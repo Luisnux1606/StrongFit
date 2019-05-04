@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RepoAnalisisPersonaDetalle" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9665c367-8f79-4dd7-af7a-662b7e62d562">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_id_per" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{p_id_per}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select p.id_per,p.ced_per, p.nom_per,p.ape_per,m.estatura_med,p.edad_per,a.recomendacionPesas_ana,a.recomendacionCardio_ana,a.recomendacionFuncional_ana,a.exesoGrasa_ana,a.exesoLiquido_ana,a.exesoTotal_ana,m.peso_med,m.fecha_med,m.abdomenAlto_med
+from persona p, ficha f,medidas m,analisis a
+where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and a.id_ana=f.Analisis_id_ana and p.id_per=$P{p_id_per} and p.estado_per=1]]>
+	</queryString>
+	<field name="ID_PER" class="java.math.BigDecimal"/>
+	<field name="CED_PER" class="java.lang.String"/>
+	<field name="NOM_PER" class="java.lang.String"/>
+	<field name="APE_PER" class="java.lang.String"/>
+	<field name="ESTATURA_MED" class="java.math.BigDecimal"/>
+	<field name="EDAD_PER" class="java.math.BigDecimal"/>
+	<field name="RECOMENDACIONPESAS_ANA" class="java.lang.String"/>
+	<field name="RECOMENDACIONCARDIO_ANA" class="java.lang.String"/>
+	<field name="RECOMENDACIONFUNCIONAL_ANA" class="java.lang.String"/>
+	<field name="EXESOGRASA_ANA" class="java.math.BigDecimal"/>
+	<field name="EXESOLIQUIDO_ANA" class="java.math.BigDecimal"/>
+	<field name="EXESOTOTAL_ANA" class="java.math.BigDecimal"/>
+	<field name="PESO_MED" class="java.math.BigDecimal"/>
+	<field name="FECHA_MED" class="java.lang.String"/>
+	<field name="ABDOMENALTO_MED" class="java.math.BigDecimal"/>
+	<group name="estatura_med">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnFooter>
+		<band height="332" splitType="Stretch">
+			<staticText>
+				<reportElement x="7" y="2" width="49" height="20" uuid="6bbebc88-ec52-4d07-b2db-15f36bbec184"/>
+				<text><![CDATA[Peso:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="78" width="72" height="20" uuid="82a5aca4-c3a1-4ae3-bc0a-1fd1238bd2f1"/>
+				<text><![CDATA[Exceso Grasa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="160" width="85" height="20" uuid="8e9bb0f7-7dbd-41e8-a399-577e73fd28de"/>
+				<text><![CDATA[Exceso Liquido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="247" width="72" height="20" uuid="ef9a5bea-e215-4066-9e2c-b16153f1adc5"/>
+				<text><![CDATA[Exceso Total:]]></text>
+			</staticText>
+			<lineChart>
+				<chart isShowLegend="false">
+					<reportElement x="107" y="2" width="164" height="76" uuid="876ae8f0-4398-4a69-8f71-0405dc167f08"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend>
+						<font size="8"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{PESO_MED}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{PESO_MED}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart isShowLegend="false">
+					<reportElement x="107" y="78" width="164" height="82" uuid="f9824911-0c85-4ea1-a071-74d918ff46cd"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend>
+						<font size="8"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{EXESOGRASA_ANA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{EXESOGRASA_ANA}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart isShowLegend="false">
+					<reportElement x="107" y="160" width="164" height="87" uuid="3715c1da-2f38-47d1-9a6d-76fbe8343586"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend>
+						<font size="8"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{EXESOLIQUIDO_ANA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{EXESOLIQUIDO_ANA}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart isShowLegend="false">
+					<reportElement x="107" y="247" width="164" height="82" uuid="068aaf65-ebb5-486e-a8c5-c4865460672c"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend>
+						<font size="8"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{EXESOTOTAL_ANA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{EXESOTOTAL_ANA}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e484188a-c062-4a2f-910a-b3b9657e92ec">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="296"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\TroyaGym\\src\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_id_per" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$F{ID_PER}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_fechaIni_ficha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{FECHAINI_FICHA}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select p.id_per,p.ced_per,f.fechaIni_ficha, p.nom_per,p.ape_per,m.estatura_med,p.edad_per,a.recomendacionPesas_ana,a.recomendacionCardio_ana,a.recomendacionFuncional_ana,a.exesoGrasa_ana,a.exesoLiquido_ana,a.exesoTotal_ana,m.peso_med,m.fecha_med,m.abdomenAlto_med
+,m.pecho_med,m.cintura_med,m.abdomenBajo_med,m.cadera_med,m.pierna_med,m.pantorrilla_med,m.brazo_med,m.antebrazo_med,m.cuello_med
+,m.espalda_med
+from persona p, ficha f,medidas m,analisis a
+where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{p_id_per} and a.id_ana=f.Analisis_id_ana and p.estado_per=1]]>
+	</queryString>
+	<field name="ID_PER" class="java.math.BigDecimal"/>
+	<field name="CED_PER" class="java.lang.String"/>
+	<field name="FECHAINI_FICHA" class="java.lang.String"/>
+	<field name="NOM_PER" class="java.lang.String"/>
+	<field name="APE_PER" class="java.lang.String"/>
+	<field name="ESTATURA_MED" class="java.math.BigDecimal"/>
+	<field name="EDAD_PER" class="java.math.BigDecimal"/>
+	<field name="RECOMENDACIONPESAS_ANA" class="java.lang.String"/>
+	<field name="RECOMENDACIONCARDIO_ANA" class="java.lang.String"/>
+	<field name="RECOMENDACIONFUNCIONAL_ANA" class="java.lang.String"/>
+	<field name="EXESOGRASA_ANA" class="java.math.BigDecimal"/>
+	<field name="EXESOLIQUIDO_ANA" class="java.math.BigDecimal"/>
+	<field name="EXESOTOTAL_ANA" class="java.math.BigDecimal"/>
+	<field name="PESO_MED" class="java.math.BigDecimal"/>
+	<field name="FECHA_MED" class="java.lang.String"/>
+	<field name="ABDOMENALTO_MED" class="java.math.BigDecimal"/>
+	<field name="PECHO_MED" class="java.math.BigDecimal"/>
+	<field name="CINTURA_MED" class="java.math.BigDecimal"/>
+	<field name="ABDOMENBAJO_MED" class="java.math.BigDecimal"/>
+	<field name="CADERA_MED" class="java.math.BigDecimal"/>
+	<field name="PIERNA_MED" class="java.math.BigDecimal"/>
+	<field name="PANTORRILLA_MED" class="java.math.BigDecimal"/>
+	<field name="BRAZO_MED" class="java.math.BigDecimal"/>
+	<field name="ANTEBRAZO_MED" class="java.math.BigDecimal"/>
+	<field name="CUELLO_MED" class="java.math.BigDecimal"/>
+	<field name="ESPALDA_MED" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="181" height="48" uuid="ba1e1cb0-dbae-44c1-bf81-ee5c1c7b56dd"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[TROYA GYM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="0" width="100" height="20" forecolor="#666666" uuid="dc58f3fb-7f8e-461f-b6d6-27e8ac456594"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Juan Carlos R.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="20" width="57" height="13" uuid="2157f144-7422-427a-b57b-5715d2817055"/>
+				<text><![CDATA[Entrenador ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="33" width="100" height="16" uuid="80151c14-76b3-472c-8f43-a02e5d7d8e60"/>
+				<text><![CDATA[09854987456]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="59" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="17" width="100" height="18" forecolor="#666666" uuid="5196b521-beed-485c-9446-a99a7336a7e4"/>
+				<textFieldExpression><![CDATA[$F{NOM_PER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="29" width="100" height="20" forecolor="#666666" uuid="ba78b7ec-33be-4194-9646-21a0faabbad6"/>
+				<textFieldExpression><![CDATA[$F{APE_PER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="134" y="4" width="38" height="14" uuid="1e53f1e7-edcd-417a-b3af-ed56f5871a88"/>
+				<text><![CDATA[Altura]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="134" y="21" width="58" height="14" forecolor="#666666" uuid="fc0d5347-7ee3-4ebd-93cc-b586cdc92bbe"/>
+				<textFieldExpression><![CDATA[$F{ESTATURA_MED}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="219" y="4" width="33" height="14" uuid="b3d8da04-2845-4366-b1f1-d704a0bdab43"/>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="219" y="21" width="52" height="14" forecolor="#666666" uuid="2191b6ce-794a-48c0-af37-3146cd8cc764"/>
+				<textFieldExpression><![CDATA[$F{EDAD_PER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="298" y="4" width="67" height="14" uuid="d284409f-859d-4aab-a304-2b616e42399d"/>
+				<text><![CDATA[Fecha Actual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="3" width="42" height="15" uuid="2912030c-0784-4ebc-9d67-14bbce0f5231"/>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="50" width="555" height="1" forecolor="#006600" uuid="9a461f2e-2927-45fe-affd-b2e904fdf977"/>
+				<graphicElement>
+					<pen lineWidth="1.75"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="204" y="2" width="1" height="31" forecolor="#999999" uuid="36c0edec-490b-4f38-a810-149908b2a9cd"/>
+			</line>
+			<line>
+				<reportElement x="123" y="2" width="1" height="31" forecolor="#999999" uuid="85db2fb3-dd2c-4509-a9b0-827a5ec5d791"/>
+			</line>
+			<line>
+				<reportElement x="2" y="1" width="1" height="31" forecolor="#999999" uuid="ab532416-1489-4f1d-b796-a32cadf3ca1c"/>
+			</line>
+			<line>
+				<reportElement x="1" y="1" width="420" height="1" uuid="e6ba589a-7811-4336-8a91-27b0d2876463"/>
+				<graphicElement>
+					<pen lineWidth="2.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="280" y="2" width="1" height="31" forecolor="#999999" uuid="02585626-fdec-4639-a2fb-56dea7ffe567"/>
+			</line>
+			<textField>
+				<reportElement x="298" y="21" width="100" height="20" uuid="7eb80469-c9d1-427c-8f6b-7888decb57cc"/>
+				<textFieldExpression><![CDATA[$P{p_fechaIni_ficha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="339" splitType="Stretch">
+			<staticText>
+				<reportElement x="53" y="0" width="212" height="24" uuid="f9846370-e50f-41c4-b369-c74a149d9f11"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Analisis por segmentos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="84" width="106" height="14" uuid="150c7f86-aa67-47b7-9167-84c3654c2af8"/>
+				<text><![CDATA[Recomendacion Pesas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="172" width="113" height="14" uuid="5c202980-f8be-4888-b008-6ce5f611c465"/>
+				<text><![CDATA[Recomendacion Cardio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="277" width="125" height="14" uuid="28a4bded-a1e7-4574-a1ad-373a4e9137c0"/>
+				<text><![CDATA[Recomendacion Funcional]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="326" y="98" width="213" height="20" forecolor="#999999" uuid="1048c4b5-4cac-4a37-9d08-aca4982672c5"/>
+				<textFieldExpression><![CDATA[$F{RECOMENDACIONPESAS_ANA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="326" y="186" width="208" height="20" forecolor="#999999" uuid="855a9d2e-71b6-47e3-a4a2-6d862aacc921"/>
+				<textFieldExpression><![CDATA[$F{RECOMENDACIONCARDIO_ANA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="327" y="291" width="207" height="20" forecolor="#999999" uuid="5fdeee5e-3c56-42f2-b7b9-6709933a47b5"/>
+				<textFieldExpression><![CDATA[$F{RECOMENDACIONFUNCIONAL_ANA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="331" y="63" width="222" height="1" uuid="2de0b84a-83e4-4fc0-bd38-d06b584d4847"/>
+			</line>
+			<staticText>
+				<reportElement x="321" y="20" width="72" height="20" uuid="336da6c4-876b-441c-b3f0-2e166803ef7f"/>
+				<text><![CDATA[Exeso de grasa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="20" width="85" height="20" uuid="c7e16964-497c-46cf-9865-0ba958bc534d"/>
+				<text><![CDATA[Exceso de liquidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="20" width="60" height="16" uuid="ba82664f-d6b9-4a66-a2ef-655a4adf6888"/>
+				<text><![CDATA[Exceso total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="324" y="37" width="42" height="14" forecolor="#999999" uuid="a3b31aa6-82fa-451c-a818-cfbb4100c050"/>
+				<textFieldExpression><![CDATA[$F{EXESOGRASA_ANA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="37" width="42" height="14" forecolor="#999999" uuid="7736799b-c281-4333-9ae8-ce29106946eb"/>
+				<textFieldExpression><![CDATA[$F{EXESOLIQUIDO_ANA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="502" y="37" width="39" height="13" forecolor="#999999" uuid="588a0764-bf09-4351-b9e0-f61f53ee439f"/>
+				<textFieldExpression><![CDATA[$F{EXESOTOTAL_ANA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="314" y="24" width="1" height="222" uuid="2f3aafb2-efad-4db3-b0e5-d61effefbafc"/>
+			</line>
+			<line>
+				<reportElement x="397" y="18" width="1" height="31" forecolor="#999999" uuid="f775b84a-7db0-44f0-8e89-4539eaabc20d"/>
+			</line>
+			<line>
+				<reportElement x="489" y="19" width="1" height="31" forecolor="#999999" uuid="05000b83-1801-4202-96b9-df8f0b08669a"/>
+			</line>
+			<image>
+				<reportElement x="16" y="26" width="293" height="302" uuid="ed2c4f84-dc25-4fb3-a9fc-950ec8a1487f"/>
+				<imageExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\TroyaGym\\src\\icons\\humanbodymen2.jpeg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="243" y="69" width="29" height="13" uuid="df0f53d0-4e8d-4f0f-8e31-3370d591f042"/>
+				<textFieldExpression><![CDATA[$F{CUELLO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="87" width="39" height="17" uuid="8716306e-49cb-4f12-897e-08a76e7c8c81"/>
+				<textFieldExpression><![CDATA[$F{PESO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="113" width="28" height="13" uuid="5073cd0e-848a-4cfa-820e-805e0b92fcd5"/>
+				<textFieldExpression><![CDATA[$F{ABDOMENALTO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="266" y="136" width="26" height="13" uuid="d82d0bab-1350-44ed-963d-487a1d31728c"/>
+				<textFieldExpression><![CDATA[$F{CINTURA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="133" width="33" height="13" uuid="4e2f36fa-ff7d-469b-b729-e28daf7e4899"/>
+				<textFieldExpression><![CDATA[$F{ABDOMENBAJO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="159" width="26" height="13" uuid="0fcce598-a780-4d2a-8009-c06fc72756fe"/>
+				<textFieldExpression><![CDATA[$F{CADERA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="184" width="15" height="13" uuid="21427090-47be-4a58-ae12-d27b24dda601"/>
+				<textFieldExpression><![CDATA[$F{PIERNA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="257" width="33" height="20" uuid="6bc38975-9d0b-47ae-8517-1b2c60624da9"/>
+				<textFieldExpression><![CDATA[$F{PANTORRILLA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="183" y="105" width="21" height="13" uuid="9b785a58-6742-4bb5-9ce3-2d0b044fa89c"/>
+				<textFieldExpression><![CDATA[$F{BRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="182" y="143" width="21" height="13" uuid="220eaea2-5e04-4e66-a5a9-d8c94e425f65"/>
+				<textFieldExpression><![CDATA[$F{ANTEBRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="105" width="19" height="17" uuid="889c59f8-4aa9-4935-852b-4ddced2c642e"/>
+				<textFieldExpression><![CDATA[$F{ESPALDA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="198" y="257" width="27" height="20" uuid="9334f0a5-f4cd-4b7e-b099-f3839f324c2b"/>
+				<textFieldExpression><![CDATA[$F{PANTORRILLA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="104" width="22" height="14" uuid="568461bb-4349-4afd-ab6c-65ffc3e96041"/>
+				<textFieldExpression><![CDATA[$F{BRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="141" width="24" height="13" uuid="f9e4cc33-f739-4df0-9eac-a9ba48ffe9fb"/>
+				<textFieldExpression><![CDATA[$F{ANTEBRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="106" width="21" height="13" uuid="b0676a9b-8df8-4c47-b04a-a04004f9c4d0"/>
+				<textFieldExpression><![CDATA[$F{BRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="142" width="24" height="13" uuid="2349273c-42e7-42b5-b868-e064d158e210"/>
+				<textFieldExpression><![CDATA[$F{ANTEBRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="144" width="21" height="13" uuid="aba82ee1-f7fc-466d-99c5-d633e6de4b0b"/>
+				<textFieldExpression><![CDATA[$F{ANTEBRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="105" width="22" height="14" uuid="b1587304-ff23-4925-8502-3b3966300bf9"/>
+				<textFieldExpression><![CDATA[$F{BRAZO_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="96" y="206" width="15" height="13" uuid="4591f4e9-5097-42d9-a4b0-5659b1da00d2"/>
+				<textFieldExpression><![CDATA[$F{PIERNA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="252" y="184" width="15" height="13" uuid="57562c6c-31f7-4294-9fe5-ee95f30824ad"/>
+				<textFieldExpression><![CDATA[$F{PIERNA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="31" y="206" width="15" height="13" uuid="62589b90-f25a-4346-901a-b3900964826a"/>
+				<textFieldExpression><![CDATA[$F{PIERNA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="32" y="265" width="24" height="20" uuid="4be772d5-6dd3-4c3f-8e5f-677fd1940d97"/>
+				<textFieldExpression><![CDATA[$F{PANTORRILLA_MED}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="265" width="33" height="20" uuid="4297d4d4-54ed-46f7-93f6-236cd3bd2884"/>
+				<textFieldExpression><![CDATA[$F{PANTORRILLA_MED}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="72">
+			<subreport>
+				<reportElement x="1" y="23" width="67" height="46" uuid="b9611df3-b2ca-4ef6-91d1-11fd5c36df85"/>
+				<subreportParameter name="p_id_per">
+					<subreportParameterExpression><![CDATA[$P{p_id_per}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "RepoAnalisisPersonaDetalle.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="0" width="191" height="23" uuid="2665c5c0-602f-476a-9440-f4aa7846692f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Historial de analisis corporal]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

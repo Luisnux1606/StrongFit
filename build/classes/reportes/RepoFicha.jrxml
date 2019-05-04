@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d495407-2d98-4387-a0fe-5ae0a6a968ba">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="p_fechaIni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{FECHAINI}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="p_fechaFin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{FECHAFIN}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') as FechaIni, TO_DATE(f.fechaFin_ficha, 'DD/MM/YYYY') as FechaFin, upper(concat(CONCAT(p.nom_per,' '),p.ape_per)) as nombres, upper(f.concepto_ficha), f.valPago_ficha,f.valPendiente_ficha
+from ficha f,persona p
+where p.id_per = f.Persona_id_per and TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') BETWEEN TO_DATE($P{p_fechaIni},'DD/MM/YYYY') AND TO_DATE($P{p_fechaFin},'DD/MM/YYYY') and p.estado_per=1 and f.estado_ficha=1]]>
+	</queryString>
+	<field name="FECHAINI" class="java.sql.Timestamp"/>
+	<field name="FECHAFIN" class="java.sql.Timestamp"/>
+	<field name="NOMBRES" class="java.lang.String"/>
+	<field name="UPPER(F.CONCEPTO_FICHA)" class="java.lang.String"/>
+	<field name="VALPAGO_FICHA" class="java.math.BigDecimal"/>
+	<field name="VALPENDIENTE_FICHA" class="java.math.BigDecimal"/>
+	<variable name="valPago" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VALPAGO_FICHA}]]></variableExpression>
+	</variable>
+	<variable name="valPendiente" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VALPENDIENTE_FICHA}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="193" y="0" width="169" height="39" uuid="65da11e2-7141-4190-949b-c68b99eb8083"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[TROYA GYM]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="48" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="66" y="0" width="100" height="20" uuid="29e0d39c-dc08-4237-9299-3948f894e859"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="66" height="20" uuid="91ea9629-ad2d-4977-8565-a98a66811883"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha actual:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="57" height="15" uuid="ed66650d-5912-4949-a11a-4701fd3071f3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte del:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="151" y="33" width="15" height="15" uuid="3662c866-21e1-4805-8b26-409f22a28f4f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[al]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="66" y="33" width="85" height="15" uuid="4fe23cd0-9560-453b-9e5a-c3e9baf406ea"/>
+				<textFieldExpression><![CDATA[$P{p_fechaIni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="174" y="33" width="94" height="15" uuid="9d9982bd-c8a2-4556-a9b2-829464ded226"/>
+				<textFieldExpression><![CDATA[$P{p_fechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="12" width="66" height="20" uuid="4e0a0358-2e86-4ef4-8f01-2b6ed1db4d4e"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA INICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="66" y="12" width="67" height="20" uuid="d7878735-3cdc-4f7f-9273-b74eba6fe33b"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA FIN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="12" width="70" height="20" uuid="f918273f-d001-4aa9-a3ea-2162e006320c"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="12" width="100" height="20" uuid="5d88b23f-594c-4be3-b512-41d8e41b3926"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONCEPTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="7" width="59" height="25" uuid="901da986-c0c2-41b3-b46b-501ca707a46b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR CANCELADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="7" width="47" height="25" uuid="a04340bb-ce65-4d27-b241-f07c15eaa7b3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR PENDIENTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="66" height="20" uuid="03d59a0b-26a4-4872-b29a-0e0780e5b61d"/>
+				<textFieldExpression><![CDATA[$F{FECHAINI}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="66" y="0" width="67" height="20" uuid="488eb3d3-df1f-4439-9565-4b19f1701ae7"/>
+				<textFieldExpression><![CDATA[$F{FECHAFIN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="0" width="135" height="20" uuid="4517a842-2e62-4900-95ea-ac62241f8367"/>
+				<textFieldExpression><![CDATA[$F{NOMBRES}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="279" y="0" width="170" height="20" uuid="43b4b61d-f387-4da3-a82f-ab917667e548"/>
+				<textFieldExpression><![CDATA[$F{UPPER(F.CONCEPTO_FICHA)}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="449" y="0" width="46" height="20" uuid="79e5369f-009e-4563-a093-a5e2828bb7f8"/>
+				<textFieldExpression><![CDATA[$F{VALPAGO_FICHA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="508" y="0" width="35" height="20" uuid="4195d7d7-27bd-463e-ae00-6855e243d725"/>
+				<textFieldExpression><![CDATA[$F{VALPENDIENTE_FICHA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="50">
+			<textField isBlankWhenNull="true">
+				<reportElement x="508" y="30" width="47" height="20" uuid="848748f5-2425-4d59-a398-8a67927e47c6"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="349" y="33" width="78" height="20" uuid="2acafcec-1ff2-46ab-a3d9-78f562f8fb95"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTALES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="449" y="33" width="34" height="20" uuid="56b1d333-1d0f-4d1a-ba1a-3460083baffb"/>
+				<textFieldExpression><![CDATA[$V{valPago}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="496" y="33" width="35" height="20" uuid="564344df-e466-41c9-91f4-d85307c22e08"/>
+				<textFieldExpression><![CDATA[$V{valPendiente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
