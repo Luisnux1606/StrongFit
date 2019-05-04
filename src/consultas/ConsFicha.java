@@ -472,4 +472,6 @@ order by id_ficha asc ;
         }
         return rs;
     }
+    
+    //public
 }
