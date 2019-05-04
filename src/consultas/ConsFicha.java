@@ -474,4 +474,5 @@ order by id_ficha asc ;
     }
     
     //public
+    //private
 }

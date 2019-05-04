@@ -189,8 +189,7 @@ public class ConsAnalisis extends Conexion{
         String sql = "SELECT * FROM analisis WHERE fecha_ana=? and estado_ana=1";
         
         try 
-        {
-            
+        {            
             ps = con.prepareStatement(sql);                     
             ps.setString(1, a.getFecha());
             rs = ps.executeQuery();
