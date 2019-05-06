@@ -452,8 +452,8 @@ public class CtrlMedidas implements ActionListener{
            desabilitaHabilita(visMedidas.btnGuardar,true);
            desabilitaHabilita(visMedidas.btnModificar,false);
            
-           visMedidas.tabp_ficha.setEnabledAt(1, false);
-           visMedidas.tabp_ficha.setEnabledAt(2, false);
+           visMedidas.tabp_ficha.setEnabledAt(1, true);
+           visMedidas.tabp_ficha.setEnabledAt(2, true);
         }
     }
     
@@ -470,8 +470,8 @@ public class CtrlMedidas implements ActionListener{
         visMedidas.btnEliminar.setToolTipText("Eliminar el registro");
         visMedidas.btnLimpiar.setToolTipText("Limpiar el registro");
         
-        visMedidas.tabp_ficha.setEnabledAt(1, false);
-        visMedidas.tabp_ficha.setEnabledAt(2, false);
+        visMedidas.tabp_ficha.setEnabledAt(1, true);
+        visMedidas.tabp_ficha.setEnabledAt(2, true);
     }
     public void limpiar()
     {

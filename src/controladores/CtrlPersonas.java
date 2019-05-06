@@ -255,8 +255,8 @@ public class CtrlPersonas implements ActionListener {
 
             visFic.setLocation(300, 20);
             visFic.tabp_ficha.setSelectedIndex(2);
-            visFic.tabp_ficha.setEnabledAt(0, false);
-            visFic.tabp_ficha.setEnabledAt(1, false);
+            visFic.tabp_ficha.setEnabledAt(0, true);
+            visFic.tabp_ficha.setEnabledAt(1, true);
             visFic.setVisible(true);
          }
          

@@ -74,10 +74,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.btnLimpiarFicha.addActionListener(this);
         this.visFicha.btnModificarFicha.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
-        
-        
-        
-        
+              
         cadBus = "";
         showTable();
         setFocus();
