@@ -14,7 +14,7 @@ porque el registro si tiene fecha de nacimiento. : ok
 MODIFICADO= ok
 
 ELIMINADO 
-1. Para eliminar se tiene que verificar que antes haya estado seleccionado un campo, o sino borrá el último marcado. : R 
+1. Para eliminar se tiene que verificar que antes haya estado seleccionado un campo, o sino borrá el último marcado. : ok (funciona con click)
 
 
 *********FICHA***************
@@ -28,7 +28,7 @@ GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR REGISTRO= borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros 
+con los datos como estaba, es decir, con los registros: ok
 
 
 ----PESTAÑA ANALISIS--
