@@ -43,7 +43,7 @@ public class Validaciones {
      public static int isNumVoid(String txt)
      {
          int val = 0;
-         if (txt.length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.trim().length()==0 ||txt.equals("null")) {
+         if (txt.length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.trim().length()==0 ||txt.equals("null")||txt.equals("0.0")) {
              val = 0;
          }
          else
@@ -51,6 +51,21 @@ public class Validaciones {
          
          return val;
      }
+     
+      public static double isNumVoid10(String txt)
+     {
+         double val = 0;
+         if (txt.length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.trim().length()==0 ||txt.equals("null")||txt.equals("0.0")) {
+             val = 0;
+         }
+         else
+             val = Double.parseDouble(txt.trim());
+         
+         return val;
+     }
+     
+     
+     
      public static String isNumVoid4(String txt)
      {
        

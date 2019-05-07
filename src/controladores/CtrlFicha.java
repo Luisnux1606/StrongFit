@@ -51,6 +51,7 @@ public class CtrlFicha implements ActionListener{
     VisReportes visReportes;
     VisMembresia visMemb;
     
+    
     Persona persona;
     Analisis analisis;
     Medidas medidas;
@@ -98,6 +99,8 @@ public class CtrlFicha implements ActionListener{
     {
         visFicha.setTitle("FICHA");
         visFicha.setLocationRelativeTo(null);
+        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());
+        visFicha.dtcFechaFinFicha.setDate(Calculos.getCurrentDate2());        
         visFicha.txt_id_Ficha.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
         visFicha.txt_id_datos.setVisible(false);
@@ -111,6 +114,9 @@ public class CtrlFicha implements ActionListener{
         visFicha.btnModificarFicha.setToolTipText("Modificar el registro");
         visFicha.btnEliminarFicha.setToolTipText("Eliminar el registro");
         visFicha.btnLimpiarFicha.setToolTipText("Limpiar el registro");
+        visFicha.tabp_ficha.setSelectedIndex(2);
+        limpiar();
+        
                
     }
     
@@ -122,7 +128,7 @@ public class CtrlFicha implements ActionListener{
     public void setTableModel()
     {            
        Color c1 = new Color(255,229,204);  
-      visFicha.tblFicha.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
+       visFicha.tblFicha.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
         {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
@@ -230,6 +236,7 @@ public class CtrlFicha implements ActionListener{
                   
                   double dif = Calculos.getDiferencia(new Double(visFicha.txtValConDsctoFicha.getText()).doubleValue(),new Double(visFicha.txt_valCancelo.getText()).doubleValue());
                   visFicha.txtValPendienteFicha.setText(dif+"");
+                  visFicha.txtValPendienteFicha.requestFocusInWindow();
               }  
           }
           
@@ -241,7 +248,91 @@ public class CtrlFicha implements ActionListener{
         };
         visFicha.txt_valCancelo.addKeyListener(keyListenertxtValCacncelo);
         
+        //**********listener txtValPendienteFicha ************
         
+        KeyListener keyListenertxtValPendieteFicha=new KeyListener() {
+          public void keyPressed(KeyEvent keyEvent) {
+            printIt("Pressed", keyEvent);
+          }
+
+          public void keyReleased(KeyEvent keyEvent) {
+            printIt("Released", keyEvent);
+          }
+
+          public void keyTyped(KeyEvent e) {
+            int m=e.getKeyChar();
+              if (m == KeyEvent.VK_ENTER) {
+                  
+                 
+                  visFicha.txtConceptoFicha.requestFocusInWindow();
+              }  
+          }
+          
+          private void printIt(String title, KeyEvent keyEvent) {
+            int keyCode = keyEvent.getKeyCode();
+            String keyText = KeyEvent.getKeyText(keyCode);
+           
+          }
+        };
+        visFicha.txtValPendienteFicha.addKeyListener(keyListenertxtValPendieteFicha);
+        
+        //**********listener txtValCancelo ************
+        
+        KeyListener keyListenertxtValPagar=new KeyListener() {
+          public void keyPressed(KeyEvent keyEvent) {
+            printIt("Pressed", keyEvent);
+          }
+
+          public void keyReleased(KeyEvent keyEvent) {
+            printIt("Released", keyEvent);
+          }
+
+          public void keyTyped(KeyEvent e) {
+            int m=e.getKeyChar();
+              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB) {
+                                  
+                 visFicha.txtValDscto.requestFocusInWindow();
+           
+              }  
+          }
+          
+          private void printIt(String title, KeyEvent keyEvent) {
+            int keyCode = keyEvent.getKeyCode();
+            String keyText = KeyEvent.getKeyText(keyCode);
+           
+          }
+        };
+        visFicha.txtValPagar.addKeyListener(keyListenertxtValPagar);
+        
+         //**********listener txtValDscto ************
+        
+        KeyListener keyListenertxtValDscto=new KeyListener() {
+          public void keyPressed(KeyEvent keyEvent) {
+            printIt("Pressed", keyEvent);
+          }
+
+          public void keyReleased(KeyEvent keyEvent) {
+            printIt("Released", keyEvent);
+          }
+
+          public void keyTyped(KeyEvent e) {
+            int m=e.getKeyChar();
+              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB) {
+                                  
+                 visFicha.txt_valCancelo.requestFocusInWindow();
+                 double  dsctoMemb = (Validaciones.isNumVoid10(visFicha.txtValDscto.getText()));
+                 double valMasDscto = Calculos.getDscto(new Double(visFicha.txtValPagar.getText()).doubleValue(), dsctoMemb);
+                 visFicha.txtValConDsctoFicha.setText(valMasDscto+"");
+              }  
+          }
+          
+          private void printIt(String title, KeyEvent keyEvent) {
+            int keyCode = keyEvent.getKeyCode();
+            String keyText = KeyEvent.getKeyText(keyCode);
+           
+          }
+        };
+        visFicha.txtValDscto.addKeyListener(keyListenertxtValDscto);
         
         KeyListener keyListenerTblPersonas = new KeyListener() {
           public void keyPressed(KeyEvent e) {
@@ -492,10 +583,13 @@ public class CtrlFicha implements ActionListener{
     }
     public void limpiar()
     {
-        visFicha.dtcFechaIniFicha.setDate(null);                
-        visFicha.dtcFechaFinFicha.setDate(null);
-        visFicha.txtValConDsctoFicha.setText("");
-        visFicha.txtValPendienteFicha.setText("");
+        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());                
+        visFicha.dtcFechaFinFicha.setDate(Calculos.getCurrentDate2());
+        visFicha.txtValConDsctoFicha.setText("0.0");
+        visFicha.txtValPendienteFicha.setText("0.0");
+        visFicha.txtValPagar.setText("0.0");
+        visFicha.txtValDscto.setText("0.0");
+        visFicha.txt_valCancelo.setText("0.0");
         visFicha.txtConceptoFicha.setText("");
         
        

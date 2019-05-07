@@ -170,7 +170,7 @@ public class VisMembresia extends javax.swing.JFrame {
         getContentPane().add(pnl_personas, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setText("TROYA GYM");
+        jLabel1.setText("STRONGFIT");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

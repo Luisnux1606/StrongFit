@@ -242,6 +242,7 @@ public class VisPersona extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         mniMembresia.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        mniMembresia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6_1.png"))); // NOI18N
         mniMembresia.setText("Membresias");
         mniMembresia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

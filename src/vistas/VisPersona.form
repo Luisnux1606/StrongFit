@@ -17,6 +17,9 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="17" style="0"/>
                 </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/lupa6_1.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Membresias"/>
               </Properties>
               <Events>
