@@ -75,6 +75,8 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.btnLimpiarFicha.addActionListener(this);
         this.visFicha.btnModificarFicha.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
+        
+         
               
         cadBus = "";
         showTable();
@@ -84,7 +86,7 @@ public class CtrlFicha implements ActionListener{
         iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
-        setTableModel();
+       
     }
     
     
@@ -127,7 +129,8 @@ public class CtrlFicha implements ActionListener{
     
     public void setTableModel()
     {            
-       Color c1 = new Color(255,229,204);  
+       Color rojo = new Color(254,000,000);  
+       Color amarillo = new Color(255,255,000);
        visFicha.tblFicha.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
         {
             @Override
@@ -135,15 +138,29 @@ public class CtrlFicha implements ActionListener{
             {
                 final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 c.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-                if (Double.parseDouble(table.getValueAt(row, 7)+"")!=0) {
-                    
-                    c.setBackground(  c1 );
+              /*
+                
+                if(Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")<=5 &&Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")>=0)
+                {
+                     c.setBackground(amarillo); //proximos a terminarse
                 }
+                else
+                    if (Calculos.dateGreaterThanCurrent(table.getValueAt(row, 4)+"")==true) {
+                     c.setBackground(rojo);
+                    }
+                if(Double.parseDouble(table.getValueAt(row, 7)+"")!=0 )
+                {
+                 c.setBackground(rojo); //proximos a terminarse o pendientes de pago
+                }
+               
+                */
                 
                 return c;
             }
+            
+            
             });
-      
+     
     }
     
     public void showTableByNom(String nom)
@@ -452,6 +469,7 @@ public class CtrlFicha implements ActionListener{
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
         }
+        visFicha.tblFicha.updateUI();
     }
     
     public void validaAnonimos()
