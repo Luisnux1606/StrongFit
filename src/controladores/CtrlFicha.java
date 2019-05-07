@@ -75,18 +75,21 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.btnLimpiarFicha.addActionListener(this);
         this.visFicha.btnModificarFicha.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
+        this.visFicha.btnCalcular.addActionListener(this);
         
          
               
         cadBus = "";
-        showTable();
+       
         setFocus();
         setListener();    
         setTableModel();
         iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
-       
+        
+        limpiarTabla();
+        showTable();
     }
     
     
@@ -595,23 +598,29 @@ public class CtrlFicha implements ActionListener{
             ConsMembresias consMem = new ConsMembresias();
             Ficha ficha  =  new Ficha();                        
             CtrlMembresias ctrMemb=new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
-        }                         
+        } 
+        
+        if (e.getSource() == visFicha.btnCalcular) 
+        {       
+            if (Validaciones.isVoidJTxt(visFicha.txt_valEntregado)) {
+                double txtValEntregado = Double.parseDouble(visFicha.txt_valEntregado.getText());
+                double txtValCancelo = Double.parseDouble(visFicha.txt_valCancelo.getText());
+                double txtCambio = txtValEntregado -txtValCancelo ;
+                visFicha.txt_cambio.setText(Calculos.setTwoDecimals(txtCambio)+"");
+               }
+        }
       
     }
     public void limpiar()
     {
         visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());                
-        visFicha.dtcFechaFinFicha.setDate(Calculos.getCurrentDate2());
         visFicha.txtValConDsctoFicha.setText("0.0");
         visFicha.txtValPendienteFicha.setText("0.0");
         visFicha.txtValPagar.setText("0.0");
         visFicha.txtValDscto.setText("0.0");
         visFicha.txt_valCancelo.setText("0.0");
         visFicha.txtConceptoFicha.setText("");
-        
-       
- 
-        limpiarTabla();
+
     }
     
 }

@@ -141,7 +141,7 @@ public class VisFicha extends javax.swing.JFrame {
         txtValDscto = new javax.swing.JTextField();
         txtValPendienteFicha = new javax.swing.JTextField();
         txtConceptoFicha = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnCalcular = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
         txt_valCancelo = new javax.swing.JTextField();
         btnGuardarFicha = new javax.swing.JButton();
@@ -813,10 +813,10 @@ public class VisFicha extends javax.swing.JFrame {
 
         txtValPendienteFicha.setName("txtValPendienteFicha"); // NOI18N
 
-        jButton1.setText("calcular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcular.setText("calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCalcularActionPerformed(evt);
             }
         });
 
@@ -871,7 +871,7 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_valEntregado, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
+                                .addComponent(btnCalcular)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txt_cambio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel7Layout.createSequentialGroup()
@@ -928,7 +928,7 @@ public class VisFicha extends javax.swing.JFrame {
                                         .addComponent(txt_valCancelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txt_cambio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton1)))
+                                .addComponent(btnCalcular)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel32)
@@ -1050,9 +1050,9 @@ public class VisFicha extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cambioActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1094,6 +1094,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscarAnalisis;
     public javax.swing.JButton btnBuscarDscto;
     public javax.swing.JButton btnBuscarMed;
+    public javax.swing.JButton btnCalcular;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnEliminarAnalisis;
     public javax.swing.JButton btnEliminarFicha;
@@ -1110,7 +1111,6 @@ public class VisFicha extends javax.swing.JFrame {
     public com.toedter.calendar.JDateChooser dtcFechaAnalisis;
     public com.toedter.calendar.JDateChooser dtcFechaFinFicha;
     public com.toedter.calendar.JDateChooser dtcFechaIniFicha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1212,6 +1212,6 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JTextField txt_id_medidas_u;
     public javax.swing.JTextField txt_id_persona_u;
     public javax.swing.JTextField txt_valCancelo;
-    private javax.swing.JTextField txt_valEntregado;
+    public javax.swing.JTextField txt_valEntregado;
     // End of variables declaration//GEN-END:variables
 }

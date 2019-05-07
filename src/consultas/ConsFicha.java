@@ -32,7 +32,7 @@ public class ConsFicha extends Conexion {
         {            
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_fin());
+            ps.setString(1, f.getFecha_ini());
             ps.setString(2, f.getFecha_fin());
             ps.setDouble(3, f.getVal_pago());
             ps.setDouble(4, f.getVal_pendiente());

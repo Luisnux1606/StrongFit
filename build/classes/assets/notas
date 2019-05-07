@@ -45,15 +45,15 @@ Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de F
 El campo "Valor pendiente de cobro" se calcule automáticamente, y se sume de lo que debió al final. :ok
 Quitar de la tabla los campos "cedula y nombres", porque la ficha ya sabemos que es de Ana Peralta. :ok(sirve para revisar)
 El buscar que no se por "nombre" sino por la fecha. :R
-En el campo "fecha de inicio" está guardando la fecha de fin. 
+En el campo "fecha de inicio" está guardando la fecha de fin. : ok
 El campo "valor cancelado" no está guardando nada. 
-El botón "Calcular" no calcula. 
+El botón "Calcular" no calcula.  : ok
 
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR REGISTRO= borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros 
+con los datos como estaba, es decir, con los registros  : ok
 
 *********GENERALES***************
-Sería bueno hacer un resize de las ventanas, porque en el caso de mi compu no se pueden ver las tablas. 
+Sería bueno hacer un resize de las ventanas, porque en el caso de mi compu no se pueden ver las tablas. : R
