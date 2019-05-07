@@ -101,8 +101,7 @@ public class CtrlFicha implements ActionListener{
     {
         visFicha.setTitle("FICHA");
         visFicha.setLocationRelativeTo(null);
-        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());
-        visFicha.dtcFechaFinFicha.setDate(Calculos.getCurrentDate2());        
+        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_Ficha.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
         visFicha.txt_id_datos.setVisible(false);
@@ -177,7 +176,7 @@ public class CtrlFicha implements ActionListener{
                 try {
                     cols[0] = listFicha.getInt("id_ficha");
                     cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nom_per").toUpperCase();
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
                     cols[3] = listFicha.getString("fechaIni_ficha");
                     cols[4] = listFicha.getString("fechaFin_ficha");
                     cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();

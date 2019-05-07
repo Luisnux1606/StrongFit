@@ -8,6 +8,7 @@ package strongfit;
 import consultas.ConsPersona;
 import controladores.CtrlPersonas;
 import modelos.Persona;
+import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
 
@@ -25,6 +26,7 @@ public class StrongFit {
         ConsPersona consPer = new ConsPersona();
         VisPersona visPer = new VisPersona();    
         VisMembresia visMemb = new VisMembresia();
+    
         CtrlPersonas ctrlPer = new CtrlPersonas(per, consPer,visMemb, visPer);               
         ctrlPer.iniciar();
         visPer.setVisible(true);

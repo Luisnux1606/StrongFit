@@ -285,8 +285,7 @@ public class ConsMedidas extends Conexion {
                 m.setId(rs.getInt("id_med"));
                 m.setFecha(rs.getString("fecha_med"));
                 m.setPeso(rs.getDouble("peso_med"));
-                m.setEstatura(rs.getDouble("estatura_med"));
-                m.setEdad(rs.getInt("edad_med"));
+                m.setEstatura(rs.getDouble("estatura_med"));                
                 m.setNro_hijos(rs.getInt("nroHijos_med"));
                 m.setPecho(rs.getDouble("pecho_med"));
                 m.setAbdomen_alto(rs.getDouble("abdomenAlto_med"));

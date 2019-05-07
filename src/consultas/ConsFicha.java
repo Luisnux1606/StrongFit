@@ -407,7 +407,7 @@ order by id_ficha asc ;
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = "SELECT f.id_ficha, p.ced_per, p.nom_per, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha " +
+        String sql = "SELECT f.id_ficha, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha " +
                     " FROM ficha f, persona p " +
                     " where  upper(p.nom_per) like upper('%"+nom+"%') and p.id_per=f.persona_id_per and f.estado_ficha=1" +
                     " order by f.id_ficha asc ";

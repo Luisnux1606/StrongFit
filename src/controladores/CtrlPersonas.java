@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import assets.Calculos;
 import assets.Validaciones;
 import consultas.ConsAnalisis;
 import consultas.ConsFicha;
@@ -58,7 +59,7 @@ public class CtrlPersonas implements ActionListener {
     ConsPersona consPer;
     VisPersona visPersona;
     VisMembresia visMemb;
-          
+       
     String cadBus;
     MyTableModel dT;
     
@@ -68,6 +69,7 @@ public class CtrlPersonas implements ActionListener {
         this.consPer = consPersona;
         this.visPersona = visPersona;
         this.visMemb = visMemb;
+      
         
         this.visPersona.btnGuardar.addActionListener(this);
         this.visPersona.btnEliminar.addActionListener(this);
@@ -94,11 +96,11 @@ public class CtrlPersonas implements ActionListener {
         visPersona.txt_cedula.requestFocus();
         visPersona.txt_cedula.setNextFocusableComponent(visPersona.txt_nombres);
         visPersona.txt_nombres.setNextFocusableComponent(visPersona.txt_apellidos);
-        visPersona.txt_apellidos.setNextFocusableComponent(visPersona.txt_edad);    
-        visPersona.txt_edad.setNextFocusableComponent(visPersona.cmbxGenero);
+        visPersona.txt_apellidos.setNextFocusableComponent(visPersona.dtc_fechaNac);    
+        visPersona.dtc_fechaNac.setNextFocusableComponent(visPersona.cmbxGenero);
         visPersona.cmbxGenero.setNextFocusableComponent(visPersona.txtCorreoElect);
         visPersona.txtCorreoElect.setNextFocusableComponent(visPersona.txt_nro_fono); 
-        visPersona.txt_nro_fono.setNextFocusableComponent(visPersona.dtc_fechaNac); 
+        visPersona.txt_nro_fono.setNextFocusableComponent(visPersona.txt_edad); 
     }
     public void iniciar()
     {
@@ -121,6 +123,9 @@ public class CtrlPersonas implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
+      
+        
+        
        if (e.getSource() == visPersona.btnGuardar) 
        {       
            ArrayList<JTextField> jtx=new ArrayList<>();
@@ -130,7 +135,7 @@ public class CtrlPersonas implements ActionListener {
                     modPer.setCedula(visPersona.txt_cedula.getText());                
                     modPer.setNombre(visPersona.txt_nombres.getText().toUpperCase());
                     modPer.setApellido(visPersona.txt_apellidos.getText().toUpperCase());
-                    modPer.setNro_fono(visPersona.txt_edad.getText());
+                    modPer.setNro_fono(visPersona.txt_nro_fono.getText());
                     modPer.setEdad(Validaciones.isNumVoid(visPersona.txt_edad.getText()));                  
                     modPer.setFecha_nac(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
                     modPer.setMail(visPersona.txtCorreoElect.getText());
@@ -209,10 +214,10 @@ public class CtrlPersonas implements ActionListener {
                     visPersona.txt_apellidos.setText(String.valueOf(modPer.getApellido()).toUpperCase());
                     visPersona.txt_edad.setText(String.valueOf(modPer.getNro_fono()));
                     visPersona.txt_nro_fono.setText(String.valueOf(modPer.getEdad()));                    
-                    if (Validaciones.isVoidDateChooser(visPersona.dtc_fechaNac)) 
+                   // if (Validaciones.isVoidDateChooser(visPersona.dtc_fechaNac)) 
                          visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(modPer.getFecha_nac()));
 
-                    visPersona.txtCorreoElect.setText(String.valueOf(modPer.getCedula()));  
+                    visPersona.txtCorreoElect.setText(String.valueOf(modPer.getMail()));  
                     visPersona.cmbxGenero.setSelectedItem(String.valueOf(modPer.getGenero()).toUpperCase());     
                 }
                 else
@@ -448,6 +453,41 @@ public class CtrlPersonas implements ActionListener {
           }
         };
         visPersona.txtBuscarCedula.addKeyListener(keyListenertxtBuscarCedula);
+        
+
+        // LISTENER OF TXTDATE OF BIRTH        
+         KeyListener keyListenerfechaNac = new KeyListener() {
+          public void keyPressed(KeyEvent keyEvent) {
+            printIt("Pressed", keyEvent);
+          }
+
+          public void keyReleased(KeyEvent keyEvent) {
+            printIt("Released", keyEvent);
+          }
+
+          public void keyTyped(KeyEvent e) {
+            int m=e.getKeyChar();
+              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB) {
+                  System.out.println("asdf");
+                  if(Validaciones.isVoidDateChooser(visPersona.dtc_fechaNac))
+                  {
+                    int ages = Calculos.getYearsFromDateOfBirth(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
+                    visPersona.txt_edad.setText(ages+"");
+                    visPersona.cmbxGenero.requestFocusInWindow();
+                  }
+                 
+              }  
+          }
+          
+          private void printIt(String title, KeyEvent keyEvent) {
+            int keyCode = keyEvent.getKeyCode();
+            String keyText = KeyEvent.getKeyText(keyCode);
+           // System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
+          }
+        };
+        visPersona.dtc_fechaNac.getDateEditor().getUiComponent().addKeyListener(keyListenerfechaNac);
+        
+        
          /////TBLPERSONAS
         KeyListener keyListenerTblPersonas = new KeyListener() {
           public void keyPressed(KeyEvent e) {
@@ -539,6 +579,50 @@ public class CtrlPersonas implements ActionListener {
         };
        
         visPersona.tbl_personas.addMouseListener(mouseListTblPersonas);
+        
+        
+        //LISTENER OF DATE OF BIRTH
+        
+         MouseListener mouseDateBirth;
+        mouseDateBirth = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+               
+                if (e.getClickCount()==1) {
+                    
+                    if(Validaciones.isVoidDateChooser(visPersona.dtc_fechaNac))
+                    {
+                        int ages = Calculos.getYearsFromDateOfBirth(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
+                        visPersona.txt_edad.setText(ages+"");
+                        visPersona.cmbxGenero.requestFocusInWindow();
+                    }
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+            
+            
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+        };
+       
+        visPersona.dtc_fechaNac.getDateEditor().getUiComponent().addMouseListener(mouseDateBirth);
       
     }
     
