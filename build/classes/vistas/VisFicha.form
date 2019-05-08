@@ -1446,7 +1446,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="80" max="32767" attributes="0"/>
+                      <EmptySpace pref="82" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1532,8 +1532,17 @@
                                   </Group>
                               </Group>
                               <Component id="jScrollPane6" alignment="0" min="-2" pref="1402" max="-2" attributes="0"/>
-                              <Component id="lblBuscarPorCualquierCampo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtBuscarFechaFicha" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtBuscarFechaFicha" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
+                                      <Component id="lblBuscarPorCualquierCampo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblBuscarPor" min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Component id="cmbTipoBusqueda" min="-2" pref="169" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                           <EmptySpace pref="56" max="32767" attributes="0"/>
                       </Group>
@@ -1544,7 +1553,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                                  <EmptySpace pref="26" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="dtcFechaIniFicha" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1609,9 +1618,15 @@
                               <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblBuscarPorCualquierCampo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtBuscarFechaFicha" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblBuscarPor" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBuscarPorCualquierCampo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtBuscarFechaFicha" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbTipoBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane6" min="-2" pref="230" max="-2" attributes="0"/>
                       </Group>
@@ -1870,6 +1885,31 @@
                         <StringItem index="3" value="Item 4"/>
                       </StringArray>
                     </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="cmbTipoBusqueda">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="6">
+                        <StringItem index="0" value="todos"/>
+                        <StringItem index="1" value="cursando"/>
+                        <StringItem index="2" value="pendientes"/>
+                        <StringItem index="3" value="proximos a vencer"/>
+                        <StringItem index="4" value="vencidos"/>
+                        <StringItem index="5" value=" "/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblBuscarPor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Buscar por:"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

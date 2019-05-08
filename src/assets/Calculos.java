@@ -96,17 +96,15 @@ public class Calculos {
              SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
              Date date1 = sdf.parse(dateEnd);
              Date date2 = sdf.parse(getCurrentDate());
-             
-             System.out.println("date1 : " + sdf.format(date1));
-             System.out.println("date2 : " + sdf.format(date2));
-             
+                                     
              if (date1.compareTo(date2) > 0) {
+                 isTrue = true;
                  //System.out.println("Date1 is after Date2");
              } else if (date1.compareTo(date2) < 0) {
-                  isTrue = true;
+                 isTrue = false; 
                  //System.out.println("Date1 is before Date2");
              } else if (date1.compareTo(date2) == 0) {
-                // System.out.println("Date1 is equal to Date2");
+               isTrue = true;
              } else {
                 // System.out.println("How to get here?");
              }

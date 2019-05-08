@@ -76,6 +76,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.btnModificarFicha.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
         this.visFicha.btnCalcular.addActionListener(this);
+        this.visFicha.cmbTipoBusqueda.addActionListener(this);
         
          
               
@@ -474,6 +475,140 @@ public class CtrlFicha implements ActionListener{
         visFicha.tblFicha.updateUI();
     }
     
+    public void showTablePendientes()
+    {
+        try {
+            limpiarTabla();
+            ResultSet listFicha = consFicha.buscarPendientes();
+            
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
+            Object cols[] = new Object[8];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("id_ficha");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_ficha");
+                    cols[4] = listFicha.getString("fechaFin_ficha");
+                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
+                    cols[6] = listFicha.getDouble("valPago_ficha");
+                    cols[7] = listFicha.getDouble("valPendiente_ficha");
+                    model.addRow(cols);
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consFicha.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visFicha.tblFicha.updateUI();
+    }
+    
+    public void showTableProximosVencer()
+    {
+        try {
+            limpiarTabla();
+            ResultSet listFicha = consFicha.buscarTodos2();
+            
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
+            Object cols[] = new Object[8];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("id_ficha");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_ficha");
+                    cols[4] = listFicha.getString("fechaFin_ficha");
+                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
+                    cols[6] = listFicha.getDouble("valPago_ficha");
+                    cols[7] = listFicha.getDouble("valPendiente_ficha");
+                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
+                        double days = Calculos.getDiffDaysToFinish(cols[4].toString());
+                        if (days<=5) {
+                            model.addRow(cols);
+                        }
+                    }                       
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consFicha.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visFicha.tblFicha.updateUI();
+    }
+    
+     public void showTableCursando()
+    {
+        try {
+            limpiarTabla();
+            ResultSet listFicha = consFicha.buscarTodos2();
+            
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
+            Object cols[] = new Object[8];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("id_ficha");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_ficha");
+                    cols[4] = listFicha.getString("fechaFin_ficha");
+                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
+                    cols[6] = listFicha.getDouble("valPago_ficha");
+                    cols[7] = listFicha.getDouble("valPendiente_ficha");
+                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
+                        model.addRow(cols);                     
+                    }                       
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consFicha.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visFicha.tblFicha.updateUI();
+    }
+    
+     public void showTableVencidos()
+    {
+        try {
+            limpiarTabla();
+            ResultSet listFicha = consFicha.buscarTodos2();
+            
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
+            Object cols[] = new Object[8];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("id_ficha");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_ficha");
+                    cols[4] = listFicha.getString("fechaFin_ficha");
+                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
+                    cols[6] = listFicha.getDouble("valPago_ficha");
+                    cols[7] = listFicha.getDouble("valPendiente_ficha");
+                    if (!Calculos.dateGreaterThanCurrent(cols[4].toString()))
+                        model.addRow(cols);
+                     
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consFicha.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visFicha.tblFicha.updateUI();
+    }
+    
     public void validaAnonimos()
     {
         
@@ -608,6 +743,26 @@ public class CtrlFicha implements ActionListener{
                 double txtCambio = txtValEntregado -txtValCancelo ;
                 visFicha.txt_cambio.setText(Calculos.setTwoDecimals(txtCambio)+"");
                }
+        }
+        
+         if (e.getSource() == visFicha.cmbTipoBusqueda) 
+        {       
+           String tipo = visFicha.cmbTipoBusqueda.getSelectedItem()+"";
+            if (tipo.equals("todos")) {
+             showTable();
+            }
+            if (tipo.equals("cursando")) {
+                showTableCursando();
+            }
+            if (tipo.equals("pendientes")) {
+                showTablePendientes();
+            }
+            if (tipo.equals("proximos a vencer")) {
+                showTableProximosVencer();
+            }
+            if (tipo.equals("vencidos")) {
+                showTableVencidos();
+            }
         }
       
     }

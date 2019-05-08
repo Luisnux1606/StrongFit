@@ -122,10 +122,7 @@ public class CtrlPersonas implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-      
-        
-        
+         
        if (e.getSource() == visPersona.btnGuardar) 
        {       
            ArrayList<JTextField> jtx=new ArrayList<>();
