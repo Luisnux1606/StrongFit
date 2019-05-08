@@ -1,1 +1,0 @@
-visual.facturacion.MyTableModel
