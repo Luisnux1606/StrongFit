@@ -55,6 +55,7 @@ BUSCAR (lupa)
 
 ----PESTAÑA FICHA--
 <<<<<<< HEAD
+<<<<<<< HEAD
 Falta completar con el apellido de la persona. : ok
 Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : ok;
 El campo "Valor pendiente de cobro" se calcule automáticamente, y se sume de lo que debió al final. :ok
@@ -64,6 +65,8 @@ En el campo "fecha de inicio" está guardando la fecha de fin. : ok
 El campo "valor cancelado" no está guardando nada. : R
 El botón "Calcular" no calcula.  : ok
 =======
+=======
+>>>>>>> 811261287f1a25996ba25a103daa3a82a3da6ed8
 VARIOS
 1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
 No debe mostrar información de otros usuarios sino sólo del seleccionado. 
@@ -73,6 +76,9 @@ No debe mostrar información de otros usuarios sino sólo del seleccionado.
 Respuesta-> Revisar qué¿? Si la fecha es de esa persona.¿?
 5. Yo quitaría el botón calcular. No calcula con decimales.
 6. El botón de la membresía, abre la venta de membresía; seleccionó la que deseo y no sucede nada. No se añade a la Ficha la membresía que seleccioné.
+<<<<<<< HEAD
+>>>>>>> 811261287f1a25996ba25a103daa3a82a3da6ed8
+=======
 >>>>>>> 811261287f1a25996ba25a103daa3a82a3da6ed8
 
 GUARDAR= ok
