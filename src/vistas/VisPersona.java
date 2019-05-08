@@ -62,10 +62,12 @@ public class VisPersona extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mniMembresia = new javax.swing.JMenuItem();
         mniFicha = new javax.swing.JMenuItem();
         mniReportes = new javax.swing.JMenuItem();
         mniSalir = new javax.swing.JMenuItem();
+        menuAdministracion = new javax.swing.JMenu();
+        mniMembresia = new javax.swing.JMenuItem();
+        mniPagos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.lightGray);
@@ -144,7 +146,7 @@ public class VisPersona extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_cedula);
-        txt_cedula.setBounds(142, 13, 190, 22);
+        txt_cedula.setBounds(180, 10, 190, 22);
 
         txt_nombres.setName("nombre"); // NOI18N
         txt_nombres.addActionListener(new java.awt.event.ActionListener() {
@@ -153,21 +155,21 @@ public class VisPersona extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_nombres);
-        txt_nombres.setBounds(142, 48, 190, 22);
+        txt_nombres.setBounds(180, 40, 190, 22);
 
         txt_apellidos.setName("apellido"); // NOI18N
         jPanel1.add(txt_apellidos);
-        txt_apellidos.setBounds(142, 78, 190, 22);
+        txt_apellidos.setBounds(180, 70, 190, 22);
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
         jPanel1.add(btnBuscar);
-        btnBuscar.setBounds(350, 13, 50, 40);
+        btnBuscar.setBounds(390, 10, 50, 40);
 
         jLabel6.setText("EDAD:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(10, 110, 36, 16);
+        jLabel6.setBounds(470, 120, 36, 16);
 
         jLabel5.setText("NRO_FONO:");
         jPanel1.add(jLabel5);
@@ -175,11 +177,11 @@ public class VisPersona extends javax.swing.JFrame {
 
         jLabel7.setText("FECHA DE NACIMIENTO:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(470, 110, 160, 16);
+        jLabel7.setBounds(10, 110, 160, 16);
 
         txt_edad.setName("edad"); // NOI18N
         jPanel1.add(txt_edad);
-        txt_edad.setBounds(142, 110, 190, 22);
+        txt_edad.setBounds(650, 120, 190, 22);
 
         txt_nro_fono.setName("fono"); // NOI18N
         jPanel1.add(txt_nro_fono);
@@ -188,7 +190,7 @@ public class VisPersona extends javax.swing.JFrame {
         dtc_fechaNac.setDateFormatString("dd/MM/yyyy");
         dtc_fechaNac.setName("fechaNac"); // NOI18N
         jPanel1.add(dtc_fechaNac);
-        dtc_fechaNac.setBounds(650, 110, 190, 22);
+        dtc_fechaNac.setBounds(180, 110, 190, 22);
 
         jLabel9.setText("CORREO ELECTR.:");
         jPanel1.add(jLabel9);
@@ -241,16 +243,6 @@ public class VisPersona extends javax.swing.JFrame {
         jMenu1.setText("Archivo");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        mniMembresia.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        mniMembresia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6_1.png"))); // NOI18N
-        mniMembresia.setText("Membresias");
-        mniMembresia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniMembresiaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniMembresia);
-
         mniFicha.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         mniFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo7.png"))); // NOI18N
         mniFicha.setText("Ficha");
@@ -282,6 +274,25 @@ public class VisPersona extends javax.swing.JFrame {
         jMenu1.add(mniSalir);
 
         jMenuBar1.add(jMenu1);
+
+        menuAdministracion.setText("Administracion");
+        menuAdministracion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mniMembresia.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        mniMembresia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6_1.png"))); // NOI18N
+        mniMembresia.setText("Membresias");
+        mniMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniMembresiaActionPerformed(evt);
+            }
+        });
+        menuAdministracion.add(mniMembresia);
+
+        mniPagos.setText("pagos");
+        mniPagos.setActionCommand("mniPagos");
+        menuAdministracion.add(mniPagos);
+
+        jMenuBar1.add(menuAdministracion);
 
         setJMenuBar(jMenuBar1);
 
@@ -373,8 +384,10 @@ public class VisPersona extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JMenu menuAdministracion;
     public javax.swing.JMenuItem mniFicha;
     public javax.swing.JMenuItem mniMembresia;
+    public javax.swing.JMenuItem mniPagos;
     public javax.swing.JMenuItem mniReportes;
     public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;

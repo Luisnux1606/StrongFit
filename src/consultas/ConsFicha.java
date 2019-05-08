@@ -32,7 +32,7 @@ public class ConsFicha extends Conexion {
         {            
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_fin());
+            ps.setString(1, f.getFecha_ini());
             ps.setString(2, f.getFecha_fin());
             ps.setDouble(3, f.getVal_pago());
             ps.setDouble(4, f.getVal_pendiente());
@@ -407,10 +407,21 @@ order by id_ficha asc ;
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = "SELECT f.id_ficha, p.ced_per, p.nom_per, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha " +
-                    " FROM ficha f, persona p " +
-                    " where  upper(p.nom_per) like upper('%"+nom+"%') and p.id_per=f.persona_id_per and f.estado_ficha=1" +
-                    " order by f.id_ficha asc ";
+        String sql = " SELECT f.id_ficha,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
+                        "FROM ficha f, persona p \n" +
+                        "where upper(p.nom_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1\n" +
+                        "UNION\n" +
+                        "SELECT f.id_ficha,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha , f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
+                        "FROM ficha f, persona p \n" +
+                        "where upper(p.ced_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1\n" +
+                        "UNION\n" +
+                        "SELECT f.id_ficha,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha , f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
+                        "FROM ficha f, persona p \n" +
+                        "where upper(f.fechaIni_ficha) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1\n" +
+                        "UNION\n" +
+                        "SELECT f.id_ficha,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha , f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
+                        "FROM ficha f, persona p \n" +
+                        "where upper(f.fechaFin_ficha) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -431,6 +442,38 @@ order by id_ficha asc ;
         }
        return rs;
     }
+    
+    public ResultSet buscarPendientes()
+    {
+        
+        PreparedStatement ps = null;
+        con = getConexion();
+        ResultSet rs = null; 
+        String sql = " SELECT f.id_ficha,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
+                        "FROM ficha f, persona p \n" +
+                        "where  p.id_per=f.persona_id_per and f.valPendiente_ficha>0 and f.estado_ficha=1" ;
+                       
+                
+        ArrayList datos = new ArrayList();
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+            
+        }
+       return rs;
+    }
+    
     public void closeConection()
     {
         

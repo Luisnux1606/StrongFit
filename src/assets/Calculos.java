@@ -9,6 +9,8 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -94,17 +96,15 @@ public class Calculos {
              SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
              Date date1 = sdf.parse(dateEnd);
              Date date2 = sdf.parse(getCurrentDate());
-             
-             System.out.println("date1 : " + sdf.format(date1));
-             System.out.println("date2 : " + sdf.format(date2));
-             
+                                     
              if (date1.compareTo(date2) > 0) {
+                 isTrue = true;
                  //System.out.println("Date1 is after Date2");
              } else if (date1.compareTo(date2) < 0) {
-                  isTrue = true;
+                 isTrue = false; 
                  //System.out.println("Date1 is before Date2");
              } else if (date1.compareTo(date2) == 0) {
-                // System.out.println("Date1 is equal to Date2");
+               isTrue = true;
              } else {
                 // System.out.println("How to get here?");
              }
@@ -112,5 +112,28 @@ public class Calculos {
              Logger.getLogger(Calculos.class.getName()).log(Level.SEVERE, null, ex);
          }
       return isTrue;
+      }
+      
+      public static int getYearsFromDateOfBirth(String dateOfBirt)
+      {
+          
+        String s = dateOfBirt;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date d = null;
+         try {
+             d = sdf.parse(s);
+         } catch (ParseException ex) {
+             Logger.getLogger(Calculos.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH) + 1;
+        int date = c.get(Calendar.DATE);
+        LocalDate l1 = LocalDate.of(year, month, date);
+        LocalDate now1 = LocalDate.now();
+        Period diff1 = Period.between(l1, now1);
+       
+        return diff1.getYears();
       }
 }

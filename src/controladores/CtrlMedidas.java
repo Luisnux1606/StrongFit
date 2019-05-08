@@ -102,21 +102,20 @@ public class CtrlMedidas implements ActionListener{
                cols[1] = listMed.get(i).getFecha();
                cols[2] = listMed.get(i).getPeso();
                cols[3] = listMed.get(i).getEstatura();
-               cols[4] = listMed.get(i).getEdad();
-               cols[5] = listMed.get(i).getNro_hijos();
-               cols[6] = listMed.get(i).getPecho();
-               cols[7] = listMed.get(i).getAbdomen_alto();
-               cols[8] = listMed.get(i).getCintura();
-               cols[9] = listMed.get(i).getAbdomen_bajo();
-               cols[10] = listMed.get(i).getCadera();
-               cols[11] = listMed.get(i).getPiernas();
-               cols[12] = listMed.get(i).getPantorrilla();
-               cols[13] = listMed.get(i).getBrazo();
-               cols[14] = listMed.get(i).getAntebrazo();
-               cols[15] = listMed.get(i).getCuello();
-               cols[16] = listMed.get(i).getEspalda();
-               cols[17] = listMed.get(i).getPorcentaje_grasa();
-               cols[18] = listMed.get(i).getPorcentaje_kgs();
+               cols[4] = listMed.get(i).getNro_hijos();
+               cols[5] = listMed.get(i).getPecho();
+               cols[6] = listMed.get(i).getAbdomen_alto();
+               cols[7] = listMed.get(i).getCintura();
+               cols[8] = listMed.get(i).getAbdomen_bajo();
+               cols[9] = listMed.get(i).getCadera();
+               cols[10] = listMed.get(i).getPiernas();
+               cols[11] = listMed.get(i).getPantorrilla();
+               cols[12] = listMed.get(i).getBrazo();
+               cols[13] = listMed.get(i).getAntebrazo();
+               cols[14] = listMed.get(i).getCuello();
+               cols[15] = listMed.get(i).getEspalda();
+               cols[16] = listMed.get(i).getPorcentaje_grasa();
+               cols[17] = listMed.get(i).getPorcentaje_kgs();
 
 
                model.addRow(cols);                    
@@ -229,22 +228,21 @@ public class CtrlMedidas implements ActionListener{
          visMedidas.txt_id_datos.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),0)));
          visMedidas.dtcFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),1))));
          visMedidas.txtPeso.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),2)));
-         visMedidas.txtEstatura.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),3)));
-         visMedidas.txtEdad.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),4)));
-         visMedidas.txtNroHijos.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),5)));
-         visMedidas.txtPecho.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),6)));
-         visMedidas.txtAbdomAlto.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),7)));
-         visMedidas.txtCintura.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),8)));
-         visMedidas.txtAbdomBajo.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),9)));
-         visMedidas.txtCadera.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),10)));
-         visMedidas.txtPierna.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),11)));
-         visMedidas.txtPantorrilla.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),12)));
-         visMedidas.txtBrazo.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),13)));
-         visMedidas.txtAntebrazo.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),14)));
-         visMedidas.txtCuello.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),15)));
-         visMedidas.txtEspalda.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),16)));
-         visMedidas.txtPorGrasa.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),17)));
-         visMedidas.txtPorKilogs.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),18)));
+         visMedidas.txtEstatura.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),3)));      
+         visMedidas.txtNroHijos.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),4)));
+         visMedidas.txtPecho.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),5)));
+         visMedidas.txtAbdomAlto.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),6)));
+         visMedidas.txtCintura.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),7)));
+         visMedidas.txtAbdomBajo.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),8)));
+         visMedidas.txtCadera.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),9)));
+         visMedidas.txtPierna.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),10)));
+         visMedidas.txtPantorrilla.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),11)));
+         visMedidas.txtBrazo.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),12)));
+         visMedidas.txtAntebrazo.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),13)));
+         visMedidas.txtCuello.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),14)));
+         visMedidas.txtEspalda.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),15)));
+         visMedidas.txtPorGrasa.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),16)));
+         visMedidas.txtPorKilogs.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),17)));
          
      }
     
@@ -252,9 +250,7 @@ public class CtrlMedidas implements ActionListener{
     {
         visMedidas.dtcFecha.requestFocus();
         visMedidas.dtcFecha.setNextFocusableComponent(visMedidas.txtPeso);
-        visMedidas.txtPeso.setNextFocusableComponent(visMedidas.txtEstatura);
-        visMedidas.txtEstatura.setNextFocusableComponent(visMedidas.txtEdad);    
-        visMedidas.txtEdad.setNextFocusableComponent(visMedidas.txtNroHijos);
+        visMedidas.txtPeso.setNextFocusableComponent(visMedidas.txtEstatura);  
         visMedidas.txtNroHijos.setNextFocusableComponent(visMedidas.txtPecho); 
         visMedidas.txtPecho.setNextFocusableComponent(visMedidas.txtAbdomAlto); 
         visMedidas.txtAbdomAlto.setNextFocusableComponent(visMedidas.txtCintura); 
@@ -289,21 +285,20 @@ public class CtrlMedidas implements ActionListener{
                cols[1] = listMed.get(i).getFecha();
                cols[2] = listMed.get(i).getPeso();
                cols[3] = listMed.get(i).getEstatura();
-               cols[4] = listMed.get(i).getEdad();
-               cols[5] = listMed.get(i).getNro_hijos();
-               cols[6] = listMed.get(i).getPecho();
-               cols[7] = listMed.get(i).getAbdomen_alto();
-               cols[8] = listMed.get(i).getCintura();
-               cols[9] = listMed.get(i).getAbdomen_bajo();
-               cols[10] = listMed.get(i).getCadera();
-               cols[11] = listMed.get(i).getPiernas();
-               cols[12] = listMed.get(i).getPantorrilla();
-               cols[13] = listMed.get(i).getBrazo();
-               cols[14] = listMed.get(i).getAntebrazo();
-               cols[15] = listMed.get(i).getCuello();
-               cols[16] = listMed.get(i).getEspalda();
-               cols[17] = listMed.get(i).getPorcentaje_grasa();
-               cols[18] = listMed.get(i).getPorcentaje_kgs();        
+               cols[4] = listMed.get(i).getNro_hijos();
+               cols[5] = listMed.get(i).getPecho();
+               cols[6] = listMed.get(i).getAbdomen_alto();
+               cols[7] = listMed.get(i).getCintura();
+               cols[8] = listMed.get(i).getAbdomen_bajo();
+               cols[9] = listMed.get(i).getCadera();
+               cols[10] = listMed.get(i).getPiernas();
+               cols[11] = listMed.get(i).getPantorrilla();
+               cols[12] = listMed.get(i).getBrazo();
+               cols[13] = listMed.get(i).getAntebrazo();
+               cols[14] = listMed.get(i).getCuello();
+               cols[15] = listMed.get(i).getEspalda();
+               cols[16] = listMed.get(i).getPorcentaje_grasa();
+               cols[17] = listMed.get(i).getPorcentaje_kgs();        
 
                model.addRow(cols);                    
            }   
@@ -322,7 +317,6 @@ public class CtrlMedidas implements ActionListener{
                     modMedidas.setFecha(Validaciones.setFormatFecha(visMedidas.dtcFecha.getDate()));                
                     modMedidas.setPeso(Validaciones.isNumVoid3(visMedidas.txtPeso.getText()));
                     modMedidas.setEstatura(Validaciones.isNumVoid3(visMedidas.txtEstatura.getText()));
-                    modMedidas.setEdad(Validaciones.isNumVoid(visMedidas.txtEdad.getText()));
                     modMedidas.setNro_hijos(Validaciones.isNumVoid(visMedidas.txtNroHijos.getText()));
                     modMedidas.setPecho(Validaciones.isNumVoid3(visMedidas.txtPecho.getText()));
                     modMedidas.setAbdomen_alto(Validaciones.isNumVoid3(visMedidas.txtAbdomAlto.getText()));
@@ -360,7 +354,6 @@ public class CtrlMedidas implements ActionListener{
             modMedidas.setFecha(Validaciones.setFormatFecha(visMedidas.dtcFecha.getDate()));                
             modMedidas.setPeso(Validaciones.isNumVoid2(visMedidas.txtPeso.getText()));
             modMedidas.setEstatura(Validaciones.isNumVoid2(visMedidas.txtEstatura.getText()));
-            modMedidas.setEdad(Validaciones.isNumVoid(visMedidas.txtEdad.getText()));
             modMedidas.setNro_hijos(Validaciones.isNumVoid(visMedidas.txtNroHijos.getText()));
             modMedidas.setPecho(Validaciones.isNumVoid2(visMedidas.txtPecho.getText()));
             modMedidas.setAbdomen_alto(Validaciones.isNumVoid2(visMedidas.txtAbdomAlto.getText()));
@@ -422,7 +415,6 @@ public class CtrlMedidas implements ActionListener{
                     visMedidas.dtcFecha.setDate(Validaciones.setStringToDate(modMedidas.getFecha()));  
                     visMedidas.txtPeso.setText(String.valueOf(modMedidas.getPeso()));
                     visMedidas.txtEstatura.setText(String.valueOf(modMedidas.getEstatura()));
-                    visMedidas.txtEdad.setText(String.valueOf(modMedidas.getEdad()));
                     visMedidas.txtNroHijos.setText(String.valueOf(modMedidas.getNro_hijos()));
                     visMedidas.txtPecho.setText(String.valueOf(modMedidas.getPecho()));
                     visMedidas.txtAbdomAlto.setText(String.valueOf(modMedidas.getAbdomen_alto()));
@@ -475,11 +467,10 @@ public class CtrlMedidas implements ActionListener{
     }
     public void limpiar()
     {
-        System.out.println("entro");
+        
         visMedidas.dtcFecha.setDate(null);                
         visMedidas.txtPeso.setText("");
         visMedidas.txtEstatura.setText("");
-        visMedidas.txtEdad.setText("");
         visMedidas.txtNroHijos.setText("");
         visMedidas.txtPecho.setText("");
         visMedidas.txtAbdomAlto.setText("");
@@ -496,7 +487,7 @@ public class CtrlMedidas implements ActionListener{
         visMedidas.txtPorKilogs.setText("");
   
      
-        limpiarTabla();
+       // limpiarTabla();
     }
     
     
