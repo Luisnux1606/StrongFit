@@ -67,7 +67,6 @@ public class VisPersona extends javax.swing.JFrame {
         mniSalir = new javax.swing.JMenuItem();
         menuAdministracion = new javax.swing.JMenu();
         mniMembresia = new javax.swing.JMenuItem();
-        mniPagos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(java.awt.Color.lightGray);
@@ -288,10 +287,6 @@ public class VisPersona extends javax.swing.JFrame {
         });
         menuAdministracion.add(mniMembresia);
 
-        mniPagos.setText("pagos");
-        mniPagos.setActionCommand("mniPagos");
-        menuAdministracion.add(mniPagos);
-
         jMenuBar1.add(menuAdministracion);
 
         setJMenuBar(jMenuBar1);
@@ -387,7 +382,6 @@ public class VisPersona extends javax.swing.JFrame {
     public javax.swing.JMenu menuAdministracion;
     public javax.swing.JMenuItem mniFicha;
     public javax.swing.JMenuItem mniMembresia;
-    public javax.swing.JMenuItem mniPagos;
     public javax.swing.JMenuItem mniReportes;
     public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;

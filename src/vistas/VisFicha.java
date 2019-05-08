@@ -144,7 +144,6 @@ public class VisFicha extends javax.swing.JFrame {
         btnCalcular = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
         txt_valCancelo = new javax.swing.JTextField();
-        cmbxValorPagar = new javax.swing.JComboBox();
         cmbTipoBusqueda = new javax.swing.JComboBox();
         lblBuscarPor = new javax.swing.JLabel();
         btnGuardarFicha = new javax.swing.JButton();
@@ -825,8 +824,6 @@ public class VisFicha extends javax.swing.JFrame {
 
         jLabel31.setText("Valor que cancelo:");
 
-        cmbxValorPagar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         cmbTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todos", "cursando", "pendientes", "proximos a vencer", "vencidos", " " }));
 
         lblBuscarPor.setText("Buscar por:");
@@ -859,12 +856,9 @@ public class VisFicha extends javax.swing.JFrame {
                                             .addComponent(txtValConDsctoFicha))
                                         .addGap(18, 18, 18)
                                         .addComponent(btnBuscarDscto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(dtcFechaFinFicha, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                                            .addComponent(txtValPagar))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbxValorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(dtcFechaFinFicha, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                        .addComponent(txtValPagar))))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -915,9 +909,7 @@ public class VisFicha extends javax.swing.JFrame {
                         .addGap(13, 13, 13)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel40)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtValPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbxValorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtValPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtValDscto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1126,7 +1118,6 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnModificarAnalisis;
     public javax.swing.JButton btnModificarFicha;
     public javax.swing.JComboBox cmbTipoBusqueda;
-    public javax.swing.JComboBox cmbxValorPagar;
     public com.toedter.calendar.JDateChooser dtcFecha;
     public com.toedter.calendar.JDateChooser dtcFechaAnalisis;
     public com.toedter.calendar.JDateChooser dtcFechaFinFicha;
