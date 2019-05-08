@@ -1,59 +1,106 @@
 1. llega persona a ficha sin datos de medidas y sin datos de analisis pero con membresia
 
-*********PAGINA PRINCIPAL***************
 
-GUARDAR (ANDREA)
-1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok
-2. El número de telefóno que guarda corresponde a la edad. : ok
 
-LUPA (ANDREA)
-1. cuando busca muestra el mensaje que falta la fecha de nacimiento lo cual no es cierto, 
-porque el registro si tiene fecha de nacimiento. : ok
-2. Cuando busca en correo electrónico pone la cédula. :ok
+*********REGISTRO DE PERSONAS***************
 
-MODIFICADO= ok
+GUARDAR
+1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok (no está hecho)
+2. No valida que haya registrado dos usuarios con la misma cédula. 
 
-ELIMINADO 
-1. Para eliminar se tiene que verificar que antes haya estado seleccionado un campo, o sino borrá el último marcado. : ok (funciona con click)
+MODIFICAR= ok
+ELIMINAR= ok
+LIMPIAR= ok
+
+BUSCAR (lupa)= ok
+1. habilitar el botón modificar, porque busco a un cliente con la lupita para modificarlo. 
+
 
 
 *********FICHA***************
+
 1. Si voy directo desde el menú a Ficha no puede buscar al cliente. : HAY QUE DAR CLICK EN CLIENTE EN LA TABLA PERSONAS
-2. Sugiero quitar la fecha de fin como predeterminada con la fecha de la compu. : ok
+Respuesta-> entonces, si es así para que poner una opción en el menú 
 
 ----PESTAÑA DATOS--
-1. Vuelve a pedir la edad a pesar que ya fue ingresada. Si se quiere visualizar que se tome de lo guardado. : ok
+VARIOS
+1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
 
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR= ok
-LIMPIAR REGISTRO= borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros: ok
+LIMPIAR= ok
+
+BUSCAR (lupa)
+1.No busca. 
+
 
 
 ----PESTAÑA ANALISIS--
+VARIOS
+1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
+
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
-LIMPIAR REGISTRO= borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros  : ok
+
+LIMPIAR REGISTRO
+1. Borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
+con los datos como estaba, es decir, con los registros  : ok [NO ESTÁ HECHO]
+
+BUSCAR (lupa)
+1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco. 
+
 
 
 ----PESTAÑA FICHA--
-Falta completar con el apellido de la persona. : ok
-Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : R
-El campo "Valor pendiente de cobro" se calcule automáticamente, y se sume de lo que debió al final. :ok
-Quitar de la tabla los campos "cedula y nombres", porque la ficha ya sabemos que es de Ana Peralta. :ok(sirve para revisar)
-El buscar que no se por "nombre" sino por la fecha. :R
-En el campo "fecha de inicio" está guardando la fecha de fin. : ok
-El campo "valor cancelado" no está guardando nada. : R
-El botón "Calcular" no calcula.  : ok
+VARIOS
+1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
+No debe mostrar información de otros usuarios sino sólo del seleccionado. 
+2.Falta completar con el apellido de la persona. : ok [NO ESTÁ HECHO]
+3.Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : R
+4.Quitar de la tabla los campos "cedula y nombres", porque la ficha ya sabemos que es de Ana Peralta. :ok(sirve para revisar)
+Respuesta-> Revisar qué¿? Si la fecha es de esa persona.¿?
+5. Yo quitaría el botón calcular. No calcula con decimales.
+6. El botón de la membresía, abre la venta de membresía; seleccionó la que deseo y no sucede nada. No se añade a la Ficha la membresía que seleccioné.
 
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
-LIMPIAR REGISTRO= borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros  : ok
+
+LIMPIAR REGISTRO
+1. Borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
+con los datos como estaba, es decir, con los registros  : ok [AHORA NO BORRA NADA]
+
+
+
+----PESTAÑA MEMBRESÍA--
+
+GUARDAR
+1. Cuando se guarda no se limpia la cabecera. 
+
+MODIFICAR= ok
+ELIMINAR= ok
+
+BUSCAR (lupa)
+1. habilitar el botón modificar, porque busco a un cliente con la lupita para modificarlo. 
+
+BUSCAR (nombre)
+1. No busca
+
+
+----PESTAÑA REPORTES--
+
+1. Es un paso innecesario la lupa para buscar. Yo considero que mejor sería de poner ese campo de buscar y la tabla en 
+la ventana principal. Es decir, no abrir otra ventana para buscar, sino que esté en la misma. 
+2. No me generó el reporte. (Exception in thread "AWT-EventQueue-0" java.lang.NoClassDefFoundError: org/apache/commons/logging/LogFactory
+	at net.sf.jasperreports.engine.util.JRLoader.<clinit>(JRLoader.java:81))
+3. No me generó los registros. (Exception in thread "AWT-EventQueue-0" java.lang.NoClassDefFoundError: Could not initialize class net.sf.jasperreports.engine.util.JRLoader
+	at controladores.CtrlReportes.getVentas(CtrlReportes.java:117)
+	at controladores.CtrlReportes.actionPerformed(CtrlReportes.java:174))
 
 *********GENERALES***************
-Sería bueno hacer un resize de las ventanas, porque en el caso de mi compu no se pueden ver las tablas. : R
+1. Sería bueno hacer un resize de las ventanas, porque en el caso de mi compu no se pueden ver las tablas. : R
+Respuesta-> Considero que lo más urgente es hacer esto, ya que no van a poder revisar porque la tabla con encaja en la pantalla. 
+2. Quitar el campo ID de todas las tablas con excepción de la persona. 
+3. L
