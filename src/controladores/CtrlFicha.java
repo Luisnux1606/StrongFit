@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -85,7 +86,7 @@ public class CtrlFicha implements ActionListener{
         setFocus();
         setListener();    
         setTableModel();
-        iniciar();
+       // iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
         
@@ -104,7 +105,7 @@ public class CtrlFicha implements ActionListener{
     public void iniciar()
     {
         visFicha.setTitle("FICHA");
-        visFicha.setLocationRelativeTo(null);
+        
         visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_Ficha.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
@@ -112,7 +113,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.txt_id_persona_u.setVisible(false);
         visFicha.txt_id_medidas_u.setVisible(false);
         visFicha.txt_id_analisis_u.setVisible(false);
-        visFicha.lbl_personaFicha.setText(persona.getNombre().toUpperCase() +" ");
+        visFicha.lbl_personaFicha.setText("");
         
         
         visFicha.btnGuardarFicha.setToolTipText("Guardar el registro");
@@ -122,7 +123,12 @@ public class CtrlFicha implements ActionListener{
         visFicha.tabp_ficha.setSelectedIndex(2);
         limpiar();
         
-               
+    
+        visFicha.setLocation(400,100); 
+        visFicha.setSize(1400,800);                
+        visFicha.setVisible(true);
+    
+        visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     public void setCmbxMembresias()

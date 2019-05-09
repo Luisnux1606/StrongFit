@@ -5,8 +5,12 @@
  */
 package strongfit;
 
+import consultas.ConsFicha;
 import consultas.ConsPersona;
+import controladores.CtrlFicha;
 import controladores.CtrlPersonas;
+import modelos.Ficha;
+import modelos.Membresias;
 import modelos.Persona;
 import vistas.VisFicha;
 import vistas.VisMembresia;
@@ -24,12 +28,19 @@ public class StrongFit {
     public static void main(String[] args) {
         Persona per = new Persona();
         ConsPersona consPer = new ConsPersona();
-        VisPersona visPer = new VisPersona();    
+        VisPersona visPer = new VisPersona();   
+                
         VisMembresia visMemb = new VisMembresia();
-    
-        CtrlPersonas ctrlPer = new CtrlPersonas(per, consPer,visMemb, visPer);               
-        ctrlPer.iniciar();
-        visPer.setVisible(true);
+        
+        Ficha ficha =  new Ficha();
+        ConsFicha consFicha = new ConsFicha();
+        VisFicha visFicha = new VisFicha();
+        
+        CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha, visMemb, per);
+        ctrlFicha.iniciar();
+       // CtrlPersonas ctrlPer = new CtrlPersonas(per, consPer,visMemb, visPer);               
+       // ctrlPer.iniciar();
+        //visPer.setVisible(true);
     }
     
 }

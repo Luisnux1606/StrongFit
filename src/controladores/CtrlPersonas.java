@@ -102,6 +102,7 @@ public class CtrlPersonas implements ActionListener {
         visPersona.txtCorreoElect.setNextFocusableComponent(visPersona.txt_nro_fono); 
         visPersona.txt_nro_fono.setNextFocusableComponent(visPersona.txt_edad); 
     }
+    
     public void iniciar()
     {
         visPersona.setTitle("REGISTRO DE PERSONAS ()TROYA GYM()");
@@ -131,7 +132,7 @@ public class CtrlPersonas implements ActionListener {
                if (Validaciones.isVoid(jtx)) {
                     modPer.setCedula(visPersona.txt_cedula.getText());                
                     modPer.setNombre(visPersona.txt_nombres.getText().toUpperCase());
-                    modPer.setApellido(visPersona.txt_apellidos.getText().toUpperCase());
+                    modPer.setApellido(Validaciones.isNumVoid4(visPersona.txt_apellidos.getText().toUpperCase()));
                     modPer.setNro_fono(visPersona.txt_nro_fono.getText());
                     modPer.setEdad(Validaciones.isNumVoid(visPersona.txt_edad.getText()));                  
                     modPer.setFecha_nac(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
@@ -274,7 +275,7 @@ public class CtrlPersonas implements ActionListener {
          //////
          if (e.getSource() == visPersona.mniMembresia) 
          {
-            
+            /*
             
             VisMembresia visMem = new VisMembresia();            
             VisFicha visFicha= new VisFicha();
@@ -282,7 +283,7 @@ public class CtrlPersonas implements ActionListener {
             ConsMembresias consMem = new ConsMembresias();
             Ficha ficha  =  new Ficha();
             CtrlMembresias ctrlMem = new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
-   
+            */
          }
 
          
@@ -337,7 +338,7 @@ public class CtrlPersonas implements ActionListener {
                cols[0] = prodList.get(i).getId();
                cols[1] = Validaciones.isNumVoid4(prodList.get(i).getCedula());
                cols[2] = prodList.get(i).getNombre().toUpperCase();
-               cols[3] = prodList.get(i).getApellido().toUpperCase();
+               cols[3] = prodList.get(i).getApellido();
                cols[4] = prodList.get(i).getGenero().toUpperCase();
                cols[5] = Validaciones.isNumVoid4(prodList.get(i).getMail());
                cols[6] = Validaciones.isNumVoid4(prodList.get(i).getNro_fono());
