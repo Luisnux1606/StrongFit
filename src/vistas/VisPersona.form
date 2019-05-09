@@ -415,6 +415,9 @@
                   <Image iconType="3" name="/icons/lupa6.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -482,7 +485,6 @@
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="dtc_fechaNac">
               <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                 <Property name="name" type="java.lang.String" value="fechaNac" noResource="true"/>
               </Properties>
               <AuxValues>

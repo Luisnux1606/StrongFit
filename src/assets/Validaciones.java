@@ -68,14 +68,13 @@ public class Validaciones {
      
      public static String isNumVoid4(String txt)
      {
-       
          String  val = "";
-         if (txt==null || txt.equals("null")) {
+         if (txt==null || txt.toString().equalsIgnoreCase("null")) {
              val = "";
          }
          else
              val = txt;
-         
+
          return val;
      }
      
