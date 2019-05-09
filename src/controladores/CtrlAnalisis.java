@@ -105,7 +105,8 @@ public class CtrlAnalisis implements ActionListener{
         //limpiarTabla();
     }
         
-    public void limpiarTabla(){
+    public void limpiarTabla()
+    {
         DefaultTableModel tb = (DefaultTableModel) visAnalisis.tblAnalisis.getModel();
         int a = visAnalisis.tblAnalisis.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           

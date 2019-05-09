@@ -112,7 +112,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.txt_id_persona_u.setVisible(false);
         visFicha.txt_id_medidas_u.setVisible(false);
         visFicha.txt_id_analisis_u.setVisible(false);
-        visFicha.lbl_personaFicha.setText(persona.getNombre().toUpperCase() +" ");
+        visFicha.lbl_personaFicha.setText(persona.getNombre().toUpperCase() +" "+persona.getApellido().toUpperCase());
         
         
         visFicha.btnGuardarFicha.setToolTipText("Guardar el registro");
@@ -768,7 +768,7 @@ public class CtrlFicha implements ActionListener{
     }
     public void limpiar()
     {
-        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());                
+        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2()); 
         visFicha.txtValConDsctoFicha.setText("0.0");
         visFicha.txtValPendienteFicha.setText("0.0");
         visFicha.txtValPagar.setText("0.0");

@@ -5,7 +5,8 @@
 *********REGISTRO DE PERSONAS***************
 
 GUARDAR
-1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok (no está hecho)
+1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok
+Respuesta-> sale la edad sólo cuando se da enter, pero yo digo que un usuario no haría algo así. 
 2. No valida que haya registrado dos usuarios con la misma cédula. 
 
 MODIFICAR= ok
@@ -57,7 +58,7 @@ BUSCAR (lupa)
 VARIOS
 1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
 No debe mostrar información de otros usuarios sino sólo del seleccionado. 
-2.Falta completar con el apellido de la persona. : ok [NO ESTÁ HECHO]
+2.Falta completar con el apellido de la persona. : ok [NO ESTÁ HECHO]= OK-A
 3.Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : R
 4.Quitar de la tabla los campos "cedula y nombres", porque la ficha ya sabemos que es de Ana Peralta. :ok(sirve para revisar)
 Respuesta-> Revisar qué¿? Si la fecha es de esa persona.¿?
@@ -67,10 +68,7 @@ Respuesta-> Revisar qué¿? Si la fecha es de esa persona.¿?
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
-
-LIMPIAR REGISTRO
-1. Borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros  : ok [AHORA NO BORRA NADA]
+LIMPIAR REGISTRO= ok
 
 
 
