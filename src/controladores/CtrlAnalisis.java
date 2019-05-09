@@ -102,10 +102,11 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.txtRecomCardio.setText("");
         visAnalisis.txtRecomFuncional.setText("");
  
-        limpiarTabla();
+        //limpiarTabla();
     }
         
-    public void limpiarTabla(){
+    public void limpiarTabla()
+    {
         DefaultTableModel tb = (DefaultTableModel) visAnalisis.tblAnalisis.getModel();
         int a = visAnalisis.tblAnalisis.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
@@ -289,7 +290,6 @@ public class CtrlAnalisis implements ActionListener{
                cols[5] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_pesas()).toUpperCase();
                cols[6] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_cardio()).toUpperCase();
                cols[7] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_funcional()).toUpperCase();
-               
                model.addRow(cols);                    
            }   
     

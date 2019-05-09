@@ -169,8 +169,6 @@ public class VisFicha extends javax.swing.JFrame {
 
         jLabel2.setText("Fecha actual:");
 
-        dtcFecha.setDateFormatString("dd/MM/yyyy");
-
         jLabel3.setText("Peso:");
 
         jLabel4.setText("Estatura:");
@@ -182,6 +180,11 @@ public class VisFicha extends javax.swing.JFrame {
 
         btnBuscarMed.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscarMed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
+        btnBuscarMed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarMedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -528,7 +531,6 @@ public class VisFicha extends javax.swing.JFrame {
 
         txtExcesoGrasa.setName("ExesoGrasa"); // NOI18N
 
-        dtcFechaAnalisis.setDateFormatString("dd/MM/yyyy");
         dtcFechaAnalisis.setName("FechaAnalisis"); // NOI18N
 
         txtExcesoLiquido.setName("ExcesoLiquido"); // NOI18N
@@ -558,6 +560,11 @@ public class VisFicha extends javax.swing.JFrame {
 
         btnBuscarAnalisis.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscarAnalisis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
+        btnBuscarAnalisis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarAnalisisActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -578,7 +585,7 @@ public class VisFicha extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
                             .addComponent(jLabel25))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtExcesoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtExcesoLiquido, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -757,8 +764,6 @@ public class VisFicha extends javax.swing.JFrame {
 
         lblBuscarPorCualquierCampo.setText("Buscar por cualquier campo");
 
-        btnBuscarDscto.setIcon(new javax.swing.ImageIcon("C:\\Users\\Administrator\\Documents\\NetBeansProjects\\StrongFit\\src\\icons\\lupa6_1.png")); // NOI18N
-
         jLabel42.setText("Cambio de :");
 
         txt_cambio.addActionListener(new java.awt.event.ActionListener() {
@@ -795,10 +800,8 @@ public class VisFicha extends javax.swing.JFrame {
         jLabel36.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabel36.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
-        dtcFechaIniFicha.setDateFormatString("dd/MM/yyyy");
         dtcFechaIniFicha.setName("dtcFechaIniFicha"); // NOI18N
 
-        dtcFechaFinFicha.setDateFormatString("dd/MM/yyyy");
         dtcFechaFinFicha.setName("dtcFechaFinFicha"); // NOI18N
 
         txtValPagar.addActionListener(new java.awt.event.ActionListener() {
@@ -1066,6 +1069,14 @@ public class VisFicha extends javax.swing.JFrame {
     private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void btnBuscarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarMedActionPerformed
+
+    private void btnBuscarAnalisisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAnalisisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarAnalisisActionPerformed
 
     /**
      * @param args the command line arguments

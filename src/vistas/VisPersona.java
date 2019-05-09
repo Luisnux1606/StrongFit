@@ -56,7 +56,7 @@ public class VisPersona extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtCorreoElect = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        cmbxGenero = new javax.swing.JComboBox<String>();
+        cmbxGenero = new javax.swing.JComboBox<>();
         txtBuscarCedula = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -121,7 +121,7 @@ public class VisPersona extends javax.swing.JFrame {
         pnl_personas.add(btnGuardar);
         btnGuardar.setBounds(10, 20, 40, 40);
         pnl_personas.add(txt_id);
-        txt_id.setBounds(430, 10, 30, 22);
+        txt_id.setBounds(430, 10, 30, 20);
 
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setLayout(null);
@@ -132,11 +132,11 @@ public class VisPersona extends javax.swing.JFrame {
 
         jLabel3.setText("NOMBRES:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(12, 48, 70, 16);
+        jLabel3.setBounds(12, 48, 70, 14);
 
         jLabel4.setText("APELLIDOS:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(12, 78, 80, 16);
+        jLabel4.setBounds(12, 78, 80, 14);
 
         txt_cedula.setName("cedula"); // NOI18N
         txt_cedula.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +145,7 @@ public class VisPersona extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_cedula);
-        txt_cedula.setBounds(180, 10, 190, 22);
+        txt_cedula.setBounds(180, 10, 190, 20);
 
         txt_nombres.setName("nombre"); // NOI18N
         txt_nombres.addActionListener(new java.awt.event.ActionListener() {
@@ -154,56 +154,60 @@ public class VisPersona extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_nombres);
-        txt_nombres.setBounds(180, 40, 190, 22);
+        txt_nombres.setBounds(180, 40, 190, 20);
 
         txt_apellidos.setName("apellido"); // NOI18N
         jPanel1.add(txt_apellidos);
-        txt_apellidos.setBounds(180, 70, 190, 22);
+        txt_apellidos.setBounds(180, 70, 190, 20);
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnBuscar);
         btnBuscar.setBounds(390, 10, 50, 40);
 
         jLabel6.setText("EDAD:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(470, 120, 36, 16);
+        jLabel6.setBounds(470, 120, 31, 14);
 
         jLabel5.setText("NRO_FONO:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(470, 80, 80, 16);
+        jLabel5.setBounds(470, 80, 80, 14);
 
         jLabel7.setText("FECHA DE NACIMIENTO:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(10, 110, 160, 16);
+        jLabel7.setBounds(10, 110, 160, 14);
 
         txt_edad.setName("edad"); // NOI18N
         jPanel1.add(txt_edad);
-        txt_edad.setBounds(650, 120, 190, 22);
+        txt_edad.setBounds(650, 120, 190, 20);
 
         txt_nro_fono.setName("fono"); // NOI18N
         jPanel1.add(txt_nro_fono);
-        txt_nro_fono.setBounds(650, 80, 190, 22);
+        txt_nro_fono.setBounds(650, 80, 190, 20);
 
-        dtc_fechaNac.setDateFormatString("dd/MM/yyyy");
         dtc_fechaNac.setName("fechaNac"); // NOI18N
         jPanel1.add(dtc_fechaNac);
-        dtc_fechaNac.setBounds(180, 110, 190, 22);
+        dtc_fechaNac.setBounds(180, 110, 190, 20);
 
         jLabel9.setText("CORREO ELECTR.:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(470, 50, 120, 16);
+        jLabel9.setBounds(470, 50, 120, 14);
         jPanel1.add(txtCorreoElect);
         txtCorreoElect.setBounds(650, 50, 190, 20);
 
         jLabel10.setText("GENERO:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(470, 20, 70, 16);
+        jLabel10.setBounds(470, 20, 70, 14);
 
-        cmbxGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MASCULINO", "FEMENINO" }));
+        cmbxGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMENINO" }));
         jPanel1.add(cmbxGenero);
-        cmbxGenero.setBounds(650, 10, 190, 22);
+        cmbxGenero.setBounds(650, 10, 190, 20);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
@@ -214,11 +218,11 @@ public class VisPersona extends javax.swing.JFrame {
             }
         });
         pnl_personas.add(txtBuscarCedula);
-        txtBuscarCedula.setBounds(10, 280, 150, 22);
+        txtBuscarCedula.setBounds(10, 280, 150, 20);
 
         jLabel8.setText("Buscar por nombres:");
         pnl_personas.add(jLabel8);
-        jLabel8.setBounds(10, 260, 110, 16);
+        jLabel8.setBounds(10, 260, 110, 14);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -321,6 +325,10 @@ public class VisPersona extends javax.swing.JFrame {
     private void mniMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniMembresiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mniMembresiaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments

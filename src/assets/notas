@@ -5,7 +5,8 @@
 *********REGISTRO DE PERSONAS***************
 
 GUARDAR
-1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok (no está hecho)
+1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok
+Respuesta-> sale la edad sólo cuando se da enter, pero yo digo que un usuario no haría algo así. 
 2. No valida que haya registrado dos usuarios con la misma cédula. 
 
 MODIFICAR= ok
@@ -46,7 +47,7 @@ MODIFICAR= ok
 
 LIMPIAR REGISTRO
 1. Borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros  : ok [NO ESTÁ HECHO]
+con los datos como estaba, es decir, con los registros  : ok [NO ESTÁ HECHO] = OK-A
 
 BUSCAR (lupa)
 1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco. 
@@ -54,6 +55,7 @@ BUSCAR (lupa)
 
 
 ----PESTAÑA FICHA--
+
 Falta completar con el apellido de la persona. : ok
 Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : ok;
 El campo "Valor pendiente de cobro" se calcule automáticamente, y se sume de lo que debió al final. :ok
@@ -62,12 +64,11 @@ El buscar que no se por "nombre" sino por la fecha. :ok
 En el campo "fecha de inicio" está guardando la fecha de fin. : ok
 El campo "valor cancelado" no está guardando nada. : R
 El botón "Calcular" no calcula.  : ok
-=======
-=======
+
 VARIOS
 1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
 No debe mostrar información de otros usuarios sino sólo del seleccionado. 
-2.Falta completar con el apellido de la persona. : ok [NO ESTÁ HECHO]
+2.Falta completar con el apellido de la persona. : ok [NO ESTÁ HECHO]= OK-A
 3.Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : R
 4.Quitar de la tabla los campos "cedula y nombres", porque la ficha ya sabemos que es de Ana Peralta. :ok(sirve para revisar)
 Respuesta-> Revisar qué¿? Si la fecha es de esa persona.¿?
@@ -77,10 +78,7 @@ Respuesta-> Revisar qué¿? Si la fecha es de esa persona.¿?
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
-
-LIMPIAR REGISTRO
-1. Borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros  : ok [AHORA NO BORRA NADA]
+LIMPIAR REGISTRO= ok
 
 
 
@@ -103,14 +101,8 @@ BUSCAR (nombre)
 
 1. Es un paso innecesario la lupa para buscar. Yo considero que mejor sería de poner ese campo de buscar y la tabla en 
 la ventana principal. Es decir, no abrir otra ventana para buscar, sino que esté en la misma. 
-2. No me generó el reporte. (Exception in thread "AWT-EventQueue-0" java.lang.NoClassDefFoundError: org/apache/commons/logging/LogFactory
-	at net.sf.jasperreports.engine.util.JRLoader.<clinit>(JRLoader.java:81))
-3. No me generó los registros. (Exception in thread "AWT-EventQueue-0" java.lang.NoClassDefFoundError: Could not initialize class net.sf.jasperreports.engine.util.JRLoader
-	at controladores.CtrlReportes.getVentas(CtrlReportes.java:117)
-	at controladores.CtrlReportes.actionPerformed(CtrlReportes.java:174))
 
 *********GENERALES***************
 1. Sería bueno hacer un resize de las ventanas, porque en el caso de mi compu no se pueden ver las tablas. : R
 Respuesta-> Considero que lo más urgente es hacer esto, ya que no van a poder revisar porque la tabla con encaja en la pantalla. 
 2. Quitar el campo ID de todas las tablas con excepción de la persona. 
-3. L

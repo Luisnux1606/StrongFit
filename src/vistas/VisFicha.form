@@ -268,9 +268,6 @@
                   </Properties>
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="dtcFecha">
-                  <Properties>
-                    <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
-                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -322,6 +319,9 @@
                       <Image iconType="3" name="/icons/lupa6.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarMedActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -994,7 +994,7 @@
                                       <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                                  <EmptySpace pref="14" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="txtExcesoTotal" min="-2" pref="123" max="-2" attributes="0"/>
                                       <Component id="txtExcesoLiquido" min="-2" pref="123" max="-2" attributes="0"/>
@@ -1106,7 +1106,6 @@
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="dtcFechaAnalisis">
                   <Properties>
-                    <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                     <Property name="name" type="java.lang.String" value="FechaAnalisis" noResource="true"/>
                   </Properties>
                   <AuxValues>
@@ -1210,6 +1209,9 @@
                       <Image iconType="3" name="/icons/lupa6.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarAnalisisActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -1728,11 +1730,6 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnBuscarDscto">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\Administrator\Documents\NetBeansProjects\StrongFit\src\icons\lupa6_1.png"/>
-                    </Property>
-                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -1806,7 +1803,6 @@
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="dtcFechaIniFicha">
                   <Properties>
-                    <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                     <Property name="name" type="java.lang.String" value="dtcFechaIniFicha" noResource="true"/>
                   </Properties>
                   <AuxValues>
@@ -1815,7 +1811,6 @@
                 </Component>
                 <Component class="com.toedter.calendar.JDateChooser" name="dtcFechaFinFicha">
                   <Properties>
-                    <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
                     <Property name="name" type="java.lang.String" value="dtcFechaFinFicha" noResource="true"/>
                   </Properties>
                   <AuxValues>
