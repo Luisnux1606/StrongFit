@@ -116,7 +116,7 @@ public class CtrlFicha implements ActionListener{
 
         visFicha.lbl_personaFicha.setText("");
 
-        visFicha.lbl_personaFicha.setText(persona.getNombre().toUpperCase() +" "+persona.getApellido().toUpperCase());
+        visFicha.lbl_personaFicha.setText("");
 
         
         
