@@ -155,9 +155,11 @@ CREATE TABLE Analisis(
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Create indexes for table analisis
-CREATE INDEX idx_id_ana ON analisis(id_ana);
+CREATE INDEX idx_id_ana ON analisis(id_ana)
+/
 -- Add keys for table analisis
-ALTER TABLE Analisis ADD CONSTRAINT Key1 PRIMARY KEY (id_ana);
+ALTER TABLE Analisis ADD CONSTRAINT Key1 PRIMARY KEY (id_ana)
+/
 
 CREATE TABLE Medidas(
   id_med Number NOT NULL,
@@ -184,9 +186,11 @@ CREATE TABLE Medidas(
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Create indexes for table medidas
-CREATE INDEX idx_id_med ON Medidas (id_med);
+CREATE INDEX idx_id_med ON Medidas (id_med)
+/
 -- Add keys for table medidas
-ALTER TABLE Medidas ADD CONSTRAINT Key2 PRIMARY KEY (id_med);
+ALTER TABLE Medidas ADD CONSTRAINT pk_id_med PRIMARY KEY (id_med)
+/
 
 CREATE TABLE Persona(
   id_per Number NOT NULL,
@@ -203,26 +207,45 @@ CREATE TABLE Persona(
 )
 TABLESPACE tbs_usr_strongfit_p
 /
+
 -- Create indexes for table persona
-CREATE INDEX idx_id_per ON Persona(id_per);
+CREATE INDEX idx_id_per ON Persona(id_per)
+/
+
 -- Add keys for table persona
-ALTER TABLE Persona ADD CONSTRAINT Key3 PRIMARY KEY (id_per);
+ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)
+/
+
 
 CREATE TABLE Ficha(
   id_ficha Number NOT NULL,
   fecha_ficha Varchar2(350 ),
+  Persona_id_per Number,
+  Analisis_id_ana Number,
+  Medidas_id_med Number,
   estado_ficha Number
 )
 TABLESPACE tbs_usr_strongfit_p
 /
+
 -- Create indexes for table ficha
-CREATE INDEX idx_id_ficha ON Ficha(id_ficha);
+CREATE INDEX idx_id_ficha ON Ficha (id_ficha)
+/
+
 -- Add keys for table ficha
-ALTER TABLE Ficha ADD CONSTRAINT Key4 PRIMARY KEY (id_ficha);
+ALTER TABLE Ficha ADD CONSTRAINT pk_id_ficha PRIMARY KEY (id_ficha)
+/
+
 -- Create relationships section  ------------------------------------------------- 
-/ALTER TABLE ficha ADD CONSTRAINT Relationship1 FOREIGN KEY (Persona_id_per) REFERENCES Persona (id_per);
-/ALTER TABLE ficha ADD CONSTRAINT Relationship2 FOREIGN KEY (Analisis_id_ana) REFERENCES Analisis (id_ana);
-/ALTER TABLE ficha ADD CONSTRAINT Relationship3 FOREIGN KEY (id_med) REFERENCES Medidas (id_med);
+ALTER TABLE Ficha ADD CONSTRAINT fk_id_per FOREIGN KEY (Persona_id_per) REFERENCES Persona(id_per)
+/
+
+ALTER TABLE Ficha ADD CONSTRAINT fk_id_ana FOREIGN KEY (Analisis_id_ana) REFERENCES Analisis (id_ana)
+/
+
+ALTER TABLE Ficha ADD CONSTRAINT fk_id_med FOREIGN KEY (Medidas_id_med) REFERENCES Medidas (id_med)
+/
+
 
 
 CREATE TABLE Membresia(
@@ -234,9 +257,11 @@ CREATE TABLE Membresia(
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Create indexes for table membresia
-CREATE INDEX idx_id_memb ON Membresia(id_memb);
+CREATE INDEX idx_id_memb ON Membresia(id_memb)
+/
 -- Add keys for table membresia
-ALTER TABLE Membresia ADD CONSTRAINT key5 PRIMARY KEY (id_memb);
+ALTER TABLE Membresia ADD CONSTRAINT pk_id_memb PRIMARY KEY (id_memb)
+/
 
 CREATE TABLE Factura(
   id_fac Number NOT NULL,
@@ -245,18 +270,24 @@ CREATE TABLE Factura(
   subTotal_fac Number(10,2),
   total_fac Number(10,2),
   valPendiente_fac Number(10,2),
+  Persona_id_per Number,
+  Membresia_id_memb Number,
   estado_fac Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Add keys for table factura
 -- Create indexes for table factura
-CREATE INDEX idx_id_fac ON Factura(id_fac);
+CREATE INDEX idx_id_fac ON Factura(id_fac)
+/
 -- Add keys for table factura
-ALTER TABLE Factura ADD CONSTRAINT key6 PRIMARY KEY (id_fac);
+ALTER TABLE Factura ADD CONSTRAINT pk_id_fac PRIMARY KEY (id_fac)
+/
 -- Create relationships section  ------------------------------------------------- 
-/ALTER TABLE Factura ADD CONSTRAINT Relationship4 FOREIGN KEY (id_per) REFERENCES Persona (id_per);
-/ALTER TABLE Factura ADD CONSTRAINT Relationship5 FOREIGN KEY (id_memb) REFERENCES Membresia (id_memb);
+ALTER TABLE Factura ADD CONSTRAINT fk_id_pers FOREIGN KEY (Persona_id_per) REFERENCES Persona (id_per)
+/
+ALTER TABLE Factura ADD CONSTRAINT fk_id_memb FOREIGN KEY (Membresia_id_memb) REFERENCES Membresia (id_memb)
+/
 
 CREATE TABLE Categoria(
   id_cat Number NOT NULL,
@@ -266,42 +297,54 @@ CREATE TABLE Categoria(
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Create indexes for table categoria
-CREATE INDEX idx_id_cat ON Categoria(id_cat);
+CREATE INDEX idx_id_cat ON Categoria(id_cat)
+/
 -- Add keys for table categoria
-ALTER TABLE Categoria ADD CONSTRAINT key7 PRIMARY KEY (id_cat);
+ALTER TABLE Categoria ADD CONSTRAINT pk_id_cat PRIMARY KEY (id_cat)
+/
 
 CREATE TABLE Producto(
   id_prod Number NOT NULL,
   descripcion_prod  Varchar2(350 ),
   precio_prod Number(10,2),
   stock_prod Number,
+  Categoria_id_cat Number,
   estado_prod Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Create indexes for table producto
-CREATE INDEX idx_id_prod ON Producto(id_prod);
+CREATE INDEX idx_id_prod ON Producto(id_prod)
+/
 -- Add keys for table producto
-ALTER TABLE Producto ADD CONSTRAINT key8 PRIMARY KEY (id_prod);
+ALTER TABLE Producto ADD CONSTRAINT pk_id_prod PRIMARY KEY (id_prod)
+/
 -- Create relationships section  ------------------------------------------------- 
-/ALTER TABLE Producto ADD CONSTRAINT Relationship6 FOREIGN KEY (id_cat) REFERENCES Categoria (id_cat);
+ALTER TABLE Producto ADD CONSTRAINT fk_id_cat FOREIGN KEY (Categoria_id_cat) REFERENCES Categoria (id_cat)
+/
 
 CREATE TABLE Detalle(
   id_det Number NOT NULL,
   cantidad_det Number,
   total_det Number(10,2),
+  Producto_id_prod Number, 
+  Factura_id_fac Number,
   estado_det Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Create indexes for table detalle
-CREATE INDEX idx_id_det ON Detalle(id_det);
+CREATE INDEX idx_id_det ON Detalle(id_det)
+/
 -- Add keys for table detalle
-/ALTER TABLE Detalle ADD CONSTRAINT key9 PRIMARY KEY (id_det)
+ALTER TABLE Detalle ADD CONSTRAINT pk_id_det PRIMARY KEY (id_det)
+/
 -- Create relationships section  ------------------------------------------------- 
-/ALTER TABLE Detalle ADD CONSTRAINT Relationship7 FOREIGN KEY (id_prod) REFERENCES Producto (id_prod)
+ALTER TABLE Detalle ADD CONSTRAINT fk_id_prod FOREIGN KEY (Producto_id_prod) REFERENCES Producto (id_prod)
+/
 -- Create relationships section  ------------------------------------------------- 
-/ALTER TABLE Detalle ADD CONSTRAINT Relationship8 FOREIGN KEY (id_fac) REFERENCES Factura (id_fac)
+ALTER TABLE Detalle ADD CONSTRAINT fk_id_fac FOREIGN KEY (Factura_id_fac) REFERENCES Factura (id_fac)
+/
 
 
 -- inserts
