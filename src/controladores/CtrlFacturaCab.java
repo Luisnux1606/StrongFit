@@ -10,7 +10,6 @@ import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
-import consultas.ConsFicha;
 import consultas.ConsMembresias;
 import java.awt.Color;
 import java.awt.Component;
@@ -44,11 +43,11 @@ import vistas.VisReportes;
  *
  * @author Administrator
  */
-public class CtrlFicha implements ActionListener{
+public class CtrlFacturaCab implements ActionListener{
 
     FacturaCab modFicha;
     ArrayList<FacturaCab> lstFicha;
-    ConsFicha consFicha;
+    ConsFacturaCab consFicha;
     VisFicha visFicha;
     VisReportes visReportes;
     VisMembresia visMemb;
@@ -60,7 +59,7 @@ public class CtrlFicha implements ActionListener{
     
     String cadBus;
     
-    public CtrlFicha(FacturaCab modFicha,ConsFicha consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
+    public CtrlFacturaCab(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
     {
         this.modFicha = modFicha;
         this.consFicha = consFicha;
@@ -200,12 +199,12 @@ public class CtrlFicha implements ActionListener{
                     
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -439,12 +438,15 @@ public class CtrlFicha implements ActionListener{
     
      public void setFocus()
     {
-        visFicha.txtCodPersona.requestFocus();
-        visFicha.txtCodPersona.setNextFocusableComponent(visFicha.dchFecha);       
+        visFicha.dtcFechaIniFicha.requestFocus();
+        visFicha.dtcFechaIniFicha.setNextFocusableComponent(visFicha.dtcFechaFinFicha);
+        visFicha.dtcFechaFinFicha.setNextFocusableComponent(visFicha.txtValConDsctoFicha);
+        visFicha.txtValConDsctoFicha.setNextFocusableComponent(visFicha.txtValPendienteFicha);    
+        visFicha.txtValPendienteFicha.setNextFocusableComponent(visFicha.txtConceptoFicha); 
     }
      public void limpiarTabla(){
-        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFichas.getModel();
-        int a = visFicha.tblFichas.getRowCount()-1;
+        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFicha.getModel();
+        int a = visFicha.tblFicha.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         } 
@@ -472,12 +474,12 @@ public class CtrlFicha implements ActionListener{
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visFicha.tblFicha.updateUI();
     }
@@ -504,12 +506,12 @@ public class CtrlFicha implements ActionListener{
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visFicha.tblFicha.updateUI();
     }
@@ -540,12 +542,12 @@ public class CtrlFicha implements ActionListener{
                         }
                     }                       
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visFicha.tblFicha.updateUI();
     }
@@ -573,12 +575,12 @@ public class CtrlFicha implements ActionListener{
                         model.addRow(cols);                     
                     }                       
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visFicha.tblFicha.updateUI();
     }
@@ -606,12 +608,12 @@ public class CtrlFicha implements ActionListener{
                         model.addRow(cols);
                      
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visFicha.tblFicha.updateUI();
     }

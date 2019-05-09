@@ -8,7 +8,7 @@ package controladores;
 import assets.Calculos;
 import assets.Validaciones;
 import consultas.ConsAnalisis;
-import consultas.ConsFicha;
+import consultas.ConsFacturaCab;
 import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
@@ -37,7 +37,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
-import modelos.Ficha;
+import modelos.FacturaCab;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -237,12 +237,12 @@ public class CtrlPersonas implements ActionListener {
            
             Analisis ana = new Analisis();
             Medidas med = new Medidas();
-            Ficha fic = new Ficha();
+            FacturaCab fic = new FacturaCab();
 
 
             ConsAnalisis consAna = new ConsAnalisis();
             ConsMedidas consMed = new ConsMedidas();
-            ConsFicha consFic = new ConsFicha();
+            ConsFacturaCab consFic = new ConsFacturaCab();
 
             VisPersona visPer = new VisPersona();
             VisFicha visFic = new VisFicha();
@@ -253,7 +253,7 @@ public class CtrlPersonas implements ActionListener {
             modPer.setNombre("anonimo");
             modPer.setApellido("anonumo");
     
-            CtrlFicha ctrlFic = new CtrlFicha(fic,consFic,visFic,visMemb,modPer);
+            CtrlFacturaCab ctrlFic = new CtrlFacturaCab(fic,consFic,visFic,visMemb,modPer);
 
             visFic.setLocation(300, 20);
             visFic.tabp_ficha.setSelectedIndex(2);
@@ -518,12 +518,12 @@ public class CtrlPersonas implements ActionListener {
                     Persona per = new Persona();
                     Analisis ana = new Analisis();
                     Medidas med = new Medidas();
-                    Ficha fic = new Ficha();                                            
+                    FacturaCab fic = new FacturaCab();                                            
                     
                     ConsPersona consPer = new ConsPersona();
                     ConsAnalisis consAna = new ConsAnalisis();
                     ConsMedidas consMed = new ConsMedidas();
-                    ConsFicha consFic = new ConsFicha();
+                    ConsFacturaCab consFic = new ConsFacturaCab();
                     
                     VisFicha visFic = new VisFicha();
 
@@ -538,7 +538,7 @@ public class CtrlPersonas implements ActionListener {
                     
                     CtrlAnalisis ctrlAna = new CtrlAnalisis(ana,consAna,visFic,modPer);
                     CtrlMedidas ctrlMed = new CtrlMedidas(med,consMed,visFic,modPer);
-                    CtrlFicha ctrlFic = new CtrlFicha(fic,consFic,visFic,visMemb,modPer);
+                    CtrlFacturaCab ctrlFic = new CtrlFacturaCab(fic,consFic,visFic,visMemb,modPer);
                     
                     visFic.setLocation(300, 20);
                     visFic.setVisible(true);

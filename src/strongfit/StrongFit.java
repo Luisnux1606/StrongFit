@@ -5,11 +5,11 @@
  */
 package strongfit;
 
-import consultas.ConsFicha;
+import consultas.ConsFacturaCab;
 import consultas.ConsPersona;
-import controladores.CtrlFicha;
+import controladores.CtrlFacturaCab;
 import controladores.CtrlPersonas;
-import modelos.Ficha;
+import modelos.FacturaCab;
 import modelos.Membresias;
 import modelos.Persona;
 import vistas.VisFicha;
@@ -32,11 +32,11 @@ public class StrongFit {
                 
         VisMembresia visMemb = new VisMembresia();
         
-        Ficha ficha =  new Ficha();
-        ConsFicha consFicha = new ConsFicha();
+        FacturaCab ficha =  new FacturaCab();
+        ConsFacturaCab consFicha = new ConsFacturaCab();
         VisFicha visFicha = new VisFicha();
         
-        CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha, visMemb, per);
+        CtrlFacturaCab ctrlFicha = new CtrlFacturaCab(ficha, consFicha, visFicha, visMemb, per);
         ctrlFicha.iniciar();
        // CtrlPersonas ctrlPer = new CtrlPersonas(per, consPer,visMemb, visPer);               
        // ctrlPer.iniciar();

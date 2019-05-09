@@ -7,7 +7,7 @@ package controladores;
 
 import assets.Validaciones;
 import consultas.ConsAnalisis;
-import consultas.ConsFicha;
+import consultas.ConsFacturaCab;
 import consultas.ConsMedidas;
 import consultas.ConsPersona;
 import java.awt.event.KeyEvent;
@@ -17,7 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
-import modelos.Ficha;
+import modelos.FacturaCab;
 import modelos.Medidas;
 import modelos.Persona;
 import vistas.VisBuscarPersonas;

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelos.Analisis;
 import modelos.Conexion;
-import modelos.Ficha;
+import modelos.FacturaCab;
 import modelos.Medidas;
 
 /**

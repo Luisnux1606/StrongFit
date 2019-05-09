@@ -19,7 +19,7 @@ import modelos.Persona;
  *
  * @author Administrator
  */
-public class ConsFicha extends Conexion {
+public class ConsFacturaCab extends Conexion {
     
     public boolean registrar(FacturaCab f)
     {
