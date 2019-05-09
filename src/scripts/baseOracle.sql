@@ -252,6 +252,7 @@ CREATE TABLE Membresia(
   id_memb Number NOT NULL,
   descripcion_memb Varchar2(350 ),
   valor_memb Number(10,2),
+  dscto_memb Number(10,2),
   estado_memb Number   
 )
 TABLESPACE tbs_usr_strongfit_p
@@ -348,18 +349,18 @@ ALTER TABLE Detalle ADD CONSTRAINT fk_id_fac FOREIGN KEY (Factura_id_fac) REFERE
 
 
 -- inserts
-/*
+
 insert into Persona(id_per,ced_per,nom_per, ape_per, nroFono_per,edad_per, fechaNac_per, genero_per, mail_per,ESTADO_PER )
 values (persona_id_seq.NEXTVAL,'999999999','anonimo', 'anonimo', 'anonimo', '99999999', 9, '999999999', '  ',1);
 
-insert into Analisis(id_ana,fecha_ana,exesoGrasa_ana,exesoLiquido_ana,exesoTotal_ana,recomendacionPesas_ana,recomendacionCardio_ana,recomendacionFuncional_ana,ESTADO_ANA)
+insert into Analisis(id_ana,fecha_ana,excesoGrasa_ana,excesoLiquido_ana,excesoTotal_ana,recomendacionPesas_ana,recomendacionCardio_ana,recomendacionFuncional_ana,ESTADO_ANA)
 values (analisis_id_seq.NEXTVAL, '999999999', 9, 9, 9, '9', '9', '999999999',1);
 
 insert into Medidas(id_med,fecha_med,peso_med,estatura_med,edad_med,nroHijos_med,pecho_med,abdomenAlto_med,cintura_med,abdomenBajo_med,cadera_med,pierna_med,pantorrilla_med,brazo_med,antebrazo_med,cuello_med,espalda_med,porcentajeGrasa_med,porcentajeKlgs_med,ESTADO_MED )
 values (medidas_id_seq.NEXTVAL, '999999999', 9, 9, 999, 9, 9, 9,9,9,9,9,9,9,9,9,9,9,9,1);
 
-insert into Membresia(id_memb,nom_memb,dscto_memb,ESTADO_MEMB)
+insert into Membresia(id_memb,descripcion_memb,dscto_memb,ESTADO_MEMB)
 values (membresia_id_seq.NEXTVAL,'diario',0,1);
-*/
+
 
 commit;
