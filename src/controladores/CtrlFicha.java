@@ -118,13 +118,12 @@ public class CtrlFicha implements ActionListener{
 
         visFicha.lbl_personaFicha.setText("");
 
-        
-        
+ 
         visFicha.btnGuardarFicha.setToolTipText("Guardar el registro");
         visFicha.btnModificarFicha.setToolTipText("Modificar el registro");
         visFicha.btnEliminarFicha.setToolTipText("Eliminar el registro");
         visFicha.btnLimpiarFicha.setToolTipText("Limpiar el registro");
-        visFicha.tabp_ficha.setSelectedIndex(2);
+        //visFicha.tabp_ficha.setSelectedIndex(2);
         limpiar();
         
     
