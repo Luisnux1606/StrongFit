@@ -64,7 +64,7 @@ public class CtrlPersonas implements ActionListener {
     String cadBus;
     MyTableModel dT;
     
-    public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisPersona visPersona)
+    public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisPersona visPersona,VisFicha visFicha)
     {
         this.modPer = modPersona;
         this.consPer = consPersona;
@@ -86,7 +86,7 @@ public class CtrlPersonas implements ActionListener {
         setFocus();
         setListener();
         setTableModel();
-        iniciar();
+     
     }
     
     
@@ -458,7 +458,10 @@ public class CtrlPersonas implements ActionListener {
                 if(e.getClickCount()==2)
                 {
    
-    
+                    int idPer = Integer.parseInt(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 0)+"");
+                    
+                    visFicha.txtCodPersona.setText(idPer+"");
+                    visPersona.dispose();
                     
                 }
                 if (e.getClickCount()==1) {

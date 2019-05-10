@@ -73,13 +73,13 @@ public class ConsFicha extends Conexion {
             
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha());         
-            
+            ps.setString(1, f.getFecha());                     
             ps.setInt(2, f.getPersona().getId());
             ps.setInt(3, f.getAnalisis().getId());
             ps.setInt(4, f.getMedidas().getId());
-            ps.setInt(5, f.getId());
-            
+            ps.setInt(5, 1);
+            ps.setInt(6, f.getId());
+            System.out.println(f.getId()+" - "+f.getPersona().getId() + " - "+ f.getAnalisis().getId()+ " - "+f.getMedidas().getId());
             ps.execute();
             return true;
         } 

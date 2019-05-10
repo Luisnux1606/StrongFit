@@ -188,8 +188,8 @@ public class CtrlMedidas implements ActionListener{
                      desabilitaHabilita(visMedidas.btnGuardar,false);
                      desabilitaHabilita(visMedidas.btnModificar,true);
                      
-                     visMedidas.tabp_ficha.setEnabledAt(1, true);
-                     visMedidas.tabp_ficha.setEnabledAt(2, false);
+                     //visMedidas.tabp_ficha.setEnabledAt(1, true);
+                     //visMedidas.tabp_ficha.setEnabledAt(2, false);
                 }
             }
 
@@ -222,8 +222,9 @@ public class CtrlMedidas implements ActionListener{
      
      public void getTableToTxts()
      {
-         
-         JTable tblD = visMedidas.tblDatos;
+          JTable tblD = visMedidas.tblDatos;
+         System.out.println("aqui" + tblD.getValueAt(tblD.getSelectedRow(),0)+"");
+        
         //  modMedidas.setId(Integer.parseInt(visMedidas.txt_id_datos.getText()));
          visMedidas.txt_id_datos.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),0)));
          visMedidas.dtcFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),1))));
@@ -454,6 +455,10 @@ public class CtrlMedidas implements ActionListener{
         visMedidas.setTitle("CARACTERISTICAS");
         visMedidas.setLocationRelativeTo(null);
         visMedidas.txt_id_datos.setVisible(false);
+        visMedidas.txt_id_medidas_u.setVisible(false);
+        visMedidas.txt_id_analisis_u.setVisible(false);
+        visMedidas.txt_id_persona_u.setVisible(false);
+        
         visMedidas.lbl_fichaDatos.setText("");
               
         visMedidas.btnBuscarMed.setToolTipText("Buscar analisis por fecha");

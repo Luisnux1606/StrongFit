@@ -178,8 +178,8 @@ public class CtrlAnalisis implements ActionListener{
                      desabilitaHabilita(visAnalisis.btnGuardarAnalisis,false);
                      desabilitaHabilita(visAnalisis.btnModificarAnalisis,true);
                      
-                     visAnalisis.tabp_ficha.setEnabledAt(1, true);
-                     visAnalisis.tabp_ficha.setEnabledAt(2, true);
+                  //   visAnalisis.tabp_ficha.setEnabledAt(1, true);
+                    // visAnalisis.tabp_ficha.setEnabledAt(2, true);
                 }
             }
 

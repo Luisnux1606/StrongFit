@@ -53,7 +53,7 @@ public class StrongFit {
         
        
         
-        CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer);
+        CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer,visFicha);
         CtrlMedidas ctrlMed = new CtrlMedidas(med, consMed, visFicha);        
         CtrlAnalisis ctrlAna = new CtrlAnalisis(ana, consAna, visFicha);
         

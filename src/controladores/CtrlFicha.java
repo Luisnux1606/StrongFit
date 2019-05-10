@@ -39,6 +39,7 @@ import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
+import vistas.VisBuscarVentas;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -86,8 +87,10 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniMembresias.addActionListener(this);
         this.visFicha.mniPersonas.addActionListener(this);
         this.visFicha.mniReportes.addActionListener(this);
+        this.visFicha.mniConsultasClientes.addActionListener(this);
         this.visFicha.menuSalir.addActionListener(this);
         
+        this.visFicha.tabp_ficha.setSelectedIndex(2);
          
               
         cadBus = "";
@@ -119,8 +122,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.txt_id_Ficha.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
         visFicha.txt_id_datos.setVisible(false);       
-        visFicha.txt_id_medidas_u.setVisible(false);
-        visFicha.txt_id_analisis_u.setVisible(false);
+       
 
         visFicha.lbl_personaFicha.setText("");
 
@@ -293,13 +295,13 @@ public class CtrlFicha implements ActionListener{
             }
         };
        
-        visFicha.tblFicha.addMouseListener(mouseListTblFicha);
+        visFicha.tblFichas.addMouseListener(mouseListTblFicha);
       
     }
      public void getTableToTxts()
      {
          JTable tblD = visFicha.tblFichas;
-         visFicha.txt_id_Ficha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
+         visFicha.txtCodPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
          visFicha.dchFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
          
          
@@ -355,39 +357,20 @@ public class CtrlFicha implements ActionListener{
     public void validaAnonimos()
     {
         
-       // System.out.println("personar: "+getAnonimos().get(0)+" anal: "+getAnonimos().get(1)+" med: "+getAnonimos().get(2));
-        if(Validaciones.isNumVoid1(visFicha.txtCodPersona.getText()))
-        {
-           persona.setId(Integer.parseInt(getAnonimos().get(0)));
-           modFicha.setPersona(persona); 
-        }
-        else
-        {
+      
             persona.setId(Integer.parseInt(visFicha.txtCodPersona.getText()));
             modFicha.setPersona(persona); 
-        }
+      
         ///*******
-        if(Validaciones.isNumVoid1(visFicha.txt_id_analisis_u.getText()))
-        {
-            analisis.setId(Integer.parseInt(getAnonimos().get(1)));
+        
+            analisis.setId(Integer.parseInt(visFicha.txt_id_analisis.getText()));
             modFicha.setAnalisis(analisis);
-        }
-        else
-        {
-            analisis.setId(Integer.parseInt(visFicha.txt_id_analisis_u.getText()));
-            modFicha.setAnalisis(analisis);
-        }
+       
         //*********
-        if(Validaciones.isNumVoid1(visFicha.txt_id_medidas_u.getText()))
-        {
-            medidas.setId(Integer.parseInt(getAnonimos().get(2)));
-            modFicha.setMedidas(medidas);
-        }
-        else
-        {
-           medidas.setId(Integer.parseInt(visFicha.txt_id_medidas_u.getText()));
+      
+           medidas.setId(Integer.parseInt(visFicha.txt_id_datos.getText()));
            modFicha.setMedidas(medidas);
-        }
+        
         System.out.println("personar: "+persona.getId()+" anal: "+analisis.getId()+" med: "+medidas.getId());
     }
     
@@ -420,9 +403,9 @@ public class CtrlFicha implements ActionListener{
       
       if (e.getSource() == visFicha.btnModificarFichaG) 
        {            
-            modFicha.setId(Integer.parseInt(visFicha.txt_id_Ficha.getText()));
+            modFicha.setId(Integer.parseInt(visFicha.tblFichas.getValueAt(visFicha.tblFichas.getSelectedRow(), 0)+""));
             modFicha.setFecha(Validaciones.setFormatFecha(visFicha.dchFecha.getDate()));                       
-
+             validaAnonimos();
             if (consFicha.modificar(modFicha)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
                 limpiar();
@@ -466,9 +449,9 @@ public class CtrlFicha implements ActionListener{
             VisPersona visPer = new VisPersona();
             Persona per  = new Persona();
             ConsPersona consPer = new ConsPersona();
-            VisFicha visFicha  =  new VisFicha();       
+                
             Ficha ficha = new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer);
+            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
             ctrPer.iniciar();
         } 
         
@@ -499,10 +482,21 @@ public class CtrlFicha implements ActionListener{
             VisPersona visPer = new VisPersona();
             Persona per  = new Persona();
             ConsPersona consPer = new ConsPersona();
-            VisFicha visFicha  =  new VisFicha();    
-            Ficha ficha  =  new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer);
            
+            Ficha ficha  =  new Ficha();
+            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
+            ctrPer.iniciar();
+        }
+         
+         if (e.getSource() == visFicha.mniConsultasClientes) {
+            
+            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();
+            FacturaCab facCab  = new FacturaCab();
+            ConsFacturaCab consFacCab = new ConsFacturaCab();
+           
+            Ficha ficha  =  new Ficha();
+            CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(facCab, consFacCab, visBuscarVentas,visFicha);
+            ctrBuscarVentas.iniciar();
         }
 
          
