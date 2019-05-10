@@ -31,7 +31,6 @@ public class VisFicha extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane7 = new javax.swing.JScrollPane();
         tabFichaVentas = new javax.swing.JTabbedPane();
         pnlFicha = new javax.swing.JPanel();
         tabp_ficha = new javax.swing.JTabbedPane();

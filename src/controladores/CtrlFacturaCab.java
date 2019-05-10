@@ -78,7 +78,7 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnModificarFicha.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
         this.visFicha.btnCalcular.addActionListener(this);
-        this.visFicha.cmbTipoBusqueda.addActionListener(this);
+       // this.visFicha.cmbTipoBusqueda.addActionListener(this);
         
          
               
@@ -246,7 +246,7 @@ public class CtrlFacturaCab implements ActionListener{
            
           }
         };
-        visFicha.txtBuscarFechaFicha.addKeyListener(keyListenertxtBuscarFecha);
+        //visFicha.txtBuscarFechaFicha.addKeyListener(keyListenertxtBuscarFecha);
 
         
         //**********listener enter ************
@@ -754,7 +754,7 @@ public class CtrlFacturaCab implements ActionListener{
                 visFicha.txt_cambio.setText(Calculos.setTwoDecimals(txtCambio)+"");
                }
         }
-        
+        /*
          if (e.getSource() == visFicha.cmbTipoBusqueda) 
         {       
            String tipo = visFicha.cmbTipoBusqueda.getSelectedItem()+"";
@@ -773,7 +773,7 @@ public class CtrlFacturaCab implements ActionListener{
             if (tipo.equals("vencidos")) {
                 showTableVencidos();
             }
-        }
+        }*/
       
     }
     public void limpiar()
