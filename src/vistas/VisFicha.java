@@ -139,17 +139,21 @@ public class VisFicha extends javax.swing.JFrame {
         pnlVentas = new javax.swing.JPanel();
         pnlVentasInterno = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        dtcFechaIniFicha = new com.toedter.calendar.JDateChooser();
-        dtcFechaFinFicha = new com.toedter.calendar.JDateChooser();
         lblCliente = new javax.swing.JLabel();
         cmbCliente = new javax.swing.JComboBox();
-        btnGuardarFicha = new javax.swing.JButton();
-        btnModificarFicha = new javax.swing.JButton();
-        btnEliminarFicha = new javax.swing.JButton();
-        btnLimpiarFicha = new javax.swing.JButton();
-        txt_id_Ficha = new javax.swing.JTextField();
+        lblFechaFacCab = new javax.swing.JLabel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        chkEntrenamiento = new javax.swing.JCheckBox();
+        pnlEntrenamientoEnFactura = new javax.swing.JPanel();
+        lblFechaInicioEntren = new javax.swing.JLabel();
+        dtcFechaIniFacCab = new com.toedter.calendar.JDateChooser();
+        lblFechaFinEntren = new javax.swing.JLabel();
+        dtcFechaFinFicha = new com.toedter.calendar.JDateChooser();
+        btnGuardarFacCab = new javax.swing.JButton();
+        btnModificarFacCab = new javax.swing.JButton();
+        btnEliminarFacCab = new javax.swing.JButton();
+        btnLimpiarFacCab = new javax.swing.JButton();
+        txt_id_FacCab = new javax.swing.JTextField();
         lbl_datosParaFicha = new javax.swing.JLabel();
         lbl_personaFicha = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -169,7 +173,6 @@ public class VisFicha extends javax.swing.JFrame {
         txt_cambio = new javax.swing.JTextField();
         btnCalcular = new javax.swing.JButton();
         txt_valEntregado = new javax.swing.JTextField();
-        btnServicio = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
@@ -902,7 +905,7 @@ public class VisFicha extends javax.swing.JFrame {
             pnlFichaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFichaLayout.createSequentialGroup()
                 .addComponent(tabp_ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 1351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlFichaLayout.setVerticalGroup(
             pnlFichaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -924,67 +927,102 @@ public class VisFicha extends javax.swing.JFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel7.setPreferredSize(new java.awt.Dimension(1413, 606));
 
-        jLabel29.setText("Fecha de Inicio:");
-        jLabel29.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel29.setPreferredSize(new java.awt.Dimension(65, 14));
-        jLabel29.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        lblCliente.setText("Cliente:");
 
-        jLabel30.setText("Fecha de Fin:");
-        jLabel30.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel30.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        lblFechaFacCab.setText("Fecha :");
 
-        dtcFechaIniFicha.setName("dtcFechaIniFicha"); // NOI18N
+        chkEntrenamiento.setText("Entrenamiento");
+
+        lblFechaInicioEntren.setText("Fecha de Inicio:");
+        lblFechaInicioEntren.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblFechaInicioEntren.setPreferredSize(new java.awt.Dimension(65, 14));
+        lblFechaInicioEntren.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        dtcFechaIniFacCab.setName("dtcFechaIniFacCab"); // NOI18N
+
+        lblFechaFinEntren.setText("Fecha de Fin:");
+        lblFechaFinEntren.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        lblFechaFinEntren.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         dtcFechaFinFicha.setName("dtcFechaFinFicha"); // NOI18N
 
-        lblCliente.setText("Cliente:");
+        javax.swing.GroupLayout pnlEntrenamientoEnFacturaLayout = new javax.swing.GroupLayout(pnlEntrenamientoEnFactura);
+        pnlEntrenamientoEnFactura.setLayout(pnlEntrenamientoEnFacturaLayout);
+        pnlEntrenamientoEnFacturaLayout.setHorizontalGroup(
+            pnlEntrenamientoEnFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEntrenamientoEnFacturaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEntrenamientoEnFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblFechaInicioEntren, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFechaFinEntren, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEntrenamientoEnFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(dtcFechaIniFacCab, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                    .addComponent(dtcFechaFinFicha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+        pnlEntrenamientoEnFacturaLayout.setVerticalGroup(
+            pnlEntrenamientoEnFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEntrenamientoEnFacturaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlEntrenamientoEnFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dtcFechaIniFacCab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblFechaInicioEntren, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEntrenamientoEnFacturaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dtcFechaFinFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFechaFinEntren, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblCliente)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dtcFechaFinFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dtcFechaIniFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(974, Short.MAX_VALUE))
+                    .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chkEntrenamiento)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCliente)
+                            .addComponent(lblFechaFacCab))
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cmbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))))
+                .addContainerGap(843, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(dtcFechaIniFicha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFechaFacCab)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dtcFechaFinFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCliente)
-                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCliente))
+                .addGap(18, 18, 18)
+                .addComponent(chkEntrenamiento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        btnGuardarFicha.setBackground(new java.awt.Color(102, 102, 102));
-        btnGuardarFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar7.png"))); // NOI18N
+        btnGuardarFacCab.setBackground(new java.awt.Color(102, 102, 102));
+        btnGuardarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar7.png"))); // NOI18N
 
-        btnModificarFicha.setBackground(new java.awt.Color(102, 102, 102));
-        btnModificarFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/modificar.png"))); // NOI18N
+        btnModificarFacCab.setBackground(new java.awt.Color(102, 102, 102));
+        btnModificarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/modificar.png"))); // NOI18N
 
-        btnEliminarFicha.setBackground(new java.awt.Color(102, 102, 102));
-        btnEliminarFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
+        btnEliminarFacCab.setBackground(new java.awt.Color(102, 102, 102));
+        btnEliminarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
 
-        btnLimpiarFicha.setBackground(new java.awt.Color(102, 102, 102));
-        btnLimpiarFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar2.png"))); // NOI18N
+        btnLimpiarFacCab.setBackground(new java.awt.Color(102, 102, 102));
+        btnLimpiarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar2.png"))); // NOI18N
 
         lbl_datosParaFicha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_datosParaFicha.setText("DATOS PARA:");
@@ -1060,9 +1098,6 @@ public class VisFicha extends javax.swing.JFrame {
             }
         });
 
-        btnServicio.setText("servicio");
-        btnServicio.setActionCommand("btnServicio");
-
         javax.swing.GroupLayout pnlVentasInternoLayout = new javax.swing.GroupLayout(pnlVentasInterno);
         pnlVentasInterno.setLayout(pnlVentasInternoLayout);
         pnlVentasInternoLayout.setHorizontalGroup(
@@ -1072,16 +1107,16 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_id_Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardarFicha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_id_FacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGuardarFacCab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnModificarFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnModificarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminarFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnEliminarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpiarFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnLimpiarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentasInternoLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lbl_datosParaFicha)
@@ -1091,7 +1126,6 @@ public class VisFicha extends javax.swing.JFrame {
                     .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnServicio)
                             .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentasInternoLayout.createSequentialGroup()
@@ -1130,7 +1164,7 @@ public class VisFicha extends javax.swing.JFrame {
                                                 .addComponent(txtValConDsctoFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addComponent(txtValPendienteFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1055, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 17, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         pnlVentasInternoLayout.setVerticalGroup(
             pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1138,7 +1172,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txt_id_Ficha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_id_FacCab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1146,15 +1180,13 @@ public class VisFicha extends javax.swing.JFrame {
                             .addComponent(lbl_personaFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(9, 9, 9)
                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnModificarFicha)
-                    .addComponent(btnEliminarFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiarFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarFicha))
+                    .addComponent(btnModificarFacCab)
+                    .addComponent(btnEliminarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardarFacCab))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(btnServicio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1183,7 +1215,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValPendienteFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlVentasLayout = new javax.swing.GroupLayout(pnlVentas);
@@ -1192,15 +1224,15 @@ public class VisFicha extends javax.swing.JFrame {
             pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVentasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlVentasInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 1335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(pnlVentasInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 1144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         pnlVentasLayout.setVerticalGroup(
             pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlVentasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlVentasInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlVentasInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         tabFichaVentas.addTab("Generar Ventas", pnlVentas);
@@ -1210,16 +1242,15 @@ public class VisFicha extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addComponent(tabFichaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 1370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(tabFichaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 1217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tabFichaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(tabFichaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -1271,18 +1302,22 @@ public class VisFicha extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(560, 560, 560)
-                .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(560, 560, 560)
+                        .addComponent(jLabel1))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -1360,27 +1395,28 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnElegirPersonaG;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnEliminarAnalisis;
-    public javax.swing.JButton btnEliminarFicha;
+    public javax.swing.JButton btnEliminarFacCab;
     public javax.swing.JButton btnEliminarFichaG;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnGuardarAnalisis;
-    public javax.swing.JButton btnGuardarFicha;
+    public javax.swing.JButton btnGuardarFacCab;
     public javax.swing.JButton btnGuardarFichaG;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnLimpiarAnalisis;
-    public javax.swing.JButton btnLimpiarFicha;
+    public javax.swing.JButton btnLimpiarFacCab;
     public javax.swing.JButton btnLimpiarFichaG;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnModificarAnalisis;
-    public javax.swing.JButton btnModificarFicha;
+    public javax.swing.JButton btnModificarFacCab;
     public javax.swing.JButton btnModificarFichaG;
-    public javax.swing.JButton btnServicio;
+    public javax.swing.JCheckBox chkEntrenamiento;
     public javax.swing.JComboBox cmbCliente;
     public com.toedter.calendar.JDateChooser dchFecha;
     public com.toedter.calendar.JDateChooser dtcFecha;
     public com.toedter.calendar.JDateChooser dtcFechaAnalisis;
     public com.toedter.calendar.JDateChooser dtcFechaFinFicha;
-    public com.toedter.calendar.JDateChooser dtcFechaIniFicha;
+    public com.toedter.calendar.JDateChooser dtcFechaIniFacCab;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1402,9 +1438,7 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -1440,6 +1474,9 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JLabel lblCliente;
     public javax.swing.JLabel lblCodigoPersona;
     public javax.swing.JLabel lblFecha;
+    public javax.swing.JLabel lblFechaFacCab;
+    public javax.swing.JLabel lblFechaFinEntren;
+    public javax.swing.JLabel lblFechaInicioEntren;
     public javax.swing.JLabel lblPersona;
     public javax.swing.JLabel lbl_PersonaAnalisis;
     public javax.swing.JLabel lbl_datosParaFicha;
@@ -1451,6 +1488,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JMenuItem mniMembresias;
     public javax.swing.JMenuItem mniPersonas;
     public javax.swing.JMenuItem mniReportes;
+    private javax.swing.JPanel pnlEntrenamientoEnFactura;
     public javax.swing.JPanel pnlFicha;
     public javax.swing.JPanel pnlFichaCrear;
     public javax.swing.JPanel pnlMedidas;
@@ -1494,7 +1532,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JTextField txtValPagar;
     public javax.swing.JTextField txtValPendienteFicha;
     public javax.swing.JTextField txt_cambio;
-    public javax.swing.JTextField txt_id_Ficha;
+    public javax.swing.JTextField txt_id_FacCab;
     public javax.swing.JTextField txt_id_analisis;
     public javax.swing.JTextField txt_id_analisis_u;
     public javax.swing.JTextField txt_id_datos;

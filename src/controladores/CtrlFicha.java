@@ -118,8 +118,8 @@ public class CtrlFicha implements ActionListener{
     {
         visFicha.setTitle("FICHA");
         
-        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());     
-        visFicha.txt_id_Ficha.setVisible(false);
+        visFicha.dtcFechaIniFacCab.setDate(Calculos.getCurrentDate2());     
+        visFicha.txt_id_FacCab.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
         visFicha.txt_id_datos.setVisible(false);       
        
@@ -421,7 +421,7 @@ public class CtrlFicha implements ActionListener{
       if (e.getSource() == visFicha.btnEliminarFichaG) 
        {
            
-            modFicha.setId(Integer.parseInt(visFicha.txt_id_Ficha.getText()));
+            modFicha.setId(Integer.parseInt(visFicha.txt_id_FacCab.getText()));
             modFicha.setEstado(0);
                       
             if (consFicha.eliminar(modFicha)) {

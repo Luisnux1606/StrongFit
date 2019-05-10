@@ -55,9 +55,6 @@ public class CtrlFacturaCab implements ActionListener{
     
     
     Persona persona;
-    Analisis analisis;
-    Medidas medidas;
-    
     String cadBus;
     
     public CtrlFacturaCab(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
@@ -67,15 +64,12 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha = visFicha;
         this.persona = persona;
         this.visMemb =  visMemb;
+              
         
-       // persona = new Persona();
-        analisis = new Analisis();
-        medidas =  new Medidas();
-        
-        this.visFicha.btnGuardarFicha.addActionListener(this);
-        this.visFicha.btnEliminarFicha.addActionListener(this);
-        this.visFicha.btnLimpiarFicha.addActionListener(this);
-        this.visFicha.btnModificarFicha.addActionListener(this);
+        this.visFicha.btnGuardarFacCab.addActionListener(this);
+        this.visFicha.btnEliminarFacCab.addActionListener(this);
+        this.visFicha.btnLimpiarFacCab.addActionListener(this);
+        this.visFicha.btnModificarFacCab.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
         this.visFicha.btnCalcular.addActionListener(this);
        // this.visFicha.cmbTipoBusqueda.addActionListener(this);
@@ -107,8 +101,8 @@ public class CtrlFacturaCab implements ActionListener{
     {
         visFicha.setTitle("FICHA");
         
-        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());     
-        visFicha.txt_id_Ficha.setVisible(false);
+        visFicha.dtcFechaIniFacCab.setDate(Calculos.getCurrentDate2());     
+        visFicha.txt_id_FacCab.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
         visFicha.txt_id_datos.setVisible(false);
         visFicha.txt_id_persona_u.setVisible(false);
@@ -120,10 +114,10 @@ public class CtrlFacturaCab implements ActionListener{
         visFicha.lbl_personaFicha.setText("");
 
  
-        visFicha.btnGuardarFicha.setToolTipText("Guardar el registro");
-        visFicha.btnModificarFicha.setToolTipText("Modificar el registro");
-        visFicha.btnEliminarFicha.setToolTipText("Eliminar el registro");
-        visFicha.btnLimpiarFicha.setToolTipText("Limpiar el registro");
+        visFicha.btnGuardarFacCab.setToolTipText("Guardar el registro");
+        visFicha.btnModificarFacCab.setToolTipText("Modificar el registro");
+        visFicha.btnEliminarFacCab.setToolTipText("Eliminar el registro");
+        visFicha.btnLimpiarFacCab.setToolTipText("Limpiar el registro");
         //visFicha.tabp_ficha.setSelectedIndex(2);
         limpiar();
         
@@ -393,8 +387,8 @@ public class CtrlFacturaCab implements ActionListener{
                 if(e.getClickCount()==1)
                 {
                     getTableToTxts();
-                     desabilitaHabilita(visFicha.btnGuardarFicha,false);
-                     desabilitaHabilita(visFicha.btnModificarFicha,true);
+                     desabilitaHabilita(visFicha.btnGuardarFacCab,false);
+                     desabilitaHabilita(visFicha.btnModificarFacCab,true);
                                           
                 }
             }
@@ -428,8 +422,8 @@ public class CtrlFacturaCab implements ActionListener{
      public void getTableToTxts()
      {
          JTable tblD = visFicha.tblFicha;
-         visFicha.txt_id_Ficha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
-         visFicha.dtcFechaIniFicha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3))));
+         visFicha.txt_id_FacCab.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
+         visFicha.dtcFechaIniFacCab.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3))));
          visFicha.dtcFechaFinFicha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4))));
          visFicha.txtConceptoFicha.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5))).toUpperCase());
          visFicha.txtValConDsctoFicha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
@@ -439,8 +433,8 @@ public class CtrlFacturaCab implements ActionListener{
     
      public void setFocus()
     {
-        visFicha.dtcFechaIniFicha.requestFocus();
-        visFicha.dtcFechaIniFicha.setNextFocusableComponent(visFicha.dtcFechaFinFicha);
+        visFicha.dtcFechaIniFacCab.requestFocus();
+        visFicha.dtcFechaIniFacCab.setNextFocusableComponent(visFicha.dtcFechaFinFicha);
         visFicha.dtcFechaFinFicha.setNextFocusableComponent(visFicha.txtValConDsctoFicha);
         visFicha.txtValConDsctoFicha.setNextFocusableComponent(visFicha.txtValPendienteFicha);    
         visFicha.txtValPendienteFicha.setNextFocusableComponent(visFicha.txtConceptoFicha); 
@@ -660,14 +654,14 @@ public class CtrlFacturaCab implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == visFicha.btnGuardarFicha) 
+      if (e.getSource() == visFicha.btnGuardarFacCab) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
-           jdc.add(visFicha.dtcFechaIniFicha);
+           jdc.add(visFicha.dtcFechaIniFacCab);
            
                if (Validaciones.isDateChooserVoid(jdc)) 
                {                   
-                    modFicha.setFecha_ini(Validaciones.setFormatFecha(visFicha.dtcFechaIniFicha.getDate()));                
+                    modFicha.setFecha_ini(Validaciones.setFormatFecha(visFicha.dtcFechaIniFacCab.getDate()));                
                     modFicha.setFecha_fin(Validaciones.setFormatFecha(visFicha.dtcFechaFinFicha.getDate()));
                     modFicha.setVal_pago(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
                     modFicha.setVal_pendiente(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));
@@ -689,10 +683,10 @@ public class CtrlFacturaCab implements ActionListener{
                }        
         }
       
-      if (e.getSource() == visFicha.btnModificarFicha) 
+      if (e.getSource() == visFicha.btnModificarFacCab) 
        {            
-            modFicha.setId(Integer.parseInt(visFicha.txt_id_Ficha.getText()));
-            modFicha.setFecha_ini(Validaciones.setFormatFecha(visFicha.dtcFechaIniFicha.getDate()));                
+            modFicha.setId(Integer.parseInt(visFicha.txt_id_FacCab.getText()));
+            modFicha.setFecha_ini(Validaciones.setFormatFecha(visFicha.dtcFechaIniFacCab.getDate()));                
             modFicha.setFecha_fin(Validaciones.setFormatFecha(visFicha.dtcFechaFinFicha.getDate()));
             modFicha.setVal_pago(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
             modFicha.setVal_pendiente(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));
@@ -711,10 +705,10 @@ public class CtrlFacturaCab implements ActionListener{
             showTable();
         }
       
-      if (e.getSource() == visFicha.btnEliminarFicha) 
+      if (e.getSource() == visFicha.btnEliminarFacCab) 
        {
            
-            modFicha.setId(Integer.parseInt(visFicha.txt_id_Ficha.getText()));
+            modFicha.setId(Integer.parseInt(visFicha.txt_id_FacCab.getText()));
             modFicha.setEstado(0);
                       
             if (consFicha.eliminar(modFicha)) {
@@ -729,11 +723,11 @@ public class CtrlFacturaCab implements ActionListener{
             showTable();
         }
       
-       if (e.getSource() == visFicha.btnLimpiarFicha) 
+       if (e.getSource() == visFicha.btnLimpiarFacCab) 
         {
            limpiar();
-           desabilitaHabilita(visFicha.btnGuardarFicha,true);
-           desabilitaHabilita(visFicha.btnModificarFicha,false);
+           desabilitaHabilita(visFicha.btnGuardarFacCab,true);
+           desabilitaHabilita(visFicha.btnModificarFacCab,false);
         }
 
         if (e.getSource() == visFicha.btnBuscarDscto) 
@@ -778,7 +772,7 @@ public class CtrlFacturaCab implements ActionListener{
     }
     public void limpiar()
     {
-        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2()); 
+        visFicha.dtcFechaIniFacCab.setDate(Calculos.getCurrentDate2()); 
         visFicha.txtValConDsctoFicha.setText("0.0");
         visFicha.txtValPendienteFicha.setText("0.0");
         visFicha.txtValPagar.setText("0.0");

@@ -40,23 +40,26 @@ public class StrongFit {
         Ficha ficha =  new Ficha();
         Medidas med =  new Medidas();
         Analisis ana = new Analisis();
+        FacturaCab facCab = new FacturaCab();
        
         
         ConsPersona consPer = new ConsPersona();
         ConsFicha consFicha = new ConsFicha();
         ConsMedidas consMed = new ConsMedidas();
         ConsAnalisis consAna = new ConsAnalisis();
+        ConsFacturaCab consFacCab = new ConsFacturaCab();
         
         VisPersona visPer = new VisPersona();   
         VisFicha visFicha = new VisFicha();        
         VisMembresia visMemb = new VisMembresia();
+        
         
        
         
         CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer,visFicha);
         CtrlMedidas ctrlMed = new CtrlMedidas(med, consMed, visFicha);        
         CtrlAnalisis ctrlAna = new CtrlAnalisis(ana, consAna, visFicha);
-        
+        CtrlFacturaCab ctrlFacturaCab = new CtrlFacturaCab(facCab, consFacCab, visFicha, visMemb, per);
         
         
         CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha );
