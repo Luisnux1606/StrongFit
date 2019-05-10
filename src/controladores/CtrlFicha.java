@@ -91,7 +91,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.menuSalir.addActionListener(this);
         
         this.visFicha.tabp_ficha.setSelectedIndex(2);
-         
+        this.visFicha.tabFichaVentas.setSelectedIndex(1);
               
         cadBus = "";
        
