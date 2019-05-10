@@ -3,106 +3,68 @@
 
 
 *********REGISTRO DE PERSONAS***************
-
 GUARDAR
 1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok
 Respuesta-> sale la edad sólo cuando se da enter, pero yo digo que un usuario no haría algo así. 
 2. No valida que haya registrado dos usuarios con la misma cédula. 
 
-MODIFICAR= ok
-ELIMINAR= ok
-LIMPIAR= ok
-
-BUSCAR (lupa)= ok
-1. habilitar el botón modificar, porque busco a un cliente con la lupita para modificarlo. 
-
-
-
-*********FICHA***************
-
-1. Si voy directo desde el menú a Ficha no puede buscar al cliente. : HAY QUE DAR CLICK EN CLIENTE EN LA TABLA PERSONAS
-Respuesta-> entonces, si es así para que poner una opción en el menú 
-
-----PESTAÑA DATOS--
-VARIOS
-1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
-
-GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
 
 BUSCAR (lupa)
-1.No busca. 
+1. Si modifica un dato, y luego quiere buscar ya no funciona el buscar. 
+2. Opino que si se usa lupa se habilite el botón modificar. 
 
 
+
+*********FICHA***************
+
+----PESTAÑA FICHA--
+GUARDAR=ok
+ELIMINAR
+1. No elimina, presenta error en el código. 
+
+MODIFICAR= ok
+LIMPIAR= ok
+
+BUSCAR (lupa)= ok pero yo propongo algo distinto
+1. Abre la ventana de membresia para que haga clic en un registro y se pase. Yo digo que debería la lupa mostrar si encontró
+o no y mostrar los datos y cédula de la persona; y obvio que la búsqueda lo haga por la cédula. 
+
+----PESTAÑA MEDIDA--
+VARIOS
+1. Deshabilitar "DATOS PARA"
+
+GUARDAR= ok
+
+ELIMINAR
+1. No debe permitir eliminar cuando exista relación con una ficha. 
+2. No pregunta si desea o no eliminar.
+
+MODIFICAR= ok
+BUSCAR (lupa)= no está buscando
 
 ----PESTAÑA ANALISIS--
 VARIOS
-1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
+1. Deshabilitar "DATOS PARA"
 
 GUARDAR= ok
-ELIMINAR= ok
+ELIMINAR
+1. No debe permitir eliminar cuando exista relación con una ficha.
+
 MODIFICAR= ok
 
-LIMPIAR REGISTRO
-1. Borra toda la información, sugiero que los cuadros de plomo se borren pero la tabla se quede
-con los datos como estaba, es decir, con los registros  : ok [NO ESTÁ HECHO] = OK-A
+LIMPIAR= ok
 
 BUSCAR (lupa)
 1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco. 
 
 
 
-----PESTAÑA FICHA--
-
-Falta completar con el apellido de la persona. : ok
-Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : ok;
-El campo "Valor pendiente de cobro" se calcule automáticamente, y se sume de lo que debió al final. :ok
-Quitar de la tabla los campos "cedula y nombres", porque la ficha ya sabemos que es de Ana Peralta. :ok(sirve para revisar)
-El buscar que no se por "nombre" sino por la fecha. :ok
-En el campo "fecha de inicio" está guardando la fecha de fin. : ok
-El campo "valor cancelado" no está guardando nada. : R
-El botón "Calcular" no calcula.  : ok
-
-VARIOS
-1. Porque aunque el usuario recién fue creado, presenta en la tabla ya información¿?
-No debe mostrar información de otros usuarios sino sólo del seleccionado. 
-2.Falta completar con el apellido de la persona. : ok [NO ESTÁ HECHO]= OK-A
-3.Sugiero incluir un tipo de pago: "mensual", "semanal", "diario".-> la fecha de Fin se calcule según este tipo. : R
-4.Quitar de la tabla los campos "cedula y nombres", porque la ficha ya sabemos que es de Ana Peralta. :ok(sirve para revisar)
-Respuesta-> Revisar qué¿? Si la fecha es de esa persona.¿?
-5. Yo quitaría el botón calcular. No calcula con decimales.
-6. El botón de la membresía, abre la venta de membresía; seleccionó la que deseo y no sucede nada. No se añade a la Ficha la membresía que seleccioné.
-
-GUARDAR= ok
-ELIMINAR= ok
-MODIFICAR= ok
-LIMPIAR REGISTRO= ok
-
-
-
-----PESTAÑA MEMBRESÍA--
-
-GUARDAR
-1. Cuando se guarda no se limpia la cabecera. 
-
-MODIFICAR= ok
-ELIMINAR= ok
-
-BUSCAR (lupa)
-1. habilitar el botón modificar, porque busco a un cliente con la lupita para modificarlo. 
-
-BUSCAR (nombre)
-1. No busca
-
-
-----PESTAÑA REPORTES--
-
-1. Es un paso innecesario la lupa para buscar. Yo considero que mejor sería de poner ese campo de buscar y la tabla en 
-la ventana principal. Es decir, no abrir otra ventana para buscar, sino que esté en la misma. 
+----PESTAÑA MEMBRESÍA-- NO FUNCIONA
+ 
 
 *********GENERALES***************
-1. Sería bueno hacer un resize de las ventanas, porque en el caso de mi compu no se pueden ver las tablas. : R
-Respuesta-> Considero que lo más urgente es hacer esto, ya que no van a poder revisar porque la tabla con encaja en la pantalla. 
-2. Quitar el campo ID de todas las tablas con excepción de la persona. 
+1. En las tablas incluir un Scroll (supongo que se podría hacer)
+2. Quitar el campo ID de todas las tablas con excepción de la persona. Mejor trabar con la cédula. 
