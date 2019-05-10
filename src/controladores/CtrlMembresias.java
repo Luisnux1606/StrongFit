@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.FacturaCab;
+import modelos.Ficha;
 import modelos.Membresias;
 import modelos.Persona;
 import vistas.VisFicha;
@@ -41,11 +42,11 @@ public class CtrlMembresias implements ActionListener{
     ConsMembresias consMembresias;
     VisMembresia visMembresias;
     VisFicha visFicha;
-    FacturaCab ficha;
+    Ficha ficha;
     
     String cadBus;
 
-    public CtrlMembresias(Membresias modMembresias, ConsMembresias consMembresias, VisMembresia visMembresias,FacturaCab f,VisFicha visFicha)
+    public CtrlMembresias(Membresias modMembresias, ConsMembresias consMembresias, VisMembresia visMembresias,Ficha f,VisFicha visFicha)
     {
         this.modMembresias = modMembresias;
         this.consMembresias = consMembresias;

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import modelos.Analisis;
 import modelos.Conexion;
 import modelos.FacturaCab;
+import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Persona;
 
@@ -21,26 +22,22 @@ import modelos.Persona;
  */
 public class ConsFicha extends Conexion {
     
-    public boolean registrar(FacturaCab f)
+    public boolean registrar(Ficha f)
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO ficha (id_ficha,fechaIni_ficha, fechaFin_ficha, valPago_ficha, valPendiente_ficha,concepto_ficha, Persona_id_per, Analisis_id_ana, Medidas_id_med,estado_ficha) "
-                + " VALUES(ficha_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ficha (id_ficha,fecha_ficha,Persona_id_per, Analisis_id_ana, Medidas_id_med,estado_ficha) "
+                + " VALUES(ficha_id_seq.NEXTVAL,?,?,?,?,?)";
 
         try 
         {            
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_ini());
-            ps.setString(2, f.getFecha_fin());
-            ps.setDouble(3, f.getVal_pago());
-            ps.setDouble(4, f.getVal_pendiente());
-            ps.setString(5, f.getConcepto());
-            ps.setInt(6, f.getPersona().getId());
-            ps.setInt(7, f.getAnalisis().getId());
-            ps.setInt(8, f.getMedidas().getId());
-            ps.setInt(9, f.getEstado());
+            ps.setString(1, f.getFecha());         
+            ps.setInt(2, f.getPersona().getId());
+            ps.setInt(3, f.getAnalisis().getId());
+            ps.setInt(4, f.getMedidas().getId());
+            ps.setInt(5, f.getEstado());
             
             
             ps.execute();                                       
@@ -64,11 +61,11 @@ public class ConsFicha extends Conexion {
         
     }
     
-    public boolean modificar(FacturaCab f)
+    public boolean modificar(Ficha f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE ficha SET fechaIni_ficha=?, fechaFin_ficha=?, valPago_ficha=?, valPendiente_ficha=?,concepto_ficha=?"
+        String sql = "UPDATE ficha SET fecha_ficha = ?,Persona_id_per = ?, Analisis_id_ana = ?, Medidas_id_med = ?,estado_ficha = ?"
                 + " WHERE id_ficha=?";
         
         try 
@@ -76,15 +73,12 @@ public class ConsFicha extends Conexion {
             
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_ini());
-            ps.setString(2, f.getFecha_fin());
-            ps.setDouble(3, f.getVal_pago());
-            ps.setDouble(4, f.getVal_pendiente());
-            ps.setString(5, f.getConcepto());
-           // ps.setInt(6, f.getPersona().getId());
-           // ps.setInt(7, f.getAnalisis().getId());
-            //ps.setInt(8, f.getMedidas().getId());
-            ps.setInt(6, f.getId());
+            ps.setString(1, f.getFecha());         
+            
+            ps.setInt(2, f.getPersona().getId());
+            ps.setInt(3, f.getAnalisis().getId());
+            ps.setInt(4, f.getMedidas().getId());
+            ps.setInt(5, f.getId());
             
             ps.execute();
             return true;
@@ -107,7 +101,7 @@ public class ConsFicha extends Conexion {
         
     }
     
-     public boolean eliminar(FacturaCab f)
+     public boolean eliminar(Ficha f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -401,27 +395,47 @@ order by id_ficha asc ;
        return rs;
     }
     
-    public ResultSet buscarTodosPorNomTabla(String nom)
+    public ResultSet buscarTodosPorNomTabla(String cad)
     {
-        System.out.println(nom);
+        System.out.println(cad); //'%"+cad+"%'
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_ficha,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
-                        "FROM ficha f, persona p \n" +
-                        "where upper(p.nom_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_ficha,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha , f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
-                        "FROM ficha f, persona p \n" +
-                        "where upper(p.ced_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_ficha,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha , f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
-                        "FROM ficha f, persona p \n" +
-                        "where upper(f.fechaIni_ficha) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_ficha,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha , f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
-                        "FROM ficha f, persona p \n" +
-                        "where upper(f.fechaFin_ficha) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_ficha=1";
+        String sql = " SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where f.id_Ficha  like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where upper(f.fecha_ficha) like upper('%"+cad+"%')  and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where upper(p.nom_per) like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where upper(p.ape_per) like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where p.id_per like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where m.fecha_med like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where m.id_med like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where a.fecha_ana like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where a.id_ana  like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -491,10 +505,10 @@ order by id_ficha asc ;
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_ficha, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha AS fechaIni_ficha, f.fechaFin_ficha AS fechaFin_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha " +
-                    " FROM ficha f, persona p " +
-                    " where p.id_per = f.Persona_id_per and f.estado_ficha=1 " +
-                    " order by id_ficha asc ";
+        String sql = "  SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                        "FROM ficha f, medidas m,analisis a, persona p \n" +
+                        "where p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                        "order by id_ficha asc ";
                 
         
         try 

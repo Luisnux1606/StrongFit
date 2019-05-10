@@ -131,9 +131,11 @@ public class VisFicha extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblPersona = new javax.swing.JLabel();
         txtCodPersona = new javax.swing.JTextField();
-        btnElegirPersona = new javax.swing.JButton();
+        btnElegirPersonaG = new javax.swing.JButton();
         dchFecha = new com.toedter.calendar.JDateChooser();
         lblFecha = new javax.swing.JLabel();
+        txtBuscarFichaPorCualquierCampo = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         pnlVentas = new javax.swing.JPanel();
         pnlVentasInterno = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -173,9 +175,12 @@ public class VisFicha extends javax.swing.JFrame {
         lbl_personaFicha = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        menuArchivo = new javax.swing.JMenu();
+        mniReportes = new javax.swing.JMenuItem();
+        menuSalir = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mniPersonas = new javax.swing.JMenuItem();
+        mniMembresias = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -236,7 +241,7 @@ public class VisFicha extends javax.swing.JFrame {
                                         .addComponent(txtPeso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))))
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarMed, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(916, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,46 +468,43 @@ public class VisFicha extends javax.swing.JFrame {
                     .addGroup(pnlMedidasLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
                             .addGroup(pnlMedidasLayout.createSequentialGroup()
                                 .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlMedidasLayout.createSequentialGroup()
-                                        .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlMedidasLayout.createSequentialGroup()
-                                                .addComponent(txt_id_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(35, 35, 35)
-                                                .addComponent(txt_id_persona_u, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pnlMedidasLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlMedidasLayout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addComponent(txt_id_medidas_u, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(28, 28, 28)
-                                                .addComponent(txt_id_analisis_u, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pnlMedidasLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtBuscarFecha, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.LEADING)))
-                                .addGap(0, 1647, Short.MAX_VALUE))))
+                                        .addComponent(txt_id_datos, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(txt_id_persona_u, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlMedidasLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlMedidasLayout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(txt_id_medidas_u, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(txt_id_analisis_u, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlMedidasLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtBuscarFecha, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel33, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMedidasLayout.createSequentialGroup()
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(54, 54, 54)
+                                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(pnlMedidasLayout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMedidasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel37)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbl_fichaDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(361, 361, 361))
+                        .addGap(609, 609, 609)
+                        .addComponent(jLabel37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_fichaDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         pnlMedidasLayout.setVerticalGroup(
             pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +515,7 @@ public class VisFicha extends javax.swing.JFrame {
                     .addComponent(txt_id_persona_u, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_id_analisis_u, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_id_medidas_u, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
                     .addComponent(lbl_fichaDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -527,7 +529,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGroup(pnlMedidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel33)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscarFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -727,7 +729,7 @@ public class VisFicha extends javax.swing.JFrame {
                         .addComponent(jLabel38)
                         .addGap(26, 26, 26)
                         .addComponent(lbl_PersonaAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(790, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -753,14 +755,13 @@ public class VisFicha extends javax.swing.JFrame {
                 .addComponent(txtFechaAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabp_ficha.addTab("Analisis", jPanel3);
 
         tblFichas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null}
@@ -803,7 +804,7 @@ public class VisFicha extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(21, 37, 0, 0);
         jPanel1.add(txtCodPersona, gridBagConstraints);
 
-        btnElegirPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
+        btnElegirPersonaG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -812,7 +813,7 @@ public class VisFicha extends javax.swing.JFrame {
         gridBagConstraints.ipady = -19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(13, 12, 0, 426);
-        jPanel1.add(btnElegirPersona, gridBagConstraints);
+        jPanel1.add(btnElegirPersonaG, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -829,6 +830,8 @@ public class VisFicha extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 50, 0, 0);
         jPanel1.add(lblFecha, gridBagConstraints);
+
+        jLabel5.setText("Buscar por cualquier campo");
 
         javax.swing.GroupLayout pnlFichaCrearLayout = new javax.swing.GroupLayout(pnlFichaCrear);
         pnlFichaCrear.setLayout(pnlFichaCrearLayout);
@@ -850,11 +853,12 @@ public class VisFicha extends javax.swing.JFrame {
                         .addComponent(btnLimpiarFichaG, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFichaCrearLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlFichaCrearLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(scrpTablaFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(895, Short.MAX_VALUE))
+                        .addGroup(pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(scrpTablaFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBuscarFichaPorCualquierCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
         pnlFichaCrearLayout.setVerticalGroup(
             pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -868,8 +872,12 @@ public class VisFicha extends javax.swing.JFrame {
                     .addComponent(btnLimpiarFichaG))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
-                .addComponent(scrpTablaFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscarFichaPorCualquierCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scrpTablaFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -879,17 +887,13 @@ public class VisFicha extends javax.swing.JFrame {
         pnlFicha.setLayout(pnlFichaLayout);
         pnlFichaLayout.setHorizontalGroup(
             pnlFichaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFichaLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(tabp_ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 1932, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(136, Short.MAX_VALUE))
+            .addComponent(tabp_ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 1316, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         pnlFichaLayout.setVerticalGroup(
             pnlFichaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFichaLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(tabp_ficha)
-                .addContainerGap())
+                .addGap(13, 13, 13)
+                .addComponent(tabp_ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 672, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tabFichaVentas.addTab("Generar Ficha", pnlFicha);
@@ -1195,7 +1199,7 @@ public class VisFicha extends javax.swing.JFrame {
             .addGroup(pnlVentasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlVentasInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         pnlVentasLayout.setVerticalGroup(
             pnlVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1214,12 +1218,12 @@ public class VisFicha extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 2089;
-        gridBagConstraints.ipady = 880;
+        gridBagConstraints.ipadx = 1237;
+        gridBagConstraints.ipady = 708;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(7, 0, 13, 221);
+        gridBagConstraints.insets = new java.awt.Insets(7, 0, 0, 153);
         getContentPane().add(jScrollPane7, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -1228,16 +1232,36 @@ public class VisFicha extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 556, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 560, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
+        menuArchivo.setText("Archivo");
+        menuArchivo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mniReportes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mniReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reportes.png"))); // NOI18N
+        mniReportes.setText("Reportes");
+        menuArchivo.add(mniReportes);
+
+        menuSalir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/salir2.png"))); // NOI18N
+        menuSalir.setText("Salir");
+        menuArchivo.add(menuSalir);
+
+        jMenuBar1.add(menuArchivo);
+
         jMenu1.setText("Gestion");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jMenuItem1.setText("Personas");
-        jMenu1.add(jMenuItem1);
+        mniPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mniPersonas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/personas.png"))); // NOI18N
+        mniPersonas.setText("Personas");
+        jMenu1.add(mniPersonas);
 
-        jMenuItem2.setText("Membresias");
-        jMenu1.add(jMenuItem2);
+        mniMembresias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mniMembresias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/membresias.png"))); // NOI18N
+        mniMembresias.setText("Membresias");
+        jMenu1.add(mniMembresias);
 
         jMenuBar1.add(jMenu1);
 
@@ -1311,7 +1335,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscarDscto;
     public javax.swing.JButton btnBuscarMed;
     public javax.swing.JButton btnCalcular;
-    public javax.swing.JButton btnElegirPersona;
+    public javax.swing.JButton btnElegirPersonaG;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnEliminarAnalisis;
     public javax.swing.JButton btnEliminarFicha;
@@ -1370,14 +1394,13 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1400,6 +1423,11 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JLabel lbl_datosParaFicha;
     public javax.swing.JLabel lbl_fichaDatos;
     public javax.swing.JLabel lbl_personaFicha;
+    public javax.swing.JMenu menuArchivo;
+    public javax.swing.JMenuItem menuSalir;
+    public javax.swing.JMenuItem mniMembresias;
+    public javax.swing.JMenuItem mniPersonas;
+    public javax.swing.JMenuItem mniReportes;
     public javax.swing.JPanel pnlFicha;
     public javax.swing.JPanel pnlFichaCrear;
     public javax.swing.JPanel pnlMedidas;
@@ -1418,6 +1446,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JTextField txtBrazo;
     public javax.swing.JTextField txtBuscarFecha;
     public javax.swing.JTextField txtBuscarFechaFicha;
+    public javax.swing.JTextField txtBuscarFichaPorCualquierCampo;
     public javax.swing.JTextField txtCadera;
     public javax.swing.JTextField txtCintura;
     public javax.swing.JTextField txtCodPersona;

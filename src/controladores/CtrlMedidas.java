@@ -48,12 +48,12 @@ public class CtrlMedidas implements ActionListener{
     int lastIdMedidas;
     String cadBus;
     
-    public CtrlMedidas(Medidas modMedidas, ConsMedidas consMedidas, VisFicha visMedidas, Persona p)
+    public CtrlMedidas(Medidas modMedidas, ConsMedidas consMedidas, VisFicha visMedidas)
     {
         this.modMedidas = modMedidas;
         this.consMedidas = consMedidas;
         this.visMedidas = visMedidas;
-        this.persona = p;
+      
         
         this.visMedidas.btnGuardar.addActionListener(this);
         this.visMedidas.btnEliminar.addActionListener(this);
@@ -454,7 +454,7 @@ public class CtrlMedidas implements ActionListener{
         visMedidas.setTitle("CARACTERISTICAS");
         visMedidas.setLocationRelativeTo(null);
         visMedidas.txt_id_datos.setVisible(false);
-        visMedidas.lbl_fichaDatos.setText(persona.getNombre().toUpperCase() +" "+persona.getApellido().toUpperCase());
+        visMedidas.lbl_fichaDatos.setText("");
               
         visMedidas.btnBuscarMed.setToolTipText("Buscar analisis por fecha");
         visMedidas.btnGuardar.setToolTipText("Guardar el registro");

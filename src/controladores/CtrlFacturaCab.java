@@ -32,6 +32,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.FacturaCab;
+import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -131,7 +132,7 @@ public class CtrlFacturaCab implements ActionListener{
         visFicha.setSize(1400,800);                
         visFicha.setVisible(true);
     
-        visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
     
     public void setCmbxMembresias()
@@ -740,7 +741,7 @@ public class CtrlFacturaCab implements ActionListener{
             VisMembresia visMem = new VisMembresia();
             Membresias memMod  = new Membresias();
             ConsMembresias consMem = new ConsMembresias();
-            FacturaCab ficha  =  new FacturaCab();                        
+            Ficha ficha  =  new Ficha();                        
             CtrlMembresias ctrMemb=new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
         } 
         

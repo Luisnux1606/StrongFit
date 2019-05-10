@@ -43,12 +43,11 @@ public class CtrlAnalisis implements ActionListener{
     
     String cadBus;
 
-    public CtrlAnalisis(Analisis modAnalisis, ConsAnalisis consAnalisis, VisFicha visAnalisis,Persona p)
+    public CtrlAnalisis(Analisis modAnalisis, ConsAnalisis consAnalisis, VisFicha visAnalisis)
     {
         this.modAnalisis = modAnalisis;
         this.consAnalisis = consAnalisis;
-        this.visAnalisis = visAnalisis;
-        this.persona = p;
+        this.visAnalisis = visAnalisis;     
         
         this.visAnalisis.btnGuardarAnalisis.addActionListener(this);
         this.visAnalisis.btnEliminarAnalisis.addActionListener(this);
@@ -67,7 +66,7 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.setTitle("FICHA");
         visAnalisis.setLocationRelativeTo(null);
         visAnalisis.txt_id_analisis.setVisible(false);
-        visAnalisis.lbl_PersonaAnalisis.setText(persona.getNombre().toUpperCase() +" "+persona.getApellido().toUpperCase());         
+        visAnalisis.lbl_PersonaAnalisis.setText("");         
         
         visAnalisis.btnBuscarAnalisis.setToolTipText("Buscar analisis por fecha");
         visAnalisis.btnGuardarAnalisis.setToolTipText("Guardar el registro");

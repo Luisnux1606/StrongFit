@@ -11,7 +11,9 @@ import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
+import consultas.ConsMedidas;
 import consultas.ConsMembresias;
+import consultas.ConsPersona;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -33,11 +35,13 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.FacturaCab;
+import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
 import vistas.VisFicha;
 import vistas.VisMembresia;
+import vistas.VisPersona;
 import vistas.VisReportes;
 
 /**
@@ -46,13 +50,13 @@ import vistas.VisReportes;
  */
 public class CtrlFicha implements ActionListener{
 
-    FacturaCab modFicha;
+    Ficha modFicha;
     ArrayList<FacturaCab> lstFicha;
     ConsFicha consFicha;
     VisFicha visFicha;
     VisReportes visReportes;
     VisMembresia visMemb;
-    
+    VisPersona visPer;
     
     Persona persona;
     Analisis analisis;
@@ -60,25 +64,29 @@ public class CtrlFicha implements ActionListener{
     
     String cadBus;
     
-    public CtrlFicha(FacturaCab modFicha,ConsFicha consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
+    public CtrlFicha(Ficha modFicha,ConsFicha consFicha,VisFicha visFicha)
     {
         this.modFicha = modFicha;
         this.consFicha = consFicha;
         this.visFicha = visFicha;
-        this.persona = persona;
+        this.persona = new Persona();
         this.visMemb =  visMemb;
+       
         
        // persona = new Persona();
         analisis = new Analisis();
         medidas =  new Medidas();
         
-        this.visFicha.btnGuardarFicha.addActionListener(this);
-        this.visFicha.btnEliminarFicha.addActionListener(this);
-        this.visFicha.btnLimpiarFicha.addActionListener(this);
-        this.visFicha.btnModificarFicha.addActionListener(this);
-        this.visFicha.btnBuscarDscto.addActionListener(this);
-        this.visFicha.btnCalcular.addActionListener(this);
-        this.visFicha.cmbTipoBusqueda.addActionListener(this);
+        this.visFicha.btnGuardarFichaG.addActionListener(this);
+        this.visFicha.btnEliminarFichaG.addActionListener(this);
+        this.visFicha.btnLimpiarFichaG.addActionListener(this);
+        this.visFicha.btnModificarFichaG.addActionListener(this);     
+        this.visFicha.btnElegirPersonaG.addActionListener(this);
+        
+        this.visFicha.mniMembresias.addActionListener(this);
+        this.visFicha.mniPersonas.addActionListener(this);
+        this.visFicha.mniReportes.addActionListener(this);
+        this.visFicha.menuSalir.addActionListener(this);
         
          
               
@@ -89,7 +97,7 @@ public class CtrlFicha implements ActionListener{
         setTableModel();
        // iniciar();
         
-        visFicha.txt_id_persona_u.setText(persona.getId()+"");
+       // visFicha.txtCodPersona.setText(persona.getId()+"");
         
         limpiarTabla();
         showTable();
@@ -110,8 +118,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_Ficha.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
-        visFicha.txt_id_datos.setVisible(false);
-        visFicha.txt_id_persona_u.setVisible(false);
+        visFicha.txt_id_datos.setVisible(false);       
         visFicha.txt_id_medidas_u.setVisible(false);
         visFicha.txt_id_analisis_u.setVisible(false);
 
@@ -120,19 +127,21 @@ public class CtrlFicha implements ActionListener{
         visFicha.lbl_personaFicha.setText("");
 
  
-        visFicha.btnGuardarFicha.setToolTipText("Guardar el registro");
-        visFicha.btnModificarFicha.setToolTipText("Modificar el registro");
-        visFicha.btnEliminarFicha.setToolTipText("Eliminar el registro");
-        visFicha.btnLimpiarFicha.setToolTipText("Limpiar el registro");
+        visFicha.btnGuardarFichaG.setToolTipText("Guardar el registro");
+        visFicha.btnModificarFichaG.setToolTipText("Modificar el registro");
+        visFicha.btnEliminarFichaG.setToolTipText("Eliminar el registro");
+        visFicha.btnLimpiarFichaG.setToolTipText("Limpiar el registro");
         //visFicha.tabp_ficha.setSelectedIndex(2);
         limpiar();
         
-    
+
         visFicha.setLocation(400,100); 
         visFicha.setSize(1400,800);                
         visFicha.setVisible(true);
     
         visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+     
     }
     
     public void setCmbxMembresias()
@@ -176,26 +185,26 @@ public class CtrlFicha implements ActionListener{
      
     }
     
-    public void showTableByNom(String nom)
+    public void showTableByNom(String cad)
     {
         try {
             limpiarTabla();
             
-            ResultSet listFicha = consFicha.buscarTodosPorNomTabla(nom);
+            ResultSet listFicha = consFicha.buscarTodosPorNomTabla(cad);
             
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFichas.getModel();
             Object cols[] = new Object[8];
             
             while (listFicha.next()) {
                 try {
-                    cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
+                   cols[0] = listFicha.getInt("id_ficha");
+                    cols[1] = listFicha.getString("fecha_ficha");
+                    cols[2] = listFicha.getString("nombresApellidos").toUpperCase();
+                    cols[3] = listFicha.getString("id_per");
+                    cols[4] = listFicha.getString("fecha_med");
+                    cols[5] = listFicha.getString("id_med");
+                    cols[6] = listFicha.getString("fecha_ana");
+                    cols[7] = listFicha.getString("id_ana");
                     model.addRow(cols);
                     
                     
@@ -216,7 +225,7 @@ public class CtrlFicha implements ActionListener{
      }
     
     public void setListener(){
-        KeyListener keyListenertxtBuscarFecha = new KeyListener() {
+        KeyListener keyListenertxtBuscarFichaPorCualquierCampo = new KeyListener() {
           public void keyPressed(KeyEvent keyEvent) {
             printIt("Pressed", keyEvent);
           }
@@ -246,146 +255,8 @@ public class CtrlFicha implements ActionListener{
            
           }
         };
-        visFicha.txtBuscarFechaFicha.addKeyListener(keyListenertxtBuscarFecha);
+        visFicha.txtBuscarFichaPorCualquierCampo.addKeyListener(keyListenertxtBuscarFichaPorCualquierCampo);
 
-        
-        //**********listener enter ************
-        
-        KeyListener keyListenertxtValCacncelo=new KeyListener() {
-          public void keyPressed(KeyEvent keyEvent) {
-            printIt("Pressed", keyEvent);
-          }
-
-          public void keyReleased(KeyEvent keyEvent) {
-            printIt("Released", keyEvent);
-          }
-
-          public void keyTyped(KeyEvent e) {
-            int m=e.getKeyChar();
-              if (m == KeyEvent.VK_ENTER) {
-                  
-                  double dif = Calculos.getDiferencia(new Double(visFicha.txtValConDsctoFicha.getText()).doubleValue(),new Double(visFicha.txt_valCancelo.getText()).doubleValue());
-                  visFicha.txtValPendienteFicha.setText(dif+"");
-                  visFicha.txtValPendienteFicha.requestFocusInWindow();
-              }  
-          }
-          
-          private void printIt(String title, KeyEvent keyEvent) {
-            int keyCode = keyEvent.getKeyCode();
-            String keyText = KeyEvent.getKeyText(keyCode);
-           
-          }
-        };
-        visFicha.txt_valCancelo.addKeyListener(keyListenertxtValCacncelo);
-        
-        //**********listener txtValPendienteFicha ************
-        
-        KeyListener keyListenertxtValPendieteFicha=new KeyListener() {
-          public void keyPressed(KeyEvent keyEvent) {
-            printIt("Pressed", keyEvent);
-          }
-
-          public void keyReleased(KeyEvent keyEvent) {
-            printIt("Released", keyEvent);
-          }
-
-          public void keyTyped(KeyEvent e) {
-            int m=e.getKeyChar();
-              if (m == KeyEvent.VK_ENTER) {
-                  
-                 
-                  visFicha.txtConceptoFicha.requestFocusInWindow();
-              }  
-          }
-          
-          private void printIt(String title, KeyEvent keyEvent) {
-            int keyCode = keyEvent.getKeyCode();
-            String keyText = KeyEvent.getKeyText(keyCode);
-           
-          }
-        };
-        visFicha.txtValPendienteFicha.addKeyListener(keyListenertxtValPendieteFicha);
-        
-        //**********listener txtValCancelo ************
-        
-        KeyListener keyListenertxtValPagar=new KeyListener() {
-          public void keyPressed(KeyEvent keyEvent) {
-            printIt("Pressed", keyEvent);
-          }
-
-          public void keyReleased(KeyEvent keyEvent) {
-            printIt("Released", keyEvent);
-          }
-
-          public void keyTyped(KeyEvent e) {
-            int m=e.getKeyChar();
-              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB) {
-                                  
-                 visFicha.txtValDscto.requestFocusInWindow();
-           
-              }  
-          }
-          
-          private void printIt(String title, KeyEvent keyEvent) {
-            int keyCode = keyEvent.getKeyCode();
-            String keyText = KeyEvent.getKeyText(keyCode);
-           
-          }
-        };
-        visFicha.txtValPagar.addKeyListener(keyListenertxtValPagar);
-        
-         //**********listener txtValDscto ************
-        
-        KeyListener keyListenertxtValDscto=new KeyListener() {
-          public void keyPressed(KeyEvent keyEvent) {
-            printIt("Pressed", keyEvent);
-          }
-
-          public void keyReleased(KeyEvent keyEvent) {
-            printIt("Released", keyEvent);
-          }
-
-          public void keyTyped(KeyEvent e) {
-            int m=e.getKeyChar();
-              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB) {
-                                  
-                 visFicha.txt_valCancelo.requestFocusInWindow();
-                 double  dsctoMemb = (Validaciones.isNumVoid10(visFicha.txtValDscto.getText()));
-                 double valMasDscto = Calculos.getDscto(new Double(visFicha.txtValPagar.getText()).doubleValue(), dsctoMemb);
-                 visFicha.txtValConDsctoFicha.setText(valMasDscto+"");
-              }  
-          }
-          
-          private void printIt(String title, KeyEvent keyEvent) {
-            int keyCode = keyEvent.getKeyCode();
-            String keyText = KeyEvent.getKeyText(keyCode);
-           
-          }
-        };
-        visFicha.txtValDscto.addKeyListener(keyListenertxtValDscto);
-        
-        KeyListener keyListenerTblPersonas = new KeyListener() {
-          public void keyPressed(KeyEvent e) {
-           
-          }
-
-          public void keyReleased(KeyEvent keyEvent) {
-            printIt("Released", keyEvent);
-          }
-
-          public void keyTyped(KeyEvent e) {
-            
-          }
-          
-          private void printIt(String title, KeyEvent keyEvent) {
-            int keyCode = keyEvent.getKeyCode();
-            String keyText = KeyEvent.getKeyText(keyCode);
-           // System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
-          }
-
-
-        };
-        
         MouseListener mouseListTblFicha = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -393,8 +264,8 @@ public class CtrlFicha implements ActionListener{
                 if(e.getClickCount()==1)
                 {
                     getTableToTxts();
-                     desabilitaHabilita(visFicha.btnGuardarFicha,false);
-                     desabilitaHabilita(visFicha.btnModificarFicha,true);
+                     desabilitaHabilita(visFicha.btnGuardarFichaG,false);
+                     desabilitaHabilita(visFicha.btnModificarFichaG,true);
                                           
                 }
             }
@@ -427,13 +298,10 @@ public class CtrlFicha implements ActionListener{
     }
      public void getTableToTxts()
      {
-         JTable tblD = visFicha.tblFicha;
-         visFicha.txt_id_Ficha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
-         visFicha.dtcFechaIniFicha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3))));
-         visFicha.dtcFechaFinFicha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4))));
-         visFicha.txtConceptoFicha.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5))).toUpperCase());
-         visFicha.txtValConDsctoFicha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
-         visFicha.txtValPendienteFicha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 7)));
+         JTable tblD = visFicha.tblFichas;
+         visFicha.txt_id_Ficha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
+         visFicha.dchFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
+         
          
      }
     
@@ -456,19 +324,19 @@ public class CtrlFicha implements ActionListener{
             limpiarTabla();
             ResultSet listFicha = consFicha.buscarTodos2();
             
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFichas.getModel();
             Object cols[] = new Object[8];
             
             while (listFicha.next()) {
-                try {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
+                    cols[1] = listFicha.getString("fecha_ficha");
+                    cols[2] = listFicha.getString("nombresApellidos").toUpperCase();
+                    cols[3] = listFicha.getString("id_per");
+                    cols[4] = listFicha.getString("fecha_med");
+                    cols[5] = listFicha.getString("id_med");
+                    cols[6] = listFicha.getString("fecha_ana");
+                    cols[7] = listFicha.getString("id_ana");
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
@@ -479,155 +347,23 @@ public class CtrlFicha implements ActionListener{
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
         }
-        visFicha.tblFicha.updateUI();
+        visFicha.tblFichas.updateUI();
     }
     
-    public void showTablePendientes()
-    {
-        try {
-            limpiarTabla();
-            ResultSet listFicha = consFicha.buscarPendientes();
-            
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
-            Object cols[] = new Object[8];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
-                    model.addRow(cols);
-                                        
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consFicha.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visFicha.tblFicha.updateUI();
-    }
     
-    public void showTableProximosVencer()
-    {
-        try {
-            limpiarTabla();
-            ResultSet listFicha = consFicha.buscarTodos2();
-            
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
-            Object cols[] = new Object[8];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
-                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
-                        double days = Calculos.getDiffDaysToFinish(cols[4].toString());
-                        if (days<=5) {
-                            model.addRow(cols);
-                        }
-                    }                       
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consFicha.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visFicha.tblFicha.updateUI();
-    }
-    
-     public void showTableCursando()
-    {
-        try {
-            limpiarTabla();
-            ResultSet listFicha = consFicha.buscarTodos2();
-            
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
-            Object cols[] = new Object[8];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
-                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
-                        model.addRow(cols);                     
-                    }                       
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consFicha.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visFicha.tblFicha.updateUI();
-    }
-    
-     public void showTableVencidos()
-    {
-        try {
-            limpiarTabla();
-            ResultSet listFicha = consFicha.buscarTodos2();
-            
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
-            Object cols[] = new Object[8];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
-                    if (!Calculos.dateGreaterThanCurrent(cols[4].toString()))
-                        model.addRow(cols);
-                     
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consFicha.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visFicha.tblFicha.updateUI();
-    }
     
     public void validaAnonimos()
     {
         
        // System.out.println("personar: "+getAnonimos().get(0)+" anal: "+getAnonimos().get(1)+" med: "+getAnonimos().get(2));
-        if(Validaciones.isNumVoid1(visFicha.txt_id_persona_u.getText()))
+        if(Validaciones.isNumVoid1(visFicha.txtCodPersona.getText()))
         {
            persona.setId(Integer.parseInt(getAnonimos().get(0)));
            modFicha.setPersona(persona); 
         }
         else
         {
-            persona.setId(Integer.parseInt(visFicha.txt_id_persona_u.getText()));
+            persona.setId(Integer.parseInt(visFicha.txtCodPersona.getText()));
             modFicha.setPersona(persona); 
         }
         ///*******
@@ -657,18 +393,14 @@ public class CtrlFicha implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == visFicha.btnGuardarFicha) 
+      if (e.getSource() == visFicha.btnGuardarFichaG) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
-           jdc.add(visFicha.dtcFechaIniFicha);
+           jdc.add(visFicha.dchFecha);
            
                if (Validaciones.isDateChooserVoid(jdc)) 
                {                   
-                    modFicha.setFecha_ini(Validaciones.setFormatFecha(visFicha.dtcFechaIniFicha.getDate()));                
-                    modFicha.setFecha_fin(Validaciones.setFormatFecha(visFicha.dtcFechaFinFicha.getDate()));
-                    modFicha.setVal_pago(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
-                    modFicha.setVal_pendiente(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));
-                    modFicha.setConcepto(visFicha.txtConceptoFicha.getText().toUpperCase());
+                    modFicha.setFecha(Validaciones.setFormatFecha(visFicha.dchFecha.getDate()));                               
                     modFicha.setEstado(1);
                     //valido > si es nullo pongo anon, llenoen mod i guardo
                     validaAnonimos();
@@ -686,16 +418,11 @@ public class CtrlFicha implements ActionListener{
                }        
         }
       
-      if (e.getSource() == visFicha.btnModificarFicha) 
+      if (e.getSource() == visFicha.btnModificarFichaG) 
        {            
             modFicha.setId(Integer.parseInt(visFicha.txt_id_Ficha.getText()));
-            modFicha.setFecha_ini(Validaciones.setFormatFecha(visFicha.dtcFechaIniFicha.getDate()));                
-            modFicha.setFecha_fin(Validaciones.setFormatFecha(visFicha.dtcFechaFinFicha.getDate()));
-            modFicha.setVal_pago(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
-            modFicha.setVal_pendiente(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));
-            modFicha.setConcepto(visFicha.txtConceptoFicha.getText().toUpperCase());
+            modFicha.setFecha(Validaciones.setFormatFecha(visFicha.dchFecha.getDate()));                       
 
-//            validaAnonimos();
             if (consFicha.modificar(modFicha)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
                 limpiar();
@@ -708,7 +435,7 @@ public class CtrlFicha implements ActionListener{
             showTable();
         }
       
-      if (e.getSource() == visFicha.btnEliminarFicha) 
+      if (e.getSource() == visFicha.btnEliminarFichaG) 
        {
            
             modFicha.setId(Integer.parseInt(visFicha.txt_id_Ficha.getText()));
@@ -726,63 +453,70 @@ public class CtrlFicha implements ActionListener{
             showTable();
         }
       
-       if (e.getSource() == visFicha.btnLimpiarFicha) 
+       if (e.getSource() == visFicha.btnLimpiarFichaG) 
         {
            limpiar();
-           desabilitaHabilita(visFicha.btnGuardarFicha,true);
-           desabilitaHabilita(visFicha.btnModificarFicha,false);
+           desabilitaHabilita(visFicha.btnGuardarFichaG,true);
+           desabilitaHabilita(visFicha.btnModificarFichaG,false);
         }
 
-        if (e.getSource() == visFicha.btnBuscarDscto) 
+        if (e.getSource() == visFicha.btnElegirPersonaG) 
         {
-            VisMembresia visMem = new VisMembresia();
-            Membresias memMod  = new Membresias();
-            ConsMembresias consMem = new ConsMembresias();
-            FacturaCab ficha  =  new FacturaCab();                        
-            CtrlMembresias ctrMemb=new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
+           
+            VisPersona visPer = new VisPersona();
+            Persona per  = new Persona();
+            ConsPersona consPer = new ConsPersona();
+            VisFicha visFicha  =  new VisFicha();       
+            Ficha ficha = new Ficha();
+            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer);
+            ctrPer.iniciar();
         } 
         
-        if (e.getSource() == visFicha.btnCalcular) 
-        {       
-            if (Validaciones.isVoidJTxt(visFicha.txt_valEntregado)) {
-                double txtValEntregado = Double.parseDouble(visFicha.txt_valEntregado.getText());
-                double txtValCancelo = Double.parseDouble(visFicha.txt_valCancelo.getText());
-                double txtCambio = txtValEntregado -txtValCancelo ;
-                visFicha.txt_cambio.setText(Calculos.setTwoDecimals(txtCambio)+"");
-               }
+          
+         if (e.getSource() == visFicha.mniReportes) 
+         {
+            
+            VisReportes visRepo = new VisReportes();
+          
+            CtrlReportes ctrlRepo = new CtrlReportes(visRepo,"C:/Users/Administrator/Documents/NetBeansProjects/TroyaGym/src/reportes/");
+            
+            
+         }
+         //////
+         if (e.getSource() == visFicha.mniMembresias) 
+         {   
+            VisMembresia visMem = new VisMembresia();            
+            VisFicha visFicha= new VisFicha();
+            Membresias memMod  = new Membresias();
+            ConsMembresias consMem = new ConsMembresias();
+            Ficha ficha  =  new Ficha();
+            CtrlMembresias ctrlMem = new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
+            
+         }
+         
+         if (e.getSource() == visFicha.mniPersonas) {
+            
+            VisPersona visPer = new VisPersona();
+            Persona per  = new Persona();
+            ConsPersona consPer = new ConsPersona();
+            VisFicha visFicha  =  new VisFicha();    
+            Ficha ficha  =  new Ficha();
+            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer);
+           
         }
-        
-         if (e.getSource() == visFicha.cmbTipoBusqueda) 
-        {       
-           String tipo = visFicha.cmbTipoBusqueda.getSelectedItem()+"";
-            if (tipo.equals("todos")) {
-             showTable();
-            }
-            if (tipo.equals("cursando")) {
-                showTableCursando();
-            }
-            if (tipo.equals("pendientes")) {
-                showTablePendientes();
-            }
-            if (tipo.equals("proximos a vencer")) {
-                showTableProximosVencer();
-            }
-            if (tipo.equals("vencidos")) {
-                showTableVencidos();
-            }
-        }
-      
+
+         
+         if (e.getSource() == visFicha.menuSalir) 
+         {
+            visFicha.dispose();
+         }
+                               
     }
     public void limpiar()
     {
-        visFicha.dtcFechaIniFicha.setDate(Calculos.getCurrentDate2()); 
-        visFicha.txtValConDsctoFicha.setText("0.0");
-        visFicha.txtValPendienteFicha.setText("0.0");
-        visFicha.txtValPagar.setText("0.0");
-        visFicha.txtValDscto.setText("0.0");
-        visFicha.txt_valCancelo.setText("0.0");
-        visFicha.txtConceptoFicha.setText("");
-
+        visFicha.txtCodPersona.setText(""); 
+        visFicha.dchFecha.setDate(Calculos.getCurrentDate2());
+       
     }
     
 }

@@ -27,7 +27,7 @@ public class ConsAnalisis extends Conexion{
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO analisis (id_ana,fecha_ana, exesoGrasa_ana, exesoLiquido_ana, exesoTotal_ana,recomendacionPesas_ana,recomendacionCardio_ana,recomendacionFuncional_ana,estado_ana) "
+        String sql = "INSERT INTO analisis (id_ana,fecha_ana, excesoGrasa_ana, excesoLiquido_ana, excesoTotal_ana,recomendacionPesas_ana,recomendacionCardio_ana,recomendacionFuncional_ana,estado_ana) "
                 + " VALUES(analisis_id_seq.NEXTVAL,?,?,?,?,?,?,?,?)";
      //   String sql2 = "INSERT INTO Ficha (fecha_ini,fecha_fin,val_pago,val_pendiente) VALUES(?,?,?,?)";
         try 
@@ -69,7 +69,7 @@ public class ConsAnalisis extends Conexion{
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE analisis SET fecha_ana=?, exesoGrasa_ana=?, exesoLiquido_ana=?, exesoTotal_ana=?,recomendacionPesas_ana=?,recomendacionCardio_ana=?,recomendacionFuncional_ana=?"
+        String sql = "UPDATE analisis SET fecha_ana=?, excesoGrasa_ana=?, excesoLiquido_ana=?, excesoTotal_ana=?,recomendacionPesas_ana=?,recomendacionCardio_ana=?,recomendacionFuncional_ana=?"
                 + " WHERE id_ana=?";
         
         try 
@@ -196,9 +196,9 @@ public class ConsAnalisis extends Conexion{
             if (rs.next()) {
                 a.setId(rs.getInt("id_ana"));
                 a.setFecha(rs.getString("fecha_ana"));
-                a.setExeso_grasa(rs.getDouble("exesoGrasa_ana"));
-                a.setExeso_liquido(rs.getDouble("exesoLiquido_ana"));
-                a.setExeso_total(rs.getDouble("exesoTotal_ana"));
+                a.setExeso_grasa(rs.getDouble("excesoGrasa_ana"));
+                a.setExeso_liquido(rs.getDouble("excesoLiquido_ana"));
+                a.setExeso_total(rs.getDouble("excesoTotal_ana"));
                 a.setRecomendacion_pesas(rs.getString("recomendacionPesas_ana"));
                 a.setRecomendacion_cardio(rs.getString("recomendacionCardio_ana"));
                 a.setRecomendacion_funcional(rs.getString("recomendacionFuncional_ana"));
@@ -244,9 +244,9 @@ public class ConsAnalisis extends Conexion{
                 a = new Analisis();
                 a.setId(rs.getInt("id_ana"));
                 a.setFecha(rs.getString("fecha_ana"));
-                a.setExeso_grasa(rs.getDouble("exesoGrasa_ana"));
-                a.setExeso_liquido(rs.getDouble("exesoLiquido_ana"));
-                a.setExeso_total(rs.getDouble("exesoTotal_ana"));
+                a.setExeso_grasa(rs.getDouble("excesoGrasa_ana"));
+                a.setExeso_liquido(rs.getDouble("excesoLiquido_ana"));
+                a.setExeso_total(rs.getDouble("excesoTotal_ana"));
                 a.setRecomendacion_pesas(rs.getString("recomendacionPesas_ana"));
                 a.setRecomendacion_cardio(rs.getString("recomendacionCardio_ana"));
                 a.setRecomendacion_funcional(rs.getString("recomendacionFuncional_ana"));                
@@ -294,9 +294,9 @@ public class ConsAnalisis extends Conexion{
                 a = new Analisis();
                 a.setId(rs.getInt("id_ana"));
                 a.setFecha(rs.getString("fecha_ana"));
-                a.setExeso_grasa(rs.getDouble("exesoGrasa_ana"));
-                a.setExeso_liquido(rs.getDouble("exesoLiquido_ana"));
-                a.setExeso_total(rs.getDouble("exesoTotal_ana"));
+                a.setExeso_grasa(rs.getDouble("excesoGrasa_ana"));
+                a.setExeso_liquido(rs.getDouble("excesoLiquido_ana"));
+                a.setExeso_total(rs.getDouble("excesoTotal_ana"));
                 a.setRecomendacion_pesas(rs.getString("recomendacionPesas_ana"));
                 a.setRecomendacion_cardio(rs.getString("recomendacionCardio_ana"));
                 a.setRecomendacion_funcional(rs.getString("recomendacionFuncional_ana"));  

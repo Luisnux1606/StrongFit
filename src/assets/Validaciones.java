@@ -103,15 +103,25 @@ public class Validaciones {
      
      public static double isNumVoid2(String txt)
      {
+         
          double val = 0;
          if (txt.length()==0) {
              val = 0;
          }
          else
+             
              val = Double.parseDouble(txt);
          
          return val;
      }
+     public static boolean isNumeric(String str) { 
+        try {  
+          Double.parseDouble(str);  
+          return true;
+        } catch(NumberFormatException e){  
+          return false;  
+        }  
+    }
      
      public static boolean isVoid(ArrayList<JTextField> txt)
      {

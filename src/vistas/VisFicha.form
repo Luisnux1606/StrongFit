@@ -4,20 +4,82 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
+        <Menu class="javax.swing.JMenu" name="menuArchivo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Archivo"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mniReportes">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/reportes.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Reportes"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuSalir">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/salir2.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Salir"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Gestion"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="0"/>
+            </Property>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="mniPersonas">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/personas.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Personas"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="mniMembresias">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icons/membresias.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Membresias"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -42,7 +104,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,4,2,0,0,9,33"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,59,0,0,5,-119"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
@@ -50,7 +112,7 @@
     <Container class="javax.swing.JScrollPane" name="jScrollPane7">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="1" gridWidth="2" gridHeight="1" fill="1" ipadX="2089" ipadY="880" insetsTop="7" insetsLeft="0" insetsBottom="13" insetsRight="221" anchor="18" weightX="1.0" weightY="1.0"/>
+          <GridBagConstraints gridX="0" gridY="1" gridWidth="2" gridHeight="1" fill="1" ipadX="1237" ipadY="708" insetsTop="7" insetsLeft="0" insetsBottom="0" insetsRight="153" anchor="18" weightX="1.0" weightY="1.0"/>
         </Constraint>
       </Constraints>
 
@@ -78,19 +140,14 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="tabp_ficha" min="-2" pref="1932" max="-2" attributes="0"/>
-                          <EmptySpace pref="136" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="tabp_ficha" min="-2" pref="1316" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="tabp_ficha" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
+                          <Component id="tabp_ficha" min="-2" pref="672" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -144,61 +201,57 @@
                                       <Group type="102" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPane1" max="32767" attributes="0"/>
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Group type="102" attributes="0">
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <Component id="txt_id_datos" min="-2" pref="42" max="-2" attributes="0"/>
-                                                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                                                  <Component id="txt_id_persona_u" min="-2" pref="38" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                                                                  <Component id="btnGuardar" min="-2" pref="42" max="-2" attributes="0"/>
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="btnModificar" min="-2" pref="38" max="-2" attributes="0"/>
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="btnEliminar" min="-2" pref="42" max="-2" attributes="0"/>
-                                                              </Group>
-                                                          </Group>
-                                                          <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Group type="102" attributes="0">
-                                                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                                                                  <Component id="txt_id_medidas_u" min="-2" pref="36" max="-2" attributes="0"/>
-                                                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                                                  <Component id="txt_id_analisis_u" min="-2" pref="40" max="-2" attributes="0"/>
-                                                              </Group>
-                                                              <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                                  <Component id="btnLimpiar" min="-2" pref="51" max="-2" attributes="0"/>
-                                                              </Group>
-                                                          </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="txt_id_datos" min="-2" pref="42" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                                          <Component id="txt_id_persona_u" min="-2" pref="38" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="txtBuscarFecha" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                                          <Component id="btnGuardar" min="-2" pref="42" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btnModificar" min="-2" pref="38" max="-2" attributes="0"/>
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btnEliminar" min="-2" pref="42" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
-                                                  <EmptySpace min="0" pref="1647" max="32767" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Group type="102" attributes="0">
+                                                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                                          <Component id="txt_id_medidas_u" min="-2" pref="36" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                                          <Component id="txt_id_analisis_u" min="-2" pref="40" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <EmptySpace max="-2" attributes="0"/>
+                                                          <Component id="btnLimpiar" min="-2" pref="51" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                              </Group>
+                                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="txtBuscarFecha" alignment="0" max="32767" attributes="0"/>
+                                                  <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                                      <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="jPanel5" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                          <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="609" max="-2" attributes="0"/>
+                                          <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lbl_fichaDatos" min="-2" pref="189" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jLabel37" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="lbl_fichaDatos" min="-2" pref="189" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="361" max="-2" attributes="0"/>
+                                  <EmptySpace pref="174" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -212,7 +265,7 @@
                                       <Component id="txt_id_analisis_u" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txt_id_medidas_u" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbl_fichaDatos" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
@@ -229,7 +282,7 @@
                                       <Component id="jPanel6" max="32767" attributes="0"/>
                                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txtBuscarFecha" min="-2" max="-2" attributes="0"/>
@@ -285,7 +338,7 @@
                                               <Component id="btnBuscarMed" min="-2" pref="45" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="916" max="32767" attributes="0"/>
+                                      <EmptySpace pref="102" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -989,7 +1042,7 @@
                                           <Component id="lbl_PersonaAnalisis" min="-2" pref="176" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="790" max="32767" attributes="0"/>
+                                  <EmptySpace pref="174" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1020,7 +1073,7 @@
                                   <Component id="txtFechaAnalisis" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jScrollPane5" min="-2" pref="241" max="-2" attributes="0"/>
-                                  <EmptySpace pref="145" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1476,16 +1529,17 @@
                                           <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                           <Component id="btnLimpiarFichaG" min="-2" pref="49" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-                                          <Component id="jPanel1" min="-2" pref="799" max="-2" attributes="0"/>
-                                      </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                          <Component id="scrpTablaFichas" min="-2" pref="982" max="-2" attributes="0"/>
+                                          <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="scrpTablaFichas" min="-2" pref="982" max="-2" attributes="0"/>
+                                              <Component id="jPanel1" min="-2" pref="799" max="-2" attributes="0"/>
+                                              <Component id="txtBuscarFichaPorCualquierCampo" alignment="0" min="-2" pref="161" max="-2" attributes="0"/>
+                                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace pref="895" max="32767" attributes="0"/>
+                                  <EmptySpace pref="304" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1502,8 +1556,12 @@
                                   </Group>
                                   <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                                  <Component id="scrpTablaFichas" min="-2" pref="294" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="txtBuscarFichaPorCualquierCampo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="scrpTablaFichas" min="-2" pref="243" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1525,7 +1583,7 @@
                             <Component class="javax.swing.JTable" name="tblFichas">
                               <Properties>
                                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                                  <Table columnCount="8" rowCount="4">
+                                  <Table columnCount="8" rowCount="3">
                                     <Column editable="true" title="Codigo" type="java.lang.Object"/>
                                     <Column editable="true" title="Fecha Ficha" type="java.lang.Object"/>
                                     <Column editable="true" title="Nombres de Persona" type="java.lang.Object"/>
@@ -1627,7 +1685,7 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnElegirPersona">
+                            <Component class="javax.swing.JButton" name="btnElegirPersonaG">
                               <Properties>
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/icons/lupa6.png"/>
@@ -1667,6 +1725,16 @@
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JTextField" name="txtBuscarFichaPorCualquierCampo">
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="jLabel5">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Buscar por cualquier campo"/>
+                          </Properties>
+                        </Component>
                       </SubComponents>
                     </Container>
                   </SubComponents>
@@ -1691,7 +1759,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="pnlVentasInterno" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="105" max="32767" attributes="0"/>
+                          <EmptySpace pref="159" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2316,7 +2384,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="15" insetsLeft="556" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
+          <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="560" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
         </Constraint>
       </Constraints>
     </Component>

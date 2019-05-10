@@ -227,7 +227,7 @@ public class ConsMembresias extends Conexion{
             while (rs.next()) {
                 m = new Membresias();
                 m.setId(rs.getInt("id_memb"));
-                m.setNombre(rs.getString("nom_memb"));
+                m.setNombre(rs.getString("descripcion_memb"));
                 m.setDscto(rs.getDouble("dscto_memb"));
                              
                 

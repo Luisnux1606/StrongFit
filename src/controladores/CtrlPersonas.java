@@ -38,6 +38,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.FacturaCab;
+import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -59,16 +60,16 @@ public class CtrlPersonas implements ActionListener {
     ConsPersona consPer;
     VisPersona visPersona;
     VisMembresia visMemb;
-       
+    VisFicha visFicha;   
     String cadBus;
     MyTableModel dT;
     
-    public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisMembresia visMemb, VisPersona visPersona)
+    public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisPersona visPersona)
     {
         this.modPer = modPersona;
         this.consPer = consPersona;
-        this.visPersona = visPersona;
-        this.visMemb = visMemb;
+        this.visPersona = visPersona;        
+        this.visFicha = visFicha;
       
         
         this.visPersona.btnGuardar.addActionListener(this);
@@ -76,10 +77,7 @@ public class CtrlPersonas implements ActionListener {
         this.visPersona.btnLimpiar.addActionListener(this);
         this.visPersona.btnModificar.addActionListener(this);
         this.visPersona.btnBuscar.addActionListener(this);
-        this.visPersona.mniFicha.addActionListener(this);
-        this.visPersona.mniReportes.addActionListener(this);
-        this.visPersona.mniSalir.addActionListener(this);
-        this.visPersona.mniMembresia.addActionListener(this);
+       
         
         
        
@@ -88,6 +86,7 @@ public class CtrlPersonas implements ActionListener {
         setFocus();
         setListener();
         setTableModel();
+        iniciar();
     }
     
     
@@ -105,9 +104,11 @@ public class CtrlPersonas implements ActionListener {
     
     public void iniciar()
     {
-        visPersona.setTitle("REGISTRO DE PERSONAS ()TROYA GYM()");
-        visPersona.setLocation(400,100);
-        visPersona.setSize(1000,800);
+        visPersona.setTitle("MEMBRESIAS");
+        visPersona.setLocationRelativeTo(null);
+        visPersona.setSize(1000,700);
+        visPersona.setVisible(true);
+        
         visPersona.txt_id.setVisible(false);
         
         visPersona.btnBuscar.setToolTipText("Buscar el registro");
@@ -116,7 +117,7 @@ public class CtrlPersonas implements ActionListener {
         visPersona.btnEliminar.setToolTipText("Eliminar el registro");
         visPersona.btnLimpiar.setToolTipText("Limpiar el registro");
         
-       
+        visPersona.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     
@@ -231,65 +232,7 @@ public class CtrlPersonas implements ActionListener {
              desabilitaHabilita(visPersona.btnGuardar,true);
            desabilitaHabilita(visPersona.btnModificar,false);
          }
-         
-         if (e.getSource() == visPersona.mniFicha) 
-         {            
-           
-            Analisis ana = new Analisis();
-            Medidas med = new Medidas();
-            FacturaCab fic = new FacturaCab();
-
-
-            ConsAnalisis consAna = new ConsAnalisis();
-            ConsMedidas consMed = new ConsMedidas();
-            ConsFacturaCab consFic = new ConsFacturaCab();
-
-            VisPersona visPer = new VisPersona();
-            VisFicha visFic = new VisFicha();
-            VisMembresia visMemb = new VisMembresia();
-
-
-            modPer.setId(0);
-            modPer.setNombre("anonimo");
-            modPer.setApellido("anonumo");
-    
-            CtrlFacturaCab ctrlFic = new CtrlFacturaCab(fic,consFic,visFic,visMemb,modPer);
-
-            visFic.setLocation(300, 20);
-            visFic.tabp_ficha.setSelectedIndex(2);
-            visFic.tabp_ficha.setEnabledAt(0, true);
-            visFic.tabp_ficha.setEnabledAt(1, true);
-            visFic.setVisible(true);
-         }
-         
-         if (e.getSource() == visPersona.mniReportes) 
-         {
-            
-            VisReportes visRepo = new VisReportes();
-          
-            CtrlReportes ctrlRepo = new CtrlReportes(visRepo,"C:/Users/Administrator/Documents/NetBeansProjects/TroyaGym/src/reportes/");
-            
-            
-         }
-         //////
-         if (e.getSource() == visPersona.mniMembresia) 
-         {
-            /*
-            
-            VisMembresia visMem = new VisMembresia();            
-            VisFicha visFicha= new VisFicha();
-            Membresias memMod  = new Membresias();
-            ConsMembresias consMem = new ConsMembresias();
-            Ficha ficha  =  new Ficha();
-            CtrlMembresias ctrlMem = new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
-            */
-         }
-
-         
-         if (e.getSource() == visPersona.mniSalir) 
-         {
-            visPersona.dispose();
-         }
+       
     }
     
      public void limpiar()
@@ -515,33 +458,6 @@ public class CtrlPersonas implements ActionListener {
                 if(e.getClickCount()==2)
                 {
    
-                    Persona per = new Persona();
-                    Analisis ana = new Analisis();
-                    Medidas med = new Medidas();
-                    FacturaCab fic = new FacturaCab();                                            
-                    
-                    ConsPersona consPer = new ConsPersona();
-                    ConsAnalisis consAna = new ConsAnalisis();
-                    ConsMedidas consMed = new ConsMedidas();
-                    ConsFacturaCab consFic = new ConsFacturaCab();
-                    
-                    VisFicha visFic = new VisFicha();
-
-                    int idPer = Integer.parseInt(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 0)+"");
-                    modPer.setId(idPer);
-                    
-                    String nombre = String.valueOf(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 2));
-                    String apellido = String.valueOf(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 3));
-                    
-                    modPer.setNombre(nombre);
-                    modPer.setApellido(apellido);
-                    
-                    CtrlAnalisis ctrlAna = new CtrlAnalisis(ana,consAna,visFic,modPer);
-                    CtrlMedidas ctrlMed = new CtrlMedidas(med,consMed,visFic,modPer);
-                    CtrlFacturaCab ctrlFic = new CtrlFacturaCab(fic,consFic,visFic,visMemb,modPer);
-                    
-                    visFic.setLocation(300, 20);
-                    visFic.setVisible(true);
     
                     
                 }
