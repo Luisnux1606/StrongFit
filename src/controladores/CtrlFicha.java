@@ -97,7 +97,7 @@ public class CtrlFicha implements ActionListener{
        
         setFocus();
         setListener();    
-        setTableModel();
+//        setTableModel();
        // iniciar();
         
        // visFicha.txtCodPersona.setText(persona.getId()+"");
@@ -150,7 +150,7 @@ public class CtrlFicha implements ActionListener{
     {
         
     }
-    
+    /*
     public void setTableModel()
     {            
        Color rojo = new Color(254,000,000);  
@@ -162,7 +162,7 @@ public class CtrlFicha implements ActionListener{
             {
                 final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 c.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-              /*
+         
                 
                 if(Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")<=5 &&Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")>=0)
                 {
@@ -177,7 +177,7 @@ public class CtrlFicha implements ActionListener{
                  c.setBackground(rojo); //proximos a terminarse o pendientes de pago
                 }
                
-                */
+               
                 
                 return c;
             }
@@ -185,7 +185,7 @@ public class CtrlFicha implements ActionListener{
             
             });
      
-    }
+    }*/
     
     public void showTableByNom(String cad)
     {
