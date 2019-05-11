@@ -1868,8 +1868,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pnlVentasInterno" min="-2" pref="727" max="-2" attributes="0"/>
-                          <EmptySpace pref="139" max="32767" attributes="0"/>
+                          <Component id="pnlVentasInterno" min="-2" pref="766" max="-2" attributes="0"/>
+                          <EmptySpace pref="100" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1961,14 +1961,16 @@
                                                           <Component id="jLabel41" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                                                           <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
                                                           <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="lblIva" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="lblTotalConIva" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Group type="103" groupAlignment="1" attributes="0">
-                                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                                              <Component id="txt_valCancelo" max="32767" attributes="0"/>
-                                                              <Component id="txtValConDsctoFicha" min="-2" pref="131" max="-2" attributes="0"/>
-                                                          </Group>
-                                                          <Component id="txtValPendienteFicha" min="-2" pref="131" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                          <Component id="txt_valCancelo" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="txtValConDsctoFicha" alignment="0" pref="131" max="32767" attributes="0"/>
+                                                          <Component id="txtValPendienteFicha" alignment="0" pref="131" max="32767" attributes="0"/>
+                                                          <Component id="txtIVA" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="txtTotalConIva" alignment="0" max="32767" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -1983,7 +1985,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -2034,15 +2036,25 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblIva" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtIVA" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblTotalConIva" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTotalConIva" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txt_valCancelo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel32" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="txtValPendienteFicha" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel32" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="txtValPendienteFicha" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace pref="49" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2069,7 +2081,6 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="pnlEntrenamientoEnFactura" min="-2" max="-2" attributes="0"/>
                                       <Component id="chkEntrenamiento" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
@@ -2077,13 +2088,16 @@
                                               <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="cmbCliente" max="32767" attributes="0"/>
-                                              <Component id="jDateChooser1" alignment="0" pref="179" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="dtcFechaFacCab" pref="179" max="32767" attributes="0"/>
+                                              <Component id="txtClienteFactura" max="32767" attributes="0"/>
                                           </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="pnlEntrenamientoEnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="843" max="32767" attributes="0"/>
+                                  <EmptySpace pref="799" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2093,17 +2107,18 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="dtcFechaFacCab" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cmbCliente" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="lblCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtClienteFactura" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnBuscarClienteFactura" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                   <Component id="chkEntrenamiento" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="pnlEntrenamientoEnFactura" min="-2" pref="68" max="-2" attributes="0"/>
+                                  <EmptySpace pref="8" max="32767" attributes="0"/>
+                                  <Component id="pnlEntrenamientoEnFactura" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -2118,16 +2133,6 @@
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="cmbCliente">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="0"/>
-                            </Property>
-                          </Properties>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
-                        </Component>
                         <Component class="javax.swing.JLabel" name="lblFechaFacCab">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Fecha :"/>
@@ -2136,7 +2141,10 @@
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
                         </Component>
-                        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+                        <Component class="com.toedter.calendar.JDateChooser" name="dtcFechaFacCab">
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
                         </Component>
                         <Component class="javax.swing.JCheckBox" name="chkEntrenamiento">
                           <Properties>
@@ -2152,80 +2160,43 @@
                             <DimensionLayout dim="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="lblFechaInicioEntren" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblFechaFinEntren" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="dtcFechaIniFacCab" alignment="0" pref="179" max="32767" attributes="0"/>
-                                          <Component id="dtcFechaFinFicha" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace pref="123" max="32767" attributes="0"/>
+                                      <Component id="lblEntrenamientoGenerado" min="-2" pref="261" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="202" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                             <DimensionLayout dim="1">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="dtcFechaIniFacCab" max="32767" attributes="0"/>
-                                          <Component id="lblFechaInicioEntren" min="-2" pref="22" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="dtcFechaFinFicha" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblFechaFinEntren" min="-2" pref="22" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblEntrenamientoGenerado" pref="39" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="lblFechaInicioEntren">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Fecha de Inicio:"/>
-                                <Property name="verticalAlignment" type="int" value="1"/>
-                                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                                  <Dimension value="[65, 14]"/>
-                                </Property>
-                                <Property name="verticalTextPosition" type="int" value="1"/>
-                              </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
-                            </Component>
-                            <Component class="com.toedter.calendar.JDateChooser" name="dtcFechaIniFacCab">
-                              <Properties>
-                                <Property name="name" type="java.lang.String" value="dtcFechaIniFacCab" noResource="true"/>
-                              </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="lblFechaFinEntren">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Fecha de Fin:"/>
-                                <Property name="verticalAlignment" type="int" value="1"/>
-                                <Property name="verticalTextPosition" type="int" value="1"/>
-                              </Properties>
-                              <AuxValues>
-                                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                              </AuxValues>
-                            </Component>
-                            <Component class="com.toedter.calendar.JDateChooser" name="dtcFechaFinFicha">
-                              <Properties>
-                                <Property name="name" type="java.lang.String" value="dtcFechaFinFicha" noResource="true"/>
-                              </Properties>
+                            <Component class="javax.swing.JLabel" name="lblEntrenamientoGenerado">
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                               </AuxValues>
                             </Component>
                           </SubComponents>
                         </Container>
+                        <Component class="javax.swing.JTextField" name="txtClienteFactura">
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnBuscarClienteFactura">
+                          <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/icons/personas.png"/>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
                       </SubComponents>
                     </Container>
                     <Component class="javax.swing.JButton" name="btnGuardarFacCab">
@@ -2316,6 +2287,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtValConDsctoFicha">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="0.0"/>
                         <Property name="name" type="java.lang.String" value="txtValConDsctoFicha" noResource="true"/>
                       </Properties>
                       <AuxValues>
@@ -2324,6 +2296,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_valCancelo">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="0.0"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[4, 20]"/>
                         </Property>
@@ -2372,6 +2345,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtValDscto">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="0.0"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtValDsctoActionPerformed"/>
                       </Events>
@@ -2400,6 +2376,9 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtValPagar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="0.0"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtValPagarActionPerformed"/>
                       </Events>
@@ -2416,6 +2395,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtValPendienteFicha">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="0.0"/>
                         <Property name="name" type="java.lang.String" value="txtValPendienteFicha" noResource="true"/>
                       </Properties>
                       <AuxValues>
@@ -2447,6 +2427,38 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_valEntregado">
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblIva">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="I.V.A"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtIVA">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="0.0"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblTotalConIva">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Total + IVA"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtTotalConIva">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="0.0"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>

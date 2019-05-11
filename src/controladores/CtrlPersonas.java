@@ -64,6 +64,7 @@ public class CtrlPersonas implements ActionListener {
     String cadBus;
     MyTableModel dT;
     
+    int locale;
     public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisPersona visPersona,VisFicha visFicha)
     {
         this.modPer = modPersona;
@@ -78,7 +79,7 @@ public class CtrlPersonas implements ActionListener {
         this.visPersona.btnModificar.addActionListener(this);
         this.visPersona.btnBuscar.addActionListener(this);
        
-        
+        locale = 0; // 1: ficha , 2: factura
         
        
         cadBus = "";
@@ -225,7 +226,8 @@ public class CtrlPersonas implements ActionListener {
                 }
                 showTable();
             }
-        }
+        }         
+         
          if (e.getSource() == visPersona.btnLimpiar) 
          {
             limpiar();
@@ -457,10 +459,19 @@ public class CtrlPersonas implements ActionListener {
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount()==2)
                 {
-   
                     int idPer = Integer.parseInt(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 0)+"");
-                    
-                    visFicha.txtCodPersona.setText(idPer+"");
+                    switch(locale){
+                        case 1:
+                            
+                            modPer.setId(idPer);
+                            visFicha.txtCodPersona.setText(idPer+"");
+                            
+                        case 2:
+                            
+                            modPer.setId(idPer);
+                            visFicha.txtClienteFactura.setText(idPer+"");
+                        default:    
+                    }
                     visPersona.dispose();
                     
                 }

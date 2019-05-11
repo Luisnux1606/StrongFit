@@ -9,6 +9,7 @@ import assets.Calculos;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
+import consultas.ConsEntrenamiento;
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
 import consultas.ConsMedidas;
@@ -49,11 +50,11 @@ import vistas.VisReportes;
  *
  * @author Administrator
  */
-public class CtrlFicha implements ActionListener{
+public class CtrlEntrenamiento implements ActionListener{
 
     Ficha modFicha;
     ArrayList<FacturaCab> lstFicha;
-    ConsFicha consFicha;
+    ConsEntrenamiento consFicha;
     VisFicha visFicha;
     VisReportes visReportes;
     VisMembresia visMemb;
@@ -65,10 +66,10 @@ public class CtrlFicha implements ActionListener{
     
     String cadBus;
     
-    public CtrlFicha(Ficha modFicha,ConsFicha consFicha,VisFicha visFicha)
+    public CtrlEntrenamiento(Ficha modFicha,ConsEntrenamiento consEntren,VisFicha visFicha)
     {
         this.modFicha = modFicha;
-        this.consFicha = consFicha;
+        this.consFicha = consEntren;
         this.visFicha = visFicha;
         this.persona = new Persona();
         this.visMemb =  visMemb;
@@ -211,12 +212,12 @@ public class CtrlFicha implements ActionListener{
                     
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -342,12 +343,12 @@ public class CtrlFicha implements ActionListener{
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
         visFicha.tblFichas.updateUI();
     }

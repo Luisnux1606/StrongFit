@@ -216,6 +216,44 @@ CREATE INDEX idx_id_per ON Persona(id_per)
 ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)
 /
 
+-- Add keys for table EntrenamientoTiempo
+CREATE TABLE EntrenTiempo(
+  id_entTmp Number NOT NULL,
+  descripcion_entTiempo Varchar2(45 ),
+  costo_entTiempo Number(10,2) 
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+
+-- Create indexes for table EntrenamientoTiempo
+CREATE INDEX idx_id_entTmp ON EntrenTiempo(id_entTmp)
+/
+
+-- Add keys for table EntrenamientoTiempo
+ALTER TABLE EntrenTiempo ADD CONSTRAINT pk_id_entTiempo PRIMARY KEY (id_entTmp)
+/
+
+--Add keys for table entrenamiento
+CREATE TABLE Entrenamiento(
+  id_ent Number NOT NULL,
+  fechaIni_ent Varchar2(45 ),
+  fechaFin_ent Varchar2(350 ),  
+  EntrenTiempo_id_entTmp Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+
+-- Create indexes for table entrenamiento
+CREATE INDEX idx_id_ent ON Entrenamiento(id_ent)
+/
+
+-- Add keys for table entrenamiento
+ALTER TABLE Entrenamiento ADD CONSTRAINT pk_id_ent PRIMARY KEY (id_ent)
+/
+-- Add keys for table entrenamiento
+ALTER TABLE Entrenamiento ADD CONSTRAINT fk_id_ent FOREIGN KEY (EntrenTiempo_id_entTmp) REFERENCES EntrenTiempo(id_entTmp)
+/
+
 
 CREATE TABLE Ficha(
   id_ficha Number NOT NULL,
@@ -279,15 +317,15 @@ ALTER TABLE IVAS ADD CONSTRAINT pk_id_ivas PRIMARY KEY (id_ivas)
 
 CREATE TABLE FacturaCabecera(
   id_facCab Number NOT NULL,
-  fechaInicio_facCab Varchar2(350 ),
-  fechaFin_facCab Varchar2(350 ),
+  fecha_facCab Varchar2(350 ),
+  num_facCab Varchar2(10),
   subTotal_facCab Number(10,2),
   total_facCab Number(10,2),
   valPendiente_facCab Number(10,2),
   Persona_id_per Number,
   Membresia_id_memb Number,
   Ivas_id_ivas Number,
-  estado_fac Number 
+  estado_facCab Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
