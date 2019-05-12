@@ -11,12 +11,12 @@ import javax.swing.JFrame;
  *
  * @author Administrator
  */
-public class VisEntrenamiento extends javax.swing.JFrame {
+public class VisEntrenamientoTiempo extends javax.swing.JFrame {
 
     /**
      * Creates new form VisPersona
      */
-    public VisEntrenamiento() {
+    public VisEntrenamientoTiempo() {
         initComponents();
         
     }
@@ -35,25 +35,19 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_membresias = new javax.swing.JTable();
+        tbl_entTiempo = new javax.swing.JTable();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txt_id = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        lblEntrenamientoTiempo = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        lblFechaFin = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        lblTipoEntrenamiento = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        txt_nombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtEntrenCosto = new javax.swing.JTextField();
         txtBuscarNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mniFicha = new javax.swing.JMenuItem();
-        mniReportes = new javax.swing.JMenuItem();
-        mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(java.awt.Color.lightGray);
@@ -72,26 +66,27 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         pnl_personas.add(btnEliminar);
         btnEliminar.setBounds(110, 20, 50, 40);
 
-        tbl_membresias.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_entTiempo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "CODIGO", "DESCRIPCION"
+                "CODIGO", "DESCRIPCION", "COSTO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tbl_membresias.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tbl_membresias);
-        tbl_membresias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_entTiempo.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tbl_entTiempo);
+        tbl_entTiempo.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
         jScrollPane1.setBounds(10, 310, 880, 220);
@@ -111,24 +106,24 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setLayout(null);
 
-        lblEntrenamientoTiempo.setText("Fecha inicio:");
-        jPanel1.add(lblEntrenamientoTiempo);
-        lblEntrenamientoTiempo.setBounds(20, 20, 80, 20);
-        jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(110, 20, 210, 20);
+        jLabel2.setText("Descripcion:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(10, 40, 80, 20);
 
-        lblFechaFin.setText("Fecha fin:");
-        jPanel1.add(lblFechaFin);
-        lblFechaFin.setBounds(20, 60, 70, 16);
-        jPanel1.add(jDateChooser2);
-        jDateChooser2.setBounds(110, 60, 210, 20);
+        txt_nombre.setName("cedula"); // NOI18N
+        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_nombre);
+        txt_nombre.setBounds(110, 40, 380, 22);
 
-        lblTipoEntrenamiento.setText("Tipo Entren.");
-        jPanel1.add(lblTipoEntrenamiento);
-        lblTipoEntrenamiento.setBounds(20, 110, 80, 16);
-
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(110, 110, 210, 22);
+        jLabel3.setText("Costo:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(10, 90, 37, 16);
+        jPanel1.add(txtEntrenCosto);
+        txtEntrenCosto.setBounds(110, 90, 160, 22);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
@@ -141,7 +136,7 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         pnl_personas.add(txtBuscarNombre);
         txtBuscarNombre.setBounds(10, 280, 150, 22);
 
-        jLabel8.setText("Buscar por Descripcion:");
+        jLabel8.setText("Buscar por descripcion:");
         pnl_personas.add(jLabel8);
         jLabel8.setBounds(10, 260, 140, 16);
 
@@ -163,62 +158,18 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 346, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
-
-        jMenu1.setText("Archivo");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        mniFicha.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        mniFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo7.png"))); // NOI18N
-        mniFicha.setText("Ficha");
-        mniFicha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFichaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniFicha);
-
-        mniReportes.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        mniReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reportes.png"))); // NOI18N
-        mniReportes.setText("Reportes");
-        mniReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniReportesActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniReportes);
-
-        mniSalir.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        mniSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/salir2.png"))); // NOI18N
-        mniSalir.setText("Salir");
-        mniSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSalirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniSalir);
-
-        jMenuBar1.add(jMenu1);
-
         setJMenuBar(jMenuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreActionPerformed
+
     private void txtBuscarNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarNombreKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarNombreKeyTyped
-
-    private void mniReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReportesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mniReportesActionPerformed
-
-    private void mniFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFichaActionPerformed
-        
-    }//GEN-LAST:event_mniFichaActionPerformed
-
-    private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalirActionPerformed
-       // this.dispose();
-    }//GEN-LAST:event_mniSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,13 +188,13 @@ public class VisEntrenamiento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisEntrenamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisEntrenamientoTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisEntrenamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisEntrenamientoTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisEntrenamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisEntrenamientoTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisEntrenamiento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisEntrenamientoTiempo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -253,7 +204,7 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VisEntrenamiento().setVisible(true);
+                new VisEntrenamientoTiempo().setVisible(true);
             }
         });
     }
@@ -263,24 +214,18 @@ public class VisEntrenamiento extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
-    private javax.swing.JComboBox jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JLabel lblEntrenamientoTiempo;
-    public javax.swing.JLabel lblFechaFin;
-    public javax.swing.JLabel lblTipoEntrenamiento;
-    public javax.swing.JMenuItem mniFicha;
-    public javax.swing.JMenuItem mniReportes;
-    public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;
-    public javax.swing.JTable tbl_membresias;
+    public javax.swing.JTable tbl_entTiempo;
     public javax.swing.JTextField txtBuscarNombre;
+    public javax.swing.JTextField txtEntrenCosto;
     public javax.swing.JTextField txt_id;
+    public javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables
 }

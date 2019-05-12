@@ -183,6 +183,7 @@ public class VisFicha extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mniPersonas = new javax.swing.JMenuItem();
         mniMembresias = new javax.swing.JMenuItem();
+        mniEntrenamientoTiempo = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mniConsultasClientes = new javax.swing.JMenuItem();
 
@@ -1288,6 +1289,15 @@ public class VisFicha extends javax.swing.JFrame {
         mniMembresias.setText("Membresias");
         jMenu1.add(mniMembresias);
 
+        mniEntrenamientoTiempo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/time.png"))); // NOI18N
+        mniEntrenamientoTiempo.setText("Tiempo entren.");
+        mniEntrenamientoTiempo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniEntrenamientoTiempoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mniEntrenamientoTiempo);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultas");
@@ -1354,6 +1364,10 @@ public class VisFicha extends javax.swing.JFrame {
     private void txt_id_persona_uActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_persona_uActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_id_persona_uActionPerformed
+
+    private void mniEntrenamientoTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEntrenamientoTiempoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniEntrenamientoTiempoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1488,6 +1502,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JMenu menuArchivo;
     public javax.swing.JMenuItem menuSalir;
     public javax.swing.JMenuItem mniConsultasClientes;
+    public javax.swing.JMenuItem mniEntrenamientoTiempo;
     public javax.swing.JMenuItem mniMembresias;
     public javax.swing.JMenuItem mniPersonas;
     public javax.swing.JMenuItem mniReportes;

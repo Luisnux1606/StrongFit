@@ -9,6 +9,8 @@ import assets.Calculos;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
+import consultas.ConsEntrenamiento;
+import consultas.ConsEntrenamientoTiempo;
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
 import consultas.ConsMedidas;
@@ -34,12 +36,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
+import modelos.EntrenamientoTiempo;
 import modelos.FacturaCab;
 import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
 import vistas.VisBuscarVentas;
+import vistas.VisEntrenamiento;
+import vistas.VisEntrenamientoTiempo;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -89,6 +94,8 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniReportes.addActionListener(this);
         this.visFicha.mniConsultasClientes.addActionListener(this);
         this.visFicha.menuSalir.addActionListener(this);
+        this.visFicha.mniEntrenamientoTiempo.addActionListener(this);
+        this.visFicha.chkEntrenamiento.addActionListener(this);
         
         this.visFicha.tabp_ficha.setSelectedIndex(2);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
@@ -454,6 +461,20 @@ public class CtrlFicha implements ActionListener{
             CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
             ctrPer.iniciar();
             ctrPer.locale = 1;
+        } 
+        
+        if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
+        {
+          
+            VisEntrenamientoTiempo visEntT = new VisEntrenamientoTiempo();
+            EntrenamientoTiempo entT  = new EntrenamientoTiempo();
+            ConsEntrenamientoTiempo consEntT = new ConsEntrenamientoTiempo();
+                
+            Ficha ficha = new Ficha();
+            CtrlEntrenamientoTiempo ctrEntT=new CtrlEntrenamientoTiempo(entT, consEntT, visEntT,visFicha);
+            ctrEntT.iniciar();
+            ctrEntT.locale = 1;
+                 
         } 
         
           

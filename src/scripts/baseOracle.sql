@@ -139,6 +139,14 @@ CREATE SEQUENCE categoria_id_seq
  ORDER
 /
 
+CREATE SEQUENCE entrenTiempo_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+ ORDER
+/
+
 
 -- Create tables section -------------------------------------------------
 CREATE TABLE Analisis(
@@ -220,7 +228,8 @@ ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)
 CREATE TABLE EntrenTiempo(
   id_entTmp Number NOT NULL,
   descripcion_entTiempo Varchar2(45 ),
-  costo_entTiempo Number(10,2) 
+  costo_entTiempo Number(10,2), 
+  estado_enTiempo Number
 )
 TABLESPACE tbs_usr_strongfit_p
 /
