@@ -209,6 +209,45 @@ public class ConsEntrenamientoTiempo extends Conexion{
         
     }
     
+    public boolean buscar(Membresias m)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM membresia WHERE nom_memb=? and estado_memb=1";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                     
+            ps.setString(1, m.getNombre());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                m.setId(rs.getInt("id_memb"));
+                m.setNombre(rs.getString("nom_memb"));
+                m.setDscto(rs.getDouble("dscto_memb"));               
+                return true;
+            }
+            return false;
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
     
     public ArrayList<EntrenamientoTiempo> buscarTodos(EntrenamientoTiempo m)
     {

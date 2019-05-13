@@ -36,6 +36,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.Entrenamiento;
+import modelos.EntrenamientoTiempo;
 import modelos.FacturaCab;
 import modelos.Ficha;
 import modelos.Medidas;
@@ -58,16 +59,19 @@ public class CtrlEntrenamiento implements ActionListener{
     VisEntrenamiento visEnt;
     Entrenamiento ent;
     ConsEntrenamiento consEnt;
+    Persona per;
+    EntrenamientoTiempo entTmp;
     
     String cadBus;
     
-    public CtrlEntrenamiento(Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt)
+    public CtrlEntrenamiento(Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,EntrenamientoTiempo entTmp)
     {
        
         this.ent = ent;
         this.consEnt = consEnt;        
         this.visEnt =  visEnt;
-       
+        this.per = per;
+        this.entTmp = entTmp;
         
         
         this.visEnt.btnGuardar.addActionListener(this);
@@ -161,21 +165,19 @@ public class CtrlEntrenamiento implements ActionListener{
         try {
             limpiarTabla();
             
-            ResultSet listFicha = consFicha.buscarTodosPorNomTabla(cad);
+            ResultSet listEntrenamiento = consEnt.buscarTodosPorNomTabla(cad);
             
-            DefaultTableModel model =  (DefaultTableModel)visEnt.tblFichas.getModel();
-            Object cols[] = new Object[8];
+            DefaultTableModel model =  (DefaultTableModel)visEnt.tbl_entrenamiento.getModel();
+            Object cols[] = new Object[5];
             
-            while (listFicha.next()) {
+            while (listEntrenamiento.next()) {
                 try {
-                   cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("fecha_ficha");
-                    cols[2] = listFicha.getString("nombresApellidos").toUpperCase();
-                    cols[3] = listFicha.getString("id_per");
-                    cols[4] = listFicha.getString("fecha_med");
-                    cols[5] = listFicha.getString("id_med");
-                    cols[6] = listFicha.getString("fecha_ana");
-                    cols[7] = listFicha.getString("id_ana");
+                   cols[0] = listEntrenamiento.getInt("id_ent");
+                   cols[1] = listEntrenamiento.getString("fechaini_en");
+                   cols[2] = listEntrenamiento.getString("fechafin_ent").toUpperCase();
+                   cols[3] = listEntrenamiento.getString("descripcion_enttiempo");
+                   cols[4] = listEntrenamiento.getString("nombres");
+                 
                     model.addRow(cols);
                     
                     
@@ -183,7 +185,7 @@ public class CtrlEntrenamiento implements ActionListener{
                     Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consFicha.closeConection();
+            consEnt.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -226,7 +228,7 @@ public class CtrlEntrenamiento implements ActionListener{
            
           }
         };
-        visEnt.txtBuscarFichaPorCualquierCampo.addKeyListener(keyListenertxtBuscarFichaPorCualquierCampo);
+        visEnt.txtBuscarCualquierCampo.addKeyListener(keyListenertxtBuscarFichaPorCualquierCampo);
 
         MouseListener mouseListTblFicha = new MouseListener() {
             @Override
@@ -264,26 +266,26 @@ public class CtrlEntrenamiento implements ActionListener{
             }
         };
        
-        visEnt.tblFichas.addMouseListener(mouseListTblFicha);
+        visEnt.tbl_entrenamiento.addMouseListener(mouseListTblFicha);
       
     }
      public void getTableToTxts()
      {
-         JTable tblD = visEnt.tblFichas;
-         visEnt.txtCodPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
-         visEnt.dchFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
-         
-         
+         JTable tblD = visEnt.tbl_entrenamiento;
+         visEnt.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));        
      }
     
      public void setFocus()
     {
-        visEnt.txtCodPersona.requestFocus();
-        visEnt.txtCodPersona.setNextFocusableComponent(visEnt.dchFecha);       
+        visEnt.cmbTipoEnt.requestFocus();
+        visEnt.cmbTipoEnt.setNextFocusableComponent(visEnt.dtchFechaInicio); 
+        visEnt.dtchFechaInicio.setNextFocusableComponent(visEnt.dtchFechaFin); 
+        visEnt.dtchFechaFin.setNextFocusableComponent(visEnt.txtPersona);
+        
     }
      public void limpiarTabla(){
-        DefaultTableModel tb = (DefaultTableModel) visEnt.tblFichas.getModel();
-        int a = visEnt.tblFichas.getRowCount()-1;
+        DefaultTableModel tb = (DefaultTableModel) visEnt.tbl_entrenamiento.getModel();
+        int a = visEnt.tbl_entrenamiento.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         } 
@@ -293,54 +295,30 @@ public class CtrlEntrenamiento implements ActionListener{
     {
         try {
             limpiarTabla();
-            ResultSet listFicha = consFicha.buscarTodos2();
+            ResultSet listEntrenamiento = consEnt.buscarTodos2();
             
-            DefaultTableModel model =  (DefaultTableModel)visEnt.tblFichas.getModel();
-            Object cols[] = new Object[8];
+            DefaultTableModel model =  (DefaultTableModel)visEnt.tbl_entrenamiento.getModel();
+            Object cols[] = new Object[5];
             
-            while (listFicha.next()) {
+            while (listEntrenamiento.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
-                    cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("fecha_ficha");
-                    cols[2] = listFicha.getString("nombresApellidos").toUpperCase();
-                    cols[3] = listFicha.getString("id_per");
-                    cols[4] = listFicha.getString("fecha_med");
-                    cols[5] = listFicha.getString("id_med");
-                    cols[6] = listFicha.getString("fecha_ana");
-                    cols[7] = listFicha.getString("id_ana");
+                   cols[0] = listEntrenamiento.getInt("id_ent");
+                   cols[1] = listEntrenamiento.getString("fechaini_en");
+                   cols[2] = listEntrenamiento.getString("fechafin_ent").toUpperCase();
+                   cols[3] = listEntrenamiento.getString("descripcion_enttiempo");
+                   cols[4] = listEntrenamiento.getString("nombres");
+                   
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consFicha.closeConection();
+            consEnt.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
-        visEnt.tblFichas.updateUI();
-    }
-    
-    
-    
-    public void validaAnonimos()
-    {
-        
-      
-            persona.setId(Integer.parseInt(visEnt.txtCodPersona.getText()));
-            modFicha.setPersona(persona); 
-      
-        ///*******
-        
-            analisis.setId(Integer.parseInt(visEnt.txt_id_analisis.getText()));
-            modFicha.setAnalisis(analisis);
-       
-        //*********
-      
-           medidas.setId(Integer.parseInt(visEnt.txt_id_datos.getText()));
-           modFicha.setMedidas(medidas);
-        
-        System.out.println("personar: "+persona.getId()+" anal: "+analisis.getId()+" med: "+medidas.getId());
+        visEnt.tbl_entrenamiento.updateUI();
     }
     
     @Override
@@ -348,16 +326,23 @@ public class CtrlEntrenamiento implements ActionListener{
       if (e.getSource() == visEnt.btnGuardar) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
-           jdc.add(visEnt.dchFecha);
+           jdc.add(visEnt.dtchFechaInicio);
+           jdc.add(visEnt.dtchFechaFin);
            
                if (Validaciones.isDateChooserVoid(jdc)) 
-               {                   
-                    modFicha.setFecha(Validaciones.setFormatFecha(visEnt.dchFecha.getDate()));                               
-                    modFicha.setEstado(1);
-                    //valido > si es nullo pongo anon, llenoen mod i guardo
-                    validaAnonimos();
-
-                    if (consFicha.registrar(modFicha)) {
+               {        
+                    int tE = consEnt.getIdByNom(visEnt.cmbTipoEnt.getSelectedItem()+"");
+                    entTmp.setId_entTmp(tE);
+                    
+                    ent.setEntrenTiempo_id_entTmp(entTmp);
+                    ent.setEntrenTiempo_id_entTmp(null);
+                    ent.setFechaIni_ent(Validaciones.setFormatFecha(visEnt.dtchFechaInicio.getDate()));
+                    ent.setFechaFin_ent(Validaciones.setFormatFecha(visEnt.dtchFechaFin.getDate()));  
+                    
+                    per.setId(Validaciones.isNumVoid(visEnt.txtPersona.getText()));                    
+                    ent.setPersona_id_per(per);
+                  
+                    if (consEnt.registrar(ent)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                         limpiar();
                     }
@@ -372,10 +357,17 @@ public class CtrlEntrenamiento implements ActionListener{
       
       if (e.getSource() == visEnt.btnModificar) 
        {            
-            modFicha.setId(Integer.parseInt(visEnt.tblFichas.getValueAt(visEnt.tblFichas.getSelectedRow(), 0)+""));
-            modFicha.setFecha(Validaciones.setFormatFecha(visEnt.dchFecha.getDate()));                       
-             validaAnonimos();
-            if (consFicha.modificar(modFicha)) {
+            int tE = consEnt.getIdByNom(visEnt.cmbTipoEnt.getSelectedItem()+"");
+            entTmp.setId_entTmp(tE);
+
+            ent.setEntrenTiempo_id_entTmp(entTmp);
+            ent.setEntrenTiempo_id_entTmp(null);
+            ent.setFechaIni_ent(Validaciones.setFormatFecha(visEnt.dtchFechaInicio.getDate()));
+            ent.setFechaFin_ent(Validaciones.setFormatFecha(visEnt.dtchFechaFin.getDate()));  
+
+            per.setId(Validaciones.isNumVoid(visEnt.txtPersona.getText()));                    
+            ent.setPersona_id_per(per);                      
+            if (consEnt.modificar(ent)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
                 limpiar();
             }
@@ -390,10 +382,10 @@ public class CtrlEntrenamiento implements ActionListener{
       if (e.getSource() == visEnt.btnEliminar) 
        {
            
-            modFicha.setId(Integer.parseInt(visEnt.txt_id_FacCab.getText()));
-            modFicha.setEstado(0);
+            ent.setId(Integer.parseInt(visEnt.txt_id_FacCab.getText()));
+            ent.setEstado(0);
                       
-            if (consFicha.eliminar(modFicha)) {
+            if (consEnt.eliminar(ent)) {
                 JOptionPane.showMessageDialog(null, "Registro Eliminado !");
                 limpiar();
             }

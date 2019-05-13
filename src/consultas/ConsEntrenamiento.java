@@ -8,9 +8,11 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import modelos.Analisis;
 import modelos.Conexion;
+import modelos.Entrenamiento;
 import modelos.FacturaCab;
 import modelos.Ficha;
 import modelos.Medidas;
@@ -22,23 +24,21 @@ import modelos.Persona;
  */
 public class ConsEntrenamiento extends Conexion {
     
-    public boolean registrar(Ficha f)
+    public boolean registrar(Entrenamiento ent)
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO ficha (id_ficha,fecha_ficha,Persona_id_per, Analisis_id_ana, Medidas_id_med,estado_ficha) "
-                + " VALUES(ficha_id_seq.NEXTVAL,?,?,?,?,?)";
+        String sql = "INSERT INTO Entrenamiento(id_ent,fechaIni_ent,fechaFin_ent, EntrenTiempo_id_entTmp, Persona_id_per,estado_ent) "
+                + " VALUES(entrenamiento_id_seq.NEXTVAL,?,?,?,?,?)";
 
         try 
         {            
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha());         
-            ps.setInt(2, f.getPersona().getId());
-            ps.setInt(3, f.getAnalisis().getId());
-            ps.setInt(4, f.getMedidas().getId());
-            ps.setInt(5, f.getEstado());
-            
+            ps.setString(1, ent.getFechaIni_ent());         
+            ps.setString(2, ent.getFechaFin_ent());
+            ps.setInt(3, ent.getEntrenTiempo_id_entTmp().getId_entTmp());
+            ps.setInt(4, ent.getPersona_id_per().getId());    
             
             ps.execute();                                       
             return true;
@@ -392,41 +392,29 @@ order by id_ficha asc ;
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where f.id_Ficha  like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where upper(f.fecha_ficha) like upper('%"+cad+"%')  and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where upper(p.nom_per) like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where upper(p.ape_per) like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where p.id_per like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where m.fecha_med like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where m.id_med like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where a.fecha_ana like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
-                    "UNION\n" +
-                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
-                    "where a.id_ana  like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med";
+        String sql = " select e.id_ent, e.fechaini_ent,e.fechafin_ent, et.descripcion_enttiempo,concat(concat(p.nom_per,' '),p.ape_per)  as nombres \n" +
+                        "from  entrenamiento e,entrentiempo et,persona p\n" +
+                        "where e.id_ent like '%"+cad+"%' and et.id_enttmp = e.entrentiempo_id_enttmp and p.id_per = e.persona_id_per\n" +
+                        "union\n" +
+                        "select e.id_ent, e.fechaini_ent,e.fechafin_ent, et.descripcion_enttiempo,concat(concat(p.nom_per,' '),p.ape_per  as nombres)\n" +
+                        "from  entrenamiento e,entrentiempo et,persona p\n" +
+                        "where e.fechaini_ent like '%"+cad+"%' and et.id_enttmp = e.entrentiempo_id_enttmp and p.id_per = e.persona_id_per\n" +
+                        "union\n" +
+                        "select e.id_ent, e.fechaini_ent,e.fechafin_ent, et.descripcion_enttiempo,concat(concat(p.nom_per,' '),p.ape_per)  as nombres \n" +
+                        "from  entrenamiento e,entrentiempo et,persona p\n" +
+                        "where e.fechafin_ent like '%"+cad+"%' and et.id_enttmp = e.entrentiempo_id_enttmp and p.id_per = e.persona_id_per\n" +
+                        "union\n" +
+                        "select e.id_ent, e.fechaini_ent,e.fechafin_ent, et.descripcion_enttiempo,concat(concat(p.nom_per,' '),p.ape_per)  as nombres \n" +
+                        "from  entrenamiento e,entrentiempo et,persona p\n" +
+                        "where upper(et.descripcion_enttiempo) like upper('%"+cad+"%') and et.id_enttmp = e.entrentiempo_id_enttmp and p.id_per = e.persona_id_per\n" +
+                        "union\n" +
+                        "select e.id_ent, e.fechaini_ent,e.fechafin_ent, et.descripcion_enttiempo,concat(concat(p.nom_per,' '),p.ape_per)  as nombres \n" +
+                        "from  entrenamiento e,entrentiempo et,persona p\n" +
+                        "where upper(et.descripcion_enttiempo) like upper('%"+cad+"%') and et.id_enttmp = e.entrentiempo_id_enttmp and p.id_per = e.persona_id_per\n" +
+                        "union\n" +
+                        "select e.id_ent, e.fechaini_ent,e.fechafin_ent, et.descripcion_enttiempo,concat(concat(p.nom_per,' '),p.ape_per)  as nombres \n" +
+                        "from  entrenamiento e,entrentiempo et,persona p\n" +
+                        "where upper(concat(concat(p.nom_per,' '),p.ape_per)) like upper('%"+cad+"%') and et.id_enttmp = e.entrentiempo_id_enttmp and p.id_per = e.persona_id_per";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -448,6 +436,30 @@ order by id_ficha asc ;
        return rs;
     }
     
+    //getIdByNom
+    public int getIdByNom(String entTmp){
+		String sql;
+		int result=0;
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                
+		sql="select et.id_enttmp \n" +
+                        "from entrenTiempo et \n" +
+                        "where upper(et.descripcion_enttiempo) like upper('"+entTmp+"')";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                        result=rs.getInt(1);
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return result;
+	}
     public ResultSet buscarPendientes()
     {
         

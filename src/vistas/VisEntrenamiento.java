@@ -35,7 +35,7 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_membresias = new javax.swing.JTable();
+        tbl_entrenamiento = new javax.swing.JTable();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txt_id = new javax.swing.JTextField();
@@ -49,7 +49,7 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         lblPersona = new javax.swing.JLabel();
         txtPersona = new javax.swing.JTextField();
         btnElegirPersona = new javax.swing.JButton();
-        txtBuscarNombre = new javax.swing.JTextField();
+        txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -75,27 +75,27 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         pnl_personas.add(btnEliminar);
         btnEliminar.setBounds(110, 20, 50, 40);
 
-        tbl_membresias.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_entrenamiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "CODIGO", "FECHAINICIO", "TIPO ENTREN.", "PERSONA"
+                "CODIGO", "FECHAINICIO ENT.", "FECHA FIN ENT.", "TIPO ENTREN.", "PERSONA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tbl_membresias.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tbl_membresias);
-        tbl_membresias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_entrenamiento.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tbl_entrenamiento);
+        tbl_entrenamiento.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
         jScrollPane1.setBounds(10, 310, 880, 220);
@@ -117,22 +117,22 @@ public class VisEntrenamiento extends javax.swing.JFrame {
 
         lblEntrenamientoTiempo.setText("Fecha inicio:");
         jPanel1.add(lblEntrenamientoTiempo);
-        lblEntrenamientoTiempo.setBounds(20, 20, 80, 20);
+        lblEntrenamientoTiempo.setBounds(20, 60, 80, 20);
         jPanel1.add(dtchFechaInicio);
-        dtchFechaInicio.setBounds(110, 20, 210, 20);
+        dtchFechaInicio.setBounds(110, 60, 210, 20);
 
         lblFechaFin.setText("Fecha fin:");
         jPanel1.add(lblFechaFin);
-        lblFechaFin.setBounds(20, 50, 70, 16);
+        lblFechaFin.setBounds(20, 90, 70, 16);
         jPanel1.add(dtchFechaFin);
-        dtchFechaFin.setBounds(110, 50, 210, 20);
+        dtchFechaFin.setBounds(110, 90, 210, 20);
 
         lblTipoEntrenamiento.setText("Tipo Entren.");
         jPanel1.add(lblTipoEntrenamiento);
-        lblTipoEntrenamiento.setBounds(20, 80, 80, 16);
+        lblTipoEntrenamiento.setBounds(20, 30, 80, 16);
 
         jPanel1.add(cmbTipoEnt);
-        cmbTipoEnt.setBounds(110, 80, 210, 22);
+        cmbTipoEnt.setBounds(110, 30, 210, 22);
 
         lblPersona.setText("Persona:");
         jPanel1.add(lblPersona);
@@ -153,13 +153,13 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
 
-        txtBuscarNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtBuscarCualquierCampo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarNombreKeyTyped(evt);
+                txtBuscarCualquierCampoKeyTyped(evt);
             }
         });
-        pnl_personas.add(txtBuscarNombre);
-        txtBuscarNombre.setBounds(10, 280, 170, 22);
+        pnl_personas.add(txtBuscarCualquierCampo);
+        txtBuscarCualquierCampo.setBounds(10, 280, 170, 22);
 
         jLabel8.setText("Buscar por cualquier campo:");
         pnl_personas.add(jLabel8);
@@ -224,9 +224,9 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscarNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarNombreKeyTyped
+    private void txtBuscarCualquierCampoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCualquierCampoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarNombreKeyTyped
+    }//GEN-LAST:event_txtBuscarCualquierCampoKeyTyped
 
     private void mniReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReportesActionPerformed
         // TODO add your handling code here:
@@ -305,8 +305,8 @@ public class VisEntrenamiento extends javax.swing.JFrame {
     public javax.swing.JMenuItem mniReportes;
     public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;
-    public javax.swing.JTable tbl_membresias;
-    public javax.swing.JTextField txtBuscarNombre;
+    public javax.swing.JTable tbl_entrenamiento;
+    public javax.swing.JTextField txtBuscarCualquierCampo;
     public javax.swing.JTextField txtPersona;
     public javax.swing.JTextField txt_id;
     // End of variables declaration//GEN-END:variables

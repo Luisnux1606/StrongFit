@@ -146,6 +146,13 @@ CREATE SEQUENCE entrenTiempo_id_seq
  CACHE 20
  ORDER
 /
+CREATE SEQUENCE entrenamiento_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+ ORDER
+/
 
 
 -- Create tables section -------------------------------------------------
@@ -247,7 +254,9 @@ CREATE TABLE Entrenamiento(
   id_ent Number NOT NULL,
   fechaIni_ent Varchar2(45 ),
   fechaFin_ent Varchar2(350 ),  
-  EntrenTiempo_id_entTmp Number
+  EntrenTiempo_id_entTmp Number,
+  Persona_id_per Number,
+  estado_ent
 )
 TABLESPACE tbs_usr_strongfit_p
 /
@@ -261,6 +270,9 @@ ALTER TABLE Entrenamiento ADD CONSTRAINT pk_id_ent PRIMARY KEY (id_ent)
 /
 -- Add keys for table entrenamiento
 ALTER TABLE Entrenamiento ADD CONSTRAINT fk_id_ent FOREIGN KEY (EntrenTiempo_id_entTmp) REFERENCES EntrenTiempo(id_entTmp)
+/
+-- Add keys for table entrenamiento
+ALTER TABLE Entrenamiento ADD CONSTRAINT fk_Ent_id_per FOREIGN KEY (Persona_id_per) REFERENCES Persona(id_per)
 /
 
 
