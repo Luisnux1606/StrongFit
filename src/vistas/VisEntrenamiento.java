@@ -41,11 +41,14 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         txt_id = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblEntrenamientoTiempo = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        dtchFechaInicio = new com.toedter.calendar.JDateChooser();
         lblFechaFin = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        dtchFechaFin = new com.toedter.calendar.JDateChooser();
         lblTipoEntrenamiento = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbTipoEnt = new javax.swing.JComboBox();
+        lblPersona = new javax.swing.JLabel();
+        txtPersona = new javax.swing.JTextField();
+        btnElegirPersona = new javax.swing.JButton();
         txtBuscarNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -74,15 +77,16 @@ public class VisEntrenamiento extends javax.swing.JFrame {
 
         tbl_membresias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CODIGO", "DESCRIPCION"
+                "CODIGO", "FECHAINICIO", "TIPO ENTREN.", "PERSONA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -114,21 +118,37 @@ public class VisEntrenamiento extends javax.swing.JFrame {
         lblEntrenamientoTiempo.setText("Fecha inicio:");
         jPanel1.add(lblEntrenamientoTiempo);
         lblEntrenamientoTiempo.setBounds(20, 20, 80, 20);
-        jPanel1.add(jDateChooser1);
-        jDateChooser1.setBounds(110, 20, 210, 20);
+        jPanel1.add(dtchFechaInicio);
+        dtchFechaInicio.setBounds(110, 20, 210, 20);
 
         lblFechaFin.setText("Fecha fin:");
         jPanel1.add(lblFechaFin);
-        lblFechaFin.setBounds(20, 60, 70, 16);
-        jPanel1.add(jDateChooser2);
-        jDateChooser2.setBounds(110, 60, 210, 20);
+        lblFechaFin.setBounds(20, 50, 70, 16);
+        jPanel1.add(dtchFechaFin);
+        dtchFechaFin.setBounds(110, 50, 210, 20);
 
         lblTipoEntrenamiento.setText("Tipo Entren.");
         jPanel1.add(lblTipoEntrenamiento);
-        lblTipoEntrenamiento.setBounds(20, 110, 80, 16);
+        lblTipoEntrenamiento.setBounds(20, 80, 80, 16);
 
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(110, 110, 210, 22);
+        jPanel1.add(cmbTipoEnt);
+        cmbTipoEnt.setBounds(110, 80, 210, 22);
+
+        lblPersona.setText("Persona:");
+        jPanel1.add(lblPersona);
+        lblPersona.setBounds(20, 120, 70, 16);
+
+        txtPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPersonaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPersona);
+        txtPersona.setBounds(110, 120, 210, 22);
+
+        btnElegirPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/personas.png"))); // NOI18N
+        jPanel1.add(btnElegirPersona);
+        btnElegirPersona.setBounds(330, 120, 40, 30);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
@@ -139,11 +159,11 @@ public class VisEntrenamiento extends javax.swing.JFrame {
             }
         });
         pnl_personas.add(txtBuscarNombre);
-        txtBuscarNombre.setBounds(10, 280, 150, 22);
+        txtBuscarNombre.setBounds(10, 280, 170, 22);
 
-        jLabel8.setText("Buscar por Descripcion:");
+        jLabel8.setText("Buscar por cualquier campo:");
         pnl_personas.add(jLabel8);
-        jLabel8.setBounds(10, 260, 140, 16);
+        jLabel8.setBounds(10, 260, 170, 16);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -220,6 +240,10 @@ public class VisEntrenamiento extends javax.swing.JFrame {
        // this.dispose();
     }//GEN-LAST:event_mniSalirActionPerformed
 
+    private void txtPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPersonaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,13 +283,14 @@ public class VisEntrenamiento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnElegirPersona;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
-    private javax.swing.JComboBox jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    public javax.swing.JComboBox cmbTipoEnt;
+    public com.toedter.calendar.JDateChooser dtchFechaFin;
+    public com.toedter.calendar.JDateChooser dtchFechaInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
@@ -274,6 +299,7 @@ public class VisEntrenamiento extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblEntrenamientoTiempo;
     public javax.swing.JLabel lblFechaFin;
+    public javax.swing.JLabel lblPersona;
     public javax.swing.JLabel lblTipoEntrenamiento;
     public javax.swing.JMenuItem mniFicha;
     public javax.swing.JMenuItem mniReportes;
@@ -281,6 +307,7 @@ public class VisEntrenamiento extends javax.swing.JFrame {
     public javax.swing.JPanel pnl_personas;
     public javax.swing.JTable tbl_membresias;
     public javax.swing.JTextField txtBuscarNombre;
+    public javax.swing.JTextField txtPersona;
     public javax.swing.JTextField txt_id;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,6 +36,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
+import modelos.Entrenamiento;
 import modelos.EntrenamientoTiempo;
 import modelos.FacturaCab;
 import modelos.Ficha;
@@ -459,6 +460,19 @@ public class CtrlFicha implements ActionListener{
                 
             Ficha ficha = new Ficha();
             CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
+            ctrPer.iniciar();
+            ctrPer.locale = 1;
+        } 
+        
+        if (e.getSource() == visFicha.chkEntrenamiento) 
+        {
+           
+            VisEntrenamiento visEnt = new VisEntrenamiento();
+            Entrenamiento ent  = new Entrenamiento();
+            ConsEntrenamiento consEnt = new ConsEntrenamiento();
+                
+            Ficha ficha = new Ficha();
+            CtrlEntrenamiento ctrPer=new CtrlEntrenamiento(ent, consEnt, visEnt,visFicha);
             ctrPer.iniciar();
             ctrPer.locale = 1;
         } 
