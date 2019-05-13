@@ -14,7 +14,7 @@ Contiene:
 */
 
 
-connect system/root@xe
+connect system/manager@xe
 
 prompt ************************BORRADO DE LOS USUARIOS****************...
 ALTER SYSTEM SET PROCESSES=150 SCOPE=SPFILE;
@@ -139,6 +139,14 @@ CREATE SEQUENCE categoria_id_seq
  ORDER
 /
 
+CREATE SEQUENCE entrenTiempo_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+ ORDER
+/
+
 
 -- Create tables section -------------------------------------------------
 CREATE TABLE Analisis(
@@ -216,6 +224,45 @@ CREATE INDEX idx_id_per ON Persona(id_per)
 ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)
 /
 
+-- Add keys for table EntrenamientoTiempo
+CREATE TABLE EntrenTiempo(
+  id_entTmp Number NOT NULL,
+  descripcion_entTiempo Varchar2(45 ),
+  costo_entTiempo Number(10,2), 
+  estado_enTiempo Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+
+-- Create indexes for table EntrenamientoTiempo
+CREATE INDEX idx_id_entTmp ON EntrenTiempo(id_entTmp)
+/
+
+-- Add keys for table EntrenamientoTiempo
+ALTER TABLE EntrenTiempo ADD CONSTRAINT pk_id_entTiempo PRIMARY KEY (id_entTmp)
+/
+
+--Add keys for table entrenamiento
+CREATE TABLE Entrenamiento(
+  id_ent Number NOT NULL,
+  fechaIni_ent Varchar2(45 ),
+  fechaFin_ent Varchar2(350 ),  
+  EntrenTiempo_id_entTmp Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+
+-- Create indexes for table entrenamiento
+CREATE INDEX idx_id_ent ON Entrenamiento(id_ent)
+/
+
+-- Add keys for table entrenamiento
+ALTER TABLE Entrenamiento ADD CONSTRAINT pk_id_ent PRIMARY KEY (id_ent)
+/
+-- Add keys for table entrenamiento
+ALTER TABLE Entrenamiento ADD CONSTRAINT fk_id_ent FOREIGN KEY (EntrenTiempo_id_entTmp) REFERENCES EntrenTiempo(id_entTmp)
+/
+
 
 CREATE TABLE Ficha(
   id_ficha Number NOT NULL,
@@ -264,30 +311,46 @@ CREATE INDEX idx_id_memb ON Membresia(id_memb)
 ALTER TABLE Membresia ADD CONSTRAINT pk_id_memb PRIMARY KEY (id_memb)
 /
 
-CREATE TABLE Factura(
-  id_fac Number NOT NULL,
-  fechaInicio_fac Varchar2(350 ),
-  fechaFin_fac Varchar2(350 ),
-  subTotal_fac Number(10,2),
-  total_fac Number(10,2),
-  valPendiente_fac Number(10,2),
+CREATE TABLE IVAS(
+  id_ivas Number NOT NULL,
+  val_ivas Number(10,2)
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+CREATE INDEX idx_id_ivas ON IVAS(id_ivas)
+/
+-- Add keys for table membresia
+ALTER TABLE IVAS ADD CONSTRAINT pk_id_ivas PRIMARY KEY (id_ivas)
+/
+
+
+CREATE TABLE FacturaCabecera(
+  id_facCab Number NOT NULL,
+  fecha_facCab Varchar2(350 ),
+  num_facCab Varchar2(10),
+  subTotal_facCab Number(10,2),
+  total_facCab Number(10,2),
+  valPendiente_facCab Number(10,2),
   Persona_id_per Number,
   Membresia_id_memb Number,
-  estado_fac Number 
+  Ivas_id_ivas Number,
+  estado_facCab Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Add keys for table factura
 -- Create indexes for table factura
-CREATE INDEX idx_id_fac ON Factura(id_fac)
+CREATE INDEX idx_id_fac ON FacturaCabecera(id_facCab)
 /
 -- Add keys for table factura
-ALTER TABLE Factura ADD CONSTRAINT pk_id_fac PRIMARY KEY (id_fac)
+ALTER TABLE FacturaCabecera ADD CONSTRAINT pk_id_fac PRIMARY KEY (id_facCab)
 /
 -- Create relationships section  ------------------------------------------------- 
-ALTER TABLE Factura ADD CONSTRAINT fk_id_pers FOREIGN KEY (Persona_id_per) REFERENCES Persona (id_per)
+ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_pers FOREIGN KEY (Persona_id_per) REFERENCES Persona (id_per)
 /
-ALTER TABLE Factura ADD CONSTRAINT fk_id_memb FOREIGN KEY (Membresia_id_memb) REFERENCES Membresia (id_memb)
+ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_memb FOREIGN KEY (Membresia_id_memb) REFERENCES Membresia (id_memb)
+/
+ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_ivas FOREIGN KEY (Ivas_id_ivas) REFERENCES IVAS (id_ivas)
 /
 
 CREATE TABLE Categoria(
@@ -324,27 +387,29 @@ ALTER TABLE Producto ADD CONSTRAINT pk_id_prod PRIMARY KEY (id_prod)
 ALTER TABLE Producto ADD CONSTRAINT fk_id_cat FOREIGN KEY (Categoria_id_cat) REFERENCES Categoria (id_cat)
 /
 
-CREATE TABLE Detalle(
-  id_det Number NOT NULL,
-  cantidad_det Number,
-  total_det Number(10,2),
+CREATE TABLE FacturaDetalle(
+  id_facDet Number NOT NULL,
+  cantidad_facDet Number,
+  descripcion_facDet Varchar2(50),
+  valUnitario_facDet Number(10,2),
+  vTotal_facDet Number(10,2),
   Producto_id_prod Number, 
   Factura_id_fac Number,
-  estado_det Number 
+  estado_facDet Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Create indexes for table detalle
-CREATE INDEX idx_id_det ON Detalle(id_det)
+CREATE INDEX idx_id_det ON FacturaDetalle(id_facDet)
 /
 -- Add keys for table detalle
-ALTER TABLE Detalle ADD CONSTRAINT pk_id_det PRIMARY KEY (id_det)
+ALTER TABLE FacturaDetalle ADD CONSTRAINT pk_id_det PRIMARY KEY (id_facDet)
 /
 -- Create relationships section  ------------------------------------------------- 
-ALTER TABLE Detalle ADD CONSTRAINT fk_id_prod FOREIGN KEY (Producto_id_prod) REFERENCES Producto (id_prod)
+ALTER TABLE FacturaDetalle ADD CONSTRAINT fk_id_prod FOREIGN KEY (Producto_id_prod) REFERENCES Producto (id_prod)
 /
 -- Create relationships section  ------------------------------------------------- 
-ALTER TABLE Detalle ADD CONSTRAINT fk_id_fac FOREIGN KEY (Factura_id_fac) REFERENCES Factura (id_fac)
+ALTER TABLE FacturaDetalle ADD CONSTRAINT fk_id_fac FOREIGN KEY (Factura_id_fac) REFERENCES FacturaCabecera (id_facCab)
 /
 
 

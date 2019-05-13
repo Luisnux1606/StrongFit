@@ -10,7 +10,6 @@ import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
 import consultas.ConsEntrenamiento;
-import consultas.ConsEntrenamientoTiempo;
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
 import consultas.ConsMedidas;
@@ -37,7 +36,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.Entrenamiento;
-import modelos.EntrenamientoTiempo;
 import modelos.FacturaCab;
 import modelos.Ficha;
 import modelos.Medidas;
@@ -45,7 +43,6 @@ import modelos.Membresias;
 import modelos.Persona;
 import vistas.VisBuscarVentas;
 import vistas.VisEntrenamiento;
-import vistas.VisEntrenamientoTiempo;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -55,51 +52,31 @@ import vistas.VisReportes;
  *
  * @author Administrator
  */
-public class CtrlFicha implements ActionListener{
+public class CtrlEntrenamiento implements ActionListener{
 
-    Ficha modFicha;
-    ArrayList<FacturaCab> lstFicha;
-    ConsFicha consFicha;
-    VisFicha visFicha;
-    VisReportes visReportes;
-    VisMembresia visMemb;
-    VisPersona visPer;
     
-    Persona persona;
-    Analisis analisis;
-    Medidas medidas;
+    VisEntrenamiento visEnt;
+    Entrenamiento ent;
+    ConsEntrenamiento consEnt;
     
     String cadBus;
     
-    public CtrlFicha(Ficha modFicha,ConsFicha consFicha,VisFicha visFicha)
+    public CtrlEntrenamiento(Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt)
     {
-        this.modFicha = modFicha;
-        this.consFicha = consFicha;
-        this.visFicha = visFicha;
-        this.persona = new Persona();
-        this.visMemb =  visMemb;
+       
+        this.ent = ent;
+        this.consEnt = consEnt;        
+        this.visEnt =  visEnt;
        
         
-       // persona = new Persona();
-        analisis = new Analisis();
-        medidas =  new Medidas();
         
-        this.visFicha.btnGuardarFichaG.addActionListener(this);
-        this.visFicha.btnEliminarFichaG.addActionListener(this);
-        this.visFicha.btnLimpiarFichaG.addActionListener(this);
-        this.visFicha.btnModificarFichaG.addActionListener(this);     
-        this.visFicha.btnElegirPersonaG.addActionListener(this);
+        this.visEnt.btnGuardar.addActionListener(this);
+        this.visEnt.btnEliminar.addActionListener(this);
+        this.visEnt.btnLimpiar.addActionListener(this);
+        this.visEnt.btnModificar.addActionListener(this);     
+        this.visEnt.btnElegirPersona.addActionListener(this);
         
-        this.visFicha.mniMembresias.addActionListener(this);
-        this.visFicha.mniPersonas.addActionListener(this);
-        this.visFicha.mniReportes.addActionListener(this);
-        this.visFicha.mniConsultasClientes.addActionListener(this);
-        this.visFicha.menuSalir.addActionListener(this);
-        this.visFicha.mniEntrenamientoTiempo.addActionListener(this);
-        this.visFicha.chkEntrenamiento.addActionListener(this);
-        
-        this.visFicha.tabp_ficha.setSelectedIndex(2);
-        this.visFicha.tabFichaVentas.setSelectedIndex(1);
+       
               
         cadBus = "";
        
@@ -108,7 +85,7 @@ public class CtrlFicha implements ActionListener{
 //        setTableModel();
        // iniciar();
         
-       // visFicha.txtCodPersona.setText(persona.getId()+"");
+       // visEnt.txtCodPersona.setText(persona.getId()+"");
         
         limpiarTabla();
         showTable();
@@ -116,40 +93,24 @@ public class CtrlFicha implements ActionListener{
     
     
     
-    public ArrayList<String> getAnonimos()
-    {        
-        ArrayList<String> listFicha = consFicha.buscarAnonyms();
-        return listFicha;
-    }
     
     public void iniciar()
     {
-        visFicha.setTitle("FICHA");
-        
-        visFicha.dtcFecha.setDate(Calculos.getCurrentDate2());     
-        visFicha.txt_id_FacCab.setVisible(false);
-        visFicha.txt_id_analisis.setVisible(false);
-        visFicha.txt_id_datos.setVisible(false);       
-       
-
-        visFicha.lbl_personaFicha.setText("");
-
-        visFicha.lbl_personaFicha.setText("");
-
+        visEnt.setTitle("TIEMPOS ENTRENAMIENTOS");            
  
-        visFicha.btnGuardarFichaG.setToolTipText("Guardar el registro");
-        visFicha.btnModificarFichaG.setToolTipText("Modificar el registro");
-        visFicha.btnEliminarFichaG.setToolTipText("Eliminar el registro");
-        visFicha.btnLimpiarFichaG.setToolTipText("Limpiar el registro");
-        //visFicha.tabp_ficha.setSelectedIndex(2);
+        visEnt.btnGuardar.setToolTipText("Guardar el registro");
+        visEnt.btnModificar.setToolTipText("Modificar el registro");
+        visEnt.btnEliminar.setToolTipText("Eliminar el registro");
+        visEnt.btnLimpiar.setToolTipText("Limpiar el registro");
+        //visEnt.tabp_ficha.setSelectedIndex(2);
         limpiar();
         
 
-        visFicha.setLocation(300,10); 
-        visFicha.setSize(1400,1000);                
-        visFicha.setVisible(true);
+        visEnt.setLocation(300,10); 
+        visEnt.setSize(1400,1000);                
+        visEnt.setVisible(true);
     
-        visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        visEnt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
      
     }
@@ -163,7 +124,7 @@ public class CtrlFicha implements ActionListener{
     {            
        Color rojo = new Color(254,000,000);  
        Color amarillo = new Color(255,255,000);
-       visFicha.tblFicha.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
+       visEnt.tblFicha.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
         {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
@@ -202,7 +163,7 @@ public class CtrlFicha implements ActionListener{
             
             ResultSet listFicha = consFicha.buscarTodosPorNomTabla(cad);
             
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFichas.getModel();
+            DefaultTableModel model =  (DefaultTableModel)visEnt.tblFichas.getModel();
             Object cols[] = new Object[8];
             
             while (listFicha.next()) {
@@ -219,12 +180,12 @@ public class CtrlFicha implements ActionListener{
                     
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -265,7 +226,7 @@ public class CtrlFicha implements ActionListener{
            
           }
         };
-        visFicha.txtBuscarFichaPorCualquierCampo.addKeyListener(keyListenertxtBuscarFichaPorCualquierCampo);
+        visEnt.txtBuscarFichaPorCualquierCampo.addKeyListener(keyListenertxtBuscarFichaPorCualquierCampo);
 
         MouseListener mouseListTblFicha = new MouseListener() {
             @Override
@@ -274,8 +235,8 @@ public class CtrlFicha implements ActionListener{
                 if(e.getClickCount()==1)
                 {
                     getTableToTxts();
-                     desabilitaHabilita(visFicha.btnGuardarFichaG,false);
-                     desabilitaHabilita(visFicha.btnModificarFichaG,true);
+                     desabilitaHabilita(visEnt.btnGuardar,false);
+                     desabilitaHabilita(visEnt.btnModificar,true);
                                           
                 }
             }
@@ -303,26 +264,26 @@ public class CtrlFicha implements ActionListener{
             }
         };
        
-        visFicha.tblFichas.addMouseListener(mouseListTblFicha);
+        visEnt.tblFichas.addMouseListener(mouseListTblFicha);
       
     }
      public void getTableToTxts()
      {
-         JTable tblD = visFicha.tblFichas;
-         visFicha.txtCodPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
-         visFicha.dchFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
+         JTable tblD = visEnt.tblFichas;
+         visEnt.txtCodPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
+         visEnt.dchFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
          
          
      }
     
      public void setFocus()
     {
-        visFicha.txtCodPersona.requestFocus();
-        visFicha.txtCodPersona.setNextFocusableComponent(visFicha.dchFecha);       
+        visEnt.txtCodPersona.requestFocus();
+        visEnt.txtCodPersona.setNextFocusableComponent(visEnt.dchFecha);       
     }
      public void limpiarTabla(){
-        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFichas.getModel();
-        int a = visFicha.tblFichas.getRowCount()-1;
+        DefaultTableModel tb = (DefaultTableModel) visEnt.tblFichas.getModel();
+        int a = visEnt.tblFichas.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         } 
@@ -334,7 +295,7 @@ public class CtrlFicha implements ActionListener{
             limpiarTabla();
             ResultSet listFicha = consFicha.buscarTodos2();
             
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFichas.getModel();
+            DefaultTableModel model =  (DefaultTableModel)visEnt.tblFichas.getModel();
             Object cols[] = new Object[8];
             
             while (listFicha.next()) {
@@ -350,14 +311,14 @@ public class CtrlFicha implements ActionListener{
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consFicha.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
         }
-        visFicha.tblFichas.updateUI();
+        visEnt.tblFichas.updateUI();
     }
     
     
@@ -366,17 +327,17 @@ public class CtrlFicha implements ActionListener{
     {
         
       
-            persona.setId(Integer.parseInt(visFicha.txtCodPersona.getText()));
+            persona.setId(Integer.parseInt(visEnt.txtCodPersona.getText()));
             modFicha.setPersona(persona); 
       
         ///*******
         
-            analisis.setId(Integer.parseInt(visFicha.txt_id_analisis.getText()));
+            analisis.setId(Integer.parseInt(visEnt.txt_id_analisis.getText()));
             modFicha.setAnalisis(analisis);
        
         //*********
       
-           medidas.setId(Integer.parseInt(visFicha.txt_id_datos.getText()));
+           medidas.setId(Integer.parseInt(visEnt.txt_id_datos.getText()));
            modFicha.setMedidas(medidas);
         
         System.out.println("personar: "+persona.getId()+" anal: "+analisis.getId()+" med: "+medidas.getId());
@@ -384,14 +345,14 @@ public class CtrlFicha implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == visFicha.btnGuardarFichaG) 
+      if (e.getSource() == visEnt.btnGuardar) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
-           jdc.add(visFicha.dchFecha);
+           jdc.add(visEnt.dchFecha);
            
                if (Validaciones.isDateChooserVoid(jdc)) 
                {                   
-                    modFicha.setFecha(Validaciones.setFormatFecha(visFicha.dchFecha.getDate()));                               
+                    modFicha.setFecha(Validaciones.setFormatFecha(visEnt.dchFecha.getDate()));                               
                     modFicha.setEstado(1);
                     //valido > si es nullo pongo anon, llenoen mod i guardo
                     validaAnonimos();
@@ -409,10 +370,10 @@ public class CtrlFicha implements ActionListener{
                }        
         }
       
-      if (e.getSource() == visFicha.btnModificarFichaG) 
+      if (e.getSource() == visEnt.btnModificar) 
        {            
-            modFicha.setId(Integer.parseInt(visFicha.tblFichas.getValueAt(visFicha.tblFichas.getSelectedRow(), 0)+""));
-            modFicha.setFecha(Validaciones.setFormatFecha(visFicha.dchFecha.getDate()));                       
+            modFicha.setId(Integer.parseInt(visEnt.tblFichas.getValueAt(visEnt.tblFichas.getSelectedRow(), 0)+""));
+            modFicha.setFecha(Validaciones.setFormatFecha(visEnt.dchFecha.getDate()));                       
              validaAnonimos();
             if (consFicha.modificar(modFicha)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
@@ -426,10 +387,10 @@ public class CtrlFicha implements ActionListener{
             showTable();
         }
       
-      if (e.getSource() == visFicha.btnEliminarFichaG) 
+      if (e.getSource() == visEnt.btnEliminar) 
        {
            
-            modFicha.setId(Integer.parseInt(visFicha.txt_id_FacCab.getText()));
+            modFicha.setId(Integer.parseInt(visEnt.txt_id_FacCab.getText()));
             modFicha.setEstado(0);
                       
             if (consFicha.eliminar(modFicha)) {
@@ -444,14 +405,14 @@ public class CtrlFicha implements ActionListener{
             showTable();
         }
       
-       if (e.getSource() == visFicha.btnLimpiarFichaG) 
+       if (e.getSource() == visEnt.btnLimpiar) 
         {
            limpiar();
-           desabilitaHabilita(visFicha.btnGuardarFichaG,true);
-           desabilitaHabilita(visFicha.btnModificarFichaG,false);
+           desabilitaHabilita(visEnt.btnGuardar,true);
+           desabilitaHabilita(visEnt.btnModificar,false);
         }
 
-        if (e.getSource() == visFicha.btnElegirPersonaG) 
+        if (e.getSource() == visEnt.btnElegirPersonaG) 
         {
            
             VisPersona visPer = new VisPersona();
@@ -459,40 +420,13 @@ public class CtrlFicha implements ActionListener{
             ConsPersona consPer = new ConsPersona();
                 
             Ficha ficha = new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
+            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visEnt);
             ctrPer.iniciar();
             ctrPer.locale = 1;
         } 
         
-        if (e.getSource() == visFicha.chkEntrenamiento) 
-        {
-           
-            VisEntrenamiento visEnt = new VisEntrenamiento();
-            Entrenamiento ent  = new Entrenamiento();
-            ConsEntrenamiento consEnt = new ConsEntrenamiento();
-                
-            Ficha ficha = new Ficha();
-            CtrlEntrenamiento ctrPer=new CtrlEntrenamiento(ent, consEnt, visEnt,visFicha);
-            ctrPer.iniciar();
-            ctrPer.locale = 1;
-        } 
-        
-        if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
-        {
           
-            VisEntrenamientoTiempo visEntT = new VisEntrenamientoTiempo();
-            EntrenamientoTiempo entT  = new EntrenamientoTiempo();
-            ConsEntrenamientoTiempo consEntT = new ConsEntrenamientoTiempo();
-                
-            Ficha ficha = new Ficha();
-            CtrlEntrenamientoTiempo ctrEntT=new CtrlEntrenamientoTiempo(entT, consEntT, visEntT,visFicha);
-            ctrEntT.iniciar();
-            ctrEntT.locale = 1;
-                 
-        } 
-        
-          
-         if (e.getSource() == visFicha.mniReportes) 
+         if (e.getSource() == visEnt.mniReportes) 
          {
             
             VisReportes visRepo = new VisReportes();
@@ -502,50 +436,52 @@ public class CtrlFicha implements ActionListener{
             
          }
          //////
-         if (e.getSource() == visFicha.mniMembresias) 
+         if (e.getSource() == visEnt.mniMembresias) 
          {   
             VisMembresia visMem = new VisMembresia();            
-            VisFicha visFicha= new VisFicha();
+            VisFicha visEnt= new VisFicha();
             Membresias memMod  = new Membresias();
             ConsMembresias consMem = new ConsMembresias();
             Ficha ficha  =  new Ficha();
-            CtrlMembresias ctrlMem = new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
+            CtrlMembresias ctrlMem = new CtrlMembresias(memMod,consMem,visMem,ficha,visEnt);
             
          }
          
-         if (e.getSource() == visFicha.mniPersonas) {
+         if (e.getSource() == visEnt.mniPersonas) {
             
             VisPersona visPer = new VisPersona();
             Persona per  = new Persona();
             ConsPersona consPer = new ConsPersona();
            
             Ficha ficha  =  new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
+            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visEnt);
             ctrPer.iniciar();
         }
          
-         if (e.getSource() == visFicha.mniConsultasClientes) {
+         if (e.getSource() == visEnt.mniConsultasClientes) {
             
             VisBuscarVentas visBuscarVentas = new VisBuscarVentas();
             FacturaCab facCab  = new FacturaCab();
             ConsFacturaCab consFacCab = new ConsFacturaCab();
            
             Ficha ficha  =  new Ficha();
-            CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(facCab, consFacCab, visBuscarVentas,visFicha);
+            CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(facCab, consFacCab, visBuscarVentas,visEnt);
             ctrBuscarVentas.iniciar();
         }
 
          
-         if (e.getSource() == visFicha.menuSalir) 
+         if (e.getSource() == visEnt.menuSalir) 
          {
-            visFicha.dispose();
+            visEnt.dispose();
          }
                                
     }
     public void limpiar()
     {
-        visFicha.txtCodPersona.setText(""); 
-        visFicha.dchFecha.setDate(Calculos.getCurrentDate2());
+        visEnt.dtchFechaInicio.setDate(null);
+        visEnt.dtchFechaFin.setDate(null); 
+        visEnt.txtPersona.setText("");
+        visEnt.cmbTipoEnt.setSelectedIndex(0);
        
     }
     

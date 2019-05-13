@@ -13,141 +13,142 @@ import java.sql.Date;
  */
 public class FacturaCab {
     
-    private int id;
-    private String fecha_ini;
-    private String fecha_fin;
-    private double val_pago;
-    private double val_pendiente;
-    private String concepto;
-    private Analisis analisis;
-    private Persona persona;
-    private Medidas medidas;
+    private int id_facCab; 
+    private String fecha_facCab;
+    private String num_facCab;
+    private double subTotal_facCab;
+    private double total_facCab;
+    private double valPendiente_facCab;
+    private Persona Persona;
+    private Membresias Membresia;
+    private Iva Ivas; 
+    
     private int estado;
 
     /**
-     * @return the fecha_ini
+     * @return the id_facCab
      */
-    public String getFecha_ini() {
-        return fecha_ini;
+    public int getId_facCab() {
+        return id_facCab;
     }
 
     /**
-     * @return the fecha_fin
+     * @param id_facCab the id_facCab to set
      */
-    public String getFecha_fin() {
-        return fecha_fin;
+    public void setId_facCab(int id_facCab) {
+        this.id_facCab = id_facCab;
     }
 
     /**
-     * @return the val_pago
+     * @return the fecha_facCab
      */
-    public double getVal_pago() {
-        return val_pago;
+    public String getFecha_facCab() {
+        return fecha_facCab;
     }
 
     /**
-     * @return the val_pendiente
+     * @param fecha_facCab the fecha_facCab to set
      */
-    public double getVal_pendiente() {
-        return val_pendiente;
+    public void setFecha_facCab(String fecha_facCab) {
+        this.fecha_facCab = fecha_facCab;
     }
 
     /**
-     * @param fecha_ini the fecha_ini to set
+     * @return the num_facCab
      */
-    public void setFecha_ini(String fecha_ini) {
-        this.fecha_ini = fecha_ini;
+    public String getNum_facCab() {
+        return num_facCab;
     }
 
     /**
-     * @param fecha_fin the fecha_fin to set
+     * @param num_facCab the num_facCab to set
      */
-    public void setFecha_fin(String fecha_fin) {
-        this.fecha_fin = fecha_fin;
+    public void setNum_facCab(String num_facCab) {
+        this.num_facCab = num_facCab;
     }
 
     /**
-     * @param val_pago the val_pago to set
+     * @return the subTotal_facCab
      */
-    public void setVal_pago(double val_pago) {
-        this.val_pago = val_pago;
+    public double getSubTotal_facCab() {
+        return subTotal_facCab;
     }
 
     /**
-     * @param val_pendiente the val_pendiente to set
+     * @param subTotal_facCab the subTotal_facCab to set
      */
-    public void setVal_pendiente(double val_pendiente) {
-        this.val_pendiente = val_pendiente;
+    public void setSubTotal_facCab(double subTotal_facCab) {
+        this.subTotal_facCab = subTotal_facCab;
     }
 
     /**
-     * @return the analisis
+     * @return the total_facCab
      */
-    public Analisis getAnalisis() {
-        return analisis;
+    public double getTotal_facCab() {
+        return total_facCab;
     }
 
     /**
-     * @return the persona
+     * @param total_facCab the total_facCab to set
+     */
+    public void setTotal_facCab(double total_facCab) {
+        this.total_facCab = total_facCab;
+    }
+
+    /**
+     * @return the valPendiente_facCab
+     */
+    public double getValPendiente_facCab() {
+        return valPendiente_facCab;
+    }
+
+    /**
+     * @param valPendiente_facCab the valPendiente_facCab to set
+     */
+    public void setValPendiente_facCab(double valPendiente_facCab) {
+        this.valPendiente_facCab = valPendiente_facCab;
+    }
+
+    /**
+     * @return the Persona_id_per
      */
     public Persona getPersona() {
-        return persona;
+        return Persona;
     }
 
     /**
-     * @return the medidas
+     * @param Persona_id_per the Persona_id_per to set
      */
-    public Medidas getMedidas() {
-        return medidas;
+    public void setPersona(Persona Persona_id_per) {
+        this.Persona = Persona_id_per;
     }
 
     /**
-     * @param analisis the analisis to set
+     * @return the Membresia_id_memb
      */
-    public void setAnalisis(Analisis analisis) {
-        this.analisis = analisis;
+    public Membresias getMembresia() {
+        return Membresia;
     }
 
     /**
-     * @param persona the persona to set
+     * @param Membresia_id_memb the Membresia_id_memb to set
      */
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setMembresia(Membresias Membresia_id_memb) {
+        this.Membresia = Membresia_id_memb;
     }
 
     /**
-     * @param medidas the medidas to set
+     * @return the Ivas_id_ivas
      */
-    public void setMedidas(Medidas medidas) {
-        this.medidas = medidas;
+    public Iva getIva() {
+        return Ivas;
     }
 
     /**
-     * @return the id
+     * @param Ivas_id_ivas the Ivas_id_ivas to set
      */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the concepto
-     */
-    public String getConcepto() {
-        return concepto;
-    }
-
-    /**
-     * @param concepto the concepto to set
-     */
-    public void setConcepto(String concepto) {
-        this.concepto = concepto;
+    public void setIva(Iva Ivas_id_ivas) {
+        this.Ivas = Ivas_id_ivas;
     }
 
     /**
@@ -163,6 +164,7 @@ public class FacturaCab {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
 
     
     

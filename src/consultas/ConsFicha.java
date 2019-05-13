@@ -134,7 +134,7 @@ public class ConsFicha extends Conexion {
         
     }
      
-    public boolean buscar(FacturaCab f)
+    public boolean buscar(Ficha f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -151,11 +151,7 @@ public class ConsFicha extends Conexion {
             rs = ps.executeQuery();
             if (rs.next()) { 
                 f.setId(rs.getInt("id_ficha"));
-                f.setFecha_ini(rs.getString("fechaIni_ficha"));
-                f.setFecha_fin(rs.getString("fechaFin_ficha"));
-                f.setVal_pago(rs.getDouble("valPago_ficha"));
-                f.setVal_pendiente(rs.getInt("valPendiente_ficha"));
-                
+                                
                 return true;
             }
             return false;
@@ -179,13 +175,13 @@ public class ConsFicha extends Conexion {
     }
     
     
-    public ArrayList<FacturaCab> buscarTodos(FacturaCab f)
+    public ArrayList<Ficha> buscarTodos(Ficha f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
         String sql = "SELECT * FROM Ficha where estado_ficha=1";
-        ArrayList<FacturaCab> fichas = new ArrayList<>();
+        ArrayList<Ficha> fichas = new ArrayList<>();
         
         
         try 
@@ -196,9 +192,7 @@ public class ConsFicha extends Conexion {
             
             while (rs.next()) {
                 f.setId(rs.getInt("id_ficha"));
-                f.setFecha_fin(rs.getString("fechaFin_ficha"));
-                f.setVal_pago(rs.getDouble("valPago_ficha"));
-                f.setVal_pendiente(rs.getInt("valPendiente_ficha"));
+               
                 
                 fichas.add(f);               
             }
@@ -230,7 +224,7 @@ where p.id_per = f.Persona_id_per and f.fechaIni_ficha like '%11%'
 order by id_ficha asc ;
     */
     
-    public ArrayList<FacturaCab> buscarTodosPorFec(FacturaCab f,String fech)
+    public ArrayList<Ficha> buscarTodosPorFec(Ficha f,String fech)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -238,7 +232,7 @@ order by id_ficha asc ;
         String sql = "SELECT * FROM ficha "
                 + " where fechaIni_ficha like '%"+fech+"%' and estado_ficha=1"
                 + " order by id_ficha asc ";
-        ArrayList<FacturaCab> ficha = new ArrayList<>();
+        ArrayList<Ficha> ficha = new ArrayList<>();
         
         
         try 
@@ -248,12 +242,9 @@ order by id_ficha asc ;
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                f = new FacturaCab();
+                f = new Ficha();
                 f.setId(rs.getInt("id_ficha"));
-                f.setFecha_fin(rs.getString("fechaFin_ficha"));
-                f.setVal_pago(rs.getDouble("valPago_ficha"));
-                f.setVal_pendiente(rs.getInt("valPendiente_ficha"));
-                
+                              
                 ficha.add(f);                     
             }
              

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import modelos.Analisis;
 import modelos.Conexion;
 import modelos.FacturaCab;
+import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Persona;
 
@@ -19,28 +20,24 @@ import modelos.Persona;
  *
  * @author Administrator
  */
-public class ConsFacturaCab extends Conexion {
+public class ConsEntrenamiento extends Conexion {
     
-    public boolean registrar(FacturaCab f)
+    public boolean registrar(Ficha f)
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FacturaCabecera (id_facCab,fecha_facCab, num_facCab, subTotal_facCab, total_facCab,valPendiente_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab) "
-                + " VALUES(factura_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO ficha (id_ficha,fecha_ficha,Persona_id_per, Analisis_id_ana, Medidas_id_med,estado_ficha) "
+                + " VALUES(ficha_id_seq.NEXTVAL,?,?,?,?,?)";
 
         try 
         {            
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_facCab());           
-            ps.setString(2, f.getNum_facCab());
-            ps.setDouble(3, f.getSubTotal_facCab());
-            ps.setDouble(4, f.getTotal_facCab());
-            ps.setDouble(5, f.getValPendiente_facCab());
-            ps.setInt(6, f.getPersona().getId());
-            ps.setInt(7, f.getMembresia().getId());
-            ps.setInt(8, f.getIva().getId_ivas());
-            ps.setInt(9, f.getEstado());
+            ps.setString(1, f.getFecha());         
+            ps.setInt(2, f.getPersona().getId());
+            ps.setInt(3, f.getAnalisis().getId());
+            ps.setInt(4, f.getMedidas().getId());
+            ps.setInt(5, f.getEstado());
             
             
             ps.execute();                                       
@@ -64,28 +61,25 @@ public class ConsFacturaCab extends Conexion {
         
     }
     
-    public boolean modificar(FacturaCab f)
+    public boolean modificar(Ficha f)
     {
-        PreparedStatement ps = null; //id_facCab,fecha_facCab, num_facCab, subTotal_facCab, total_facCab,valPendiente_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_fac
+        PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "update FacturaCabecera SET fecha_facCab=?, num_facCab=?, subTotal_facCab=?, total_facCab=?,valPendiente_facCab=?,Persona_id_per=?,Membresia_id_memb=?,Ivas_id_ivas=?,estado_facCab=?"
-                + " WHERE id_facCab=?";
+        String sql = "UPDATE ficha SET fecha_ficha = ?,Persona_id_per = ?, Analisis_id_ana = ?, Medidas_id_med = ?,estado_ficha = ?"
+                + " WHERE id_ficha=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_facCab());           
-            ps.setString(2, f.getNum_facCab());
-            ps.setDouble(3, f.getSubTotal_facCab());
-            ps.setDouble(4, f.getTotal_facCab());
-            ps.setDouble(5, f.getValPendiente_facCab());
-            ps.setInt(6, f.getPersona().getId());
-            ps.setInt(7, f.getMembresia().getId());
-            ps.setInt(8, f.getIva().getId_ivas());
-            ps.setInt(9, f.getEstado());
-            
+            ps.setString(1, f.getFecha());                     
+            ps.setInt(2, f.getPersona().getId());
+            ps.setInt(3, f.getAnalisis().getId());
+            ps.setInt(4, f.getMedidas().getId());
+            ps.setInt(5, 1);
+            ps.setInt(6, f.getId());
+            System.out.println(f.getId()+" - "+f.getPersona().getId() + " - "+ f.getAnalisis().getId()+ " - "+f.getMedidas().getId());
             ps.execute();
             return true;
         } 
@@ -107,18 +101,18 @@ public class ConsFacturaCab extends Conexion {
         
     }
     
-     public boolean eliminar(FacturaCab f)
+     public boolean eliminar(Ficha f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  FacturaCabecera SET estado_facCab =? WHERE id_facCab=?";
+        String sql = "UPDATE  ficha SET ESTADO_FICHA =? WHERE id_ficha=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);  
             ps.setInt(1, f.getEstado());
-            ps.setInt(2, f.getId_facCab());
+            ps.setInt(2, f.getId());
             ps.execute();
             return true;
         } 
@@ -139,14 +133,16 @@ public class ConsFacturaCab extends Conexion {
         }
         
     }
-     /*
-    public boolean buscar(FacturaCab f)
+     
+    public boolean buscar(Ficha f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM factura WHERE id_fac=? and estado_fac=1";
-        
+        String sql = "SELECT * FROM ficha WHERE id_ficha=? and estado_ficha=1";
+        /*
+             fechaIni_ficha, fechaFin_ficha, valPago_ficha, valPendiente_ficha, Persona_id_per, Analisis_id_ana, Medidas_id_med
+        */
         try 
         {
             
@@ -154,12 +150,8 @@ public class ConsFacturaCab extends Conexion {
             ps.setInt(1, f.getId());
             rs = ps.executeQuery();
             if (rs.next()) { 
-                f.setId(rs.getInt("id_fac"));
-                f.setFecha_ini(rs.getString("fechaIni_fac"));
-                f.setFecha_fin(rs.getString("fechaFin_fac"));
-                f.setVal_pago(rs.getDouble("valPago_fac"));
-                f.setVal_pendiente(rs.getInt("valPendiente_fac"));
-                
+                f.setId(rs.getInt("id_ficha"));
+                                
                 return true;
             }
             return false;
@@ -180,16 +172,16 @@ public class ConsFacturaCab extends Conexion {
             }
         }
         
-    }*/
+    }
     
-    /*
-    public ArrayList<FacturaCab> buscarTodos(FacturaCab f)
+    
+    public ArrayList<Ficha> buscarTodos(Ficha f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM factura where estado_fac=1";
-        ArrayList<FacturaCab> fichas = new ArrayList<>();
+        String sql = "SELECT * FROM Ficha where estado_ficha=1";
+        ArrayList<Ficha> fichas = new ArrayList<>();
         
         
         try 
@@ -199,10 +191,8 @@ public class ConsFacturaCab extends Conexion {
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                f.setId(rs.getInt("id_fac"));
-                f.setFecha_fin(rs.getString("fechaFin_fac"));
-                f.setVal_pago(rs.getDouble("valPago_fac"));
-                f.setVal_pendiente(rs.getInt("valPendiente_fac"));
+                f.setId(rs.getInt("id_ficha"));
+               
                 
                 fichas.add(f);               
             }
@@ -225,18 +215,24 @@ public class ConsFacturaCab extends Conexion {
         }
        return fichas ;
     }
-    */
-
+    
     /*
-    public ArrayList<FacturaCab> buscarTodosPorFec(FacturaCab f,String fech)
+    
+    SELECT p.ced_per, p.nom_per, f.fechaIni_ficha, f.fechaFin_ficha, f.valPago_ficha, f.valPendiente_ficha
+FROM ficha f, persona p
+where p.id_per = f.Persona_id_per and f.fechaIni_ficha like '%11%'
+order by id_ficha asc ;
+    */
+    
+    public ArrayList<Ficha> buscarTodosPorFec(Ficha f,String fech)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null; 
-        String sql = "SELECT * FROM factura "
-                + " where fechaIni_fac like '%"+fech+"%' and estado_fac=1"
-                + " order by id_fac asc ";
-        ArrayList<FacturaCab> ficha = new ArrayList<>();
+        String sql = "SELECT * FROM ficha "
+                + " where fechaIni_ficha like '%"+fech+"%' and estado_ficha=1"
+                + " order by id_ficha asc ";
+        ArrayList<Ficha> ficha = new ArrayList<>();
         
         
         try 
@@ -246,12 +242,9 @@ public class ConsFacturaCab extends Conexion {
             rs = ps.executeQuery();
             
             while (rs.next()) {
-                f = new FacturaCab();
-                f.setId(rs.getInt("id_fac"));
-                f.setFecha_fin(rs.getString("fechaFin_fac"));
-                f.setVal_pago(rs.getDouble("valPago_fac"));
-                f.setVal_pendiente(rs.getInt("valPendiente_fac"));
-                
+                f = new Ficha();
+                f.setId(rs.getInt("id_ficha"));
+                              
                 ficha.add(f);                     
             }
              
@@ -272,7 +265,7 @@ public class ConsFacturaCab extends Conexion {
             }
         }
        return ficha ;
-    }*/
+    }
     
     public ArrayList<String> buscarAnonyms()
     {
@@ -368,10 +361,10 @@ public class ConsFacturaCab extends Conexion {
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = "SELECT f.id_fac, p.ced_per, p.nom_per, f.fechaInicio_fac, f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac " +
-                    " FROM factura f, persona p " +
-                    " where p.id_per = f.Persona_id_per and f.fechaInicio_fac like '%"+fech+"%' and f.estado_fac=1" +
-                    " order by id_fac asc ";
+        String sql = "SELECT f.id_ficha, p.ced_per, p.nom_per, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha " +
+                    " FROM ficha f, persona p " +
+                    " where p.id_per = f.Persona_id_per and f.fechaIni_ficha like '%"+fech+"%' and f.estado_ficha=1" +
+                    " order by id_ficha asc ";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -393,27 +386,47 @@ public class ConsFacturaCab extends Conexion {
        return rs;
     }
     
-    public ResultSet buscarTodosPorNomTabla(String nom)
+    public ResultSet buscarTodosPorNomTabla(String cad)
     {
-        System.out.println(nom);
+        System.out.println(cad); //'%"+cad+"%'
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac, f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(p.nom_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(p.ced_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(f.fechaInicio_fac) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(f.fechaFin_fac) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1";
+        String sql = " SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where f.id_Ficha  like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where upper(f.fecha_ficha) like upper('%"+cad+"%')  and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where upper(p.nom_per) like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where upper(p.ape_per) like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where p.id_per like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where m.fecha_med like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where m.id_med like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where a.fecha_ana like upper('%"+cad+"%') and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                    "UNION\n" +
+                    "SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                    "FROM  ficha f, medidas m,analisis a, persona p\n" +
+                    "where a.id_ana  like '%"+cad+"%' and p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -441,9 +454,9 @@ public class ConsFacturaCab extends Conexion {
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac, f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where  p.id_per=f.persona_id_per and f.valPendiente_fac>0 and f.estado_fac=1" ;
+        String sql = " SELECT f.id_ficha,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaIni_ficha, f.fechaFin_ficha,f.concepto_ficha, f.valPago_ficha, f.valPendiente_ficha,f.concepto_ficha \n" +
+                        "FROM ficha f, persona p \n" +
+                        "where  p.id_per=f.persona_id_per and f.valPendiente_ficha>0 and f.estado_ficha=1" ;
                        
                 
         ArrayList datos = new ArrayList();
@@ -483,10 +496,10 @@ public class ConsFacturaCab extends Conexion {
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_fac, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac AS fechaIni_fac, f.fechaFin_fac AS fechaFin_fac, f.total_fac, f.valPendiente_fac" +
-                    " FROM factura f, persona p " +
-                    " where p.id_per = f.Persona_id_per and f.estado_fac=1 " +
-                    " order by id_fac asc ";
+        String sql = "  SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
+                        "FROM ficha f, medidas m,analisis a, persona p \n" +
+                        "where p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+                        "order by id_ficha asc ";
                 
         
         try 
