@@ -42,6 +42,7 @@ import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
+import vistas.VisEntrenamiento;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -61,17 +62,18 @@ public class CtrlPersonas implements ActionListener {
     VisPersona visPersona;
     VisMembresia visMemb;
     VisFicha visFicha;   
+    VisEntrenamiento visEnt;
+    Object vis;
     String cadBus;
     MyTableModel dT;
     
     int locale;
-    public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisPersona visPersona,VisFicha visFicha)
+    public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisPersona visPersona,Object vis)
     {
         this.modPer = modPersona;
         this.consPer = consPersona;
         this.visPersona = visPersona;        
-        this.visFicha = visFicha;
-      
+        this.vis = vis;
         
         this.visPersona.btnGuardar.addActionListener(this);
         this.visPersona.btnEliminar.addActionListener(this);
@@ -79,7 +81,7 @@ public class CtrlPersonas implements ActionListener {
         this.visPersona.btnModificar.addActionListener(this);
         this.visPersona.btnBuscar.addActionListener(this);
        
-        locale = 0; // 1: ficha , 2: factura
+        locale = 0; // 1: ficha , 2: factura, 3: entrenamiento
         
        
         cadBus = "";
@@ -89,6 +91,7 @@ public class CtrlPersonas implements ActionListener {
         setTableModel();
      
     }
+    
     
     
     public void setFocus()
@@ -462,14 +465,20 @@ public class CtrlPersonas implements ActionListener {
                     int idPer = Integer.parseInt(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 0)+"");
                     switch(locale){
                         case 1:
-                            
+                            visFicha = (VisFicha)vis;
                             modPer.setId(idPer);
                             visFicha.txtCodPersona.setText(idPer+"");
-                            
+                            break;
                         case 2:
-                            
+                            visFicha = (VisFicha)vis;
                             modPer.setId(idPer);
                             visFicha.txtClienteFactura.setText(idPer+"");
+                            break;
+                        case 3:  
+                            visEnt = (VisEntrenamiento)vis;
+                            modPer.setId(idPer);
+                            visEnt.txtPersona.setText(idPer+"");
+                           break; 
                         default:    
                     }
                     visPersona.dispose();

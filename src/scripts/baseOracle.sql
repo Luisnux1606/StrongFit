@@ -256,7 +256,7 @@ CREATE TABLE Entrenamiento(
   fechaFin_ent Varchar2(350 ),  
   EntrenTiempo_id_entTmp Number,
   Persona_id_per Number,
-  estado_ent
+  estado_ent Number
 )
 TABLESPACE tbs_usr_strongfit_p
 /

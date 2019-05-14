@@ -29,6 +29,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
@@ -229,6 +230,46 @@ public class CtrlFacturaCab implements ActionListener{
         };
         //visFicha.txtBuscarFechaFicha.addKeyListener(keyListenertxtBuscarFecha);
 
+         //**********LISTENER EN TABLA DETALLES ************
+       
+        KeyListener keyListenerTblDetalle = new KeyListener() {
+          public void keyPressed(KeyEvent e) {
+            int m=e.getKeyChar();
+             
+              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB ) {
+                  
+                  switch(visFicha.tblFacturaDetalle.getSelectedColumn())
+                  {
+                    case 2: 
+                          System.out.println("para calcular total");
+                          break;
+                    case 3:
+                          addRows(visFicha.tblFacturaDetalle);
+                          visFicha.tblFacturaDetalle.setColumnSelectionInterval(visFicha.tblFacturaDetalle.getRowCount(),0);
+                          System.out.println("a");
+                          break;
+                    default:
+                        break;
+                  }
+         
+              }
+          }
+
+          public void keyReleased(KeyEvent keyEvent) {
+            printIt("Released", keyEvent);
+          }
+
+          public void keyTyped(KeyEvent e) {
+              
+          }
+          
+          private void printIt(String title, KeyEvent keyEvent) {
+            int keyCode = keyEvent.getKeyCode();
+            String keyText = KeyEvent.getKeyText(keyCode);
+           
+          }
+        };
+        visFicha.tblFacturaDetalle.addKeyListener(keyListenerTblDetalle);
         
         //**********listener enter ************
         
@@ -431,10 +472,29 @@ public class CtrlFacturaCab implements ActionListener{
         int a = visFicha.tblFacturaDetalle.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
-        } 
+        }
+         addRows(visFicha.tblFacturaDetalle);
     }
+    public void addRows(JTable table)
+    {        
+         Object cols[] = new Object[6];
+         DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalle.getModel();         
+         for (int i = 0; i <= 5; i++) {
+            cols[i] = new String();
+        }
+         setFormatTable(table);
+       tb.addRow(cols);
+    }
+    public void setFormatTable(JTable table)
+    {
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+        table.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(2).setCellRenderer(tcr);
+
+    }   
     
-     /*
+    /*
     public void showTable()
     {
         try {

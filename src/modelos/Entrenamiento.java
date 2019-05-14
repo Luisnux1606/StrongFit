@@ -94,4 +94,11 @@ public class Entrenamiento {
         return estado_ent;
     }
 
+    /**
+     * @param estado_ent the estado_ent to set
+     */
+    public void setEstado_ent(int estado_ent) {
+        this.estado_ent = estado_ent;
+    }
+
 }

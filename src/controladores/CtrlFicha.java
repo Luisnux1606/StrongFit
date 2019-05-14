@@ -33,8 +33,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import modelos.Analisis;
 import modelos.Entrenamiento;
 import modelos.EntrenamientoTiempo;
@@ -105,13 +107,25 @@ public class CtrlFicha implements ActionListener{
        
         setFocus();
         setListener();    
-//        setTableModel();
+        setTableModel(visFicha.tblFacturaDetalle);
        // iniciar();
         
        // visFicha.txtCodPersona.setText(persona.getId()+"");
         
         limpiarTabla();
         showTable();
+    }
+    
+    public void setTableModel(JTable table)
+    {
+        initColumnSizes(table);
+        
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+        table.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(2).setCellRenderer(tcr);
+
+        table.updateUI();
     }
     
     
@@ -327,7 +341,7 @@ public class CtrlFicha implements ActionListener{
             tb.removeRow(tb.getRowCount()-1);
         } 
     }
-    
+     
     public void showTable()
     {
         try {
@@ -469,12 +483,17 @@ public class CtrlFicha implements ActionListener{
            
             VisEntrenamiento visEnt = new VisEntrenamiento();
             Entrenamiento ent  = new Entrenamiento();
+           
             ConsEntrenamiento consEnt = new ConsEntrenamiento();
-                
-            Ficha ficha = new Ficha();
-            CtrlEntrenamiento ctrPer=new CtrlEntrenamiento(ent, consEnt, visEnt,visFicha);
-            ctrPer.iniciar();
-            ctrPer.locale = 1;
+           
+            
+            Ficha ficha = new Ficha(); //Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,EntrenamientoTiempo entTmp
+            persona.setId(Validaciones.isNumVoid(visFicha.txtClienteFactura.getText()));
+            
+            CtrlEntrenamiento ctrEnt=new CtrlEntrenamiento(ent, consEnt, visEnt,persona,visFicha);
+            ctrEnt.iniciar();
+            visEnt.txtPersona.setText(visFicha.txtClienteFactura.getText());
+            ctrEnt.locale = 1;
         } 
         
         if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
@@ -548,5 +567,16 @@ public class CtrlFicha implements ActionListener{
         visFicha.dchFecha.setDate(Calculos.getCurrentDate2());
        
     }
+    
+    private void initColumnSizes(JTable table) {
+		TableColumn column = null;
+        for (int i = 0; i < 3; i++) {
+        	column = table.getColumnModel().getColumn(i);
+            if(i==1){
+            	column.setPreferredWidth(400);
+            }
+        }
+    }
+
     
 }

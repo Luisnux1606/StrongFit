@@ -28,7 +28,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -60,29 +62,34 @@ public class CtrlEntrenamiento implements ActionListener{
     Entrenamiento ent;
     ConsEntrenamiento consEnt;
     Persona per;
+    VisFicha visFicha;
     EntrenamientoTiempo entTmp;
     
+
     String cadBus;
+    int locale;
     
-    public CtrlEntrenamiento(Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,EntrenamientoTiempo entTmp)
+    public CtrlEntrenamiento(Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,VisFicha visFicha)
     {
        
         this.ent = ent;
         this.consEnt = consEnt;        
         this.visEnt =  visEnt;
         this.per = per;
-        this.entTmp = entTmp;
+   
+        this.visFicha = visFicha;
         
-        
+                
         this.visEnt.btnGuardar.addActionListener(this);
         this.visEnt.btnEliminar.addActionListener(this);
         this.visEnt.btnLimpiar.addActionListener(this);
         this.visEnt.btnModificar.addActionListener(this);     
         this.visEnt.btnElegirPersona.addActionListener(this);
         
-       
+       entTmp = new EntrenamientoTiempo();
               
         cadBus = "";
+        locale = 0; //1:ficha
        
         setFocus();
         setListener();    
@@ -93,6 +100,9 @@ public class CtrlEntrenamiento implements ActionListener{
         
         limpiarTabla();
         showTable();
+        showComboEntTiempos();
+        
+     
     }
     
     
@@ -108,57 +118,10 @@ public class CtrlEntrenamiento implements ActionListener{
         visEnt.btnLimpiar.setToolTipText("Limpiar el registro");
         //visEnt.tabp_ficha.setSelectedIndex(2);
         limpiar();
-        
-
         visEnt.setLocation(300,10); 
         visEnt.setSize(1400,1000);                
         visEnt.setVisible(true);
-    
-        visEnt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-     
     }
-    
-    public void setCmbxMembresias()
-    {
-        
-    }
-    /*
-    public void setTableModel()
-    {            
-       Color rojo = new Color(254,000,000);  
-       Color amarillo = new Color(255,255,000);
-       visEnt.tblFicha.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
-        {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-            {
-                final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                c.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-         
-                
-                if(Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")<=5 &&Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")>=0)
-                {
-                     c.setBackground(amarillo); //proximos a terminarse
-                }
-                else
-                    if (Calculos.dateGreaterThanCurrent(table.getValueAt(row, 4)+"")==true) {
-                     c.setBackground(rojo);
-                    }
-                if(Double.parseDouble(table.getValueAt(row, 7)+"")!=0 )
-                {
-                 c.setBackground(rojo); //proximos a terminarse o pendientes de pago
-                }
-               
-               
-                
-                return c;
-            }
-            
-            
-            });
-     
-    }*/
     
     public void showTableByNom(String cad)
     {
@@ -236,10 +199,19 @@ public class CtrlEntrenamiento implements ActionListener{
                 
                 if(e.getClickCount()==1)
                 {
-                    getTableToTxts();
+                     getTableToTxts();
                      desabilitaHabilita(visEnt.btnGuardar,false);
                      desabilitaHabilita(visEnt.btnModificar,true);
                                           
+                }
+                if(e.getClickCount()==2)
+                {
+                    int idEnt = Integer.parseInt(visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 0)+"");                    
+                    visFicha.lblEntrenamientoGenerado.setText(idEnt+ " "+visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 2)+" "+ visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 5)+" ");
+                    
+                    addRows(visEnt.tbl_entrenamiento);
+                    visEnt.dispose();
+                
                 }
             }
 
@@ -272,7 +244,11 @@ public class CtrlEntrenamiento implements ActionListener{
      public void getTableToTxts()
      {
          JTable tblD = visEnt.tbl_entrenamiento;
-         visEnt.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));        
+         visEnt.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
+         visEnt.dtchFechaInicio.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
+         visEnt.dtchFechaFin.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2))));
+         visEnt.cmbTipoEnt.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3));
+         visEnt.txtPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4));
      }
     
      public void setFocus()
@@ -290,23 +266,61 @@ public class CtrlEntrenamiento implements ActionListener{
             tb.removeRow(tb.getRowCount()-1);
         } 
     }
+    public void showComboEntTiempos()
+    {
+        try {
+           
+            ResultSet listEntrenamiento = consEnt.buscarEntrenamientosTiempos();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visEnt.cmbTipoEnt.getModel();
+           
+            
+            while (listEntrenamiento.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(listEntrenamiento.getString("descripcion_enttiempo"));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consEnt.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visEnt.cmbTipoEnt.updateUI();
+    }
+     
+     public void addRows(JTable table)
+    {
+        
+            Object cols[] = new Object[6];
+         DefaultTableModel tb = (DefaultTableModel) visEnt.tbl_entrenamiento.getModel();
+         
+         for (int i = 0; i <= 5; i++) {
+            cols[i] = new String();
+        }
+    tb.addRow(cols);
+    }
+    
     
     public void showTable()
     {
         try {
             limpiarTabla();
-            ResultSet listEntrenamiento = consEnt.buscarTodos2();
+            ResultSet listEntrenamiento = consEnt.buscarTodos();
             
             DefaultTableModel model =  (DefaultTableModel)visEnt.tbl_entrenamiento.getModel();
-            Object cols[] = new Object[5];
+            Object cols[] = new Object[6];
             
             while (listEntrenamiento.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                    cols[0] = listEntrenamiento.getInt("id_ent");
-                   cols[1] = listEntrenamiento.getString("fechaini_en");
+                   cols[1] = listEntrenamiento.getString("fechaini_ent");
                    cols[2] = listEntrenamiento.getString("fechafin_ent").toUpperCase();
                    cols[3] = listEntrenamiento.getString("descripcion_enttiempo");
-                   cols[4] = listEntrenamiento.getString("nombres");
+                   cols[4] = listEntrenamiento.getString("id_per");
+                   cols[5] = listEntrenamiento.getString("nombres");
                    
                     model.addRow(cols);
                                         
@@ -332,16 +346,15 @@ public class CtrlEntrenamiento implements ActionListener{
                if (Validaciones.isDateChooserVoid(jdc)) 
                {        
                     int tE = consEnt.getIdByNom(visEnt.cmbTipoEnt.getSelectedItem()+"");
+                     
                     entTmp.setId_entTmp(tE);
-                    
                     ent.setEntrenTiempo_id_entTmp(entTmp);
-                    ent.setEntrenTiempo_id_entTmp(null);
                     ent.setFechaIni_ent(Validaciones.setFormatFecha(visEnt.dtchFechaInicio.getDate()));
                     ent.setFechaFin_ent(Validaciones.setFormatFecha(visEnt.dtchFechaFin.getDate()));  
                     
                     per.setId(Validaciones.isNumVoid(visEnt.txtPersona.getText()));                    
                     ent.setPersona_id_per(per);
-                  
+                    ent.setEstado_ent(1);
                     if (consEnt.registrar(ent)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                         limpiar();
@@ -359,14 +372,17 @@ public class CtrlEntrenamiento implements ActionListener{
        {            
             int tE = consEnt.getIdByNom(visEnt.cmbTipoEnt.getSelectedItem()+"");
             entTmp.setId_entTmp(tE);
-
+            
             ent.setEntrenTiempo_id_entTmp(entTmp);
-            ent.setEntrenTiempo_id_entTmp(null);
             ent.setFechaIni_ent(Validaciones.setFormatFecha(visEnt.dtchFechaInicio.getDate()));
             ent.setFechaFin_ent(Validaciones.setFormatFecha(visEnt.dtchFechaFin.getDate()));  
-
+            
             per.setId(Validaciones.isNumVoid(visEnt.txtPersona.getText()));                    
-            ent.setPersona_id_per(per);                      
+            ent.setPersona_id_per(per);
+            
+            ent.setEstado_ent(1);
+            ent.setId_ent(Validaciones.isNumVoid(visEnt.txt_id.getText()));
+            
             if (consEnt.modificar(ent)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
                 limpiar();
@@ -382,8 +398,8 @@ public class CtrlEntrenamiento implements ActionListener{
       if (e.getSource() == visEnt.btnEliminar) 
        {
            
-            ent.setId(Integer.parseInt(visEnt.txt_id_FacCab.getText()));
-            ent.setEstado(0);
+            ent.setId_ent(Integer.parseInt(visEnt.txt_id.getText()));
+            ent.setEstado_ent(0);
                       
             if (consEnt.eliminar(ent)) {
                 JOptionPane.showMessageDialog(null, "Registro Eliminado !");
@@ -404,7 +420,7 @@ public class CtrlEntrenamiento implements ActionListener{
            desabilitaHabilita(visEnt.btnModificar,false);
         }
 
-        if (e.getSource() == visEnt.btnElegirPersonaG) 
+        if (e.getSource() == visEnt.btnElegirPersona) 
         {
            
             VisPersona visPer = new VisPersona();
@@ -412,60 +428,10 @@ public class CtrlEntrenamiento implements ActionListener{
             ConsPersona consPer = new ConsPersona();
                 
             Ficha ficha = new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visEnt);
+            CtrlPersonas ctrPer=new CtrlPersonas(per, consPer, visPer,visEnt);
             ctrPer.iniciar();
-            ctrPer.locale = 1;
+            ctrPer.locale = 3;
         } 
-        
-          
-         if (e.getSource() == visEnt.mniReportes) 
-         {
-            
-            VisReportes visRepo = new VisReportes();
-          
-            CtrlReportes ctrlRepo = new CtrlReportes(visRepo,"C:/Users/Administrator/Documents/NetBeansProjects/TroyaGym/src/reportes/");
-            
-            
-         }
-         //////
-         if (e.getSource() == visEnt.mniMembresias) 
-         {   
-            VisMembresia visMem = new VisMembresia();            
-            VisFicha visEnt= new VisFicha();
-            Membresias memMod  = new Membresias();
-            ConsMembresias consMem = new ConsMembresias();
-            Ficha ficha  =  new Ficha();
-            CtrlMembresias ctrlMem = new CtrlMembresias(memMod,consMem,visMem,ficha,visEnt);
-            
-         }
-         
-         if (e.getSource() == visEnt.mniPersonas) {
-            
-            VisPersona visPer = new VisPersona();
-            Persona per  = new Persona();
-            ConsPersona consPer = new ConsPersona();
-           
-            Ficha ficha  =  new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visEnt);
-            ctrPer.iniciar();
-        }
-         
-         if (e.getSource() == visEnt.mniConsultasClientes) {
-            
-            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();
-            FacturaCab facCab  = new FacturaCab();
-            ConsFacturaCab consFacCab = new ConsFacturaCab();
-           
-            Ficha ficha  =  new Ficha();
-            CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(facCab, consFacCab, visBuscarVentas,visEnt);
-            ctrBuscarVentas.iniciar();
-        }
-
-         
-         if (e.getSource() == visEnt.menuSalir) 
-         {
-            visEnt.dispose();
-         }
                                
     }
     public void limpiar()
@@ -477,4 +443,5 @@ public class CtrlEntrenamiento implements ActionListener{
        
     }
     
+   
 }

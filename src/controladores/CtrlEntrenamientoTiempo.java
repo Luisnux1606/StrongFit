@@ -275,8 +275,7 @@ public class CtrlEntrenamientoTiempo implements ActionListener{
                     modEntrenamientoTiempo.setEstado(1);
  
                     if (consEntrenamientoTiempo.registrar(modEntrenamientoTiempo)) {
-                        JOptionPane.showMessageDialog(null, "Registro Guardado!");
-                        visEntrenamientoTiempo.txt_id.setText(consEntrenamientoTiempo.getLastId()+"");
+                        JOptionPane.showMessageDialog(null, "Registro Guardado!");                      
                        // limpiar();
                     }
                     else

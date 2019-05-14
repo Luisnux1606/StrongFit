@@ -129,126 +129,7 @@ public class ConsEntrenamientoTiempo extends Conexion{
         }
         
     }
-     
-    public int getLastId()
-    {
-        PreparedStatement ps = null;
-        Connection con = getConexion();
-        ResultSet rs = null;
-        String sql = " select max(id_memb) as ID_MEMB from membresia " +
-                     " order by id_memb asc " +
-                     " ";
-        
-        int idMemb = 0;
-       
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                                 
-            rs = ps.executeQuery() ;
-
-            if (rs.next()) { 
-               idMemb = rs.getInt("ID_MEMB");
-            }
-           
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-          
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                System.err.println(e);
-            }
-        }
-       return idMemb; 
-    }
-     
-    public boolean buscar(Membresias m)
-    {
-        PreparedStatement ps = null;
-        Connection con = getConexion();
-        ResultSet rs = null;
-        String sql = "SELECT * FROM membresia WHERE nom_memb=? and estado_memb=1";
-        
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                     
-            ps.setString(1, m.getNombre());
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                m.setId(rs.getInt("id_memb"));
-                m.setNombre(rs.getString("nom_memb"));
-                m.setDscto(rs.getDouble("dscto_memb"));               
-                return true;
-            }
-            return false;
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-            return false;
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                System.err.println(e);
-            }
-        }
-        
-    }
-    
-    public boolean buscar(Membresias m)
-    {
-        PreparedStatement ps = null;
-        Connection con = getConexion();
-        ResultSet rs = null;
-        String sql = "SELECT * FROM membresia WHERE nom_memb=? and estado_memb=1";
-        
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                     
-            ps.setString(1, m.getNombre());
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                m.setId(rs.getInt("id_memb"));
-                m.setNombre(rs.getString("nom_memb"));
-                m.setDscto(rs.getDouble("dscto_memb"));               
-                return true;
-            }
-            return false;
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-            return false;
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                System.err.println(e);
-            }
-        }
-        
-    }
-    
-    
+   
     public ArrayList<EntrenamientoTiempo> buscarTodos(EntrenamientoTiempo m)
     {
         PreparedStatement ps = null;
@@ -265,7 +146,7 @@ public class ConsEntrenamientoTiempo extends Conexion{
             while (rs.next()) {
                 m = new EntrenamientoTiempo();
                 m.setId_entTmp(rs.getInt("id_entTmp"));
-                m.setDescripcion_entTiempo(rs.getString("descripcion_entTiempo"));
+                m.setDescripcion_entTiempo(rs.getString("descripcion_entTiempo"));               
                 m.setCosto_entTiempo(rs.getDouble("costo_entTiempo"));
                              
                 
