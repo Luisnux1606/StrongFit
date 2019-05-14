@@ -326,5 +326,34 @@ public class ConsEntrenamiento extends Conexion {
         return rs;
     }
     
+    public ResultSet buscarEntrenamientoCosto(Entrenamiento ent)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select '1',et.costo_enttiempo,concat('ENTRENAMIENTO ',et.descripcion_enttiempo) as descr " +
+                    "from entrenamiento e, entrentiempo et " +
+                    "where et.id_enttmp = e.entrentiempo_id_enttmp and e.id_ent ="+ent.getId_ent()+"";
+
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
     //public
 }

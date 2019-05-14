@@ -28,7 +28,7 @@ public class ConsMembresias extends Conexion{
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO membresia (id_memb ,nom_memb , dscto_memb,ESTADO_MEMB) "
+        String sql = "INSERT INTO membresia (id_memb ,descripcion_memb , dscto_memb,ESTADO_MEMB) "
                 + " VALUES(membresia_id_seq.NEXTVAL,?,?,?)";
      //   String sql2 = "INSERT INTO Ficha (fecha_ini,fecha_fin,val_pago,val_pendiente) VALUES(?,?,?,?)";
         try 
@@ -64,7 +64,7 @@ public class ConsMembresias extends Conexion{
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE membresia SET nom_memb=?, dscto_memb=? "
+        String sql = "UPDATE membresia SET descripcion_memb=?, dscto_memb=? "
                 + " WHERE id_memb=?";
         
         try 
@@ -176,7 +176,7 @@ public class ConsMembresias extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM membresia WHERE nom_memb=? and estado_memb=1";
+        String sql = "SELECT * FROM membresia WHERE descripcion_memb=? and estado_memb=1";
         
         try 
         {
@@ -186,7 +186,7 @@ public class ConsMembresias extends Conexion{
             rs = ps.executeQuery();
             if (rs.next()) {
                 m.setId(rs.getInt("id_memb"));
-                m.setNombre(rs.getString("nom_memb"));
+                m.setNombre(rs.getString("descripcion_memb"));
                 m.setDscto(rs.getDouble("dscto_memb"));               
                 return true;
             }

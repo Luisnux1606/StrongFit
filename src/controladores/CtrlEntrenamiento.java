@@ -159,6 +159,39 @@ public class CtrlEntrenamiento implements ActionListener{
      {
          btn.setEnabled(estado);
      }
+     
+     public void cargarEntrenamientoDetalle(JTable table,int idEnt)
+     {
+        
+                 
+            this.ent.setId_ent(idEnt);
+            ResultSet rs = consEnt.buscarEntrenamientoCosto(ent);    
+            
+            try 
+            {
+                if (rs.next())     
+                {   
+                    table.setValueAt(1, table.getRowCount()-1, 0);
+                    table.setValueAt(2, table.getRowCount()-1, 1);
+                    table.setValueAt(3, table.getRowCount()-1, 2);
+                }
+            } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+     }
     
     public void setListener(){
         KeyListener keyListenertxtBuscarFichaPorCualquierCampo = new KeyListener() {
@@ -208,8 +241,8 @@ public class CtrlEntrenamiento implements ActionListener{
                 {
                     int idEnt = Integer.parseInt(visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 0)+"");                    
                     visFicha.lblEntrenamientoGenerado.setText(idEnt+ " "+visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 2)+" "+ visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 5)+" ");
-                    
-                    addRows(visEnt.tbl_entrenamiento);
+                    cargarEntrenamientoDetalle(visFicha.tblFacturaDetalle,idEnt);
+                   
                     visEnt.dispose();
                 
                 }

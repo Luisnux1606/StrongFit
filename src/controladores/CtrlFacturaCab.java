@@ -9,6 +9,7 @@ import assets.Calculos;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
+import consultas.ConsEntrenamiento;
 import consultas.ConsFacturaCab;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
@@ -29,15 +30,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
+import modelos.Entrenamiento;
 import modelos.FacturaCab;
 import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
+import vistas.VisEntrenamiento;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -76,6 +80,9 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnBuscarDscto.addActionListener(this);
         this.visFicha.btnCalcular.addActionListener(this);
         this.visFicha.btnBuscarClienteFactura.addActionListener(this);
+        this.visFicha.btnAgregarFilas.addActionListener(this);
+        this.visFicha.btnEliminarFilas.addActionListener(this);
+        this.visFicha.chkEntrenamiento.addActionListener(this);
        // this.visFicha.cmbTipoBusqueda.addActionListener(this);
         
          
@@ -196,6 +203,11 @@ public class CtrlFacturaCab implements ActionListener{
      {
          btn.setEnabled(estado);
      }
+     
+    public void setTotalesCabecera(JTable facDet)
+    {
+        visFicha.txtValPagar.setText(Calculos.calcularValorPagar(facDet)+"");
+    }
     
     public void setListener(){
         KeyListener keyListenertxtBuscarFecha = new KeyListener() {
@@ -231,28 +243,16 @@ public class CtrlFacturaCab implements ActionListener{
         //visFicha.txtBuscarFechaFicha.addKeyListener(keyListenertxtBuscarFecha);
 
          //**********LISTENER EN TABLA DETALLES ************
-       
+         int col = 0;      
+        JTable facDet = visFicha.tblFacturaDetalle;
+        facDet.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        facDet.setColumnSelectionAllowed(true);
+        facDet.setRowSelectionAllowed(true);
+        
         KeyListener keyListenerTblDetalle = new KeyListener() {
           public void keyPressed(KeyEvent e) {
-            int m=e.getKeyChar();
-             
-              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB ) {
-                  
-                  switch(visFicha.tblFacturaDetalle.getSelectedColumn())
-                  {
-                    case 2: 
-                          System.out.println("para calcular total");
-                          break;
-                    case 3:
-                          addRows(visFicha.tblFacturaDetalle);
-                          visFicha.tblFacturaDetalle.setColumnSelectionInterval(visFicha.tblFacturaDetalle.getRowCount(),0);
-                          System.out.println("a");
-                          break;
-                    default:
-                        break;
-                  }
-         
-              }
+              Calculos.calcularTotalDetalles(facDet);
+              setTotalesCabecera(facDet);
           }
 
           public void keyReleased(KeyEvent keyEvent) {
@@ -260,7 +260,31 @@ public class CtrlFacturaCab implements ActionListener{
           }
 
           public void keyTyped(KeyEvent e) {
-              
+             int m=e.getKeyChar();
+             Calculos.calcularTotalDetalles(facDet);
+             setTotalesCabecera(facDet);
+             
+             int col =facDet.getSelectedColumn();
+             int  row =facDet.getRowCount()-1;
+              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB ) {
+                              
+                  switch(col)
+                  {
+                    case 2: 
+
+                          break;
+                    case 3:
+                          row = facDet.getSelectedRow()-1;                                                   
+                          addRows(visFicha.tblFacturaDetalle);
+                          col = 0;
+                          row = visFicha.tblFacturaDetalle.getRowCount()-1;
+                          visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);                        
+                          break;
+                    default:
+                        break;
+                  }
+                visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);
+              }
           }
           
           private void printIt(String title, KeyEvent keyEvent) {
@@ -478,12 +502,20 @@ public class CtrlFacturaCab implements ActionListener{
     public void addRows(JTable table)
     {        
          Object cols[] = new Object[6];
-         DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalle.getModel();         
+         DefaultTableModel tb = (DefaultTableModel) table.getModel();         
          for (int i = 0; i <= 5; i++) {
             cols[i] = new String();
         }
          setFormatTable(table);
        tb.addRow(cols);
+    }
+    public void deleteRows(JTable table)
+    {
+        DefaultTableModel tb = (DefaultTableModel) table.getModel();   
+        if (tb.getRowCount()-1>=1) {
+            tb.removeRow(tb.getRowCount()-1);
+        }
+        
     }
     public void setFormatTable(JTable table)
     {
@@ -491,7 +523,7 @@ public class CtrlFacturaCab implements ActionListener{
         tcr.setHorizontalAlignment(SwingConstants.RIGHT);
         table.getColumnModel().getColumn(3).setCellRenderer(tcr);
         table.getColumnModel().getColumn(2).setCellRenderer(tcr);
-
+        table.setCellSelectionEnabled(false);
     }   
     
     /*
@@ -812,14 +844,27 @@ public class CtrlFacturaCab implements ActionListener{
         if (e.getSource() == visFicha.chkEntrenamiento) 
         {
            
-            VisPersona visPer = new VisPersona();
-            Persona per  = new Persona();
-            ConsPersona consPer = new ConsPersona();
-                
-            Ficha ficha = new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
-            ctrPer.iniciar();
-            ctrPer.locale = 2;
+            VisEntrenamiento visEnt = new VisEntrenamiento();
+            Entrenamiento ent  = new Entrenamiento();
+           
+            ConsEntrenamiento consEnt = new ConsEntrenamiento();
+           
+            
+            Ficha ficha = new Ficha(); //Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,EntrenamientoTiempo entTmp
+            persona.setId(Validaciones.isNumVoid(visFicha.txtClienteFactura.getText()));
+            
+            CtrlEntrenamiento ctrEnt=new CtrlEntrenamiento(ent, consEnt, visEnt,persona,visFicha);
+            ctrEnt.iniciar();
+            visEnt.txtPersona.setText(visFicha.txtClienteFactura.getText());
+            ctrEnt.locale = 1;
+        } 
+        if (e.getSource() == visFicha.btnAgregarFilas) 
+        {
+           addRows(visFicha.tblFacturaDetalle);
+        } 
+        if (e.getSource() == visFicha.btnEliminarFilas) 
+        {
+           deleteRows(visFicha.tblFacturaDetalle);
         } 
         /*
          if (e.getSource() == visFicha.cmbTipoBusqueda) 

@@ -98,7 +98,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniConsultasClientes.addActionListener(this);
         this.visFicha.menuSalir.addActionListener(this);
         this.visFicha.mniEntrenamientoTiempo.addActionListener(this);
-        this.visFicha.chkEntrenamiento.addActionListener(this);
+        
         
         this.visFicha.tabp_ficha.setSelectedIndex(2);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
@@ -476,25 +476,7 @@ public class CtrlFicha implements ActionListener{
             CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
             ctrPer.iniciar();
             ctrPer.locale = 1;
-        } 
-        
-        if (e.getSource() == visFicha.chkEntrenamiento) 
-        {
-           
-            VisEntrenamiento visEnt = new VisEntrenamiento();
-            Entrenamiento ent  = new Entrenamiento();
-           
-            ConsEntrenamiento consEnt = new ConsEntrenamiento();
-           
-            
-            Ficha ficha = new Ficha(); //Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,EntrenamientoTiempo entTmp
-            persona.setId(Validaciones.isNumVoid(visFicha.txtClienteFactura.getText()));
-            
-            CtrlEntrenamiento ctrEnt=new CtrlEntrenamiento(ent, consEnt, visEnt,persona,visFicha);
-            ctrEnt.iniciar();
-            visEnt.txtPersona.setText(visFicha.txtClienteFactura.getText());
-            ctrEnt.locale = 1;
-        } 
+        }                 
         
         if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
         {

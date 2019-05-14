@@ -17,6 +17,8 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JTable;
 
 /**
  *
@@ -136,4 +138,57 @@ public class Calculos {
        
         return diff1.getYears();
       }
+      
+      
+      public static double round(double value, int places) 
+      {
+        if (places < 0) throw new IllegalArgumentException();
+            long factor = (long) Math.pow(10, places);
+            value = value * factor;
+            long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+     public static double calcularTotalDetalle(double num, double vU)
+     {
+         double total = num * vU;
+         return total;
+     }
+     public static void calcularTotalDetalles(JTable table)
+     {
+         String valU;
+         String num;
+         double totDet;
+         for (int i = 0; i <= table.getRowCount()-1; i++) {
+             num = table.getValueAt(i, 0)+"";
+             valU = table.getValueAt(i, 2)+"";
+             
+             
+             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0) {
+                 totDet = calcularTotalDetalle(Validaciones.isNumVoid10(num),Validaciones.isNumVoid10(valU));
+                 table.setValueAt(getTwoDecimals(totDet), i,3);
+             }
+         }
+     } 
+     
+     public static double getTwoDecimals(double val)
+     {
+         return round(val,2);
+     
+     }
+     public static double calcularValorPagar(JTable table)
+     {
+         String valTotDet;      
+         double totDetalles = 0;
+         
+         for (int i = 0; i <= table.getRowCount()-1; i++) {
+             valTotDet = table.getValueAt(i, 3)+"";
+             
+             if (Validaciones.isNumVoid10(valTotDet)!=0 ) {
+                 totDetalles = totDetalles + Validaciones.isNumVoid10(valTotDet);
+               
+             }
+         }
+         return getTwoDecimals(totDetalles);
+     } 
+                         
 }
