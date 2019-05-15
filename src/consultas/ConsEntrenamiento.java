@@ -331,7 +331,7 @@ public class ConsEntrenamiento extends Conexion {
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select '1',et.costo_enttiempo,concat('ENTRENAMIENTO ',et.descripcion_enttiempo) as descr " +
+        String sql = "select '1' as num,et.costo_enttiempo,concat('ENTRENAMIENTO ',et.descripcion_enttiempo) as descr " +
                     "from entrenamiento e, entrentiempo et " +
                     "where et.id_enttmp = e.entrentiempo_id_enttmp and e.id_ent ="+ent.getId_ent()+"";
 

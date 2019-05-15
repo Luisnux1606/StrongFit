@@ -187,14 +187,13 @@ public class CtrlMembresias implements ActionListener{
                 {
                     int idMemb = Integer.parseInt(visMembresias.tbl_membresias.getValueAt(visMembresias.tbl_membresias.getSelectedRow(), 0)+"");
                     double  dsctoMemb = Double.parseDouble(visMembresias.tbl_membresias.getValueAt(visMembresias.tbl_membresias.getSelectedRow(), 2)+"");
+                    visFicha.lblDsctoId.setText(idMemb+"");
                     visFicha.txtValDscto.setText(dsctoMemb+"");
                     
                     double valMasDscto = Calculos.getDscto(new Double(visFicha.txtValPagar.getText()).doubleValue(), dsctoMemb);
                     visFicha.txtValConDsctoFicha.setText(valMasDscto+"");
                     visMembresias.dispose();
-                     
-                    /* visMembresias.tabp_ficha.setEnabledAt(1, true);
-                     visAnalisis.tabp_ficha.setEnabledAt(2, true);*/
+                  
                 }
             }
 

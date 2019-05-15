@@ -1938,12 +1938,19 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jPanel7" alignment="0" min="-2" pref="1306" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="1" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="1" attributes="0">
                                                           <Group type="103" groupAlignment="1" attributes="0">
-                                                              <Group type="102" attributes="0">
-                                                                  <Component id="jLabel42" min="-2" pref="77" max="-2" attributes="0"/>
+                                                              <Group type="102" alignment="1" attributes="0">
+                                                                  <Component id="lblDsctoId" min="-2" pref="46" max="-2" attributes="0"/>
+                                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                                  <Component id="btnBuscarDscto" min="-2" pref="43" max="-2" attributes="0"/>
+                                                                  <EmptySpace max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <Group type="102" alignment="1" attributes="0">
+                                                                  <Component id="lblCambio" min="-2" pref="77" max="-2" attributes="0"/>
                                                                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                                                   <Component id="txt_cambio" min="-2" pref="42" max="-2" attributes="0"/>
                                                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1952,19 +1959,15 @@
                                                                   <Component id="txt_valEntregado" min="-2" pref="43" max="-2" attributes="0"/>
                                                                   <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                                                               </Group>
-                                                              <Group type="102" alignment="1" attributes="0">
-                                                                  <Component id="btnBuscarDscto" min="-2" pref="43" max="-2" attributes="0"/>
-                                                                  <EmptySpace max="-2" attributes="0"/>
-                                                              </Group>
                                                           </Group>
                                                           <Group type="103" groupAlignment="0" attributes="0">
                                                               <Group type="102" alignment="0" attributes="0">
-                                                                  <Component id="jLabel40" min="-2" pref="138" max="-2" attributes="0"/>
+                                                                  <Component id="lblValPagar" min="-2" pref="138" max="-2" attributes="0"/>
                                                                   <EmptySpace max="-2" attributes="0"/>
                                                                   <Component id="txtValPagar" min="-2" pref="131" max="-2" attributes="0"/>
                                                               </Group>
                                                               <Group type="102" alignment="1" attributes="0">
-                                                                  <Component id="jLabel39" min="-2" pref="138" max="-2" attributes="0"/>
+                                                                  <Component id="lblDscto" min="-2" pref="138" max="-2" attributes="0"/>
                                                                   <EmptySpace max="-2" attributes="0"/>
                                                                   <Component id="txtValDscto" min="-2" pref="131" max="-2" attributes="0"/>
                                                               </Group>
@@ -1973,19 +1976,26 @@
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace min="-2" pref="366" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="jLabel41" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                                              <Component id="jLabel31" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                              <Component id="lblIva" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              <Component id="lblTotDscto" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                                                              <Component id="lblCobroPendiente" alignment="0" min="-2" max="-2" attributes="0"/>
                                                               <Component id="lblTotalConIva" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                                                  <Group type="102" alignment="1" attributes="0">
+                                                                      <Component id="lblIva" min="-2" max="-2" attributes="0"/>
+                                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                                      <Component id="lblIvaId" min="-2" pref="60" max="-2" attributes="0"/>
+                                                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <Component id="lblValCancelo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                              </Group>
                                                           </Group>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                                               <Component id="txt_valCancelo" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="txtValConDsctoFicha" alignment="0" pref="131" max="32767" attributes="0"/>
-                                                              <Component id="txtValPendienteFicha" alignment="0" pref="131" max="32767" attributes="0"/>
+                                                              <Component id="txtValConDsctoFicha" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="txtValPendienteFicha" alignment="0" max="32767" attributes="0"/>
                                                               <Component id="txtIVA" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="txtTotalConIva" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="txtTotalConIva" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                                                           </Group>
                                                       </Group>
                                                   </Group>
@@ -2032,35 +2042,43 @@
                               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jScrollPane6" min="-2" pref="163" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel40" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                                          <Component id="txtValPagar" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                              <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btnCalcular" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="txt_cambio" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                              <Component id="txt_valEntregado" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jScrollPane6" min="-2" pref="163" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="lblValPagar" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                                  <Component id="txtValPagar" alignment="1" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                                      <Component id="lblCambio" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="btnCalcular" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="txt_cambio" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                                      <Component id="txt_valEntregado" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblDscto" min="-2" pref="22" max="-2" attributes="0"/>
+                                                      <Component id="txtValDscto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="btnBuscarDscto" min="-2" pref="29" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel39" min="-2" pref="22" max="-2" attributes="0"/>
-                                              <Component id="txtValDscto" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="btnBuscarDscto" min="-2" pref="29" max="-2" attributes="0"/>
+                                          <Component id="lblDsctoId" min="-2" pref="21" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel41" min="-2" pref="25" max="-2" attributes="0"/>
+                                          <Component id="lblTotDscto" min="-2" pref="25" max="-2" attributes="0"/>
                                           <Component id="txtValConDsctoFicha" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblIva" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txtIVA" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lblIva" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtIVA" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="lblIvaId" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -2070,11 +2088,11 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="txt_valCancelo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblValCancelo" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel32" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Component id="lblCobroPendiente" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
                                           <Component id="txtValPendienteFicha" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -2125,6 +2143,8 @@
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="lblPersonaId" min="-2" pref="52" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="pnlEntrenamientoEnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -2135,18 +2155,26 @@
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
-                                      <Component id="dtcFechaFacCab" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
+                                              <Component id="dtcFechaFacCab" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="lblCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtClienteFactura" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnBuscarClienteFactura" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                          <Component id="lblPersonaId" min="-2" pref="26" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblCliente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtClienteFactura" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="btnBuscarClienteFactura" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="chkEntrenamiento" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="8" max="32767" attributes="0"/>
                                   <Component id="pnlEntrenamientoEnFactura" min="-2" max="-2" attributes="0"/>
@@ -2224,6 +2252,11 @@
                               <Image iconType="3" name="/icons/personas.png"/>
                             </Property>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblPersonaId">
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
@@ -2309,7 +2342,7 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel41">
+                    <Component class="javax.swing.JLabel" name="lblTotDscto">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Total con Dscto:"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
@@ -2336,7 +2369,7 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel31">
+                    <Component class="javax.swing.JLabel" name="lblValCancelo">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Valor que cancelo:"/>
                       </Properties>
@@ -2365,7 +2398,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JLabel" name="jLabel39">
+                    <Component class="javax.swing.JLabel" name="lblDscto">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Aplica descuento:"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
@@ -2396,7 +2429,7 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel40">
+                    <Component class="javax.swing.JLabel" name="lblValPagar">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Valor a pagar:"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
@@ -2417,7 +2450,7 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel32">
+                    <Component class="javax.swing.JLabel" name="lblCobroPendiente">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Cobro pendiente:"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
@@ -2433,7 +2466,7 @@
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel42">
+                    <Component class="javax.swing.JLabel" name="lblCambio">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Cambio de :"/>
                       </Properties>
@@ -2508,6 +2541,22 @@
                     <Component class="javax.swing.JButton" name="btnAgregarFilas">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Agregar"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblIvaId">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="1"/>
+                      </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="lblDsctoId">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="1"/>
                       </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

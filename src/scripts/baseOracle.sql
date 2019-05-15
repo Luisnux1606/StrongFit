@@ -153,6 +153,13 @@ CREATE SEQUENCE entrenamiento_id_seq
  CACHE 20
  ORDER
 /
+CREATE SEQUENCE iva_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+ ORDER
+/
 
 
 -- Create tables section -------------------------------------------------
@@ -325,7 +332,8 @@ ALTER TABLE Membresia ADD CONSTRAINT pk_id_memb PRIMARY KEY (id_memb)
 
 CREATE TABLE IVAS(
   id_ivas Number NOT NULL,
-  val_ivas Number(10,2)
+  val_ivas Number(10,2),
+  estado_ivas Number
 )
 TABLESPACE tbs_usr_strongfit_p
 /
@@ -340,12 +348,14 @@ CREATE TABLE FacturaCabecera(
   id_facCab Number NOT NULL,
   fecha_facCab Varchar2(350 ),
   num_facCab Varchar2(10),
-  subTotal_facCab Number(10,2),
-  total_facCab Number(10,2),
-  valPendiente_facCab Number(10,2),
+  valPagar_facCab Number(10,2),          --1. valpagar
+  subTotal_facCab Number(10,2),   --3. val+dscto
+  total_facCab Number(10,2),        --5. total+iva
+  valPendiente_facCab Number(10,2),  --7. valPendiente
+  valCancelo_facCab Number(10,2),     --6. valCancelo
   Persona_id_per Number,
-  Membresia_id_memb Number,
-  Ivas_id_ivas Number,
+  Membresia_id_memb Number,        --2. descuento
+  Ivas_id_ivas Number,            --4. iva
   estado_facCab Number 
 )
 TABLESPACE tbs_usr_strongfit_p
@@ -437,7 +447,13 @@ insert into Medidas(id_med,fecha_med,peso_med,estatura_med,edad_med,nroHijos_med
 values (medidas_id_seq.NEXTVAL, '999999999', 9, 9, 999, 9, 9, 9,9,9,9,9,9,9,9,9,9,9,9,1);
 
 insert into Membresia(id_memb,descripcion_memb,dscto_memb,ESTADO_MEMB)
-values (membresia_id_seq.NEXTVAL,'diario',0,1);
+values (membresia_id_seq.NEXTVAL,'999999999',0,1);
+
+insert into Membresia(id_memb,descripcion_memb,dscto_memb,ESTADO_MEMB)
+values (membresia_id_seq.NEXTVAL,'diario',2,1);
+
+insert into IVAS(id_ivas,val_ivas,estado_ivas)
+values (iva_id_seq.NEXTVAL,0,1)
 
 
 commit;

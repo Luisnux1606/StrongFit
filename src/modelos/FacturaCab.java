@@ -16,13 +16,14 @@ public class FacturaCab {
     private int id_facCab; 
     private String fecha_facCab;
     private String num_facCab;
+    private double valPagar_facCab;    
     private double subTotal_facCab;
     private double total_facCab;
+    private double valCancelo_facCab;
     private double valPendiente_facCab;
     private Persona Persona;
     private Membresias Membresia;
-    private Iva Ivas; 
-    
+    private Iva Ivas;     
     private int estado;
 
     /**
@@ -68,6 +69,20 @@ public class FacturaCab {
     }
 
     /**
+     * @return the valPagar_facCab
+     */
+    public double getValPagar_facCab() {
+        return valPagar_facCab;
+    }
+
+    /**
+     * @param valPagar_facCab the valPagar_facCab to set
+     */
+    public void setValPagar_facCab(double valPagar_facCab) {
+        this.valPagar_facCab = valPagar_facCab;
+    }
+
+    /**
      * @return the subTotal_facCab
      */
     public double getSubTotal_facCab() {
@@ -96,6 +111,20 @@ public class FacturaCab {
     }
 
     /**
+     * @return the valCancelo_facCab
+     */
+    public double getValCancelo_facCab() {
+        return valCancelo_facCab;
+    }
+
+    /**
+     * @param valCancelo_facCab the valCancelo_facCab to set
+     */
+    public void setValCancelo_facCab(double valCancelo_facCab) {
+        this.valCancelo_facCab = valCancelo_facCab;
+    }
+
+    /**
      * @return the valPendiente_facCab
      */
     public double getValPendiente_facCab() {
@@ -110,45 +139,45 @@ public class FacturaCab {
     }
 
     /**
-     * @return the Persona_id_per
+     * @return the Persona
      */
     public Persona getPersona() {
         return Persona;
     }
 
     /**
-     * @param Persona_id_per the Persona_id_per to set
+     * @param Persona the Persona to set
      */
-    public void setPersona(Persona Persona_id_per) {
-        this.Persona = Persona_id_per;
+    public void setPersona(Persona Persona) {
+        this.Persona = Persona;
     }
 
     /**
-     * @return the Membresia_id_memb
+     * @return the Membresia
      */
     public Membresias getMembresia() {
         return Membresia;
     }
 
     /**
-     * @param Membresia_id_memb the Membresia_id_memb to set
+     * @param Membresia the Membresia to set
      */
-    public void setMembresia(Membresias Membresia_id_memb) {
-        this.Membresia = Membresia_id_memb;
+    public void setMembresia(Membresias Membresia) {
+        this.Membresia = Membresia;
     }
 
     /**
-     * @return the Ivas_id_ivas
+     * @return the Ivas
      */
-    public Iva getIva() {
+    public Iva getIvas() {
         return Ivas;
     }
 
     /**
-     * @param Ivas_id_ivas the Ivas_id_ivas to set
+     * @param Ivas the Ivas to set
      */
-    public void setIva(Iva Ivas_id_ivas) {
-        this.Ivas = Ivas_id_ivas;
+    public void setIvas(Iva Ivas) {
+        this.Ivas = Ivas;
     }
 
     /**
@@ -164,7 +193,6 @@ public class FacturaCab {
     public void setEstado(int estado) {
         this.estado = estado;
     }
-
 
     
     

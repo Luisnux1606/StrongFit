@@ -165,34 +165,42 @@ public class CtrlEntrenamiento implements ActionListener{
         
                  
             this.ent.setId_ent(idEnt);
+            
+            
+           try {
+           
             ResultSet rs = consEnt.buscarEntrenamientoCosto(ent);    
             
-            try 
-            {
-                if (rs.next())     
-                {   
-                    table.setValueAt(1, table.getRowCount()-1, 0);
-                    table.setValueAt(2, table.getRowCount()-1, 1);
-                    table.setValueAt(3, table.getRowCount()-1, 2);
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFacturaDetalle.getModel();
+            Object cols[] = new Object[8];
+            
+            while (rs.next()) {
+                try {
+                    cols[0] = rs.getInt("num");
+                    cols[1] = rs.getString("descr").toUpperCase();
+                    cols[2] = rs.getDouble("costo_enttiempo");
+                                         
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-            return false;
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                System.err.println(e);
             }
+            table.setValueAt(cols[0], table.getRowCount()-1, 0);
+            table.setValueAt(cols[1], table.getRowCount()-1, 1);
+            table.setValueAt(cols[2], table.getRowCount()-1, 2);
+            Calculos.calcularTotalDetalles(table);
+            consEnt.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
      }
     
+    public void setTotalesCabecera(JTable facDet)
+    {
+        visFicha.txtValPagar.setText(Calculos.calcularValorPagar(facDet)+"");
+        
+    }
+     
     public void setListener(){
         KeyListener keyListenertxtBuscarFichaPorCualquierCampo = new KeyListener() {
           public void keyPressed(KeyEvent keyEvent) {
@@ -242,7 +250,8 @@ public class CtrlEntrenamiento implements ActionListener{
                     int idEnt = Integer.parseInt(visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 0)+"");                    
                     visFicha.lblEntrenamientoGenerado.setText(idEnt+ " "+visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 2)+" "+ visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 5)+" ");
                     cargarEntrenamientoDetalle(visFicha.tblFacturaDetalle,idEnt);
-                   
+                    Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
+                    setTotalesCabecera(visFicha.tblFacturaDetalle);
                     visEnt.dispose();
                 
                 }
@@ -280,8 +289,8 @@ public class CtrlEntrenamiento implements ActionListener{
          visEnt.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
          visEnt.dtchFechaInicio.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
          visEnt.dtchFechaFin.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2))));
-         visEnt.cmbTipoEnt.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3));
-         visEnt.txtPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4));
+         visEnt.cmbTipoEnt.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
+         visEnt.txtPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)));
      }
     
      public void setFocus()

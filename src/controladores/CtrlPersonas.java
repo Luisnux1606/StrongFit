@@ -463,6 +463,8 @@ public class CtrlPersonas implements ActionListener {
                 if(e.getClickCount()==2)
                 {
                     int idPer = Integer.parseInt(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 0)+"");
+                    String nombre = visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 2)+"";
+                    String apellido = visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 3)+"";
                     switch(locale){
                         case 1:
                             visFicha = (VisFicha)vis;
@@ -472,7 +474,10 @@ public class CtrlPersonas implements ActionListener {
                         case 2:
                             visFicha = (VisFicha)vis;
                             modPer.setId(idPer);
-                            visFicha.txtClienteFactura.setText(idPer+"");
+                            modPer.setNombre(cadBus);
+                            modPer.setApellido(apellido);
+                            visFicha.lblPersonaId.setText(idPer+"");
+                            visFicha.txtClienteFactura.setText(nombre + " "+apellido);
                             break;
                         case 3:  
                             visEnt = (VisEntrenamiento)vis;

@@ -38,6 +38,7 @@ import modelos.Analisis;
 import modelos.Entrenamiento;
 import modelos.FacturaCab;
 import modelos.Ficha;
+import modelos.Iva;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -59,7 +60,8 @@ public class CtrlFacturaCab implements ActionListener{
     VisFicha visFicha;
     VisReportes visReportes;
     VisMembresia visMemb;
-    
+    Membresias memb;
+    Iva iva;
     
     Persona persona;
     String cadBus;
@@ -71,6 +73,8 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha = visFicha;
         this.persona = persona;
         this.visMemb =  visMemb;
+        this.memb = new Membresias();
+        this.iva = new Iva();
               
         
         this.visFicha.btnGuardarFacCab.addActionListener(this);
@@ -207,6 +211,7 @@ public class CtrlFacturaCab implements ActionListener{
     public void setTotalesCabecera(JTable facDet)
     {
         visFicha.txtValPagar.setText(Calculos.calcularValorPagar(facDet)+"");
+        
     }
     
     public void setListener(){
@@ -511,10 +516,11 @@ public class CtrlFacturaCab implements ActionListener{
     }
     public void deleteRows(JTable table)
     {
-        DefaultTableModel tb = (DefaultTableModel) table.getModel();   
-        if (tb.getRowCount()-1>=1) {
-            tb.removeRow(tb.getRowCount()-1);
-        }
+        DefaultTableModel tb = (DefaultTableModel) table.getModel();  
+        int n = table.getSelectedRow();
+        
+            tb.removeRow(n);
+        
         
     }
     public void setFormatTable(JTable table)
@@ -748,8 +754,22 @@ public class CtrlFacturaCab implements ActionListener{
                {                   
                     modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
                     modFacCab.setNum_facCab("sera numero");
+                    
+                    persona.setId(Validaciones.isNumVoid(visFicha.lblPersonaId.getText()));
+                    modFacCab.setPersona(persona);
+                    
+                    modFacCab.setValPagar_facCab(Validaciones.isNumVoid3(visFicha.txtValPagar.getText()));
+                    
+                    memb.setId(Validaciones.isNumVoid(visFicha.lblDsctoId.getText()));
+                    modFacCab.setMembresia(memb); // 1  = 0
+                    
                     modFacCab.setSubTotal_facCab(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
+                    
+                    iva.setId_ivas(Validaciones.isNumVoid(visFicha.lblIvaId.getText()));
+                    modFacCab.setIvas(iva); //1 = 0
+                    
                     modFacCab.setTotal_facCab(Validaciones.isNumVoid3(visFicha.txtTotalConIva.getText()));
+                    modFacCab.setValCancelo_facCab(Validaciones.isNumVoid3(visFicha.txt_valCancelo.getText()));
                     modFacCab.setValPendiente_facCab(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));       
                     modFacCab.setEstado(1);          
                    
@@ -861,10 +881,14 @@ public class CtrlFacturaCab implements ActionListener{
         if (e.getSource() == visFicha.btnAgregarFilas) 
         {
            addRows(visFicha.tblFacturaDetalle);
+           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
+           setTotalesCabecera(visFicha.tblFacturaDetalle);
         } 
         if (e.getSource() == visFicha.btnEliminarFilas) 
         {
            deleteRows(visFicha.tblFacturaDetalle);
+           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
+            setTotalesCabecera(visFicha.tblFacturaDetalle);
         } 
         /*
          if (e.getSource() == visFicha.cmbTipoBusqueda) 
@@ -896,6 +920,7 @@ public class CtrlFacturaCab implements ActionListener{
         visFicha.txtValPagar.setText("0.0");
         visFicha.txtValDscto.setText("0.0");
         visFicha.txt_valCancelo.setText("0.0");   
+        visFicha.lblDsctoId.setText("1");
 
     }
     
