@@ -208,11 +208,7 @@ public class CtrlFacturaCab implements ActionListener{
          btn.setEnabled(estado);
      }
      
-    public void setTotalesCabecera(JTable facDet)
-    {
-        visFicha.txtValPagar.setText(Calculos.calcularValorPagar(facDet)+"");
-        
-    }
+    
     
     public void setListener(){
         KeyListener keyListenertxtBuscarFecha = new KeyListener() {
@@ -256,8 +252,8 @@ public class CtrlFacturaCab implements ActionListener{
         
         KeyListener keyListenerTblDetalle = new KeyListener() {
           public void keyPressed(KeyEvent e) {
-              Calculos.calcularTotalDetalles(facDet);
-              setTotalesCabecera(facDet);
+              Calculos.calcularTotalDetalles(facDet);             
+              Calculos.calcularValorPagar(facDet,visFicha);
           }
 
           public void keyReleased(KeyEvent keyEvent) {
@@ -267,7 +263,7 @@ public class CtrlFacturaCab implements ActionListener{
           public void keyTyped(KeyEvent e) {
              int m=e.getKeyChar();
              Calculos.calcularTotalDetalles(facDet);
-             setTotalesCabecera(facDet);
+             Calculos.setTotalesCabecera(facDet,visFicha);
              
              int col =facDet.getSelectedColumn();
              int  row =facDet.getRowCount()-1;
@@ -871,7 +867,7 @@ public class CtrlFacturaCab implements ActionListener{
            
             
             Ficha ficha = new Ficha(); //Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,EntrenamientoTiempo entTmp
-            persona.setId(Validaciones.isNumVoid(visFicha.txtClienteFactura.getText()));
+            persona.setId(Validaciones.isNumVoid(visFicha.lblPersonaId.getText()));
             
             CtrlEntrenamiento ctrEnt=new CtrlEntrenamiento(ent, consEnt, visEnt,persona,visFicha);
             ctrEnt.iniciar();
@@ -882,13 +878,13 @@ public class CtrlFacturaCab implements ActionListener{
         {
            addRows(visFicha.tblFacturaDetalle);
            Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
-           setTotalesCabecera(visFicha.tblFacturaDetalle);
+           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle,visFicha);
         } 
         if (e.getSource() == visFicha.btnEliminarFilas) 
         {
            deleteRows(visFicha.tblFacturaDetalle);
            Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
-            setTotalesCabecera(visFicha.tblFacturaDetalle);
+           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle,visFicha);
         } 
         /*
          if (e.getSource() == visFicha.cmbTipoBusqueda) 

@@ -194,12 +194,7 @@ public class CtrlEntrenamiento implements ActionListener{
         }
        
      }
-    
-    public void setTotalesCabecera(JTable facDet)
-    {
-        visFicha.txtValPagar.setText(Calculos.calcularValorPagar(facDet)+"");
         
-    }
      
     public void setListener(){
         KeyListener keyListenertxtBuscarFichaPorCualquierCampo = new KeyListener() {
@@ -251,7 +246,8 @@ public class CtrlEntrenamiento implements ActionListener{
                     visFicha.lblEntrenamientoGenerado.setText(idEnt+ " "+visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 2)+" "+ visEnt.tbl_entrenamiento.getValueAt(visEnt.tbl_entrenamiento.getSelectedRow(), 5)+" ");
                     cargarEntrenamientoDetalle(visFicha.tblFacturaDetalle,idEnt);
                     Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
-                    setTotalesCabecera(visFicha.tblFacturaDetalle);
+                    Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle,visFicha);
+                   
                     visEnt.dispose();
                 
                 }

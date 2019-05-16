@@ -1873,8 +1873,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pnlVentasInterno" min="-2" pref="1144" max="-2" attributes="0"/>
-                          <EmptySpace pref="56" max="32767" attributes="0"/>
+                          <Component id="pnlVentasInterno" pref="1200" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

@@ -186,12 +186,9 @@ public class CtrlMembresias implements ActionListener{
                 if(e.getClickCount()==2)
                 {
                     int idMemb = Integer.parseInt(visMembresias.tbl_membresias.getValueAt(visMembresias.tbl_membresias.getSelectedRow(), 0)+"");
-                    double  dsctoMemb = Double.parseDouble(visMembresias.tbl_membresias.getValueAt(visMembresias.tbl_membresias.getSelectedRow(), 2)+"");
-                    visFicha.lblDsctoId.setText(idMemb+"");
-                    visFicha.txtValDscto.setText(dsctoMemb+"");
-                    
-                    double valMasDscto = Calculos.getDscto(new Double(visFicha.txtValPagar.getText()).doubleValue(), dsctoMemb);
-                    visFicha.txtValConDsctoFicha.setText(valMasDscto+"");
+                    visFicha.lblDsctoId.setText(idMemb+"");                    
+                    Calculos.setDsctuentoFromMemb(visMembresias, visFicha);
+                    Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
                     visMembresias.dispose();
                   
                 }

@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import vistas.VisFicha;
+import vistas.VisMembresia;
 
 /**
  *
@@ -175,7 +177,7 @@ public class Calculos {
          return round(val,2);
      
      }
-     public static double calcularValorPagar(JTable table)
+     public static double calcularValorPagar(JTable table,VisFicha visFicha)
      {
          String valTotDet;      
          double totDetalles = 0;
@@ -190,5 +192,43 @@ public class Calculos {
          }
          return getTwoDecimals(totDetalles);
      } 
-                         
+               
+    public static double setDescuentoFromDetEnt(VisFicha visFicha)
+    {
+                          
+        double dsctoMembtxt = Validaciones.isNumVoid10(visFicha.txtValDscto.getText());
+        double valMasDscto = Calculos.getDscto(new Double(visFicha.txtValPagar.getText()).doubleValue(), dsctoMembtxt);
+        
+        return getTwoDecimals(valMasDscto);
+    }
+    
+    public static void setDsctuentoFromMemb(VisMembresia visMemb,VisFicha visFicha)
+    {
+        double  dsctoMemb = Double.parseDouble(visMemb.tbl_membresias.getValueAt(visMemb.tbl_membresias.getSelectedRow(), 2)+"");                   
+        visFicha.txtValDscto.setText(getTwoDecimals(dsctoMemb)+"");
+    }
+    
+    public static double setTotalConIva(VisFicha visFicha)
+    {
+        double iva = Validaciones.isNumVoid10(visFicha.txtIVA.getText());
+        double valConDscto = Validaciones.isNumVoid10(visFicha.txtValConDsctoFicha.getText());
+        double totMasIva = ((valConDscto*iva)/100) +valConDscto;        
+        return getTwoDecimals(totMasIva);
+    }
+    
+    public static double getValCancelo(VisFicha visFicha)
+    {
+        double valCancelo = Validaciones.isNumVoid10(visFicha.txt_valCancelo.getText());
+        return valCancelo;
+    
+    }
+     public static void setTotalesCabecera(JTable facDet,VisFicha visFicha)
+    {
+        visFicha.txtValPagar.setText(calcularValorPagar(facDet,visFicha)+"");
+        visFicha.txtValConDsctoFicha.setText(setDescuentoFromDetEnt(visFicha)+"");
+        visFicha.txtTotalConIva.setText(setTotalConIva(visFicha)+"");
+        visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");
+    }
+     
+     
 }

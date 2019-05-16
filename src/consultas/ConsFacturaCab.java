@@ -25,8 +25,8 @@ public class ConsFacturaCab extends Conexion {
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FacturaCabecera (id_facCab,fecha_facCab, num_facCab, subTotal_facCab, total_facCab,valPendiente_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab) "
-                + " VALUES(factura_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO FacturaCabecera (id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab) "
+                + " VALUES(factura_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try 
         {            
@@ -35,12 +35,15 @@ public class ConsFacturaCab extends Conexion {
             ps.setString(1, f.getFecha_facCab());           
             ps.setString(2, f.getNum_facCab());
             ps.setDouble(3, f.getSubTotal_facCab());
-            ps.setDouble(4, f.getTotal_facCab());
-            ps.setDouble(5, f.getValPendiente_facCab());
-            ps.setInt(6, f.getPersona().getId());
-            ps.setInt(7, f.getMembresia().getId());
-            ps.setInt(8, f.getIva().getId_ivas());
-            ps.setInt(9, f.getEstado());
+            ps.setDouble(4, f.getValPagar_facCab());
+            ps.setDouble(5, f.getSubTotal_facCab());
+            ps.setDouble(6, f.getTotal_facCab());
+            ps.setDouble(7, f.getValPendiente_facCab());
+            ps.setDouble(8, f.getValCancelo_facCab());
+            ps.setInt(9, f.getPersona().getId());
+            ps.setInt(10, f.getMembresia().getId());
+            ps.setInt(11, f.getIvas().getId_ivas());
+            ps.setInt(12, f.getEstado());
             
             
             ps.execute();                                       
@@ -66,9 +69,9 @@ public class ConsFacturaCab extends Conexion {
     
     public boolean modificar(FacturaCab f)
     {
-        PreparedStatement ps = null; //id_facCab,fecha_facCab, num_facCab, subTotal_facCab, total_facCab,valPendiente_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_fac
-        Connection con = getConexion();
-        String sql = "update FacturaCabecera SET fecha_facCab=?, num_facCab=?, subTotal_facCab=?, total_facCab=?,valPendiente_facCab=?,Persona_id_per=?,Membresia_id_memb=?,Ivas_id_ivas=?,estado_facCab=?"
+        PreparedStatement ps = null;
+        Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
+        String sql = "update FacturaCabecera SET fecha_facCab=?, num_facCab=?, subTotal_facCab=?,valPagar_facCab=?,subTotal_facCab=?,total_facCab=?,valPendiente_facCab=?,valCancelo_facCab=?,Persona_id_per=?,Membresia_id_memb=?,Ivas_id_ivas=?,estado_facCab=?"
                 + " WHERE id_facCab=?";
         
         try 
@@ -79,12 +82,15 @@ public class ConsFacturaCab extends Conexion {
             ps.setString(1, f.getFecha_facCab());           
             ps.setString(2, f.getNum_facCab());
             ps.setDouble(3, f.getSubTotal_facCab());
-            ps.setDouble(4, f.getTotal_facCab());
-            ps.setDouble(5, f.getValPendiente_facCab());
-            ps.setInt(6, f.getPersona().getId());
-            ps.setInt(7, f.getMembresia().getId());
-            ps.setInt(8, f.getIva().getId_ivas());
-            ps.setInt(9, f.getEstado());
+            ps.setDouble(4, f.getValPagar_facCab());
+            ps.setDouble(5, f.getSubTotal_facCab());
+            ps.setDouble(6, f.getTotal_facCab());
+            ps.setDouble(7, f.getValPendiente_facCab());
+            ps.setDouble(8, f.getValCancelo_facCab());
+            ps.setInt(9, f.getPersona().getId());
+            ps.setInt(10, f.getMembresia().getId());
+            ps.setInt(11, f.getIvas().getId_ivas());
+            ps.setInt(12, f.getEstado());
             
             ps.execute();
             return true;
@@ -485,7 +491,7 @@ public class ConsFacturaCab extends Conexion {
         ResultSet rs = null; 
         String sql = " SELECT f.id_fac, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac AS fechaIni_fac, f.fechaFin_fac AS fechaFin_fac, f.total_fac, f.valPendiente_fac" +
                     " FROM FacturaCabecera f, persona p " +
-                    " where p.id_per = f.Persona_id_per and f.estado_fac=1 " +
+                    " where p.id_per = f.Persona_id_per and f.estado_facCab=1 " +
                     " order by id_fac asc ";
                 
         
