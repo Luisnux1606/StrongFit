@@ -453,7 +453,7 @@ insert into Membresia(id_memb,descripcion_memb,dscto_memb,ESTADO_MEMB)
 values (membresia_id_seq.NEXTVAL,'diario',2,1);
 
 insert into IVAS(id_ivas,val_ivas,estado_ivas)
-values (iva_id_seq.NEXTVAL,0,1)
+values (iva_id_seq.NEXTVAL,0,1);
 
 
 commit;

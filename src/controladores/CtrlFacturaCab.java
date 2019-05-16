@@ -749,7 +749,7 @@ public class CtrlFacturaCab implements ActionListener{
                if (Validaciones.isDateChooserVoid(jdc)) 
                {                   
                     modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
-                    modFacCab.setNum_facCab("sera numero");
+                    modFacCab.setNum_facCab("numero");
                     
                     persona.setId(Validaciones.isNumVoid(visFicha.lblPersonaId.getText()));
                     modFacCab.setPersona(persona);
