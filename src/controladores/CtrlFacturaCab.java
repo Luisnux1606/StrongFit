@@ -652,8 +652,7 @@ public class CtrlFacturaCab implements ActionListener{
        
         ConsFacturaDet consFacDet = new ConsFacturaDet();        
         CtrlFacturaDetalle facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
-       // facDetalle.setDetalles(visFicha, visFicha.lblNroFactura.getText());
-        System.out.println("entro aqui");
+
     }
     
     

@@ -550,15 +550,7 @@ public class CtrlFicha implements ActionListener{
        
     }
     
-    private void initColumnSizes(JTable table) {
-		TableColumn column = null;
-        for (int i = 0; i < 3; i++) {
-        	column = table.getColumnModel().getColumn(i);
-            if(i==1){
-            	column.setPreferredWidth(400);
-            }
-        }
-    }
+   
 
     
 }

@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.Producto;
@@ -58,8 +59,18 @@ public class CtrlFacturaDetalle implements ActionListener {
         setListener();
         limpiarTabla();
         setFormatTable(visFicha.tblFacturaDetalle);
+        
     }
     
+     private void initColumnSizes(JTable table) {
+		TableColumn column = null;
+        for (int i = 0; i < 3; i++) {
+        	column = table.getColumnModel().getColumn(i);
+            if(i==1){
+            	column.setPreferredWidth(400);
+            }
+        }
+    }
     public void setListener()
     {               
 
@@ -187,11 +198,29 @@ public class CtrlFacturaDetalle implements ActionListener {
     {
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-        table.getColumnModel().getColumn(3).setCellRenderer(tcr);
-        table.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
+        
+        int colHide[] = new int[1];
+        colHide[0]=0;
+        setHideJtableColumn(table,colHide);
+        
+        initColumnSizes(table);
+        
         table.setCellSelectionEnabled(false);
+        
     }   
     
+    public void setHideJtableColumn(JTable table, int col[])
+    {
+        for (int i = 0; i < col.length; i++) {
+            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
+            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
+            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
+        }
+       
+    
+    }
     
     public void setDetalles(VisFicha visFicha,String numFac)
     {

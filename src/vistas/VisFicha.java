@@ -1049,13 +1049,13 @@ public class VisFicha extends javax.swing.JFrame {
 
         tblFacturaDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Cantidad", "Descripcion", "V.Unitario", "V.Total"
+                "IdProducto", "Cantidad", "Descripcion", "V.Unitario", "V.Total"
             }
         ));
         jScrollPane6.setViewportView(tblFacturaDetalle);
@@ -1413,7 +1413,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(501, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1333, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
