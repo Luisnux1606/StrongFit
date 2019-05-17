@@ -464,7 +464,6 @@ CREATE TABLE Producto(
   id_prod Number NOT NULL,
   descripcion_prod  Varchar2(350 ),
   precio_prod Number(10,2),
-  stock_prod Number,
   Categoria_id_cat Number,
   estado_prod Number 
 )

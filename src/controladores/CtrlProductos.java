@@ -55,7 +55,7 @@ import vistas.VisReportes;
  *
  * @author Administrator
  */
-public class CtrlEntrenamiento implements ActionListener{
+public class CtrlProductos implements ActionListener{
 
     
     VisEntrenamiento visEnt;
@@ -69,7 +69,7 @@ public class CtrlEntrenamiento implements ActionListener{
     String cadBus;
     int locale;
     
-    public CtrlEntrenamiento(Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,VisFicha visFicha)
+    public CtrlProductos(Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,VisFicha visFicha)
     {
        
         this.ent = ent;
@@ -145,12 +145,12 @@ public class CtrlEntrenamiento implements ActionListener{
                     
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consEnt.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -318,12 +318,12 @@ public class CtrlEntrenamiento implements ActionListener{
                     model.addElement(listEntrenamiento.getString("descripcion_enttiempo"));
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consEnt.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
         visEnt.cmbTipoEnt.updateUI();
     }
@@ -362,12 +362,12 @@ public class CtrlEntrenamiento implements ActionListener{
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             consEnt.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlEntrenamiento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
         visEnt.tbl_entrenamiento.updateUI();
     }

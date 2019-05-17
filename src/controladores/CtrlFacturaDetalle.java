@@ -222,19 +222,28 @@ public class CtrlFacturaDetalle implements ActionListener {
     
     }
     
+    
+    
     public void setDetalles(VisFicha visFicha,String numFac)
     {
         JTable table = visFicha.tblFacturaDetalle;
         String num,desc,valU,valT,prodId;
-
+        int facCabId = 0;
+                
         Producto prod = new Producto();
         FacturaCab facCab = new FacturaCab();
         FacturaDetalle detalle ;
-        int idFac = 1; //consulta factura id by numFac
-                
+        
         ArrayList<FacturaDetalle> detalles=new ArrayList<>();
         ArrayList<Producto> p = new ArrayList<>();
         ArrayList<FacturaCab> f = new ArrayList<>();
+        
+        
+        if (consFacDet.getLastInvoice(facCab))               
+            facCabId = facCab.getId_facCab();
+        
+        facCab.setId_facCab(facCabId);        
+        
         for (int i = 0; i <= table.getRowCount()-1; i++) 
         {
             num = table.getValueAt(i, 1)+"";
@@ -242,20 +251,24 @@ public class CtrlFacturaDetalle implements ActionListener {
             valU = table.getValueAt(i, 3)+"";
             valT = table.getValueAt(i, 4)+"";
             prodId =table.getValueAt(i, 0)+"";
-            prod.setId_prod(Validaciones.isNumVoid(prodId));
-            facCab.setId_facCab(1);//consulra factura idFac by numFac
+            
+            //consulra factura idFac by numFac
             p.add(prod);
-            f.add(facCab);
+           
 
             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
+                
                 detalle = new FacturaDetalle();
                
                 detalle.setCantidad_facDet(Validaciones.isNumVoid(num));
                 detalle.setDescripcion_facDet(desc);
                 detalle.setValUnitario_facDet(Validaciones.isNumVoid10(valU));
                 detalle.setvTotal_facDet(Validaciones.isNumVoid10(valT));
+               
+                prod.setId_prod(Validaciones.isNumVoid(prodId));
                 detalle.setProducto_id_prod(p.get(i));
-                detalle.setFactura_id_fac(f.get(i));
+                
+                detalle.setFactura_id_fac(facCab);
                 detalle.setEstado_facDet(1);
                 
                 detalles.add(detalle);

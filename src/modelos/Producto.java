@@ -14,8 +14,7 @@ public class Producto {
    private int  id_prod;
    private String descripcion_prod;
    private double precio_prod;
-   private int stock_prod;
-   private int Categoria_id_cat;
+   private Categoria Categoria_id_cat;
    private int estado_prod;
 
     /**
@@ -61,30 +60,16 @@ public class Producto {
     }
 
     /**
-     * @return the stock_prod
-     */
-    public int getStock_prod() {
-        return stock_prod;
-    }
-
-    /**
-     * @param stock_prod the stock_prod to set
-     */
-    public void setStock_prod(int stock_prod) {
-        this.stock_prod = stock_prod;
-    }
-
-    /**
      * @return the Categoria_id_cat
      */
-    public int getCategoria_id_cat() {
+    public Categoria getCategoria_id_cat() {
         return Categoria_id_cat;
     }
 
     /**
      * @param Categoria_id_cat the Categoria_id_cat to set
      */
-    public void setCategoria_id_cat(int Categoria_id_cat) {
+    public void setCategoria_id_cat(Categoria Categoria_id_cat) {
         this.Categoria_id_cat = Categoria_id_cat;
     }
 

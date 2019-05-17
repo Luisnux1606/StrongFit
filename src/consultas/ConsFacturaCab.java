@@ -512,5 +512,42 @@ public class ConsFacturaCab extends Conexion {
         return rs;
     }
     
-    //public
+    public boolean getLastInvoice(FacturaCab fCab)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        String sql = "select fC.Id_Faccab\n" +
+                    "from facturaCabecera fC\n" +
+                    "order by Id_Faccab asc";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                     
+          
+            rs = ps.executeQuery();
+            if (rs.next()) { //ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per
+                fCab.setId_facCab(rs.getInt("Id_Faccab"));                            
+                return true;
+            }
+            return false;
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
 }

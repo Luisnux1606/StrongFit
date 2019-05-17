@@ -492,6 +492,20 @@ public class CtrlFicha implements ActionListener{
                  
         } 
         
+        if (e.getSource() == visFicha.mniProductos) 
+        {
+          
+            VisEntrenamientoTiempo visEntT = new VisEntrenamientoTiempo();
+            EntrenamientoTiempo entT  = new EntrenamientoTiempo();
+            ConsEntrenamientoTiempo consEntT = new ConsEntrenamientoTiempo();
+                
+            Ficha ficha = new Ficha();
+            CtrlEntrenamientoTiempo ctrEntT=new CtrlEntrenamientoTiempo(entT, consEntT, visEntT,visFicha);
+            ctrEntT.iniciar();
+            ctrEntT.locale = 1;
+                 
+        }
+        
           
          if (e.getSource() == visFicha.mniReportes) 
          {
