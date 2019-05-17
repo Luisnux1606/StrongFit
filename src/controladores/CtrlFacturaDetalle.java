@@ -66,7 +66,7 @@ public class CtrlFacturaDetalle implements ActionListener {
 		TableColumn column = null;
         for (int i = 0; i < 3; i++) {
         	column = table.getColumnModel().getColumn(i);
-            if(i==1){
+            if(i==2){
             	column.setPreferredWidth(400);
             }
         }
@@ -74,7 +74,7 @@ public class CtrlFacturaDetalle implements ActionListener {
     public void setListener()
     {               
 
-        int col = 0;      
+        int col = 1;      
         JTable facDet = visFicha.tblFacturaDetalle;
         facDet.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         facDet.setColumnSelectionAllowed(true);
@@ -101,10 +101,10 @@ public class CtrlFacturaDetalle implements ActionListener {
                               
                   switch(col)
                   {
-                    case 2: 
+                    case 3: 
 
                           break;
-                    case 3:
+                    case 4:
                           row = facDet.getSelectedRow()-1;                                                   
                           addRows(visFicha.tblFacturaDetalle);
                           col = 0;

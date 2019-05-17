@@ -118,7 +118,7 @@ public class CtrlFicha implements ActionListener{
     
     public void setTableModel(JTable table)
     {
-        initColumnSizes(table);
+       
         
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.RIGHT);
