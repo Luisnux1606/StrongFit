@@ -24,14 +24,14 @@ public class ConsFacturaDet extends Conexion {
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FacturaCabecera (id_facCab,fecha_facCab, num_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab) "
+        String sql = "INSERT INTO FacturaCabecera (id_facDet,cantidad_facDet, descripcion_facDet,valUnitario_facDet,vTotal_facDet,Producto_id_prod,Factura_id_fac,estado_facDet) "
                 + " VALUES(factura_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
 
         try 
         {            
             ps = con.prepareStatement(sql);
-            for (FacturaDetalle facDet1 : facDet) {
-              ps.setInt(1,facDet1.getCantidad_facDet());
+            for (FacturaDetalle listDets : facDet) {
+              ps.setInt(1,listDets.getCantidad_facDet());
             }
            
                         
