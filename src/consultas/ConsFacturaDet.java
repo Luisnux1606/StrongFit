@@ -24,23 +24,28 @@ public class ConsFacturaDet extends Conexion {
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FacturaCabecera (id_facDet,cantidad_facDet, descripcion_facDet,valUnitario_facDet,vTotal_facDet,Producto_id_prod,Factura_id_fac,estado_facDet) "
+        String sql = "INSERT INTO FacturaDetalle (id_facDet,cantidad_facDet, descripcion_facDet,valUnitario_facDet,vTotal_facDet,Producto_id_prod,Factura_id_fac,estado_facDet) "
                 + " VALUES(detalle_id_seq.NEXTVAL,?,?,?,?,?,?,?)";
 
         try 
         {            
             ps = con.prepareStatement(sql);
             
-            for (FacturaDetalle listDets : facDet) {
-              ps.setInt(1,listDets.getCantidad_facDet());
-              ps.setString(1,listDets.getDescripcion_facDet());
-              ps.setDouble(1,listDets.getValUnitario_facDet());
-              ps.setDouble(1,listDets.getvTotal_facDet());
-              ps.setInt(1,listDets.getProducto_id_prod());
+            for (FacturaDetalle listDets : facDet) 
+            {
+                ps.setInt(1,listDets.getCantidad_facDet());
+                ps.setString(2,listDets.getDescripcion_facDet());
+                ps.setDouble(3,listDets.getValUnitario_facDet());
+                ps.setDouble(4,listDets.getvTotal_facDet());
+                ps.setInt(5,listDets.getProducto_id_prod().getId_prod());
+                ps.setInt(6,listDets.getFactura_id_fac().getId_facCab());
+                ps.setInt(7, listDets.getEstado_facDet());
+               
+                ps.execute();
             }
            
                         
-            ps.execute();                                       
+                                                   
             return true;
         } 
         catch (Exception e) 

@@ -7,11 +7,13 @@ package strongfit;
 
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
+import consultas.ConsFacturaDet;
 import consultas.ConsFicha;
 import consultas.ConsMedidas;
 import consultas.ConsPersona;
 import controladores.CtrlAnalisis;
 import controladores.CtrlFacturaCab;
+import controladores.CtrlFacturaDetalle;
 import controladores.CtrlFicha;
 import controladores.CtrlMedidas;
 import controladores.CtrlPersonas;
@@ -48,6 +50,7 @@ public class StrongFit {
         ConsMedidas consMed = new ConsMedidas();
         ConsAnalisis consAna = new ConsAnalisis();
         ConsFacturaCab consFacCab = new ConsFacturaCab();
+        ConsFacturaDet consFacDet = new ConsFacturaDet();
         
         VisPersona visPer = new VisPersona();   
         VisFicha visFicha = new VisFicha();        
@@ -61,7 +64,7 @@ public class StrongFit {
         CtrlMedidas ctrlMed = new CtrlMedidas(med, consMed, visFicha);        
         CtrlAnalisis ctrlAna = new CtrlAnalisis(ana, consAna, visFicha);
         CtrlFacturaCab ctrlFacturaCab = new CtrlFacturaCab(facCab, consFacCab, visFicha, visMemb, per);
-        
+      //  CtrlFacturaDetalle ctrlFacDet = new CtrlFacturaDetalle(consFacDet, visFicha);
         
         CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha );
         ctrlFicha.iniciar();

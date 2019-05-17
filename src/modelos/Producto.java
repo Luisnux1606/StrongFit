@@ -17,6 +17,90 @@ public class Producto {
    private int stock_prod;
    private int Categoria_id_cat;
    private int estado_prod;
+
+    /**
+     * @return the id_prod
+     */
+    public int getId_prod() {
+        return id_prod;
+    }
+
+    /**
+     * @param id_prod the id_prod to set
+     */
+    public void setId_prod(int id_prod) {
+        this.id_prod = id_prod;
+    }
+
+    /**
+     * @return the descripcion_prod
+     */
+    public String getDescripcion_prod() {
+        return descripcion_prod;
+    }
+
+    /**
+     * @param descripcion_prod the descripcion_prod to set
+     */
+    public void setDescripcion_prod(String descripcion_prod) {
+        this.descripcion_prod = descripcion_prod;
+    }
+
+    /**
+     * @return the precio_prod
+     */
+    public double getPrecio_prod() {
+        return precio_prod;
+    }
+
+    /**
+     * @param precio_prod the precio_prod to set
+     */
+    public void setPrecio_prod(double precio_prod) {
+        this.precio_prod = precio_prod;
+    }
+
+    /**
+     * @return the stock_prod
+     */
+    public int getStock_prod() {
+        return stock_prod;
+    }
+
+    /**
+     * @param stock_prod the stock_prod to set
+     */
+    public void setStock_prod(int stock_prod) {
+        this.stock_prod = stock_prod;
+    }
+
+    /**
+     * @return the Categoria_id_cat
+     */
+    public int getCategoria_id_cat() {
+        return Categoria_id_cat;
+    }
+
+    /**
+     * @param Categoria_id_cat the Categoria_id_cat to set
+     */
+    public void setCategoria_id_cat(int Categoria_id_cat) {
+        this.Categoria_id_cat = Categoria_id_cat;
+    }
+
+    /**
+     * @return the estado_prod
+     */
+    public int getEstado_prod() {
+        return estado_prod;
+    }
+
+    /**
+     * @param estado_prod the estado_prod to set
+     */
+    public void setEstado_prod(int estado_prod) {
+        this.estado_prod = estado_prod;
+    }
    
    
 }

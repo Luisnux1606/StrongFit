@@ -22,6 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.Producto;
 import vistas.VisFicha;
@@ -37,9 +38,9 @@ public class CtrlFacturaDetalle implements ActionListener {
     private ConsFacturaDet consFacDet;
     private VisFicha visFicha;
     
-    public CtrlFacturaDetalle(ArrayList<FacturaDetalle> facDet,ConsFacturaDet consFacDet,VisFicha visFicha)
+    public CtrlFacturaDetalle(ConsFacturaDet consFacDet,VisFicha visFicha)
     {
-        this.facDet = facDet;
+        this.facDet = new ArrayList<>();
         this.consFacDet = consFacDet;
         this.visFicha = visFicha;
         
@@ -55,7 +56,8 @@ public class CtrlFacturaDetalle implements ActionListener {
         this.visFicha.chkEntrenamiento.addActionListener(this);
         
         setListener();
-       
+        limpiarTabla();
+        setFormatTable(visFicha.tblFacturaDetalle);
     }
     
     public void setListener()
@@ -116,7 +118,19 @@ public class CtrlFacturaDetalle implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e) {
-        
+        if (e.getSource() == visFicha.btnGuardarFacCab) 
+       {       
+           ArrayList<JDateChooser> jdc=new ArrayList<>();
+           jdc.add(visFicha.dtcFechaFacCab);
+           
+               if (Validaciones.isDateChooserVoid(jdc)) 
+               {                                        
+                       
+                      setDetalles(visFicha, visFicha.lblNroFactura.getText());
+                
+                 
+               }        
+        }
         if (e.getSource() == visFicha.btnLimpiarFacCab) 
         {
             limpiarTabla();
@@ -156,10 +170,15 @@ public class CtrlFacturaDetalle implements ActionListener {
     }
     public void deleteRows(JTable table)
     {
-        DefaultTableModel tb = (DefaultTableModel) table.getModel();  
-        int n = table.getSelectedRow();
-        
+        DefaultTableModel tb = (DefaultTableModel) table.getModel(); 
+        int n =0 ;
+        n = table.getSelectedRow();
+        if (n>=0) 
             tb.removeRow(n);
+        else
+            Validaciones.getMensaje("Debe seleccionar una fila para eliminar");
+ 
+        
         
         
     }
@@ -177,35 +196,40 @@ public class CtrlFacturaDetalle implements ActionListener {
     public void setDetalles(VisFicha visFicha,String numFac)
     {
         JTable table = visFicha.tblFacturaDetalle;
-        String num;
-        String desc;
-        String valU;
-        String valT;
-        Producto prod;
+        String num,desc,valU,valT;
+
+        Producto prod = new Producto();
+        FacturaCab facCab = new FacturaCab();
+        FacturaDetalle detalle ;
         int idFac = 1; //consulta factura id by numFac
                 
-        FacturaDetalle detalle;
+        ArrayList<FacturaDetalle> detalles=new ArrayList<>();
         ArrayList<Producto> p = new ArrayList<>();
+        ArrayList<FacturaCab> f = new ArrayList<>();
         for (int i = 0; i <= table.getRowCount()-1; i++) 
         {
             num = table.getValueAt(i, 0)+"";
-            desc = table.getValueAt(i, 1)+"";
+            desc = table.getValueAt(i, 1)+"";     
             valU = table.getValueAt(i, 2)+"";
             valT = table.getValueAt(i, 3)+"";
-            idProd = 1;//consulra productos idProd by nomProd
-            
+            prod.setId_prod(1);//consulra productos idProd by nomProd
+            facCab.setId_facCab(1);//consulra factura idFac by numFac
+            p.add(prod);
+            f.add(facCab);
 
             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
-                
                 detalle = new FacturaDetalle();
+               
                 detalle.setCantidad_facDet(Validaciones.isNumVoid(num));
                 detalle.setDescripcion_facDet(desc);
                 detalle.setValUnitario_facDet(Validaciones.isNumVoid10(valU));
                 detalle.setvTotal_facDet(Validaciones.isNumVoid10(valT));
-                detalle.setProducto_id_prod(prod.);
-                detalle.setFactura_id_fac();
+                detalle.setProducto_id_prod(p.get(i));
+                detalle.setFactura_id_fac(f.get(i));
                 detalle.setEstado_facDet(1);
-                facDet.add(detalle);
+                
+                detalles.add(detalle);
+                facDet.add(detalles.get(i));
 
             }
         }                 

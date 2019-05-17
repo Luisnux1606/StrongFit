@@ -101,7 +101,7 @@ public class CtrlFacturaCab implements ActionListener{
         iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
-              
+        setFacturaDetalle(visFicha);
 //        showTable();
     }
     
@@ -649,9 +649,11 @@ public class CtrlFacturaCab implements ActionListener{
     
     public void setFacturaDetalle(VisFicha visFicha)
     {
-        ArrayList<FacturaDetalle> facDet = new ArrayList<>(); ////ArrayList<JDateChooser> jdc=new ArrayList<>();
+       
         ConsFacturaDet consFacDet = new ConsFacturaDet();        
-        CtrlFacturaDetalle facDetalle = new CtrlFacturaDetalle(facDet, consFacDet, visFicha);
+        CtrlFacturaDetalle facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
+       // facDetalle.setDetalles(visFicha, visFicha.lblNroFactura.getText());
+        System.out.println("entro aqui");
     }
     
     
@@ -665,7 +667,7 @@ public class CtrlFacturaCab implements ActionListener{
                if (Validaciones.isDateChooserVoid(jdc)) 
                {                                        
                         setFacturaCabecera(visFicha);
-                        setFacturaDetalle(visFicha);
+                       // setFacturaDetalle(visFicha);
                    
                     if (consFicha.registrar(modFacCab)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
