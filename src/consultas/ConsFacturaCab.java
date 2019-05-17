@@ -43,8 +43,7 @@ public class ConsFacturaCab extends Conexion {
             ps.setInt(9, f.getMembresia().getId());
             ps.setInt(10, f.getIvas().getId_ivas());
             ps.setInt(11, f.getEstado());
-            
-            
+                        
             ps.execute();                                       
             return true;
         } 

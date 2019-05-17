@@ -41,7 +41,7 @@ public class Calculos {
          valTotal = val   - val2;
              
        
-        return valTotal;
+        return getTwoDecimals(valTotal);
      }
       
       public static String getCurrentDate()
@@ -219,7 +219,7 @@ public class Calculos {
     public static double getValCancelo(VisFicha visFicha)
     {
         double valCancelo = Validaciones.isNumVoid10(visFicha.txt_valCancelo.getText());
-        return valCancelo;
+        return getTwoDecimals(valCancelo);
     
     }
      public static void setTotalesCabecera(JTable facDet,VisFicha visFicha)
@@ -227,7 +227,10 @@ public class Calculos {
         visFicha.txtValPagar.setText(calcularValorPagar(facDet,visFicha)+"");
         visFicha.txtValConDsctoFicha.setText(setDescuentoFromDetEnt(visFicha)+"");
         visFicha.txtTotalConIva.setText(setTotalConIva(visFicha)+"");
+        
+        visFicha.txt_valCancelo.setText(setTotalConIva(visFicha)+"");
         visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");
+       
     }
      
      

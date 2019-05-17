@@ -162,6 +162,7 @@ CREATE SEQUENCE iva_id_seq
 /
 
 
+
 -- Create tables section -------------------------------------------------
 CREATE TABLE Analisis(
   id_ana Number NOT NULL,
@@ -454,6 +455,9 @@ values (membresia_id_seq.NEXTVAL,'diario',2,1);
 
 insert into IVAS(id_ivas,val_ivas,estado_ivas)
 values (iva_id_seq.NEXTVAL,0,1);
+
+insert into entrentiempo(id_enttmp,descripcion_enttiempo,costo_enttiempo,estado_entiempo)
+values (entrenTiempo_id_seq.NEXTVAL,'diario',2,1);
 
 
 commit;

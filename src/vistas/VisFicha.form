@@ -2123,14 +2123,24 @@
                                               <Component id="dtcFechaFacCab" pref="179" max="32767" attributes="0"/>
                                               <Component id="txtClienteFactura" max="32767" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="lblPersonaId" min="-2" pref="52" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="lblPersonaId" min="-2" pref="52" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
+                                                  <Component id="lblNro" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="lblNroFactura" min="-2" pref="60" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                       <Component id="pnlEntrenamientoEnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="709" max="32767" attributes="0"/>
+                                  <EmptySpace pref="478" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2143,6 +2153,8 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
                                               <Component id="dtcFechaFacCab" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblNro" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblNroFactura" min="-2" pref="16" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
@@ -2239,6 +2251,22 @@
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblPersonaId">
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblNro">
+                          <Properties>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="13" style="1"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Numbero Registro:"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JLabel" name="lblNroFactura">
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>

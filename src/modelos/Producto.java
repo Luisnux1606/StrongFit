@@ -9,6 +9,6 @@ package modelos;
  *
  * @author Administrator
  */
-public class CtrlFacturaDetalle {
+public class Producto {
     
 }
