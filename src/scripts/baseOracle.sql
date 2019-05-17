@@ -161,6 +161,76 @@ CREATE SEQUENCE iva_id_seq
  ORDER
 /
 
+-- Create sequences CONTABILIDAD -------------------------------------------------
+CREATE SEQUENCE tipoAsiento_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
+
+CREATE SEQUENCE asiento_id_seq
+ INCREMENT BY 1
+ MAXVALUE 1000000000
+ MINVALUE 0
+ CACHE 20
+/
+
+CREATE SEQUENCE tipoDoc_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
+
+CREATE SEQUENCE docRef_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
+
+CREATE SEQUENCE asientoCta_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ MINVALUE 0
+ CACHE 20
+/
+
+CREATE SEQUENCE tipoCta_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
+
+CREATE SEQUENCE nivel_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
+
+CREATE SEQUENCE cuentaMov_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
+
+CREATE SEQUENCE cuenta_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
+
+CREATE SEQUENCE mayorDet_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+/
 
 
 -- Create tables section -------------------------------------------------
@@ -433,6 +503,162 @@ ALTER TABLE FacturaDetalle ADD CONSTRAINT fk_id_prod FOREIGN KEY (Producto_id_pr
 /
 -- Create relationships section  ------------------------------------------------- 
 ALTER TABLE FacturaDetalle ADD CONSTRAINT fk_id_fac FOREIGN KEY (Factura_id_fac) REFERENCES FacturaCabecera (id_facCab)
+/
+
+
+-- Create tables CONTABILIDAD -------------------------------------------------
+
+-- Table CONTA_TIPOASIENTO
+CREATE TABLE Conta_TipoAsiento(
+  id_tipasi Number,
+  descripcion_tipasi Varchar2(100 ),
+  estado_tipasi number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_TipoAsiento ADD CONSTRAINT pk_id_tipasi PRIMARY KEY (id_tipasi)
+/
+
+-- Table CONTA_ASIENTO
+CREATE TABLE Conta_Asiento(
+  id_asi Number CONSTRAINT SYS_C004382 NOT NULL,
+  concepto_asi Varchar2(300 ),
+  numero_asi Number,
+  fecha_asi Varchar2(45 ),
+  estado_asi number,
+  TipoAsiento_id_tipasi Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_Asiento ADD CONSTRAINT pk_id_asi PRIMARY KEY (id_asi)
+/
+ALTER TABLE Conta_Asiento ADD CONSTRAINT fk_id_tipasi FOREIGN KEY (TipoAsiento_id_tipasi) REFERENCES Conta_TipoAsiento (id_tipasi)
+/
+
+CREATE TABLE Conta_TipoDocumento(
+  id_tipdoc Number CONSTRAINT SYS_C004394 NOT NULL,
+  descripcion_tipdoc Varchar2(100 ),
+  estado_tipdoc number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_TipoDocumento ADD CONSTRAINT pk_id_tipdoc PRIMARY KEY (id_tipdoc)
+/
+
+CREATE TABLE Conta_DocumentoReferencia(
+  id_docref Number CONSTRAINT SYS_C004390 NOT NULL,
+  num_docref Varchar2(100 ),
+  descripcion_docref Varchar2(100 ),
+  estado_docref number,
+  TipoDocumento_id_tipdoc Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_DocumentoReferencia ADD CONSTRAINT pk_id_docref PRIMARY KEY (id_docref)
+/
+ALTER TABLE Conta_DocumentoReferencia ADD CONSTRAINT fk_id_tipdoc FOREIGN KEY (TipoDocumento_id_tipdoc) REFERENCES Conta_TipoDocumento (id_tipdoc)
+/
+
+CREATE TABLE Conta_TipoCuenta(
+  id_tipcta Number CONSTRAINT SYS_C004388 NOT NULL,
+  descripcion_tipcta Varchar2(100 ),
+  estado_tipcta number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_TipoCuenta ADD CONSTRAINT pk_id_tipcta PRIMARY KEY (id_tipcta)
+/
+
+CREATE TABLE Conta_Nivel(
+  id_niv Number CONSTRAINT SYS_NIVEL NOT NULL,
+  valor_niv Number,
+  descripcion_niv Varchar2(100),
+  estado_niv number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_Nivel ADD CONSTRAINT pk_id_niv PRIMARY KEY (id_niv)
+/
+
+-- Table CONTA_CTA_MOVIMIENTOS
+
+CREATE TABLE Conta_CuentaMovimiento(
+  id_ctamov Number CONSTRAINT SYS_CTAMOV NOT NULL,
+  codigo_ctamov Varchar2(100 ),
+  descripcion_ctamov Varchar2(100 ),
+  estado_ctamov number
+  )
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_CuentaMovimiento ADD CONSTRAINT pk_id_ctamov PRIMARY KEY (id_ctamov)
+/
+
+CREATE TABLE Conta_Cuenta(
+  id_cta Number CONSTRAINT SYS_C004384 NOT NULL,
+  codigo_cta Varchar2(100 ),
+  nombre_cta Varchar2(100 ),
+  est_enlace_cta Number,
+  TipoCuenta_id_tipcta Number,
+  Nivel_id_niv Number,
+  CuentaMovimiento_id_ctamov Number,
+  rec_id_cta Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_Cuenta ADD CONSTRAINT pk_id_cta PRIMARY KEY (id_cta)
+/
+ALTER TABLE Conta_Cuenta ADD CONSTRAINT fk_id_tipcta FOREIGN KEY (TipoCuenta_id_tipcta) REFERENCES Conta_TipoCuenta (id_tipcta)
+/
+ALTER TABLE Conta_Cuenta ADD CONSTRAINT fk_id_niv FOREIGN KEY (Nivel_id_niv) REFERENCES Conta_Nivel (id_niv)
+/
+ALTER TABLE Conta_Cuenta ADD CONSTRAINT fk_id_ctamov FOREIGN KEY (CuentaMovimiento_id_ctamov) REFERENCES Conta_CuentaMovimiento (id_ctamov)
+/
+ALTER TABLE Conta_Cuenta ADD CONSTRAINT fk_Recursiva_Cuentas FOREIGN KEY (rec_id_cta) REFERENCES Conta_Cuenta (id_cta)
+/
+
+CREATE TABLE Conta_AsientoCuenta(
+  id_asicta Number CONSTRAINT SYS_C004386 NOT NULL,
+  fecha_asicta Varchar2(45 ),
+  debe_asicta Number(10,2),
+  haber_asicta Number(10,2),
+  id_cta_aux_asicta Number(10,2),
+  id_cta_elegida_asicta Number,
+  nota_asicta Varchar2(100 ),
+  ordena_dh_asicta Varchar2(100 ),
+  Asiento_id_asi Number,
+  DocumentoReferencia_id_docref Number,
+  Cuenta_id_cta Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_AsientoCuenta ADD CONSTRAINT pk_id_asicta PRIMARY KEY (id_asicta)
+/
+ALTER TABLE Conta_AsientoCuenta ADD CONSTRAINT fk_id_asi FOREIGN KEY (Asiento_id_asi) REFERENCES Conta_Asiento (id_asi)
+/
+ALTER TABLE Conta_AsientoCuenta ADD CONSTRAINT fk_id_docref FOREIGN KEY (DocumentoReferencia_id_docref) REFERENCES Conta_DocumentoReferencia (id_docref)
+/
+ALTER TABLE Conta_AsientoCuenta ADD CONSTRAINT fk_id_cta FOREIGN KEY (Cuenta_id_cta) REFERENCES Conta_Cuenta (id_cta)
+/
+
+CREATE TABLE Conta_MayorDetalle(
+  id_maydet Number CONSTRAINT SYS_C004392 NOT NULL,
+  fecha_maydet Varchar2(45 ),
+  debe_maydet Number(10,2),
+  haber_maydet Number(10,2),
+  saldo_maydet Number(10,2),
+  saldo_cierreasiento_maydet Number(10,2),
+  saldo_debealcomp_maydet Number(10,2),
+  saldo_haberalcomp_maydet Number(10,2),
+  total_debealcomp_maydet Number(10,2),
+  total_haberalcomp_maydet Number(10,2),
+  asientocierre_maydet Varchar2(50 ),
+  Cuenta_id_cta Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+ALTER TABLE Conta_MayorDetalle ADD CONSTRAINT pk_id_maydet PRIMARY KEY (id_maydet)
+/
+ALTER TABLE Conta_MayorDetalle ADD CONSTRAINT fk_id_ctas FOREIGN KEY (Cuenta_id_cta) REFERENCES Conta_Cuenta (id_cta)
 /
 
 
