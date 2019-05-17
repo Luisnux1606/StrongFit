@@ -19,8 +19,8 @@ public class FacturaDetalle {
   private String descripcion_facDet;
   private double valUnitario_facDet;
   private double vTotal_facDet;
-  private int Producto_id_prod;
-  private int Factura_id_fac;
+  private Producto Producto_id_prod;
+  private FacturaCab Factura_id_fac;
   private int estado_facDet;
   
   
@@ -103,28 +103,28 @@ public class FacturaDetalle {
     /**
      * @return the Producto_id_prod
      */
-    public int getProducto_id_prod() {
+    public Producto getProducto_id_prod() {
         return Producto_id_prod;
     }
 
     /**
      * @param Producto_id_prod the Producto_id_prod to set
      */
-    public void setProducto_id_prod(int Producto_id_prod) {
+    public void setProducto_id_prod(Producto Producto_id_prod) {
         this.Producto_id_prod = Producto_id_prod;
     }
 
     /**
      * @return the Factura_id_fac
      */
-    public int getFactura_id_fac() {
+    public FacturaCab getFactura_id_fac() {
         return Factura_id_fac;
     }
 
     /**
      * @param Factura_id_fac the Factura_id_fac to set
      */
-    public void setFactura_id_fac(int Factura_id_fac) {
+    public void setFactura_id_fac(FacturaCab Factura_id_fac) {
         this.Factura_id_fac = Factura_id_fac;
     }
 

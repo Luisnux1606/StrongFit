@@ -11,4 +11,12 @@ package modelos;
  */
 public class Producto {
     
+   private int  id_prod;
+   private String descripcion_prod;
+   private double precio_prod;
+   private int stock_prod;
+   private int Categoria_id_cat;
+   private int estado_prod;
+   
+   
 }

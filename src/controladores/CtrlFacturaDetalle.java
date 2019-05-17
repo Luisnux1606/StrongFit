@@ -181,7 +181,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         String desc;
         String valU;
         String valT;
-        int idProd;
+        Producto prod;
         int idFac = 1; //consulta factura id by numFac
                 
         FacturaDetalle detalle;
@@ -202,8 +202,8 @@ public class CtrlFacturaDetalle implements ActionListener {
                 detalle.setDescripcion_facDet(desc);
                 detalle.setValUnitario_facDet(Validaciones.isNumVoid10(valU));
                 detalle.setvTotal_facDet(Validaciones.isNumVoid10(valT));
-                detalle.setProducto_id_prod(idProd);
-                detalle.setFactura_id_fac(idFac);
+                detalle.setProducto_id_prod(prod.);
+                detalle.setFactura_id_fac();
                 detalle.setEstado_facDet(1);
                 facDet.add(detalle);
 
