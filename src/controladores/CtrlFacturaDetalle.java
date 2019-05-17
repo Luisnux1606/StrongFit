@@ -107,7 +107,7 @@ public class CtrlFacturaDetalle implements ActionListener {
                     case 4:
                           row = facDet.getSelectedRow()-1;                                                   
                           addRows(visFicha.tblFacturaDetalle);
-                          col = 0;
+                          col = 1;
                           row = visFicha.tblFacturaDetalle.getRowCount()-1;
                           visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);                        
                           break;
@@ -225,7 +225,7 @@ public class CtrlFacturaDetalle implements ActionListener {
     public void setDetalles(VisFicha visFicha,String numFac)
     {
         JTable table = visFicha.tblFacturaDetalle;
-        String num,desc,valU,valT;
+        String num,desc,valU,valT,prodId;
 
         Producto prod = new Producto();
         FacturaCab facCab = new FacturaCab();
@@ -237,11 +237,12 @@ public class CtrlFacturaDetalle implements ActionListener {
         ArrayList<FacturaCab> f = new ArrayList<>();
         for (int i = 0; i <= table.getRowCount()-1; i++) 
         {
-            num = table.getValueAt(i, 0)+"";
-            desc = table.getValueAt(i, 1)+"";     
-            valU = table.getValueAt(i, 2)+"";
-            valT = table.getValueAt(i, 3)+"";
-            prod.setId_prod(1);//consulra productos idProd by nomProd
+            num = table.getValueAt(i, 1)+"";
+            desc = table.getValueAt(i, 2)+"";     
+            valU = table.getValueAt(i, 3)+"";
+            valT = table.getValueAt(i, 4)+"";
+            prodId =table.getValueAt(i, 0)+"";
+            prod.setId_prod(Validaciones.isNumVoid(prodId));
             facCab.setId_facCab(1);//consulra factura idFac by numFac
             p.add(prod);
             f.add(facCab);
