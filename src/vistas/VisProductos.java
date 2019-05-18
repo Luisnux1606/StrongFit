@@ -35,7 +35,7 @@ public class VisProductos extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_membresias = new javax.swing.JTable();
+        tbl_productos = new javax.swing.JTable();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txt_id = new javax.swing.JTextField();
@@ -47,6 +47,7 @@ public class VisProductos extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         Categoria = new javax.swing.JLabel();
         txtCategoria = new javax.swing.JTextField();
+        cbxCategoria = new javax.swing.JComboBox<>();
         txtBuscarNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -73,7 +74,7 @@ public class VisProductos extends javax.swing.JFrame {
         pnl_personas.add(btnEliminar);
         btnEliminar.setBounds(110, 20, 50, 40);
 
-        tbl_membresias.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -92,9 +93,9 @@ public class VisProductos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_membresias.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tbl_membresias);
-        tbl_membresias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_productos.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tbl_productos);
+        tbl_productos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
         jScrollPane1.setBounds(10, 310, 880, 220);
@@ -109,7 +110,7 @@ public class VisProductos extends javax.swing.JFrame {
         pnl_personas.add(btnGuardar);
         btnGuardar.setBounds(10, 20, 40, 40);
         pnl_personas.add(txt_id);
-        txt_id.setBounds(430, 10, 30, 22);
+        txt_id.setBounds(430, 10, 30, 20);
 
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setLayout(null);
@@ -120,7 +121,7 @@ public class VisProductos extends javax.swing.JFrame {
 
         jLabel3.setText("Precio:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(12, 48, 70, 16);
+        jLabel3.setBounds(12, 48, 70, 14);
 
         txt_descripcionProd.setName("cedula"); // NOI18N
         txt_descripcionProd.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +130,7 @@ public class VisProductos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_descripcionProd);
-        txt_descripcionProd.setBounds(142, 13, 190, 22);
+        txt_descripcionProd.setBounds(142, 13, 190, 20);
 
         txtPrecioProd.setName("nombre"); // NOI18N
         txtPrecioProd.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +139,7 @@ public class VisProductos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtPrecioProd);
-        txtPrecioProd.setBounds(142, 48, 190, 22);
+        txtPrecioProd.setBounds(142, 48, 190, 20);
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
@@ -148,9 +149,13 @@ public class VisProductos extends javax.swing.JFrame {
 
         Categoria.setText("Categoria:");
         jPanel1.add(Categoria);
-        Categoria.setBounds(10, 90, 70, 16);
+        Categoria.setBounds(10, 90, 70, 14);
         jPanel1.add(txtCategoria);
-        txtCategoria.setBounds(140, 90, 190, 22);
+        txtCategoria.setBounds(140, 90, 190, 20);
+
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Servicio Gimnasio", "Producto"}));
+        jPanel1.add(cbxCategoria);
+        cbxCategoria.setBounds(140, 120, 190, 20);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
@@ -161,11 +166,11 @@ public class VisProductos extends javax.swing.JFrame {
             }
         });
         pnl_personas.add(txtBuscarNombre);
-        txtBuscarNombre.setBounds(10, 280, 150, 22);
+        txtBuscarNombre.setBounds(10, 280, 150, 20);
 
         jLabel8.setText("Buscar por nombre:");
         pnl_personas.add(jLabel8);
-        jLabel8.setBounds(10, 260, 130, 16);
+        jLabel8.setBounds(10, 260, 130, 14);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -295,6 +300,7 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
+    public javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
@@ -307,7 +313,7 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JMenuItem mniReportes;
     public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;
-    public javax.swing.JTable tbl_membresias;
+    public javax.swing.JTable tbl_productos;
     public javax.swing.JTextField txtBuscarNombre;
     public javax.swing.JTextField txtCategoria;
     public javax.swing.JTextField txtPrecioProd;

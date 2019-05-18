@@ -993,7 +993,7 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblNroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addContainerGap(487, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1016,7 +1016,7 @@ public class VisFicha extends javax.swing.JFrame {
                         .addComponent(lblPersonaId, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(chkEntrenamiento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1229,7 +1229,7 @@ public class VisFicha extends javax.swing.JFrame {
                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEliminarFilas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregarFilas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 11, Short.MAX_VALUE))
                     .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                         .addGap(872, 872, 872)
                         .addComponent(lblIvaId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1314,7 +1314,7 @@ public class VisFicha extends javax.swing.JFrame {
                     .addComponent(lblTotalConIva))
                 .addGap(12, 12, 12)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlVentasLayout = new javax.swing.GroupLayout(pnlVentas);
@@ -1375,6 +1375,11 @@ public class VisFicha extends javax.swing.JFrame {
         mniPersonas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mniPersonas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/personas.png"))); // NOI18N
         mniPersonas.setText("Personas");
+        mniPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniPersonasActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniPersonas);
 
         mniMembresias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -1393,6 +1398,11 @@ public class VisFicha extends javax.swing.JFrame {
 
         mniProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/productos.png"))); // NOI18N
         mniProductos.setText("Productos");
+        mniProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniProductosActionPerformed(evt);
+            }
+        });
         jMenu1.add(mniProductos);
 
         jMenuBar1.add(jMenu1);
@@ -1418,7 +1428,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(501, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1333, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1335, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1469,6 +1479,14 @@ public class VisFicha extends javax.swing.JFrame {
     private void btnEliminarFilasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFilasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarFilasActionPerformed
+
+    private void mniPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniPersonasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniPersonasActionPerformed
+
+    private void mniProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mniProductosActionPerformed
 
     /**
      * @param args the command line arguments

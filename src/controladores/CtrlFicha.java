@@ -16,6 +16,7 @@ import consultas.ConsFicha;
 import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
+import consultas.ConsProductos;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import modelos.Analisis;
+import modelos.Categoria;
 import modelos.Entrenamiento;
 import modelos.EntrenamientoTiempo;
 import modelos.FacturaCab;
@@ -45,12 +47,14 @@ import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
+import modelos.Producto;
 import vistas.VisBuscarVentas;
 import vistas.VisEntrenamiento;
 import vistas.VisEntrenamientoTiempo;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
+import vistas.VisProductos;
 import vistas.VisReportes;
 
 /**
@@ -98,7 +102,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniConsultasClientes.addActionListener(this);
         this.visFicha.menuSalir.addActionListener(this);
         this.visFicha.mniEntrenamientoTiempo.addActionListener(this);
-        
+        this.visFicha.mniProductos.addActionListener(this);
         
         this.visFicha.tabp_ficha.setSelectedIndex(2);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
@@ -397,9 +401,10 @@ public class CtrlFicha implements ActionListener{
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == visFicha.btnGuardarFichaG) 
-       {       
+    public void actionPerformed(ActionEvent e) 
+    {
+        if (e.getSource() == visFicha.btnGuardarFichaG) 
+        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dchFecha);
            
@@ -492,7 +497,7 @@ public class CtrlFicha implements ActionListener{
                  
         } 
         
-        if (e.getSource() == visFicha.mniProductos) 
+        if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
         {
           
             VisEntrenamientoTiempo visEntT = new VisEntrenamientoTiempo();
@@ -528,7 +533,8 @@ public class CtrlFicha implements ActionListener{
             
          }
          
-         if (e.getSource() == visFicha.mniPersonas) {
+         if (e.getSource() == visFicha.mniPersonas) 
+         {
             
             VisPersona visPer = new VisPersona();
             Persona per  = new Persona();
@@ -549,7 +555,17 @@ public class CtrlFicha implements ActionListener{
             CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(facCab, consFacCab, visBuscarVentas,visFicha);
             ctrBuscarVentas.iniciar();
         }
-
+         
+        if (e.getSource() == visFicha.mniProductos) //Cuando toca el menú productos
+        {   
+            VisProductos visProd = new VisProductos();
+            ConsProductos consProd = new ConsProductos();
+            Producto prod=new Producto();
+            Categoria cat=new Categoria();
+            
+            CtrlProducto ctrProd=new CtrlProducto(prod, cat, consProd, visProd, visFicha);
+            ctrProd.iniciar();
+        }
          
          if (e.getSource() == visFicha.menuSalir) 
          {

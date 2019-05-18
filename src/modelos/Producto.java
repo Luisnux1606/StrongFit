@@ -14,7 +14,7 @@ public class Producto {
    private int  id_prod;
    private String descripcion_prod;
    private double precio_prod;
-   private Categoria Categoria_id_cat;
+   private Categoria categoria;
    private int estado_prod;
 
     /**
@@ -60,17 +60,17 @@ public class Producto {
     }
 
     /**
-     * @return the Categoria_id_cat
+     * @return the Categoria
      */
-    public Categoria getCategoria_id_cat() {
-        return Categoria_id_cat;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
     /**
-     * @param Categoria_id_cat the Categoria_id_cat to set
+     * @param Categoria the Categoria_id_cat to set
      */
-    public void setCategoria_id_cat(Categoria Categoria_id_cat) {
-        this.Categoria_id_cat = Categoria_id_cat;
+    public void setCategoria(Categoria Categoria) {
+        this.categoria = Categoria;
     }
 
     /**

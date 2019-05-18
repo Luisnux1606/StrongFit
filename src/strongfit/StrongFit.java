@@ -56,9 +56,6 @@ public class StrongFit {
         VisFicha visFicha = new VisFicha();        
         VisMembresia visMemb = new VisMembresia();
         
-        
-       
-        
         //CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer,visFicha);
         CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer, visFicha);
         CtrlMedidas ctrlMed = new CtrlMedidas(med, consMed, visFicha);        

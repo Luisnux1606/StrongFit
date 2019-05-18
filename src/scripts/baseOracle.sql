@@ -685,5 +685,10 @@ values (iva_id_seq.NEXTVAL,0,1);
 insert into entrentiempo(id_enttmp,descripcion_enttiempo,costo_enttiempo,estado_entiempo)
 values (entrenTiempo_id_seq.NEXTVAL,'diario',2,1);
 
+insert into Categoria(id_cat,tipo_cat,estado_cat)
+values (categoria_id_seq.NEXTVAL,'servicio gimnasio',1);
+
+insert into Categoria(id_cat,tipo_cat,estado_cat)
+values (categoria_id_seq.NEXTVAL,'producto',1);
 
 commit;
