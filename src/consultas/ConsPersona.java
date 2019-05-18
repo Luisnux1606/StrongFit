@@ -18,9 +18,8 @@ import modelos.Persona;
  *
  * @author Administrator
  */
-public class ConsPersona extends Conexion {
-    
-     
+public class ConsPersona extends Conexion 
+{     
     public boolean registrar(Persona p)
     {
         PreparedStatement ps,ps2 = null;

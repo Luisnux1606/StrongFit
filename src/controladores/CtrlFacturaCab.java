@@ -640,6 +640,7 @@ public class CtrlFacturaCab implements ActionListener{
 
         iva.setId_ivas(Validaciones.isNumVoid(visFicha.lblIvaId.getText()));
         modFacCab.setIvas(iva); //1 = 0
+        
 
         modFacCab.setTotal_facCab(Validaciones.isNumVoid3(visFicha.txtTotalConIva.getText()));
         modFacCab.setValCancelo_facCab(Validaciones.isNumVoid3(visFicha.txt_valCancelo.getText()));

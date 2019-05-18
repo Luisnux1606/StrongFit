@@ -46,7 +46,7 @@ public class VisProductos extends javax.swing.JFrame {
         txtPrecioProd = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         Categoria = new javax.swing.JLabel();
-        cmbCategoria = new javax.swing.JComboBox();
+        cbxCategoria = new javax.swing.JComboBox<String>();
         txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lblIdCat = new javax.swing.JLabel();
@@ -151,8 +151,9 @@ public class VisProductos extends javax.swing.JFrame {
         jPanel1.add(Categoria);
         Categoria.setBounds(10, 90, 70, 16);
 
-        jPanel1.add(cmbCategoria);
-        cmbCategoria.setBounds(140, 90, 190, 22);
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Servicio Gimnasio", "Producto"}));
+        jPanel1.add(cbxCategoria);
+        cbxCategoria.setBounds(140, 90, 190, 20);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
@@ -299,7 +300,7 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
-    public javax.swing.JComboBox cmbCategoria;
+    public javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;

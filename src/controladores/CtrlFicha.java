@@ -39,6 +39,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import modelos.Analisis;
+import modelos.Categoria;
 import modelos.Entrenamiento;
 import modelos.EntrenamientoTiempo;
 import modelos.FacturaCab;
@@ -101,7 +102,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniConsultasClientes.addActionListener(this);
         this.visFicha.menuSalir.addActionListener(this);
         this.visFicha.mniEntrenamientoTiempo.addActionListener(this);
-        
+        this.visFicha.mniProductos.addActionListener(this);
         
         this.visFicha.tabp_ficha.setSelectedIndex(2);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
@@ -400,9 +401,10 @@ public class CtrlFicha implements ActionListener{
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == visFicha.btnGuardarFichaG) 
-       {       
+    public void actionPerformed(ActionEvent e) 
+    {
+        if (e.getSource() == visFicha.btnGuardarFichaG) 
+        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dchFecha);
            
@@ -495,7 +497,7 @@ public class CtrlFicha implements ActionListener{
                  
         } 
         
-        if (e.getSource() == visFicha.mniProductos) 
+        if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
         {
           
             VisProductos visProd = new VisProductos();
@@ -530,7 +532,8 @@ public class CtrlFicha implements ActionListener{
             
          }
          
-         if (e.getSource() == visFicha.mniPersonas) {
+         if (e.getSource() == visFicha.mniPersonas) 
+         {
             
             VisPersona visPer = new VisPersona();
             Persona per  = new Persona();
@@ -551,7 +554,17 @@ public class CtrlFicha implements ActionListener{
             CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(facCab, consFacCab, visBuscarVentas,visFicha);
             ctrBuscarVentas.iniciar();
         }
-
+         
+        if (e.getSource() == visFicha.mniProductos) //Cuando toca el menú productos
+        {   
+            VisProductos visProd = new VisProductos();
+            ConsProductos consProd = new ConsProductos();
+            Producto prod=new Producto();
+            Categoria cat=new Categoria();
+            
+            CtrlProducto ctrProd=new CtrlProducto(prod, cat, consProd, visProd, visFicha);
+            ctrProd.iniciar();
+        }
          
          if (e.getSource() == visFicha.menuSalir) 
          {
