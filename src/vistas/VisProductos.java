@@ -35,20 +35,21 @@ public class VisProductos extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_membresias = new javax.swing.JTable();
+        tbl_productos = new javax.swing.JTable();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txt_id = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         lblDescripcionProducto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txt_descripcionProd = new javax.swing.JTextField();
+        txtDescripcionProd = new javax.swing.JTextField();
         txtPrecioProd = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         Categoria = new javax.swing.JLabel();
-        txtCategoria = new javax.swing.JTextField();
-        txtBuscarNombre = new javax.swing.JTextField();
+        cmbCategoria = new javax.swing.JComboBox();
+        txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        lblIdCat = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -73,7 +74,7 @@ public class VisProductos extends javax.swing.JFrame {
         pnl_personas.add(btnEliminar);
         btnEliminar.setBounds(110, 20, 50, 40);
 
-        tbl_membresias.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -92,9 +93,9 @@ public class VisProductos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_membresias.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tbl_membresias);
-        tbl_membresias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_productos.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tbl_productos);
+        tbl_productos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
         jScrollPane1.setBounds(10, 310, 880, 220);
@@ -122,14 +123,14 @@ public class VisProductos extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(12, 48, 70, 16);
 
-        txt_descripcionProd.setName("cedula"); // NOI18N
-        txt_descripcionProd.addActionListener(new java.awt.event.ActionListener() {
+        txtDescripcionProd.setName("cedula"); // NOI18N
+        txtDescripcionProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_descripcionProdActionPerformed(evt);
+                txtDescripcionProdActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_descripcionProd);
-        txt_descripcionProd.setBounds(142, 13, 190, 22);
+        jPanel1.add(txtDescripcionProd);
+        txtDescripcionProd.setBounds(142, 13, 190, 22);
 
         txtPrecioProd.setName("nombre"); // NOI18N
         txtPrecioProd.addActionListener(new java.awt.event.ActionListener() {
@@ -149,23 +150,26 @@ public class VisProductos extends javax.swing.JFrame {
         Categoria.setText("Categoria:");
         jPanel1.add(Categoria);
         Categoria.setBounds(10, 90, 70, 16);
-        jPanel1.add(txtCategoria);
-        txtCategoria.setBounds(140, 90, 190, 22);
+
+        jPanel1.add(cmbCategoria);
+        cmbCategoria.setBounds(140, 90, 190, 22);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
 
-        txtBuscarNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtBuscarCualquierCampo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarNombreKeyTyped(evt);
+                txtBuscarCualquierCampoKeyTyped(evt);
             }
         });
-        pnl_personas.add(txtBuscarNombre);
-        txtBuscarNombre.setBounds(10, 280, 150, 22);
+        pnl_personas.add(txtBuscarCualquierCampo);
+        txtBuscarCualquierCampo.setBounds(10, 280, 150, 22);
 
         jLabel8.setText("Buscar por nombre:");
         pnl_personas.add(jLabel8);
         jLabel8.setBounds(10, 260, 130, 16);
+        pnl_personas.add(lblIdCat);
+        lblIdCat.setBounds(470, 10, 41, 20);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -230,13 +234,13 @@ public class VisProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioProdActionPerformed
 
-    private void txt_descripcionProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descripcionProdActionPerformed
+    private void txtDescripcionProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionProdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_descripcionProdActionPerformed
+    }//GEN-LAST:event_txtDescripcionProdActionPerformed
 
-    private void txtBuscarNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarNombreKeyTyped
+    private void txtBuscarCualquierCampoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCualquierCampoKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarNombreKeyTyped
+    }//GEN-LAST:event_txtBuscarCualquierCampoKeyTyped
 
     private void mniReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReportesActionPerformed
         // TODO add your handling code here:
@@ -295,6 +299,7 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
+    public javax.swing.JComboBox cmbCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
@@ -303,15 +308,15 @@ public class VisProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblDescripcionProducto;
+    public javax.swing.JLabel lblIdCat;
     public javax.swing.JMenuItem mniFicha;
     public javax.swing.JMenuItem mniReportes;
     public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;
-    public javax.swing.JTable tbl_membresias;
-    public javax.swing.JTextField txtBuscarNombre;
-    public javax.swing.JTextField txtCategoria;
+    public javax.swing.JTable tbl_productos;
+    public javax.swing.JTextField txtBuscarCualquierCampo;
+    public javax.swing.JTextField txtDescripcionProd;
     public javax.swing.JTextField txtPrecioProd;
-    public javax.swing.JTextField txt_descripcionProd;
     public javax.swing.JTextField txt_id;
     // End of variables declaration//GEN-END:variables
 }

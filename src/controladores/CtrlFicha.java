@@ -16,6 +16,7 @@ import consultas.ConsFicha;
 import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
+import consultas.ConsProductos;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -45,12 +46,14 @@ import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
+import modelos.Producto;
 import vistas.VisBuscarVentas;
 import vistas.VisEntrenamiento;
 import vistas.VisEntrenamientoTiempo;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
+import vistas.VisProductos;
 import vistas.VisReportes;
 
 /**
@@ -495,12 +498,11 @@ public class CtrlFicha implements ActionListener{
         if (e.getSource() == visFicha.mniProductos) 
         {
           
-            VisEntrenamientoTiempo visEntT = new VisEntrenamientoTiempo();
-            EntrenamientoTiempo entT  = new EntrenamientoTiempo();
-            ConsEntrenamientoTiempo consEntT = new ConsEntrenamientoTiempo();
-                
-            Ficha ficha = new Ficha();
-            CtrlEntrenamientoTiempo ctrEntT=new CtrlEntrenamientoTiempo(entT, consEntT, visEntT,visFicha);
+            VisProductos visProd = new VisProductos();
+            Producto prod  = new Producto();
+            ConsProductos consProd = new ConsProductos();
+
+            CtrlProductos ctrEntT=new CtrlProductos(prod, consProd,visProd,visFicha);
             ctrEntT.iniciar();
             ctrEntT.locale = 1;
                  
