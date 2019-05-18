@@ -58,24 +58,23 @@ public class ConsProductos extends Conexion
         
     }
     
-    public boolean modificar(Entrenamiento ent)
+    public boolean modificar(Producto modProducto)
     {
         PreparedStatement ps = null;
-        Connection con = getConexion(); //id_ent,fechaIni_ent,fechaFin_ent, EntrenTiempo_id_entTmp, Persona_id_per,estado_ent
-        String sql = "UPDATE Entrenamiento SET fechaIni_ent = ?,fechaFin_ent = ?, EntrenTiempo_id_entTmp = ?, Persona_id_per = ?,estado_ent = ?"
-                + " WHERE id_ent=?";
+        Connection con = getConexion();// descripcion_prod, precio_prod, Categoria_id_cat, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?)
+        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?, Categoria_id_cat = ?, estado_prod = ?"
+                + " WHERE id_prod=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, ent.getFechaIni_ent());         
-            ps.setString(2, ent.getFechaFin_ent());
-            ps.setInt(3, ent.getEntrenTiempo_id_entTmp().getId_entTmp());
-            ps.setInt(4, ent.getPersona_id_per().getId()); 
-            ps.setInt(5, ent.getEstado_ent());
-            ps.setInt(6, ent.getId_ent());
+            ps.setString(1, modProducto.getDescripcion_prod());
+            ps.setDouble(2, modProducto.getPrecio_prod());
+            ps.setInt(3, modProducto.getCategoria().getId_cat());
+            ps.setInt(4, modProducto.getEstado_prod());  
+            ps.setInt(5, modProducto.getId_prod());
           
             ps.execute();
             return true;
@@ -98,18 +97,18 @@ public class ConsProductos extends Conexion
         
     }
     
-     public boolean eliminar(Entrenamiento ent)
+     public boolean eliminar(Producto prod)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  Entrenamiento SET estado_ent =? WHERE id_ent=?";
+        String sql = "UPDATE  Producto SET estado_prod =? WHERE id_prod=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);  
-            ps.setInt(1, ent.getEstado_ent());
-            ps.setInt(2, ent.getId_ent());
+            ps.setInt(1, prod.getEstado_prod());
+            ps.setInt(2, prod.getId_prod());
             ps.execute();
             return true;
         } 

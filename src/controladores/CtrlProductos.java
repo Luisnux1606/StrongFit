@@ -167,39 +167,7 @@ public class CtrlProductos implements ActionListener{
          btn.setEnabled(estado);
      }
      
-     public void cargarEntrenamientoDetalle(JTable table,int idEnt)
-     {
-                         
-           this.ent.setId_ent(idEnt);
-                        
-           try {
-           
-            ResultSet rs = consEnt.buscarEntrenamientoCosto(ent);    
-            
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFacturaDetalle.getModel();
-            Object cols[] = new Object[8];
-            
-            while (rs.next()) {
-                try {
-                    cols[0] = rs.getInt("num");
-                    cols[1] = rs.getString("descr").toUpperCase();
-                    cols[2] = rs.getDouble("costo_enttiempo");
-                                         
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            table.setValueAt(1, table.getRowCount()-1, 0); //1 for id product 999999999
-            table.setValueAt(cols[0], table.getRowCount()-1, 1);
-            table.setValueAt(cols[1], table.getRowCount()-1, 2);
-            table.setValueAt(cols[2], table.getRowCount()-1, 3);
-            Calculos.calcularTotalDetalles(table);
-            consEnt.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-     }
+     
         
      
     public void setListener(){
