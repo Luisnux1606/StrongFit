@@ -28,7 +28,6 @@ public class ConsPersona extends Conexion
 
         try 
         {
-            
             ps = con.prepareStatement(sql);
             ps.setString(1, p.getCedula());
             ps.setString(2, p.getNombre());
