@@ -76,17 +76,17 @@ public class VisProductos extends javax.swing.JFrame {
 
         tbl_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "DESCRIPCION", "PRECIO", "CATEGORIA"
+                "ID", "DESCRIPCION", "PRECIO", "CATEGORIA", "IDCAT"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, true
+                false, true, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -150,8 +150,6 @@ public class VisProductos extends javax.swing.JFrame {
         Categoria.setText("Categoria:");
         jPanel1.add(Categoria);
         Categoria.setBounds(10, 90, 70, 16);
-
-        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Servicio Gimnasio", "Producto"}));
         jPanel1.add(cbxCategoria);
         cbxCategoria.setBounds(140, 90, 190, 20);
 

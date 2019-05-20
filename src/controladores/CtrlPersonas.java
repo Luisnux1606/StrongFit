@@ -42,7 +42,6 @@ import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
-import vistas.VisEntrenamiento;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -62,7 +61,7 @@ public class CtrlPersonas implements ActionListener {
     VisPersona visPersona;
     VisMembresia visMemb;
     VisFicha visFicha;   
-    VisEntrenamiento visEnt;
+//    VisEntrenamiento visEnt;
     Object vis;
     String cadBus;
     MyTableModel dT;
@@ -482,9 +481,9 @@ public class CtrlPersonas implements ActionListener {
                             visFicha.txtClienteFactura.setText(nombre + " "+apellido);
                             break;
                         case 3:  
-                            visEnt = (VisEntrenamiento)vis;
+//                            visEnt = (VisEntrenamiento)vis;
                             modPer.setId(idPer);
-                            visEnt.txtPersona.setText(idPer+"");
+                    //        visEnt.txtPersona.setText(idPer+"");
                            break; 
                         default:    
                     }

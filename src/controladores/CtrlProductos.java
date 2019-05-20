@@ -9,7 +9,7 @@ import assets.Calculos;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
-import consultas.ConsEntrenamiento;
+
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
 import consultas.ConsMedidas;
@@ -35,12 +35,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import modelos.Analisis;
 import modelos.Categoria;
-import modelos.Entrenamiento;
-import modelos.EntrenamientoTiempo;
+
 import modelos.FacturaCab;
 import modelos.Ficha;
 import modelos.Medidas;
@@ -48,7 +49,7 @@ import modelos.Membresias;
 import modelos.Persona;
 import modelos.Producto;
 import vistas.VisBuscarVentas;
-import vistas.VisEntrenamiento;
+
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -96,19 +97,15 @@ public class CtrlProductos implements ActionListener{
        catProd = new Categoria();
               
         cadBus = "";
-        locale = 0; //1:ficha
+        locale = 0; //1:menu , 2:factura
        
         setFocus();
         setListener();    
-//        setTableModel();
-       // iniciar();
-        
-       // visEnt.txtCodPersona.setText(persona.getId()+"");
-        
+
         limpiarTabla();
         showTable();
         showComboCategorias();
-        
+        setFormatTable(visProd.tbl_productos);
      
     }
     
@@ -126,7 +123,7 @@ public class CtrlProductos implements ActionListener{
         //visEnt.tabp_ficha.setSelectedIndex(2);
         limpiar();
         visProd.setLocation(300,10); 
-        visProd.setSize(1400,1000);                
+        visProd.setSize(1000,600);                
         visProd.setVisible(true);
     }
     
@@ -216,8 +213,35 @@ public class CtrlProductos implements ActionListener{
                 }
                 if(e.getClickCount()==2)
                 {
-                    int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");                                       
-
+                                                           
+                    int filaDetalle = visFicha.tblFacturaDetalle.getRowCount()-1;
+                    switch(locale)
+                    {
+                        case 0 :
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
+                            String descripcion = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
+                            double precio =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
+                            
+                           
+                            visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
+                            visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
+                            visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 2);
+                            visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
+                            
+                            Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
+                            Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+                            visProd.dispose();
+                            break;
+                        case 3:
+                            
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
@@ -247,6 +271,43 @@ public class CtrlProductos implements ActionListener{
         visProd.tbl_productos.addMouseListener(mouseListTblProd);
       
     }
+    
+    public void setFormatTable(JTable table)
+    {
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.LEFT);
+        table.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
+        
+        int colHide[] = new int[2];
+        colHide[0]=0;
+        colHide[1]=4;
+        setHideJtableColumn(table,colHide);
+        
+        //initColumnSizes(table);
+        
+        table.setCellSelectionEnabled(false);
+        
+    }  
+     private void initColumnSizes(JTable table) {
+		TableColumn column = null;
+        for (int i = 0; i < 3; i++) {
+        	column = table.getColumnModel().getColumn(i);
+            if(i==0){
+            	column.setPreferredWidth(100);
+            }
+        }
+    }
+    public void setHideJtableColumn(JTable table, int col[])
+    {
+        for (int i = 0; i < col.length; i++) {
+            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
+            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
+            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
+        }
+       
+    
+    }
      public void getTableToTxts()
      {
          JTable tblD = visProd.tbl_productos;
@@ -274,6 +335,7 @@ public class CtrlProductos implements ActionListener{
     }
     public void showComboCategorias()
     {
+        System.out.println("aqui");
         try {
            
             ResultSet listCategorias = consProd.buscarCategorias();
@@ -362,7 +424,7 @@ public class CtrlProductos implements ActionListener{
        {            
             int tE = consProd.getIdByNom(visProd.cbxCategoria.getSelectedItem()+"");
             catProd.setId_cat(tE);
-            
+            prod.setId_prod(Validaciones.isNumVoid(visProd.txt_id.getText()));
             prod.setCategoria(catProd);
             prod.setDescripcion_prod(visProd.txtDescripcionProd.getText());
             prod.setPrecio_prod(Validaciones.isNumVoid(visProd.txtPrecioProd.getText()));  

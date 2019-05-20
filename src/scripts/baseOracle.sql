@@ -139,20 +139,6 @@ CREATE SEQUENCE categoria_id_seq
  ORDER
 /
 
-CREATE SEQUENCE entrenTiempo_id_seq
- INCREMENT BY 1
- NOMAXVALUE
- NOMINVALUE
- CACHE 20
- ORDER
-/
-CREATE SEQUENCE entrenamiento_id_seq
- INCREMENT BY 1
- NOMAXVALUE
- NOMINVALUE
- CACHE 20
- ORDER
-/
 CREATE SEQUENCE iva_id_seq
  INCREMENT BY 1
  NOMAXVALUE
@@ -309,50 +295,26 @@ CREATE INDEX idx_id_per ON Persona(id_per)
 ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)
 /
 
--- Add keys for table EntrenamientoTiempo
-CREATE TABLE EntrenTiempo(
-  id_entTmp Number NOT NULL,
-  descripcion_entTiempo Varchar2(45 ),
-  costo_entTiempo Number(10,2), 
-  estado_enTiempo Number
+CREATE TABLE Producto(
+  id_prod Number NOT NULL,
+  descripcion_prod  Varchar2(350 ),
+  precio_prod Number(10,2),
+  fechaIni_prod Varchar2(100),
+  fechaFin_prod Varchar2(100),
+  Categoria_id_cat Number,
+  estado_prod Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
-
--- Create indexes for table EntrenamientoTiempo
-CREATE INDEX idx_id_entTmp ON EntrenTiempo(id_entTmp)
+-- Create indexes for table producto
+CREATE INDEX idx_id_prod ON Producto(id_prod)
 /
-
--- Add keys for table EntrenamientoTiempo
-ALTER TABLE EntrenTiempo ADD CONSTRAINT pk_id_entTiempo PRIMARY KEY (id_entTmp)
+-- Add keys for table producto
+ALTER TABLE Producto ADD CONSTRAINT pk_id_prod PRIMARY KEY (id_prod)
 /
-
---Add keys for table entrenamiento
-CREATE TABLE Entrenamiento(
-  id_ent Number NOT NULL,
-  fechaIni_ent Varchar2(45 ),
-  fechaFin_ent Varchar2(350 ),  
-  EntrenTiempo_id_entTmp Number,
-  Persona_id_per Number,
-  estado_ent Number
-)
-TABLESPACE tbs_usr_strongfit_p
+-- Create relationships section  ------------------------------------------------- 
+ALTER TABLE Producto ADD CONSTRAINT fk_id_cat FOREIGN KEY (Categoria_id_cat) REFERENCES Categoria (id_cat)
 /
-
--- Create indexes for table entrenamiento
-CREATE INDEX idx_id_ent ON Entrenamiento(id_ent)
-/
-
--- Add keys for table entrenamiento
-ALTER TABLE Entrenamiento ADD CONSTRAINT pk_id_ent PRIMARY KEY (id_ent)
-/
--- Add keys for table entrenamiento
-ALTER TABLE Entrenamiento ADD CONSTRAINT fk_id_ent FOREIGN KEY (EntrenTiempo_id_entTmp) REFERENCES EntrenTiempo(id_entTmp)
-/
--- Add keys for table entrenamiento
-ALTER TABLE Entrenamiento ADD CONSTRAINT fk_Ent_id_per FOREIGN KEY (Persona_id_per) REFERENCES Persona(id_per)
-/
-
 
 CREATE TABLE Ficha(
   id_ficha Number NOT NULL,
@@ -458,25 +420,6 @@ CREATE INDEX idx_id_cat ON Categoria(id_cat)
 /
 -- Add keys for table categoria
 ALTER TABLE Categoria ADD CONSTRAINT pk_id_cat PRIMARY KEY (id_cat)
-/
-
-CREATE TABLE Producto(
-  id_prod Number NOT NULL,
-  descripcion_prod  Varchar2(350 ),
-  precio_prod Number(10,2),
-  Categoria_id_cat Number,
-  estado_prod Number 
-)
-TABLESPACE tbs_usr_strongfit_p
-/
--- Create indexes for table producto
-CREATE INDEX idx_id_prod ON Producto(id_prod)
-/
--- Add keys for table producto
-ALTER TABLE Producto ADD CONSTRAINT pk_id_prod PRIMARY KEY (id_prod)
-/
--- Create relationships section  ------------------------------------------------- 
-ALTER TABLE Producto ADD CONSTRAINT fk_id_cat FOREIGN KEY (Categoria_id_cat) REFERENCES Categoria (id_cat)
 /
 
 CREATE TABLE FacturaDetalle(
@@ -681,9 +624,6 @@ values (membresia_id_seq.NEXTVAL,'diario',2,1);
 
 insert into IVAS(id_ivas,val_ivas,estado_ivas)
 values (iva_id_seq.NEXTVAL,0,1);
-
-insert into entrentiempo(id_enttmp,descripcion_enttiempo,costo_enttiempo,estado_entiempo)
-values (entrenTiempo_id_seq.NEXTVAL,'diario',2,1);
 
 insert into Categoria(id_cat,tipo_cat,estado_cat)
 values (categoria_id_seq.NEXTVAL,'servicio gimnasio',1);

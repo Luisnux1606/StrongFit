@@ -10,8 +10,7 @@ import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
 import consultas.ConsCategoria;
-import consultas.ConsEntrenamiento;
-import consultas.ConsEntrenamientoTiempo;
+
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
 import consultas.ConsMedidas;
@@ -41,8 +40,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import modelos.Analisis;
 import modelos.Categoria;
-import modelos.Entrenamiento;
-import modelos.EntrenamientoTiempo;
 import modelos.FacturaCab;
 import modelos.Ficha;
 import modelos.Medidas;
@@ -51,8 +48,7 @@ import modelos.Persona;
 import modelos.Producto;
 import vistas.VisBuscarVentas;
 import vistas.VisCategoria;
-import vistas.VisEntrenamiento;
-import vistas.VisEntrenamientoTiempo;
+
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -103,7 +99,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniReportes.addActionListener(this);
         this.visFicha.mniConsultasClientes.addActionListener(this);
         this.visFicha.menuSalir.addActionListener(this);
-        this.visFicha.mniEntrenamientoTiempo.addActionListener(this);
+
         this.visFicha.mniProductos.addActionListener(this);
         this.visFicha.mniCategoria.addActionListener(this);
         
@@ -486,34 +482,7 @@ public class CtrlFicha implements ActionListener{
             ctrPer.locale = 1;
         }                 
         
-        if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
-        {
-          
-            VisEntrenamientoTiempo visEntT = new VisEntrenamientoTiempo();
-            EntrenamientoTiempo entT  = new EntrenamientoTiempo();
-            ConsEntrenamientoTiempo consEntT = new ConsEntrenamientoTiempo();
                 
-            Ficha ficha = new Ficha();
-            CtrlEntrenamientoTiempo ctrEntT=new CtrlEntrenamientoTiempo(entT, consEntT, visEntT,visFicha);
-            ctrEntT.iniciar();
-            ctrEntT.locale = 1;
-                 
-        } 
-        
-        if (e.getSource() == visFicha.mniEntrenamientoTiempo) 
-        {
-          
-            VisProductos visProd = new VisProductos();
-            Producto prod  = new Producto();
-            ConsProductos consProd = new ConsProductos();
-
-            CtrlProductos ctrEntT=new CtrlProductos(prod, consProd,visProd,visFicha);
-            ctrEntT.iniciar();
-            ctrEntT.locale = 1;
-                 
-        }
-        
-          
          if (e.getSource() == visFicha.mniReportes) 
          {
             
@@ -566,6 +535,7 @@ public class CtrlFicha implements ActionListener{
             Categoria cat=new Categoria();
             
             CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
+            ctrProd.locale = 1;
             ctrProd.iniciar();
         }
         

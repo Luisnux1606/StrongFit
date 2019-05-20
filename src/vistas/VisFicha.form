@@ -84,20 +84,6 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mniEntrenamientoTiempo">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/time.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Tiempo entren."/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniEntrenamientoTiempoActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniProductos">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -115,7 +101,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="mniCategoria">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icons/productos.png"/>
+                  <Image iconType="3" name="/icons/category.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Categorias"/>
               </Properties>
@@ -1924,7 +1910,7 @@
                       <Color blue="cc" green="cc" red="cc" type="rgb"/>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor Por defecto"/>
+                      <Color id="Default Cursor"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[1413, 853]"/>
@@ -2003,7 +1989,7 @@
                                           <Component id="btnEliminarFilas" max="32767" attributes="0"/>
                                           <Component id="btnAgregarFilas" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="872" max="-2" attributes="0"/>
@@ -2116,7 +2102,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -2171,7 +2157,7 @@
                                       </Group>
                                       <Component id="pnlEntrenamientoEnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="487" max="32767" attributes="0"/>
+                                  <EmptySpace pref="478" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -2201,7 +2187,7 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="chkEntrenamiento" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                                  <EmptySpace pref="8" max="32767" attributes="0"/>
                                   <Component id="pnlEntrenamientoEnFactura" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>

@@ -11,6 +11,7 @@ import static assets.Calculos.getTwoDecimals;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsFacturaDet;
+import consultas.ConsProductos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -23,10 +24,12 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.Producto;
 import vistas.VisFicha;
+import vistas.VisProductos;
 
 /**
  *
@@ -82,8 +85,23 @@ public class CtrlFacturaDetalle implements ActionListener {
         
         KeyListener keyListenerTblDetalle = new KeyListener() {
           public void keyPressed(KeyEvent e) {
+
               Calculos.calcularTotalDetalles(facDet);             
               Calculos.calcularValorPagar(facDet,visFicha);
+              
+              
+              if (e.getKeyCode()==KeyEvent.VK_F1 )
+              {
+                
+                  VisProductos visProd = new VisProductos();
+                  ConsProductos consProd = new ConsProductos();
+                  Producto prod=new Producto();
+                  Categoria cat=new Categoria();
+
+                  CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
+                  ctrProd.locale = 2;
+                  ctrProd.iniciar();
+              }
           }
 
           public void keyReleased(KeyEvent keyEvent) {
@@ -97,12 +115,25 @@ public class CtrlFacturaDetalle implements ActionListener {
              
              int col =facDet.getSelectedColumn();
              int  row =facDet.getRowCount()-1;
-              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB ) {
+             
+              if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB ) 
+              {
                               
                   switch(col)
                   {
-                    case 3: 
+                      case 2:
+                        VisProductos visProd = new VisProductos();
+                        ConsProductos consProd = new ConsProductos();
+                        Producto prod=new Producto();
+                        Categoria cat=new Categoria();
 
+                        CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
+                        ctrProd.locale = 2;
+                        ctrProd.iniciar();
+              
+                          break;
+                    case 3: 
+                           
                           break;
                     case 4:
                           row = facDet.getSelectedRow()-1;                                                   
@@ -116,6 +147,8 @@ public class CtrlFacturaDetalle implements ActionListener {
                   }
                 visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);
               }
+                
+              
           }
           
           private void printIt(String title, KeyEvent keyEvent) {
@@ -243,22 +276,24 @@ public class CtrlFacturaDetalle implements ActionListener {
             facCabId = facCab.getId_facCab();
         
         facCab.setId_facCab(facCabId);        
-        
+        System.out.println(facCab.getId_facCab());
         for (int i = 0; i <= table.getRowCount()-1; i++) 
         {
+            prodId =table.getValueAt(i, 0)+"";
             num = table.getValueAt(i, 1)+"";
             desc = table.getValueAt(i, 2)+"";     
             valU = table.getValueAt(i, 3)+"";
             valT = table.getValueAt(i, 4)+"";
-            prodId =table.getValueAt(i, 0)+"";
+            
             
             //consulra factura idFac by numFac
-            p.add(prod);
+            
            
 
             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
                 
                 detalle = new FacturaDetalle();
+                prod = new Producto();
                
                 detalle.setCantidad_facDet(Validaciones.isNumVoid(num));
                 detalle.setDescripcion_facDet(desc);
@@ -266,6 +301,7 @@ public class CtrlFacturaDetalle implements ActionListener {
                 detalle.setvTotal_facDet(Validaciones.isNumVoid10(valT));
                
                 prod.setId_prod(Validaciones.isNumVoid(prodId));
+                p.add(prod);
                 detalle.setProducto_id_prod(p.get(i));
                 
                 detalle.setFactura_id_fac(facCab);

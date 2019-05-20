@@ -43,6 +43,8 @@ public class VisCategoria extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
         txtBuscarNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -70,17 +72,17 @@ public class VisCategoria extends javax.swing.JFrame {
 
         tbl_categoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "NOMBRE"
+                "ID", "PRODUCTO/SERVICIO", "CATEGORIA SUPERIOR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -104,14 +106,14 @@ public class VisCategoria extends javax.swing.JFrame {
         pnl_categoria.add(btnGuardar);
         btnGuardar.setBounds(10, 20, 40, 40);
         pnl_categoria.add(txt_id);
-        txt_id.setBounds(430, 10, 30, 20);
+        txt_id.setBounds(430, 10, 30, 22);
 
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setLayout(null);
 
-        jLabel2.setText("Nombre categoría:");
+        jLabel2.setText("Producto Servicio:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(12, 13, 130, 20);
+        jLabel2.setBounds(12, 13, 110, 20);
 
         txt_nombre.setName("cedula"); // NOI18N
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -120,13 +122,20 @@ public class VisCategoria extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_nombre);
-        txt_nombre.setBounds(142, 13, 190, 20);
+        txt_nombre.setBounds(142, 13, 190, 22);
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
         jPanel1.add(btnBuscar);
         btnBuscar.setBounds(350, 13, 50, 40);
+
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(140, 60, 190, 22);
+
+        jLabel1.setText("Categoria superior:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(10, 60, 120, 16);
 
         pnl_categoria.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 170);
@@ -137,11 +146,11 @@ public class VisCategoria extends javax.swing.JFrame {
             }
         });
         pnl_categoria.add(txtBuscarNombre);
-        txtBuscarNombre.setBounds(10, 280, 150, 20);
+        txtBuscarNombre.setBounds(10, 280, 150, 22);
 
         jLabel8.setText("Buscar por nombre:");
         pnl_categoria.add(jLabel8);
-        jLabel8.setBounds(10, 260, 130, 14);
+        jLabel8.setBounds(10, 260, 130, 16);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -257,6 +266,8 @@ public class VisCategoria extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;

@@ -155,6 +155,8 @@ public class Calculos {
          double total = num * vU;
          return total;
      }
+     
+    
      public static void calcularTotalDetalles(JTable table)
      {
          String valU;
@@ -183,7 +185,7 @@ public class Calculos {
          double totDetalles = 0;
          
          for (int i = 0; i <= table.getRowCount()-1; i++) {
-             valTotDet = table.getValueAt(i, 3)+"";
+             valTotDet = table.getValueAt(i, 4)+"";
              
              if (Validaciones.isNumVoid10(valTotDet)!=0 ) {
                  totDetalles = totDetalles + Validaciones.isNumVoid10(valTotDet);
@@ -229,9 +231,14 @@ public class Calculos {
         visFicha.txtTotalConIva.setText(setTotalConIva(visFicha)+"");
         
         visFicha.txt_valCancelo.setText(setTotalConIva(visFicha)+"");
-        visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");
-       
+        visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");               
     }
+     
+     public static void setPendiente(VisFicha visFicha)
+     {
+         visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");
+     
+     }
      
      
 }

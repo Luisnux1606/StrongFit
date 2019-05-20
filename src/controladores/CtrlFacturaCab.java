@@ -9,11 +9,11 @@ import assets.Calculos;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
-import consultas.ConsEntrenamiento;
 import consultas.ConsFacturaCab;
 import consultas.ConsFacturaDet;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
+import consultas.ConsProductos;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -36,7 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
-import modelos.Entrenamiento;
+import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.Ficha;
@@ -44,10 +44,12 @@ import modelos.Iva;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
-import vistas.VisEntrenamiento;
+import modelos.Producto;
+
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
+import vistas.VisProductos;
 import vistas.VisReportes;
 
 /**
@@ -228,7 +230,7 @@ public class CtrlFacturaCab implements ActionListener{
           public void keyTyped(KeyEvent e) {
             int m=e.getKeyChar();
               if (m == KeyEvent.VK_ENTER) {
-                  Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);                                    
+                  Calculos.setPendiente(visFicha);                                    
               }  
           }
           
@@ -760,19 +762,15 @@ public class CtrlFacturaCab implements ActionListener{
         if (e.getSource() == visFicha.chkEntrenamiento) 
         {
            
-            VisEntrenamiento visEnt = new VisEntrenamiento();
-            Entrenamiento ent  = new Entrenamiento();
-           
-            ConsEntrenamiento consEnt = new ConsEntrenamiento();
-           
+            VisProductos visProd = new VisProductos();
+            ConsProductos consProd = new ConsProductos();
+            Producto prod=new Producto();
+            Categoria cat=new Categoria();
             
-            Ficha ficha = new Ficha(); //Entrenamiento ent, ConsEntrenamiento consEnt,VisEntrenamiento visEnt,Persona per,EntrenamientoTiempo entTmp
-            persona.setId(Validaciones.isNumVoid(visFicha.lblPersonaId.getText()));
-            
-            CtrlEntrenamiento ctrEnt=new CtrlEntrenamiento(ent, consEnt, visEnt,persona,visFicha);
-            ctrEnt.iniciar();
-            visEnt.txtPersona.setText(visFicha.txtClienteFactura.getText());
-            ctrEnt.locale = 1;
+            CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
+            ctrProd.locale = 2;
+            ctrProd.iniciar();
+
         } 
         
         /*

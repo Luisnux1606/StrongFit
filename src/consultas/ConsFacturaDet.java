@@ -518,7 +518,7 @@ public class ConsFacturaDet extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "select fC.Id_Faccab\n" +
+        String sql = "select max(fC.Id_Faccab) as Id_Faccab\n" +
                     "from facturaCabecera fC\n" +
                     "order by Id_Faccab asc";
         

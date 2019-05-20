@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelos.Conexion;
-import modelos.Entrenamiento;
+
 
 import java.util.ArrayList;
 import modelos.Categoria;
@@ -130,46 +130,7 @@ public class ConsProductos extends Conexion
         
     }
        
-    public ArrayList<Entrenamiento> buscarTodos(Entrenamiento ent)
-    {
-        PreparedStatement ps = null;
-        Connection con = getConexion();
-        ResultSet rs = null;
-        String sql = "SELECT * FROM Entrenamiento where estado_ent=1";
-        ArrayList<Entrenamiento> entrenamientos = new ArrayList<>();
-        
-        
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-            
-            while (rs.next()) {
-                ent.setId_ent(rs.getInt("id_ent"));
-               
-                
-                entrenamientos.add(ent);               
-            }
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                e.printStackTrace();
-            }
-        }
-       return entrenamientos ;
-    }
+   
    
    
        
@@ -222,9 +183,9 @@ public class ConsProductos extends Conexion
                 con = getConexion();
                 ResultSet rs = null; 
                 
-		sql="select p.id_prod " +
-                    "from producto p " +
-                    "where upper(p.descripcion_prod) like upper('"+prod+"')";						
+		sql="select c.id_cat " +
+                    "from categoria c " +
+                    "where upper(c.tipo_cat) like upper('"+prod+"')";						
                         try 
                         {
                             ps = con.prepareStatement(sql);                            
@@ -310,37 +271,7 @@ public class ConsProductos extends Conexion
         return rs;
     }
     
-    public ResultSet buscarEntrenamientoCosto(Entrenamiento ent)
-    {
-        PreparedStatement ps = null;
-         con = getConexion();
-        ResultSet rs = null; 
-        String sql = "select '1' as num,et.costo_enttiempo,concat('ENTRENAMIENTO ',et.descripcion_enttiempo) as descr " +
-                    "from entrenamiento e, entrentiempo et " +
-                    "where et.id_enttmp = e.entrentiempo_id_enttmp and e.id_ent ="+ent.getId_ent()+"";
-
-        
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-           
-        }
-        return rs;
-    }
-
-    
-    
+       
     public ArrayList<Producto> buscarTodos(Producto modProducto, Categoria modCategoria)
     {
         PreparedStatement ps = null;
