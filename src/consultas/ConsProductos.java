@@ -215,16 +215,16 @@ public class ConsProductos extends Conexion
     }
     
     //getIdByNom
-    public int getIdByNom(String cat){
+    public int getIdByNom(String prod){
 		String sql;
 		int result=0;
                 PreparedStatement ps = null;
                 con = getConexion();
                 ResultSet rs = null; 
                 
-		sql="select c.id_cat " +
-                    "from categoria c " +
-                    "where upper(c.tipo_cat) like upper('"+cat+"')";						
+		sql="select p.id_prod " +
+                    "from producto p " +
+                    "where upper(p.descripcion_prod) like upper('"+prod+"')";						
                         try 
                         {
                             ps = con.prepareStatement(sql);                            
@@ -388,36 +388,5 @@ public class ConsProductos extends Conexion
     }
 
     
-    public boolean eliminar(Producto modProducto)
-    {
-        PreparedStatement ps = null;
-        Connection con = getConexion();
-        String sql = "UPDATE Producto SET ESTADO_PROD=? WHERE ID_PROD=?";
-        
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, modProducto.getEstado_prod());
-            ps.setInt(2, modProducto.getId_prod());
-            ps.execute();
-            return true;
-        } 
-        catch (Exception e) 
-        {
-            System.err.println(e);
-            return false;
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                System.err.println(e);
-            }
-        }
-        
-    }
+   
 }

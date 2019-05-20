@@ -562,7 +562,7 @@ public class CtrlFicha implements ActionListener{
             Producto prod=new Producto();
             Categoria cat=new Categoria();
             
-            CtrlProducto ctrProd=new CtrlProducto(prod, cat, consProd, visProd, visFicha);
+            CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
             ctrProd.iniciar();
         }
          
