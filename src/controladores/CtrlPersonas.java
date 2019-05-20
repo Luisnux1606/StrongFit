@@ -367,7 +367,8 @@ public class CtrlPersonas implements ActionListener {
     
     
     public void setListener(){
-        KeyListener keyListenertxtBuscarCedula = new KeyListener() {
+        KeyListener keyListenertxtBuscarCedula = new KeyListener() 
+        {
           public void keyPressed(KeyEvent keyEvent) {
             printIt("Pressed", keyEvent);
           }
@@ -377,6 +378,7 @@ public class CtrlPersonas implements ActionListener {
           }
 
           public void keyTyped(KeyEvent e) {
+              System.out.println ("-------------------------------------");
             String m=(e.getKeyChar()+"").toUpperCase();
             char c =m.charAt(0);
 					

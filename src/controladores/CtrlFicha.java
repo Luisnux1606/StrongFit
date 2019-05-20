@@ -9,6 +9,7 @@ import assets.Calculos;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
+import consultas.ConsCategoria;
 import consultas.ConsEntrenamiento;
 import consultas.ConsEntrenamientoTiempo;
 import consultas.ConsFacturaCab;
@@ -49,6 +50,7 @@ import modelos.Membresias;
 import modelos.Persona;
 import modelos.Producto;
 import vistas.VisBuscarVentas;
+import vistas.VisCategoria;
 import vistas.VisEntrenamiento;
 import vistas.VisEntrenamientoTiempo;
 import vistas.VisFicha;
@@ -103,6 +105,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.menuSalir.addActionListener(this);
         this.visFicha.mniEntrenamientoTiempo.addActionListener(this);
         this.visFicha.mniProductos.addActionListener(this);
+        this.visFicha.mniCategoria.addActionListener(this);
         
         this.visFicha.tabp_ficha.setSelectedIndex(2);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
@@ -564,6 +567,16 @@ public class CtrlFicha implements ActionListener{
             
             CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
             ctrProd.iniciar();
+        }
+        
+        if (e.getSource()==visFicha.mniCategoria) //Cuando toca el menú categorías
+        {
+            Categoria modCat=new Categoria();
+            VisCategoria visCat=new VisCategoria();
+            ConsCategoria consCat=new ConsCategoria();
+            
+            CtrlCategoria ctrCat=new CtrlCategoria (modCat, visCat, consCat, visFicha);
+            ctrCat.iniciar();
         }
          
          if (e.getSource() == visFicha.menuSalir) 

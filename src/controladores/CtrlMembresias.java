@@ -114,7 +114,8 @@ public class CtrlMembresias implements ActionListener{
         } 
     }
     
-    public void setListener(){
+    public void setListener()
+    {
         KeyListener keyListenertxtBuscarNombre = new KeyListener() {
           public void keyPressed(KeyEvent keyEvent) {
             printIt("Pressed", keyEvent);
