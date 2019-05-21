@@ -358,9 +358,6 @@ public class CtrlProductos implements ActionListener{
         }
         visProd.cbxCategoria.updateUI();
     }
-     
-   
-    
     
     public void showTable()
     {

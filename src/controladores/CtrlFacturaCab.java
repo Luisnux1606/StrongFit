@@ -70,6 +70,9 @@ public class CtrlFacturaCab implements ActionListener{
     Persona persona;
     String cadBus;
     
+     ConsFacturaDet consFacDet ;     
+        CtrlFacturaDetalle facDetalle; 
+    
     public CtrlFacturaCab(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
     {
         this.modFacCab = modFicha;
@@ -80,6 +83,8 @@ public class CtrlFacturaCab implements ActionListener{
         this.memb = new Membresias();
         this.iva = new Iva();
               
+         consFacDet= new ConsFacturaDet();  
+        facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
         
         this.visFicha.btnGuardarFacCab.addActionListener(this);
         this.visFicha.btnEliminarFacCab.addActionListener(this);
@@ -103,7 +108,7 @@ public class CtrlFacturaCab implements ActionListener{
         iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
-        setFacturaDetalle(visFicha);
+      //  setFacturaDetalle(visFicha);
 //        showTable();
     }
     
@@ -655,7 +660,7 @@ public class CtrlFacturaCab implements ActionListener{
        
         ConsFacturaDet consFacDet = new ConsFacturaDet();        
         CtrlFacturaDetalle facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
-
+        facDetalle.setDetalles(visFicha, cadBus);
     }
     
     
@@ -669,7 +674,8 @@ public class CtrlFacturaCab implements ActionListener{
                if (Validaciones.isDateChooserVoid(jdc)) 
                {                                        
                         setFacturaCabecera(visFicha);
-                       // setFacturaDetalle(visFicha);
+                        
+                       //
                    
                     if (consFicha.registrar(modFacCab)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
@@ -680,7 +686,7 @@ public class CtrlFacturaCab implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Error al Guardar");
                         limpiar();
                     }
-                 
+                 facDetalle.setDetalles(visFicha, cadBus);
                }        
         }
       

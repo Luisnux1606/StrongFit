@@ -14,6 +14,7 @@ public class Categoria {
   private int id_cat;
   private String tipo_cat;
   private int estado_cat;
+  private Categoria categoria_id_cat;
 
     /**
      * @return the id_cat
@@ -55,6 +56,20 @@ public class Categoria {
      */
     public void setEstado_cat(int estado_cat) {
         this.estado_cat = estado_cat;
+    }
+
+    /**
+     * @return the categoria_id_cat
+     */
+    public Categoria getCategoria_id_cat() {
+        return categoria_id_cat;
+    }
+
+    /**
+     * @param categoria_id_cat the categoria_id_cat to set
+     */
+    public void setCategoria_id_cat(Categoria categoria_id_cat) {
+        this.categoria_id_cat = categoria_id_cat;
     }
   
   

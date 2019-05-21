@@ -48,7 +48,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         this.consFacDet = consFacDet;
         this.visFicha = visFicha;
         
-        this.visFicha.btnGuardarFacCab.addActionListener(this);
+      //  this.visFicha.btnGuardarFacCab.addActionListener(this);
         this.visFicha.btnEliminarFacCab.addActionListener(this);
         this.visFicha.btnLimpiarFacCab.addActionListener(this);
         this.visFicha.btnModificarFacCab.addActionListener(this);
@@ -250,8 +250,7 @@ public class CtrlFacturaDetalle implements ActionListener {
             table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
             table.getColumnModel().getColumn(col[i]).setMinWidth(0);
             table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
-        }
-       
+        }       
     
     }
     

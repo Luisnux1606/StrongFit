@@ -8,29 +8,28 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import modelos.Categoria;
 import modelos.Conexion;
 import modelos.Persona;
 
 
-/**
- *
- * @author aplaza
- */
+
 public class ConsCategoria extends Conexion
 {
     public boolean guardar(Categoria modCat)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO categoria (id_cat, tipo_cat, estado_cat) VALUES(categoria_id_seq.NEXTVAL,?,?)";
+        String sql = "INSERT INTO categoria (id_cat, tipo_cat,CATEGORIA_ID_CAT, estado_cat) VALUES(categoria_id_seq.NEXTVAL,?,?,?)";
 
         try 
         {
             ps = con.prepareStatement(sql);
             ps.setString(1, modCat.getTipo_cat());
-            ps.setInt(2, modCat.getEstado_cat()); 
+            ps.setInt(2, modCat.getCategoria_id_cat().getId_cat()); 
+             ps.setInt(3, modCat.getEstado_cat());
             ps.execute();                                       
             return true;
         } 
@@ -56,18 +55,27 @@ public class ConsCategoria extends Conexion
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM Categoria where estado_cat=1 order by id_cat asc";
+        String sql = "SELECT c.id_cat, c.tipo_cat,c.categoria_id_cat,c.estado_cat " +
+                    "FROM Categoria c " +
+                    "where estado_cat=1 " +
+                    "order by id_cat asc";
         ArrayList<Categoria> categoria = new ArrayList<>();
-        
+        Categoria c;
+        ConsCategoria consC;
         try 
         {   
             ps = con.prepareStatement(sql);                            
             rs = ps.executeQuery();
             
             while (rs.next()) {
+                c  = new Categoria();
+                consC  = new ConsCategoria();
                 modCat = new Categoria();
                 modCat.setId_cat(rs.getInt("id_cat"));
                 modCat.setTipo_cat(rs.getString("tipo_cat"));
+                    c.setId_cat(rs.getInt("CATEGORIA_ID_CAT"));                    
+                    c.setTipo_cat(getNomById(c.getId_cat()));
+                modCat.setCategoria_id_cat(c);
                 categoria.add(modCat);               
             }
         } 
@@ -84,7 +92,53 @@ public class ConsCategoria extends Conexion
         }
        return categoria;
     }
+    public String getNomById(int idCat){
+		String sql;
+		String result="";
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                
+		sql="select c.tipo_cat " +
+                    "from categoria c " +
+                    "where c.id_cat =  "+idCat+"";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                        result=rs.getString(1);
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return result;
+	}
     
+    public int getIdByNom(String cat){
+		String sql;
+		int result=0;
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                
+		sql="select c.id_cat " +
+                    "from categoria c " +
+                    "where upper(c.tipo_cat) like upper('"+cat+"')";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                        result=rs.getInt(1);
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return result;
+	}
     public boolean eliminar(Categoria modCat)
     {
         PreparedStatement ps = null;
@@ -119,14 +173,15 @@ public class ConsCategoria extends Conexion
     public boolean modificar(Categoria modCat)
     {
         PreparedStatement ps = null;
-        Connection con = getConexion();
-        String sql = "UPDATE categoria SET tipo_cat=?"
+        Connection con = getConexion(); //id_cat, tipo_cat,CATEGORIA_ID_CAT, estado_cat
+        String sql = "UPDATE categoria SET tipo_cat=?,CATEGORIA_ID_CAT = ? "
                 + " WHERE id_cat=?";
         try 
         {
             ps = con.prepareStatement(sql);
             ps.setString(1, modCat.getTipo_cat());
-            ps.setInt(2, modCat.getId_cat());
+            ps.setInt(2, modCat.getCategoria_id_cat().getId_cat());
+            ps.setInt(3, modCat.getId_cat());
             ps.execute();
             return true;
         } 
@@ -185,5 +240,46 @@ public class ConsCategoria extends Conexion
             }
         }
        return cat;
+    }
+    
+    public ResultSet buscarCategorias()
+    {
+        PreparedStatement ps = null;
+        Connection  con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select c.tipo_cat \n" +
+                    "from categoria c \n" +
+                    "where c.estado_cat = 1";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public void closeConection()
+    {
+        
+          try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
     }
 }

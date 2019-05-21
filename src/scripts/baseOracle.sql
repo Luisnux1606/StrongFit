@@ -411,6 +411,7 @@ ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_ivas FOREIGN KEY (Ivas_id_ivas)
 CREATE TABLE Categoria(
   id_cat Number NOT NULL,
   tipo_cat  Varchar2(45 ),
+  categoria_id_cat Number,
   estado_cat Number 
 )
 TABLESPACE tbs_usr_strongfit_p
@@ -420,6 +421,8 @@ CREATE INDEX idx_id_cat ON Categoria(id_cat)
 /
 -- Add keys for table categoria
 ALTER TABLE Categoria ADD CONSTRAINT pk_id_cat PRIMARY KEY (id_cat)
+/
+ALTER TABLE Categoria ADD CONSTRAINT fk_id_cat FOREIGN KEY (categoria_id_cat) REFERENCES Categoria(id_cat)
 /
 
 CREATE TABLE FacturaDetalle(

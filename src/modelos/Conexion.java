@@ -23,7 +23,7 @@ public class Conexion {
     String pass = "luisnux1606";
     //String url = "jdbc:mysql://localhost:3306/"+base;
     String url ="jdbc:oracle:thin:@localhost:1521:xe";
-    Connection con =  null;
+    public Connection con =  null;
     
     public Connection getConexion()
     {

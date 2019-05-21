@@ -43,7 +43,7 @@ public class VisCategoria extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbCatSuperior = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         txtBuscarNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -72,17 +72,17 @@ public class VisCategoria extends javax.swing.JFrame {
 
         tbl_categoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "PRODUCTO/SERVICIO", "CATEGORIA SUPERIOR"
+                "ID", "PRODUCTO/SERVICIO", "CATEGORIA SUPERIOR", "IDCATSUP"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -130,8 +130,9 @@ public class VisCategoria extends javax.swing.JFrame {
         jPanel1.add(btnBuscar);
         btnBuscar.setBounds(350, 13, 50, 40);
 
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(140, 60, 190, 22);
+        cmbCatSuperior.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        jPanel1.add(cmbCatSuperior);
+        cmbCatSuperior.setBounds(140, 60, 190, 22);
 
         jLabel1.setText("Categoria superior:");
         jPanel1.add(jLabel1);
@@ -266,7 +267,7 @@ public class VisCategoria extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
-    private javax.swing.JComboBox jComboBox1;
+    public javax.swing.JComboBox cmbCatSuperior;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;

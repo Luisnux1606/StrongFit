@@ -16,7 +16,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -55,6 +60,37 @@ public class CtrlCategoria implements ActionListener
         this.visCat.btnLimpiar.addActionListener(this);
         
         setListener();  
+        showComboCategoriaSuperior();
+        
+        int colHide[] = new int[1];
+        colHide[0]=0;
+        setHideJtableColumn(visCat.tbl_categoria,colHide);
+    }
+    
+    public void showComboCategoriaSuperior()
+    {
+      
+        try {
+           
+            ResultSet listCategorias = consCat.buscarCategorias();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visCat.cmbCatSuperior.getModel();
+           
+            
+            while (listCategorias.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(listCategorias.getString("tipo_cat"));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consCat.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visCat.cmbCatSuperior.updateUI();
     }
     
     public void iniciar()
@@ -83,10 +119,13 @@ public class CtrlCategoria implements ActionListener
         {       
            ArrayList<JTextField> jtx=new ArrayList<>();
            jtx.add(visCat.txt_nombre);  
-           
+           Categoria c = new Categoria();
             if (Validaciones.isVoid(jtx)) //validación que no esté el campo vacío
             {
                 modCat.setTipo_cat(visCat.txt_nombre.getText().toUpperCase());
+                c.setId_cat(consCat.getIdByNom(visCat.cmbCatSuperior.getSelectedItem()+"")); //idByNom
+                
+                modCat.setCategoria_id_cat(c);
                 modCat.setEstado_cat(1);
 
                 if (consCat.guardar(modCat)) {
@@ -118,8 +157,12 @@ public class CtrlCategoria implements ActionListener
         
         if (e.getSource() == visCat.btnModificar)  //MODIFICAR
         {
-            modCat.setId_cat(Integer.parseInt(visCat.txt_id.getText()));
+            Categoria c = new Categoria();
+            modCat.setId_cat(Validaciones.isNumVoid(visCat.tbl_categoria.getValueAt(visCat.tbl_categoria.getSelectedRow(), 0)+""));
             modCat.setTipo_cat(visCat.txt_nombre.getText().toUpperCase());
+            c.setId_cat(consCat.getIdByNom(visCat.cmbCatSuperior.getSelectedItem()+"")); //idByNom
+            modCat.setCategoria_id_cat(c);
+            modCat.setEstado_cat(1);
             if (consCat.modificar(modCat)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
             }
@@ -142,6 +185,17 @@ public class CtrlCategoria implements ActionListener
     public void limpiar()
     {
         visCat.txt_nombre.setText("");
+        visCat.cmbCatSuperior.setSelectedIndex(0);
+    }
+    
+     public void setHideJtableColumn(JTable table, int col[])
+    {
+        for (int i = 0; i < col.length; i++) {
+            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
+            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
+            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
+        }       
+    
     }
     
     public void showTable()
@@ -149,14 +203,17 @@ public class CtrlCategoria implements ActionListener
         limpiarTabla();                            
         ArrayList<Categoria> catList = consCat.buscarTodos(modCat);
         DefaultTableModel model =  (DefaultTableModel)visCat.tbl_categoria.getModel();
-        Object cols[] = new Object[2];
+        Object cols[] = new Object[4];
 
         for (int i = 0; i < catList.size(); i++) 
         {
             cols[0] = catList.get(i).getId_cat();
             cols[1] = catList.get(i).getTipo_cat();
+            cols[2] = catList.get(i).getCategoria_id_cat().getTipo_cat();
+            cols[3] = catList.get(i).getCategoria_id_cat().getId_cat();
             model.addRow(cols);                    
         }   
+        visCat.tbl_categoria.updateUI();
     }
     
     public void limpiarTabla()
@@ -233,6 +290,13 @@ public class CtrlCategoria implements ActionListener
         JTable tblCat = visCat.tbl_categoria;
         visCat.txt_id.setText(String.valueOf(tblCat.getValueAt(tblCat.getSelectedRow(), 0)));
         visCat.txt_nombre.setText(String.valueOf(tblCat.getValueAt(tblCat.getSelectedRow(), 1)));
+        if (String.valueOf(tblCat.getValueAt(tblCat.getSelectedRow(), 2)+"").length()==0) {
+            visCat.cmbCatSuperior.setSelectedIndex(0);
+        }
+        else
+            visCat.cmbCatSuperior.setSelectedItem(String.valueOf(tblCat.getValueAt(tblCat.getSelectedRow(), 2)+""));
+            
+        
     }
     
     public void desabilitaHabilita(JButton btn,boolean estado)
@@ -254,4 +318,6 @@ public class CtrlCategoria implements ActionListener
                model.addRow(cols);                    
         }   
     }
+    
+    
 }
