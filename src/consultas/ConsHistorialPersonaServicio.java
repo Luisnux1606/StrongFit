@@ -17,14 +17,14 @@ import modelos.Conexion;
 import java.util.ArrayList;
 import modelos.Categoria;
 import modelos.Conexion;
-import modelos.HistorialPeronaServicio;
+import modelos.HistorialPersonaServicio;
 
 import modelos.Producto;
 
 
 public class ConsHistorialPersonaServicio extends Conexion
 {
-    public boolean registrar(HistorialPeronaServicio hisPerServ)
+    public boolean registrar(HistorialPersonaServicio hisPerServ)
     {
         PreparedStatement ps= null;
         Connection con = getConexion();
@@ -60,7 +60,7 @@ public class ConsHistorialPersonaServicio extends Conexion
         
     }
     
-    public boolean modificar(HistorialPeronaServicio hisPerServ)
+    public boolean modificar(HistorialPersonaServicio hisPerServ)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();//HistorialPeronaServicio (ID_HISPERSER,FECHAINI_HISPERSER, FECHAFIN_HISPERSER, PERSONA_ID_HISPERSER, PRODUCTO_ID_HISPERSER,ESTADO_HISPERSER) VALUES(HistPersServ_id_seq.NEXTVAL,?,?,?,?,?)";
@@ -101,7 +101,7 @@ public class ConsHistorialPersonaServicio extends Conexion
         
     }
     
-     public boolean eliminar(HistorialPeronaServicio hisPerServ)
+     public boolean eliminar(HistorialPersonaServicio hisPerServ)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();

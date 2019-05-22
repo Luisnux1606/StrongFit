@@ -45,7 +45,7 @@ import modelos.Categoria;
 
 import modelos.FacturaCab;
 import modelos.Ficha;
-import modelos.HistorialPeronaServicio;
+import modelos.HistorialPersonaServicio;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -69,7 +69,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     
             
     VisHistorialPersonaServicio visHisPerServ;
-    HistorialPeronaServicio hisPerServ;
+    HistorialPersonaServicio hisPerServ;
     ConsHistorialPersonaServicio consHisPerServ;
     
     VisFicha visFicha;
@@ -79,7 +79,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     String cadBus;
     int locale;
     
-    public CtrlHistorialPersServicio(VisHistorialPersonaServicio visHisPerServ, HistorialPeronaServicio hisPerServ,ConsHistorialPersonaServicio consHisPerServ,VisFicha visFicha)
+    public CtrlHistorialPersServicio(VisHistorialPersonaServicio visHisPerServ, HistorialPersonaServicio hisPerServ,ConsHistorialPersonaServicio consHisPerServ,VisFicha visFicha)
     {
        
         this.consHisPerServ = consHisPerServ;
@@ -120,7 +120,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     
     public void iniciar()
     {
-        visHisPerServ.setTitle("PRODUCTOS");            
+        visHisPerServ.setTitle("PRODUCTOS/SERVICIOS");            
  
         visHisPerServ.btnGuardar.setToolTipText("Guardar el registro");
         visHisPerServ.btnModificar.setToolTipText("Modificar el registro");

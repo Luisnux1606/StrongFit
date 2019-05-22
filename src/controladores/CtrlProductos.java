@@ -70,12 +70,7 @@ public class CtrlProductos implements ActionListener{
    
     VisFicha visFicha;
     Categoria catProd;
-    /*
-    VisProductos visProd = new VisProductos();
-            Producto entT  = new Producto();
-            ConsProductos consEntT = new ConsProductos();
-    
-    */
+  
 
     String cadBus;
     int locale;
@@ -121,7 +116,7 @@ public class CtrlProductos implements ActionListener{
     
     public void iniciar()
     {
-        visProd.setTitle("PRODUCTOS");            
+        visProd.setTitle("PRODUCTOS/SERVICIOS");            
  
         visProd.btnGuardar.setToolTipText("Guardar el registro");
         visProd.btnModificar.setToolTipText("Modificar el registro");

@@ -11,6 +11,7 @@ import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
 import consultas.ConsFacturaDet;
+import consultas.ConsHistorialPersonaServicio;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
 import consultas.ConsProductos;
@@ -40,6 +41,7 @@ import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.Ficha;
+import modelos.HistorialPersonaServicio;
 import modelos.Iva;
 import modelos.Medidas;
 import modelos.Membresias;
@@ -47,6 +49,7 @@ import modelos.Persona;
 import modelos.Producto;
 
 import vistas.VisFicha;
+import vistas.VisHistorialPersonaServicio;
 import vistas.VisMembresia;
 import vistas.VisPersona;
 import vistas.VisProductos;
@@ -768,14 +771,13 @@ public class CtrlFacturaCab implements ActionListener{
         if (e.getSource() == visFicha.chkEntrenamiento) 
         {
            
-            VisProductos visProd = new VisProductos();
-            ConsProductos consProd = new ConsProductos();
-            Producto prod=new Producto();
-            Categoria cat=new Categoria();
+                       
+            VisHistorialPersonaServicio visHis = new VisHistorialPersonaServicio();
+            ConsHistorialPersonaServicio consHPS = new ConsHistorialPersonaServicio();
+            HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
             
-            CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
-            ctrProd.locale = 2;
-            ctrProd.iniciar();
+            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha);                        
+            ctlHis.iniciar();
 
         } 
         

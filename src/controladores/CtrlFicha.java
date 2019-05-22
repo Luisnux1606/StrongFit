@@ -45,7 +45,7 @@ import modelos.Analisis;
 import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.Ficha;
-import modelos.HistorialPeronaServicio;
+import modelos.HistorialPersonaServicio;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -577,7 +577,7 @@ public class CtrlFicha implements ActionListener{
         
         if (e.getSource()==visFicha.mniEntrenamientos) //Cuando toca el menú categorías
         {
-            HistorialPeronaServicio hisPerServ=new HistorialPeronaServicio();
+            HistorialPersonaServicio hisPerServ=new HistorialPersonaServicio();
             VisHistorialPersonaServicio visCat=new VisHistorialPersonaServicio();
             ConsHistorialPersonaServicio consCat=new ConsHistorialPersonaServicio();
             

@@ -9,7 +9,7 @@ package modelos;
  *
  * @author Administrator
  */
-public class HistorialPeronaServicio {
+public class HistorialPersonaServicio {
     /*fechaIni_prod Varchar2(100),
   fechaFin_prod Varchar2(100),
   Persona_id_per Number,
