@@ -487,7 +487,7 @@ public class ConsFacturaCab extends Conexion {
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_fac, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac AS fechaIni_fac, f.fechaFin_fac AS fechaFin_fac, f.total_fac, f.valPendiente_faccab" +
+        String sql = " SELECT f.id_fac, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_faccab AS fechaIni_fac, f.fechaFin_faccab AS fechaFin_fac, f.total_faccab, f.valPendiente_faccab" +
                     " FROM FacturaCabecera f, persona p " +
                     " where p.id_per = f.Persona_id_per and f.estado_facCab=1 " +
                     " order by id_fac asc ";

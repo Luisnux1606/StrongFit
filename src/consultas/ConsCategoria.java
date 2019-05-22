@@ -29,7 +29,7 @@ public class ConsCategoria extends Conexion
             ps = con.prepareStatement(sql);
             ps.setString(1, modCat.getTipo_cat());
             ps.setInt(2, modCat.getCategoria_id_cat().getId_cat()); 
-             ps.setInt(3, modCat.getEstado_cat());
+            ps.setInt(3, modCat.getEstado_cat());
             ps.execute();                                       
             return true;
         } 

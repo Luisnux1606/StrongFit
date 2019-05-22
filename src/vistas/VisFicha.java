@@ -193,6 +193,7 @@ public class VisFicha extends javax.swing.JFrame {
         mniMembresias = new javax.swing.JMenuItem();
         mniProductos = new javax.swing.JMenuItem();
         mniCategoria = new javax.swing.JMenuItem();
+        mniEntrenamientos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mniConsultasClientes = new javax.swing.JMenuItem();
 
@@ -1405,6 +1406,10 @@ public class VisFicha extends javax.swing.JFrame {
         });
         jMenu1.add(mniCategoria);
 
+        mniEntrenamientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/training.png"))); // NOI18N
+        mniEntrenamientos.setText("Entrenamientos");
+        jMenu1.add(mniEntrenamientos);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultas");
@@ -1630,6 +1635,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JMenuItem menuSalir;
     public javax.swing.JMenuItem mniCategoria;
     public javax.swing.JMenuItem mniConsultasClientes;
+    public javax.swing.JMenuItem mniEntrenamientos;
     public javax.swing.JMenuItem mniMembresias;
     public javax.swing.JMenuItem mniPersonas;
     public javax.swing.JMenuItem mniProductos;

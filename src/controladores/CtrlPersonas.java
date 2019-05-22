@@ -42,6 +42,7 @@ import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 import vistas.VisPersona;
@@ -88,10 +89,14 @@ public class CtrlPersonas implements ActionListener {
         setFocus();
         setListener();
         setTableModel();
-     
+        escribirCombos();
     }
     
-    
+      private void escribirCombos()
+      {
+        AutoCompleteDecorator.decorate(visPersona.cmbxGenero);        
+           
+      }   
     
     public void setFocus()
     {

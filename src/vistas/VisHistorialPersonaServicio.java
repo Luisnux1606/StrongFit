@@ -11,12 +11,12 @@ import javax.swing.JFrame;
  *
  * @author Administrator
  */
-public class VisProductos extends javax.swing.JFrame {
+public class VisHistorialPersonaServicio extends javax.swing.JFrame {
 
     /**
      * Creates new form VisPersona
      */
-    public VisProductos() {
+    public VisHistorialPersonaServicio() {
         initComponents();
         
     }
@@ -35,25 +35,27 @@ public class VisProductos extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_productos = new javax.swing.JTable();
+        tbl_historialPerServ = new javax.swing.JTable();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txt_id = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        lblDescripcionProducto = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtDescripcionProd = new javax.swing.JTextField();
-        txtPrecioProd = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
-        Categoria = new javax.swing.JLabel();
-        cbxCategoria = new javax.swing.JComboBox<String>();
+        lblTipoEntrenam = new javax.swing.JLabel();
+        cbxServicio = new javax.swing.JComboBox<String>();
         dchFechaIni = new com.toedter.calendar.JDateChooser();
         lblFechaIni = new javax.swing.JLabel();
         lblFechaFin = new javax.swing.JLabel();
         dchFechaFin = new com.toedter.calendar.JDateChooser();
+        lblPersona = new javax.swing.JLabel();
+        txtPersona = new javax.swing.JTextField();
+        btnBuscarPerona = new javax.swing.JButton();
+        lblPrecio = new javax.swing.JLabel();
+        lblPrecioIndic = new javax.swing.JLabel();
         txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        lblIdCat = new javax.swing.JLabel();
+        lblIdProd = new javax.swing.JLabel();
+        lblIdPersona = new javax.swing.JLabel();
+        lblIdPer = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -78,28 +80,28 @@ public class VisProductos extends javax.swing.JFrame {
         pnl_personas.add(btnEliminar);
         btnEliminar.setBounds(110, 20, 50, 40);
 
-        tbl_productos.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_historialPerServ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "DESCRIPCION", "PRECIO", "CATEGORIA", "IDCAT"
+                "ID", "PERSONA", "TIPO ENTRENAMIENTO", "FECHA INICIO", "FECHA FIN", "IDTIPOENT", "IDPERSONA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, true, true, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tbl_productos.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tbl_productos);
-        tbl_productos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_historialPerServ.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tbl_historialPerServ);
+        tbl_historialPerServ.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
         jScrollPane1.setBounds(10, 350, 880, 180);
@@ -119,43 +121,13 @@ public class VisProductos extends javax.swing.JFrame {
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setLayout(null);
 
-        lblDescripcionProducto.setText("Descripcion:");
-        jPanel1.add(lblDescripcionProducto);
-        lblDescripcionProducto.setBounds(12, 13, 130, 20);
+        lblTipoEntrenam.setText("Tipo entrenamiento:");
+        jPanel1.add(lblTipoEntrenam);
+        lblTipoEntrenam.setBounds(10, 40, 120, 16);
 
-        jLabel3.setText("Precio:");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(12, 48, 70, 16);
-
-        txtDescripcionProd.setName("cedula"); // NOI18N
-        txtDescripcionProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionProdActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtDescripcionProd);
-        txtDescripcionProd.setBounds(142, 13, 190, 22);
-
-        txtPrecioProd.setName("nombre"); // NOI18N
-        txtPrecioProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrecioProdActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtPrecioProd);
-        txtPrecioProd.setBounds(142, 48, 190, 22);
-
-        btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
-        jPanel1.add(btnBuscar);
-        btnBuscar.setBounds(350, 13, 50, 40);
-
-        Categoria.setText("Categoria:");
-        jPanel1.add(Categoria);
-        Categoria.setBounds(10, 160, 70, 16);
-        jPanel1.add(cbxCategoria);
-        cbxCategoria.setBounds(140, 160, 190, 20);
+        cbxServicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        jPanel1.add(cbxServicio);
+        cbxServicio.setBounds(140, 40, 190, 20);
         jPanel1.add(dchFechaIni);
         dchFechaIni.setBounds(140, 80, 190, 22);
 
@@ -168,6 +140,24 @@ public class VisProductos extends javax.swing.JFrame {
         lblFechaFin.setBounds(10, 120, 80, 16);
         jPanel1.add(dchFechaFin);
         dchFechaFin.setBounds(140, 120, 190, 22);
+
+        lblPersona.setText("Persona:");
+        jPanel1.add(lblPersona);
+        lblPersona.setBounds(10, 160, 70, 16);
+        jPanel1.add(txtPersona);
+        txtPersona.setBounds(140, 160, 190, 22);
+
+        btnBuscarPerona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/personas.png"))); // NOI18N
+        jPanel1.add(btnBuscarPerona);
+        btnBuscarPerona.setBounds(340, 151, 50, 40);
+
+        lblPrecio.setText("$");
+        jPanel1.add(lblPrecio);
+        lblPrecio.setBounds(420, 40, 90, 20);
+
+        lblPrecioIndic.setText("Precio:");
+        jPanel1.add(lblPrecioIndic);
+        lblPrecioIndic.setBounds(360, 40, 40, 16);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 210);
@@ -183,8 +173,12 @@ public class VisProductos extends javax.swing.JFrame {
         jLabel8.setText("Buscar por nombre:");
         pnl_personas.add(jLabel8);
         jLabel8.setBounds(10, 300, 130, 16);
-        pnl_personas.add(lblIdCat);
-        lblIdCat.setBounds(470, 10, 41, 20);
+        pnl_personas.add(lblIdProd);
+        lblIdProd.setBounds(470, 10, 41, 20);
+        pnl_personas.add(lblIdPersona);
+        lblIdPersona.setBounds(490, 10, 0, 0);
+        pnl_personas.add(lblIdPer);
+        lblIdPer.setBounds(530, 20, 0, 0);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -245,14 +239,6 @@ public class VisProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPrecioProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioProdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioProdActionPerformed
-
-    private void txtDescripcionProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionProdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionProdActionPerformed
-
     private void txtBuscarCualquierCampoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCualquierCampoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarCualquierCampoKeyTyped
@@ -286,14 +272,18 @@ public class VisProductos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VisProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisHistorialPersonaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VisProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisHistorialPersonaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VisProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisHistorialPersonaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VisProductos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VisHistorialPersonaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -302,40 +292,42 @@ public class VisProductos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VisProductos().setVisible(true);
+                new VisHistorialPersonaServicio().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel Categoria;
-    public javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnBuscarPerona;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
-    public javax.swing.JComboBox<String> cbxCategoria;
+    public javax.swing.JComboBox<String> cbxServicio;
     public com.toedter.calendar.JDateChooser dchFechaFin;
     public com.toedter.calendar.JDateChooser dchFechaIni;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JLabel lblDescripcionProducto;
     public javax.swing.JLabel lblFechaFin;
     public javax.swing.JLabel lblFechaIni;
-    public javax.swing.JLabel lblIdCat;
+    public javax.swing.JLabel lblIdPer;
+    public javax.swing.JLabel lblIdPersona;
+    public javax.swing.JLabel lblIdProd;
+    public javax.swing.JLabel lblPersona;
+    public javax.swing.JLabel lblPrecio;
+    public javax.swing.JLabel lblPrecioIndic;
+    public javax.swing.JLabel lblTipoEntrenam;
     public javax.swing.JMenuItem mniFicha;
     public javax.swing.JMenuItem mniReportes;
     public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;
-    public javax.swing.JTable tbl_productos;
+    public javax.swing.JTable tbl_historialPerServ;
     public javax.swing.JTextField txtBuscarCualquierCampo;
-    public javax.swing.JTextField txtDescripcionProd;
-    public javax.swing.JTextField txtPrecioProd;
+    public javax.swing.JTextField txtPersona;
     public javax.swing.JTextField txt_id;
     // End of variables declaration//GEN-END:variables
 }

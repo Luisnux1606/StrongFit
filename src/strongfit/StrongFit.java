@@ -17,6 +17,8 @@ import controladores.CtrlFacturaDetalle;
 import controladores.CtrlFicha;
 import controladores.CtrlMedidas;
 import controladores.CtrlPersonas;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import modelos.Analisis;
 import modelos.FacturaCab;
 import modelos.Ficha;
@@ -38,6 +40,9 @@ public class StrongFit {
      */
     public static void main(String[] args) {
        
+        
+        
+        
         Persona per = new Persona();
         Ficha ficha =  new Ficha();
         Medidas med =  new Medidas();

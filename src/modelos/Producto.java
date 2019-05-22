@@ -15,6 +15,8 @@ public class Producto {
    private String descripcion_prod;
    private double precio_prod;
    private Categoria categoria;
+   private String fechaIni;
+   private String fechaFin;
    private int estado_prod;
 
     /**
@@ -85,6 +87,34 @@ public class Producto {
      */
     public void setEstado_prod(int estado_prod) {
         this.estado_prod = estado_prod;
+    }
+
+    /**
+     * @return the fechaIni
+     */
+    public String getFechaIni() {
+        return fechaIni;
+    }
+
+    /**
+     * @param fechaIni the fechaIni to set
+     */
+    public void setFechaIni(String fechaIni) {
+        this.fechaIni = fechaIni;
+    }
+
+    /**
+     * @return the fechaFin
+     */
+    public String getFechaFin() {
+        return fechaFin;
+    }
+
+    /**
+     * @param fechaFin the fechaFin to set
+     */
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
     }
    
    

@@ -147,6 +147,15 @@ CREATE SEQUENCE iva_id_seq
  ORDER
 /
 
+
+CREATE SEQUENCE HistPersServ_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+ ORDER
+/
+
 -- Create sequences CONTABILIDAD -------------------------------------------------
 -- Create sequences CONTABILIDAD -------------------------------------------------
 CREATE SEQUENCE TIPO_ASIENTO_SEQ_ID
@@ -295,6 +304,24 @@ CREATE INDEX idx_id_per ON Persona(id_per)
 ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)
 /
 
+CREATE TABLE Categoria(
+  id_cat Number NOT NULL,
+  tipo_cat  Varchar2(45 ),
+  categoria_id_cat Number,
+  estado_cat Number 
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+-- Create indexes for table categoria
+CREATE INDEX idx_id_cat ON Categoria(id_cat)
+/
+-- Add keys for table categoria
+ALTER TABLE Categoria ADD CONSTRAINT pk_id_cat PRIMARY KEY (id_cat)
+/
+ALTER TABLE Categoria ADD CONSTRAINT fk_id_cat_cat FOREIGN KEY (categoria_id_cat) REFERENCES Categoria(id_cat)
+/
+
+
 CREATE TABLE Producto(
   id_prod Number NOT NULL,
   descripcion_prod  Varchar2(350 ),
@@ -315,6 +342,30 @@ ALTER TABLE Producto ADD CONSTRAINT pk_id_prod PRIMARY KEY (id_prod)
 -- Create relationships section  ------------------------------------------------- 
 ALTER TABLE Producto ADD CONSTRAINT fk_id_cat FOREIGN KEY (Categoria_id_cat) REFERENCES Categoria (id_cat)
 /
+
+CREATE TABLE HistPersServ(
+  id_HisPerSer Number NOT NULL,  
+  fechaIni_HisPerSer Varchar2(100),
+  fechaFin_HisPerSer Varchar2(100),
+  Persona_id_HisPerSer Number,
+  Producto_id_HisPerSer Number,
+  estado_HisPerSer Number 
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+-- Create indexes for table producto
+CREATE INDEX id_HisPerSer ON HistPersServ(id_HisPerSer)
+/
+-- Add keys for table producto
+ALTER TABLE HistPersServ ADD CONSTRAINT pk_id_HisPerSer PRIMARY KEY (id_HisPerSer)
+/
+-- Create relationships section  ------------------------------------------------- 
+ALTER TABLE HistPersServ ADD CONSTRAINT fk_id_per_hps FOREIGN KEY (Persona_id_HisPerSer) REFERENCES Persona (id_per)
+/
+-- Create relationships section  ------------------------------------------------- 
+ALTER TABLE HistPersServ ADD CONSTRAINT fk_id_prod_hps FOREIGN KEY (Producto_id_HisPerSer) REFERENCES Producto (id_prod)
+/
+
 
 CREATE TABLE Ficha(
   id_ficha Number NOT NULL,
@@ -386,6 +437,7 @@ CREATE TABLE FacturaCabecera(
   total_facCab Number(10,2),        --5. total+iva
   valPendiente_facCab Number(10,2),  --7. valPendiente
   valCancelo_facCab Number(10,2),     --6. valCancelo
+  concepto_facCab Varchar2(350),
   Persona_id_per Number,
   Membresia_id_memb Number,        --2. descuento
   Ivas_id_ivas Number,            --4. iva
@@ -406,23 +458,6 @@ ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_pers FOREIGN KEY (Persona_id_pe
 ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_memb FOREIGN KEY (Membresia_id_memb) REFERENCES Membresia (id_memb)
 /
 ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_ivas FOREIGN KEY (Ivas_id_ivas) REFERENCES IVAS (id_ivas)
-/
-
-CREATE TABLE Categoria(
-  id_cat Number NOT NULL,
-  tipo_cat  Varchar2(45 ),
-  categoria_id_cat Number,
-  estado_cat Number 
-)
-TABLESPACE tbs_usr_strongfit_p
-/
--- Create indexes for table categoria
-CREATE INDEX idx_id_cat ON Categoria(id_cat)
-/
--- Add keys for table categoria
-ALTER TABLE Categoria ADD CONSTRAINT pk_id_cat PRIMARY KEY (id_cat)
-/
-ALTER TABLE Categoria ADD CONSTRAINT fk_id_cat FOREIGN KEY (categoria_id_cat) REFERENCES Categoria(id_cat)
 /
 
 CREATE TABLE FacturaDetalle(

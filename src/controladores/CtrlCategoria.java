@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelos.Categoria;
 import modelos.Persona;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisCategoria;
 
 
@@ -62,10 +63,19 @@ public class CtrlCategoria implements ActionListener
         setListener();  
         showComboCategoriaSuperior();
         
-        int colHide[] = new int[1];
+        int colHide[] = new int[2];
         colHide[0]=0;
+        colHide[1]=3;
         setHideJtableColumn(visCat.tbl_categoria,colHide);
+        escribirCombos();
     }
+    
+    private void escribirCombos(){
+        AutoCompleteDecorator.decorate(visCat.cmbCatSuperior);
+        
+        
+    }
+
     
     public void showComboCategoriaSuperior()
     {

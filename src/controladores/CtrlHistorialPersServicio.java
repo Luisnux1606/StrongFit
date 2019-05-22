@@ -12,6 +12,7 @@ import consultas.ConsAnalisis;
 
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
+import consultas.ConsHistorialPersonaServicio;
 import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
@@ -44,6 +45,7 @@ import modelos.Categoria;
 
 import modelos.FacturaCab;
 import modelos.Ficha;
+import modelos.HistorialPeronaServicio;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -52,6 +54,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisBuscarVentas;
 
 import vistas.VisFicha;
+import vistas.VisHistorialPersonaServicio;
 import vistas.VisMembresia;
 import vistas.VisPersona;
 import vistas.VisProductos;
@@ -61,42 +64,39 @@ import vistas.VisReportes;
  *
  * @author Administrator
  */
-public class CtrlProductos implements ActionListener{
+public class CtrlHistorialPersServicio implements ActionListener{
 
     
-    VisProductos visProd;
-    Producto prod;
-    ConsProductos consProd;
-   
+            
+    VisHistorialPersonaServicio visHisPerServ;
+    HistorialPeronaServicio hisPerServ;
+    ConsHistorialPersonaServicio consHisPerServ;
+    
     VisFicha visFicha;
-    Categoria catProd;
-    /*
-    VisProductos visProd = new VisProductos();
-            Producto entT  = new Producto();
-            ConsProductos consEntT = new ConsProductos();
-    
-    */
-
+    Producto prod;
+    Persona per;
+   
     String cadBus;
     int locale;
     
-    public CtrlProductos(Producto prod, ConsProductos consProd,VisProductos visProd,VisFicha visFicha)
+    public CtrlHistorialPersServicio(VisHistorialPersonaServicio visHisPerServ, HistorialPeronaServicio hisPerServ,ConsHistorialPersonaServicio consHisPerServ,VisFicha visFicha)
     {
        
-        this.prod = prod;
-        this.consProd = consProd;        
-        this.visProd =  visProd;
+        this.consHisPerServ = consHisPerServ;
+        this.hisPerServ = hisPerServ;        
+        this.consHisPerServ =  consHisPerServ;
         this.visFicha = visFicha;
+        prod = new Producto();
+        per = new Persona();
         
                 
-        this.visProd.btnGuardar.addActionListener(this);
-        this.visProd.btnEliminar.addActionListener(this);
-        this.visProd.btnLimpiar.addActionListener(this);
-        this.visProd.btnModificar.addActionListener(this);
-        
+        this.visHisPerServ.btnGuardar.addActionListener(this);
+        this.visHisPerServ.btnEliminar.addActionListener(this);
+        this.visHisPerServ.btnLimpiar.addActionListener(this);
+        this.visHisPerServ.btnModificar.addActionListener(this);     
        
         
-       catProd = new Categoria();
+
               
         cadBus = "";
         locale = 0; //1:menu , 2:factura
@@ -106,76 +106,63 @@ public class CtrlProductos implements ActionListener{
 
         limpiarTabla();
         showTable();
-        showComboCategorias();
-        setFormatTable(visProd.tbl_productos);
+        showComboServicio();
+        setFormatTable(visHisPerServ.tbl_historialPerServ);
         escribirCombos();
-        setTableModel();
     }
     
     private void escribirCombos()
       {
-        AutoCompleteDecorator.decorate(visProd.cbxCategoria);        
+        AutoCompleteDecorator.decorate(visHisPerServ.cbxServicio);        
            
       }  
     
     
     public void iniciar()
     {
-        visProd.setTitle("PRODUCTOS");            
+        visHisPerServ.setTitle("PRODUCTOS");            
  
-        visProd.btnGuardar.setToolTipText("Guardar el registro");
-        visProd.btnModificar.setToolTipText("Modificar el registro");
-        visProd.btnEliminar.setToolTipText("Eliminar el registro");
-        visProd.btnLimpiar.setToolTipText("Limpiar el registro");
+        visHisPerServ.btnGuardar.setToolTipText("Guardar el registro");
+        visHisPerServ.btnModificar.setToolTipText("Modificar el registro");
+        visHisPerServ.btnEliminar.setToolTipText("Eliminar el registro");
+        visHisPerServ.btnLimpiar.setToolTipText("Limpiar el registro");
         //visEnt.tabp_ficha.setSelectedIndex(2);
         limpiar();
-        visProd.setLocation(300,10); 
-        visProd.setSize(1000,600);                
-        visProd.setVisible(true);
+        visHisPerServ.setLocation(300,10); 
+        visHisPerServ.setSize(1000,600);                
+        visHisPerServ.setVisible(true);
     }
     
-    public void setTableModel()
-    {
-      visProd.tbl_productos.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
-        {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-            {
-                final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                c.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-                return c;
-            }
-            });
-        
-    }
     public void showTableByNom(String cad)
     {
         try {
             limpiarTabla();
             
-            ResultSet listProd = consProd.buscarTodosPorNomTabla(cad);
+            ResultSet listProd = consHisPerServ.buscarTodosPorNomTabla(cad);
             
-            DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-            Object cols[] = new Object[5];
+            DefaultTableModel model =  (DefaultTableModel)visHisPerServ.tbl_historialPerServ.getModel();
+            Object cols[] = new Object[7];
             
             while (listProd.next()) {
                 try {
-                   cols[0] = listProd.getInt("id_prod");
-                   cols[1] = listProd.getString("descripcion_prod");
-                   cols[2] = listProd.getString("precio_prod").toUpperCase();
-                   cols[3] = listProd.getString("tipo_cat");
-                   cols[4] = listProd.getString("id_cat");
-                 
+                   cols[0] = listProd.getInt("id_hisperser");
+                   cols[1] = listProd.getString("nombres");
+                   cols[2] = listProd.getString("descripcion_prod").toUpperCase();
+                   cols[3] = listProd.getString("fechaini_hisperser");
+                   cols[4] = listProd.getString("fechafin_hisperser");
+                   cols[5] = listProd.getString("id_prod");
+                   cols[6] = listProd.getString("id_per");
+                   
                     model.addRow(cols);
                     
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consProd.closeConection();
+            consHisPerServ.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -219,7 +206,7 @@ public class CtrlProductos implements ActionListener{
            
           }
         };
-        visProd.txtBuscarCualquierCampo.addKeyListener(keyListenertxtBuscarProductosPorCualquierCampo);
+        visHisPerServ.txtBuscarCualquierCampo.addKeyListener(keyListenertxtBuscarProductosPorCualquierCampo);
 
         MouseListener mouseListTblProd = new MouseListener() {
             @Override
@@ -228,8 +215,8 @@ public class CtrlProductos implements ActionListener{
                 if(e.getClickCount()==1)
                 {
                      getTableToTxts();
-                     desabilitaHabilita(visProd.btnGuardar,false);
-                     desabilitaHabilita(visProd.btnModificar,true);
+                     desabilitaHabilita(visHisPerServ.btnGuardar,false);
+                     desabilitaHabilita(visHisPerServ.btnModificar,true);
                                           
                 }
                 if(e.getClickCount()==2)
@@ -243,9 +230,10 @@ public class CtrlProductos implements ActionListener{
                         case 1:
                             break;
                         case 2:
-                            int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
-                            String descripcion = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
-                            double precio =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
+                            int idProd = Integer.parseInt(visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 5)+"");
+                            int idPer = Integer.parseInt(visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 6)+"");
+                            String descripcion = visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 2)+"";
+                            double precio =  Validaciones.isNumVoid10(visHisPerServ.lblPrecio.getText());
                             
                            
                             visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
@@ -255,7 +243,7 @@ public class CtrlProductos implements ActionListener{
                             
                             Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
                             Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
-                            visProd.dispose();
+                            visHisPerServ.dispose();
                             break;
                         case 3:
                             
@@ -274,7 +262,9 @@ public class CtrlProductos implements ActionListener{
             @Override
             public void mouseReleased(MouseEvent e) {
                 
-            }                                                                
+            }
+
+           
 
             @Override
             public void mouseExited(MouseEvent e) {
@@ -287,58 +277,16 @@ public class CtrlProductos implements ActionListener{
             }
         };
        
-        visProd.tbl_productos.addMouseListener(mouseListTblProd);
-      //key listener 
-        
-        KeyListener keyListenerTblDetalle = new KeyListener() {
-          public void keyPressed(KeyEvent e) {
-
-             
-          }
-
-          public void keyReleased(KeyEvent keyEvent) {
-            printIt("Released", keyEvent);
-          }
-
-          public void keyTyped(KeyEvent e) {
-             int m=e.getKeyChar();
-             int filaDetalle = visFicha.tblFacturaDetalle.getRowCount()-1;
-             System.out.println("hola");
-              if (m == KeyEvent.VK_ENTER  ) 
-              {
-                  int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
-                String descripcion = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
-                double precio =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
-
-
-                visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
-                visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
-                visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 2);
-                visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
-
-                Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
-                Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
-                visProd.dispose();
-              }
-                
-              
-          }
-          
-          private void printIt(String title, KeyEvent keyEvent) {
-            int keyCode = keyEvent.getKeyCode();
-            String keyText = KeyEvent.getKeyText(keyCode);
-           
-          }
-        };
-        visProd.tbl_productos.addKeyListener(keyListenerTblDetalle);
+        visHisPerServ.tbl_historialPerServ.addMouseListener(mouseListTblProd);
+      
     }
     
     public void setFormatTable(JTable table)
     {
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.LEFT);
-        //table.getColumnModel().getColumn(4).setCellRenderer(tcr);
-       // table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
+        table.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
         
         int colHide[] = new int[2];
         colHide[0]=0;
@@ -371,104 +319,110 @@ public class CtrlProductos implements ActionListener{
     }
      public void getTableToTxts()
      {
-         JTable tblD = visProd.tbl_productos;
-         visProd.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
-         visProd.txtDescripcionProd.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));
-         visProd.txtPrecioProd.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2)));
-         visProd.cbxCategoria.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
-         visProd.lblIdCat.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)));
+         JTable tblD = visHisPerServ.tbl_historialPerServ;
+         visHisPerServ.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
+         visHisPerServ.txtPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));
+         visHisPerServ.cbxServicio.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2)));
+         visHisPerServ.dchFechaIni.setDateFormatString(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
+         visHisPerServ.dchFechaFin.setDateFormatString(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)));
+         visHisPerServ.lblIdProd.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5)));
+         visHisPerServ.lblIdPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
      }
     
      public void setFocus()
     {
-        visProd.txtBuscarCualquierCampo.requestFocus();
-        
-        visProd.txtDescripcionProd.setNextFocusableComponent(visProd.txtPrecioProd); 
-        visProd.txtPrecioProd.setNextFocusableComponent(visProd.cbxCategoria); 
+        visHisPerServ.cbxServicio.requestFocus();
+        visHisPerServ.cbxServicio.setNextFocusableComponent(visHisPerServ.dchFechaIni); 
+        visHisPerServ.dchFechaIni.setNextFocusableComponent(visHisPerServ.dchFechaFin); 
         
         
     }
      public void limpiarTabla(){
-        DefaultTableModel tb = (DefaultTableModel) visProd.tbl_productos.getModel();
-        int a = visProd.tbl_productos.getRowCount()-1;
+        DefaultTableModel tb = (DefaultTableModel) visHisPerServ.tbl_historialPerServ.getModel();
+        int a = visHisPerServ.tbl_historialPerServ.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         } 
     }
-    public void showComboCategorias()
+    public void showComboServicio()
     {
         System.out.println("aqui");
         try {
            
-            ResultSet listCategorias = consProd.buscarCategorias();
+            ResultSet listCategorias = consHisPerServ.buscarServicios();
             
-            DefaultComboBoxModel model =  (DefaultComboBoxModel)visProd.cbxCategoria.getModel();
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visHisPerServ.cbxServicio.getModel();
            
             
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     
-                    model.addElement(listCategorias.getString("tipo_cat"));
+                    model.addElement(listCategorias.getString("descripcion_prod"));
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consProd.closeConection();
+            consHisPerServ.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        visProd.cbxCategoria.updateUI();
+        visHisPerServ.cbxServicio.updateUI();
     }
     
     public void showTable()
     {
         try {
             limpiarTabla();
-            ResultSet listProd = consProd.buscarTodos();
+            ResultSet listProd = consHisPerServ.buscarTodos();
             
-            DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-            Object cols[] = new Object[5];
+            DefaultTableModel model =  (DefaultTableModel)visHisPerServ.tbl_historialPerServ.getModel();
+            Object cols[] = new Object[7];
             
             while (listProd.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
-                   cols[0] = listProd.getInt("id_prod");
-                   cols[1] = listProd.getString("descripcion_prod");
-                   cols[2] = listProd.getString("precio_prod").toUpperCase();
-                   cols[3] = listProd.getString("tipo_cat");
-                   cols[4] = listProd.getString("id_cat");
+                    cols[0] = listProd.getInt("id_hisperser");
+                   cols[1] = listProd.getString("nombres");
+                   cols[2] = listProd.getString("descripcion_prod").toUpperCase();
+                   cols[3] = listProd.getString("fechaini_hisperser");
+                   cols[4] = listProd.getString("fechafin_hisperser");
+                   cols[5] = listProd.getString("id_prod");
+                   cols[6] = listProd.getString("id_per");
                    
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
-                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consProd.closeConection();
+            consHisPerServ.closeConection();
         } catch (SQLException ex) {
-            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        visProd.tbl_productos.updateUI();
+        visHisPerServ.tbl_historialPerServ.updateUI();
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == visProd.btnGuardar) 
+      if (e.getSource() == visHisPerServ.btnGuardar) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
                      
                        
-                    int tE = consProd.getIdByNom(visProd.cbxCategoria.getSelectedItem()+"");                     
-                    catProd.setId_cat(tE);
-                    prod.setCategoria(catProd);
-                    prod.setDescripcion_prod(visProd.txtDescripcionProd.getText());
-                    prod.setPrecio_prod(Validaciones.isNumVoid10(visProd.txtPrecioProd.getText()));
-                    prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaIni.getDate()));
-                    prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaFin.getDate()));
+                    int tE = consHisPerServ.getIdByNom(visHisPerServ.cbxServicio.getSelectedItem()+"");                                         
+                    prod.setId_prod(tE);
+                    hisPerServ.setProducto_id_HisPerSer(prod);
+                    
+                    hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaIni.getDate()));
+                    hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
+                    
+                    per.setId(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
+                    hisPerServ.setPersona_id_HisPerSer(per);
+                                     
                     prod.setEstado_prod(1);
                   
                    
-                    if (consProd.registrar(prod)) {
+                    if (consHisPerServ.registrar(hisPerServ)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                         limpiar();
                     }
@@ -481,19 +435,21 @@ public class CtrlProductos implements ActionListener{
                        
         }
       
-      if (e.getSource() == visProd.btnModificar) 
+      if (e.getSource() == visHisPerServ.btnModificar) 
        {            
-            int tE = consProd.getIdByNom(visProd.cbxCategoria.getSelectedItem()+"");
-            catProd.setId_cat(tE);
-            prod.setId_prod(Validaciones.isNumVoid(visProd.txt_id.getText()));
-            prod.setCategoria(catProd);
-            prod.setDescripcion_prod(visProd.txtDescripcionProd.getText());
-            prod.setPrecio_prod(Validaciones.isNumVoid10(visProd.txtPrecioProd.getText()));  
-            prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaIni.getDate()));
-            prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaFin.getDate()));
+            int tE = consHisPerServ.getIdByNom(visHisPerServ.cbxServicio.getSelectedItem()+"");                                         
+            prod.setId_prod(tE);
+            hisPerServ.setProducto_id_HisPerSer(prod);
+
+            hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaIni.getDate()));
+            hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
+
+            per.setId(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
+            hisPerServ.setPersona_id_HisPerSer(per);
+            hisPerServ.setId_HisPerSer(Validaciones.isNumVoid(visHisPerServ.txt_id.getText()));
             prod.setEstado_prod(1);
             
-            if (consProd.modificar(prod)) {
+            if (consHisPerServ.modificar(hisPerServ)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
                 limpiar();
             }
@@ -505,13 +461,13 @@ public class CtrlProductos implements ActionListener{
             showTable();
         }
       
-      if (e.getSource() == visProd.btnEliminar) 
+      if (e.getSource() == visHisPerServ.btnEliminar) 
        {
            
-            prod.setId_prod(Integer.parseInt(visProd.txt_id.getText()));
-            prod.setEstado_prod(0);
+            hisPerServ.setId_HisPerSer(Integer.parseInt(visHisPerServ.txt_id.getText()));
+            hisPerServ.setEstado_HisPerSer(0);
                       
-            if (consProd.eliminar(prod)) {
+            if (consHisPerServ.eliminar(hisPerServ)) {
                 JOptionPane.showMessageDialog(null, "Registro Eliminado !");
                 limpiar();
             }
@@ -523,11 +479,11 @@ public class CtrlProductos implements ActionListener{
             showTable();
         }
       
-       if (e.getSource() == visProd.btnLimpiar) 
+       if (e.getSource() == visHisPerServ.btnLimpiar) 
         {
            limpiar();
-           desabilitaHabilita(visProd.btnGuardar,true);
-           desabilitaHabilita(visProd.btnModificar,false);
+           desabilitaHabilita(visHisPerServ.btnGuardar,true);
+           desabilitaHabilita(visHisPerServ.btnModificar,false);
         }
 
        
@@ -535,9 +491,9 @@ public class CtrlProductos implements ActionListener{
     }
     public void limpiar()
     {
-        visProd.txtDescripcionProd.setText("");
-        visProd.txtPrecioProd.setText("");
-        visProd.cbxCategoria.setSelectedIndex(0);
+        visHisPerServ.dchFechaFin.setDate(null);
+        visHisPerServ.dchFechaIni.setDate(null);
+        visHisPerServ.cbxServicio.setSelectedIndex(0);
        
        
     }

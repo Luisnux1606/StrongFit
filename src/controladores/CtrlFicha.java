@@ -13,6 +13,7 @@ import consultas.ConsCategoria;
 
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
+import consultas.ConsHistorialPersonaServicio;
 import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
@@ -35,6 +36,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -42,6 +45,7 @@ import modelos.Analisis;
 import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.Ficha;
+import modelos.HistorialPeronaServicio;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
@@ -50,6 +54,7 @@ import vistas.VisBuscarVentas;
 import vistas.VisCategoria;
 
 import vistas.VisFicha;
+import vistas.VisHistorialPersonaServicio;
 import vistas.VisMembresia;
 import vistas.VisPersona;
 import vistas.VisProductos;
@@ -141,6 +146,27 @@ public class CtrlFicha implements ActionListener{
     
     public void iniciar()
     {
+        
+      try {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+                //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+               // UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        } catch (InstantiationException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        } catch (IllegalAccessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+        }
+
+
         visFicha.setTitle("FICHA");
         
         visFicha.dtcFecha.setDate(Calculos.getCurrentDate2());     
@@ -546,6 +572,16 @@ public class CtrlFicha implements ActionListener{
             ConsCategoria consCat=new ConsCategoria();
             
             CtrlCategoria ctrCat=new CtrlCategoria (modCat, visCat, consCat, visFicha);
+            ctrCat.iniciar();
+        }
+        
+        if (e.getSource()==visFicha.mniEntrenamientos) //Cuando toca el menú categorías
+        {
+            HistorialPeronaServicio hisPerServ=new HistorialPeronaServicio();
+            VisHistorialPersonaServicio visCat=new VisHistorialPersonaServicio();
+            ConsHistorialPersonaServicio consCat=new ConsHistorialPersonaServicio();
+            
+            CtrlHistorialPersServicio ctrCat=new CtrlHistorialPersServicio (visCat, hisPerServ, consCat, visFicha);
             ctrCat.iniciar();
         }
          

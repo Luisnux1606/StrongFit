@@ -17,24 +17,26 @@ import modelos.Conexion;
 import java.util.ArrayList;
 import modelos.Categoria;
 import modelos.Conexion;
+import modelos.HistorialPeronaServicio;
 
 import modelos.Producto;
 
 
-public class ConsProductos extends Conexion
+public class ConsHistorialPersonaServicio extends Conexion
 {
-    public boolean registrar(Producto modProducto)
+    public boolean registrar(HistorialPeronaServicio hisPerServ)
     {
         PreparedStatement ps= null;
         Connection con = getConexion();
-        String sql = "INSERT INTO Producto (id_prod,descripcion_prod, precio_prod, Categoria_id_cat, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?)";
+        String sql = "INSERT INTO HistorialPeronaServicio (ID_HISPERSER,FECHAINI_HISPERSER, FECHAFIN_HISPERSER, PERSONA_ID_HISPERSER, PRODUCTO_ID_HISPERSER,ESTADO_HISPERSER) VALUES(HistPersServ_id_seq.NEXTVAL,?,?,?,?,?)";
         try 
         {
             ps = con.prepareStatement(sql);
-            ps.setString(1, modProducto.getDescripcion_prod());
-            ps.setDouble(2, modProducto.getPrecio_prod());
-            ps.setInt(3, modProducto.getCategoria().getId_cat());
-            ps.setInt(4, modProducto.getEstado_prod());  
+            ps.setString(1, hisPerServ.getFechaIni_HisPerSer());
+            ps.setString(2, hisPerServ.getFechaFin_HisPerSer());
+            ps.setInt(3, hisPerServ.getPersona_id_HisPerSer().getId());
+            ps.setInt(4, hisPerServ.getProducto_id_HisPerSer().getId_prod());  
+            ps.setInt(5, hisPerServ.getEstado_HisPerSer()); 
 
             ps.execute();                                       
             return true;
@@ -58,23 +60,25 @@ public class ConsProductos extends Conexion
         
     }
     
-    public boolean modificar(Producto modProducto)
+    public boolean modificar(HistorialPeronaServicio hisPerServ)
     {
         PreparedStatement ps = null;
-        Connection con = getConexion();// descripcion_prod, precio_prod, Categoria_id_cat, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?)
-        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?, Categoria_id_cat = ?, estado_prod = ?"
-                + " WHERE id_prod=?";
+        Connection con = getConexion();//HistorialPeronaServicio (ID_HISPERSER,FECHAINI_HISPERSER, FECHAFIN_HISPERSER, PERSONA_ID_HISPERSER, PRODUCTO_ID_HISPERSER,ESTADO_HISPERSER) VALUES(HistPersServ_id_seq.NEXTVAL,?,?,?,?,?)";
+        String sql = "UPDATE HistorialPeronaServicio SET FECHAINI_HISPERSER = ?,FECHAFIN_HISPERSER = ?, PERSONA_ID_HISPERSER = ?, PRODUCTO_ID_HISPERSER = ?, ESTADO_HISPERSER = ?"
+                + " WHERE ID_HISPERSER=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, modProducto.getDescripcion_prod());
-            ps.setDouble(2, modProducto.getPrecio_prod());
-            ps.setInt(3, modProducto.getCategoria().getId_cat());
-            ps.setInt(4, modProducto.getEstado_prod());  
-            ps.setInt(5, modProducto.getId_prod());
+            ps = con.prepareStatement(sql);
+            ps.setString(1, hisPerServ.getFechaIni_HisPerSer());
+            ps.setString(2, hisPerServ.getFechaFin_HisPerSer());
+            ps.setInt(3, hisPerServ.getPersona_id_HisPerSer().getId());
+            ps.setInt(4, hisPerServ.getProducto_id_HisPerSer().getId_prod());  
+            ps.setInt(5, hisPerServ.getEstado_HisPerSer()); 
+            ps.setInt(6, hisPerServ.getId_HisPerSer());
           
             ps.execute();
             return true;
@@ -97,18 +101,18 @@ public class ConsProductos extends Conexion
         
     }
     
-     public boolean eliminar(Producto prod)
+     public boolean eliminar(HistorialPeronaServicio hisPerServ)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  Producto SET estado_prod =? WHERE id_prod=?";
+        String sql = "UPDATE  HistorialPeronaServicio SET ESTADO_HISPERSER =? WHERE ID_HISPERSER=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);  
-            ps.setInt(1, prod.getEstado_prod());
-            ps.setInt(2, prod.getId_prod());
+            ps.setInt(1, hisPerServ.getEstado_HisPerSer());
+            ps.setInt(2, hisPerServ.getId_HisPerSer());
             ps.execute();
             return true;
         } 
@@ -143,17 +147,17 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,c.tipo_cat,c.id_cat " +
-                    "from  categoria c,producto p " +
-                    "where c.id_cat = p.categoria_id_cat and upper(p.id_prod) like upper('%"+cad+"%')  " +
-                    "union " +
-                    "select p.id_prod,p.descripcion_prod,p.precio_prod,c.tipo_cat,c.id_cat " +
-                    "from  categoria c,producto p " +
-                    "where c.id_cat = p.categoria_id_cat and upper(p.descripcion_prod) like upper('%"+cad+"%') " +
-                    "union " +
-                    "select p.id_prod,p.descripcion_prod,p.precio_prod,c.tipo_cat,c.id_cat " +
-                    "from  categoria c,producto p " +
-                    "where c.id_cat = p.categoria_id_cat and upper(c.tipo_cat) like upper('%"+cad+"%') ";
+        String sql = "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per\n" +
+                    "from  persona p, histpersserv h, producto pr\n" +
+                    "where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and   upper(concat(concat(p.nom_per,' '),p.ape_per)) like upper('%"+cad+"%') \n" +
+                    "union\n" +
+                    "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per\n" +
+                    "from  persona p, histpersserv h, producto pr\n" +
+                    "where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and   upper(pr.descripcion_prod) like upper('%"+cad+"%') \n" +
+                    "union\n" +
+                    "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per\n" +
+                    "from  persona p, histpersserv h, producto pr\n" +
+                    "where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and   h.fechaini_hisperser like '%"+cad+"%' ";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -183,9 +187,9 @@ public class ConsProductos extends Conexion
                 con = getConexion();
                 ResultSet rs = null; 
                 
-		sql="select c.id_cat " +
-                    "from categoria c " +
-                    "where upper(c.tipo_cat) like upper('"+prod+"')";						
+		sql="select p.id_prod " +
+                    "from producto p " +
+                    "where upper(p.DESCRIPCION_PROD) like upper('"+prod+"')";						
                         try 
                         {
                             ps = con.prepareStatement(sql);                            
@@ -218,9 +222,9 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,c.tipo_cat,c.id_cat\n" +
-                    "from categoria c, producto p\n" +
-                    "where c.id_cat = p.categoria_id_cat and p.estado_prod = 1";
+        String sql = "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per\n" +
+                    "from  persona p, histpersserv h, producto pr\n" +
+                    "where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser";
                 
         
         try 
@@ -242,14 +246,14 @@ public class ConsProductos extends Conexion
         return rs;
     }
     
-    public ResultSet buscarCategorias()
+    public ResultSet buscarServicios()
     {
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select c.tipo_cat \n" +
-                    "from categoria c \n" +
-                    "where c.estado_cat = 1";
+        String sql = "select p.descripcion_prod " +
+                    "from producto p " +
+                    "where p.categoria_id_cat = 1";
                 
         
         try 

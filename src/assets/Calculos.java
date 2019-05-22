@@ -165,8 +165,7 @@ public class Calculos {
          for (int i = 0; i <= table.getRowCount()-1; i++) {
              num = table.getValueAt(i, 1)+"";
              valU = table.getValueAt(i, 3)+"";
-             
-             
+                          
              if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0) {
                  totDet = calcularTotalDetalle(Validaciones.isNumVoid10(num),Validaciones.isNumVoid10(valU));
                  table.setValueAt(getTwoDecimals(totDet), i,4);
