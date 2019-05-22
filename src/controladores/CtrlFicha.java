@@ -581,7 +581,7 @@ public class CtrlFicha implements ActionListener{
             VisHistorialPersonaServicio visCat=new VisHistorialPersonaServicio();
             ConsHistorialPersonaServicio consCat=new ConsHistorialPersonaServicio();
             
-            CtrlHistorialPersServicio ctrCat=new CtrlHistorialPersServicio (visCat, hisPerServ, consCat, visFicha);
+            CtrlHistorialPersServicio ctrCat=new CtrlHistorialPersServicio (visCat, hisPerServ, consCat, visFicha,persona);
             ctrCat.iniciar();
         }
          

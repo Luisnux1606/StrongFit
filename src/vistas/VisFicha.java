@@ -142,7 +142,6 @@ public class VisFicha extends javax.swing.JFrame {
         lblCliente = new javax.swing.JLabel();
         lblFechaFacCab = new javax.swing.JLabel();
         dtcFechaFacCab = new com.toedter.calendar.JDateChooser();
-        chkEntrenamiento = new javax.swing.JCheckBox();
         pnlEntrenamientoEnFactura = new javax.swing.JPanel();
         lblEntrenamientoGenerado = new javax.swing.JLabel();
         txtClienteFactura = new javax.swing.JTextField();
@@ -150,6 +149,7 @@ public class VisFicha extends javax.swing.JFrame {
         lblPersonaId = new javax.swing.JLabel();
         lblNro = new javax.swing.JLabel();
         lblNroFactura = new javax.swing.JLabel();
+        btnEntrenamiento = new javax.swing.JButton();
         btnGuardarFacCab = new javax.swing.JButton();
         btnModificarFacCab = new javax.swing.JButton();
         btnEliminarFacCab = new javax.swing.JButton();
@@ -944,8 +944,6 @@ public class VisFicha extends javax.swing.JFrame {
 
         lblFechaFacCab.setText("Fecha :");
 
-        chkEntrenamiento.setText("Entrenamiento");
-
         javax.swing.GroupLayout pnlEntrenamientoEnFacturaLayout = new javax.swing.GroupLayout(pnlEntrenamientoEnFactura);
         pnlEntrenamientoEnFactura.setLayout(pnlEntrenamientoEnFacturaLayout);
         pnlEntrenamientoEnFacturaLayout.setHorizontalGroup(
@@ -966,6 +964,9 @@ public class VisFicha extends javax.swing.JFrame {
         lblNro.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblNro.setText("Numbero Registro:");
 
+        btnEntrenamiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/training.png"))); // NOI18N
+        btnEntrenamiento.setText("Elegir entrenamiento");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -973,7 +974,8 @@ public class VisFicha extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkEntrenamiento)
+                    .addComponent(btnEntrenamiento)
+                    .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblCliente)
@@ -992,8 +994,7 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addGap(217, 217, 217)
                                 .addComponent(lblNro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblNroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblNroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(478, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -1015,9 +1016,9 @@ public class VisFicha extends javax.swing.JFrame {
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(lblPersonaId, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(chkEntrenamiento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnEntrenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1059,7 +1060,15 @@ public class VisFicha extends javax.swing.JFrame {
             new String [] {
                 "IdProducto", "Cantidad", "Descripcion", "V.Unitario", "V.Total"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane6.setViewportView(tblFacturaDetalle);
 
         lblDscto.setText("Aplica descuento:");
@@ -1542,6 +1551,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnEliminarFacCab;
     public javax.swing.JButton btnEliminarFichaG;
     public javax.swing.JButton btnEliminarFilas;
+    public javax.swing.JButton btnEntrenamiento;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnGuardarAnalisis;
     public javax.swing.JButton btnGuardarFacCab;
@@ -1554,7 +1564,6 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnModificarAnalisis;
     public javax.swing.JButton btnModificarFacCab;
     public javax.swing.JButton btnModificarFichaG;
-    public javax.swing.JCheckBox chkEntrenamiento;
     public com.toedter.calendar.JDateChooser dchFecha;
     public com.toedter.calendar.JDateChooser dtcFecha;
     public com.toedter.calendar.JDateChooser dtcFechaAnalisis;

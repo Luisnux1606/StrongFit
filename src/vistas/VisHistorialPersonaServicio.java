@@ -55,7 +55,6 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lblIdProd = new javax.swing.JLabel();
         lblIdPersona = new javax.swing.JLabel();
-        lblIdPer = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -92,7 +91,7 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -174,11 +173,9 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
         pnl_personas.add(jLabel8);
         jLabel8.setBounds(10, 300, 130, 16);
         pnl_personas.add(lblIdProd);
-        lblIdProd.setBounds(470, 10, 41, 20);
+        lblIdProd.setBounds(540, 10, 41, 20);
         pnl_personas.add(lblIdPersona);
-        lblIdPersona.setBounds(490, 10, 0, 0);
-        pnl_personas.add(lblIdPer);
-        lblIdPer.setBounds(530, 20, 0, 0);
+        lblIdPersona.setBounds(490, 10, 30, 20);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -314,7 +311,6 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblFechaFin;
     public javax.swing.JLabel lblFechaIni;
-    public javax.swing.JLabel lblIdPer;
     public javax.swing.JLabel lblIdPersona;
     public javax.swing.JLabel lblIdProd;
     public javax.swing.JLabel lblPersona;

@@ -44,8 +44,10 @@ import modelos.Membresias;
 import modelos.Persona;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisFicha;
+import vistas.VisHistorialPersonaServicio;
 import vistas.VisMembresia;
 import vistas.VisPersona;
+import vistas.VisProductos;
 import vistas.VisReportes;
 import visual.facturacion.MyTableModel;
 
@@ -62,6 +64,7 @@ public class CtrlPersonas implements ActionListener {
     VisPersona visPersona;
     VisMembresia visMemb;
     VisFicha visFicha;   
+    VisHistorialPersonaServicio visHisPerServ;
 //    VisEntrenamiento visEnt;
     Object vis;
     String cadBus;
@@ -480,14 +483,18 @@ public class CtrlPersonas implements ActionListener {
                         case 2:
                             visFicha = (VisFicha)vis;
                             modPer.setId(idPer);
-                            modPer.setNombre(cadBus);
+                            modPer.setNombre(nombre);
                             modPer.setApellido(apellido);
                             visFicha.lblPersonaId.setText(idPer+"");
                             visFicha.txtClienteFactura.setText(nombre + " "+apellido);
                             break;
                         case 3:  
-//                            visEnt = (VisEntrenamiento)vis;
+                            visHisPerServ = (VisHistorialPersonaServicio)vis;
                             modPer.setId(idPer);
+                            modPer.setNombre(nombre);
+                            modPer.setApellido(apellido);
+                            visHisPerServ.txtPersona.setText(nombre+" "+apellido);
+                            visHisPerServ.lblIdPersona.setText(idPer+"");
                     //        visEnt.txtPersona.setText(idPer+"");
                            break; 
                         default:    

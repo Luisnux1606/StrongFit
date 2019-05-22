@@ -668,4 +668,5 @@ values (categoria_id_seq.NEXTVAL,'servicio gimnasio',1);
 insert into Categoria(id_cat,tipo_cat,estado_cat)
 values (categoria_id_seq.NEXTVAL,'producto',1);
 
+
 commit;

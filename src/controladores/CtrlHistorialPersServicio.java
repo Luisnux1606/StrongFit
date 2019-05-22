@@ -79,22 +79,27 @@ public class CtrlHistorialPersServicio implements ActionListener{
     String cadBus;
     int locale;
     
-    public CtrlHistorialPersServicio(VisHistorialPersonaServicio visHisPerServ, HistorialPersonaServicio hisPerServ,ConsHistorialPersonaServicio consHisPerServ,VisFicha visFicha)
+    public CtrlHistorialPersServicio(VisHistorialPersonaServicio visHisPerServ, HistorialPersonaServicio hisPerServ,ConsHistorialPersonaServicio consHisPerServ,VisFicha visFicha,Persona persona)
     {
        
         this.consHisPerServ = consHisPerServ;
         this.hisPerServ = hisPerServ;        
         this.consHisPerServ =  consHisPerServ;
+        this.visHisPerServ = visHisPerServ;
         this.visFicha = visFicha;
-        prod = new Producto();
-        per = new Persona();
+        this.per = persona;
+        this.prod = new Producto();
+        
+        visHisPerServ.txtPersona.setText(per.getNombre()+" "+per.getApellido() );
+        visHisPerServ.lblIdPersona.setText(per.getId()+"");
         
                 
         this.visHisPerServ.btnGuardar.addActionListener(this);
         this.visHisPerServ.btnEliminar.addActionListener(this);
         this.visHisPerServ.btnLimpiar.addActionListener(this);
         this.visHisPerServ.btnModificar.addActionListener(this);     
-       
+        this.visHisPerServ.cbxServicio.addActionListener(this);
+        this.visHisPerServ.btnBuscarPerona.addActionListener(this);
         
 
               
@@ -234,7 +239,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
                             int idPer = Integer.parseInt(visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 6)+"");
                             String descripcion = visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 2)+"";
                             double precio =  Validaciones.isNumVoid10(visHisPerServ.lblPrecio.getText());
-                            
+                          
                            
                             visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
                             visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
@@ -409,7 +414,8 @@ public class CtrlHistorialPersServicio implements ActionListener{
            ArrayList<JDateChooser> jdc=new ArrayList<>();
                      
                        
-                    int tE = consHisPerServ.getIdByNom(visHisPerServ.cbxServicio.getSelectedItem()+"");                                         
+                    int tE = consHisPerServ.getIdByNom(visHisPerServ.cbxServicio.getSelectedItem()+"");     
+                  
                     prod.setId_prod(tE);
                     hisPerServ.setProducto_id_HisPerSer(prod);
                     
@@ -478,6 +484,33 @@ public class CtrlHistorialPersServicio implements ActionListener{
             }
             showTable();
         }
+       if (e.getSource() == visHisPerServ.cbxServicio) 
+       {    
+           String prod = visHisPerServ.cbxServicio.getSelectedItem()+"";          
+           double precio = consHisPerServ.getPrecioByCat(prod);
+           visHisPerServ.lblPrecio.setText(precio+"");
+           
+           if(prod.equals("entrenamiento diario"))
+           {
+               visHisPerServ.dchFechaIni.setDate(Calculos.getCurrentDate2());
+               visHisPerServ.dchFechaFin.setDate(Calculos.getCurrentDate2());
+           }
+
+      
+       }
+       if (e.getSource() == visHisPerServ.btnBuscarPerona) 
+       {    
+            VisPersona visPer = new VisPersona();
+           
+            ConsPersona consPer = new ConsPersona();
+           
+            CtrlPersonas ctrPer=new CtrlPersonas(per, consPer, visPer,visHisPerServ);
+            ctrPer.iniciar();
+            ctrPer.locale = 3;
+      
+       }
+       
+        //
       
        if (e.getSource() == visHisPerServ.btnLimpiar) 
         {

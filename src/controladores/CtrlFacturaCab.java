@@ -98,7 +98,7 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnBuscarClienteFactura.addActionListener(this);
         this.visFicha.btnAgregarFilas.addActionListener(this);
         this.visFicha.btnEliminarFilas.addActionListener(this);
-        this.visFicha.chkEntrenamiento.addActionListener(this);
+        this.visFicha.btnEntrenamiento.addActionListener(this);
        // this.visFicha.cmbTipoBusqueda.addActionListener(this);
         
          
@@ -768,16 +768,17 @@ public class CtrlFacturaCab implements ActionListener{
             ctrPer.iniciar();
             ctrPer.locale = 2;
         } 
-        if (e.getSource() == visFicha.chkEntrenamiento) 
+        if (e.getSource() == visFicha.btnEntrenamiento) 
         {
-           
-                       
+
             VisHistorialPersonaServicio visHis = new VisHistorialPersonaServicio();
             ConsHistorialPersonaServicio consHPS = new ConsHistorialPersonaServicio();
             HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
-            
-            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha);                        
+
+            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
             ctlHis.iniciar();
+            ctlHis.locale = 2;
+           
 
         } 
         
@@ -805,6 +806,7 @@ public class CtrlFacturaCab implements ActionListener{
     }
     public void limpiar()
     {
+        visFicha.txtClienteFactura.setText("");
         visFicha.dtcFechaFacCab.setDate(Calculos.getCurrentDate2()); 
         visFicha.txtValConDsctoFicha.setText("0.0");
         visFicha.txtValPendienteFicha.setText("0.0");

@@ -57,7 +57,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         this.visFicha.btnBuscarClienteFactura.addActionListener(this);
         this.visFicha.btnAgregarFilas.addActionListener(this);
         this.visFicha.btnEliminarFilas.addActionListener(this);
-        this.visFicha.chkEntrenamiento.addActionListener(this);
+        this.visFicha.btnEntrenamiento.addActionListener(this);
         
         setListener();
         limpiarTabla();

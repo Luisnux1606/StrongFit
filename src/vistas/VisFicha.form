@@ -2140,8 +2140,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chkEntrenamiento" min="-2" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
+                                      <Component id="btnEntrenamiento" min="-2" max="-2" attributes="0"/>
+                                      <Component id="pnlEntrenamientoEnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
                                               <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
@@ -2166,7 +2167,6 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <Component id="pnlEntrenamientoEnFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace pref="478" max="32767" attributes="0"/>
                               </Group>
@@ -2196,9 +2196,9 @@
                                           <Component id="lblPersonaId" min="-2" pref="26" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="chkEntrenamiento" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="8" max="32767" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnEntrenamiento" min="-2" pref="46" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="32767" attributes="0"/>
                                   <Component id="pnlEntrenamientoEnFactura" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -2223,14 +2223,6 @@
                           </AuxValues>
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="dtcFechaFacCab">
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                          </AuxValues>
-                        </Component>
-                        <Component class="javax.swing.JCheckBox" name="chkEntrenamiento">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Entrenamiento"/>
-                          </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
@@ -2295,6 +2287,17 @@
                           </AuxValues>
                         </Component>
                         <Component class="javax.swing.JLabel" name="lblNroFactura">
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnEntrenamiento">
+                          <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/icons/training.png"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Elegir entrenamiento"/>
+                          </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
@@ -2411,11 +2414,11 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="5" rowCount="4">
-                                <Column editable="true" title="IdProducto" type="java.lang.Object"/>
+                                <Column editable="false" title="IdProducto" type="java.lang.Object"/>
                                 <Column editable="true" title="Cantidad" type="java.lang.Object"/>
-                                <Column editable="true" title="Descripcion" type="java.lang.Object"/>
-                                <Column editable="true" title="V.Unitario" type="java.lang.Object"/>
-                                <Column editable="true" title="V.Total" type="java.lang.Object"/>
+                                <Column editable="false" title="Descripcion" type="java.lang.Object"/>
+                                <Column editable="false" title="V.Unitario" type="java.lang.Object"/>
+                                <Column editable="false" title="V.Total" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>
