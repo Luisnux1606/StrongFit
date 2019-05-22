@@ -7,6 +7,7 @@ package controladores;
 
 import assets.Validaciones;
 import consultas.ConsAnalisis;
+import consultas.ConsBuscarVentas;
 import consultas.ConsFacturaCab;
 import consultas.ConsMedidas;
 import consultas.ConsPersona;
@@ -39,7 +40,7 @@ public class CtrlBuscarVentas {
     
     
     ArrayList<Persona> lstPersonas;
-    ConsFacturaCab consFacCab;
+    ConsBuscarVentas consVentas;
     FacturaCab facCab;
     VisBuscarVentas visVentas;
     VisFicha visFicha;
@@ -47,11 +48,11 @@ public class CtrlBuscarVentas {
     String cadBus;
     //facCab, consFacCab, visBuscarVentas,visFicha
     
-    public CtrlBuscarVentas(FacturaCab facCab,ConsFacturaCab consFacCab, VisBuscarVentas visVentas, VisFicha visFicha)
+    public CtrlBuscarVentas(ConsBuscarVentas consVentas, VisBuscarVentas visVentas, VisFicha visFicha)
     {
         
         this.facCab = facCab;
-        this.consFacCab = consFacCab;
+        this.consVentas = consVentas;
         this.visVentas = visVentas;
         this.visVentas = visVentas;
         this.visFicha = visFicha;
@@ -77,21 +78,23 @@ public class CtrlBuscarVentas {
         try {
             limpiarTabla();
             
-            ResultSet listFicha = consFacCab.buscarTodosPorNomTabla(nom);
+            ResultSet listFicha = consVentas.buscarTodosPorNomTabla(nom);
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
-            Object cols[] = new Object[8];
+            Object cols[] = new Object[10];
             
             while (listFicha.next()) {
                 try {
-                    cols[0] = listFicha.getInt("id_ficha");
+                    cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
+                    cols[3] = listFicha.getString("fechaIni_hisperser");
+                    cols[4] = listFicha.getString("fechafin_hisperser");
+                    cols[5] = listFicha.getString("Concepto_Faccab");
+                    cols[6] = listFicha.getString("Fecha_Faccab");
+                    cols[7] = listFicha.getDouble("Total_Faccab");
+                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
                     model.addRow(cols);
                     
                     
@@ -99,7 +102,7 @@ public class CtrlBuscarVentas {
                     Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consFacCab.closeConection();
+           // consFacCab.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,28 +121,30 @@ public class CtrlBuscarVentas {
     {
         try {
             limpiarTabla();
-            ResultSet listFicha = consFacCab.buscarTodos2();
+            ResultSet listFicha = consVentas.buscarTodos2();
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
-            Object cols[] = new Object[8];
+            Object cols[] = new Object[10];
             
             while (listFicha.next()) {
                 try {
-                    cols[0] = listFicha.getInt("id_fac");
+                    cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
                     cols[3] = listFicha.getString("fechaIni_fac");
                     cols[4] = listFicha.getString("fechaFin_fac");
-                   
-                    cols[5] = listFicha.getDouble("total_fac");
-                    cols[6] = listFicha.getDouble("valPendiente_fac");
+                    cols[5] = listFicha.getString("Concepto_Faccab");
+                    cols[6] = listFicha.getString("Fecha_Faccab");
+                    cols[7] = listFicha.getDouble("Total_Faccab");
+                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consFacCab.closeConection();
+            consVentas.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -9,6 +9,7 @@ import assets.Calculos;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
+import consultas.ConsBuscarVentas;
 import consultas.ConsCategoria;
 
 import consultas.ConsFacturaCab;
@@ -545,11 +546,11 @@ public class CtrlFicha implements ActionListener{
          if (e.getSource() == visFicha.mniConsultasClientes) {
             
             VisBuscarVentas visBuscarVentas = new VisBuscarVentas();
-            FacturaCab facCab  = new FacturaCab();
-            ConsFacturaCab consFacCab = new ConsFacturaCab();
+            
+            ConsBuscarVentas consFacCab = new ConsBuscarVentas();
            
             Ficha ficha  =  new Ficha();
-            CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(facCab, consFacCab, visBuscarVentas,visFicha);
+            CtrlBuscarVentas ctrBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
             ctrBuscarVentas.iniciar();
         }
          

@@ -86,6 +86,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniProductos">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/productos.png"/>
                 </Property>
@@ -100,6 +103,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniCategoria">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/category.png"/>
                 </Property>
@@ -114,6 +120,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniEntrenamientos">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="18" style="0"/>
+                </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/icons/training.png"/>
                 </Property>

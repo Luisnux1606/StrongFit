@@ -420,7 +420,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
                     hisPerServ.setProducto_id_HisPerSer(prod);
                     
                     hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaIni.getDate()));
-                    hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
+                    hisPerServ.setFechaFin_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
                     
                     per.setId(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
                     hisPerServ.setPersona_id_HisPerSer(per);

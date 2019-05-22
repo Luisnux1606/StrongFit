@@ -19,7 +19,7 @@ import modelos.Persona;
  *
  * @author Administrator
  */
-public class ConsFacturaCab extends Conexion {
+public class ConsBuscarVentas extends Conexion {
     
     public boolean registrar(FacturaCab f)
     {
@@ -403,21 +403,23 @@ public class ConsFacturaCab extends Conexion {
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac, f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(p.nom_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(p.ced_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(f.fechaInicio_fac) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
-                        "UNION\n" +
-                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
-                        "FROM factura f, persona p \n" +
-                        "where upper(f.fechaFin_fac) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1";
+        String sql = " select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres,' ' as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
+                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+nom+"%' and c.id_cat=2 " +
+                    "union " +
+                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
+                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+nom+"%' and c.id_cat=1 " +
+                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser " +
+                    "UNION " +
+                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,' 'as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
+                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=2 " +
+                    "union " +
+                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
+                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=1 " +
+                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -487,10 +489,15 @@ public class ConsFacturaCab extends Conexion {
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_faccab, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.total_faccab, f.valPendiente_faccab" +
-                    " FROM FacturaCabecera f, persona p " +
-                    " where p.id_per = f.Persona_id_per and f.estado_facCab=1 " +
-                    " order by id_faccab asc ";
+        String sql = " select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres,' ' as fechaIni_fac,' ' as fechaFin_fac,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
+                        "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
+                        "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.id_cat=2 " +
+                        "union " +
+                        "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per),h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
+                        "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
+                        "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.id_cat=1 " +
+                        "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser " +
+                        "order by id_faccab";
                 
         
         try 

@@ -1397,6 +1397,7 @@ public class VisFicha extends javax.swing.JFrame {
         mniMembresias.setText("Membresias");
         jMenu1.add(mniMembresias);
 
+        mniProductos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mniProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/productos.png"))); // NOI18N
         mniProductos.setText("Productos");
         mniProductos.addActionListener(new java.awt.event.ActionListener() {
@@ -1406,6 +1407,7 @@ public class VisFicha extends javax.swing.JFrame {
         });
         jMenu1.add(mniProductos);
 
+        mniCategoria.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mniCategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/category.png"))); // NOI18N
         mniCategoria.setText("Categorias");
         mniCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -1415,6 +1417,7 @@ public class VisFicha extends javax.swing.JFrame {
         });
         jMenu1.add(mniCategoria);
 
+        mniEntrenamientos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         mniEntrenamientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/training.png"))); // NOI18N
         mniEntrenamientos.setText("Entrenamientos");
         jMenu1.add(mniEntrenamientos);
