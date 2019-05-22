@@ -157,9 +157,8 @@ CREATE SEQUENCE HistPersServ_id_seq
 /
 
 -- Create sequences CONTABILIDAD -------------------------------------------------
--- Create sequences CONTABILIDAD -------------------------------------------------
 CREATE SEQUENCE TIPO_ASIENTO_SEQ_ID
- INCREMENT BY 1
+ INCREMENT BY 1
  NOMAXVALUE
  NOMINVALUE
  CACHE 20
