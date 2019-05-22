@@ -2,20 +2,55 @@
 
 
 
-*********REGISTRO DE PERSONAS***************
+*********GESTIÓN DE PERSONAS***************
+En la cabecera de la ventana sale "MEMBRESIA"
 GUARDAR
-1. Calcule automáticamente la fecha de nacimiento permitiéndola editar. : ok
-Respuesta-> sale la edad sólo cuando se da enter, pero yo digo que un usuario no haría algo así. 
-2. No valida que haya registrado dos usuarios con la misma cédula. 
+1. No valida que haya registrado dos usuarios con la misma cédula. 
 
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
 
 BUSCAR (lupa)
-1. Si modifica un dato, y luego quiere buscar ya no funciona el buscar. 
-2. Opino que si se usa lupa se habilite el botón modificar. 
+1. Recupera en el campo "edad" como "null", y en el campo "nro_fono" con la "edad"
 
+BUSCAR (nombre)= ok
+
+
+*********GESTIÓN DE MEMBRESIA***************
+
+GUARDAR
+1. Guarda y no se limpia.
+
+ELIMINAR= ok
+MODIFICAR= ok
+LIMPIAR=ok
+
+BUSCAR (lupa)
+1. Siempre muestra el primer registro guardado, es decir que no busca según lo ingresado. 
+
+BUSCAR (nombre)
+1. No busca, y borra lo que tiene la tabla. 
+
+
+*********GESTIÓN DE GATEGORÍA***************
+Al momento que se abre la ventana no muestra la información en la tabla.  
+Entiendo que este sirve para crearse subcategorías de las dos ("producto", "servicio gimnasio") ya definidas, pero eso ya está haciendo la gestión de productos
+Yo mejor haría que se cree nuevas categorías y no subcategorías como lo propones. 
+
+GUARDAR
+1. No guarda. 
+2. No puedo revisar el resto porque como no guarda, y no visualiza ninguna información en la tabla de datos anteriores. 
+
+ELIMINAR
+MODIFICAR
+LIMPIAR
+BUSCAR (lupa)
+BUSCAR (nombre)
+
+
+*********GESTIÓN DE PRODUCTO***************
+ 
 
 
 *********FICHA***************
