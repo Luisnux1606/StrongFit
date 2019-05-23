@@ -497,9 +497,7 @@ public class ConsBuscarVentas extends Conexion {
                         "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
                         "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.id_cat=1 " +
                         "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser " +
-                        "order by id_faccab";
-                
-        
+                        "order by id_faccab";                       
         try 
         {
             
