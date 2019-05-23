@@ -6,6 +6,7 @@
 package controladores;
 
 import assets.Calculos;
+
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -24,9 +25,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import modelos.Analisis;
 import modelos.FacturaCab;
 import modelos.Medidas;
@@ -63,6 +66,7 @@ public class CtrlBuscarVentas implements ActionListener {
         this.visFicha = visFicha;
         
         this.visVentas.cmbTipoBusqueda.addActionListener(this);
+        this.visVentas.btnMostrarFacturas.addActionListener(this);
         
         f = new FacturaCab();
         
@@ -70,6 +74,8 @@ public class CtrlBuscarVentas implements ActionListener {
         
         setListener();
         iniciar();
+        
+        setModelTablaFacCab();
     }
     
     @Override
@@ -95,6 +101,11 @@ public class CtrlBuscarVentas implements ActionListener {
            
                
         }
+      if (e.getSource() == visVentas.btnMostrarFacturas) 
+       { 
+           showTableFacturasCabeceras();           
+           
+       }
     }
     
     public void iniciar()
@@ -122,8 +133,8 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_fac");
-                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[3] = listFicha.getString("fechaini_hisperser");
+                    cols[4] = listFicha.getString("fechafin_hisperser");
                     cols[5] = listFicha.getString("Concepto_Faccab");
                     cols[6] = listFicha.getString("Fecha_Faccab");
                     cols[7] = listFicha.getDouble("Total_Faccab");
@@ -156,8 +167,8 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_fac");
-                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[3] = listFicha.getString("fechaini_hisperser");
+                    cols[4] = listFicha.getString("fechafin_hisperser");
                     cols[5] = listFicha.getString("Concepto_Faccab");
                     cols[6] = listFicha.getString("Fecha_Faccab");
                     cols[7] = listFicha.getDouble("Total_Faccab");
@@ -194,8 +205,8 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_fac");
-                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[3] = listFicha.getString("fechaini_hisperser");
+                    cols[4] = listFicha.getString("fechafin_hisperser");
                     cols[5] = listFicha.getString("Concepto_Faccab");
                     cols[6] = listFicha.getString("Fecha_Faccab");
                     cols[7] = listFicha.getDouble("Total_Faccab");
@@ -229,7 +240,7 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_hisperser");
+                    cols[3] = listFicha.getString("fechaini_hisperser");
                     cols[4] = listFicha.getString("fechafin_hisperser");
                     cols[5] = listFicha.getString("Concepto_Faccab");
                     cols[6] = listFicha.getString("Fecha_Faccab");
@@ -258,7 +269,50 @@ public class CtrlBuscarVentas implements ActionListener {
         } 
     }
       
-     public void showTable()
+      public void setModelTablaFacCab()
+      {
+          
+      
+       
+       
+      
+      }
+    public void showTableFacturasCabeceras()
+    {
+        try {
+            limpiarTabla(visVentas.tblFacturasCabeceras);
+            ResultSet listFicha = consBuscarVentas.buscarFacturas();
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
+            Object cols[] = new Object[10];
+            JButton b=new JButton();
+            b.setName("g");
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("nombres");
+                    cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
+                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[4] = listFicha.getString("Concepto_Faccab");
+                    cols[5] = listFicha.getString("Total_Faccab");
+                    cols[6] = listFicha.getString("Valcancelo_Faccab");
+                    cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    
+                
+                    model.addRow(cols);
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visVentas.tblFacturasCabeceras.updateUI();
+    }  
+      
+    public void showTable()
     {
         try {
             limpiarTabla(visVentas.tbl_BuscarVentas);
@@ -272,8 +326,8 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_fac");
-                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[3] = listFicha.getString("fechaini_hisperser");
+                    cols[4] = listFicha.getString("fechafin_hisperser");
                     cols[5] = listFicha.getString("Concepto_Faccab");
                     cols[6] = listFicha.getString("Fecha_Faccab");
                     cols[7] = listFicha.getDouble("Total_Faccab");
@@ -306,8 +360,8 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("ced_per");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_fac");
-                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[3] = listFicha.getString("fechaini_hisperser");
+                    cols[4] = listFicha.getString("fechafin_hisperser");
                     cols[5] = listFicha.getString("Concepto_Faccab");
                     cols[6] = listFicha.getString("Fecha_Faccab");
                     cols[7] = listFicha.getDouble("Total_Faccab");
@@ -327,7 +381,7 @@ public class CtrlBuscarVentas implements ActionListener {
         visVentas.tbl_BuscarVentas.updateUI();
     }
      
-     public void showTableDetalles(int idFac)
+    public void showTableDetalles(int idFac)
     {
         try {
             limpiarTabla(visVentas.tblDetalles);
@@ -354,6 +408,35 @@ public class CtrlBuscarVentas implements ActionListener {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visVentas.tblDetalles.updateUI();
+    }
+    
+    public void showTableFacturaDetalles(int idFac)
+    {
+        try {
+            limpiarTabla(visVentas.tblFacturaDetalles);
+            ResultSet listFicha = consBuscarVentas.buscarDetallesByIdFac(idFac);
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturaDetalles.getModel();
+            Object cols[] = new Object[4];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Facdet");
+                    cols[1] = listFicha.getString("Descripcion_Facdet");
+                    cols[2] = listFicha.getDouble("Valunitario_Facdet");
+                    cols[3] = listFicha.getDouble("Vtotal_Facdet");
+                    
+                    model.addRow(cols);
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visVentas.tblFacturaDetalles.updateUI();
     }
       
        public void setListener(){
@@ -420,7 +503,8 @@ public class CtrlBuscarVentas implements ActionListener {
                 {
                    int idFac = Validaciones.isNumVoid(visVentas.tbl_BuscarVentas.getValueAt(visVentas.tbl_BuscarVentas.getSelectedRow(), 0)+"");                    
                    f.setId_facCab(idFac);                       
-                   showTableDetalles(idFac);                     
+                   showTableDetalles(idFac);      
+                   
                 }
                 if(e.getClickCount()==2)
                 {
@@ -454,6 +538,55 @@ public class CtrlBuscarVentas implements ActionListener {
         };
        
         visVentas.tbl_BuscarVentas.addMouseListener(mouseListTblPersonas);
+        
+        
+        ////
+        
+        MouseListener mouseListTblFacDetalles;
+        mouseListTblFacDetalles = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                
+                if(e.getClickCount()==1)
+                {
+                   int idFac = Validaciones.isNumVoid(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 0)+"");                    
+                   f.setId_facCab(idFac);                       
+                   showTableFacturaDetalles(idFac);     
+                   System.out.println("as");
+                }
+                if(e.getClickCount()==2)
+                {
+   
+                                        
+                }
+             
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+            
+            
+            
+            @Override
+            public void mouseExited(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+        };
+       
+        visVentas.tblFacturasCabeceras.addMouseListener(mouseListTblFacDetalles);
       
     }
+
 }
