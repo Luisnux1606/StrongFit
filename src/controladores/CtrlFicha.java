@@ -53,11 +53,13 @@ import modelos.Persona;
 import modelos.Producto;
 import vistas.VisBuscarVentas;
 import vistas.VisCategoria;
+import vistas.VisDiarioGeneral;
 
 import vistas.VisFicha;
 import vistas.VisHistorialPersonaServicio;
 import vistas.VisMembresia;
 import vistas.VisPersona;
+import vistas.VisPlanCuentas;
 import vistas.VisProductos;
 import vistas.VisReportes;
 
@@ -104,6 +106,8 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniPersonas.addActionListener(this);
         this.visFicha.mniReportes.addActionListener(this);
         this.visFicha.mniConsultasClientes.addActionListener(this);
+        this.visFicha.mniDiarioGeneral.addActionListener(this);
+        this.visFicha.mniPlanCuentas.addActionListener(this);
         this.visFicha.menuSalir.addActionListener(this);
 
         this.visFicha.mniProductos.addActionListener(this);
@@ -584,6 +588,22 @@ public class CtrlFicha implements ActionListener{
             
             CtrlHistorialPersServicio ctrCat=new CtrlHistorialPersServicio (visCat, hisPerServ, consCat, visFicha,persona);
             ctrCat.iniciar();
+        }
+        
+        if (e.getSource()==visFicha.mniDiarioGeneral) //Cuando toca el menú diario general
+        {
+            VisDiarioGeneral visDiario=new VisDiarioGeneral();
+                    
+            CtrlDiarioGeneral ctrDiario=new CtrlDiarioGeneral(visDiario);
+            ctrDiario.iniciar();
+        }
+        
+        if (e.getSource()==visFicha.mniPlanCuentas) //Cuando toca el menú diario general
+        {
+            VisPlanCuentas visPlan=new VisPlanCuentas();
+                    
+            CtrlPlanCuentas ctrPlan=new CtrlPlanCuentas(visPlan);
+            ctrPlan.iniciar();
         }
          
          if (e.getSource() == visFicha.menuSalir) 

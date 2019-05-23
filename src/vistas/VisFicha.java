@@ -196,6 +196,10 @@ public class VisFicha extends javax.swing.JFrame {
         mniEntrenamientos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mniConsultasClientes = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        mniPlanCuentas = new javax.swing.JMenuItem();
+        mniDiarioGeneral = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -995,7 +999,7 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addComponent(lblNro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblNroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addContainerGap(487, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1239,7 +1243,7 @@ public class VisFicha extends javax.swing.JFrame {
                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEliminarFilas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregarFilas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 11, Short.MAX_VALUE))
                     .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                         .addGap(872, 872, 872)
                         .addComponent(lblIvaId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1324,7 +1328,7 @@ public class VisFicha extends javax.swing.JFrame {
                     .addComponent(lblTotalConIva))
                 .addGap(12, 12, 12)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlVentasLayout = new javax.swing.GroupLayout(pnlVentas);
@@ -1433,6 +1437,26 @@ public class VisFicha extends javax.swing.JFrame {
         jMenu2.add(mniConsultasClientes);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Contabilidad");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/planCuentas.jpg"))); // NOI18N
+        jMenu4.setText("Mantenimiento");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mniPlanCuentas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mniPlanCuentas.setText("Plan de Cuentas");
+        jMenu4.add(mniPlanCuentas);
+
+        jMenu3.add(jMenu4);
+
+        mniDiarioGeneral.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mniDiarioGeneral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diario.jpg"))); // NOI18N
+        mniDiarioGeneral.setText("Diario General");
+        jMenu3.add(mniDiarioGeneral);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -1605,6 +1629,8 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -1647,9 +1673,11 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JMenuItem menuSalir;
     public javax.swing.JMenuItem mniCategoria;
     public javax.swing.JMenuItem mniConsultasClientes;
+    public javax.swing.JMenuItem mniDiarioGeneral;
     public javax.swing.JMenuItem mniEntrenamientos;
     public javax.swing.JMenuItem mniMembresias;
     public javax.swing.JMenuItem mniPersonas;
+    public javax.swing.JMenuItem mniPlanCuentas;
     public javax.swing.JMenuItem mniProductos;
     public javax.swing.JMenuItem mniReportes;
     private javax.swing.JPanel pnlEntrenamientoEnFactura;
