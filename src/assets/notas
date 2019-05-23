@@ -12,94 +12,127 @@ MODIFICAR= ok
 LIMPIAR= ok
 
 BUSCAR (lupa)
-1. Recupera en el campo "edad" como "null", y en el campo "nro_fono" con la "edad"
+1. Recupera en el campo "nro_fono" la edad, y en el campo "edad" el nro_fono. 
 
 BUSCAR (nombre)= ok
 
 
 *********GESTIÓN DE MEMBRESIA***************
-
 GUARDAR
-1. Guarda y no se limpia.
+1. Guarda y no se limpia la cabecera.
 
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR=ok
 
 BUSCAR (lupa)
-1. Siempre muestra el primer registro guardado, es decir que no busca según lo ingresado. 
+1. Sugiero que se habilite el campo modificar, porque pueda que lo busque para modificar su información. 
 
 BUSCAR (nombre)
 1. No busca, y borra lo que tiene la tabla. 
 
-
-*********GESTIÓN DE GATEGORÍA***************
-Al momento que se abre la ventana no muestra la información en la tabla.  
-Entiendo que este sirve para crearse subcategorías de las dos ("producto", "servicio gimnasio") ya definidas, pero eso ya está haciendo la gestión de productos
-Yo mejor haría que se cree nuevas categorías y no subcategorías como lo propones. 
+*********GESTIÓN DE PRODUCTO***************
+1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado.
 
 GUARDAR
-1. No guarda. 
-2. No puedo revisar el resto porque como no guarda, y no visualiza ninguna información en la tabla de datos anteriores. 
+1. Cuando se guarda no se limpia la fecha de inicio y la fecha de fin. 
 
 ELIMINAR
-MODIFICAR
-LIMPIAR
+1. No pregunta si deseo eliminar. 
+
+MODIFICAR= ok 
+
+LIMPIAR 
+1. No se borra la fecha de inicio ni la fecha de fin. 
+
 BUSCAR (lupa)
-BUSCAR (nombre)
+1. no busca
 
+BUSCAR (nombre)=ok
 
-*********GESTIÓN DE PRODUCTO***************
- 
+*********GESTIÓN DE GATEGORÍA***************
+1. Cambiar el label "producto/servicio" por categoría, lo mismo hacer en la tabla. 
+2. No se actualiza el combo con las nuevas categorías creadas.
+3. En la tabla cambiar el orden de las columnas, por: "categoría superior" y luego "categoría".
+4. Esta lógica funciona cuando ya se encuentran creadas categorías superiores. ¿Qué sucede cuando se quiere crear una categoría superior?
 
-
-*********FICHA***************
-
-----PESTAÑA FICHA--
 GUARDAR=ok
-ELIMINAR
-1. No elimina, presenta error en el código. 
 
-MODIFICAR= ok
-LIMPIAR= ok
-
-BUSCAR (lupa)= ok pero yo propongo algo distinto
-1. Abre la ventana de membresia para que haga clic en un registro y se pase. Yo digo que debería la lupa mostrar si encontró
-o no y mostrar los datos y cédula de la persona; y obvio que la búsqueda lo haga por la cédula. 
-
-----PESTAÑA MEDIDA--
-VARIOS
-1. Deshabilitar "DATOS PARA"
-
-GUARDAR= ok
-
-ELIMINAR
-1. No debe permitir eliminar cuando exista relación con una ficha. 
-2. No pregunta si desea o no eliminar.
-
-MODIFICAR= ok
-BUSCAR (lupa)= no está buscando
-
-----PESTAÑA ANALISIS--
-VARIOS
-1. Deshabilitar "DATOS PARA"
-
-GUARDAR= ok
-ELIMINAR
-1. No debe permitir eliminar cuando exista relación con una ficha.
-
-MODIFICAR= ok
-
+ELIMINAR= ok
+MODIFICAR=ok
 LIMPIAR= ok
 
 BUSCAR (lupa)
-1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco. 
+1. yo diría que en este caso es mejor quitarlo, porque una categoría superior puede tener varias inferiores
+
+BUSCAR (nombre)
+1. debería buscar por el nombre de la categoría superior. 
+2. borra la segunda columna de la categoría. 
+
+*********GESTIÓN DE ENTRENAMIENTO***************
+1. No se despliega la ventana. 
 
 
+*********GENERAR VENTAS***************
+1. No se despliega la ventana. 
+2. Si yo incluyo un entrenamiento se debería añadir al detalle, y no reemplazar el último registro. 
+3. Borrar el label "Datos para" y "Numbero registro".
+4. Cuando se seleccione en la tabla un producto que se muestre sólo "PRODUCTOS" no servicios. 
+5. Cuando seleccione "entrenamiento" sólo muestre de la persona de la factura. 
 
-----PESTAÑA MEMBRESÍA-- NO FUNCIONA
+*********GENERAR MEDIDAS***************
+1.Quitar el label "DATOS PARA"
+2.Cuando se abre la pestaña Borrar la información de la tabla.
+
+GUARDAR= ok
+ELIMINAR
+1. No pregunta si desea eliminar. 
+2.Cuando exista dependencia a una ficha no debería permitir eliminar. 
+
+MODIFICAR= ok
+LIMPIAR= ok
+
+BUSCAR (lupa)
+1. No busca
+
+BUSCAR (fecha)= ok
+
+*********GENERAR ANALISIS***************
+1.Quitar el label "DATOS PARA"
+2.Cuando se abre la pestaña Borrar la información de la tabla.
+
+GUARDAR= ok
+
+ELIMINAR
+2.Cuando exista dependencia a una ficha no debería permitir eliminar. 
+
+MODIFICAR
+
+LIMPIAR
+
+BUSCAR (lupa)
+1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco.
+
+BUSCAR (fecha)= ok
+
+*********FICHA*************** 
+
+GUARDAR=ok
+
+ELIMINAR
+1.No elimina
+
+MODIFICAR= ok 
+
+LIMPIAR
+1.No limpia la fecha
+
+BUSCAR (lupa)
+1.Despliega una ventana para seleccionar la persona, y luego no pasa nada en la ventana FICHA. 
+Debería mostrar en la tabla la información según la persona seleccionada. 
+
+BUSCAR (cualquier campo)= ok  
  
 
 *********GENERALES***************
 1. En las tablas incluir un Scroll (supongo que se podría hacer)
-2. Quitar el campo ID de todas las tablas con excepción de la persona. Mejor trabar con la cédula. 
