@@ -5,12 +5,16 @@
  */
 package controladores;
 
+import assets.Calculos;
 import assets.Validaciones;
+import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
 import consultas.ConsBuscarVentas;
 import consultas.ConsFacturaCab;
 import consultas.ConsMedidas;
 import consultas.ConsPersona;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -20,6 +24,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.FacturaCab;
@@ -36,15 +42,15 @@ import visual.facturacion.MyTableModel;
  *
  * @author Administrator
  */
-public class CtrlBuscarVentas {
+public class CtrlBuscarVentas implements ActionListener {
     
     
     ArrayList<Persona> lstPersonas;
-    ConsBuscarVentas consVentas;
+    ConsBuscarVentas consBuscarVentas;
     FacturaCab facCab;
     VisBuscarVentas visVentas;
     VisFicha visFicha;
-    
+     FacturaCab f;
     String cadBus;
     //facCab, consFacCab, visBuscarVentas,visFicha
     
@@ -52,15 +58,30 @@ public class CtrlBuscarVentas {
     {
         
         this.facCab = facCab;
-        this.consVentas = consVentas;
-        this.visVentas = visVentas;
-        this.visVentas = visVentas;
+        this.consBuscarVentas = consVentas;
+        this.visVentas = visVentas;       
         this.visFicha = visFicha;
+        
+        this.visVentas.cmbTipoBusqueda.addActionListener(this);
+        
+        f = new FacturaCab();
         
         cadBus = "";
         
         setListener();
         iniciar();
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      if (e.getSource() == visVentas.cmbTipoBusqueda) 
+       {       
+           if (visVentas.cmbTipoBusqueda.getSelectedItem().equals("vencidos")) {
+               showTableVencidos();
+           }
+           
+               
+        }
     }
     
     public void iniciar()
@@ -76,9 +97,9 @@ public class CtrlBuscarVentas {
     public void showTableByNom(String nom)
     {
         try {
-            limpiarTabla();
+            limpiarTabla(visVentas.tbl_BuscarVentas);
             
-            ResultSet listFicha = consVentas.buscarTodosPorNomTabla(nom);
+            ResultSet listFicha = consBuscarVentas.buscarTodosPorNomTabla(nom);
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];
@@ -102,16 +123,16 @@ public class CtrlBuscarVentas {
                     Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-           // consFacCab.closeConection();
+            consBuscarVentas.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
      
-      public void limpiarTabla(){
-        DefaultTableModel tb = (DefaultTableModel) visVentas.tbl_BuscarVentas.getModel();
-        int a = visVentas.tbl_BuscarVentas.getRowCount()-1;
+      public void limpiarTabla(JTable table){
+        DefaultTableModel tb = (DefaultTableModel) table.getModel();
+        int a = table.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         } 
@@ -120,8 +141,8 @@ public class CtrlBuscarVentas {
      public void showTable()
     {
         try {
-            limpiarTabla();
-            ResultSet listFicha = consVentas.buscarTodos2();
+            limpiarTabla(visVentas.tbl_BuscarVentas);
+            ResultSet listFicha = consBuscarVentas.buscarTodos2();
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];
@@ -144,11 +165,75 @@ public class CtrlBuscarVentas {
                     Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            consVentas.closeConection();
+            consBuscarVentas.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visVentas.tbl_BuscarVentas.updateUI();
+    }
+     
+     public void showTableVencidos()
+    {
+        try {
+            limpiarTabla(visVentas.tbl_BuscarVentas);
+            ResultSet listFicha = consBuscarVentas.buscarTodos2();
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
+            Object cols[] = new Object[10];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_fac");
+                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[5] = listFicha.getString("Concepto_Faccab");
+                    cols[6] = listFicha.getString("Fecha_Faccab");
+                    cols[7] = listFicha.getDouble("Total_Faccab");
+                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
+                    if (!Calculos.dateGreaterThanCurrent(cols[4].toString()))
+                        model.addRow(cols);
+                     
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visVentas.tbl_BuscarVentas.updateUI();
+    }
+     
+     public void showTableDetalles(int idFac)
+    {
+        try {
+            limpiarTabla(visVentas.tblDetalles);
+            ResultSet listFicha = consBuscarVentas.buscarDetallesByIdFac(idFac);
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tblDetalles.getModel();
+            Object cols[] = new Object[4];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Facdet");
+                    cols[1] = listFicha.getString("Descripcion_Facdet");
+                    cols[2] = listFicha.getDouble("Valunitario_Facdet");
+                    cols[3] = listFicha.getDouble("Vtotal_Facdet");
+                    
+                    model.addRow(cols);
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visVentas.tblDetalles.updateUI();
     }
       
        public void setListener(){
@@ -165,7 +250,7 @@ public class CtrlBuscarVentas {
             String m=(e.getKeyChar()+"").toUpperCase();
             char c =m.charAt(0);
 					
-            limpiarTabla();
+            limpiarTabla(visVentas.tbl_BuscarVentas);
             if((c+"").equals("")==false&&(c+"").equals(null)==false)
                     cadBus+=c;	            
             else
@@ -179,7 +264,7 @@ public class CtrlBuscarVentas {
           private void printIt(String title, KeyEvent keyEvent) {
             int keyCode = keyEvent.getKeyCode();
             String keyText = KeyEvent.getKeyText(keyCode);
-           // System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
+         
           }
         };
         visVentas.txt_buscarPersonaNombres.addKeyListener(keyListenertxtBuscarCedula);
@@ -200,7 +285,7 @@ public class CtrlBuscarVentas {
           private void printIt(String title, KeyEvent keyEvent) {
             int keyCode = keyEvent.getKeyCode();
             String keyText = KeyEvent.getKeyText(keyCode);
-           // System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
+           
           }
 
 
@@ -210,6 +295,13 @@ public class CtrlBuscarVentas {
         mouseListTblPersonas = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                
+                if(e.getClickCount()==1)
+                {
+                   int idFac = Validaciones.isNumVoid(visVentas.tbl_BuscarVentas.getValueAt(visVentas.tbl_BuscarVentas.getSelectedRow(), 0)+"");                    
+                   f.setId_facCab(idFac);                       
+                   showTableDetalles(idFac);                     
+                }
                 if(e.getClickCount()==2)
                 {
    

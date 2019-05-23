@@ -351,7 +351,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     }
     public void showComboServicio()
     {
-        System.out.println("aqui");
+
         try {
            
             ResultSet listCategorias = consHisPerServ.buscarServicios();

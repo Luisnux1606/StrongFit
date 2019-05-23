@@ -83,7 +83,6 @@ public class CtrlReportes extends Conexion implements ActionListener{
             {
                 try
                 {
-                    System.out.println(pCedPer + " "+fIni );
                     reporteMaestro = (JasperReport) JRLoader.loadObjectFromFile(rutaJasper+"RepoAnalisisPersona.jasper");
                 }
                 catch (JRException e) {e.printStackTrace();}
@@ -106,7 +105,6 @@ public class CtrlReportes extends Conexion implements ActionListener{
          String fIni=Validaciones.setFormatFecha(fI);
          String fFin=Validaciones.setFormatFecha(fF);
          
-         System.out.println(fIni+"   ::   "+fFin);
          parametros.put("p_fechaIni", fIni); 
          parametros.put("p_fechaFin", fFin);
 

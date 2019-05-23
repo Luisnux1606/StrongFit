@@ -79,7 +79,7 @@ public class ConsFicha extends Conexion {
             ps.setInt(4, f.getMedidas().getId());
             ps.setInt(5, 1);
             ps.setInt(6, f.getId());
-            System.out.println(f.getId()+" - "+f.getPersona().getId() + " - "+ f.getAnalisis().getId()+ " - "+f.getMedidas().getId());
+          
             ps.execute();
             return true;
         } 
@@ -388,7 +388,7 @@ order by id_ficha asc ;
     
     public ResultSet buscarTodosPorNomTabla(String cad)
     {
-        System.out.println(cad); //'%"+cad+"%'
+   
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 

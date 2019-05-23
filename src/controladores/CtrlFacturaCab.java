@@ -99,7 +99,7 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnAgregarFilas.addActionListener(this);
         this.visFicha.btnEliminarFilas.addActionListener(this);
         this.visFicha.btnEntrenamiento.addActionListener(this);
-       // this.visFicha.cmbTipoBusqueda.addActionListener(this);
+
         
          
               
@@ -111,8 +111,7 @@ public class CtrlFacturaCab implements ActionListener{
         iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
-      //  setFacturaDetalle(visFicha);
-//        showTable();
+
     }
     
     
@@ -352,7 +351,7 @@ public class CtrlFacturaCab implements ActionListener{
           private void printIt(String title, KeyEvent keyEvent) {
             int keyCode = keyEvent.getKeyCode();
             String keyText = KeyEvent.getKeyText(keyCode);
-           // System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
+      
           }
 
 
@@ -628,7 +627,7 @@ public class CtrlFacturaCab implements ActionListener{
            medidas.setId(Integer.parseInt(visFicha.txt_id_medidas_u.getText()));
            modFicha.setMedidas(medidas);
         }
-        System.out.println("personar: "+persona.getId()+" anal: "+analisis.getId()+" med: "+medidas.getId());
+     
     }
     */
     public void setFacturaCabecera(VisFicha visFich)

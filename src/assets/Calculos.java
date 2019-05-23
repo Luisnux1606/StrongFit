@@ -103,14 +103,14 @@ public class Calculos {
                                      
              if (date1.compareTo(date2) > 0) {
                  isTrue = true;
-                 //System.out.println("Date1 is after Date2");
+                 
              } else if (date1.compareTo(date2) < 0) {
                  isTrue = false; 
-                 //System.out.println("Date1 is before Date2");
+                
              } else if (date1.compareTo(date2) == 0) {
                isTrue = true;
              } else {
-                // System.out.println("How to get here?");
+               
              }
          } catch (ParseException ex) {
              Logger.getLogger(Calculos.class.getName()).log(Level.SEVERE, null, ex);

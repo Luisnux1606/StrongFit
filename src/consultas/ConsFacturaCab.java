@@ -399,7 +399,7 @@ public class ConsFacturaCab extends Conexion {
     
     public ResultSet buscarTodosPorNomTabla(String nom)
     {
-        System.out.println(nom);
+      
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 

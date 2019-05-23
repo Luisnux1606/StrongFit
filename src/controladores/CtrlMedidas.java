@@ -223,7 +223,7 @@ public class CtrlMedidas implements ActionListener{
      public void getTableToTxts()
      {
           JTable tblD = visMedidas.tblDatos;
-         System.out.println("aqui" + tblD.getValueAt(tblD.getSelectedRow(),0)+"");
+      
         
         //  modMedidas.setId(Integer.parseInt(visMedidas.txt_id_datos.getText()));
          visMedidas.txt_id_datos.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),0)));

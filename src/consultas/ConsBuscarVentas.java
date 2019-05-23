@@ -399,7 +399,7 @@ public class ConsBuscarVentas extends Conexion {
     
     public ResultSet buscarTodosPorNomTabla(String nom)
     {
-        System.out.println(nom);
+   
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
@@ -498,6 +498,35 @@ public class ConsBuscarVentas extends Conexion {
                         "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.id_cat=1 " +
                         "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser " +
                         "order by id_faccab";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarDetallesByIdFac(int idFac)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = " select fD.Id_Facdet, fD.Descripcion_Facdet, fD.Valunitario_Facdet,fD.Vtotal_Facdet " +
+                        "from facturacabecera fC, facturaDetalle fD " +
+                        "where  fC.Id_Faccab = fD.Factura_Id_Fac and fC.Id_Faccab ="+idFac+"";
                 
         
         try 

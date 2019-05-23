@@ -298,7 +298,7 @@ public class CtrlProductos implements ActionListener{
           public void keyTyped(KeyEvent e) {
              int m=e.getKeyChar();
              int filaDetalle = visFicha.tblFacturaDetalle.getRowCount()-1;
-             System.out.println("hola");
+          
               if (m == KeyEvent.VK_ENTER  ) 
               {
                   int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
@@ -392,7 +392,7 @@ public class CtrlProductos implements ActionListener{
     }
     public void showComboCategorias()
     {
-        System.out.println("aqui");
+
         try {
            
             ResultSet listCategorias = consProd.buscarCategorias();

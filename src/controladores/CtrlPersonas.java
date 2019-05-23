@@ -436,7 +436,7 @@ public class CtrlPersonas implements ActionListener {
           private void printIt(String title, KeyEvent keyEvent) {
             int keyCode = keyEvent.getKeyCode();
             String keyText = KeyEvent.getKeyText(keyCode);
-           // System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
+     
           }
         };
         visPersona.dtc_fechaNac.getDateEditor().getUiComponent().addKeyListener(keyListenerfechaNac);
@@ -459,7 +459,7 @@ public class CtrlPersonas implements ActionListener {
           private void printIt(String title, KeyEvent keyEvent) {
             int keyCode = keyEvent.getKeyCode();
             String keyText = KeyEvent.getKeyText(keyCode);
-           // System.out.println(title + " : " + keyText + " / " + keyEvent.getKeyChar());
+       
           }
 
 

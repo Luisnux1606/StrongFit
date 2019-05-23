@@ -79,7 +79,7 @@ public class ConsPersona extends Conexion
             ps.setString(7, p.getMail());     
             ps.setString(8, p.getGenero()); 
             ps.setInt(9, p.getId());   
-            System.out.println("id "+p.getId()+" edad"+p.getEdad());
+      
             ps.execute();
             return true;
         } 

@@ -143,7 +143,7 @@ public class ConsHistorialPersonaServicio extends Conexion
     
     public ResultSet buscarTodosPorNomTabla(String cad)
     {
-        System.out.println(cad); //'%"+cad+"%'
+      
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 

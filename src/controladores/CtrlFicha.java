@@ -423,7 +423,7 @@ public class CtrlFicha implements ActionListener{
            medidas.setId(Integer.parseInt(visFicha.txt_id_datos.getText()));
            modFicha.setMedidas(medidas);
         
-        System.out.println("personar: "+persona.getId()+" anal: "+analisis.getId()+" med: "+medidas.getId());
+
     }
     
     @Override
