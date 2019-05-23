@@ -76,9 +76,22 @@ public class CtrlBuscarVentas implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == visVentas.cmbTipoBusqueda) 
        {       
-           if (visVentas.cmbTipoBusqueda.getSelectedItem().equals("vencidos")) {
-               showTableVencidos();
-           }
+           String tipo = visVentas.cmbTipoBusqueda.getSelectedItem()+"";
+            if (tipo.equals("todos")) {
+             showTable();
+            }
+            if (tipo.equals("cursando")) {
+                showTableCursando();
+            }
+            if (tipo.equals("pendientes")) {
+                showTablePendientes();
+            }
+            if (tipo.equals("proximos a vencer")) {
+                showTableProximosVencer();
+            }
+            if (tipo.equals("vencidos")) {
+                showTableVencidos();
+            }
            
                
         }
@@ -93,6 +106,113 @@ public class CtrlBuscarVentas implements ActionListener {
        
         showTable();
                 
+    }
+    
+    public void showTablePendientes()
+    {
+        try {
+            limpiarTabla(visVentas.tbl_BuscarVentas);
+            ResultSet listFicha = consBuscarVentas.buscarPendientes();
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
+            Object cols[] = new Object[10];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_fac");
+                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[5] = listFicha.getString("Concepto_Faccab");
+                    cols[6] = listFicha.getString("Fecha_Faccab");
+                    cols[7] = listFicha.getDouble("Total_Faccab");
+                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
+                    model.addRow(cols);
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visVentas.tbl_BuscarVentas.updateUI();
+    }
+    
+    public void showTableProximosVencer()
+    {
+        try {
+            limpiarTabla(visVentas.tbl_BuscarVentas);
+            ResultSet listFicha = consBuscarVentas.buscarTodos2();
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
+            Object cols[] = new Object[10];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_fac");
+                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[5] = listFicha.getString("Concepto_Faccab");
+                    cols[6] = listFicha.getString("Fecha_Faccab");
+                    cols[7] = listFicha.getDouble("Total_Faccab");
+                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
+                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
+                        double days = Calculos.getDiffDaysToFinish(cols[4].toString());
+                        if (days<=5) {
+                            model.addRow(cols);
+                        }
+                    }                       
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visVentas.tbl_BuscarVentas.updateUI();
+    }
+    
+    public void showTableCursando()
+    {
+        try {
+             limpiarTabla(visVentas.tbl_BuscarVentas);
+            ResultSet listFicha = consBuscarVentas.buscarTodos2();
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
+            Object cols[] = new Object[10];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaIni_fac");
+                    cols[4] = listFicha.getString("fechaFin_fac");
+                    cols[5] = listFicha.getString("Concepto_Faccab");
+                    cols[6] = listFicha.getString("Fecha_Faccab");
+                    cols[7] = listFicha.getDouble("Total_Faccab");
+                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
+                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
+                        model.addRow(cols);                     
+                    }                       
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visVentas.tbl_BuscarVentas.updateUI();
     }
     public void showTableByNom(String nom)
     {

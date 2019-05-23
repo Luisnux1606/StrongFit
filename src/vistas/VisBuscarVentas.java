@@ -87,7 +87,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
 
         jLabel3.setText("Detalles");
 
-        cmbTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "vencidos" }));
+        cmbTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Eliga un tipo de consulta", "cursando", "proximos a vencer", "pendientes", "vencidos" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
