@@ -437,7 +437,7 @@ CREATE TABLE FacturaCabecera(
   valPendiente_facCab Number(10,2),  --7. valPendiente
   valCancelo_facCab Number(10,2),     --6. valCancelo
   concepto_facCab Varchar2(350),
-  ajuste_facCab Number(10,2),
+  valAjuste_facCab Number(10,2),
   Persona_id_per Number,
   Membresia_id_memb Number,        --2. descuento
   Ivas_id_ivas Number,            --4. iva

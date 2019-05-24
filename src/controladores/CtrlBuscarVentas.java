@@ -6,6 +6,8 @@
 package controladores;
 
 import assets.Calculos;
+import assets.JButtonTableExample;
+import assets.TableButton3;
 
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
@@ -67,6 +69,7 @@ public class CtrlBuscarVentas implements ActionListener {
         
         this.visVentas.cmbTipoBusqueda.addActionListener(this);
         this.visVentas.btnMostrarFacturas.addActionListener(this);
+        this.visVentas.cmbElegirBusquedaFac.addActionListener(this);
         
         f = new FacturaCab();
         
@@ -101,6 +104,16 @@ public class CtrlBuscarVentas implements ActionListener {
            
                
         }
+      
+       if (e.getSource() == visVentas.cmbElegirBusquedaFac) 
+       {
+           String tipo = visVentas.cmbElegirBusquedaFac.getSelectedItem()+"";
+           if (tipo.equals("pendientes")) {
+               showTable();
+            }
+           
+       }
+       
       if (e.getSource() == visVentas.btnMostrarFacturas) 
        { 
            showTableFacturasCabeceras();           
@@ -289,6 +302,8 @@ public class CtrlBuscarVentas implements ActionListener {
             b.setName("g");
             while (listFicha.next()) {
                 try {
+                  
+                    
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("nombres");
                     cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
@@ -297,18 +312,24 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[5] = listFicha.getString("Total_Faccab");
                     cols[6] = listFicha.getString("Valcancelo_Faccab");
                     cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[9] = "Guardar";
                     
                 
                     model.addRow(cols);
+                    
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            
             consBuscarVentas.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
+        visVentas.tblFacturasCabeceras.updateUI();
+      //  new JButtonTableExample(visVentas);
+        new TableButton3( visVentas.tblFacturasCabeceras);
         visVentas.tblFacturasCabeceras.updateUI();
     }  
       
@@ -333,6 +354,7 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[7] = listFicha.getDouble("Total_Faccab");
                     cols[8] = listFicha.getDouble("Valcancelo_Faccab");
                     cols[9] = listFicha.getDouble("Valpendiente_Faccab");
+                  
                     model.addRow(cols);
                                         
                 } catch (SQLException ex) {

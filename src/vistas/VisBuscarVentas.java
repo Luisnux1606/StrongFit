@@ -30,14 +30,12 @@ public class VisBuscarVentas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        txtBuscarFacPorCampos = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblFacturasCabeceras = new javax.swing.JTable();
         btnMostrarFacturas = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblFacturaDetalles = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbElegirBusquedaFac = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_buscarPersonaNombres = new javax.swing.JTextField();
@@ -53,8 +51,6 @@ public class VisBuscarVentas extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("BUSCAR VENTAS ");
-
-        jLabel4.setText("Buscar por cualquier campo");
 
         tblFacturasCabeceras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,7 +73,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblFacturasCabeceras);
 
-        btnMostrarFacturas.setText("Mostrar");
+        btnMostrarFacturas.setText("Mostrar todos");
 
         tblFacturaDetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,7 +96,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblFacturaDetalles);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elegir un tipo", "pendientes" }));
+        cmbElegirBusquedaFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elegir un tipo", "pendientes" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -108,15 +104,12 @@ public class VisBuscarVentas extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
-                    .addComponent(btnMostrarFacturas)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtBuscarFacPorCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
+                        .addComponent(btnMostrarFacturas)
+                        .addComponent(jScrollPane3)))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -124,12 +117,8 @@ public class VisBuscarVentas extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(btnMostrarFacturas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscarFacPorCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
@@ -300,12 +289,11 @@ public class VisBuscarVentas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnMostrarFacturas;
+    public javax.swing.JComboBox cmbElegirBusquedaFac;
     public javax.swing.JComboBox cmbTipoBusqueda;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -318,7 +306,6 @@ public class VisBuscarVentas extends javax.swing.JFrame {
     public javax.swing.JTable tblFacturaDetalles;
     public javax.swing.JTable tblFacturasCabeceras;
     public javax.swing.JTable tbl_BuscarVentas;
-    public javax.swing.JTextField txtBuscarFacPorCampos;
     public javax.swing.JTextField txt_buscarPersonaNombres;
     // End of variables declaration//GEN-END:variables
 }
