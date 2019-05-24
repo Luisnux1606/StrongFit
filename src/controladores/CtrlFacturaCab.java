@@ -74,7 +74,7 @@ public class CtrlFacturaCab implements ActionListener{
     String cadBus;
     
      ConsFacturaDet consFacDet ;     
-        CtrlFacturaDetalle facDetalle; 
+     CtrlFacturaDetalle facDetalle; 
     
     public CtrlFacturaCab(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
     {

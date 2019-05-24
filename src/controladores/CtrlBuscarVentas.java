@@ -6,8 +6,8 @@
 package controladores;
 
 import assets.Calculos;
-import assets.JButtonTableExample;
-import assets.TableButton3;
+
+import assets.ButtonTable;
 
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
@@ -312,6 +312,7 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[5] = listFicha.getString("Total_Faccab");
                     cols[6] = listFicha.getString("Valcancelo_Faccab");
                     cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[8] = listFicha.getDouble("valajuste_faccab");
                     cols[9] = "Guardar";
                     
                 
@@ -327,9 +328,8 @@ public class CtrlBuscarVentas implements ActionListener {
         } catch (SQLException ex) {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
-        visVentas.tblFacturasCabeceras.updateUI();
-      //  new JButtonTableExample(visVentas);
-        new TableButton3( visVentas.tblFacturasCabeceras);
+             
+        new ButtonTable(visVentas);
         visVentas.tblFacturasCabeceras.updateUI();
     }  
       
@@ -525,7 +525,8 @@ public class CtrlBuscarVentas implements ActionListener {
                 {
                    int idFac = Validaciones.isNumVoid(visVentas.tbl_BuscarVentas.getValueAt(visVentas.tbl_BuscarVentas.getSelectedRow(), 0)+"");                    
                    f.setId_facCab(idFac);                       
-                   showTableDetalles(idFac);      
+                   showTableDetalles(idFac);    
+                  
                    
                 }
                 if(e.getClickCount()==2)
@@ -574,7 +575,7 @@ public class CtrlBuscarVentas implements ActionListener {
                    int idFac = Validaciones.isNumVoid(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 0)+"");                    
                    f.setId_facCab(idFac);                       
                    showTableFacturaDetalles(idFac);     
-                   System.out.println("as");
+                    
                 }
                 if(e.getClickCount()==2)
                 {

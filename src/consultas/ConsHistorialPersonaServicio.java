@@ -270,14 +270,43 @@ public class ConsHistorialPersonaServicio extends Conexion
         return rs;
     }
     
+    public ResultSet buscarTodosByIdPer(int idPer)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per " +
+                "     from  persona p, histpersserv h, producto pr " +
+                "     where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and p.id_per  = "+idPer+"";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
     public ResultSet buscarServicios()
     {
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
         String sql = "select p.descripcion_prod " +
-                    "from producto p " +
-                    "where p.categoria_id_cat = 1";
+                    "from producto p, categoria c" +
+                    "where c.id_cat = p.categoria_id_cat and c.id_cat=1 ";
                 
         
         try 

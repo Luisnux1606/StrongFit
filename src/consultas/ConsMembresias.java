@@ -176,13 +176,13 @@ public class ConsMembresias extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM membresia WHERE descripcion_memb=? and estado_memb=1";
+        String sql = "SELECT * FROM membresia WHERE upper(descripcion_memb)=? and estado_memb=1";
         
         try 
         {
             
             ps = con.prepareStatement(sql);                     
-            ps.setString(1, m.getNombre());
+            ps.setString(1, m.getNombre().toUpperCase().trim());
             rs = ps.executeQuery();
             if (rs.next()) {
                 m.setId(rs.getInt("id_memb"));

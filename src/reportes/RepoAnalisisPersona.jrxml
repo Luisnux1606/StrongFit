@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e484188a-c062-4a2f-910a-b3b9657e92ec">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="296"/>
+	<property name="ireport.y" value="282"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\TroyaGym\\src\\reportes\\"]]></defaultValueExpression>
 	</parameter>
@@ -306,9 +306,9 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 		</band>
 	</columnHeader>
 	<summary>
-		<band height="72">
+		<band height="63">
 			<subreport>
-				<reportElement x="1" y="23" width="67" height="46" uuid="b9611df3-b2ca-4ef6-91d1-11fd5c36df85"/>
+				<reportElement x="0" y="17" width="67" height="46" uuid="b9611df3-b2ca-4ef6-91d1-11fd5c36df85"/>
 				<subreportParameter name="p_id_per">
 					<subreportParameterExpression><![CDATA[$P{p_id_per}]]></subreportParameterExpression>
 				</subreportParameter>

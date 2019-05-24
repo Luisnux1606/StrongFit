@@ -21,6 +21,7 @@ public class FacturaCab {
     private double total_facCab;
     private double valCancelo_facCab;
     private double valPendiente_facCab;
+    private double valAjuste_facCab;
     private Persona Persona;
     private Membresias Membresia;
     private Iva Ivas;     
@@ -192,6 +193,20 @@ public class FacturaCab {
      */
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the valAjuste_facCab
+     */
+    public double getValAjuste_facCab() {
+        return valAjuste_facCab;
+    }
+
+    /**
+     * @param valAjuste_facCab the valAjuste_facCab to set
+     */
+    public void setValAjuste_facCab(double valAjuste_facCab) {
+        this.valAjuste_facCab = valAjuste_facCab;
     }
 
     

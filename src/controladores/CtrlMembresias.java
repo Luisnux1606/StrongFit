@@ -279,7 +279,7 @@ public class CtrlMembresias implements ActionListener{
                     if (consMembresias.registrar(modMembresias)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                         visMembresias.txt_id.setText(consMembresias.getLastId()+"");
-                       // limpiar();
+                        limpiar();
                     }
                     else
                     {
@@ -330,12 +330,15 @@ public class CtrlMembresias implements ActionListener{
         }
        
        if (e.getSource() == visMembresias.btnBuscar) 
-         {                      
+         {                 
+             modMembresias.setNombre(visMembresias.txt_nombre.getText().toUpperCase().trim());
             if (consMembresias.buscar(modMembresias)){    
 
                 visMembresias.txt_id.setText(String.valueOf(modMembresias.getId()));
                 visMembresias.txt_nombre.setText(String.valueOf(modMembresias.getNombre()).toUpperCase());  
-                visMembresias.txt_dscto.setText(String.valueOf(modMembresias.getDscto()));                        
+                visMembresias.txt_dscto.setText(String.valueOf(modMembresias.getDscto()));     
+                desabilitaHabilita(visMembresias.btnGuardar,false);
+                desabilitaHabilita(visMembresias.btnModificar,true);
             }
             else
             {

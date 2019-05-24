@@ -79,7 +79,7 @@ public class CtrlCategoria implements ActionListener
     
     public void showComboCategoriaSuperior()
     {
-      
+      limpiarComboCat();
         try {
            
             ResultSet listCategorias = consCat.buscarCategorias();
@@ -145,6 +145,8 @@ public class CtrlCategoria implements ActionListener
                 }
                 limpiar();
                 showTable();
+                showComboCategoriaSuperior();
+                
             }
         }
         
@@ -233,6 +235,14 @@ public class CtrlCategoria implements ActionListener
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         } 
+    }
+    public void limpiarComboCat()
+    {
+        DefaultComboBoxModel tb = (DefaultComboBoxModel) visCat.cmbCatSuperior.getModel();
+        int a = visCat.tbl_categoria.getRowCount()-1;
+                  
+        tb.removeAllElements();
+         
     }
     
     public void setListener()
