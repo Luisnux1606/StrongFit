@@ -81,8 +81,7 @@ public class CtrlFicha implements ActionListener{
     
     Persona persona;
     Analisis analisis;
-    Medidas medidas;
-    
+    Medidas medidas;    
     String cadBus;
     
     public CtrlFicha(Ficha modFicha,ConsFicha consFicha,VisFicha visFicha)
@@ -118,7 +117,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniColores.addActionListener(this);
         this.visFicha.mniEntrenamientos.addActionListener(this);
         
-        this.visFicha.tabp_ficha.setSelectedIndex(2);
+        this.visFicha.tabp_ficha.setSelectedIndex(0);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
               
         cadBus = "";
@@ -132,7 +131,14 @@ public class CtrlFicha implements ActionListener{
         
         limpiarTabla();
         showTable();
+        
+        int colHide[] = new int[1];
+        colHide[0]=0;
+       
+        setHideJtableColumn(visFicha.tblFichas,colHide);
     }
+    
+    
     
     public void setTableModel(JTable table)
     {
@@ -359,9 +365,18 @@ public class CtrlFicha implements ActionListener{
          JTable tblD = visFicha.tblFichas;
          visFicha.txtCodPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
          visFicha.dchFecha.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1))));
-         
+         visFicha.lblIdFicha.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
          
      }
+     public void setHideJtableColumn(JTable table, int col[])
+    {
+        for (int i = 0; i < col.length; i++) {
+            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
+            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
+            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
+        }       
+    
+    }
     
      public void setFocus()
     {
@@ -478,7 +493,7 @@ public class CtrlFicha implements ActionListener{
       if (e.getSource() == visFicha.btnEliminarFichaG) 
        {
            
-            modFicha.setId(Integer.parseInt(visFicha.txt_id_FacCab.getText()));
+            modFicha.setId(Validaciones.isNumVoid(visFicha.lblIdFicha.getText()));
             modFicha.setEstado(0);
                       
             if (consFicha.eliminar(modFicha)) {
@@ -518,8 +533,8 @@ public class CtrlFicha implements ActionListener{
          {
             
             VisReportes visRepo = new VisReportes();
-          
-            CtrlReportes ctrlRepo = new CtrlReportes(visRepo,"C:/Users/Administrator/Documents/NetBeansProjects/TroyaGym/src/reportes/");
+           
+            CtrlReportes ctrlRepo = new CtrlReportes(visRepo);
             
             
          }
@@ -565,9 +580,10 @@ public class CtrlFicha implements ActionListener{
             Producto prod=new Producto();
             Categoria cat=new Categoria();
             
-            CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
+            CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);  
             ctrProd.locale = 1;
             ctrProd.iniciar();
+            
         }
         
         if (e.getSource()==visFicha.mniCategoria) //Cuando toca el menú categorías
@@ -643,7 +659,7 @@ public class CtrlFicha implements ActionListener{
     public void limpiar()
     {
         visFicha.txtCodPersona.setText(""); 
-        visFicha.dchFecha.setDate(Calculos.getCurrentDate2());
+        visFicha.dchFecha.setDate(null);
        
     }
     

@@ -41,16 +41,14 @@ public class CtrlReportes extends Conexion implements ActionListener{
     Connection  conexion; 
     Map parametros=null;
     JasperReport reporteMaestro;    
-    String rutaJasper;
     JasperPrint jP;
     ConsPersona consP;
     Persona p;
+    String rutaJasper = "C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/reportes/";
     
-    
-    public CtrlReportes(VisReportes visRepo,String rutaJasper)
+    public CtrlReportes(VisReportes visRepo)
     {
         this.visRepo = visRepo; 
-        this.rutaJasper =rutaJasper;
         this.conexion = getConexion();
         
         consP = new ConsPersona();
@@ -75,9 +73,9 @@ public class CtrlReportes extends Conexion implements ActionListener{
         String fIni=Validaciones.setFormatFecha(pFIniFicha);       
         parametros.put("p_id_per", Integer.parseInt(pCedPer));
         
-        parametros.put("p_fechaIni_ficha", fIni);
+        parametros.put("p_fecha_ficha", fIni);
         
-        try//RepoAnalisisPersona.jasper
+        try
         {
             try 
             {
@@ -112,7 +110,7 @@ public class CtrlReportes extends Conexion implements ActionListener{
         {
              try
                 {
-                    reporteMaestro = (JasperReport) JRLoader.loadObjectFromFile(rutaJasper+"RepoFicha.jasper");
+                    reporteMaestro = (JasperReport) JRLoader.loadObjectFromFile(rutaJasper+"RepoFacturaCab.jasper");
                 }
                 catch (JRException e) {e.printStackTrace();}
                 

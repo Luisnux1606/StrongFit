@@ -28,7 +28,7 @@ BUSCAR (nombre)
 1. No busca, y borra lo que tiene la tabla. :ok
 
 *********GESTIÓN DE PRODUCTO***************
-1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : r
+1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : ok
 
 GUARDAR
 1. Cuando se guarda no se limpia la fecha de inicio y la fecha de fin. : ok
@@ -59,11 +59,11 @@ MODIFICAR=ok
 LIMPIAR= ok
 
 BUSCAR (lupa)
-1. yo diría que en este caso es mejor quitarlo, porque una categoría superior puede tener varias inferiores : r
+1. yo diría que en este caso es mejor quitarlo, porque una categoría superior puede tener varias inferiores : ok
 
 BUSCAR (nombre)
-1. debería buscar por el nombre de la categoría superior. :r
-2. borra la segunda columna de la categoría. :r
+1. debería buscar por el nombre de la categoría superior. : r(se busca por producto y muestra la categoria a lado)
+2. borra la segunda columna de la categoría. :ok
 
 *********GESTIÓN DE ENTRENAMIENTO***************
 1. No se despliega la ventana.  :ok
@@ -77,7 +77,7 @@ BUSCAR (nombre)
 5. Cuando seleccione "entrenamiento" sólo muestre de la persona de la factura.  :ok
 
 *********GENERAR MEDIDAS***************
-1.Quitar el label "DATOS PARA"
+1.Quitar el label "DATOS PARA" :ok
 2.Cuando se abre la pestaña Borrar la información de la tabla.
 
 GUARDAR= ok
@@ -94,20 +94,20 @@ BUSCAR (lupa)
 BUSCAR (fecha)= ok
 
 *********GENERAR ANALISIS***************
-1.Quitar el label "DATOS PARA"
-2.Cuando se abre la pestaña Borrar la información de la tabla.
+1.Quitar el label "DATOS PARA" :ok
+2.Cuando se abre la pestaña Borrar la información de la tabla.: ok(no deberia, se carga los historiales de la persona seleccionada)
 
 GUARDAR= ok
 
 ELIMINAR
-2.Cuando exista dependencia a una ficha no debería permitir eliminar. 
+2.Cuando exista dependencia a una ficha no debería permitir eliminar. ok(se elminia logico)
 
 MODIFICAR
 
 LIMPIAR
 
 BUSCAR (lupa)
-1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco.
+1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco.: ok
 
 BUSCAR (fecha)= ok
 
@@ -116,19 +116,19 @@ BUSCAR (fecha)= ok
 GUARDAR=ok
 
 ELIMINAR
-1.No elimina
+1.No elimina : ok
 
 MODIFICAR= ok 
 
 LIMPIAR
-1.No limpia la fecha
+1.No limpia la fecha :ok
 
 BUSCAR (lupa)
 1.Despliega una ventana para seleccionar la persona, y luego no pasa nada en la ventana FICHA. 
-Debería mostrar en la tabla la información según la persona seleccionada. 
+Debería mostrar en la tabla la información según la persona seleccionada. :ok(se carga el codigo)
 
 BUSCAR (cualquier campo)= ok  
  
 
 *********GENERALES***************
-1. En las tablas incluir un Scroll (supongo que se podría hacer)
+1. En las tablas incluir un Scroll (supongo que se podría hacer) :ok

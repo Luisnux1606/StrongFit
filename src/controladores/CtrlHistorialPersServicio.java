@@ -179,6 +179,25 @@ public class CtrlHistorialPersServicio implements ActionListener{
      
      
         
+     public void setProductoServicioFacCab()
+     {
+        int filaDetalle = visFicha.tblFacturaDetalle.getRowCount()-1;
+        int idProd = Integer.parseInt(visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 5)+"");
+        int idPer = Integer.parseInt(visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 6)+"");
+        String descripcion = visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 2)+"";
+        double precio =  Validaciones.isNumVoid10(visHisPerServ.lblPrecio.getText());
+
+
+        visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
+        visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
+        visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 2);
+        visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
+
+        Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
+        Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+        visHisPerServ.dispose();
+     }
+     
      
     public void setListener(){
         KeyListener keyListenertxtBuscarProductosPorCualquierCampo = new KeyListener() {
@@ -227,28 +246,16 @@ public class CtrlHistorialPersServicio implements ActionListener{
                 if(e.getClickCount()==2)
                 {
                                                            
-                    int filaDetalle = visFicha.tblFacturaDetalle.getRowCount()-1;
+                    
                     switch(locale)
                     {
                         case 0 :
                             break;
                         case 1:
+                            setProductoServicioFacCab();
                             break;
                         case 2:
-                            int idProd = Integer.parseInt(visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 5)+"");
-                            int idPer = Integer.parseInt(visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 6)+"");
-                            String descripcion = visHisPerServ.tbl_historialPerServ.getValueAt(visHisPerServ.tbl_historialPerServ.getSelectedRow(), 2)+"";
-                            double precio =  Validaciones.isNumVoid10(visHisPerServ.lblPrecio.getText());
-                          
-                           
-                            visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
-                            visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
-                            visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 2);
-                            visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
                             
-                            Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
-                            Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
-                            visHisPerServ.dispose();
                             break;
                         case 3:
                             

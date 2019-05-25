@@ -42,7 +42,6 @@ public class VisCategoria extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         cmbCatSuperior = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         txtBuscarNombre = new javax.swing.JTextField();
@@ -123,12 +122,6 @@ public class VisCategoria extends javax.swing.JFrame {
         });
         jPanel1.add(txt_nombre);
         txt_nombre.setBounds(140, 10, 260, 30);
-
-        btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
-        btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
-        jPanel1.add(btnBuscar);
-        btnBuscar.setBounds(410, 10, 50, 40);
 
         cmbCatSuperior.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         jPanel1.add(cmbCatSuperior);
@@ -262,7 +255,6 @@ public class VisCategoria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;

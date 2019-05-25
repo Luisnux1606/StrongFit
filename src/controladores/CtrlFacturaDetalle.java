@@ -128,7 +128,7 @@ public class CtrlFacturaDetalle implements ActionListener {
                         Categoria cat=new Categoria();
 
                         CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
-                        ctrProd.locale = 2;
+                        ctrProd.locale = 0;
                         ctrProd.iniciar();
               
                           break;
@@ -236,6 +236,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         
         int colHide[] = new int[1];
         colHide[0]=0;
+       
         setHideJtableColumn(table,colHide);
         
         initColumnSizes(table);

@@ -61,7 +61,7 @@ public class ConsCategoria extends Conexion
                     "order by id_cat asc";
         ArrayList<Categoria> categoria = new ArrayList<>();
         Categoria c;
-        ConsCategoria consC;
+
         try 
         {   
             ps = con.prepareStatement(sql);                            
@@ -69,7 +69,7 @@ public class ConsCategoria extends Conexion
             
             while (rs.next()) {
                 c  = new Categoria();
-                consC  = new ConsCategoria();
+               
                 modCat = new Categoria();
                 modCat.setId_cat(rs.getInt("id_cat"));
                 modCat.setTipo_cat(rs.getString("tipo_cat"));
@@ -206,40 +206,44 @@ public class ConsCategoria extends Conexion
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        ResultSet rs = null; //'%"+cad+"%'
-        String sql = "SELECT * FROM Categoria "
-                + " where upper(tipo_cat) like upper('%"+nom+"%') and estado_cat=1"
-                + " order by id_cat asc ";
-        ArrayList<Categoria> cat = new ArrayList<>();
-        
+        ResultSet rs = null;
+        String sql = "SELECT c.id_cat, c.tipo_cat,c.categoria_id_cat,c.estado_cat " +
+                    "FROM Categoria c " +
+                    "where estado_cat=1 and upper(c.tipo_cat) like upper('%"+nom+"%') " +
+                    "order by id_cat asc";
+        ArrayList<Categoria> categoria = new ArrayList<>();
+        Categoria c;
+
         try 
-        {
+        {   
             ps = con.prepareStatement(sql);                            
             rs = ps.executeQuery();
-            while (rs.next()) 
-            {
+            
+            while (rs.next()) {
+                c  = new Categoria();
+               
                 modCat = new Categoria();
                 modCat.setId_cat(rs.getInt("id_cat"));
                 modCat.setTipo_cat(rs.getString("tipo_cat"));
-                cat.add(modCat);               
-            } 
+                    c.setId_cat(rs.getInt("CATEGORIA_ID_CAT"));                    
+                    c.setTipo_cat(getNomById(c.getId_cat()));
+                modCat.setCategoria_id_cat(c);
+                categoria.add(modCat);   
+                closeConection();
+            }
         } 
-        catch (Exception e) 
-        {
+        catch (Exception e) {
             e.printStackTrace();
-           
         }
         finally
         {
-            try 
-            {
+            try {
                 con.close();
-            } catch (Exception e) 
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-       return cat;
+       return categoria;
     }
     
     public ResultSet buscarCategorias()

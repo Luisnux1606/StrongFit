@@ -124,7 +124,7 @@ public class CtrlFacturaCab implements ActionListener{
     
     public void iniciar()
     {
-        visFicha.setTitle("FICHA");
+        visFicha.setTitle("FAC");
         
         visFicha.dtcFechaFacCab.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_FacCab.setVisible(false);
@@ -776,7 +776,7 @@ public class CtrlFacturaCab implements ActionListener{
 
             CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
             ctlHis.iniciar();
-            ctlHis.locale = 2;
+            ctlHis.locale = 1;
            
 
         } 
