@@ -115,7 +115,7 @@ public class CtrlPersonas implements ActionListener {
     
     public void iniciar()
     {
-        visPersona.setTitle("MEMBRESIAS");
+        visPersona.setTitle("GESTION DE PERSONAS");
         visPersona.setLocationRelativeTo(null);
         visPersona.setSize(1000,700);
         visPersona.setVisible(true);
@@ -140,7 +140,8 @@ public class CtrlPersonas implements ActionListener {
            ArrayList<JTextField> jtx=new ArrayList<>();
            jtx.add(visPersona.txt_cedula);
            
-               if (Validaciones.isVoid(jtx)) {
+               if (Validaciones.isVoid(jtx) && !Validaciones.existeCedula(visPersona.txt_cedula.getText()) ) {
+                 
                     modPer.setCedula(visPersona.txt_cedula.getText());                
                     modPer.setNombre(visPersona.txt_nombres.getText().toUpperCase());
                     modPer.setApellido(Validaciones.isNumVoid4(visPersona.txt_apellidos.getText().toUpperCase()));
@@ -221,13 +222,15 @@ public class CtrlPersonas implements ActionListener {
                     visPersona.txt_cedula.setText(String.valueOf(modPer.getCedula()));
                     visPersona.txt_nombres.setText(String.valueOf(modPer.getNombre()).toUpperCase());
                     visPersona.txt_apellidos.setText(String.valueOf(modPer.getApellido()).toUpperCase());
-                    visPersona.txt_edad.setText(String.valueOf(modPer.getNro_fono()));
-                    visPersona.txt_nro_fono.setText(String.valueOf(modPer.getEdad()));                    
-                   // if (Validaciones.isVoidDateChooser(visPersona.dtc_fechaNac)) 
-                         visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(modPer.getFecha_nac()));
+                    visPersona.txt_edad.setText(String.valueOf(modPer.getEdad()));
+                    visPersona.txt_nro_fono.setText(String.valueOf(modPer.getNro_fono()));                    
+                    visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(modPer.getFecha_nac()));
 
                     visPersona.txtCorreoElect.setText(String.valueOf(modPer.getMail()));  
-                    visPersona.cmbxGenero.setSelectedItem(String.valueOf(modPer.getGenero()).toUpperCase());     
+                    visPersona.cmbxGenero.setSelectedItem(String.valueOf(modPer.getGenero()).toUpperCase());  
+                    
+                    desabilitaHabilita(visPersona.btnGuardar,false);
+                    desabilitaHabilita(visPersona.btnModificar,true);
                 }
                 else
                 {

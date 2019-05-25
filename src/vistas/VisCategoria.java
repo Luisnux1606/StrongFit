@@ -111,9 +111,9 @@ public class VisCategoria extends javax.swing.JFrame {
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setLayout(null);
 
-        jLabel2.setText("Producto Servicio:");
+        jLabel2.setText("Producto/Servicio:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 50, 110, 20);
+        jLabel2.setBounds(10, 10, 110, 20);
 
         txt_nombre.setName("cedula"); // NOI18N
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -122,21 +122,21 @@ public class VisCategoria extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txt_nombre);
-        txt_nombre.setBounds(140, 50, 190, 22);
+        txt_nombre.setBounds(140, 10, 260, 30);
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
         jPanel1.add(btnBuscar);
-        btnBuscar.setBounds(350, 13, 50, 40);
+        btnBuscar.setBounds(410, 10, 50, 40);
 
         cmbCatSuperior.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         jPanel1.add(cmbCatSuperior);
-        cmbCatSuperior.setBounds(140, 10, 190, 22);
+        cmbCatSuperior.setBounds(140, 50, 260, 30);
 
         jLabel1.setText("Categoria superior:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 10, 120, 16);
+        jLabel1.setBounds(10, 50, 120, 16);
 
         pnl_categoria.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 160);

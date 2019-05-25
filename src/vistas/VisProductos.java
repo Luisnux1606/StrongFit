@@ -80,17 +80,17 @@ public class VisProductos extends javax.swing.JFrame {
 
         tbl_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "DESCRIPCION", "PRECIO", "CATEGORIA", "IDCAT"
+                "ID", "DESCRIPCION", "PRECIO", "FECHA INI.", "FECHA FIN.", "CATEGORIA", "IDCAT"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, true, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

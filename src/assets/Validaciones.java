@@ -6,6 +6,7 @@
 package assets;
 
 import com.toedter.calendar.JDateChooser;
+import consultas.ConsPersona;
 import controladores.CtrlPersonas;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -69,11 +70,23 @@ public class Validaciones {
      public static String isNumVoid4(String txt)
      {
          String  val = "";
-         if (txt==null || txt.toString().equalsIgnoreCase("null")) {
+         if (txt==null || txt.toString().equalsIgnoreCase("null") || txt.length()==0) {
              val = "";
          }
          else
              val = txt;
+
+         return val;
+     }
+     
+     public static boolean isCadnull(String txt)
+     {
+         boolean  val = false;
+         if (txt==null || txt.toString().equalsIgnoreCase("null") || txt.length()==0) {
+             val = true;
+         }
+         else
+             val = false;
 
          return val;
      }
@@ -213,6 +226,17 @@ public class Validaciones {
        
         
         return resultado;
+      }
+      
+      public static boolean existeCedula(String ced)
+      {
+          ConsPersona cP=new ConsPersona();
+            if(!isCadnull(cP.getCedByCed(ced))) {           
+                getMensaje("El usuario con cedula "+ced+" ya existe.");
+                return true;            
+            }
+            else
+                return false;
       }
       
       public static void getMensaje(String msg)

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import modelos.Analisis;
 import modelos.Conexion;
@@ -332,4 +333,27 @@ public class ConsPersona extends Conexion
        return personas ;
     }
     
+     public String getCedByCed(String ced){
+		String sql;
+		String result="";
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                
+		sql="select p.ced_per " +
+                    "from persona p " +
+                    "where p.ced_per like '"+ced+"'";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                        result=rs.getString(1);
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return result;
+	}
 }

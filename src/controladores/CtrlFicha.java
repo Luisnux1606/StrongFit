@@ -32,7 +32,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javafx.scene.paint.Color.color;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -113,6 +115,9 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniProductos.addActionListener(this);
         this.visFicha.mniCategoria.addActionListener(this);
         
+        this.visFicha.mniColores.addActionListener(this);
+        this.visFicha.mniEntrenamientos.addActionListener(this);
+        
         this.visFicha.tabp_ficha.setSelectedIndex(2);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
               
@@ -180,11 +185,6 @@ public class CtrlFicha implements ActionListener{
         visFicha.txt_id_datos.setVisible(false);       
        
 
-        visFicha.lbl_personaFicha.setText("");
-
-        visFicha.lbl_personaFicha.setText("");
-
- 
         visFicha.btnGuardarFichaG.setToolTipText("Guardar el registro");
         visFicha.btnModificarFichaG.setToolTipText("Modificar el registro");
         visFicha.btnEliminarFichaG.setToolTipText("Eliminar el registro");
@@ -582,12 +582,14 @@ public class CtrlFicha implements ActionListener{
         
         if (e.getSource()==visFicha.mniEntrenamientos) //Cuando toca el menú categorías
         {
-            HistorialPersonaServicio hisPerServ=new HistorialPersonaServicio();
-            VisHistorialPersonaServicio visCat=new VisHistorialPersonaServicio();
-            ConsHistorialPersonaServicio consCat=new ConsHistorialPersonaServicio();
-            
-            CtrlHistorialPersServicio ctrCat=new CtrlHistorialPersServicio (visCat, hisPerServ, consCat, visFicha,persona);
-            ctrCat.iniciar();
+            VisPersona visPer = new VisPersona();
+            Persona per  = new Persona();
+            ConsPersona consPer = new ConsPersona();
+                
+            Ficha ficha = new Ficha();
+            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
+            ctrPer.iniciar();
+            ctrPer.locale = 1;
         }
         
         if (e.getSource()==visFicha.mniDiarioGeneral) //Cuando toca el menú diario general
@@ -604,6 +606,32 @@ public class CtrlFicha implements ActionListener{
                     
             CtrlPlanCuentas ctrPlan=new CtrlPlanCuentas(visPlan);
             ctrPlan.iniciar();
+        }
+        
+        if (e.getSource()==visFicha.mniColores) //Cuando toca el menú diario general
+        {
+            JColorChooser ventanaDeColores=new JColorChooser();
+            Color color=ventanaDeColores.showDialog(null, "Seleccione un Color", Color.gray);
+            visFicha.pnlTabSuperior.setBackground(color);
+            visFicha.pnlFicha.setBackground(color);
+            visFicha.pnlVentas.setBackground(color);
+            visFicha.pnlMedidas.setBackground(color);
+            visFicha.pnlAnalisis.setBackground(color);
+            visFicha.pnlPlanAlim.setBackground(color);
+            visFicha.pnlFichaCrear.setBackground(color);
+            visFicha.pnlVentas.setBackground(color);
+            visFicha.pnlVentasInterno.setBackground(color);
+            visFicha.pnlVentasComponentes.setBackground(color);             
+            visFicha.pnlMedidasComponentes.setBackground(color);
+            visFicha.pnlMedidasComponentes2.setBackground(color);
+            visFicha.pnlAnalisisComponentes.setBackground(color);
+            visFicha.pnlFichaComponentes.setBackground(color);
+            
+           // visPer.pnl_personas.setBackground(color);
+            //visMemb.pnl_personas.setBackground(color);
+            
+                    
+            
         }
          
          if (e.getSource() == visFicha.menuSalir) 

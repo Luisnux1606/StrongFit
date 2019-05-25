@@ -293,9 +293,10 @@ public class CtrlHistorialPersServicio implements ActionListener{
         table.getColumnModel().getColumn(4).setCellRenderer(tcr);
         table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
         
-        int colHide[] = new int[2];
+        int colHide[] = new int[3];
         colHide[0]=0;
-        colHide[1]=4;
+        colHide[1]=5;
+        colHide[2]=6;
         setHideJtableColumn(table,colHide);
         
         //initColumnSizes(table);
@@ -379,7 +380,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     {
         try {
             limpiarTabla();
-            ResultSet listProd = consHisPerServ.buscarTodos();
+            ResultSet listProd = consHisPerServ.buscarTodosByIdPer(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
             
             DefaultTableModel model =  (DefaultTableModel)visHisPerServ.tbl_historialPerServ.getModel();
             Object cols[] = new Object[7];
