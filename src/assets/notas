@@ -6,8 +6,8 @@ Pero debe validar que no esté activado, en caso de eliminado puede volverlo a i
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
-BUSCAR (lupa)= ok
-BUSCAR (nombre)= ok
+BUSCAR(lupa)= ok
+BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE MEMBRESIA***************
@@ -15,147 +15,151 @@ GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
-BUSCAR (lupa)= ok
-BUSCAR (nombre)= ok
+BUSCAR(lupa)= ok
+BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE GATEGORÍA***************
-1. Cambiar el label "producto/servicio" por categoría, lo mismo hacer en la tabla. :ok
-sigue igual la tabla
+1. Quitar caja de texto de id que se encuentra en la parte superior. 
+2. Añadir el título de la empresa.  
 
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
 LIMPIAR= ok
-BUSCAR (nombre)= ok
+BUSCAR(nombre)= ok
 
+
+*********GESTIÓN DE GATEGORÍA***************
+1. Quitar caja de texto de id que se encuentra en la parte superior. 
+2. Añadir el título de la empresa.  
+GUARDAR=ok
+ELIMINAR= ok
+MODIFICAR=ok
+LIMPIAR= ok
+BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE PRODUCTO***************
-1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : ok
+1. Quitar caja de texto de id que se encuentra en la parte superior. 
+2. Añadir el título de la empresa.  
 
-
-*********GESTIÓN DE PRODUCTO*************** [Cuando haya cambiado, este debo revisar]
-1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : r
-2. Ahora ya no me permite seleccionar la fecha de inicio y la fecha de fin
-
-
-GUARDAR
-1. Cuando se guarda no se limpia la fecha de inicio y la fecha de fin. : ok
-2. Ahora cuando guarda no se muestra en la tabla
-
-ELIMINAR
-1. No pregunta si deseo eliminar. ok
-
-MODIFICAR= ok 
-
-LIMPIAR 
-1. No se borra la fecha de inicio ni la fecha de fin. :ok
-
-BUSCAR (lupa)
-1. no busca  : r
-
-BUSCAR (nombre)=ok
-
-
-*********GESTIÓN DE GATEGORÍA***************
-1. Cambiar el label "producto/servicio" por categoría, lo mismo hacer en la tabla. :ok
-2. No se actualiza el combo con las nuevas categorías creadas.  ok
-3. En la tabla cambiar el orden de las columnas, por: "categoría superior" y luego "categoría". : ok
-4. Esta lógica funciona cuando ya se encuentran creadas categorías superiores. ¿Qué sucede cuando se quiere crear una categoría superior? : ok(se crea si no hay)
-
-GUARDAR=ok
-
+GUARDAR= ok
 ELIMINAR= ok
-MODIFICAR=ok
-LIMPIAR= ok
+MODIFICAR= ok 
+LIMPIAR= ok 
 
-BUSCAR (lupa)
-1. yo diría que en este caso es mejor quitarlo, porque una categoría superior puede tener varias inferiores : ok
+BUSCAR(lupa)
+1. no busca
 
-BUSCAR (nombre)
-1. debería buscar por el nombre de la categoría superior. : r(se busca por producto y muestra la categoria a lado)
-2. borra la segunda columna de la categoría. :ok
+BUSCAR(nombre)=ok
 
 
 
 *********GESTIÓN DE ENTRENAMIENTO***************
-1. Ahora despliega la ventana de gestión de entrenamiento
+1. Quitar caja de texto de id que se encuentra en la parte superior. 
+2. Añadir el título de la empresa.  
+3. El título de la ventana dice "producto/servicios"
+4. El campo de persona aparece "null null"
+5. En el combo no despliega ningún dato.
+
+GUARDAR
+ELIMINAR 
+MODIFICAR
+LIMPIAR
+BUSCAR
 
 
-*********GENERAR VENTAS*************** [no puedo revisar porque cuando voy a seleccionar los productos la tabla está vacía]
-2. Si yo incluyo un entrenamiento se debería añadir al detalle, y no reemplazar el último registro. r
-4. Cuando se seleccione en la tabla un producto que se muestre sólo "PRODUCTOS" no servicios. :ok 
-5. Cuando seleccione "entrenamiento" sólo muestre de la persona de la factura.  :ok
+*********GENERAR VENTAS***************
+1. NO he revisado incluyendo entrenamiento porque todavía falta. 
+
+GUARDAR
+1. Debe borrar los datos que se encuentren en la tabla. 
+
+ELIMINAR
+1. No puedo eliminar porque no puedo BUSCAR 
+MODIFICAR
+1. No puedo modificar porque no puedo BUSCAR
+
+LIMPIAR= ok
 
 
 
 *********GENERAR MEDIDAS***************
-
-1.Quitar el label "DATOS PARA" :ok
-
-1.Quitar el label "DATOS PARA" 
-
-2.Cuando se abre la pestaña Borrar la información de la tabla.
+1. Cuando se abre la pestaña Borrar la información de la tabla.
 
 GUARDAR= ok
 ELIMINAR
-1. No pregunta si desea eliminar.
+1. Debe presentar si se desea eliminar. 
 
 MODIFICAR= ok
 LIMPIAR= ok
+BUSCAR(fecha)= ok 
 
-BUSCAR (lupa)
-1. No busca
+BUSCAR(lupa)
+1. no busca
 
-BUSCAR (fecha)= ok
+
 
 *********GENERAR ANALISIS***************
 1.Quitar el label "DATOS PARA" :ok
 2.Cuando se abre la pestaña Borrar la información de la tabla.: ok(no deberia, se carga los historiales de la persona seleccionada)
+2.Si yo elimino y luego busco(fecha) se duplica la información de "REcomen.Cardio" a "Recom. pesas".
 
 GUARDAR= ok
-
-
-ELIMINAR
-2.Cuando exista dependencia a una ficha no debería permitir eliminar. ok(se elminia logico)
-
-MODIFICAR
-
-LIMPIAR
-
 ELIMINAR= ok
 MODIFICAR= ok
-LIMPIAR= ok
+LIMPIAR= oK
+BUSCAR(lupa)= ok
+
+BUSCAR(fecha)
+1. Al momento de buscar duplica la información de "REcomen.Cardio" a "Recom. pesas".
 
 
-BUSCAR (lupa)
-1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco.: ok
 
-BUSCAR (fecha)= ok
 
 *********PLAN ALIMENTICIO*************** 
 1. Existen cajas de texto para poner información, pero no presenta las opciones CRUD
 
 
+
 *********FICHA*************** 
+1. Que se muestre el nombre de la persona y no el código. 
+2. Como voy seleccionando de las otras pestañas que muestre la fecha de análisis y la fecha de medida para que el usuario sepa lo que seleccionó.
+3. Quitar caja de texto de id que se encuentra en la parte superior. 
+
 GUARDAR=ok
 
 ELIMINAR
-1.No elimina : ok
+1. Debe preguntar si deseo o no eliminar. 
 
 MODIFICAR= ok 
+1. Pero sería más interesante poder modificar la selección de análisis y medidas. 
 
-LIMPIAR
-1.No limpia la fecha :ok
+LIMPIAR= ok
 
-BUSCAR (lupa)
-1.Despliega una ventana para seleccionar la persona, y luego no pasa nada en la ventana FICHA. 
-Debería mostrar en la tabla la información según la persona seleccionada. :ok(se carga el codigo)
-
-BUSCAR (cualquier campo)= ok  
+BUSCAR(lupa)= ok
+BUSCAR(cualquier campo)= ok  
 
  
+
+*********CONSULTAS*************** 
+------VENTAS REALIZADAS------
+
+1. Está duplicando la información del detalle. 
+2. El combo no está funcionando. 
+3. El "buscar por campos" no funciona.
+
+------ENTRENAMIENTOS Y SALDOS------
+
+
+
+*********REPORTES*************** 
+------PERSONAS------
+1. Cambiar el código por el nombre de la persona. 
+
+
+
 
 *********GENERALES***************
 1. En las tablas incluir un Scroll (supongo que se podría hacer) :ok
