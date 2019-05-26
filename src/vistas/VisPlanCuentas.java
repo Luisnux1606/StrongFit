@@ -56,14 +56,14 @@ public class VisPlanCuentas extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         txtBuscarCedula3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(java.awt.Color.lightGray);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setText("STRONGFIT");
+        jLabel1.setText("PLAN DE CUENTAS");
         jLabel1.setPreferredSize(new java.awt.Dimension(100, 25));
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
@@ -118,11 +118,11 @@ public class VisPlanCuentas extends javax.swing.JFrame {
             }
         });
         pnl_personas1.add(txtBuscarCedula1);
-        txtBuscarCedula1.setBounds(90, 70, 150, 20);
+        txtBuscarCedula1.setBounds(90, 70, 150, 22);
 
         jLabel19.setText("Buscar cuentas:");
         pnl_personas1.add(jLabel19);
-        jLabel19.setBounds(10, 70, 88, 14);
+        jLabel19.setBounds(10, 70, 88, 16);
 
         tbl_personas3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -161,7 +161,7 @@ public class VisPlanCuentas extends javax.swing.JFrame {
             }
         });
         pnl_personas1.add(btnAgregar);
-        btnAgregar.setBounds(730, 70, 150, 23);
+        btnAgregar.setBounds(730, 70, 150, 25);
 
         btnModificar3.setBackground(new java.awt.Color(102, 102, 102));
         btnModificar3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/modificar.png"))); // NOI18N
@@ -227,7 +227,7 @@ public class VisPlanCuentas extends javax.swing.JFrame {
             }
         });
         pnl_personas2.add(txtBuscarCedula2);
-        txtBuscarCedula2.setBounds(90, 350, 660, 20);
+        txtBuscarCedula2.setBounds(90, 350, 660, 22);
 
         jLabel28.setText("Descripción:");
         pnl_personas2.add(jLabel28);
@@ -248,11 +248,11 @@ public class VisPlanCuentas extends javax.swing.JFrame {
             }
         });
         pnl_personas2.add(txtBuscarCedula3);
-        txtBuscarCedula3.setBounds(10, 110, 150, 20);
+        txtBuscarCedula3.setBounds(10, 110, 150, 22);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         pnl_personas2.add(jComboBox1);
-        jComboBox1.setBounds(760, 350, 120, 20);
+        jComboBox1.setBounds(760, 350, 120, 22);
 
         jPanel5.add(pnl_personas2);
 
@@ -271,7 +271,7 @@ public class VisPlanCuentas extends javax.swing.JFrame {
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 942, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(312, 312, 312)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

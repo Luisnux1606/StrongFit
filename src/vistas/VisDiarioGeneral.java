@@ -41,7 +41,7 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         dtcFechaFacCab = new com.toedter.calendar.JDateChooser();
         jLabel22 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jPanel1 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         txtBuscarCedula1 = new javax.swing.JTextField();
@@ -74,7 +74,7 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtBuscarCedula7 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<String>();
         jLabel7 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -91,7 +91,7 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
         setBackground(java.awt.Color.lightGray);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setText("STRONGFIT");
+        jLabel1.setText("DIARIO GENERAL");
         jLabel1.setPreferredSize(new java.awt.Dimension(100, 25));
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
@@ -143,15 +143,15 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
         pnl_personas1.add(jLabel2);
         jLabel2.setBounds(380, 130, 170, 40);
         pnl_personas1.add(dtcFechaFacCab);
-        dtcFechaFacCab.setBounds(90, 50, 170, 20);
+        dtcFechaFacCab.setBounds(90, 50, 170, 22);
 
         jLabel22.setText("Fecha:");
         pnl_personas1.add(jLabel22);
         jLabel22.setBounds(10, 50, 88, 20);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         pnl_personas1.add(jComboBox2);
-        jComboBox2.setBounds(710, 50, 170, 20);
+        jComboBox2.setBounds(710, 50, 170, 22);
 
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("RESULTADOS"));
@@ -219,7 +219,7 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
                     .addComponent(txtBuscarCedula6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnl_personas1.add(jPanel1);
@@ -235,7 +235,7 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
             }
         });
         pnl_personas1.add(txtBuscarCedula4);
-        txtBuscarCedula4.setBounds(90, 80, 790, 20);
+        txtBuscarCedula4.setBounds(90, 80, 790, 22);
 
         jPanel3.add(pnl_personas1);
 
@@ -384,7 +384,7 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
 
         jLabel6.setText("Tipo de Cuenta:");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("DIFERENCIA:");
 
@@ -557,8 +557,8 @@ public class VisDiarioGeneral extends javax.swing.JFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 942, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(335, 335, 335)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(221, 221, 221)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -6,6 +6,7 @@
 package controladores;
 
 import assets.Calculos;
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -69,7 +70,8 @@ public class CtrlMembresias implements ActionListener{
     }
     public void iniciar()
     {
-        visMembresias.setTitle("MEMBRESIAS");
+        visMembresias.setTitle(Configuracion.nomEmp +" MEMBRESIAS");
+        visMembresias.lblNomEmp.setText(Configuracion.nomEmp );
         visMembresias.setLocationRelativeTo(null);
         visMembresias.setSize(1000,700);
         visMembresias.setVisible(true);

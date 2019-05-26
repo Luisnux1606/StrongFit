@@ -6,6 +6,7 @@
 package controladores;
 
 import assets.Calculos;
+import assets.Configuracion;
 import assets.Validaciones;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
@@ -115,7 +116,8 @@ public class CtrlPersonas implements ActionListener {
     
     public void iniciar()
     {
-        visPersona.setTitle("GESTION DE PERSONAS");
+        visPersona.setTitle(Configuracion.nomEmp + " GESTION DE PERSONAS");
+        visPersona.lblNomEmp.setText(Configuracion.nomEmp); 
         visPersona.setLocationRelativeTo(null);
         visPersona.setSize(1000,700);
         visPersona.setVisible(true);

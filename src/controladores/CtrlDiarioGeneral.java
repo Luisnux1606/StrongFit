@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import assets.Configuracion;
 import javax.swing.JFrame;
 import vistas.VisDiarioGeneral;
 
@@ -23,7 +24,7 @@ public class CtrlDiarioGeneral
     
     public void iniciar()
     {
-        visDiario.setTitle("Diario General");
+        visDiario.setTitle(Configuracion.nomEmp +" Diario General");
         visDiario.setLocationRelativeTo(null);
         visDiario.setSize(1000,700);
         visDiario.setVisible(true);

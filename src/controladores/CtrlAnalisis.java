@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -42,7 +43,7 @@ public class CtrlAnalisis implements ActionListener{
     Persona persona;
     
     String cadBus;
-
+    
     public CtrlAnalisis(Analisis modAnalisis, ConsAnalisis consAnalisis, VisFicha visAnalisis)
     {
         this.modAnalisis = modAnalisis;
@@ -66,6 +67,7 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.setTitle("FICHA");
         visAnalisis.setLocationRelativeTo(null);
         visAnalisis.txt_id_analisis.setVisible(false);
+        visAnalisis.setTitle( Configuracion.nomEmp + " ANALISIS");
                 
         visAnalisis.btnBuscarAnalisis.setToolTipText("Buscar analisis por fecha");
         visAnalisis.btnGuardarAnalisis.setToolTipText("Guardar el registro");

@@ -5,6 +5,7 @@
  */
 package strongfit;
 
+import assets.Configuracion;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
 import consultas.ConsFacturaDet;
@@ -17,6 +18,9 @@ import controladores.CtrlFacturaDetalle;
 import controladores.CtrlFicha;
 import controladores.CtrlMedidas;
 import controladores.CtrlPersonas;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import modelos.Analisis;
@@ -38,11 +42,10 @@ public class StrongFit {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-       
-        
-        
-        
+    public static void main(String[] args) 
+    {
+        new Configuracion();
+               
         Persona per = new Persona();
         Ficha ficha =  new Ficha();
         Medidas med =  new Medidas();
@@ -61,18 +64,16 @@ public class StrongFit {
         VisFicha visFicha = new VisFicha();        
         VisMembresia visMemb = new VisMembresia();
         
-        //CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer,visFicha);
+
         CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer, visFicha);
         CtrlMedidas ctrlMed = new CtrlMedidas(med, consMed, visFicha);        
         CtrlAnalisis ctrlAna = new CtrlAnalisis(ana, consAna, visFicha);
         CtrlFacturaCab ctrlFacturaCab = new CtrlFacturaCab(facCab, consFacCab, visFicha, visMemb, per);
-      //  CtrlFacturaDetalle ctrlFacDet = new CtrlFacturaDetalle(consFacDet, visFicha);
+
         
         CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha );
         ctrlFicha.iniciar();
-       // CtrlPersonas ctrlPer = new CtrlPersonas(per, consPer,visMemb, visPer);               
-       // ctrlPer.iniciar();
-        //visPer.setVisible(true);
+
     }
     
 }

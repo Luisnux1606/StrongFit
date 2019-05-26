@@ -46,6 +46,7 @@ public class VisCategoria extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtBuscarNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        lblNomEmp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -149,8 +150,17 @@ public class VisCategoria extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 938;
         gridBagConstraints.ipady = 595;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 54, 13, 30);
+        gridBagConstraints.insets = new java.awt.Insets(13, 103, 0, 79);
         getContentPane().add(pnl_categoria, gridBagConstraints);
+
+        lblNomEmp.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        lblNomEmp.setText("STRONGFIT");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(17, 396, 0, 0);
+        getContentPane().add(lblNomEmp, gridBagConstraints);
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -214,6 +224,7 @@ public class VisCategoria extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblNomEmp;
     public javax.swing.JPanel pnl_categoria;
     public javax.swing.JTable tbl_categoria;
     public javax.swing.JTextField txtBuscarNombre;

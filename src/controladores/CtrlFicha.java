@@ -6,6 +6,7 @@
 package controladores;
 
 import assets.Calculos;
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -27,6 +28,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -84,8 +86,12 @@ public class CtrlFicha implements ActionListener{
     Medidas medidas;    
     String cadBus;
     
+    String nomEmpresa;
+    
     public CtrlFicha(Ficha modFicha,ConsFicha consFicha,VisFicha visFicha)
     {
+        nomEmpresa = Configuracion.nomEmp;
+        
         this.modFicha = modFicha;
         this.consFicha = consFicha;
         this.visFicha = visFicha;
@@ -183,7 +189,7 @@ public class CtrlFicha implements ActionListener{
         }
 
 
-        visFicha.setTitle("FICHA");
+        visFicha.setTitle(Configuracion.nomEmp  + "FICHA");
         
         visFicha.dtcFecha.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_FacCab.setVisible(false);
@@ -195,7 +201,8 @@ public class CtrlFicha implements ActionListener{
         visFicha.btnModificarFichaG.setToolTipText("Modificar el registro");
         visFicha.btnEliminarFichaG.setToolTipText("Eliminar el registro");
         visFicha.btnLimpiarFichaG.setToolTipText("Limpiar el registro");
-        //visFicha.tabp_ficha.setSelectedIndex(2);
+        
+        visFicha.lblNomEmpresa.setText(nomEmpresa);
         limpiar();
         
 

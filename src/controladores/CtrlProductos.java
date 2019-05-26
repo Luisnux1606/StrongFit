@@ -6,6 +6,7 @@
 package controladores;
 
 import assets.Calculos;
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -114,7 +115,8 @@ public class CtrlProductos implements ActionListener{
     
     public void iniciar()
     {
-        visProd.setTitle("STRONGFIT");            
+        visProd.setTitle(Configuracion.nomEmp +" STRONGFIT");    
+        visProd.lblNomEmp.setText(Configuracion.nomEmp);
         visProd.btnGuardar.setToolTipText("Guardar el registro");
         visProd.btnModificar.setToolTipText("Modificar el registro");
         visProd.btnEliminar.setToolTipText("Eliminar el registro");

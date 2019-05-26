@@ -47,7 +47,7 @@ public class VisMembresia extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         txtBuscarNombre = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNomEmp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -165,14 +165,14 @@ public class VisMembresia extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 54, 13, 30);
         getContentPane().add(pnl_personas, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setText("STRONGFIT");
+        lblNomEmp.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        lblNomEmp.setText("STRONGFIT");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 346, 0, 0);
-        getContentPane().add(jLabel1, gridBagConstraints);
+        getContentPane().add(lblNomEmp, gridBagConstraints);
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -232,13 +232,13 @@ public class VisMembresia extends javax.swing.JFrame {
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblNomEmp;
     public javax.swing.JPanel pnl_personas;
     public javax.swing.JTable tbl_membresias;
     public javax.swing.JTextField txtBuscarNombre;

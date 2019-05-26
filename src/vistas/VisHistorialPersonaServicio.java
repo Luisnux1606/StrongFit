@@ -55,7 +55,7 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         lblIdProd = new javax.swing.JLabel();
         lblIdPersona = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNomEmp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -183,14 +183,14 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(7, 54, 13, 30);
         getContentPane().add(pnl_personas, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setText("STRONGFIT");
+        lblNomEmp.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        lblNomEmp.setText("STRONGFIT");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 346, 0, 0);
-        getContentPane().add(jLabel1, gridBagConstraints);
+        getContentPane().add(lblNomEmp, gridBagConstraints);
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -251,7 +251,6 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbxServicio;
     public com.toedter.calendar.JDateChooser dchFechaFin;
     public com.toedter.calendar.JDateChooser dchFechaIni;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -260,6 +259,7 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
     public javax.swing.JLabel lblFechaIni;
     public javax.swing.JLabel lblIdPersona;
     public javax.swing.JLabel lblIdProd;
+    public javax.swing.JLabel lblNomEmp;
     public javax.swing.JLabel lblPersona;
     public javax.swing.JLabel lblPrecio;
     public javax.swing.JLabel lblPrecioIndic;

@@ -8,6 +8,7 @@ package controladores;
 import assets.Calculos;
 
 import assets.ButtonTable;
+import assets.Configuracion;
 
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
@@ -121,7 +122,7 @@ public class CtrlBuscarVentas implements ActionListener {
     
     public void iniciar()
     {
-        visVentas.setTitle("BUSQUEDA DE VENTAS");
+        visVentas.setTitle(Configuracion.nomEmp +" BUSQUEDA DE VENTAS");
         visVentas.setSize(1200, 800);
         visVentas.setLocation(400, 200);
         visVentas.setVisible(true);

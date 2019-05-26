@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import assets.Configuracion;
 import javax.swing.JFrame;
 import vistas.VisPlanCuentas;
 
@@ -23,7 +24,7 @@ public class CtrlPlanCuentas
     
     public void iniciar()
     {
-        visPlan.setTitle("Plan de Cuentas");
+        visPlan.setTitle(Configuracion.nomEmp +" Plan de Cuentas");
         visPlan.setLocationRelativeTo(null);
         visPlan.setSize(1000,700);
         visPlan.setVisible(true);

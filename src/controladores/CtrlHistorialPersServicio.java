@@ -6,6 +6,7 @@
 package controladores;
 
 import assets.Calculos;
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -125,8 +126,8 @@ public class CtrlHistorialPersServicio implements ActionListener{
     
     public void iniciar()
     {
-        visHisPerServ.setTitle("SERVICIOS");            
- 
+        visHisPerServ.setTitle(Configuracion.nomEmp +" SERVICIOS");            
+        visHisPerServ.lblNomEmp.setText(Configuracion.nomEmp );
         visHisPerServ.btnGuardar.setToolTipText("Guardar el registro");
         visHisPerServ.btnModificar.setToolTipText("Modificar el registro");
         visHisPerServ.btnEliminar.setToolTipText("Eliminar el registro");

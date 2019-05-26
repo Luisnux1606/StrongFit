@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsPersona;
@@ -44,7 +45,7 @@ public class CtrlReportes extends Conexion implements ActionListener{
     JasperPrint jP;
     ConsPersona consP;
     Persona p;
-    String rutaJasper = "C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/reportes/";
+    String rutaJasper = Configuracion.rutaRepos();
     
     public CtrlReportes(VisReportes visRepo)
     {
