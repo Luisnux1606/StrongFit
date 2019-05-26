@@ -56,10 +56,6 @@ public class VisProductos extends javax.swing.JFrame {
         lblIdCat = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        mniFicha = new javax.swing.JMenuItem();
-        mniReportes = new javax.swing.JMenuItem();
-        mniSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(java.awt.Color.lightGray);
@@ -204,42 +200,6 @@ public class VisProductos extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 346, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
-
-        jMenu1.setText("Archivo");
-        jMenu1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-
-        mniFicha.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        mniFicha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/nuevo7.png"))); // NOI18N
-        mniFicha.setText("Ficha");
-        mniFicha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniFichaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniFicha);
-
-        mniReportes.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        mniReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/reportes.png"))); // NOI18N
-        mniReportes.setText("Reportes");
-        mniReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniReportesActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniReportes);
-
-        mniSalir.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        mniSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/salir2.png"))); // NOI18N
-        mniSalir.setText("Salir");
-        mniSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mniSalirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mniSalir);
-
-        jMenuBar1.add(jMenu1);
-
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -256,18 +216,6 @@ public class VisProductos extends javax.swing.JFrame {
     private void txtBuscarCualquierCampoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarCualquierCampoKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarCualquierCampoKeyTyped
-
-    private void mniReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniReportesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mniReportesActionPerformed
-
-    private void mniFichaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniFichaActionPerformed
-        
-    }//GEN-LAST:event_mniFichaActionPerformed
-
-    private void mniSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniSalirActionPerformed
-       // this.dispose();
-    }//GEN-LAST:event_mniSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,7 +268,6 @@ public class VisProductos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -328,9 +275,6 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JLabel lblFechaFin;
     public javax.swing.JLabel lblFechaIni;
     public javax.swing.JLabel lblIdCat;
-    public javax.swing.JMenuItem mniFicha;
-    public javax.swing.JMenuItem mniReportes;
-    public javax.swing.JMenuItem mniSalir;
     public javax.swing.JPanel pnl_personas;
     public javax.swing.JTable tbl_productos;
     public javax.swing.JTextField txtBuscarCualquierCampo;
