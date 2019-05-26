@@ -43,8 +43,7 @@ public class CtrlFacturaDetalle implements ActionListener {
     private VisFicha visFicha;
     
     public CtrlFacturaDetalle(ConsFacturaDet consFacDet,VisFicha visFicha)
-    {
-        this.facDet = new ArrayList<>();
+    {        
         this.consFacDet = consFacDet;
         this.visFicha = visFicha;
         
@@ -76,7 +75,6 @@ public class CtrlFacturaDetalle implements ActionListener {
     }
     public void setListener()
     {               
-
         int col = 1;      
         JTable facDet = visFicha.tblFacturaDetalle;
         facDet.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -99,7 +97,7 @@ public class CtrlFacturaDetalle implements ActionListener {
                   Categoria cat=new Categoria();
 
                   CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
-                  ctrProd.locale = 2;
+                  ctrProd.locale = 0;
                   ctrProd.iniciar();
               }
           }
@@ -170,7 +168,7 @@ public class CtrlFacturaDetalle implements ActionListener {
                if (Validaciones.isDateChooserVoid(jdc)) 
                {                                        
                        
-                      setDetalles(visFicha, visFicha.lblNroFactura.getText());
+                  //    setDetalles(visFicha, visFicha.lblNroFactura.getText());
                 
                  
                }        
@@ -268,8 +266,8 @@ public class CtrlFacturaDetalle implements ActionListener {
         FacturaDetalle detalle ;
         
         ArrayList<FacturaDetalle> detalles=new ArrayList<>();
-        ArrayList<Producto> p = new ArrayList<>();
-        ArrayList<FacturaCab> f = new ArrayList<>();
+        ArrayList<Producto> p = new ArrayList<>();      
+        facDet = new ArrayList<>();
         
         
         if (consFacDet.getLastInvoice(facCab))               
@@ -284,11 +282,7 @@ public class CtrlFacturaDetalle implements ActionListener {
             desc = table.getValueAt(i, 2)+"";     
             valU = table.getValueAt(i, 3)+"";
             valT = table.getValueAt(i, 4)+"";
-            
-            
-            //consulra factura idFac by numFac
-          
-
+         
             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
                 
                 detalle = new FacturaDetalle();

@@ -663,11 +663,11 @@ values (membresia_id_seq.NEXTVAL,'diario',2,1);
 insert into IVAS(id_ivas,val_ivas,estado_ivas)
 values (iva_id_seq.NEXTVAL,0,1);
 
-insert into Categoria(id_cat,tipo_cat,estado_cat)
-values (categoria_id_seq.NEXTVAL,'SERVICIO GIMNASIO',1);
+insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
+values (categoria_id_seq.NEXTVAL,'SERVICIO GIMNASIO',1,1);
 
-insert into Categoria(id_cat,tipo_cat,estado_cat)
-values (categoria_id_seq.NEXTVAL,'PRODUCTO',1);
+insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
+values (categoria_id_seq.NEXTVAL,'PRODUCTO',2,1);
 
 
 commit;

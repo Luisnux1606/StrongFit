@@ -679,6 +679,7 @@ public class CtrlFacturaCab implements ActionListener{
                     setFacturaCabecera(visFicha);                                                               
                     if (consFicha.registrar(modFacCab)) {
                         
+                        facDetalle.setDetalles(visFicha, "");
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                          
                         limpiar();
@@ -688,7 +689,7 @@ public class CtrlFacturaCab implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Error al Guardar");
                         limpiar();
                     }
-                    facDetalle.setDetalles(visFicha, cadBus);
+                   
                }        
         }
       

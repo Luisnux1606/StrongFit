@@ -39,6 +39,7 @@ public class ConsFacturaDet extends Conexion {
                 ps.setDouble(4,listDets.getvTotal_facDet());
                 ps.setInt(5,listDets.getProducto_id_prod().getId_prod());
                 ps.setInt(6,listDets.getFactura_id_fac().getId_facCab());
+                System.out.println("cabFac "+listDets.getFactura_id_fac().getId_facCab());
                 ps.setInt(7, listDets.getEstado_facDet());
                
                 ps.execute();
@@ -518,8 +519,8 @@ public class ConsFacturaDet extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "select max(fC.Id_Faccab) as Id_Faccab\n" +
-                    "from facturaCabecera fC\n" +
+        String sql = "select max(fC.Id_Faccab) as Id_Faccab " +
+                    "from facturaCabecera fC " +
                     "order by Id_Faccab asc";
         
         try 
