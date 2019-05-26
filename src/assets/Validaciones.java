@@ -190,8 +190,11 @@ public class Validaciones {
                else 
                {
                    estado  = false;
-                   getMensaje("La factura debe tener almenos un detalle.");
+                   
                }
+               if (estado == false)
+                   getMensaje("La factura debe tener almenos un detalle.");
+               
            }      
       return estado;
       }

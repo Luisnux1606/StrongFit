@@ -38,6 +38,7 @@ public class ButtonTable extends JFrame
         
 
         ButtonColumn buttonColumn = new ButtonColumn(visVentas.tblFacturasCabeceras, 9);
+        ButtonColumn buttonColumn1 = new ButtonColumn(visVentas.tblFacturasCabeceras, 10);
     }
 
     
@@ -105,27 +106,27 @@ public class ButtonTable extends JFrame
         public void actionPerformed(ActionEvent e)
         {
             fireEditingStopped();
-            System.out.println( e.getActionCommand() + " : " + table.getSelectedRow());
+            String command = ((JButton) e.getSource()).getActionCommand();
+            if (command.equals( "Guardar")) {
+                 setAjuste();
+                 System.out.println("aqui se actualiza ajuste!!!" +visVentas.tblFacturasCabeceras.getSelectedRow() );
+            }
+            if (command.equals( "Anular")) {
+               System.out.println("aqui se anulara!!!" +visVentas.tblFacturasCabeceras.getSelectedRow() );
+            }
             
+           
+           
+           
+            
+            
+                        
+        }
+        
+        public void setAjuste()
+        {
             FacturaCab modFacCab=new FacturaCab();
-            /*
-            
-            //fecha_facCab, num_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
-            String fechaFac = Validaciones.isNumVoid4(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 2)+"");
-            String numFac = "";
-            double valConDsto;
-            double totalConIva;
-            double valPend;
-            
-            
-            modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
-            modFacCab.setNum_facCab("sera numero");
-            modFacCab.setSubTotal_facCab(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
-            modFacCab.setTotal_facCab(Validaciones.isNumVoid3(visFicha.txtTotalConIva.getText()));
-            modFacCab.setValPendiente_facCab(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));       
-            modFacCab.setEstado(1);     
-            */
-            
+                      
             double ajuste = Validaciones.isNumVoid10(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 8)+"");
             int idFacCab = Validaciones.isNumVoid(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 0)+"");
             modFacCab.setValAjuste_facCab(ajuste); 
@@ -134,37 +135,37 @@ public class ButtonTable extends JFrame
             
             if (consFacCab.modificarAjuste(modFacCab)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
-                try{
-               showTableFacturasCabeceras();
-                }catch(Exception e1){System.out.println("...");}
+                
+                 showTableFacturasCabeceras();
+                
             }
             else
             {
                 JOptionPane.showMessageDialog(null, "Error al Modificar");
                
             }
-            
-            
-                        
         }
-         public void limpiarTabla(JTable table){
-        DefaultTableModel tb = (DefaultTableModel) table.getModel();
-        int a = table.getRowCount()-1;
-        for (int i = a; i >= 0; i--) {           
-            tb.removeRow(tb.getRowCount()-1);
-        } 
-    }
+        
+        
+         public void limpiarTabla(JTable table)
+         {
+            DefaultTableModel tb = (DefaultTableModel) table.getModel();
+            int a = table.getRowCount()-1;
+            for (int i = a; i >= 0; i--) {           
+                tb.removeRow(tb.getRowCount()-1);
+            } 
+         }
         public void showTableFacturasCabeceras()
         {
         ConsBuscarVentas consBuscarVentas = new ConsBuscarVentas();
+         DefaultTableModel model=null; 
         try {
             limpiarTabla(visVentas.tblFacturasCabeceras);
             ResultSet listFicha = consBuscarVentas.buscarFacturas();
             
-            DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
-            Object cols[] = new Object[10];
-            JButton b=new JButton();
-            b.setName("g");
+           model=  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
+            Object cols[] = new Object[11];
+           
             while (listFicha.next()) {
                 try {
                   
@@ -179,6 +180,7 @@ public class ButtonTable extends JFrame
                     cols[7] = listFicha.getDouble("Valpendiente_Faccab");
                     cols[8] = listFicha.getDouble("valajuste_faccab");
                     cols[9] = "Guardar";
+                    cols[10] = "Anular";
                     
                 
                     model.addRow(cols);
@@ -195,8 +197,9 @@ public class ButtonTable extends JFrame
         }
              
         new ButtonTable(visVentas);
-        visVentas.tblFacturasCabeceras.updateUI();
-    }  
+        visVentas.tblFacturasCabeceras.setModel(model);
+        
+        }  
     }
     
     

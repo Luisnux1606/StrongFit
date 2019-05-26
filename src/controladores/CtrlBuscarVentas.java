@@ -76,9 +76,7 @@ public class CtrlBuscarVentas implements ActionListener {
         cadBus = "";
         
         setListener();
-        iniciar();
-        
-        setModelTablaFacCab();
+        iniciar();               
     }
     
     @Override
@@ -282,14 +280,7 @@ public class CtrlBuscarVentas implements ActionListener {
         } 
     }
       
-      public void setModelTablaFacCab()
-      {
-          
-      
-       
-       
-      
-      }
+    
     public void showTableFacturasCabeceras()
     {
         try {
@@ -297,9 +288,8 @@ public class CtrlBuscarVentas implements ActionListener {
             ResultSet listFicha = consBuscarVentas.buscarFacturas();
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
-            Object cols[] = new Object[10];
-            JButton b=new JButton();
-            b.setName("g");
+            Object cols[] = new Object[11];
+           
             while (listFicha.next()) {
                 try {
                   
@@ -314,6 +304,7 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[7] = listFicha.getDouble("Valpendiente_Faccab");
                     cols[8] = listFicha.getDouble("valajuste_faccab");
                     cols[9] = "Guardar";
+                    cols[10] = "Anular";
                     
                 
                     model.addRow(cols);

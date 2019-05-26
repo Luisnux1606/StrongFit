@@ -676,19 +676,23 @@ public class CtrlFacturaCab implements ActionListener{
            
                if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txtClienteFactura) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
                {                                        
-                    setFacturaCabecera(visFicha);                                                               
-                    if (consFicha.registrar(modFacCab)) {
-                        
-                        JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                    setFacturaCabecera(visFicha);   
+                                       
+                    if (consFicha.registrar(modFacCab)) 
+                    {
+                        ArrayList<FacturaDetalle> facDets = facDetalle.setDetalles(visFicha, "");
+                        if(consFacDet.registrar(facDets))                        
+                            JOptionPane.showMessageDialog(null, "Registro Guardado!");
                          
                         limpiar();
+                        facDetalle.limpiarTablaDetalles();
                     }
                     else
                     {
                         JOptionPane.showMessageDialog(null, "Error al Guardar");
                         limpiar();
                     }
-                    facDetalle.setDetalles(visFicha, cadBus);
+                   
                }        
         }
       
@@ -813,7 +817,8 @@ public class CtrlFacturaCab implements ActionListener{
         visFicha.txtValDscto.setText("0.0");
         visFicha.txt_valCancelo.setText("0.0");   
         visFicha.lblDsctoId.setText("1");
-
+        
+        
     }
     
 }

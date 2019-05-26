@@ -89,9 +89,9 @@ public class CtrlProductos implements ActionListener{
         this.visProd.btnLimpiar.addActionListener(this);
         this.visProd.btnModificar.addActionListener(this);
         
-       
+        this.visProd.txt_id.setVisible(false);
         
-       catProd = new Categoria();
+        catProd = new Categoria();
               
         cadBus = "";
         locale = 0; //1:menu , 2:factura
@@ -100,8 +100,7 @@ public class CtrlProductos implements ActionListener{
         setListener();    
 
         limpiarTabla();
-        
-        
+                
         setFormatTable(visProd.tbl_productos);
         escribirCombos();
         setTableModel();
@@ -109,15 +108,13 @@ public class CtrlProductos implements ActionListener{
     
     private void escribirCombos()
       {
-        AutoCompleteDecorator.decorate(visProd.cbxCategoria);        
-           
+        AutoCompleteDecorator.decorate(visProd.cbxCategoria);           
       }  
     
     
     public void iniciar()
     {
-        visProd.setTitle("PRODUCTOS/SERVICIOS");            
- 
+        visProd.setTitle("STRONGFIT");            
         visProd.btnGuardar.setToolTipText("Guardar el registro");
         visProd.btnModificar.setToolTipText("Modificar el registro");
         visProd.btnEliminar.setToolTipText("Eliminar el registro");
@@ -158,7 +155,7 @@ public class CtrlProductos implements ActionListener{
             while (listProd.next()) {
                 try {
                    cols[0] = listProd.getInt("id_prod");
-                   cols[1] = listProd.getString("descripcion_prod");
+                   cols[1] = listProd.getString("descripcion_prod").toUpperCase();
                    cols[2] = listProd.getString("precio_prod").toUpperCase();
                    cols[3] = listProd.getString("FECHAINI_PROD");
                    cols[4] = listProd.getString("FECHAFIN_PROD");
@@ -658,8 +655,6 @@ public class CtrlProductos implements ActionListener{
         visProd.dchFechaIni.setDate(null);
         visProd.dchFechaFin.setDate(null);
         //visProd.cbxCategoria.setSelectedIndex(0);    
-        
-        
     }
     
    

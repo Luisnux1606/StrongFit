@@ -60,6 +60,8 @@ public class CtrlCategoria implements ActionListener
         this.visCat.btnModificar.addActionListener(this);
         this.visCat.btnLimpiar.addActionListener(this);
         
+        this.visCat.txt_id.setVisible(false);
+        
         setListener();  
         showComboCategoriaSuperior();
         
@@ -105,7 +107,7 @@ public class CtrlCategoria implements ActionListener
     
     public void iniciar()
     {
-        visCat.setTitle("Categoria");
+        visCat.setTitle("STRONGFIT");
         visCat.setLocationRelativeTo(null);
         visCat.setSize(1000,700);
         visCat.setVisible(true);

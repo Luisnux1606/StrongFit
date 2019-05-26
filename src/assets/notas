@@ -1,7 +1,7 @@
 ﻿*********GESTIÓN DE PERSONAS***************
 GUARDAR=
 1. No valida que haya registrado dos usuarios con la misma cédula. :ok
-Pero debe validar que no esté activado, en caso de eliminado puede volverlo a ingresar.. 
+Pero debe validar que no esté activado, en caso de eliminado puede volverlo a ingresar.. ok
 
 ELIMINAR= ok
 MODIFICAR= ok
@@ -20,8 +20,8 @@ BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE GATEGORÍA***************
-1. Quitar caja de texto de id que se encuentra en la parte superior. 
-2. Añadir el título de la empresa.  
+1. Quitar caja de texto de id que se encuentra en la parte superior. ok
+2. Añadir el título de la empresa.   ok
 
 GUARDAR=ok
 ELIMINAR= ok
@@ -31,8 +31,8 @@ BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE GATEGORÍA***************
-1. Quitar caja de texto de id que se encuentra en la parte superior. 
-2. Añadir el título de la empresa.  
+1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
+2. Añadir el título de la empresa.  :ok
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
@@ -57,11 +57,11 @@ BUSCAR(nombre)=ok
 
 
 *********GESTIÓN DE ENTRENAMIENTO***************
-1. Quitar caja de texto de id que se encuentra en la parte superior. 
-2. Añadir el título de la empresa.  
-3. El título de la ventana dice "producto/servicios"
-4. El campo de persona aparece "null null"
-5. En el combo no despliega ningún dato.
+1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
+2. Añadir el título de la empresa.  ok
+3. El título de la ventana dice "producto/servicios" :ok
+4. El campo de persona aparece "null null" : ok(validar elegir una persona)
+5. En el combo no despliega ningún dato. :ok
 
 GUARDAR
 ELIMINAR 
@@ -71,22 +71,22 @@ BUSCAR
 
 
 *********GENERAR VENTAS***************
-1. NO he revisado incluyendo entrenamiento porque todavía falta. 
+1. NO he revisado incluyendo entrenamiento porque todavía falta. :ok
 
 GUARDAR
-1. Debe borrar los datos que se encuentren en la tabla. 
+1. Debe borrar los datos que se encuentren en la tabla. :ok
 
 ELIMINAR
-1. No puedo eliminar porque no puedo BUSCAR 
+1. No puedo eliminar porque no puedo BUSCAR :ok(solo se anula)
 MODIFICAR
-1. No puedo modificar porque no puedo BUSCAR
+1. No puedo modificar porque no puedo BUSCAR :ok(desde la ventana de busquedas)
 
 LIMPIAR= ok
 
 
 
 *********GENERAR MEDIDAS***************
-1. Cuando se abre la pestaña Borrar la información de la tabla.
+1. Cuando se abre la pestaña Borrar la información de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
 
 GUARDAR= ok
 ELIMINAR
@@ -113,7 +113,7 @@ LIMPIAR= oK
 BUSCAR(lupa)= ok
 
 BUSCAR(fecha)
-1. Al momento de buscar duplica la información de "REcomen.Cardio" a "Recom. pesas".
+1. Al momento de buscar duplica la información de "REcomen.Cardio" a "Recom. pesas".: ok, no hay error!!
 
 
 
@@ -125,16 +125,16 @@ BUSCAR(fecha)
 
 *********FICHA*************** 
 1. Que se muestre el nombre de la persona y no el código. 
-2. Como voy seleccionando de las otras pestañas que muestre la fecha de análisis y la fecha de medida para que el usuario sepa lo que seleccionó.
-3. Quitar caja de texto de id que se encuentra en la parte superior. 
+2. Como voy seleccionando de las otras pestañas que muestre la fecha de análisis y la fecha de medida para que el usuario sepa lo que seleccionó.:r
+3. Quitar caja de texto de id que se encuentra en la parte superior. :ok
 
 GUARDAR=ok
 
 ELIMINAR
-1. Debe preguntar si deseo o no eliminar. 
+1. Debe preguntar si deseo o no eliminar. :r
 
 MODIFICAR= ok 
-1. Pero sería más interesante poder modificar la selección de análisis y medidas. 
+1. Pero sería más interesante poder modificar la selección de análisis y medidas. :r
 
 LIMPIAR= ok
 
