@@ -148,15 +148,15 @@ public class ConsProductos extends Conexion
         ResultSet rs = null; 
         String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
                     "from  categoria c,producto p " +
-                    "where c.id_cat = p.categoria_id_cat and upper(p.id_prod) like upper('%"+cad+"%')  " +
+                    "where c.id_cat = p.categoria_id_cat and upper(p.id_prod) like upper('%"+cad+"%') and p.estado_prod=1 " +
                     "union " +
                     "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
                     "from  categoria c,producto p " +
-                    "where c.id_cat = p.categoria_id_cat and upper(p.descripcion_prod) like upper('%"+cad+"%') " +
+                    "where c.id_cat = p.categoria_id_cat and upper(p.descripcion_prod) like upper('%"+cad+"%') and p.estado_prod=1  " +
                     "union " +
                     "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
                     "from  categoria c,producto p " +
-                    "where c.id_cat = p.categoria_id_cat and upper(c.tipo_cat) like upper('%"+cad+"%') ";
+                    "where c.id_cat = p.categoria_id_cat and upper(c.tipo_cat) like upper('%"+cad+"%') and p.estado_prod=1  ";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -188,7 +188,7 @@ public class ConsProductos extends Conexion
                 
 		sql="select c.id_cat " +
                     "from categoria c " +
-                    "where upper(c.tipo_cat) like upper('"+prod+"')";						
+                    "where upper(c.tipo_cat) like upper('"+prod+"') and c.estado_cat = 1";						
                         try 
                         {
                             ps = con.prepareStatement(sql);                            

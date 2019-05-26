@@ -78,12 +78,17 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbElegirBusquedaFac" min="-2" pref="175" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jScrollPane5" pref="960" max="32767" attributes="0"/>
-                              <Component id="btnMostrarFacturas" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="btnMostrarFacturas" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="cmbElegirBusquedaFac" min="-2" pref="175" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="jScrollPane3" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="txtBuscarCampo" min="-2" pref="219" max="-2" attributes="0"/>
+                          <Component id="jLabel4" alignment="0" min="-2" pref="129" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="156" max="32767" attributes="0"/>
                   </Group>
@@ -93,9 +98,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace pref="24" max="32767" attributes="0"/>
-                      <Component id="btnMostrarFacturas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="cmbElegirBusquedaFac" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnMostrarFacturas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbElegirBusquedaFac" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtBuscarCampo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" pref="170" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
@@ -180,6 +190,16 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtBuscarCampo">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar por campos"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

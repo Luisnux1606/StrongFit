@@ -36,6 +36,8 @@ public class VisBuscarVentas extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblFacturaDetalles = new javax.swing.JTable();
         cmbElegirBusquedaFac = new javax.swing.JComboBox();
+        txtBuscarCampo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_buscarPersonaNombres = new javax.swing.JTextField();
@@ -98,6 +100,8 @@ public class VisBuscarVentas extends javax.swing.JFrame {
 
         cmbElegirBusquedaFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elegir un tipo", "pendientes" }));
 
+        jLabel4.setText("Buscar por campos");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -105,20 +109,28 @@ public class VisBuscarVentas extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
-                        .addComponent(btnMostrarFacturas)
-                        .addComponent(jScrollPane3)))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(btnMostrarFacturas)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3))
+                    .addComponent(txtBuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(btnMostrarFacturas)
-                .addGap(42, 42, 42)
-                .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMostrarFacturas)
+                    .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
@@ -294,6 +306,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -306,6 +319,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
     public javax.swing.JTable tblFacturaDetalles;
     public javax.swing.JTable tblFacturasCabeceras;
     public javax.swing.JTable tbl_BuscarVentas;
+    public javax.swing.JTextField txtBuscarCampo;
     public javax.swing.JTextField txt_buscarPersonaNombres;
     // End of variables declaration//GEN-END:variables
 }
