@@ -125,7 +125,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     
     public void iniciar()
     {
-        visHisPerServ.setTitle("PRODUCTOS/SERVICIOS");            
+        visHisPerServ.setTitle("SERVICIOS");            
  
         visHisPerServ.btnGuardar.setToolTipText("Guardar el registro");
         visHisPerServ.btnModificar.setToolTipText("Modificar el registro");

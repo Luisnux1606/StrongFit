@@ -89,9 +89,9 @@ public class CtrlProductos implements ActionListener{
         this.visProd.btnLimpiar.addActionListener(this);
         this.visProd.btnModificar.addActionListener(this);
         
-       
+        this.visProd.txt_id.setVisible(false);
         
-       catProd = new Categoria();
+        catProd = new Categoria();
               
         cadBus = "";
         locale = 0; //1:menu , 2:factura
@@ -114,7 +114,7 @@ public class CtrlProductos implements ActionListener{
     
     public void iniciar()
     {
-        visProd.setTitle("PRODUCTOS/SERVICIOS");            
+        visProd.setTitle("STRONGFIT");            
         visProd.btnGuardar.setToolTipText("Guardar el registro");
         visProd.btnModificar.setToolTipText("Modificar el registro");
         visProd.btnEliminar.setToolTipText("Eliminar el registro");

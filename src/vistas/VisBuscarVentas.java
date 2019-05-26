@@ -60,17 +60,17 @@ public class VisBuscarVentas extends javax.swing.JFrame {
 
         tblFacturasCabeceras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "IDFAC", "NOMBRES", "FECHA FACTURA", "NUM FACTURA", "CONCEPTO", "TOTAL", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "GUARDAR"
+                "IDFAC", "NOMBRES", "FECHA FACTURA", "NUM FACTURA", "CONCEPTO", "TOTAL", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "GUARDAR", "ANULAR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -59,7 +59,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         this.visFicha.btnEntrenamiento.addActionListener(this);
         
         setListener();
-        limpiarTabla();
+        limpiarTablaDetalles();
         setFormatTable(visFicha.tblFacturaDetalle);
         
     }
@@ -175,7 +175,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         }
         if (e.getSource() == visFicha.btnLimpiarFacCab) 
         {
-            limpiarTabla();
+            limpiarTablaDetalles();
         }
         if (e.getSource() == visFicha.btnAgregarFilas) 
         {
@@ -192,7 +192,7 @@ public class CtrlFacturaDetalle implements ActionListener {
 
     }
     
-    public void limpiarTabla(){
+    public void limpiarTablaDetalles(){
         DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalle.getModel();
         int a = visFicha.tblFacturaDetalle.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
@@ -255,7 +255,7 @@ public class CtrlFacturaDetalle implements ActionListener {
     
     
     
-    public void setDetalles(VisFicha visFicha,String numFac)
+    public ArrayList<FacturaDetalle> setDetalles(VisFicha visFicha,String numFac)
     {
         JTable table = visFicha.tblFacturaDetalle;
         String num,desc,valU,valT,prodId;
@@ -305,8 +305,8 @@ public class CtrlFacturaDetalle implements ActionListener {
 
             }
         }                               
-            consFacDet.registrar(facDet);
-        
+            return facDet;
+       
     }
   
     
