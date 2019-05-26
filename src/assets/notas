@@ -1,37 +1,62 @@
-*********GESTIÓN DE PERSONAS***************
-En la cabecera de la ventana sale "MEMBRESIA"
-GUARDAR : ok
+﻿*********GESTIÓN DE PERSONAS***************
+GUARDAR=
 1. No valida que haya registrado dos usuarios con la misma cédula. :ok
+Pero debe validar que no esté activado, en caso de eliminado puede volverlo a ingresar.. 
 
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
-
-BUSCAR (lupa)
-1. Recupera en el campo "nro_fono" la edad, y en el campo "edad" el nro_fono. :ok
-
+BUSCAR (lupa)= ok
 BUSCAR (nombre)= ok
 
 
 *********GESTIÓN DE MEMBRESIA***************
-GUARDAR
-1. Guarda y no se limpia la cabecera. :ok
-
+GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
-LIMPIAR=ok
-
-BUSCAR (lupa)
-1. Sugiero que se habilite el campo modificar, porque pueda que lo busque para modificar su información. :ok
+LIMPIAR= ok
+BUSCAR (lupa)= ok
 
 BUSCAR (nombre)
 1. No busca, y borra lo que tiene la tabla. :ok
+Sigue con el mismo inconveniente.
+
+
+
+*********GESTIÓN DE GATEGORÍA***************
+1. Cambiar el label "producto/servicio" por categoría, lo mismo hacer en la tabla. :ok
+sigue igual la tabla
+2. En la tabla cambiar el orden de las columnas, por: "categoría superior" y luego "categoría". : ok
+sigue igual la tabla
+3. Esta lógica funciona cuando ya se encuentran creadas categorías superiores. ¿Qué sucede cuando se quiere crear una categoría superior? : ok(se crea si no hay)
+Cómo, si hay un combo donde debo elegir. 
+
+GUARDAR=ok
+ELIMINAR= ok
+MODIFICAR=ok
+LIMPIAR= ok
+
+BUSCAR (lupa)
+1. yo diría que en este caso es mejor quitarlo, porque una categoría superior puede tener varias inferiores : r
+
+BUSCAR (nombre)
+1. debería buscar por el nombre de la categoría superior. :r
+2. está borrando la segunda columna de la categoría cuando busca. :r
+
+
 
 *********GESTIÓN DE PRODUCTO***************
 1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : ok
 
+
+*********GESTIÓN DE PRODUCTO*************** [Cuando haya cambiado, este debo revisar]
+1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : r
+2. Ahora ya no me permite seleccionar la fecha de inicio y la fecha de fin
+
+
 GUARDAR
 1. Cuando se guarda no se limpia la fecha de inicio y la fecha de fin. : ok
+2. Ahora cuando guarda no se muestra en la tabla
 
 ELIMINAR
 1. No pregunta si deseo eliminar. ok
@@ -45,6 +70,7 @@ BUSCAR (lupa)
 1. no busca  : r
 
 BUSCAR (nombre)=ok
+
 
 *********GESTIÓN DE GATEGORÍA***************
 1. Cambiar el label "producto/servicio" por categoría, lo mismo hacer en la tabla. :ok
@@ -65,25 +91,30 @@ BUSCAR (nombre)
 1. debería buscar por el nombre de la categoría superior. : r(se busca por producto y muestra la categoria a lado)
 2. borra la segunda columna de la categoría. :ok
 
+
+
 *********GESTIÓN DE ENTRENAMIENTO***************
-1. No se despliega la ventana.  :ok
+1. Ahora despliega la ventana de gestión de entrenamiento
 
 
-*********GENERAR VENTAS***************
-1. No se despliega la ventana. 
+*********GENERAR VENTAS*************** [no puedo revisar porque cuando voy a seleccionar los productos la tabla está vacía]
 2. Si yo incluyo un entrenamiento se debería añadir al detalle, y no reemplazar el último registro. r
-3. Borrar el label "Datos para" y "Numbero registro". :ok
 4. Cuando se seleccione en la tabla un producto que se muestre sólo "PRODUCTOS" no servicios. :ok 
 5. Cuando seleccione "entrenamiento" sólo muestre de la persona de la factura.  :ok
 
+
+
 *********GENERAR MEDIDAS***************
+
 1.Quitar el label "DATOS PARA" :ok
+
+1.Quitar el label "DATOS PARA" 
+
 2.Cuando se abre la pestaña Borrar la información de la tabla.
 
 GUARDAR= ok
 ELIMINAR
-1. No pregunta si desea eliminar. 
-2.Cuando exista dependencia a una ficha no debería permitir eliminar. 
+1. No pregunta si desea eliminar.
 
 MODIFICAR= ok
 LIMPIAR= ok
@@ -99,6 +130,7 @@ BUSCAR (fecha)= ok
 
 GUARDAR= ok
 
+
 ELIMINAR
 2.Cuando exista dependencia a una ficha no debería permitir eliminar. ok(se elminia logico)
 
@@ -106,13 +138,21 @@ MODIFICAR
 
 LIMPIAR
 
+ELIMINAR= ok
+MODIFICAR= ok
+LIMPIAR= ok
+
+
 BUSCAR (lupa)
 1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco.: ok
 
 BUSCAR (fecha)= ok
 
-*********FICHA*************** 
+*********PLAN ALIMENTICIO*************** 
+1. Existen cajas de texto para poner información, pero no presenta las opciones CRUD
 
+
+*********FICHA*************** 
 GUARDAR=ok
 
 ELIMINAR
@@ -128,6 +168,7 @@ BUSCAR (lupa)
 Debería mostrar en la tabla la información según la persona seleccionada. :ok(se carga el codigo)
 
 BUSCAR (cualquier campo)= ok  
+
  
 
 *********GENERALES***************
