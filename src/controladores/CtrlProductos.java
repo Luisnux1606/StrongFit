@@ -124,6 +124,7 @@ public class CtrlProductos implements ActionListener{
         
         showDatosComboTable();
         limpiar();
+        
         visProd.setLocation(300,10); 
         visProd.setSize(1000,600);                
         visProd.setVisible(true);
@@ -401,6 +402,7 @@ public class CtrlProductos implements ActionListener{
      {
          visProd.cbxCategoria.removeAllItems();
      }
+     
      public void limpiarTabla(){
         DefaultTableModel tb = (DefaultTableModel) visProd.tbl_productos.getModel();
         int a = visProd.tbl_productos.getRowCount()-1;
@@ -654,9 +656,7 @@ public class CtrlProductos implements ActionListener{
         visProd.txtPrecioProd.setText("");
         visProd.dchFechaIni.setDate(null);
         visProd.dchFechaFin.setDate(null);
-//        visProd.cbxCategoria.setSelectedIndex(0);    
-        
-        
+        //visProd.cbxCategoria.setSelectedIndex(0);    
     }
     
    
