@@ -16,32 +16,18 @@ ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
 BUSCAR (lupa)= ok
-
-BUSCAR (nombre)
-1. No busca, y borra lo que tiene la tabla. :ok
-Sigue con el mismo inconveniente.
-
+BUSCAR (nombre)= ok
 
 
 *********GESTIÓN DE GATEGORÍA***************
 1. Cambiar el label "producto/servicio" por categoría, lo mismo hacer en la tabla. :ok
 sigue igual la tabla
-2. En la tabla cambiar el orden de las columnas, por: "categoría superior" y luego "categoría". : ok
-sigue igual la tabla
-3. Esta lógica funciona cuando ya se encuentran creadas categorías superiores. ¿Qué sucede cuando se quiere crear una categoría superior? : ok(se crea si no hay)
-Cómo, si hay un combo donde debo elegir. 
 
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
 LIMPIAR= ok
-
-BUSCAR (lupa)
-1. yo diría que en este caso es mejor quitarlo, porque una categoría superior puede tener varias inferiores : r
-
-BUSCAR (nombre)
-1. debería buscar por el nombre de la categoría superior. :r
-2. está borrando la segunda columna de la categoría cuando busca. :r
+BUSCAR (nombre)= ok
 
 
 
