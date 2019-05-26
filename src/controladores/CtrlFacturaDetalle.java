@@ -287,8 +287,7 @@ public class CtrlFacturaDetalle implements ActionListener {
             
             
             //consulra factura idFac by numFac
-            
-           
+          
 
             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
                 
@@ -302,17 +301,18 @@ public class CtrlFacturaDetalle implements ActionListener {
                
                 prod.setId_prod(Validaciones.isNumVoid(prodId));
                 p.add(prod);
-                detalle.setProducto_id_prod(p.get(i));
+                detalle.setProducto_id_prod(p.get(p.size()-1));
                 
                 detalle.setFactura_id_fac(facCab);
                 detalle.setEstado_facDet(1);
                 
                 detalles.add(detalle);
-                facDet.add(detalles.get(i));
+                facDet.add(detalles.get(detalles.size()-1));
 
             }
-        }                 
-        consFacDet.registrar(facDet);
+        }                               
+            consFacDet.registrar(facDet);
+        
     }
   
     

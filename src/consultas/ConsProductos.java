@@ -310,7 +310,7 @@ public class ConsProductos extends Conexion
         ResultSet rs = null; 
         String sql = "select c.tipo_cat " +
                     "from categoria c " +
-                    "where c.categoria_id_cat=2 and c.estado_cat = 1";
+                    "where c.estado_cat = 1";
                 
         
         try 

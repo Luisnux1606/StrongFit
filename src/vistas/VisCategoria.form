@@ -166,7 +166,7 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="false" title="ID" type="java.lang.Object"/>
-                    <Column editable="true" title="PRODUCTO/SERVICIO" type="java.lang.Object"/>
+                    <Column editable="true" title="NOMBRE CATEGORIA" type="java.lang.Object"/>
                     <Column editable="true" title="CATEGORIA SUPERIOR" type="java.lang.Object"/>
                     <Column editable="true" title="IDCATSUP" type="java.lang.Object"/>
                   </Table>

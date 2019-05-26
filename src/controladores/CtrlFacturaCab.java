@@ -672,15 +672,15 @@ public class CtrlFacturaCab implements ActionListener{
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dtcFechaFacCab);
+          
            
-               if (Validaciones.isDateChooserVoid(jdc)) 
+               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txtClienteFactura) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
                {                                        
-                        setFacturaCabecera(visFicha);
-                        
-                       //
-                   
+                    setFacturaCabecera(visFicha);                                                               
                     if (consFicha.registrar(modFacCab)) {
+                        
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                         
                         limpiar();
                     }
                     else
@@ -688,7 +688,7 @@ public class CtrlFacturaCab implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Error al Guardar");
                         limpiar();
                     }
-                 facDetalle.setDetalles(visFicha, cadBus);
+                    facDetalle.setDetalles(visFicha, cadBus);
                }        
         }
       

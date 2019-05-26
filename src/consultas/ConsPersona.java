@@ -342,7 +342,7 @@ public class ConsPersona extends Conexion
                 
 		sql="select p.ced_per " +
                     "from persona p " +
-                    "where p.ced_per like '"+ced+"'";						
+                    "where p.ced_per like '"+ced+"' and p.estado_per=1";						
                         try 
                         {
                             ps = con.prepareStatement(sql);                            

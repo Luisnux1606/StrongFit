@@ -17,7 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import modelos.FacturaDetalle;
+import modelos.Producto;
 
 /**
  *
@@ -166,6 +169,33 @@ public class Validaciones {
          }
          return estado;
      }
+      
+      public static boolean isDetalleNull(JTable table)
+      {
+          String num,desc,valU,valT,prodId; 
+          
+          boolean estado=false;
+          for (int i = 0; i <= table.getRowCount()-1; i++) 
+           {
+               num = table.getValueAt(i, 1)+"";
+               desc = table.getValueAt(i, 2)+"";     
+               valU = table.getValueAt(i, 3)+"";
+               valT = table.getValueAt(i, 4)+"";
+
+               if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 )
+               {
+                    estado = true;
+                    break;
+               }
+               else 
+               {
+                   estado  = false;
+                   getMensaje("La factura debe tener almenos un detalle.");
+               }
+           }      
+      return estado;
+      }
+
       
       public static boolean isVoidDateChooser(JDateChooser dateChooser)
      {

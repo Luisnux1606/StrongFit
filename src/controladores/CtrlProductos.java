@@ -122,7 +122,6 @@ public class CtrlProductos implements ActionListener{
         visProd.btnModificar.setToolTipText("Modificar el registro");
         visProd.btnEliminar.setToolTipText("Eliminar el registro");
         visProd.btnLimpiar.setToolTipText("Limpiar el registro");
-        //visEnt.tabp_ficha.setSelectedIndex(2);
         
         showDatosComboTable();
         limpiar();
@@ -398,6 +397,11 @@ public class CtrlProductos implements ActionListener{
         
         
     }
+     
+     public void limpiarComboProdServ()
+     {
+         visProd.cbxCategoria.removeAllItems();
+     }
      public void limpiarTabla(){
         DefaultTableModel tb = (DefaultTableModel) visProd.tbl_productos.getModel();
         int a = visProd.tbl_productos.getRowCount()-1;
@@ -411,8 +415,7 @@ public class CtrlProductos implements ActionListener{
            
             ResultSet listCategorias = consProd.buscarCategoriasProductos();
             
-            DefaultComboBoxModel model =  (DefaultComboBoxModel)visProd.cbxCategoria.getModel();
-           
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visProd.cbxCategoria.getModel();           
             
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
@@ -522,7 +525,7 @@ public class CtrlProductos implements ActionListener{
     
     public void showDatosComboTable()
     {
-        System.out.println(locale);
+        limpiarComboProdServ();
         switch(locale)
         {
             case 0: //muestra productos solamente
@@ -536,11 +539,7 @@ public class CtrlProductos implements ActionListener{
             default :
                 break;
                         
-        }
-        
-        
-        
-        
+        }  
         
     }
     
@@ -644,6 +643,7 @@ public class CtrlProductos implements ActionListener{
            limpiar();
            desabilitaHabilita(visProd.btnGuardar,true);
            desabilitaHabilita(visProd.btnModificar,false);
+           showDatosComboTable();
         }
 
        
@@ -655,7 +655,9 @@ public class CtrlProductos implements ActionListener{
         visProd.txtPrecioProd.setText("");
         visProd.dchFechaIni.setDate(null);
         visProd.dchFechaFin.setDate(null);
-        visProd.cbxCategoria.setSelectedIndex(0);        
+        visProd.cbxCategoria.setSelectedIndex(0);    
+        
+        
     }
     
    

@@ -77,7 +77,7 @@ public class VisCategoria extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "PRODUCTO/SERVICIO", "CATEGORIA SUPERIOR", "IDCATSUP"
+                "ID", "NOMBRE CATEGORIA", "CATEGORIA SUPERIOR", "IDCATSUP"
             }
         ) {
             boolean[] canEdit = new boolean [] {
