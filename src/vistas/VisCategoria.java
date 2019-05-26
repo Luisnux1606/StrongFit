@@ -110,7 +110,7 @@ public class VisCategoria extends javax.swing.JFrame {
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setLayout(null);
 
-        jLabel2.setText("Producto/Servicio:");
+        jLabel2.setText("Nombre categoria:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(10, 10, 110, 20);
 

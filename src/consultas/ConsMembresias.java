@@ -252,5 +252,49 @@ public class ConsMembresias extends Conexion{
         }
        return membresia ;
     }
+    
+    public ArrayList<Membresias> buscarTodosByNom(Membresias m,String nom)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        String sql = "select * " +
+                    "from membresia m " +
+                    "where upper(m.descripcion_memb) like upper('%"+nom+"%') and estado_memb = 1";
+        ArrayList<Membresias> membresia = new ArrayList<>();
+               
+        try 
+        {            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                m = new Membresias();
+                m.setId(rs.getInt("id_memb"));
+                m.setNombre(rs.getString("descripcion_memb"));
+                m.setDscto(rs.getDouble("dscto_memb"));
+                             
+                
+                membresia.add(m);               
+            }
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+        }
+       return membresia ;
+    }
         
 }

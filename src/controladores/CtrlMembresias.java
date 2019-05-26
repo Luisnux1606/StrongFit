@@ -137,7 +137,7 @@ public class CtrlMembresias implements ActionListener{
                     if(cadBus.length()>0)
                     cadBus=cadBus.substring(0, cadBus.length()-1);
                 }
-            //showTableByFecha(cadBus);
+            showTableByNom(cadBus);
           }
           
           private void printIt(String title, KeyEvent keyEvent) {
@@ -241,6 +241,23 @@ public class CtrlMembresias implements ActionListener{
     {
         limpiarTabla();                            
            ArrayList<Membresias> listMembresias = consMembresias.buscarTodos(modMembresias);
+           DefaultTableModel model =  (DefaultTableModel)visMembresias.tbl_membresias.getModel();
+           Object cols[] = new Object[3];
+
+           for (int i = 0; i < listMembresias.size(); i++) {
+               cols[0] = listMembresias.get(i).getId();
+               cols[1] = Validaciones.isNumVoid4(listMembresias.get(i).getNombre()).toUpperCase();
+               cols[2] = listMembresias.get(i).getDscto();             
+               
+               model.addRow(cols);                    
+           }   
+    
+    }
+     
+    public void showTableByNom(String nom)
+    {
+        limpiarTabla();                            
+           ArrayList<Membresias> listMembresias = consMembresias.buscarTodosByNom(modMembresias,nom);
            DefaultTableModel model =  (DefaultTableModel)visMembresias.tbl_membresias.getModel();
            Object cols[] = new Object[3];
 

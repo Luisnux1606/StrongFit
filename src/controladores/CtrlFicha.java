@@ -598,14 +598,13 @@ public class CtrlFicha implements ActionListener{
         
         if (e.getSource()==visFicha.mniEntrenamientos) //Cuando toca el menú categorías
         {
-            VisPersona visPer = new VisPersona();
-            Persona per  = new Persona();
-            ConsPersona consPer = new ConsPersona();
-                
-            Ficha ficha = new Ficha();
-            CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
-            ctrPer.iniciar();
-            ctrPer.locale = 1;
+            VisHistorialPersonaServicio visHis = new VisHistorialPersonaServicio();
+            ConsHistorialPersonaServicio consHPS = new ConsHistorialPersonaServicio();
+            HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
+
+            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
+            ctlHis.iniciar();
+            ctlHis.locale = 1;
         }
         
         if (e.getSource()==visFicha.mniDiarioGeneral) //Cuando toca el menú diario general
