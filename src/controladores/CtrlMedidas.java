@@ -459,8 +459,7 @@ public class CtrlMedidas implements ActionListener{
         visMedidas.txt_id_medidas_u.setVisible(false);
         visMedidas.txt_id_analisis_u.setVisible(false);
         visMedidas.txt_id_persona_u.setVisible(false);
-        
-        visMedidas.lbl_fichaDatos.setText("");
+    
               
         visMedidas.btnBuscarMed.setToolTipText("Buscar analisis por fecha");
         visMedidas.btnGuardar.setToolTipText("Guardar el registro");

@@ -1,4 +1,4 @@
-*********GESTIÓN DE PERSONAS***************
+﻿*********GESTIÓN DE PERSONAS***************
 GUARDAR=
 1. No valida que haya registrado dos usuarios con la misma cédula. :ok
 Pero debe validar que no esté activado, en caso de eliminado puede volverlo a ingresar.. 
@@ -44,9 +44,14 @@ BUSCAR (nombre)
 
 
 
+*********GESTIÓN DE PRODUCTO***************
+1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : ok
+
+
 *********GESTIÓN DE PRODUCTO*************** [Cuando haya cambiado, este debo revisar]
 1. Cuando selecciono en la tabla no se muestra la fecha de inicio y la fecha de fin según lo seleccionado. : r
 2. Ahora ya no me permite seleccionar la fecha de inicio y la fecha de fin
+
 
 GUARDAR
 1. Cuando se guarda no se limpia la fecha de inicio y la fecha de fin. : ok
@@ -66,6 +71,27 @@ BUSCAR (lupa)
 BUSCAR (nombre)=ok
 
 
+*********GESTIÓN DE GATEGORÍA***************
+1. Cambiar el label "producto/servicio" por categoría, lo mismo hacer en la tabla. :ok
+2. No se actualiza el combo con las nuevas categorías creadas.  ok
+3. En la tabla cambiar el orden de las columnas, por: "categoría superior" y luego "categoría". : ok
+4. Esta lógica funciona cuando ya se encuentran creadas categorías superiores. ¿Qué sucede cuando se quiere crear una categoría superior? : ok(se crea si no hay)
+
+GUARDAR=ok
+
+ELIMINAR= ok
+MODIFICAR=ok
+LIMPIAR= ok
+
+BUSCAR (lupa)
+1. yo diría que en este caso es mejor quitarlo, porque una categoría superior puede tener varias inferiores : ok
+
+BUSCAR (nombre)
+1. debería buscar por el nombre de la categoría superior. : r(se busca por producto y muestra la categoria a lado)
+2. borra la segunda columna de la categoría. :ok
+
+
+
 *********GESTIÓN DE ENTRENAMIENTO***************
 1. Ahora despliega la ventana de gestión de entrenamiento
 
@@ -78,7 +104,11 @@ BUSCAR (nombre)=ok
 
 
 *********GENERAR MEDIDAS***************
+
+1.Quitar el label "DATOS PARA" :ok
+
 1.Quitar el label "DATOS PARA" 
+
 2.Cuando se abre la pestaña Borrar la información de la tabla.
 
 GUARDAR= ok
@@ -94,16 +124,26 @@ BUSCAR (lupa)
 BUSCAR (fecha)= ok
 
 *********GENERAR ANALISIS***************
-1.Quitar el label "DATOS PARA"
-2.Cuando se abre la pestaña Borrar la información de la tabla.
+1.Quitar el label "DATOS PARA" :ok
+2.Cuando se abre la pestaña Borrar la información de la tabla.: ok(no deberia, se carga los historiales de la persona seleccionada)
 
 GUARDAR= ok
+
+
+ELIMINAR
+2.Cuando exista dependencia a una ficha no debería permitir eliminar. ok(se elminia logico)
+
+MODIFICAR
+
+LIMPIAR
+
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
 
+
 BUSCAR (lupa)
-1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco.
+1. Cuando no exista información presenta como "NULL". Sería mejor que muestre en blanco.: ok
 
 BUSCAR (fecha)= ok
 
@@ -115,20 +155,20 @@ BUSCAR (fecha)= ok
 GUARDAR=ok
 
 ELIMINAR
-1.No elimina
+1.No elimina : ok
 
 MODIFICAR= ok 
 
 LIMPIAR
-1.No limpia la fecha
+1.No limpia la fecha :ok
 
 BUSCAR (lupa)
 1.Despliega una ventana para seleccionar la persona, y luego no pasa nada en la ventana FICHA. 
-Debería mostrar en la tabla la información según la persona seleccionada. 
+Debería mostrar en la tabla la información según la persona seleccionada. :ok(se carga el codigo)
 
 BUSCAR (cualquier campo)= ok  
 
  
 
 *********GENERALES***************
-1. En las tablas incluir un Scroll (supongo que se podría hacer)
+1. En las tablas incluir un Scroll (supongo que se podría hacer) :ok

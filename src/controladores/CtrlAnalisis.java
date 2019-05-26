@@ -66,8 +66,7 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.setTitle("FICHA");
         visAnalisis.setLocationRelativeTo(null);
         visAnalisis.txt_id_analisis.setVisible(false);
-        visAnalisis.lbl_PersonaAnalisis.setText("");         
-        
+                
         visAnalisis.btnBuscarAnalisis.setToolTipText("Buscar analisis por fecha");
         visAnalisis.btnGuardarAnalisis.setToolTipText("Guardar el registro");
         visAnalisis.btnModificarAnalisis.setToolTipText("Modificar el registro");
@@ -409,12 +408,12 @@ public class CtrlAnalisis implements ActionListener{
                     
                     visAnalisis.txt_id_analisis.setText(String.valueOf(modAnalisis.getId()));
                     visAnalisis.dtcFechaAnalisis.setDate(Validaciones.setStringToDate(modAnalisis.getFecha()));  
-                    visAnalisis.txtExcesoGrasa.setText(String.valueOf(modAnalisis.getExeso_grasa()));
-                    visAnalisis.txtExcesoLiquido.setText(String.valueOf(modAnalisis.getExeso_liquido()));
-                    visAnalisis.txtExcesoTotal.setText(String.valueOf(modAnalisis.getExeso_total()));
-                    visAnalisis.txtRecomPesas.setText(String.valueOf(modAnalisis.getRecomendacion_pesas()).toUpperCase());
-                    visAnalisis.txtRecomCardio.setText(String.valueOf(modAnalisis.getRecomendacion_cardio()).toUpperCase());     
-                    visAnalisis.txtRecomFuncional.setText(String.valueOf(modAnalisis.getRecomendacion_funcional()).toUpperCase());       
+                    visAnalisis.txtExcesoGrasa.setText(Validaciones.isNumVoid4(String.valueOf(modAnalisis.getExeso_grasa())));
+                    visAnalisis.txtExcesoLiquido.setText(Validaciones.isNumVoid4(String.valueOf(modAnalisis.getExeso_liquido())));
+                    visAnalisis.txtExcesoTotal.setText(Validaciones.isNumVoid4(String.valueOf(modAnalisis.getExeso_total())));
+                    visAnalisis.txtRecomPesas.setText(Validaciones.isNumVoid4(String.valueOf(modAnalisis.getRecomendacion_pesas()).toUpperCase()));
+                    visAnalisis.txtRecomCardio.setText(Validaciones.isNumVoid4(String.valueOf(modAnalisis.getRecomendacion_cardio()).toUpperCase()));     
+                    visAnalisis.txtRecomFuncional.setText(Validaciones.isNumVoid4(String.valueOf(modAnalisis.getRecomendacion_funcional()).toUpperCase()));       
                 }
                 else
                 {

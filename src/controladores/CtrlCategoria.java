@@ -111,8 +111,7 @@ public class CtrlCategoria implements ActionListener
         visCat.setVisible(true);
         
         visCat.txt_id.setVisible(false);
-        
-        visCat.btnBuscar.setToolTipText("Buscar el registro");
+             
         visCat.btnGuardar.setToolTipText("Guardar el registro");
         visCat.btnModificar.setToolTipText("Modificar el registro");
         visCat.btnEliminar.setToolTipText("Eliminar el registro");
@@ -220,8 +219,8 @@ public class CtrlCategoria implements ActionListener
         for (int i = 0; i < catList.size(); i++) 
         {
             cols[0] = catList.get(i).getId_cat();
-            cols[1] = catList.get(i).getTipo_cat();
-            cols[2] = catList.get(i).getCategoria_id_cat().getTipo_cat();
+            cols[1] = catList.get(i).getTipo_cat().toUpperCase();
+            cols[2] = catList.get(i).getCategoria_id_cat().getTipo_cat().toUpperCase();
             cols[3] = catList.get(i).getCategoria_id_cat().getId_cat();
             model.addRow(cols);                    
         }   
@@ -329,13 +328,15 @@ public class CtrlCategoria implements ActionListener
         limpiarTabla();                            
         ArrayList<Categoria> catList = consCat.buscarTodosPorNom(modCat,nom);
         DefaultTableModel model =  (DefaultTableModel)visCat.tbl_categoria.getModel();
-        Object cols[] = new Object[2];
+        Object cols[] = new Object[4];
 
         for (int i = 0; i < catList.size(); i++) 
         {
-               cols[0] = catList.get(i).getId_cat();
-               cols[1] = catList.get(i).getTipo_cat();
-               model.addRow(cols);                    
+            cols[0] = catList.get(i).getId_cat();
+            cols[1] = catList.get(i).getTipo_cat().toUpperCase();
+            cols[2] = catList.get(i).getCategoria_id_cat().getTipo_cat().toUpperCase();
+            cols[3] = catList.get(i).getCategoria_id_cat().getId_cat();
+            model.addRow(cols);                    
         }   
     }
     

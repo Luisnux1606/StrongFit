@@ -252,7 +252,36 @@ public class ConsProductos extends Conexion
         ResultSet rs = null; 
         String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
                     "from categoria c, producto p " +
-                    "where c.id_cat = p.categoria_id_cat and c.id_cat=2  and p.estado_prod = 1 ";
+                    "where c.id_cat = p.categoria_id_cat and c.id_cat=2 and p.estado_prod = 1 ";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarCategoriasProductos()
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select c.tipo_cat " +
+                    "from categoria c " +
+                    "where c.categoria_id_cat=2 and c.estado_cat = 1";
                 
         
         try 
@@ -279,9 +308,9 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select c.tipo_cat \n" +
-                    "from categoria c \n" +
-                    "where c.estado_cat = 1";
+        String sql = "select c.tipo_cat " +
+                    "from categoria c " +
+                    "where c.categoria_id_cat=2 and c.estado_cat = 1";
                 
         
         try 
