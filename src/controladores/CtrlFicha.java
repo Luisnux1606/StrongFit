@@ -194,7 +194,9 @@ public class CtrlFicha implements ActionListener{
         visFicha.dtcFecha.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_FacCab.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
-        visFicha.txt_id_datos.setVisible(false);       
+        visFicha.txt_id_datos.setVisible(false);   
+        visFicha.lblDsctoId.setVisible(false);
+        visFicha.lblIvaId.setVisible(false);
        
 
         visFicha.btnGuardarFichaG.setToolTipText("Guardar el registro");

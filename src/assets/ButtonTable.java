@@ -113,6 +113,7 @@ public class ButtonTable extends JFrame
             }
             if (command.equals( "Anular")) {
                System.out.println("aqui se anulara!!!" +visVentas.tblFacturasCabeceras.getSelectedRow() );
+               setAnulado();
             }
                          
         }
