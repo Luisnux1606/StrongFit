@@ -41,14 +41,6 @@ BUSCAR(nombre)=ok
 1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
 Sigue igual 
 
-2. Añadir el título de la empresa.  ok
-Sigue igual 
-
-3. El campo de persona aparece "null null" : ok(validar elegir una persona)
-Debería estar vacío 
-
-4. En el combo no despliega ningún dato. :ok
-Sigue igual
 
 GUARDAR
 ELIMINAR 
