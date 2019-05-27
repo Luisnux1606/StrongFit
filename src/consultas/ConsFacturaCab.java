@@ -148,6 +148,43 @@ public class ConsFacturaCab extends Conexion {
         
     }
     
+    public boolean modificarAnulado(FacturaCab f)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
+        String sql = "update FacturaCabecera SET VALAJUSTE_FACCAB=?"
+                + " WHERE id_facCab=?";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);
+            
+            ps.setDouble(1, f.getValAjuste_facCab());           
+            ps.setInt(2, f.getId_facCab());
+           
+            
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
      public boolean eliminar(FacturaCab f)
     {
         PreparedStatement ps = null;

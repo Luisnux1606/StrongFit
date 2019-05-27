@@ -277,7 +277,7 @@ public class ConsHistorialPersonaServicio extends Conexion
         ResultSet rs = null; 
         String sql = "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per " +
                 "     from  persona p, histpersserv h, producto pr " +
-                "     where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and p.id_per  = "+idPer+" and h.ID_HISPERSER=1";
+                "     where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and p.id_per  = "+idPer+" and h.ESTADO_HISPERSER=1";
                 
         
         try 
