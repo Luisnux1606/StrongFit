@@ -1,0 +1,10 @@
+
+
+Campo estado 
+
+0 = eliminado
+1 = activo
+2 = configuracion  //para manejo de programa
+3 = anulado
+
+
