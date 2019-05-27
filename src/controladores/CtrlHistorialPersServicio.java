@@ -458,7 +458,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
             hisPerServ.setProducto_id_HisPerSer(prod);
 
             hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaIni.getDate()));
-            hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
+            hisPerServ.setFechaFin_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
 
             per.setId(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
             hisPerServ.setPersona_id_HisPerSer(per);
@@ -482,15 +482,18 @@ public class CtrlHistorialPersServicio implements ActionListener{
            
             hisPerServ.setId_HisPerSer(Integer.parseInt(visHisPerServ.txt_id.getText()));
             hisPerServ.setEstado_HisPerSer(0);
-                      
-            if (consHisPerServ.eliminar(hisPerServ)) {
-                JOptionPane.showMessageDialog(null, "Registro Eliminado !");
-                limpiar();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar...");
-                limpiar();
+             int o= JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar el registro?", "Confirmar eliminar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);            
+            if (o ==0) 
+            {            
+                if (consHisPerServ.eliminar(hisPerServ)) {
+                    JOptionPane.showMessageDialog(null, "Registro Eliminado !");
+                    limpiar();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Error al Eliminar...");
+                    limpiar();
+                }
             }
             showTable();
         }
