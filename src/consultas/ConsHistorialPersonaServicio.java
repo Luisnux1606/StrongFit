@@ -64,7 +64,7 @@ public class ConsHistorialPersonaServicio extends Conexion
     {
         PreparedStatement ps = null;
         Connection con = getConexion();//HistorialPeronaServicio (ID_HISPERSER,FECHAINI_HISPERSER, FECHAFIN_HISPERSER, PERSONA_ID_HISPERSER, PRODUCTO_ID_HISPERSER,ESTADO_HISPERSER) VALUES(HistPersServ_id_seq.NEXTVAL,?,?,?,?,?)";
-        String sql = "UPDATE HistorialPeronaServicio SET FECHAINI_HISPERSER = ?,FECHAFIN_HISPERSER = ?, PERSONA_ID_HISPERSER = ?, PRODUCTO_ID_HISPERSER = ?, ESTADO_HISPERSER = ?"
+        String sql = "UPDATE HISTPERSSERV SET FECHAINI_HISPERSER = ?,FECHAFIN_HISPERSER = ?, PERSONA_ID_HISPERSER = ?, PRODUCTO_ID_HISPERSER = ?, ESTADO_HISPERSER = ?"
                 + " WHERE ID_HISPERSER=?";
         
         try 
@@ -105,7 +105,7 @@ public class ConsHistorialPersonaServicio extends Conexion
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  HistorialPeronaServicio SET ESTADO_HISPERSER =? WHERE ID_HISPERSER=?";
+        String sql = "UPDATE  HISTPERSSERV SET ESTADO_HISPERSER =? WHERE ID_HISPERSER=?";
         
         try 
         {

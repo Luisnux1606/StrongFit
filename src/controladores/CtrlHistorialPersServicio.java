@@ -536,6 +536,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     {
         visHisPerServ.dchFechaFin.setDate(null);
         visHisPerServ.dchFechaIni.setDate(null);
+        visHisPerServ.txtPersona.setText("");
         visHisPerServ.cbxServicio.setSelectedIndex(0);
        
        
