@@ -399,8 +399,8 @@ public class CtrlHistorialPersServicio implements ActionListener{
                     cols[0] = listProd.getInt("id_hisperser");
                    cols[1] = listProd.getString("nombres").toUpperCase();
                    cols[2] = listProd.getString("descripcion_prod").toUpperCase();
-                   cols[3] = listProd.getString("fechafin_hisperser");
-                   cols[4] = listProd.getString("fechaini_hisperser");
+                   cols[3] = listProd.getString("fechaini_hisperser");
+                   cols[4] = listProd.getString("fechafin_hisperser");
                    cols[5] = listProd.getString("id_prod");
                    cols[6] = listProd.getString("id_per");
                    

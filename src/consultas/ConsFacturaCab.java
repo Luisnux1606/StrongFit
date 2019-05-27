@@ -152,7 +152,7 @@ public class ConsFacturaCab extends Conexion {
     {
         PreparedStatement ps = null;
         Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
-        String sql = "update FacturaCabecera SET VALAJUSTE_FACCAB=?"
+        String sql = "update FacturaCabecera SET ESTADO_FACCAB=?"
                 + " WHERE id_facCab=?";
         
         try 

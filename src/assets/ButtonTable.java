@@ -150,8 +150,8 @@ public class ButtonTable extends JFrame
             modFacCab.setId_facCab(idFacCab);       
            // consFacCab.modificarAjuste(modFacCab);
             
-            if (consFacCab.modificarAjuste(modFacCab)) {
-                JOptionPane.showMessageDialog(null, "Registro Modificado!");
+            if (consFacCab.modificarAnulado(modFacCab)) {
+                JOptionPane.showMessageDialog(null, "Registro Anulado!");
                 
                  showTableFacturasCabeceras();
                 
