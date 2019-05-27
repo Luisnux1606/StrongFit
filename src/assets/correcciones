@@ -154,19 +154,16 @@ BUSCAR(cualquier campo)= ok
 
 *********CONSULTAS*************** 
 ------VENTAS REALIZADAS------
-
 1. El combo no está funcionando. 
 2. El "buscar por campos" no funciona.
 
 ------ENTRENAMIENTOS Y SALDOS------
-
+1. Actualizar la tabla al momento que se anule en ventas. 
 
 
 *********REPORTES*************** 
 ------PERSONAS------
 1. Cambiar el código por el nombre de la persona. 
-
-
 
 
 *********GENERALES***************
