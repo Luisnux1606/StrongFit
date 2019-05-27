@@ -102,6 +102,9 @@ public class CtrlHistorialPersServicio implements ActionListener{
         this.visHisPerServ.cbxServicio.addActionListener(this);
         this.visHisPerServ.btnBuscarPerona.addActionListener(this);
         
+        this.visHisPerServ.lblIdPersona.setVisible(false);
+        this.visHisPerServ.txt_id.setVisible(false);
+        
 
               
         cadBus = "";

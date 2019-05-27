@@ -2173,38 +2173,21 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <EmptySpace min="-2" pref="623" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="lblDsctoId" min="-2" pref="46" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="btnBuscarDscto" min="-2" pref="43" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="lblCambio" min="-2" pref="77" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                                      <Component id="txt_cambio" min="-2" pref="42" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="btnCalcular" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="txt_valEntregado" min="-2" pref="43" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="lblValPagar" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Component id="lblDscto" min="-2" pref="138" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <Component id="lblCambio" min="-2" pref="77" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                                              <Component id="txt_cambio" min="-2" pref="42" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="btnCalcular" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="txt_valEntregado" min="-2" pref="43" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="287" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jScrollPane6" alignment="1" min="-2" pref="1183" max="-2" attributes="0"/>
                                                   <Component id="pnlVentasComponentes" min="-2" pref="1216" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -2228,8 +2211,19 @@
                                               <Component id="btnLimpiarFacCab" min="-2" pref="49" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="872" max="-2" attributes="0"/>
-                                              <Component id="lblIvaId" min="-2" pref="60" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" attributes="0">
+                                                      <EmptySpace min="-2" pref="889" max="-2" attributes="0"/>
+                                                      <Component id="btnBuscarDscto" min="-2" pref="43" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="lblDsctoId" min="-2" pref="46" max="-2" attributes="0"/>
+                                                          <Component id="lblIvaId" min="-2" pref="29" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Group type="102" attributes="0">
@@ -2237,6 +2231,8 @@
                                                           <Component id="lblIva" alignment="0" min="-2" max="-2" attributes="0"/>
                                                           <Component id="lblTotDscto" min="-2" pref="138" max="-2" attributes="0"/>
                                                           <Component id="lblTotalConIva" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="lblValPagar" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                                          <Component id="lblDscto" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
                                                       </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -2284,32 +2280,28 @@
                                       <Component id="jScrollPane6" min="-2" pref="163" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="lblValPagar" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                                                  <Component id="txtValPagar" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                                                      <Component id="lblCambio" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="btnCalcular" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="txt_cambio" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                                      <Component id="txt_valEntregado" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="lblDscto" min="-2" pref="22" max="-2" attributes="0"/>
-                                                      <Component id="txtValDscto" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="btnBuscarDscto" min="-2" pref="29" max="-2" attributes="0"/>
-                                              </Group>
+                                          <Component id="lblValPagar" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
+                                          <Component id="txtValPagar" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                              <Component id="lblCambio" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnCalcular" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_cambio" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                              <Component id="txt_valEntregado" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="lblDsctoId" min="-2" pref="21" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="lblDscto" min="-2" pref="22" max="-2" attributes="0"/>
+                                              <Component id="txtValDscto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="btnBuscarDscto" min="-2" pref="29" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="txtValConDsctoFicha" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblTotDscto" min="-2" pref="25" max="-2" attributes="0"/>
+                                          <Component id="lblDsctoId" min="-2" pref="21" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
