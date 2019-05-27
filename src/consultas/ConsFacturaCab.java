@@ -160,7 +160,7 @@ public class ConsFacturaCab extends Conexion {
             
             ps = con.prepareStatement(sql);
             
-            ps.setDouble(1, f.getValAjuste_facCab());           
+            ps.setInt(1, f.getEstado());           
             ps.setInt(2, f.getId_facCab());
            
             

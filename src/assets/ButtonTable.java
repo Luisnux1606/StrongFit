@@ -146,7 +146,7 @@ public class ButtonTable extends JFrame
                       
             double ajuste = Validaciones.isNumVoid10(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 8)+"");
             int idFacCab = Validaciones.isNumVoid(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 0)+"");
-            modFacCab.setValAjuste_facCab(ajuste); 
+            modFacCab.setEstado(3); //anulado 
             modFacCab.setId_facCab(idFacCab);       
            // consFacCab.modificarAjuste(modFacCab);
             
@@ -158,7 +158,7 @@ public class ButtonTable extends JFrame
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Error al Modificar");
+                JOptionPane.showMessageDialog(null, "Error al Anular");
                
             }
         }

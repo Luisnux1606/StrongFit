@@ -463,6 +463,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
             per.setId(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
             hisPerServ.setPersona_id_HisPerSer(per);
             hisPerServ.setId_HisPerSer(Validaciones.isNumVoid(visHisPerServ.txt_id.getText()));
+            hisPerServ.setEstado_HisPerSer(1);
             prod.setEstado_prod(1);
             
             if (consHisPerServ.modificar(hisPerServ)) {
