@@ -338,8 +338,8 @@ public class CtrlHistorialPersServicio implements ActionListener{
          visHisPerServ.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
          visHisPerServ.txtPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));
          visHisPerServ.cbxServicio.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2)));
-         visHisPerServ.dchFechaIni.setDateFormatString(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)));
-         visHisPerServ.dchFechaFin.setDateFormatString(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)));
+         visHisPerServ.dchFechaIni.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)))));
+         visHisPerServ.dchFechaFin.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)))));
          visHisPerServ.lblIdProd.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5)));
          visHisPerServ.lblIdPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
      }
@@ -397,7 +397,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
             while (listProd.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     cols[0] = listProd.getInt("id_hisperser");
-                   cols[1] = listProd.getString("nombres");
+                   cols[1] = listProd.getString("nombres").toUpperCase();
                    cols[2] = listProd.getString("descripcion_prod").toUpperCase();
                    cols[3] = listProd.getString("fechaini_hisperser");
                    cols[4] = listProd.getString("fechafin_hisperser");
