@@ -1,8 +1,5 @@
 ﻿*********GESTIÓN DE PERSONAS***************
-GUARDAR=
-1. No valida que haya registrado dos usuarios con la misma cédula. :ok
-Pero debe validar que no esté activado, en caso de eliminado puede volverlo a ingresar.. ok
-
+GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
@@ -20,19 +17,6 @@ BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE GATEGORÍA***************
-1. Quitar caja de texto de id que se encuentra en la parte superior. ok
-2. Añadir el título de la empresa.   ok
-
-GUARDAR=ok
-ELIMINAR= ok
-MODIFICAR=ok
-LIMPIAR= ok
-BUSCAR(nombre)= ok
-
-
-*********GESTIÓN DE GATEGORÍA***************
-1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
-2. Añadir el título de la empresa.  :ok
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
@@ -41,9 +25,6 @@ BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE PRODUCTO***************
-1. Quitar caja de texto de id que se encuentra en la parte superior. 
-2. Añadir el título de la empresa.  
-
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok 
@@ -53,15 +34,21 @@ BUSCAR(lupa)
 1. no busca
 
 BUSCAR(nombre)=ok
-
+1. Cuando se busca aparece el label con el código. 
 
 
 *********GESTIÓN DE ENTRENAMIENTO***************
 1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
+Sigue igual 
+
 2. Añadir el título de la empresa.  ok
-3. El título de la ventana dice "producto/servicios" :ok
-4. El campo de persona aparece "null null" : ok(validar elegir una persona)
-5. En el combo no despliega ningún dato. :ok
+Sigue igual 
+
+3. El campo de persona aparece "null null" : ok(validar elegir una persona)
+Debería estar vacío 
+
+4. En el combo no despliega ningún dato. :ok
+Sigue igual
 
 GUARDAR
 ELIMINAR 
@@ -73,20 +60,22 @@ BUSCAR
 *********GENERAR VENTAS***************
 1. NO he revisado incluyendo entrenamiento porque todavía falta. :ok
 
-GUARDAR
-1. Debe borrar los datos que se encuentren en la tabla. :ok
+GUARDAR= ok
 
 ELIMINAR
 1. No puedo eliminar porque no puedo BUSCAR :ok(solo se anula)
+Entonces, mejor ya quitarlo
+
 MODIFICAR
 1. No puedo modificar porque no puedo BUSCAR :ok(desde la ventana de busquedas)
+Entonces, mejor ya quitarlo. 
 
 LIMPIAR= ok
 
 
-
 *********GENERAR MEDIDAS***************
 1. Cuando se abre la pestaña Borrar la información de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
+No podría quedar porque no es específico para esa persona. 
 
 GUARDAR= ok
 ELIMINAR
@@ -146,9 +135,8 @@ BUSCAR(cualquier campo)= ok
 *********CONSULTAS*************** 
 ------VENTAS REALIZADAS------
 
-1. Está duplicando la información del detalle. 
-2. El combo no está funcionando. 
-3. El "buscar por campos" no funciona.
+1. El combo no está funcionando. 
+2. El "buscar por campos" no funciona.
 
 ------ENTRENAMIENTOS Y SALDOS------
 
@@ -162,4 +150,5 @@ BUSCAR(cualquier campo)= ok
 
 
 *********GENERALES***************
-1. En las tablas incluir un Scroll (supongo que se podría hacer) :ok
+1.En las tablas incluir un Scroll (supongo que se podría hacer) :ok
+2.Cambiar el nombre de las ventanas.
