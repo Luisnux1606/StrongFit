@@ -323,6 +323,68 @@ public class ConsMedidas extends Conexion {
        return medidas ;
     }
     
+    public ArrayList<Medidas> buscarTodosByIdPer(Medidas m,int idPer)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        String sql = "SELECT * "
+                + " FROM medidas m, ficha f, persona p "
+                + " where p.id_per=f.persona_id_per and m.id_med=f.medidas_id_med and m.estado_med=1 and p.id_per="+idPer+"";
+        ArrayList<Medidas> medidas = new ArrayList<>();
+        
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+               
+                m=new Medidas();
+                
+                m.setId(rs.getInt("id_med"));
+                m.setFecha(rs.getString("fecha_med"));
+                m.setPeso(rs.getDouble("peso_med"));
+                m.setEstatura(rs.getDouble("estatura_med"));                
+                m.setNro_hijos(rs.getInt("nroHijos_med"));
+                m.setPecho(rs.getDouble("pecho_med"));
+                m.setAbdomen_alto(rs.getDouble("abdomenAlto_med"));
+                m.setCintura(rs.getDouble("cintura_med"));
+                m.setAbdomen_bajo(rs.getDouble("abdomenBajo_med"));
+                m.setCadera(rs.getDouble("cadera_med"));
+                m.setPiernas(rs.getDouble("pierna_med"));
+                m.setPantorrilla(rs.getDouble("pantorrilla_med"));
+                m.setBrazo(rs.getDouble("brazo_med"));
+                m.setAntebrazo(rs.getDouble("antebrazo_med"));
+                m.setCuello(rs.getDouble("cuello_med"));
+                m.setEspalda(rs.getDouble("espalda_med"));
+                m.setPorcentaje_grasa(rs.getDouble("porcentajeGrasa_med"));
+                m.setPorcentaje_kgs(rs.getDouble("porcentajeklgs_med"));  
+                
+                medidas.add(m);               
+            }
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+        }
+       return medidas ;
+    }
+    
     public ArrayList<Medidas> buscarTodosPorFec(Medidas m,String fech)
     {
         PreparedStatement ps = null;

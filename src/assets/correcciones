@@ -31,15 +31,15 @@ MODIFICAR= ok
 LIMPIAR= ok 
 
 BUSCAR(lupa)
-1. no busca
+1. no busca : r(it's going to be by code)
 
 BUSCAR(nombre)=ok
-1. Cuando se busca aparece el label con el código. 
+1. Cuando se busca aparece el label con el código. :ok
 
 
 *********GESTIÓN DE ENTRENAMIENTO***************
 1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
-Sigue igual 
+Sigue igual :ok
 
 
 GUARDAR
@@ -56,18 +56,46 @@ GUARDAR= ok
 
 ELIMINAR
 1. No puedo eliminar porque no puedo BUSCAR :ok(solo se anula)
-Entonces, mejor ya quitarlo
+Entonces, mejor ya quitarlo :ok
 
 MODIFICAR
 1. No puedo modificar porque no puedo BUSCAR :ok(desde la ventana de busquedas)
-Entonces, mejor ya quitarlo. 
+Entonces, mejor ya quitarlo. :ok
 
 LIMPIAR= ok
 
 
 *********GENERAR MEDIDAS***************
 1. Cuando se abre la pestaña Borrar la información de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
-No podría quedar porque no es específico para esa persona. 
+No podría quedar porque no es específico para esa persona. (it is goigng to be load of ficha by id of person, so will be load analisis and medidas, later choose to modifi or save.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)
 
 GUARDAR= ok
 ELIMINAR

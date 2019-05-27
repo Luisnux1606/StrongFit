@@ -91,7 +91,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
         this.per = persona;
         this.prod = new Producto();
         
-        visHisPerServ.txtPersona.setText(per.getNombre()+" "+per.getApellido() );
+        visHisPerServ.txtPersona.setText(per.getNombre()+" "+Validaciones.isNumVoid4(per.getApellido()) );
         visHisPerServ.lblIdPersona.setText(per.getId()+"");
         
                 
@@ -103,6 +103,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
         this.visHisPerServ.btnBuscarPerona.addActionListener(this);
         
         this.visHisPerServ.lblIdPersona.setVisible(false);
+        this.visHisPerServ.lblIdProd.setVisible(false);
         this.visHisPerServ.txt_id.setVisible(false);
         
 
@@ -114,7 +115,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
         setListener();    
 
         limpiarTabla();
-        showTable();
+        
         
         setFormatTable(visHisPerServ.tbl_historialPerServ);
         escribirCombos();
@@ -136,11 +137,31 @@ public class CtrlHistorialPersServicio implements ActionListener{
         visHisPerServ.btnEliminar.setToolTipText("Eliminar el registro");
         visHisPerServ.btnLimpiar.setToolTipText("Limpiar el registro");
         //visEnt.tabp_ficha.setSelectedIndex(2);
-        limpiar();
-        showComboServicio();
+        limpiar();        
+        showDataTableByLocal();
         visHisPerServ.setLocation(300,10); 
         visHisPerServ.setSize(1000,600);                
         visHisPerServ.setVisible(true);
+    }
+    
+    public void showDataTableByLocal()
+    {
+        switch(locale)
+        {
+            case 0:      
+                
+                showComboServicioTrain();
+                showTableByIdPer();
+                break;
+            case 1: //to show all services
+                showComboServicioTrain();
+                showTableAll();
+                break;
+            default:
+                break;
+        
+        }
+    
     }
     
     public void showTableByNom(String cad)
@@ -156,7 +177,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
             while (listProd.next()) {
                 try {
                    cols[0] = listProd.getInt("id_hisperser");
-                   cols[1] = listProd.getString("nombres");
+                   cols[1] = listProd.getString("nombres").toUpperCase();
                    cols[2] = listProd.getString("descripcion_prod").toUpperCase();
                    cols[3] = listProd.getString("fechaini_hisperser");
                    cols[4] = listProd.getString("fechafin_hisperser");
@@ -364,7 +385,6 @@ public class CtrlHistorialPersServicio implements ActionListener{
     }
     public void showComboServicio()
     {
-
         try {
            
             ResultSet listCategorias = consHisPerServ.buscarServicios();
@@ -387,12 +407,68 @@ public class CtrlHistorialPersServicio implements ActionListener{
         }
         visHisPerServ.cbxServicio.updateUI();
     }
+    public void showComboServicioTrain()
+    {
+        try {
+           
+            ResultSet listCategorias = consHisPerServ.buscarServiciosTrain();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visHisPerServ.cbxServicio.getModel();
+           
+            
+            while (listCategorias.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(listCategorias.getString("descripcion_prod"));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consHisPerServ.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visHisPerServ.cbxServicio.updateUI();
+    }
     
-    public void showTable()
+    public void showTableByIdPer()
     {
         try {
             limpiarTabla();
             ResultSet listProd = consHisPerServ.buscarTodosByIdPer(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
+            
+            DefaultTableModel model =  (DefaultTableModel)visHisPerServ.tbl_historialPerServ.getModel();
+            Object cols[] = new Object[7];
+            
+            while (listProd.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    cols[0] = listProd.getInt("id_hisperser");
+                   cols[1] = listProd.getString("nombres").toUpperCase();
+                   cols[2] = listProd.getString("descripcion_prod").toUpperCase();
+                   cols[3] = listProd.getString("fechaini_hisperser");
+                   cols[4] = listProd.getString("fechafin_hisperser");
+                   cols[5] = listProd.getString("id_prod");
+                   cols[6] = listProd.getString("id_per");
+                   
+                    model.addRow(cols);
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consHisPerServ.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visHisPerServ.tbl_historialPerServ.updateUI();
+    }
+    
+    public void showTableAll()
+    {
+        try {
+            limpiarTabla();
+            ResultSet listProd = consHisPerServ.buscarTodos();
             
             DefaultTableModel model =  (DefaultTableModel)visHisPerServ.tbl_historialPerServ.getModel();
             Object cols[] = new Object[7];
@@ -450,7 +526,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Error al Guardar");
                         limpiar();
                     }
-                    showTable();
+                    showDataTableByLocal();
                        
         }
       
@@ -478,7 +554,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Error al Modificar");
                 limpiar();
             }
-            showTable();
+            showDataTableByLocal();
         }
       
       if (e.getSource() == visHisPerServ.btnEliminar) 
@@ -499,7 +575,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
                     limpiar();
                 }
             }
-            showTable();
+            showDataTableByLocal();
         }
        if (e.getSource() == visHisPerServ.cbxServicio) 
        {    

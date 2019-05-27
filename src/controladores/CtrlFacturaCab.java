@@ -91,9 +91,9 @@ public class CtrlFacturaCab implements ActionListener{
         facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
         
         this.visFicha.btnGuardarFacCab.addActionListener(this);
-        this.visFicha.btnEliminarFacCab.addActionListener(this);
+//        this.visFicha.btnEliminarFacCab.addActionListener(this);
         this.visFicha.btnLimpiarFacCab.addActionListener(this);
-        this.visFicha.btnModificarFacCab.addActionListener(this);
+ //       this.visFicha.btnModificarFacCab.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
         this.visFicha.btnCalcular.addActionListener(this);
         this.visFicha.btnBuscarClienteFactura.addActionListener(this);
@@ -131,8 +131,8 @@ public class CtrlFacturaCab implements ActionListener{
         visFicha.txt_id_FacCab.setVisible(false);
        
         visFicha.btnGuardarFacCab.setToolTipText("Guardar el registro");
-        visFicha.btnModificarFacCab.setToolTipText("Modificar el registro");
-        visFicha.btnEliminarFacCab.setToolTipText("Eliminar el registro");
+//        visFicha.btnModificarFacCab.setToolTipText("Modificar el registro");
+//        visFicha.btnEliminarFacCab.setToolTipText("Eliminar el registro");
         visFicha.btnLimpiarFacCab.setToolTipText("Limpiar el registro");
         //visFicha.tabp_ficha.setSelectedIndex(2);
         limpiar();       
@@ -697,7 +697,7 @@ public class CtrlFacturaCab implements ActionListener{
                }        
         }
       
-      if (e.getSource() == visFicha.btnModificarFacCab) 
+/*      if (e.getSource() == visFicha.btnModificarFacCab) 
        {            
                 modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
                 modFacCab.setNum_facCab("sera numero");
@@ -733,13 +733,13 @@ public class CtrlFacturaCab implements ActionListener{
                 limpiar();
             }
           
-        }
+        }*/
       
        if (e.getSource() == visFicha.btnLimpiarFacCab) 
         {
            limpiar();
            desabilitaHabilita(visFicha.btnGuardarFacCab,true);
-           desabilitaHabilita(visFicha.btnModificarFacCab,false);
+          // desabilitaHabilita(visFicha.btnModificarFacCab,false);
         }
 
         if (e.getSource() == visFicha.btnBuscarDscto) 
@@ -780,8 +780,9 @@ public class CtrlFacturaCab implements ActionListener{
             HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
 
             CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
+            ctlHis.locale = 0;
             ctlHis.iniciar();
-            ctlHis.locale = 1;
+            
            
 
         } 
