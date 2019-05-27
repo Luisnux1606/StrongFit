@@ -63,7 +63,8 @@ public class CtrlReportes extends Conexion implements ActionListener{
     
     public void iniciar()
     {
-        visRepo.setLocation(400, 200);      
+        visRepo.setLocation(400, 200); 
+        visRepo.setTitle(Configuracion.nomEmp + "REPORTES");
         visRepo.setSize(600,300);
         visRepo.setVisible(true);
     }

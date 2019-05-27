@@ -116,8 +116,7 @@ public class CtrlPersonas implements ActionListener {
     
     public void iniciar()
     {
-        visPersona.setTitle(Configuracion.nomEmp + " GESTION DE PERSONAS");
-        visPersona.lblNomEmp.setText(Configuracion.nomEmp); 
+        visPersona.setTitle(Configuracion.nomEmp + " GESTION DE PERSONAS");        
         visPersona.setLocationRelativeTo(null);
         visPersona.setSize(1000,700);
         visPersona.setVisible(true);

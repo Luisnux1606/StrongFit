@@ -75,9 +75,24 @@ public class CtrlBuscarVentas implements ActionListener {
         f = new FacturaCab();
         
         cadBus = "";
-        
+//        
         setListener();
-        iniciar();               
+        iniciar();             
+        
+        int colHide[] = new int[1];
+        colHide[0]=0;            
+        setHideJtableColumn(visVentas.tblFacturasCabeceras,colHide);        
+        setHideJtableColumn(visVentas.tbl_BuscarVentas,colHide);
+    }
+    
+    public void setHideJtableColumn(JTable table, int col[])
+    {
+        for (int i = 0; i < col.length; i++) {
+            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
+            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
+            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
+        }       
+    
     }
     
     @Override
@@ -108,7 +123,11 @@ public class CtrlBuscarVentas implements ActionListener {
        {
            String tipo = visVentas.cmbElegirBusquedaFac.getSelectedItem()+"";
            if (tipo.equals("pendientes")) {
-               showTable();
+               showTableFacPendientes();
+               
+            }
+           if (tipo.equals("todos")) {
+               showTableFacturasCabeceras();
             }
            
        }
@@ -139,7 +158,7 @@ public class CtrlBuscarVentas implements ActionListener {
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];
-            
+            double diff;
             while (listFicha.next()) {
                 try {
                     cols[0] = listFicha.getInt("Id_Faccab");
@@ -152,7 +171,11 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[7] = listFicha.getDouble("Total_Faccab");
                     cols[8] = listFicha.getDouble("Valcancelo_Faccab");
                     cols[9] = listFicha.getDouble("Valpendiente_Faccab");
-                    model.addRow(cols);
+                    diff = (double)cols[8]-(double)cols[9];
+                    if (Math.abs(diff)>0) {
+                         model.addRow(cols);
+                    }
+                   
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
@@ -358,6 +381,53 @@ public class CtrlBuscarVentas implements ActionListener {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visVentas.tbl_BuscarVentas.updateUI();
+    }
+    
+    public void showTableFacPendientes()
+    {
+         try {
+            limpiarTabla(visVentas.tblFacturasCabeceras);
+            ResultSet listFicha = consBuscarVentas.buscarFacturas();
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
+            Object cols[] = new Object[11];
+            double diffAjusteCanc;
+            while (listFicha.next()) {
+                try {
+                  
+                    
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("nombres");
+                    cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
+                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[4] = listFicha.getString("Concepto_Faccab");
+                    cols[5] = listFicha.getString("Total_Faccab");
+                    cols[6] = listFicha.getString("Valcancelo_Faccab");
+                    cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[8] = listFicha.getDouble("valajuste_faccab");
+                    cols[9] = "Guardar";
+                    cols[10] = "Anular";
+                    
+                    diffAjusteCanc = (double)cols[8] - (double)cols[7];
+                    
+                    if (Math.abs(diffAjusteCanc)>0) {
+                         model.addRow(cols);
+                    }
+                   
+                    
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        new ButtonTable(visVentas);
+        visVentas.tblFacturasCabeceras.updateUI();
     }
      
      public void showTableVencidos()

@@ -229,7 +229,7 @@ public class VisPersona extends javax.swing.JFrame {
         getContentPane().add(pnl_personas, gridBagConstraints);
 
         lblNomEmp.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        lblNomEmp.setText("STRONGFIT");
+        lblNomEmp.setText("PERSONAS");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;

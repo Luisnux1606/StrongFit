@@ -112,7 +112,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
 
         limpiarTabla();
         showTable();
-        showComboServicio();
+        
         setFormatTable(visHisPerServ.tbl_historialPerServ);
         escribirCombos();
     }
@@ -127,13 +127,14 @@ public class CtrlHistorialPersServicio implements ActionListener{
     public void iniciar()
     {
         visHisPerServ.setTitle(Configuracion.nomEmp +" SERVICIOS");            
-        visHisPerServ.lblNomEmp.setText(Configuracion.nomEmp );
+       
         visHisPerServ.btnGuardar.setToolTipText("Guardar el registro");
         visHisPerServ.btnModificar.setToolTipText("Modificar el registro");
         visHisPerServ.btnEliminar.setToolTipText("Eliminar el registro");
         visHisPerServ.btnLimpiar.setToolTipText("Limpiar el registro");
         //visEnt.tabp_ficha.setSelectedIndex(2);
         limpiar();
+        showComboServicio();
         visHisPerServ.setLocation(300,10); 
         visHisPerServ.setSize(1000,600);                
         visHisPerServ.setVisible(true);

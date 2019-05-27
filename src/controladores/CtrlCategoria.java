@@ -8,6 +8,7 @@ package controladores;
 
 
 import assets.Calculos;
+import assets.Configuracion;
 import assets.Validaciones;
 import consultas.ConsCategoria;
 import java.awt.event.ActionEvent;
@@ -107,7 +108,7 @@ public class CtrlCategoria implements ActionListener
     
     public void iniciar()
     {
-        visCat.setTitle("STRONGFIT");
+        visCat.setTitle(Configuracion.nomEmp+ " STRONGFIT");
         visCat.setLocationRelativeTo(null);
         visCat.setSize(1000,700);
         visCat.setVisible(true);

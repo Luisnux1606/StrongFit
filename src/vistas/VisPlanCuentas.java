@@ -30,7 +30,7 @@ public class VisPlanCuentas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblPlanCtas = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         pnl_personas1 = new javax.swing.JPanel();
@@ -62,9 +62,9 @@ public class VisPlanCuentas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(java.awt.Color.lightGray);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setText("PLAN DE CUENTAS");
-        jLabel1.setPreferredSize(new java.awt.Dimension(100, 25));
+        lblPlanCtas.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        lblPlanCtas.setText("PLAN DE CUENTAS");
+        lblPlanCtas.setPreferredSize(new java.awt.Dimension(100, 25));
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -271,14 +271,14 @@ public class VisPlanCuentas extends javax.swing.JFrame {
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 942, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(312, 312, 312)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblPlanCtas, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblPlanCtas, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE))
         );
@@ -347,7 +347,6 @@ public class VisPlanCuentas extends javax.swing.JFrame {
     public javax.swing.JButton btnModificar2;
     public javax.swing.JButton btnModificar3;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -361,6 +360,7 @@ public class VisPlanCuentas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JLabel lblPlanCtas;
     public javax.swing.JPanel pnl_personas1;
     public javax.swing.JPanel pnl_personas2;
     public javax.swing.JTable tbl_personas1;

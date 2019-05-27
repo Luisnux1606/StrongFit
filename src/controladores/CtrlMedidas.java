@@ -6,6 +6,7 @@
  */
 package controladores;
 
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -453,7 +454,7 @@ public class CtrlMedidas implements ActionListener{
     
     public void iniciar()
     {
-        visMedidas.setTitle("CARACTERISTICAS");
+        visMedidas.setTitle(Configuracion.nomEmp+" CARACTERISTICAS");
         visMedidas.setLocationRelativeTo(null);
         visMedidas.txt_id_datos.setVisible(false);
         visMedidas.txt_id_medidas_u.setVisible(false);

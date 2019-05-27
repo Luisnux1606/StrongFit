@@ -190,7 +190,7 @@ public class CtrlFicha implements ActionListener{
 
 
         visFicha.setTitle(Configuracion.nomEmp  + "FICHA");
-        
+        visFicha.lblNomEmpresa.setText(Configuracion.nomEmp);
         visFicha.dtcFecha.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_FacCab.setVisible(false);
         visFicha.txt_id_analisis.setVisible(false);
@@ -609,9 +609,10 @@ public class CtrlFicha implements ActionListener{
             ConsHistorialPersonaServicio consHPS = new ConsHistorialPersonaServicio();
             HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
 
-            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
+            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);         
+             ctlHis.locale = 1;
             ctlHis.iniciar();
-            ctlHis.locale = 1;
+           
         }
         
         if (e.getSource()==visFicha.mniDiarioGeneral) //Cuando toca el menú diario general
@@ -634,7 +635,6 @@ public class CtrlFicha implements ActionListener{
         {
             JColorChooser ventanaDeColores=new JColorChooser();
             Color color=ventanaDeColores.showDialog(null, "Seleccione un Color", Color.gray);
-            visFicha.pnlTabSuperior.setBackground(color);
             visFicha.pnlFicha.setBackground(color);
             visFicha.pnlVentas.setBackground(color);
             visFicha.pnlMedidas.setBackground(color);

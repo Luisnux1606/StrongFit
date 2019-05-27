@@ -180,16 +180,17 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 938;
         gridBagConstraints.ipady = 595;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 54, 13, 30);
+        gridBagConstraints.insets = new java.awt.Insets(7, 103, 2, 79);
         getContentPane().add(pnl_personas, gridBagConstraints);
 
         lblNomEmp.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        lblNomEmp.setText("STRONGFIT");
+        lblNomEmp.setText("ENTRENAMIENTOS");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = -11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 346, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 289, 0, 0);
         getContentPane().add(lblNomEmp, gridBagConstraints);
         setJMenuBar(jMenuBar1);
 

@@ -64,7 +64,7 @@ public class CtrlAnalisis implements ActionListener{
     }
     public void iniciar()
     {
-        visAnalisis.setTitle("FICHA");
+        
         visAnalisis.setLocationRelativeTo(null);
         visAnalisis.txt_id_analisis.setVisible(false);
         visAnalisis.setTitle( Configuracion.nomEmp + " ANALISIS");

@@ -146,6 +146,29 @@ public class ButtonTable extends JFrame
             }
         }
         
+        public void setAnulado()
+        {
+            FacturaCab modFacCab=new FacturaCab();
+                      
+            double ajuste = Validaciones.isNumVoid10(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 8)+"");
+            int idFacCab = Validaciones.isNumVoid(visVentas.tblFacturasCabeceras.getValueAt(visVentas.tblFacturasCabeceras.getSelectedRow(), 0)+"");
+            modFacCab.setValAjuste_facCab(ajuste); 
+            modFacCab.setId_facCab(idFacCab);       
+           // consFacCab.modificarAjuste(modFacCab);
+            
+            if (consFacCab.modificarAjuste(modFacCab)) {
+                JOptionPane.showMessageDialog(null, "Registro Modificado!");
+                
+                 showTableFacturasCabeceras();
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Error al Modificar");
+               
+            }
+        }
+        
         
          public void limpiarTabla(JTable table)
          {

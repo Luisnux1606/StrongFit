@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import assets.Configuracion;
 import assets.Validaciones;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
@@ -56,7 +57,7 @@ public class CtrlBuscarPersonas {
     
     public void iniciar()
     {
-        visPersona.setTitle("BUSQUEDA DE PERSONAS");
+        visPersona.setTitle(Configuracion.nomEmp + " BUSQUEDA DE PERSONAS");
         visPersona.setSize(700, 400);
         visPersona.setLocation(400, 200);
         visPersona.setVisible(true);

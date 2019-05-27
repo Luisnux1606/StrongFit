@@ -6,6 +6,7 @@
 package controladores;
 
 import assets.Calculos;
+import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -124,7 +125,7 @@ public class CtrlFacturaCab implements ActionListener{
     
     public void iniciar()
     {
-        visFicha.setTitle("FAC");
+        visFicha.setTitle( Configuracion.nomEmp + "FACTURA CABECERA");
         
         visFicha.dtcFechaFacCab.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_FacCab.setVisible(false);

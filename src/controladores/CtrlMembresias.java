@@ -71,7 +71,7 @@ public class CtrlMembresias implements ActionListener{
     public void iniciar()
     {
         visMembresias.setTitle(Configuracion.nomEmp +" MEMBRESIAS");
-        visMembresias.lblNomEmp.setText(Configuracion.nomEmp );
+        
         visMembresias.setLocationRelativeTo(null);
         visMembresias.setSize(1000,700);
         visMembresias.setVisible(true);

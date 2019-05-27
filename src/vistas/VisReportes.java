@@ -31,7 +31,7 @@ public class VisReportes extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
+        lblReportes = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -50,8 +50,8 @@ public class VisReportes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel1.setText("TROYA GYM");
+        lblReportes.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        lblReportes.setText("REPORTES");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -59,7 +59,7 @@ public class VisReportes extends javax.swing.JFrame {
         gridBagConstraints.ipady = -18;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(13, 396, 0, 0);
-        getContentPane().add(jLabel1, gridBagConstraints);
+        getContentPane().add(lblReportes, gridBagConstraints);
 
         jLabel2.setText("Codigo");
 
@@ -223,7 +223,6 @@ public class VisReportes extends javax.swing.JFrame {
     public com.toedter.calendar.JDateChooser dtcFechaFinReportesRegistros;
     public com.toedter.calendar.JDateChooser dtcFechaInicioReportesRegistros;
     public com.toedter.calendar.JDateChooser dtcFechaReporte;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -231,6 +230,7 @@ public class VisReportes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JLabel lblReportes;
     public javax.swing.JTextField txtCedulaReportePersonas;
     // End of variables declaration//GEN-END:variables
 }

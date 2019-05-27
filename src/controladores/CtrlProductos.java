@@ -116,7 +116,7 @@ public class CtrlProductos implements ActionListener{
     public void iniciar()
     {
         visProd.setTitle(Configuracion.nomEmp +" STRONGFIT");    
-        visProd.lblNomEmp.setText(Configuracion.nomEmp);
+        //visProd.lblNomEmp.setText(Configuracion.nomEmp);
         visProd.btnGuardar.setToolTipText("Guardar el registro");
         visProd.btnModificar.setToolTipText("Modificar el registro");
         visProd.btnEliminar.setToolTipText("Eliminar el registro");
