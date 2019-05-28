@@ -75,11 +75,11 @@ public class ConsProductos extends Conexion
             
             ps.setString(1, modProducto.getDescripcion_prod());
             ps.setDouble(2, modProducto.getPrecio_prod());
-            ps.setString(2, modProducto.getFechaIni());
-            ps.setString(2, modProducto.getFechaFin());
-            ps.setInt(3, modProducto.getCategoria().getId_cat());
-            ps.setInt(4, modProducto.getEstado_prod());  
-            ps.setInt(5, modProducto.getId_prod());
+            ps.setString(3, modProducto.getFechaIni());
+            ps.setString(4, modProducto.getFechaFin());
+            ps.setInt(5, modProducto.getCategoria().getId_cat());
+            ps.setInt(6, modProducto.getEstado_prod());  
+            ps.setInt(7, modProducto.getId_prod());
           
             ps.execute();
             return true;

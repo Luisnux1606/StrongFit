@@ -507,10 +507,10 @@ CREATE TABLE FacturaCabeceraCompras(
   fecha_facCabComp Varchar2(350 ),
   num_facCabComp Varchar2(10),
   valPagar_facCabCompr Number(10,2),          --1. valpagar
-  subTotal_facCab Number(10,2),   --3. val+dscto
-  total_facCab Number(10,2),        --5. total+iva
-  valPendiente_facCab Number(10,2),  --7. valPendiente
-  valCancelo_facCab Number(10,2),     --6. valCancelo
+  subTotal_facCabCompr Number(10,2),   --3. val+dscto
+  total_facCabCompr Number(10,2),        --5. total+iva
+  valPendiente_facCabCompr Number(10,2),  --7. valPendiente
+  valCancelo_facCabCompr Number(10,2),     --6. valCancelo
   concepto_facCab Varchar2(350),
   valAjuste_facCab Number(10,2),
   Persona_id_per Number,
