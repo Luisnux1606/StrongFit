@@ -343,6 +343,9 @@ CREATE TABLE Producto(
   precio_prod Number(10,2),
   fechaIni_prod Varchar2(100),
   fechaFin_prod Varchar2(100),
+  entradas Number(10,2),
+  salidas Number(10,2),
+  stock Number(10,2),
   Categoria_id_cat Number,
   estado_prod Number 
 )

@@ -266,10 +266,34 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-38,0,0,5,34"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-38,0,0,5,78"/>
   </AuxValues>
 
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="626" pref="626" max="-2" attributes="0"/>
+              <Component id="lblNomEmpresa" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="448" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Component id="tabFichaVentas" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Component id="lblNomEmpresa" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+              <Component id="tabFichaVentas" min="-2" pref="828" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblNomEmpresa">
       <Properties>
@@ -281,11 +305,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="604" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="tabFichaVentas">
       <Properties>
@@ -296,11 +315,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="1" gridWidth="2" gridHeight="1" fill="0" ipadX="1167" ipadY="753" insetsTop="7" insetsLeft="0" insetsBottom="66" insetsRight="37" anchor="18" weightX="0.0" weightY="0.0"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -2182,8 +2196,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pnlVentasInterno" min="-2" pref="1241" max="-2" attributes="0"/>
-                          <EmptySpace pref="180" max="32767" attributes="0"/>
+                          <Component id="pnlVentasInterno" min="-2" pref="1314" max="-2" attributes="0"/>
+                          <EmptySpace pref="107" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2232,15 +2246,7 @@
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Component id="txt_valEntregado" min="-2" pref="43" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jScrollPane6" alignment="1" min="-2" pref="1183" max="-2" attributes="0"/>
-                                              <Component id="pnlVentasComponentes" min="-2" pref="1216" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="btnEliminarFilas" max="32767" attributes="0"/>
-                                          <Component id="btnAgregarFilas" max="32767" attributes="0"/>
+                                          <Component id="pnlVentasComponentes" min="-2" pref="1216" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -2248,51 +2254,65 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="txt_id_FacCab" min="-2" pref="45" max="-2" attributes="0"/>
-                                                  <Component id="btnGuardarFacCab" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="btnLimpiarFacCab" min="-2" pref="49" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace min="-2" pref="889" max="-2" attributes="0"/>
-                                                      <Component id="btnBuscarDscto" min="-2" pref="43" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="1" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblDsctoId" min="-2" pref="46" max="-2" attributes="0"/>
-                                                          <Component id="lblIvaId" min="-2" pref="29" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Group type="102" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="lblIva" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="lblTotDscto" min="-2" pref="138" max="-2" attributes="0"/>
-                                                          <Component id="lblTotalConIva" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="lblValPagar" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                                                          <Component id="lblDscto" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                                          <Component id="txt_id_FacCab" min="-2" pref="45" max="-2" attributes="0"/>
+                                                          <Component id="btnGuardarFacCab" alignment="1" min="-2" pref="45" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="btnLimpiarFacCab" min="-2" pref="49" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="txtValDscto" min="-2" pref="131" max="-2" attributes="0"/>
-                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                              <Component id="txtValConDsctoFicha" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="txtIVA" alignment="0" max="32767" attributes="0"/>
-                                                              <Component id="txtTotalConIva" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                                          <Group type="102" attributes="0">
+                                                              <EmptySpace min="-2" pref="889" max="-2" attributes="0"/>
+                                                              <Component id="btnBuscarDscto" min="-2" pref="43" max="-2" attributes="0"/>
                                                           </Group>
-                                                          <Component id="txtValPagar" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                                          <Group type="102" alignment="1" attributes="0">
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="lblDsctoId" min="-2" pref="46" max="-2" attributes="0"/>
+                                                                  <Component id="lblIvaId" min="-2" pref="29" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                          <Group type="102" attributes="0">
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="lblIva" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                                  <Component id="lblTotDscto" min="-2" pref="138" max="-2" attributes="0"/>
+                                                                  <Component id="lblTotalConIva" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                                  <Component id="lblValPagar" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                                                  <Component id="lblDscto" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                                              </Group>
+                                                              <EmptySpace max="-2" attributes="0"/>
+                                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                                  <Component id="txtValDscto" min="-2" pref="131" max="-2" attributes="0"/>
+                                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                                      <Component id="txtValConDsctoFicha" alignment="0" max="32767" attributes="0"/>
+                                                                      <Component id="txtIVA" alignment="0" max="32767" attributes="0"/>
+                                                                      <Component id="txtTotalConIva" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                                                  </Group>
+                                                                  <Component id="txtValPagar" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                                              </Group>
+                                                          </Group>
+                                                          <Component id="jPanel8" max="32767" attributes="0"/>
                                                       </Group>
                                                   </Group>
-                                                  <Component id="jPanel8" max="32767" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                              <Component id="jScrollPane6" min="-2" pref="1173" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="btnAgregarFilas" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btnEliminarFilas" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -2309,15 +2329,15 @@
                                   <Component id="btnGuardarFacCab" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="pnlVentasComponentes" min="-2" pref="210" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="btnAgregarFilas" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnEliminarFilas" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="pnlVentasComponentes" min="-2" pref="210" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
                                       <Component id="jScrollPane6" min="-2" pref="163" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">

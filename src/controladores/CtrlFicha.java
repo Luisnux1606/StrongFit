@@ -127,6 +127,8 @@ public class CtrlFicha implements ActionListener{
         
         this.visFicha.tabp_ficha.setSelectedIndex(3);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
+        
+        this.visFicha.lblPersonaId.setVisible(false);
         habilitaMedAlimAnalisis();     
         cadBus = "";
        
