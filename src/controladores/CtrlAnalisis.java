@@ -274,10 +274,11 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.txtRecomCardio.setNextFocusableComponent(visAnalisis.txtRecomFuncional); 
 
     }
-     public void showTable()
+    
+    public void showTable()
     {
         limpiarTabla();                            
-           ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodos(modAnalisis);
+           ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodosByIdPer(modAnalisis,Validaciones.isNumVoid(visAnalisis.txtCodPersona.getText()));
            DefaultTableModel model =  (DefaultTableModel)visAnalisis.tblAnalisis.getModel();
            Object cols[] = new Object[8];
 

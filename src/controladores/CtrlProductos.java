@@ -91,6 +91,7 @@ public class CtrlProductos implements ActionListener{
         this.visProd.btnModificar.addActionListener(this);
         
         this.visProd.txt_id.setVisible(false);
+        this.visProd.lblIdCat.setVisible(false);
         
         catProd = new Categoria();
               
@@ -471,11 +472,11 @@ public class CtrlProductos implements ActionListener{
                 while (listProd.next()) {
                     try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                        cols[0] = listProd.getInt("id_prod");
-                       cols[1] = listProd.getString("descripcion_prod");
+                       cols[1] = listProd.getString("descripcion_prod").toUpperCase();
                        cols[2] = listProd.getString("precio_prod").toUpperCase();
                        cols[3] = listProd.getString("FECHAINI_PROD");
                        cols[4] = listProd.getString("FECHAFIN_PROD");
-                       cols[5] = listProd.getString("tipo_cat");
+                       cols[5] = listProd.getString("tipo_cat").toUpperCase();
                        cols[6] = listProd.getString("id_cat");
 
                         model.addRow(cols);
@@ -503,11 +504,11 @@ public class CtrlProductos implements ActionListener{
                 while (listProd.next()) {
                     try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                        cols[0] = listProd.getInt("id_prod");
-                       cols[1] = listProd.getString("descripcion_prod");
+                       cols[1] = listProd.getString("descripcion_prod").toUpperCase();
                        cols[2] = listProd.getString("precio_prod").toUpperCase();
                        cols[3] = listProd.getString("FECHAINI_PROD");
                        cols[4] = listProd.getString("FECHAFIN_PROD");
-                       cols[5] = listProd.getString("tipo_cat");
+                       cols[5] = listProd.getString("tipo_cat").toUpperCase();
                        cols[6] = listProd.getString("id_cat");
 
                         model.addRow(cols);

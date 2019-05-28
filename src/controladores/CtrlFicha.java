@@ -108,6 +108,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.btnLimpiarFichaG.addActionListener(this);
         this.visFicha.btnModificarFichaG.addActionListener(this);     
         this.visFicha.btnElegirPersonaG.addActionListener(this);
+        this.visFicha.btnCargarFichas.addActionListener(this);
         
         this.visFicha.mniMembresias.addActionListener(this);
         this.visFicha.mniPersonas.addActionListener(this);
@@ -122,10 +123,11 @@ public class CtrlFicha implements ActionListener{
         
         this.visFicha.mniColores.addActionListener(this);
         this.visFicha.mniEntrenamientos.addActionListener(this);
+        this.visFicha.txtCodPersona.setVisible(false);
         
-        this.visFicha.tabp_ficha.setSelectedIndex(0);
+        this.visFicha.tabp_ficha.setSelectedIndex(3);
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
-              
+        habilitaMedAlimAnalisis();     
         cadBus = "";
        
         setFocus();
@@ -135,7 +137,7 @@ public class CtrlFicha implements ActionListener{
         
        // visFicha.txtCodPersona.setText(persona.getId()+"");
         
-        limpiarTabla();
+        limpiarTabla(visFicha.tblFichas);
         showTable();
         
         int colHide[] = new int[1];
@@ -144,6 +146,87 @@ public class CtrlFicha implements ActionListener{
         setHideJtableColumn(visFicha.tblFichas,colHide);
     }
     
+    public void habilitaMedAlimAnalisis()
+    {
+        this.visFicha.tabp_ficha.setEnabledAt(0, false);
+        this.visFicha.tabp_ficha.setEnabledAt(1, false);
+        this.visFicha.tabp_ficha.setEnabledAt(2, false);
+    }
+    
+    public void deshabilitaMedAlimAnalisis()
+    {
+        this.visFicha.tabp_ficha.setEnabledAt(0, true);
+        this.visFicha.tabp_ficha.setEnabledAt(1, true);
+        this.visFicha.tabp_ficha.setEnabledAt(2, true);
+    }
+    
+    public void setMedidasAnalisisFichas()
+    {
+        showTableByIdPer();
+        showTableMedidas();
+        showTableAnalisis();
+        
+    }
+    
+    public  void showTableMedidas()
+    {
+        ConsMedidas consMedidas = new ConsMedidas();
+        Medidas modMedidas = new Medidas();
+        int idPer =Validaciones.isNumVoid(visFicha.txtCodPersona.getText());
+        limpiarTabla(visFicha.tblDatos);                  
+        //persona.setId(visMedidas.txt_id_persona_u);
+           ArrayList<Medidas> listMed = consMedidas.buscarTodosByIdPer(modMedidas,idPer);
+           DefaultTableModel model =  (DefaultTableModel)visFicha.tblDatos.getModel();
+           Object cols[] = new Object[19];
+
+           for (int i = 0; i < listMed.size(); i++) {
+               cols[0] = listMed.get(i).getId();
+               cols[1] = listMed.get(i).getFecha();
+               cols[2] = listMed.get(i).getPeso();
+               cols[3] = listMed.get(i).getEstatura();
+               cols[4] = listMed.get(i).getNro_hijos();
+               cols[5] = listMed.get(i).getPecho();
+               cols[6] = listMed.get(i).getAbdomen_alto();
+               cols[7] = listMed.get(i).getCintura();
+               cols[8] = listMed.get(i).getAbdomen_bajo();
+               cols[9] = listMed.get(i).getCadera();
+               cols[10] = listMed.get(i).getPiernas();
+               cols[11] = listMed.get(i).getPantorrilla();
+               cols[12] = listMed.get(i).getBrazo();
+               cols[13] = listMed.get(i).getAntebrazo();
+               cols[14] = listMed.get(i).getCuello();
+               cols[15] = listMed.get(i).getEspalda();
+               cols[16] = listMed.get(i).getPorcentaje_grasa();
+               cols[17] = listMed.get(i).getPorcentaje_kgs();        
+
+               model.addRow(cols);                    
+           }   
+    
+    }
+    
+    public  void showTableAnalisis()
+    {
+        ConsAnalisis consAnalisis = new ConsAnalisis();
+        Analisis modAnalisis = new Analisis();
+        limpiarTabla(visFicha.tblAnalisis);                            
+        ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodosByIdPer(modAnalisis,Validaciones.isNumVoid(visFicha.txtCodPersona.getText()));
+        DefaultTableModel model =  (DefaultTableModel)visFicha.tblAnalisis.getModel();
+        Object cols[] = new Object[8];
+
+        for (int i = 0; i < listAnalisis.size(); i++) {
+            cols[0] = listAnalisis.get(i).getId();
+            cols[1] = listAnalisis.get(i).getFecha();
+            cols[2] = listAnalisis.get(i).getExeso_grasa();
+            cols[3] = listAnalisis.get(i).getExeso_liquido();
+            cols[4] = listAnalisis.get(i).getExeso_total();
+            cols[5] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_pesas()).toUpperCase();
+            cols[6] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_cardio()).toUpperCase();
+            cols[7] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_funcional()).toUpperCase();
+            model.addRow(cols);                    
+        }   
+    
+    
+    }
     
     
     public void setTableModel(JTable table)
@@ -261,7 +344,7 @@ public class CtrlFicha implements ActionListener{
     public void showTableByNom(String cad)
     {
         try {
-            limpiarTabla();
+            limpiarTabla(visFicha.tblFichas);
             
             ResultSet listFicha = consFicha.buscarTodosPorNomTabla(cad);
             
@@ -311,7 +394,7 @@ public class CtrlFicha implements ActionListener{
             String m=(e.getKeyChar()+"").toUpperCase();
             char c =m.charAt(0);
 					
-            limpiarTabla();
+            limpiarTabla(visFicha.tblFichas);
             if((c+"").equals("")==false&&(c+"").equals(null)==false)
                     cadBus+=c;	            
             else
@@ -392,9 +475,9 @@ public class CtrlFicha implements ActionListener{
         visFicha.txtCodPersona.requestFocus();
         visFicha.txtCodPersona.setNextFocusableComponent(visFicha.dchFecha);       
     }
-     public void limpiarTabla(){
-        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFichas.getModel();
-        int a = visFicha.tblFichas.getRowCount()-1;
+     public void limpiarTabla(JTable table){
+        DefaultTableModel tb = (DefaultTableModel) table.getModel();
+        int a = table.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         } 
@@ -403,9 +486,41 @@ public class CtrlFicha implements ActionListener{
     public void showTable()
     {
         try {
-            limpiarTabla();
+            limpiarTabla(visFicha.tblFichas);
             ResultSet listFicha = consFicha.buscarTodos2();
             
+            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFichas.getModel();
+            Object cols[] = new Object[8];
+            
+            while (listFicha.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    cols[0] = listFicha.getInt("id_ficha");
+                    cols[1] = listFicha.getString("fecha_ficha");
+                    cols[2] = listFicha.getString("nombresApellidos").toUpperCase();
+                    cols[3] = listFicha.getString("id_per");
+                    cols[4] = listFicha.getString("fecha_med");
+                    cols[5] = listFicha.getString("id_med");
+                    cols[6] = listFicha.getString("fecha_ana");
+                    cols[7] = listFicha.getString("id_ana");
+                    model.addRow(cols);
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consFicha.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFicha.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visFicha.tblFichas.updateUI();
+    }
+    
+    public void showTableByIdPer()
+    {
+        try {
+            limpiarTabla(visFicha.tblFichas);
+            ResultSet listFicha = consFicha.buscarTodos2ByIdPer(Validaciones.isNumVoid(visFicha.txtCodPersona.getText()));
+            System.out.println(visFicha.txtCodPersona.getText());
             DefaultTableModel model =  (DefaultTableModel)visFicha.tblFichas.getModel();
             Object cols[] = new Object[8];
             
@@ -478,7 +593,8 @@ public class CtrlFicha implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Error al Guardar");
                         limpiar();
                     }
-                    showTable();
+                //    showTable();
+                    setMedidasAnalisisFichas();
                }        
         }
       
@@ -536,7 +652,13 @@ public class CtrlFicha implements ActionListener{
             ctrPer.iniciar();
             ctrPer.locale = 1;
         }                 
-        
+         if (e.getSource() == visFicha.btnCargarFichas) 
+        {           
+            setMedidasAnalisisFichas();
+            if (!Validaciones.isNumVoid1(visFicha.txtCodPersona.getText())) {
+                deshabilitaMedAlimAnalisis();
+            }
+        }
                 
          if (e.getSource() == visFicha.mniReportes) 
          {

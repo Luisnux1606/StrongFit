@@ -496,9 +496,39 @@ order by id_ficha asc ;
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "  SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n" +
-                        "FROM ficha f, medidas m,analisis a, persona p \n" +
-                        "where p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med\n" +
+        String sql = "  SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana " +
+                        "FROM ficha f, medidas m,analisis a, persona p " +
+                        "where p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med " +
+                        "order by id_ficha asc ";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarTodos2ByIdPer(int idPer)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "  SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana " +
+                        "FROM ficha f, medidas m,analisis a, persona p " +
+                        "where p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med and p.id_per="+idPer+"" +
                         "order by id_ficha asc ";
                 
         

@@ -149,13 +149,15 @@ public class VisFicha extends javax.swing.JFrame {
         btnLimpiarFichaG = new javax.swing.JButton();
         pnlFichaComponentes = new javax.swing.JPanel();
         lblPersona = new javax.swing.JLabel();
-        txtCodPersona = new javax.swing.JTextField();
         btnElegirPersonaG = new javax.swing.JButton();
         dchFecha = new com.toedter.calendar.JDateChooser();
         lblFecha = new javax.swing.JLabel();
+        txtNomPersonaFicha = new javax.swing.JTextField();
+        btnCargarFichas = new javax.swing.JButton();
         txtBuscarFichaPorCualquierCampo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         lblIdFicha = new javax.swing.JLabel();
+        txtCodPersona = new javax.swing.JTextField();
         scpVentas = new javax.swing.JScrollPane();
         pnlVentas = new javax.swing.JPanel();
         pnlVentasInterno = new javax.swing.JPanel();
@@ -171,8 +173,6 @@ public class VisFicha extends javax.swing.JFrame {
         lblNroFactura = new javax.swing.JLabel();
         btnEntrenamiento = new javax.swing.JButton();
         btnGuardarFacCab = new javax.swing.JButton();
-        btnModificarFacCab = new javax.swing.JButton();
-        btnEliminarFacCab = new javax.swing.JButton();
         btnLimpiarFacCab = new javax.swing.JButton();
         txt_id_FacCab = new javax.swing.JTextField();
         lblTotDscto = new javax.swing.JLabel();
@@ -943,51 +943,58 @@ public class VisFicha extends javax.swing.JFrame {
         btnLimpiarFichaG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar2.png"))); // NOI18N
 
         pnlFichaComponentes.setBackground(java.awt.Color.gray);
-        pnlFichaComponentes.setLayout(new java.awt.GridBagLayout());
 
         lblPersona.setText("Persona:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(24, 50, 0, 0);
-        pnlFichaComponentes.add(lblPersona, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 247;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 37, 0, 0);
-        pnlFichaComponentes.add(txtCodPersona, gridBagConstraints);
 
         btnElegirPersonaG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/lupa6.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = -38;
-        gridBagConstraints.ipady = -19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(13, 12, 0, 426);
-        pnlFichaComponentes.add(btnElegirPersonaG, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 226;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 37, 31, 0);
-        pnlFichaComponentes.add(dchFecha, gridBagConstraints);
 
         lblFecha.setText("Fecha");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 50, 0, 0);
-        pnlFichaComponentes.add(lblFecha, gridBagConstraints);
+
+        btnCargarFichas.setText("Cargar fichas");
+
+        javax.swing.GroupLayout pnlFichaComponentesLayout = new javax.swing.GroupLayout(pnlFichaComponentes);
+        pnlFichaComponentes.setLayout(pnlFichaComponentesLayout);
+        pnlFichaComponentesLayout.setHorizontalGroup(
+            pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFichaComponentesLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFecha)
+                    .addComponent(lblPersona))
+                .addGap(37, 37, 37)
+                .addGroup(pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFichaComponentesLayout.createSequentialGroup()
+                        .addComponent(txtNomPersonaFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnElegirPersonaG, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCargarFichas))
+                    .addComponent(dchFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(475, Short.MAX_VALUE))
+        );
+        pnlFichaComponentesLayout.setVerticalGroup(
+            pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFichaComponentesLayout.createSequentialGroup()
+                .addGroup(pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFichaComponentesLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnElegirPersonaG, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlFichaComponentesLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(lblPersona))))
+                    .addGroup(pnlFichaComponentesLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(txtNomPersonaFicha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFichaComponentesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnCargarFichas)))
+                .addGap(18, 18, 18)
+                .addGroup(pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFecha)
+                    .addComponent(dchFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jLabel5.setText("Buscar por cualquier campo");
 
@@ -1010,15 +1017,18 @@ public class VisFicha extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(btnEliminarFichaG, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
-                        .addComponent(btnLimpiarFichaG, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnLimpiarFichaG, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCodPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlFichaCrearLayout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(scrpTablaFichas, javax.swing.GroupLayout.PREFERRED_SIZE, 982, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnlFichaComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtBuscarFichaPorCualquierCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))))
-                .addContainerGap(345, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addGroup(pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pnlFichaComponentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(scrpTablaFichas, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)))))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
         pnlFichaCrearLayout.setVerticalGroup(
             pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1029,14 +1039,16 @@ public class VisFicha extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(lblIdFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
-                .addGroup(pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGuardarFichaG)
-                    .addComponent(btnModificarFichaG)
-                    .addComponent(btnEliminarFichaG, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiarFichaG))
+                .addGroup(pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlFichaCrearLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnGuardarFichaG)
+                        .addComponent(btnModificarFichaG)
+                        .addComponent(btnEliminarFichaG, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLimpiarFichaG))
+                    .addComponent(txtCodPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(pnlFichaComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(pnlFichaComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtBuscarFichaPorCualquierCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1158,12 +1170,6 @@ public class VisFicha extends javax.swing.JFrame {
 
         btnGuardarFacCab.setBackground(new java.awt.Color(102, 102, 102));
         btnGuardarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/guardar7.png"))); // NOI18N
-
-        btnModificarFacCab.setBackground(new java.awt.Color(102, 102, 102));
-        btnModificarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/modificar.png"))); // NOI18N
-
-        btnEliminarFacCab.setBackground(new java.awt.Color(102, 102, 102));
-        btnEliminarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eliminar.png"))); // NOI18N
 
         btnLimpiarFacCab.setBackground(new java.awt.Color(102, 102, 102));
         btnLimpiarFacCab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar2.png"))); // NOI18N
@@ -1327,13 +1333,11 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnCalcular)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_valEntregado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(287, 287, 287))
-                            .addGroup(pnlVentasInternoLayout.createSequentialGroup()
-                                .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pnlVentasComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 1216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(54, 54, 54)))
+                                .addComponent(txt_valEntregado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnlVentasComponentes, javax.swing.GroupLayout.PREFERRED_SIZE, 1216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(54, 54, 54)
                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEliminarFilas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAgregarFilas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1344,11 +1348,7 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_id_FacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnGuardarFacCab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnModificarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEliminarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnLimpiarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1360,7 +1360,6 @@ public class VisFicha extends javax.swing.JFrame {
                                             .addComponent(lblDsctoId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lblIvaId, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(14, 14, 14)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                                         .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1387,8 +1386,6 @@ public class VisFicha extends javax.swing.JFrame {
                 .addComponent(txt_id_FacCab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnModificarFacCab)
-                    .addComponent(btnEliminarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiarFacCab, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardarFacCab))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1658,10 +1655,10 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscarDscto;
     public javax.swing.JButton btnBuscarMed;
     public javax.swing.JButton btnCalcular;
+    public javax.swing.JButton btnCargarFichas;
     public javax.swing.JButton btnElegirPersonaG;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnEliminarAnalisis;
-    public javax.swing.JButton btnEliminarFacCab;
     public javax.swing.JButton btnEliminarFichaG;
     public javax.swing.JButton btnEliminarFilas;
     public javax.swing.JButton btnEntrenamiento;
@@ -1675,7 +1672,6 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnLimpiarFichaG;
     public javax.swing.JButton btnModificar;
     public javax.swing.JButton btnModificarAnalisis;
-    public javax.swing.JButton btnModificarFacCab;
     public javax.swing.JButton btnModificarFichaG;
     public com.toedter.calendar.JDateChooser dchFecha;
     public com.toedter.calendar.JDateChooser dtcFecha;
@@ -1816,6 +1812,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JTextField txtExcesoTotal;
     public javax.swing.JTextField txtFechaAnalisis;
     public javax.swing.JTextField txtIVA;
+    public javax.swing.JTextField txtNomPersonaFicha;
     public javax.swing.JTextField txtNroHijos;
     public javax.swing.JTextField txtPantorrilla;
     public javax.swing.JTextField txtPecho;

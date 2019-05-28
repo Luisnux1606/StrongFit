@@ -223,7 +223,55 @@ public class ConsAnalisis extends Conexion{
         }
         
     }
-    
+     public ArrayList<Analisis> buscarTodosByIdPer(Analisis a,int idPer)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        String sql = "SELECT * " +
+                    " FROM analisis a,ficha f,persona p " +
+                    " where p.id_per = f.persona_id_per and a.id_ana=f.analisis_id_ana and  a.estado_ana=1 and p.id_per="+idPer+"";
+        ArrayList<Analisis> analisis = new ArrayList<>();
+        
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                a = new Analisis();
+                a.setId(rs.getInt("id_ana"));
+                a.setFecha(rs.getString("fecha_ana"));
+                a.setExeso_grasa(rs.getDouble("excesoGrasa_ana"));
+                a.setExeso_liquido(rs.getDouble("excesoLiquido_ana"));
+                a.setExeso_total(rs.getDouble("excesoTotal_ana"));
+                a.setRecomendacion_pesas(rs.getString("recomendacionPesas_ana"));
+                a.setRecomendacion_cardio(rs.getString("recomendacionCardio_ana"));
+                a.setRecomendacion_funcional(rs.getString("recomendacionFuncional_ana"));                
+                
+                analisis.add(a);               
+            }
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+        }
+       return analisis ;
+    }
     
     public ArrayList<Analisis> buscarTodos(Analisis a)
     {

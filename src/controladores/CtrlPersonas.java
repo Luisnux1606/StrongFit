@@ -275,12 +275,12 @@ public class CtrlPersonas implements ActionListener {
          JTable tblD = visPersona.tbl_personas;
          visPersona.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
          visPersona.txt_cedula.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));
-         visPersona.txt_nombres.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2)).toUpperCase());
-         visPersona.txt_apellidos.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)).toUpperCase());
-         visPersona.txt_edad.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 7)));
+         visPersona.txt_nombres.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2)).toUpperCase()));
+         visPersona.txt_apellidos.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)).toUpperCase()));
+         visPersona.txt_edad.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 7))));
          visPersona.cmbxGenero.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)).toUpperCase());
-         visPersona.txtCorreoElect.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5)));
-         visPersona.txt_nro_fono.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
+         visPersona.txtCorreoElect.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5))));
+         visPersona.txt_nro_fono.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6))));
          visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 8)))));                        
      }
     
@@ -476,13 +476,17 @@ public class CtrlPersonas implements ActionListener {
                 if(e.getClickCount()==2)
                 {
                     int idPer = Integer.parseInt(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 0)+"");
-                    String nombre = visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 2)+"";
-                    String apellido = visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 3)+"";
+                    String nombre = Validaciones.isNumVoid4(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 2)+"");
+                    String apellido = Validaciones.isNumVoid4(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 3)+"");
                     switch(locale){
                         case 1:
                             visFicha = (VisFicha)vis;
                             modPer.setId(idPer);
-                            visFicha.txtCodPersona.setText(idPer+"");
+                            modPer.setNombre(nombre);
+                            modPer.setApellido(apellido);
+                            visFicha.txtCodPersona.setText(modPer.getId()+"");
+                            visFicha.txtNomPersonaFicha.setText(modPer.getNombre() + " "+modPer.getApellido());
+                            //CtrlFicha.setMedidasAnalisis();
                             break;
                         case 2:
                             visFicha = (VisFicha)vis;
@@ -490,7 +494,7 @@ public class CtrlPersonas implements ActionListener {
                             modPer.setNombre(nombre);
                             modPer.setApellido(apellido);
                             visFicha.lblPersonaId.setText(idPer+"");
-                            visFicha.txtClienteFactura.setText(nombre + " "+apellido);
+                            visFicha.txtClienteFactura.setText(modPer.getNombre() + " "+modPer.getApellido());
                             break;
                         case 3:  
                             visHisPerServ = (VisHistorialPersonaServicio)vis;

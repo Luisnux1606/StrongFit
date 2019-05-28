@@ -216,7 +216,7 @@ public class ButtonTable extends JFrame
              
         new ButtonTable(visVentas);
         visVentas.tblFacturasCabeceras.setModel(model);
-        visVentas.tbl_BuscarVentas.updateUI();
+       // visVentas.tbl_BuscarVentas.updateUI();
         
         }  
     }

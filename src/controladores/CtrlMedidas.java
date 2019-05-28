@@ -1,4 +1,5 @@
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -279,7 +280,7 @@ public class CtrlMedidas implements ActionListener{
     {
         limpiarTabla();                  
         //persona.setId(visMedidas.txt_id_persona_u);
-           ArrayList<Medidas> listMed = consMedidas.buscarTodos(modMedidas);
+           ArrayList<Medidas> listMed = consMedidas.buscarTodosByIdPer(modMedidas,Validaciones.isNumVoid(visMedidas.txtCodPersona.getText()));
            DefaultTableModel model =  (DefaultTableModel)visMedidas.tblDatos.getModel();
            Object cols[] = new Object[19];
 
