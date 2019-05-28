@@ -17,7 +17,7 @@ BUSCAR(lupa)= ok
 BUSCAR(nombre)= ok
 
 
-*********GESTI�N DE GATEGORIA***************
+*********GESTION DE GATEGORIA***************
 1. cambiar el nombre de la ventana por: "Strongfit CATEGORIAS"
 2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando informaci�n de la tabla. �?
 
@@ -33,9 +33,7 @@ BUSCAR(nombre)= ok
 
 GUARDAR= ok
 ELIMINAR= ok
-MODIFICAR
-1. no permite modificar las fechas de inicio y de fin. 
-
+MODIFICAR= ok
 LIMPIAR= ok 
 BUSCAR(nombre)=ok
 
@@ -44,41 +42,46 @@ BUSCAR(lupa)
 
 
 *********GESTION DE ENTRENAMIENTO***************
-1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
-Sigue igual :ok
+1. cambiar el nombre de la ventana por: "Strongfit ENTRENAMIENTO"
 
-
-GUARDAR
-ELIMINAR 
-MODIFICAR
-LIMPIAR
-BUSCAR
+GUARDAR= ok
+ELIMINAR= ok 
+MODIFICAR= ok
+LIMPIAR=ok
+BUSCAR(nombre)= ok
 
 
 *********GENERAR VENTAS***************
-1. NO he revisado incluyendo entrenamiento porque todav�a falta. :ok
-
-GUARDAR= ok
-
-ELIMINAR
-1. No puedo eliminar porque no puedo BUSCAR :ok(solo se anula)
-Entonces, mejor ya quitarlo :ok
-
-MODIFICAR
-1. No puedo modificar porque no puedo BUSCAR :ok(desde la ventana de busquedas)
-Entonces, mejor ya quitarlo. :ok
+GUARDAR
+1. Si pongo guardar y no tengo nada cambiar mensaje, ya que ahora muestra "Debe ingresar un null".
+2. No puedo elegir el entrenamiento, porque cuando hago doble click en la tabla, no pasa nada.
 
 LIMPIAR= ok
 
 
+*********FICHA*************** 
+1. Cambiar el icono de "lupa" por el de "persona"
+2. El botón "cargar fichas" debería además de habilitar las pestañas (ya hace) también mostrar en la tabla todas las fichas de la persona.  
+3. Como voy seleccionando de las otras pestañas que muestre la fecha de analisis y la fecha de medida para que el usuario sepa lo que seleccionó.:r
+
+GUARDAR
+
+ELIMINAR
+1. Debe preguntar si deseo o no eliminar. :r
+
+MODIFICAR= ok 
+1. Pero seria mas interesante poder modificar la selecci�n de an�lisis y medidas. :r
+
+LIMPIAR= ok
+
+BUSCAR(lupa)= ok
+BUSCAR(cualquier campo)= ok  
+
 *********GENERAR MEDIDAS***************
 
-1. Cuando se abre la pestaña Borrar la información de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
-No podría quedar porque no es específico para esa persona. (it is goigng to be load of ficha or table  by id of person, so will be load analisis and medidas, later choose to modifi or save.
+GUARDAR
+1. No muestra la información en la tabla, pero si lo guarda en la BD. 
 
-)
-
-GUARDAR= ok
 ELIMINAR
 1. Debe presentar si se desea eliminar. 
 
@@ -90,13 +93,12 @@ BUSCAR(lupa)
 1. no busca
 
 
-
 *********GENERAR ANALISIS***************
-1.Quitar el label "DATOS PARA" :ok
-2.Cuando se abre la pesta�a Borrar la informaci�n de la tabla.: ok(no deberia, se carga los historiales de la persona seleccionada)
-2.Si yo elimino y luego busco(fecha) se duplica la informaci�n de "REcomen.Cardio" a "Recom. pesas".
+1.Si yo elimino y luego busco(fecha) se duplica la informaci�n de "REcomen.Cardio" a "Recom. pesas".
 
-GUARDAR= ok
+GUARDAR
+1. No muestra la información en la tabla, pero si lo guarda en la BD. 
+
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= oK
@@ -107,44 +109,35 @@ BUSCAR(fecha)
 
 
 
-
 *********PLAN ALIMENTICIO*************** 
 1. Existen cajas de texto para poner informaci�n, pero no presenta las opciones CRUD
 
 
 
-*********FICHA*************** 
-1. Que se muestre el nombre de la persona y no el c�digo. 
-2. Como voy seleccionando de las otras pesta�as que muestre la fecha de an�lisis y la fecha de medida para que el usuario sepa lo que seleccion�.:r
-3. Quitar caja de texto de id que se encuentra en la parte superior. :ok
-
-GUARDAR=ok
-
-ELIMINAR
-1. Debe preguntar si deseo o no eliminar. :r
-
-MODIFICAR= ok 
-1. Pero ser�a m�s interesante poder modificar la selecci�n de an�lisis y medidas. :r
-
-LIMPIAR= ok
-
-BUSCAR(lupa)= ok
-BUSCAR(cualquier campo)= ok  
-
- 
 
 *********CONSULTAS*************** 
 ------VENTAS REALIZADAS------
-1. El combo no est� funcionando. 
-2. El "buscar por campos" no funciona.
+FILTRAR TODO= ok
+
+FILTRAR POR COMBO
+1. No funciona
+
+BUSCAR(nombre)
+2.No funciona
 
 ------ENTRENAMIENTOS Y SALDOS------
 1. Actualizar la tabla al momento que se anule en ventas. 
 
+FILTRAR POR COMBO
+BUSCAR(nombre)
+
+------FICHA DE ANALISIS------
+Pendiente
 
 *********REPORTES*************** 
 ------PERSONAS------
-1. Cambiar el c�digo por el nombre de la persona. 
+1. Cambiar el codigo por el nombre de la persona. 
+
 
 
 *********GENERALES***************
