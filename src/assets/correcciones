@@ -3,9 +3,10 @@ GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
-BUSCAR(lupa)= ok
 BUSCAR(nombre)= ok
 
+BUSCAR(lupa)
+1. Validar que si un campo de la tabla está vacío no se muestre null. 
 
 *********GESTIÓN DE MEMBRESIA***************
 GUARDAR= ok
@@ -17,6 +18,9 @@ BUSCAR(nombre)= ok
 
 
 *********GESTIÓN DE GATEGORÍA***************
+1. cambiar el nombre de la ventana por: "Strongfit CATEGORIAS"
+2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando información de la tabla. ¿?
+
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
@@ -24,17 +28,18 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 
 
-*********GESTIÓN DE PRODUCTO***************
+*********GESTIÓN DE PRODUCTOS/SERVICIOS***************
+1. cambiar el nombre de la ventana por: "Strongfit PRODUCTOS/SERVICIOS"
+2. En la tabla la columna "descripcion" está con minúscula.
+
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok 
 LIMPIAR= ok 
+BUSCAR(nombre)=ok
 
 BUSCAR(lupa)
 1. no busca
-
-BUSCAR(nombre)=ok
-1. Cuando se busca aparece el label con el código. 
 
 
 *********GESTIÓN DE ENTRENAMIENTO***************
