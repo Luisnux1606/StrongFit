@@ -385,6 +385,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     }
     public void showComboServicio()
     {
+        visHisPerServ.cbxServicio.removeAllItems();
         try {
            
             ResultSet listCategorias = consHisPerServ.buscarServicios();
@@ -409,6 +410,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
     }
     public void showComboServicioTrain()
     {
+        visHisPerServ.cbxServicio.removeAllItems();
         try {
            
             ResultSet listCategorias = consHisPerServ.buscarServiciosTrain();

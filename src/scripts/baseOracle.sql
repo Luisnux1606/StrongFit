@@ -516,13 +516,13 @@ CREATE TABLE FacturaCabeceraCompras(
   Persona_id_per Number,
   Membresia_id_memb Number,        --2. descuento
   Ivas_id_ivas Number,            --4. iva
-  estado_facCab Number 
+  estado_facCabCompr Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
 -- Add keys for table factura
 -- Create indexes for table factura
-CREATE INDEX idx_id_fac ON FacturaCabecera(id_facCab)
+CREATE INDEX idx_id_facCab ON FacturaCabeceraCompras(id_facCabComp)
 /
 -- Add keys for table factura
 ALTER TABLE FacturaCabecera ADD CONSTRAINT pk_id_fac PRIMARY KEY (id_facCab)
