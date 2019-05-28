@@ -1,4 +1,4 @@
-*********GESTION DE PERSONAS***************
+﻿*********GESTION DE PERSONAS***************
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -8,7 +8,7 @@ BUSCAR(nombre)= ok
 BUSCAR(lupa)
 1. Validar que si un campo de la tabla está vacío no se muestre null. 
 
-*********GESTI�N DE MEMBRESIA***************
+*********GESTION DE MEMBRESIA***************
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -72,34 +72,9 @@ LIMPIAR= ok
 
 
 *********GENERAR MEDIDAS***************
-1. Cuando se abre la pesta�a Borrar la informaci�n de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
-No podr�a quedar porque no es espec�fico para esa persona. (it is goigng to be load of ficha by id of person, so will be load analisis and medidas, later choose to modifi or save.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1. Cuando se abre la pestaña Borrar la información de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
+No podría quedar porque no es específico para esa persona. (it is goigng to be load of ficha or table  by id of person, so will be load analisis and medidas, later choose to modifi or save.
 
 )
 

@@ -65,7 +65,7 @@ public class ConsProductos extends Conexion
     {
         PreparedStatement ps = null;
         Connection con = getConexion();// descripcion_prod, precio_prod, Categoria_id_cat, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?)
-        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?, Categoria_id_cat = ?, estado_prod = ?"
+        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?,FECHAINI_PROD=?,FECHAFIN_PROD=?, Categoria_id_cat = ?, estado_prod = ?"
                 + " WHERE id_prod=?";
         
         try 
@@ -75,6 +75,8 @@ public class ConsProductos extends Conexion
             
             ps.setString(1, modProducto.getDescripcion_prod());
             ps.setDouble(2, modProducto.getPrecio_prod());
+            ps.setString(2, modProducto.getFechaIni());
+            ps.setString(2, modProducto.getFechaFin());
             ps.setInt(3, modProducto.getCategoria().getId_cat());
             ps.setInt(4, modProducto.getEstado_prod());  
             ps.setInt(5, modProducto.getId_prod());
