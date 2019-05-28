@@ -604,7 +604,7 @@ public class CtrlProductos implements ActionListener{
             prod.setDescripcion_prod(visProd.txtDescripcionProd.getText());
             prod.setPrecio_prod(Validaciones.isNumVoid10(visProd.txtPrecioProd.getText()));  
             prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaIni.getDate()));
-            prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaFin.getDate()));
+            prod.setFechaFin(Validaciones.setFormatFecha(visProd.dchFechaFin.getDate()));
             prod.setEstado_prod(1);
             
             if (consProd.modificar(prod)) {

@@ -511,8 +511,8 @@ CREATE TABLE FacturaCabeceraCompras(
   total_facCabCompr Number(10,2),        --5. total+iva
   valPendiente_facCabCompr Number(10,2),  --7. valPendiente
   valCancelo_facCabCompr Number(10,2),     --6. valCancelo
-  concepto_facCab Varchar2(350),
-  valAjuste_facCab Number(10,2),
+  concepto_facCabCompr Varchar2(350),
+  valAjuste_facCabCompr Number(10,2),
   Persona_id_per Number,
   Membresia_id_memb Number,        --2. descuento
   Ivas_id_ivas Number,            --4. iva
