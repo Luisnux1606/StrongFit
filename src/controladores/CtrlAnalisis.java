@@ -293,7 +293,7 @@ public class CtrlAnalisis implements ActionListener{
                cols[7] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_funcional()).toUpperCase();
                model.addRow(cols);                    
            }   
-    
+        visAnalisis.tblAnalisis.updateUI();
     }
      
      public void showTableByFecha(String fecha)

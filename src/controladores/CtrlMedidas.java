@@ -306,7 +306,7 @@ public class CtrlMedidas implements ActionListener{
 
                model.addRow(cols);                    
            }   
-    
+     visMedidas.tblDatos.updateUI();
     }
     
     @Override
