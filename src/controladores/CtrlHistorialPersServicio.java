@@ -276,9 +276,10 @@ public class CtrlHistorialPersServicio implements ActionListener{
                     switch(locale)
                     {
                         case 0 :
+                            setProductoServicioFacCab();
                             break;
                         case 1:
-                            setProductoServicioFacCab();
+                            
                             break;
                         case 2:
                             

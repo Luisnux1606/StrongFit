@@ -769,8 +769,9 @@ public class CtrlFacturaCab implements ActionListener{
                 
             Ficha ficha = new Ficha();
             CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
-            ctrPer.iniciar();
             ctrPer.locale = 2;
+            ctrPer.iniciar();
+            
         } 
         if (e.getSource() == visFicha.btnEntrenamiento) 
         {
