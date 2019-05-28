@@ -1,4 +1,4 @@
-*********GESTIÓN DE PERSONAS***************
+*********GESTION DE PERSONAS***************
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -6,9 +6,9 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 
 BUSCAR(lupa)
-1. Validar que si un campo de la tabla está vacío no se muestre null. 
+1. Validar que si un campo de la tabla estÃ¡ vacÃ­o no se muestre null. 
 
-*********GESTIÓN DE MEMBRESIA***************
+*********GESTIï¿½N DE MEMBRESIA***************
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -17,9 +17,9 @@ BUSCAR(lupa)= ok
 BUSCAR(nombre)= ok
 
 
-*********GESTIÓN DE GATEGORÍA***************
+*********GESTIï¿½N DE GATEGORIA***************
 1. cambiar el nombre de la ventana por: "Strongfit CATEGORIAS"
-2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando información de la tabla. ¿?
+2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando informaciï¿½n de la tabla. ï¿½?
 
 GUARDAR=ok
 ELIMINAR= ok
@@ -28,25 +28,22 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 
 
-*********GESTIÓN DE PRODUCTOS/SERVICIOS***************
+*********GESTION DE PRODUCTOS/SERVICIOS***************
 1. cambiar el nombre de la ventana por: "Strongfit PRODUCTOS/SERVICIOS"
-2. En la tabla la columna "descripcion" está con minúscula.
 
 GUARDAR= ok
 ELIMINAR= ok
-MODIFICAR= ok 
+MODIFICAR
+1. no permite modificar las fechas de inicio y de fin. 
+
 LIMPIAR= ok 
 BUSCAR(nombre)=ok
 
 BUSCAR(lupa)
 1. no busca : r(it's going to be by code)
 
-BUSCAR(nombre)=ok
-1. Cuando se busca aparece el label con el código. :ok
 
-
-
-*********GESTIÓN DE ENTRENAMIENTO***************
+*********GESTION DE ENTRENAMIENTO***************
 1. Quitar caja de texto de id que se encuentra en la parte superior. :ok
 Sigue igual :ok
 
@@ -59,7 +56,7 @@ BUSCAR
 
 
 *********GENERAR VENTAS***************
-1. NO he revisado incluyendo entrenamiento porque todavía falta. :ok
+1. NO he revisado incluyendo entrenamiento porque todavï¿½a falta. :ok
 
 GUARDAR= ok
 
@@ -75,8 +72,8 @@ LIMPIAR= ok
 
 
 *********GENERAR MEDIDAS***************
-1. Cuando se abre la pestaña Borrar la información de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
-No podría quedar porque no es específico para esa persona. (it is goigng to be load of ficha by id of person, so will be load analisis and medidas, later choose to modifi or save.
+1. Cuando se abre la pestaï¿½a Borrar la informaciï¿½n de la tabla.:ok(puede quedar para elegir los que corresponden a la persona)
+No podrï¿½a quedar porque no es especï¿½fico para esa persona. (it is goigng to be load of ficha by id of person, so will be load analisis and medidas, later choose to modifi or save.
 
 
 
@@ -121,8 +118,8 @@ BUSCAR(lupa)
 
 *********GENERAR ANALISIS***************
 1.Quitar el label "DATOS PARA" :ok
-2.Cuando se abre la pestaña Borrar la información de la tabla.: ok(no deberia, se carga los historiales de la persona seleccionada)
-2.Si yo elimino y luego busco(fecha) se duplica la información de "REcomen.Cardio" a "Recom. pesas".
+2.Cuando se abre la pestaï¿½a Borrar la informaciï¿½n de la tabla.: ok(no deberia, se carga los historiales de la persona seleccionada)
+2.Si yo elimino y luego busco(fecha) se duplica la informaciï¿½n de "REcomen.Cardio" a "Recom. pesas".
 
 GUARDAR= ok
 ELIMINAR= ok
@@ -131,19 +128,19 @@ LIMPIAR= oK
 BUSCAR(lupa)= ok
 
 BUSCAR(fecha)
-1. Al momento de buscar duplica la información de "REcomen.Cardio" a "Recom. pesas".: ok, no hay error!!
+1. Al momento de buscar duplica la informaciï¿½n de "REcomen.Cardio" a "Recom. pesas".: ok, no hay error!!
 
 
 
 
 *********PLAN ALIMENTICIO*************** 
-1. Existen cajas de texto para poner información, pero no presenta las opciones CRUD
+1. Existen cajas de texto para poner informaciï¿½n, pero no presenta las opciones CRUD
 
 
 
 *********FICHA*************** 
-1. Que se muestre el nombre de la persona y no el código. 
-2. Como voy seleccionando de las otras pestañas que muestre la fecha de análisis y la fecha de medida para que el usuario sepa lo que seleccionó.:r
+1. Que se muestre el nombre de la persona y no el cï¿½digo. 
+2. Como voy seleccionando de las otras pestaï¿½as que muestre la fecha de anï¿½lisis y la fecha de medida para que el usuario sepa lo que seleccionï¿½.:r
 3. Quitar caja de texto de id que se encuentra en la parte superior. :ok
 
 GUARDAR=ok
@@ -152,7 +149,7 @@ ELIMINAR
 1. Debe preguntar si deseo o no eliminar. :r
 
 MODIFICAR= ok 
-1. Pero sería más interesante poder modificar la selección de análisis y medidas. :r
+1. Pero serï¿½a mï¿½s interesante poder modificar la selecciï¿½n de anï¿½lisis y medidas. :r
 
 LIMPIAR= ok
 
@@ -163,7 +160,7 @@ BUSCAR(cualquier campo)= ok
 
 *********CONSULTAS*************** 
 ------VENTAS REALIZADAS------
-1. El combo no está funcionando. 
+1. El combo no estï¿½ funcionando. 
 2. El "buscar por campos" no funciona.
 
 ------ENTRENAMIENTOS Y SALDOS------
@@ -172,9 +169,9 @@ BUSCAR(cualquier campo)= ok
 
 *********REPORTES*************** 
 ------PERSONAS------
-1. Cambiar el código por el nombre de la persona. 
+1. Cambiar el cï¿½digo por el nombre de la persona. 
 
 
 *********GENERALES***************
-1.En las tablas incluir un Scroll (supongo que se podría hacer) :ok
+1.En las tablas incluir un Scroll (supongo que se podrï¿½a hacer) :ok
 2.Cambiar el nombre de las ventanas.
