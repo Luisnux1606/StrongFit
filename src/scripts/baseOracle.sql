@@ -502,6 +502,66 @@ ALTER TABLE FacturaDetalle ADD CONSTRAINT fk_id_fac FOREIGN KEY (Factura_id_fac)
 /
 
 
+CREATE TABLE FacturaCabeceraCompras(
+  id_facCabComp Number NOT NULL,
+  fecha_facCabComp Varchar2(350 ),
+  num_facCabComp Varchar2(10),
+  valPagar_facCabCompr Number(10,2),          --1. valpagar
+  subTotal_facCab Number(10,2),   --3. val+dscto
+  total_facCab Number(10,2),        --5. total+iva
+  valPendiente_facCab Number(10,2),  --7. valPendiente
+  valCancelo_facCab Number(10,2),     --6. valCancelo
+  concepto_facCab Varchar2(350),
+  valAjuste_facCab Number(10,2),
+  Persona_id_per Number,
+  Membresia_id_memb Number,        --2. descuento
+  Ivas_id_ivas Number,            --4. iva
+  estado_facCab Number 
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+-- Add keys for table factura
+-- Create indexes for table factura
+CREATE INDEX idx_id_fac ON FacturaCabecera(id_facCab)
+/
+-- Add keys for table factura
+ALTER TABLE FacturaCabecera ADD CONSTRAINT pk_id_fac PRIMARY KEY (id_facCab)
+/
+-- Create relationships section  ------------------------------------------------- 
+ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_pers FOREIGN KEY (Persona_id_per) REFERENCES Persona (id_per)
+/
+ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_memb FOREIGN KEY (Membresia_id_memb) REFERENCES Membresia (id_memb)
+/
+ALTER TABLE FacturaCabecera ADD CONSTRAINT fk_id_ivas FOREIGN KEY (Ivas_id_ivas) REFERENCES IVAS (id_ivas)
+/
+
+CREATE TABLE FacturaDetalle(
+  id_facDet Number NOT NULL,
+  cantidad_facDet Number,
+  descripcion_facDet Varchar2(50),
+  valUnitario_facDet Number(10,2),
+  vTotal_facDet Number(10,2),
+  Producto_id_prod Number, 
+  Factura_id_fac Number,
+  estado_facDet Number 
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+-- Create indexes for table detalle
+CREATE INDEX idx_id_det ON FacturaDetalle(id_facDet)
+/
+-- Add keys for table detalle
+ALTER TABLE FacturaDetalle ADD CONSTRAINT pk_id_det PRIMARY KEY (id_facDet)
+/
+-- Create relationships section  ------------------------------------------------- 
+ALTER TABLE FacturaDetalle ADD CONSTRAINT fk_id_prod FOREIGN KEY (Producto_id_prod) REFERENCES Producto (id_prod)
+/
+-- Create relationships section  ------------------------------------------------- 
+ALTER TABLE FacturaDetalle ADD CONSTRAINT fk_id_fac FOREIGN KEY (Factura_id_fac) REFERENCES FacturaCabecera (id_facCab)
+/
+
+
+
 -- Create tables CONTABILIDAD -------------------------------------------------
 
 CREATE TABLE CONTA_TIPO_ASIENTOS(

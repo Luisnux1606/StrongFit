@@ -335,7 +335,7 @@ public class ConsHistorialPersonaServicio extends Conexion
         ResultSet rs = null; 
         String sql = "select p.descripcion_prod " +
                     "  from categoria c, producto p " +
-                    "  where c.id_cat =p.categoria_id_cat and c.categoria_id_cat=1 and c.estado_cat = 1";
+                    "  where c.id_cat =p.categoria_id_cat and c.categoria_id_cat=1 and c.estado_cat = 1 and p.estado_prod=1";
                 
         
         try 
