@@ -8,6 +8,7 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import modelos.Conexion;
 import modelos.FacturaCab;
@@ -46,6 +47,115 @@ public class ConsFacturaDetCompras extends Conexion {
            
                         
                                                    
+            return true;
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
+    public boolean actualizarEntradas(ArrayList<FacturaDetalleCompras> facDet)
+    {
+        PreparedStatement ps,ps2 = null;
+        Connection con = getConexion();
+        String sql = "update producto set entradas = ?" +
+                      "where id_prod = ?";
+
+        try 
+        {            
+            ps = con.prepareStatement(sql);            
+            for (FacturaDetalleCompras listDets : facDet) 
+            {
+                System.out.println(listDets.getCantidad_facDetComp()+"  "+listDets.getProducto_id_prodComp().getId_prod());
+                ps.setInt(1,listDets.getCantidad_facDetComp());                
+                ps.setInt(2,listDets.getProducto_id_prodComp().getId_prod());
+                
+                ps.execute();
+            }
+           
+                        
+                                                   
+            return true;
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    public int[] getEntradasSalidas(int idProd){
+        String sql;
+        int entradasSalidas[] = new int[2];
+        PreparedStatement ps = null;
+        con = getConexion();
+        ResultSet rs = null; 
+
+        sql="select  p.entradas,p.salidas " +
+            "from producto p " +
+            "where p.id_prod = "+idProd+" and p.estado_prod = 1";						
+                try 
+                {
+                    ps = con.prepareStatement(sql);                            
+                    rs = ps.executeQuery();
+                        while(rs.next()){
+                                entradasSalidas[0]=rs.getInt(1);
+                                entradasSalidas[1]=rs.getInt(2);
+                        }
+                        con.close();
+                } catch (SQLException e) 
+                {e.printStackTrace();}			
+
+        return entradasSalidas;
+    }
+    public int calculaStock(int idProd)
+    {
+        int entradasSalidas[] = getEntradasSalidas(idProd);
+        int stock = entradasSalidas[0]-entradasSalidas[1];
+        
+        return stock;    
+    }
+    
+    public boolean actualizarStock(ArrayList<FacturaDetalleCompras> facDet)
+    {
+        PreparedStatement ps,ps2 = null;
+        Connection con = getConexion();
+        String sql = "update producto set stock = ?" +
+                      "where id_prod = ?";
+
+        try 
+        {            
+            ps = con.prepareStatement(sql);            
+            for (FacturaDetalleCompras listDets : facDet) 
+            {
+                System.out.println(listDets.getCantidad_facDetComp()+"  "+listDets.getProducto_id_prodComp().getId_prod());
+                ps.setInt(1,calculaStock(listDets.getProducto_id_prodComp().getId_prod()));                
+                ps.setInt(2,listDets.getProducto_id_prodComp().getId_prod());                
+                ps.execute();
+            }                                       
             return true;
         } 
         catch (Exception e) 

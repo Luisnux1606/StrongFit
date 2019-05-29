@@ -647,7 +647,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
         memb.setId(Validaciones.isNumVoid(visFicha.lblDsctoIdComp.getText()));
         modFacCabCompras.setMembresiaComp(memb); // 1  = 0
 
-        modFacCabCompras.setSubTotal_facCabComp(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
+        modFacCabCompras.setSubTotal_facCabComp(Validaciones.isNumVoid3(visFicha.txtValConDsctoFichaComp.getText()));
 
         iva.setId_ivas(Validaciones.isNumVoid(visFicha.lblIvaIdComp.getText()));
         modFacCabCompras.setIvasComp(iva); //1 = 0
@@ -683,8 +683,17 @@ public class CtrlFacturaCabCompras implements ActionListener{
                     if (consFicha.registrar(modFacCabCompras)) 
                     {
                         ArrayList<FacturaDetalleCompras> facDets = facDetalleCompras.setDetalles(visFicha, "");
-                        if(consFacDetCompras.registrar(facDets))                        
+                        
+                        if(consFacDetCompras.registrar(facDets)){
                             JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                            if(consFacDetCompras.actualizarEntradas(facDets)){
+                                consFacDetCompras.actualizarStock(facDets);
+                                System.out.println("actualizado entradas");
+                            }
+                            else
+                                System.out.println("NO actualizado entradas");                            
+                        }
+                        
                          
                         limpiar();
                         facDetalleCompras.limpiarTablaDetalles();

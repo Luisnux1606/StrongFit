@@ -203,6 +203,15 @@ public class Calculos {
         return getTwoDecimals(valMasDscto);
     }
     
+    public static double setDescuentoFromDetEntComp(VisFicha visFicha)
+    {
+                          
+        double dsctoMembtxt = Validaciones.isNumVoid10(visFicha.txtValDsctoComp.getText());
+        double valMasDscto = Calculos.getDscto(new Double(visFicha.txtValPagarComp.getText()).doubleValue(), dsctoMembtxt);
+        
+        return getTwoDecimals(valMasDscto);
+    }
+    
     public static void setDsctuentoFromMemb(VisMembresia visMemb,VisFicha visFicha)
     {
         double  dsctoMemb = Double.parseDouble(visMemb.tbl_membresias.getValueAt(visMemb.tbl_membresias.getSelectedRow(), 2)+"");                   
@@ -213,6 +222,13 @@ public class Calculos {
     {
         double iva = Validaciones.isNumVoid10(visFicha.txtIVA.getText());
         double valConDscto = Validaciones.isNumVoid10(visFicha.txtValConDsctoFicha.getText());
+        double totMasIva = ((valConDscto*iva)/100) +valConDscto;        
+        return getTwoDecimals(totMasIva);
+    }
+    public static double setTotalConIvaCompras(VisFicha visFicha)
+    {
+        double iva = Validaciones.isNumVoid10(visFicha.txtIVAComp.getText());
+        double valConDscto = Validaciones.isNumVoid10(visFicha.txtValConDsctoFichaComp.getText());
         double totMasIva = ((valConDscto*iva)/100) +valConDscto;        
         return getTwoDecimals(totMasIva);
     }
@@ -231,6 +247,16 @@ public class Calculos {
         
         visFicha.txt_valCancelo.setText(setTotalConIva(visFicha)+"");
         visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");               
+    }
+     
+     public static void setTotalesCabeceraCompras(JTable facDet,VisFicha visFicha)
+    {
+        visFicha.txtValPagarComp.setText(calcularValorPagar(facDet,visFicha)+"");
+        visFicha.txtValConDsctoFichaComp.setText(setDescuentoFromDetEntComp(visFicha)+"");
+        visFicha.txtTotalConIvaComp.setText(setTotalConIvaCompras(visFicha)+"");
+        
+        visFicha.txt_valCanceloComp.setText(setTotalConIvaCompras(visFicha)+"");
+        visFicha.txtValPendienteFichaComp.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");               
     }
      
      public static void setPendiente(VisFicha visFicha)

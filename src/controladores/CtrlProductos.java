@@ -218,7 +218,7 @@ public class CtrlProductos implements ActionListener{
        visFicha.tblFacturaDetalleCompras.setValueAt(precio, filaDetalle, 3);
 
        Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);                            
-       Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras, visFicha);
+       Calculos.setTotalesCabeceraCompras(visFicha.tblFacturaDetalleCompras, visFicha);
        visProd.dispose();
      }
         

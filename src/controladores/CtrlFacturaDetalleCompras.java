@@ -312,6 +312,11 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
        
     }
   
+    public void setEntradasInventarios()
+    {
+        
+    
+    }
     
     
     

@@ -682,8 +682,15 @@ public class CtrlFacturaCab implements ActionListener{
                     if (consFicha.registrar(modFacCab)) 
                     {
                         ArrayList<FacturaDetalle> facDets = facDetalle.setDetalles(visFicha, "");
-                        if(consFacDet.registrar(facDets))                        
+                        if(consFacDet.registrar(facDets)){                      
                             JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                            if(consFacDet.actualizarSalidas(facDets)){
+                                consFacDet.actualizarStock(facDets);
+                                System.out.println("actualizado salidas");
+                            }
+                            else
+                                System.out.println("NO actualizado salidas");      
+                        }
                          
                         limpiar();
                         facDetalle.limpiarTablaDetalles();
