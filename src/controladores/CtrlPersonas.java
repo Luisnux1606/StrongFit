@@ -100,6 +100,10 @@ public class CtrlPersonas implements ActionListener {
         setTableModel();
         showComboTipoPersonas();
         escribirCombos();
+        int colHide[] = new int[1];
+        colHide[0]=10;
+       
+        setHideJtableColumn(visPersona.tbl_personas,colHide);
        
     }
     
@@ -110,6 +114,17 @@ public class CtrlPersonas implements ActionListener {
            
       }   
     
+       public void setHideJtableColumn(JTable table, int col[])
+    {
+        for (int i = 0; i < col.length; i++) {
+            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
+            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
+            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
+        }
+       
+    
+    }
+      
     public void setFocus()
     {
         visPersona.txt_cedula.requestFocus();
@@ -268,6 +283,7 @@ public class CtrlPersonas implements ActionListener {
 
                     visPersona.txtCorreoElect.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getMail())));  
                     visPersona.cmbxGenero.setSelectedItem(String.valueOf(modPer.getGenero()).toUpperCase());  
+                    visPersona.cmbTipoPersona.setSelectedItem(modPer.getTipoPersona().getDescripcion_tipoPer());
                     
                     desabilitaHabilita(visPersona.btnGuardar,false);
                     desabilitaHabilita(visPersona.btnModificar,true);

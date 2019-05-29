@@ -294,7 +294,7 @@ public class CtrlFacturaCab implements ActionListener{
               if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB) {
                                   
                  visFicha.txtValDscto.requestFocusInWindow();
-                 Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+                 Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras, visFicha);
               }  
           }
           
@@ -675,7 +675,7 @@ public class CtrlFacturaCab implements ActionListener{
            jdc.add(visFicha.dtcFechaFacCab);
           
                 System.out.println(visFicha.txt_clienteFac.getName());
-               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFac) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
+               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFac) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalleCompras)) 
                {                                        
                     setFacturaCabecera(visFicha);   
                                        

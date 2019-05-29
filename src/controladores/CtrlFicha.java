@@ -137,7 +137,7 @@ public class CtrlFicha implements ActionListener{
        
         setFocus();
         setListener();    
-        setTableModel(visFicha.tblFacturaDetalle);
+        setTableModel(visFicha.tblFacturaDetalleCompras);
        // iniciar();
         
        // visFicha.txtCodPersona.setText(persona.getId()+"");

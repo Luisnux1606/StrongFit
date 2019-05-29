@@ -191,7 +191,7 @@ public class CtrlMembresias implements ActionListener{
                     int idMemb = Integer.parseInt(visMembresias.tbl_membresias.getValueAt(visMembresias.tbl_membresias.getSelectedRow(), 0)+"");
                     visFicha.lblDsctoId.setText(idMemb+"");                    
                     Calculos.setDsctuentoFromMemb(visMembresias, visFicha);
-                    Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+                    Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras, visFicha);
                     visMembresias.dispose();
                   
                 }

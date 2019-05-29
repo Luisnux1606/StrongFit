@@ -188,19 +188,19 @@ public class CtrlProductos implements ActionListener{
      
      public void setProductoServicioFactura()
      {
-        int filaDetalle = visFicha.tblFacturaDetalle.getRowCount()-1;
+        int filaDetalle = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
        int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
        String descripcion = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
        double precio =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
 
 
-       visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
-       visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
-       visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 2);
-       visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
+       visFicha.tblFacturaDetalleCompras.setValueAt(idProd, filaDetalle, 0);                            
+       visFicha.tblFacturaDetalleCompras.setValueAt(1, filaDetalle, 1);
+       visFicha.tblFacturaDetalleCompras.setValueAt(descripcion, filaDetalle, 2);
+       visFicha.tblFacturaDetalleCompras.setValueAt(precio, filaDetalle, 3);
 
-       Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
-       Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+       Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);                            
+       Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras, visFicha);
        visProd.dispose();
      }
         
@@ -309,7 +309,7 @@ public class CtrlProductos implements ActionListener{
 
           public void keyTyped(KeyEvent e) {
              int m=e.getKeyChar();
-             int filaDetalle = visFicha.tblFacturaDetalle.getRowCount()-1;
+             int filaDetalle = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
           
               if (m == KeyEvent.VK_ENTER  ) 
               {
@@ -318,13 +318,13 @@ public class CtrlProductos implements ActionListener{
                 double precio =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
 
 
-                visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
-                visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
-                visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 2);
-                visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
+                visFicha.tblFacturaDetalleCompras.setValueAt(idProd, filaDetalle, 0);                            
+                visFicha.tblFacturaDetalleCompras.setValueAt(1, filaDetalle, 1);
+                visFicha.tblFacturaDetalleCompras.setValueAt(descripcion, filaDetalle, 2);
+                visFicha.tblFacturaDetalleCompras.setValueAt(precio, filaDetalle, 3);
 
-                Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
-                Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+                Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);                            
+                Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras, visFicha);
                 visProd.dispose();
               }
                 

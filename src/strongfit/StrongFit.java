@@ -8,12 +8,14 @@ package strongfit;
 import assets.Configuracion;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
+import consultas.ConsFacturaCabCompras;
 import consultas.ConsFacturaDet;
 import consultas.ConsFicha;
 import consultas.ConsMedidas;
 import consultas.ConsPersona;
 import controladores.CtrlAnalisis;
 import controladores.CtrlFacturaCab;
+import controladores.CtrlFacturaCabCompras;
 import controladores.CtrlFacturaDetalle;
 import controladores.CtrlFicha;
 import controladores.CtrlMedidas;
@@ -25,6 +27,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import modelos.Analisis;
 import modelos.FacturaCab;
+import modelos.FacturaCabCompras;
 import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
@@ -51,6 +54,7 @@ public class StrongFit {
         Medidas med =  new Medidas();
         Analisis ana = new Analisis();
         FacturaCab facCab = new FacturaCab();
+        FacturaCabCompras facCabComp = new FacturaCabCompras();
        
         
         ConsPersona consPer = new ConsPersona();
@@ -59,6 +63,7 @@ public class StrongFit {
         ConsAnalisis consAna = new ConsAnalisis();
         ConsFacturaCab consFacCab = new ConsFacturaCab();
         ConsFacturaDet consFacDet = new ConsFacturaDet();
+        ConsFacturaCabCompras consFacCabComp = new ConsFacturaCabCompras();
         
         VisPersona visPer = new VisPersona();   
         VisFicha visFicha = new VisFicha();        
@@ -69,6 +74,7 @@ public class StrongFit {
         CtrlMedidas ctrlMed = new CtrlMedidas(med, consMed, visFicha);        
         CtrlAnalisis ctrlAna = new CtrlAnalisis(ana, consAna, visFicha);
         CtrlFacturaCab ctrlFacturaCab = new CtrlFacturaCab(facCab, consFacCab, visFicha, visMemb, per);
+        CtrlFacturaCabCompras ctrlFacCabComp = new CtrlFacturaCabCompras(facCabComp, consFacCabComp, visFicha, visMemb, per);
 
         
         CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha );

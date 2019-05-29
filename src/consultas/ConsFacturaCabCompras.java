@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import modelos.Analisis;
 import modelos.Conexion;
 import modelos.FacturaCab;
+import modelos.FacturaCabCompras;
 import modelos.Medidas;
 import modelos.Persona;
 
@@ -21,28 +22,28 @@ import modelos.Persona;
  */
 public class ConsFacturaCabCompras extends Conexion {
     
-    public boolean registrar(FacturaCab f)
+    public boolean registrar(FacturaCabCompras f)
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FacturaCabecera (id_facCab,fecha_facCab, num_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab) "
-                + " VALUES(factura_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO FACTURACABECERACOMPRAS (ID_FACCABCOMP,FECHA_FACCABCOMP, NUM_FACCABCOMP,VALPAGAR_FACCABCOMPR,SUBTOTAL_FACCABCOMPR,TOTAL_FACCABCOMPR,VALPENDIENTE_FACCABCOMPR,VALCANCELO_FACCABCOMPR, PERSONA_ID_PER, MEMBRESIA_ID_MEMB, IVAS_ID_IVAS,ESTADO_FACCABCOMPR) "
+                + " VALUES(facturaComp_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
 
         try 
         {            
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_facCab());           
-            ps.setString(2, f.getNum_facCab());
-            ps.setDouble(3, f.getValPagar_facCab());
-            ps.setDouble(4, f.getSubTotal_facCab());
-            ps.setDouble(5, f.getTotal_facCab());
-            ps.setDouble(6, f.getValPendiente_facCab());
-            ps.setDouble(7, f.getValCancelo_facCab());
-            ps.setInt(8, f.getPersona().getId());
-            ps.setInt(9, f.getMembresia().getId());
-            ps.setInt(10, f.getIvas().getId_ivas());
-            ps.setInt(11, f.getEstado());
+            ps.setString(1, f.getFecha_facCabComp());           
+            ps.setString(2, f.getNum_facCabComp());
+            ps.setDouble(3, f.getValPagar_facCabComp());
+            ps.setDouble(4, f.getSubTotal_facCabComp());
+            ps.setDouble(5, f.getTotal_facCabComp());
+            ps.setDouble(6, f.getValPendiente_facCabComp());
+            ps.setDouble(7, f.getValCancelo_facCabComp());
+            ps.setInt(8, f.getPersonaComp().getId());
+            ps.setInt(9, f.getMembresiaComp().getId());
+            ps.setInt(10, f.getIvasComp().getId_ivas());
+            ps.setInt(11, f.getEstadoComp());
                         
             ps.execute();                                       
             return true;
@@ -65,11 +66,11 @@ public class ConsFacturaCabCompras extends Conexion {
         
     }
     
-    public boolean modificar(FacturaCab f)
+    public boolean modificar(FacturaCabCompras f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
-        String sql = "update FacturaCabecera SET fecha_facCab=?, num_facCab=?, subTotal_facCab=?,valPagar_facCab=?,subTotal_facCab=?,total_facCab=?,valPendiente_facCab=?,valCancelo_facCab=?,Persona_id_per=?,Membresia_id_memb=?,Ivas_id_ivas=?,estado_facCab=?"
+        String sql = "update FACTURACABECERACOMPRAS SET FECHA_FACCABCOMP=?, NUM_FACCABCOMP=?, VALPAGAR_FACCABCOMPR=?,SUBTOTAL_FACCABCOMPR=?,TOTAL_FACCABCOMPR=?,VALPENDIENTE_FACCABCOMPR=?,VALCANCELO_FACCABCOMPR=?,PERSONA_ID_PER=?,MEMBRESIA_ID_MEMB=?,IVAS_ID_IVAS=?,ESTADO_FACCABCOMPR=?"
                 + " WHERE id_facCab=?";
         
         try 
@@ -77,18 +78,17 @@ public class ConsFacturaCabCompras extends Conexion {
             
             ps = con.prepareStatement(sql);
             
-            ps.setString(1, f.getFecha_facCab());           
-            ps.setString(2, f.getNum_facCab());
-            ps.setDouble(3, f.getSubTotal_facCab());
-            ps.setDouble(4, f.getValPagar_facCab());
-            ps.setDouble(5, f.getSubTotal_facCab());
-            ps.setDouble(6, f.getTotal_facCab());
-            ps.setDouble(7, f.getValPendiente_facCab());
-            ps.setDouble(8, f.getValCancelo_facCab());
-            ps.setInt(9, f.getPersona().getId());
-            ps.setInt(10, f.getMembresia().getId());
-            ps.setInt(11, f.getIvas().getId_ivas());
-            ps.setInt(12, f.getEstado());
+            ps.setString(1, f.getFecha_facCabComp());           
+            ps.setString(2, f.getNum_facCabComp());
+            ps.setDouble(3, f.getValPagar_facCabComp());
+            ps.setDouble(4, f.getSubTotal_facCabComp());
+            ps.setDouble(5, f.getTotal_facCabComp());
+            ps.setDouble(6, f.getValPendiente_facCabComp());
+            ps.setDouble(7, f.getValCancelo_facCabComp());
+            ps.setInt(8, f.getPersonaComp().getId());
+            ps.setInt(9, f.getMembresiaComp().getId());
+            ps.setInt(10, f.getIvasComp().getId_ivas());
+            ps.setInt(11, f.getEstadoComp());
             
             ps.execute();
             return true;
@@ -115,7 +115,7 @@ public class ConsFacturaCabCompras extends Conexion {
     {
         PreparedStatement ps = null;
         Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
-        String sql = "update FacturaCabecera SET VALAJUSTE_FACCAB=?"
+        String sql = "update FACTURACABECERACOMPRAS SET VALAJUSTE_FACCAB=?"
                 + " WHERE id_facCab=?";
         
         try 
@@ -152,7 +152,7 @@ public class ConsFacturaCabCompras extends Conexion {
     {
         PreparedStatement ps = null;
         Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
-        String sql = "update FacturaCabecera SET ESTADO_FACCAB=?"
+        String sql = "update FACTURACABECERACOMPRAS SET ESTADO_FACCABCOMPR=?"
                 + " WHERE id_facCab=?";
         
         try 
@@ -185,18 +185,18 @@ public class ConsFacturaCabCompras extends Conexion {
         
     }
     
-     public boolean eliminar(FacturaCab f)
+     public boolean eliminar(FacturaCabCompras f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE  FacturaCabecera SET estado_facCab =? WHERE id_facCab=?";
+        String sql = "UPDATE  FACTURACABECERACOMPRAS SET ESTADO_FACCABCOMPR =? WHERE ID_FACCABCOMP=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);  
-            ps.setInt(1, f.getEstado());
-            ps.setInt(2, f.getId_facCab());
+            ps.setInt(1, f.getEstadoComp());
+            ps.setInt(2, f.getId_facCabComp());
             ps.execute();
             return true;
         } 
@@ -586,14 +586,14 @@ public class ConsFacturaCabCompras extends Conexion {
         return rs;
     }
     
-    public boolean getLastInvoice(FacturaCab fCab)
+    public boolean getLastInvoice(FacturaCabCompras fCab)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "select fC.Id_Faccab\n" +
-                    "from facturaCabecera fC\n" +
-                    "order by Id_Faccab asc";
+        String sql = "select fC.ID_FACCABCOMP " +
+                    "from FACTURACABECERACOMPRAS fC " +
+                    "order by ID_FACCABCOMP asc";
         
         try 
         {
@@ -602,7 +602,7 @@ public class ConsFacturaCabCompras extends Conexion {
           
             rs = ps.executeQuery();
             if (rs.next()) { //ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per
-                fCab.setId_facCab(rs.getInt("Id_Faccab"));                            
+                fCab.setId_facCabComp(rs.getInt("ID_FACCABCOMP"));                            
                 return true;
             }
             return false;

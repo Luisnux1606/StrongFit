@@ -161,7 +161,10 @@ public class ConsPersona extends Conexion
                 p.setNro_fono(rs.getString("nroFono_per"));
                 p.setEdad(rs.getInt("edad_per"));
                 p.setFecha_nac(rs.getString("fechaNac_per")+"");
-               
+                TipoPersona tipoPer = new TipoPersona();
+                    tipoPer.setId_tipoPer(rs.getInt("TIPOPERSONA_ID_TIPOPER"));
+                    tipoPer.setDescripcion_tipoPer(getNomByIdPerByNom(tipoPer.getId_tipoPer()+"")+"");
+               p.setTipoPersona(tipoPer);
                 return true;
             }
             return false;
@@ -362,7 +365,10 @@ public class ConsPersona extends Conexion
                 p.setNro_fono(rs.getString("nroFono_per"));
                 p.setEdad(rs.getInt("edad_per"));                
                 p.setFecha_nac(rs.getString("fechaNac_per")+"");         
-                
+                TipoPersona tipoPer = new TipoPersona();
+                    tipoPer.setId_tipoPer(rs.getInt("TIPOPERSONA_ID_TIPOPER"));
+                    tipoPer.setDescripcion_tipoPer(getNomByIdPerByNom(tipoPer.getId_tipoPer()+"")+"");
+                p.setTipoPersona(tipoPer);  
                 personas.add(p);               
             }
              

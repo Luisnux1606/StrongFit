@@ -20,7 +20,7 @@ public class FacturaDetalleCompras {
   private double valUnitario_facDetComp;
   private double vTotal_facDetComp;
   private Producto Producto_id_prodComp;
-  private FacturaCab Factura_id_facComp;
+  private FacturaCabCompras Factura_id_facComp;
   private int estado_facDetComp;
 
     /**
@@ -110,14 +110,14 @@ public class FacturaDetalleCompras {
     /**
      * @return the Factura_id_facComp
      */
-    public FacturaCab getFactura_id_facComp() {
+    public FacturaCabCompras getFactura_id_facComp() {
         return Factura_id_facComp;
     }
 
     /**
      * @param Factura_id_facComp the Factura_id_facComp to set
      */
-    public void setFactura_id_facComp(FacturaCab Factura_id_facComp) {
+    public void setFactura_id_facComp(FacturaCabCompras Factura_id_facComp) {
         this.Factura_id_facComp = Factura_id_facComp;
     }
 

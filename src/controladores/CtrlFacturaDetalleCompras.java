@@ -11,6 +11,7 @@ import static assets.Calculos.getTwoDecimals;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsFacturaDet;
+import consultas.ConsFacturaDetCompras;
 import consultas.ConsProductos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import modelos.Categoria;
 import modelos.FacturaCab;
+import modelos.FacturaCabCompras;
 import modelos.FacturaDetalle;
+import modelos.FacturaDetalleCompras;
 import modelos.Producto;
 import vistas.VisFicha;
 import vistas.VisProductos;
@@ -38,13 +41,13 @@ import vistas.VisProductos;
 public class CtrlFacturaDetalleCompras implements ActionListener {
     
     
-    private ArrayList<FacturaDetalle> facDet; 
-    private ConsFacturaDet consFacDet;
+    private ArrayList<FacturaDetalleCompras> facDetCompras; 
+    private ConsFacturaDetCompras consFacDetCompras;
     private VisFicha visFicha;
     
-    public CtrlFacturaDetalleCompras(ConsFacturaDet consFacDet,VisFicha visFicha)
+    public CtrlFacturaDetalleCompras(ConsFacturaDetCompras consFacDet,VisFicha visFicha)
     {        
-        this.consFacDet = consFacDet;
+        this.consFacDetCompras = consFacDet;
         this.visFicha = visFicha;
         
       //  this.visFicha.btnGuardarFacCab.addActionListener(this);
@@ -60,7 +63,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
         
         setListener();
         limpiarTablaDetalles();
-        setFormatTable(visFicha.tblFacturaDetalle);
+        setFormatTable(visFicha.tblFacturaDetalleCompras);
         
     }
     
@@ -76,7 +79,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
     public void setListener()
     {               
         int col = 1;      
-        JTable facDet = visFicha.tblFacturaDetalle;
+        JTable facDet = visFicha.tblFacturaDetalleCompras;
         facDet.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         facDet.setColumnSelectionAllowed(true);
         facDet.setRowSelectionAllowed(true);
@@ -135,15 +138,15 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
                           break;
                     case 4:
                           row = facDet.getSelectedRow()-1;                                                   
-                          addRows(visFicha.tblFacturaDetalle);
+                          addRows(visFicha.tblFacturaDetalleCompras);
                           col = 1;
-                          row = visFicha.tblFacturaDetalle.getRowCount()-1;
-                          visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);                        
+                          row = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
+                          visFicha.tblFacturaDetalleCompras.changeSelection(row, col,false,false);                        
                           break;
                     default:
                         break;
                   }
-                visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);
+                visFicha.tblFacturaDetalleCompras.changeSelection(row, col,false,false);
               }
                 
               
@@ -155,7 +158,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
            
           }
         };
-        visFicha.tblFacturaDetalle.addKeyListener(keyListenerTblDetalle);
+        visFicha.tblFacturaDetalleCompras.addKeyListener(keyListenerTblDetalle);
     
     }
     
@@ -179,26 +182,26 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
         }
         if (e.getSource() == visFicha.btnAgregarFilas) 
         {
-           addRows(visFicha.tblFacturaDetalle);
-           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
-           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle,visFicha);
+           addRows(visFicha.tblFacturaDetalleCompras);
+           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);
+           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras,visFicha);
         } 
         if (e.getSource() == visFicha.btnEliminarFilas) 
         {
-           deleteRows(visFicha.tblFacturaDetalle);
-           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
-           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle,visFicha);
+           deleteRows(visFicha.tblFacturaDetalleCompras);
+           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);
+           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras,visFicha);
         } 
 
     }
     
     public void limpiarTablaDetalles(){
-        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalle.getModel();
-        int a = visFicha.tblFacturaDetalle.getRowCount()-1;
+        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalleCompras.getModel();
+        int a = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         }
-         addRows(visFicha.tblFacturaDetalle);
+         addRows(visFicha.tblFacturaDetalleCompras);
     }
     public void addRows(JTable table)
     {        
@@ -255,26 +258,26 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
     
     
     
-    public ArrayList<FacturaDetalle> setDetalles(VisFicha visFicha,String numFac)
+    public ArrayList<FacturaDetalleCompras> setDetalles(VisFicha visFicha,String numFac)
     {
-        JTable table = visFicha.tblFacturaDetalle;
+        JTable table = visFicha.tblFacturaDetalleCompras;
         String num,desc,valU,valT,prodId;
         int facCabId = 0;
                 
         Producto prod = new Producto();
-        FacturaCab facCab = new FacturaCab();
-        FacturaDetalle detalle ;
+        FacturaCabCompras facCab = new FacturaCabCompras();
+        FacturaDetalleCompras detalle ;
         
-        ArrayList<FacturaDetalle> detalles=new ArrayList<>();
+        ArrayList<FacturaDetalleCompras> detalles=new ArrayList<>();
         ArrayList<Producto> p = new ArrayList<>();      
-        facDet = new ArrayList<>();
+        facDetCompras = new ArrayList<>();
         
         
-        if (consFacDet.getLastInvoice(facCab))               
-            facCabId = facCab.getId_facCab();
+        if (consFacDetCompras.getLastInvoice(facCab))               
+            facCabId = facCab.getId_facCabComp();
         
-        facCab.setId_facCab(facCabId);        
-        System.out.println(facCab.getId_facCab());
+        facCab.setId_facCabComp(facCabId);        
+        System.out.println(facCab.getId_facCabComp());
         for (int i = 0; i <= table.getRowCount()-1; i++) 
         {
             prodId =table.getValueAt(i, 0)+"";
@@ -285,27 +288,27 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
          
             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
                 
-                detalle = new FacturaDetalle();
+                detalle = new FacturaDetalleCompras();
                 prod = new Producto();
                
-                detalle.setCantidad_facDet(Validaciones.isNumVoid(num));
-                detalle.setDescripcion_facDet(desc);
-                detalle.setValUnitario_facDet(Validaciones.isNumVoid10(valU));
-                detalle.setvTotal_facDet(Validaciones.isNumVoid10(valT));
+                detalle.setCantidad_facDetComp(Validaciones.isNumVoid(num));
+                detalle.setDescripcion_facDetComp(desc);
+                detalle.setValUnitario_facDetComp(Validaciones.isNumVoid10(valU));
+                detalle.setvTotal_facDetComp(Validaciones.isNumVoid10(valT));
                
                 prod.setId_prod(Validaciones.isNumVoid(prodId));
                 p.add(prod);
-                detalle.setProducto_id_prod(p.get(p.size()-1));
+                detalle.setProducto_id_prodComp(p.get(p.size()-1));
                 
-                detalle.setFactura_id_fac(facCab);
-                detalle.setEstado_facDet(1);
+                detalle.setFactura_id_facComp(facCab);
+                detalle.setEstado_facDetComp(1);
                 
                 detalles.add(detalle);
-                facDet.add(detalles.get(detalles.size()-1));
+                facDetCompras.add(detalles.get(detalles.size()-1));
 
             }
         }                               
-            return facDet;
+            return facDetCompras;
        
     }
   

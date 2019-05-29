@@ -11,7 +11,9 @@ import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
+import consultas.ConsFacturaCabCompras;
 import consultas.ConsFacturaDet;
+import consultas.ConsFacturaDetCompras;
 import consultas.ConsHistorialPersonaServicio;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
@@ -40,7 +42,9 @@ import javax.swing.table.DefaultTableModel;
 import modelos.Analisis;
 import modelos.Categoria;
 import modelos.FacturaCab;
+import modelos.FacturaCabCompras;
 import modelos.FacturaDetalle;
+import modelos.FacturaDetalleCompras;
 import modelos.Ficha;
 import modelos.HistorialPersonaServicio;
 import modelos.Iva;
@@ -62,9 +66,9 @@ import vistas.VisReportes;
  */
 public class CtrlFacturaCabCompras implements ActionListener{
 
-    FacturaCab modFacCab;
-    ArrayList<FacturaCab> lstFicha;
-    ConsFacturaCab consFicha;
+    FacturaCabCompras modFacCabCompras;
+    ArrayList<FacturaCabCompras> lstFicha;
+    ConsFacturaCabCompras consFicha;
     VisFicha visFicha;
     VisReportes visReportes;
     VisMembresia visMemb;
@@ -74,12 +78,12 @@ public class CtrlFacturaCabCompras implements ActionListener{
     Persona persona;
     String cadBus;
     
-     ConsFacturaDet consFacDet ;     
-     CtrlFacturaDetalle facDetalle; 
+     ConsFacturaDetCompras consFacDetCompras ;     
+     CtrlFacturaDetalleCompras facDetalleCompras; 
     
-    public CtrlFacturaCabCompras(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
+    public CtrlFacturaCabCompras(FacturaCabCompras modFicha,ConsFacturaCabCompras consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
     {
-        this.modFacCab = modFicha;
+        this.modFacCabCompras = modFicha;
         this.consFicha = consFicha;
         this.visFicha = visFicha;
         this.persona = persona;
@@ -87,12 +91,12 @@ public class CtrlFacturaCabCompras implements ActionListener{
         this.memb = new Membresias();
         this.iva = new Iva();
               
-         consFacDet= new ConsFacturaDet();  
-        facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
+         consFacDetCompras= new ConsFacturaDetCompras();  
+        facDetalleCompras = new CtrlFacturaDetalleCompras(consFacDetCompras, visFicha);
         
-        this.visFicha.btnGuardarFacCab.addActionListener(this);
+        this.visFicha.btnGuardarFacCabCompras.addActionListener(this);
 //        this.visFicha.btnEliminarFacCab.addActionListener(this);
-        this.visFicha.btnLimpiarFacCab.addActionListener(this);
+        this.visFicha.btnLimpiarFacCabComp.addActionListener(this);
  //       this.visFicha.btnModificarFacCab.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
         this.visFicha.btnCalcular.addActionListener(this);
@@ -294,7 +298,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
               if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB) {
                                   
                  visFicha.txtValDscto.requestFocusInWindow();
-                 Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+                 Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras, visFicha);
               }  
           }
           
@@ -633,29 +637,29 @@ public class CtrlFacturaCabCompras implements ActionListener{
     */
     public void setFacturaCabecera(VisFicha visFich)
     {
-         String numFac = visFicha.lblNroFactura.getText();
+         String numFac = visFicha.lblNroFacCompras.getText();
         
-        modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
-        modFacCab.setNum_facCab(numFac);
+        modFacCabCompras.setFecha_facCabComp(Validaciones.setFormatFecha(visFicha.dtcFechaFacCabComp.getDate()));                
+        modFacCabCompras.setNum_facCabComp(numFac);
 
-        persona.setId(Validaciones.isNumVoid(visFicha.lblPersonaId.getText()));
-        modFacCab.setPersona(persona);
+        persona.setId(Validaciones.isNumVoid(visFicha.lblPersonaIdComp.getText()));
+        modFacCabCompras.setPersonaComp(persona);
 
-        modFacCab.setValPagar_facCab(Validaciones.isNumVoid3(visFicha.txtValPagar.getText()));
+        modFacCabCompras.setValPagar_facCabComp(Validaciones.isNumVoid3(visFicha.txtValPagarComp.getText()));
 
-        memb.setId(Validaciones.isNumVoid(visFicha.lblDsctoId.getText()));
-        modFacCab.setMembresia(memb); // 1  = 0
+        memb.setId(Validaciones.isNumVoid(visFicha.lblDsctoIdComp.getText()));
+        modFacCabCompras.setMembresiaComp(memb); // 1  = 0
 
-        modFacCab.setSubTotal_facCab(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
+        modFacCabCompras.setSubTotal_facCabComp(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
 
-        iva.setId_ivas(Validaciones.isNumVoid(visFicha.lblIvaId.getText()));
-        modFacCab.setIvas(iva); //1 = 0
+        iva.setId_ivas(Validaciones.isNumVoid(visFicha.lblIvaIdComp.getText()));
+        modFacCabCompras.setIvasComp(iva); //1 = 0
         
 
-        modFacCab.setTotal_facCab(Validaciones.isNumVoid3(visFicha.txtTotalConIva.getText()));
-        modFacCab.setValCancelo_facCab(Validaciones.isNumVoid3(visFicha.txt_valCancelo.getText()));
-        modFacCab.setValPendiente_facCab(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));       
-        modFacCab.setEstado(1);      
+        modFacCabCompras.setTotal_facCabComp(Validaciones.isNumVoid3(visFicha.txtTotalConIvaComp.getText()));
+        modFacCabCompras.setValCancelo_facCabComp(Validaciones.isNumVoid3(visFicha.txt_valCanceloComp.getText()));
+        modFacCabCompras.setValPendiente_facCabComp(Validaciones.isNumVoid3(visFicha.txtValPendienteFichaComp.getText()));       
+        modFacCabCompras.setEstadoComp(1);      
     }
     
     public void setFacturaDetalle(VisFicha visFicha)
@@ -669,24 +673,24 @@ public class CtrlFacturaCabCompras implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == visFicha.btnGuardarFacCab) 
+      if (e.getSource() == visFicha.btnGuardarFacCabCompras) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dtcFechaFacCab);
           
                 System.out.println(visFicha.txt_clienteFac.getName());
-               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFac) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
+               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFac) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalleCompras)) 
                {                                        
                     setFacturaCabecera(visFicha);   
                                        
-                    if (consFicha.registrar(modFacCab)) 
+                    if (consFicha.registrar(modFacCabCompras)) 
                     {
-                        ArrayList<FacturaDetalle> facDets = facDetalle.setDetalles(visFicha, "");
-                        if(consFacDet.registrar(facDets))                        
+                        ArrayList<FacturaDetalleCompras> facDets = facDetalleCompras.setDetalles(visFicha, "");
+                        if(consFacDetCompras.registrar(facDets))                        
                             JOptionPane.showMessageDialog(null, "Registro Guardado!");
                          
                         limpiar();
-                        facDetalle.limpiarTablaDetalles();
+                        facDetalleCompras.limpiarTablaDetalles();
                     }
                     else
                     {

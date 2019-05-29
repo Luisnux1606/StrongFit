@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import modelos.Conexion;
 import modelos.FacturaCab;
+import modelos.FacturaCabCompras;
 import modelos.FacturaDetalle;
+import modelos.FacturaDetalleCompras;
 
 /**
  *
@@ -20,28 +22,25 @@ import modelos.FacturaDetalle;
 public class ConsFacturaDetCompras extends Conexion {
     
     
-    public boolean registrar(ArrayList<FacturaDetalle> facDet)
+    public boolean registrar(ArrayList<FacturaDetalleCompras> facDet)
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FacturaDetalle (id_facDet,cantidad_facDet, descripcion_facDet,valUnitario_facDet,vTotal_facDet,Producto_id_prod,Factura_id_fac,estado_facDet) "
-                + " VALUES(detalle_id_seq.NEXTVAL,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO FACTURADETALLECOMPRAS (ID_FACDETCOMP,CANTIDAD_FACDETCOMP, DESCRIPCION_FACDETCOMP,VALUNITARIO_FACDETCOMP,VTOTAL_FACDETCOMP,PRODUCTO_ID_PRODCOMP,FACTURA_ID_FACCOMP,ESTADO_FACDETCOMP) "
+                + " VALUES(detalleComp_id_seq.NEXTVAL,?,?,?,?,?,?,?)";
 
         try 
         {            
-            ps = con.prepareStatement(sql);
-            
-            for (FacturaDetalle listDets : facDet) 
+            ps = con.prepareStatement(sql);            
+            for (FacturaDetalleCompras listDets : facDet) 
             {
-                ps.setInt(1,listDets.getCantidad_facDet());
-                ps.setString(2,listDets.getDescripcion_facDet());
-                ps.setDouble(3,listDets.getValUnitario_facDet());
-                ps.setDouble(4,listDets.getvTotal_facDet());
-                ps.setInt(5,listDets.getProducto_id_prod().getId_prod());
-                ps.setInt(6,listDets.getFactura_id_fac().getId_facCab());
-                System.out.println("cabFac "+listDets.getFactura_id_fac().getId_facCab());
-                ps.setInt(7, listDets.getEstado_facDet());
-               
+                ps.setInt(1,listDets.getCantidad_facDetComp());
+                ps.setString(2,listDets.getDescripcion_facDetComp());
+                ps.setDouble(3,listDets.getValUnitario_facDetComp());
+                ps.setDouble(4,listDets.getvTotal_facDetComp());
+                ps.setInt(5,listDets.getProducto_id_prodComp().getId_prod());
+                ps.setInt(6,listDets.getFactura_id_facComp().getId_facCabComp());               
+                ps.setInt(7, listDets.getEstado_facDetComp());               
                 ps.execute();
             }
            
@@ -514,14 +513,14 @@ public class ConsFacturaDetCompras extends Conexion {
         return rs;
     }
     
-   public boolean getLastInvoice(FacturaCab fCab)
+   public boolean getLastInvoice(FacturaCabCompras fCab)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "select max(fC.Id_Faccab) as Id_Faccab " +
-                    "from facturaCabecera fC " +
-                    "order by Id_Faccab asc";
+        String sql = "select max(fC.ID_FACCABCOMP) as Id_Faccab " +
+                    "from FACTURACABECERACOMPRAS fC " +
+                    "order by ID_FACCABCOMP asc";
         
         try 
         {
@@ -530,7 +529,7 @@ public class ConsFacturaDetCompras extends Conexion {
           
             rs = ps.executeQuery();
             if (rs.next()) { //ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per
-                fCab.setId_facCab(rs.getInt("Id_Faccab"));                            
+                fCab.setId_facCabComp(rs.getInt("ID_FACCABCOMP"));                            
                 return true;
             }
             return false;
