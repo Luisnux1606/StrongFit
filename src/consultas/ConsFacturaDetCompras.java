@@ -74,13 +74,17 @@ public class ConsFacturaDetCompras extends Conexion {
         String sql = "update producto set entradas = ?" +
                       "where id_prod = ?";
 
+        int entradasActual = 0;
+        int entradas = 0;
         try 
         {            
             ps = con.prepareStatement(sql);            
             for (FacturaDetalleCompras listDets : facDet) 
             {
-                System.out.println(listDets.getCantidad_facDetComp()+"  "+listDets.getProducto_id_prodComp().getId_prod());
-                ps.setInt(1,listDets.getCantidad_facDetComp());                
+                System.out.println(listDets.getCantidad_facDetComp()+"  "+listDets.getProducto_id_prodComp().getId_prod());                
+                entradasActual = getEntradasSalidas(listDets.getProducto_id_prodComp().getId_prod())[0];
+                entradas = entradasActual + listDets.getCantidad_facDetComp();
+                ps.setInt(1,entradas);                
                 ps.setInt(2,listDets.getProducto_id_prodComp().getId_prod());
                 
                 ps.execute();
@@ -152,6 +156,7 @@ public class ConsFacturaDetCompras extends Conexion {
             for (FacturaDetalleCompras listDets : facDet) 
             {
                 System.out.println(listDets.getCantidad_facDetComp()+"  "+listDets.getProducto_id_prodComp().getId_prod());
+                
                 ps.setInt(1,calculaStock(listDets.getProducto_id_prodComp().getId_prod()));                
                 ps.setInt(2,listDets.getProducto_id_prodComp().getId_prod());                
                 ps.execute();

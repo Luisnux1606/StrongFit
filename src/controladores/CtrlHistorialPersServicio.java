@@ -89,10 +89,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
         this.visHisPerServ = visHisPerServ;
         this.visFicha = visFicha;
         this.per = persona;
-        this.prod = new Producto();
-        
-        visHisPerServ.txtPersona.setText(per.getNombre()+" "+Validaciones.isNumVoid4(per.getApellido()) );
-        visHisPerServ.lblIdPersona.setText(per.getId()+"");
+        this.prod = new Producto();               
         
                 
         this.visHisPerServ.btnGuardar.addActionListener(this);
@@ -137,8 +134,10 @@ public class CtrlHistorialPersServicio implements ActionListener{
         visHisPerServ.btnEliminar.setToolTipText("Eliminar el registro");
         visHisPerServ.btnLimpiar.setToolTipText("Limpiar el registro");
         //visEnt.tabp_ficha.setSelectedIndex(2);
-        limpiar();        
-        showDataTableByLocal();
+        limpiar();    
+        visHisPerServ.txtPersona.setText(per.getNombre()+" "+Validaciones.isNumVoid4(per.getApellido()) );
+        visHisPerServ.lblIdPersona.setText(per.getId()+"");
+        showDataTableByLocal();                
         visHisPerServ.setLocation(300,10); 
         visHisPerServ.setSize(1000,600);                
         visHisPerServ.setVisible(true);
@@ -506,7 +505,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
            ArrayList<JDateChooser> jdc=new ArrayList<>();
                      
                        
-                    int tE = consHisPerServ.getIdByNom(visHisPerServ.cbxServicio.getSelectedItem()+"");     
+                    int tE = consHisPerServ.getIdByNom((visHisPerServ.cbxServicio.getSelectedItem()+"").toUpperCase());     
                   
                     prod.setId_prod(tE);
                     hisPerServ.setProducto_id_HisPerSer(prod);
@@ -582,11 +581,11 @@ public class CtrlHistorialPersServicio implements ActionListener{
         }
        if (e.getSource() == visHisPerServ.cbxServicio) 
        {    
-           String prod = visHisPerServ.cbxServicio.getSelectedItem()+"";          
+           String prod = (visHisPerServ.cbxServicio.getSelectedItem()+"").toUpperCase();          
            double precio = consHisPerServ.getPrecioByCat(prod);
            visHisPerServ.lblPrecio.setText(precio+"");
            
-           if(prod.equals("entrenamiento diario"))
+           if(prod.equals("ENTRENAMIENTO DIARIO"))
            {
                visHisPerServ.dchFechaIni.setDate(Calculos.getCurrentDate2());
                visHisPerServ.dchFechaFin.setDate(Calculos.getCurrentDate2());

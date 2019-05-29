@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelos.Conexion;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
@@ -130,18 +132,28 @@ public class ConsFacturaDet extends Conexion {
                     ps = con.prepareStatement(sql);                            
                     rs = ps.executeQuery();
                         while(rs.next()){
-                                entradasSalidas[0]=rs.getInt(1);
-                                entradasSalidas[1]=rs.getInt(2);
+                                entradasSalidas[0]=rs.getInt("entradas");
+                                entradasSalidas[1]=rs.getInt("salidas");
                         }
-                        con.close();
+                       
                 } catch (SQLException e) 
-                {e.printStackTrace();}			
+                {
+                    e.printStackTrace();
+                }
+                finally{
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConsFacturaDet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                }
 
         return entradasSalidas;
     }
     
     public int calculaStock(int idProd)
     {
+        //0: entradas , 1: salidas
         int entradasSalidas[] = getEntradasSalidas(idProd);
         int stock = entradasSalidas[0]-entradasSalidas[1];
         
@@ -189,19 +201,24 @@ public class ConsFacturaDet extends Conexion {
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "update producto set salidas = ?" +
+        String sql = "update producto set salidas=? " +
                       "where id_prod = ?";
-
+        int salidas = 0;
+        int salidasActual = 0;
         try 
         {            
             ps = con.prepareStatement(sql);            
             for (FacturaDetalle listDets : facDet) 
             {
                 System.out.println(listDets.getCantidad_facDet()+"  "+listDets.getProducto_id_prod().getId_prod());
-                ps.setInt(1,listDets.getCantidad_facDet());                
+                salidasActual = getEntradasSalidas(listDets.getProducto_id_prod().getId_prod())[1];
+                System.out.println("salidas es "+salidasActual);
+                salidas = salidasActual + listDets.getCantidad_facDet();
+                ps.setInt(1,salidas);                
                 ps.setInt(2,listDets.getProducto_id_prod().getId_prod());                
                 ps.execute();
-            }                                       
+            } 
+            
             return true;
         } 
         catch (Exception e) 
@@ -214,6 +231,7 @@ public class ConsFacturaDet extends Conexion {
             try 
             {
                 con.close();
+                System.out.println("cerro");
             } catch (Exception e) 
             {
                 System.err.println(e);

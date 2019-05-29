@@ -682,7 +682,8 @@ public class CtrlFacturaCab implements ActionListener{
                     if (consFicha.registrar(modFacCab)) 
                     {
                         ArrayList<FacturaDetalle> facDets = facDetalle.setDetalles(visFicha, "");
-                        if(consFacDet.registrar(facDets)){                      
+                        if(consFacDet.registrar(facDets))
+                        {                      
                             JOptionPane.showMessageDialog(null, "Registro Guardado!");
                             if(consFacDet.actualizarSalidas(facDets)){
                                 consFacDet.actualizarStock(facDets);
@@ -786,7 +787,8 @@ public class CtrlFacturaCab implements ActionListener{
             VisHistorialPersonaServicio visHis = new VisHistorialPersonaServicio();
             ConsHistorialPersonaServicio consHPS = new ConsHistorialPersonaServicio();
             HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
-
+            
+            System.out.println(persona.getNombre());
             CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
             ctlHis.locale = 0;
             ctlHis.iniciar();

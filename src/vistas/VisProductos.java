@@ -54,6 +54,8 @@ public class VisProductos extends javax.swing.JFrame {
         txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lblIdCat = new javax.swing.JLabel();
+        rdbProductos = new javax.swing.JRadioButton();
+        rdbServicios = new javax.swing.JRadioButton();
         lblNomEmp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -182,6 +184,14 @@ public class VisProductos extends javax.swing.JFrame {
         pnl_personas.add(lblIdCat);
         lblIdCat.setBounds(470, 10, 41, 20);
 
+        rdbProductos.setText("productos");
+        pnl_personas.add(rdbProductos);
+        rdbProductos.setBounds(200, 320, 85, 25);
+
+        rdbServicios.setText("servicios");
+        pnl_personas.add(rdbServicios);
+        rdbServicios.setBounds(330, 320, 77, 25);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -277,6 +287,8 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JLabel lblIdCat;
     public javax.swing.JLabel lblNomEmp;
     public javax.swing.JPanel pnl_personas;
+    public javax.swing.JRadioButton rdbProductos;
+    public javax.swing.JRadioButton rdbServicios;
     public javax.swing.JTable tbl_productos;
     public javax.swing.JTextField txtBuscarCualquierCampo;
     public javax.swing.JTextField txtDescripcionProd;

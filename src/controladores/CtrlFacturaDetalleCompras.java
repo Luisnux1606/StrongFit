@@ -163,7 +163,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == visFicha.btnGuardarFacCab) 
+        if (e.getSource() == visFicha.btnGuardarFacCabCompras) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dtcFechaFacCab);
@@ -176,17 +176,17 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
                  
                }        
         }
-        if (e.getSource() == visFicha.btnLimpiarFacCab) 
+        if (e.getSource() == visFicha.btnLimpiarFacCabComp) 
         {
             limpiarTablaDetalles();
         }
-        if (e.getSource() == visFicha.btnAgregarFilas) 
+        if (e.getSource() == visFicha.btnAgregarFilasComp) 
         {
            addRows(visFicha.tblFacturaDetalleCompras);
            Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);
            Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras,visFicha);
         } 
-        if (e.getSource() == visFicha.btnEliminarFilas) 
+        if (e.getSource() == visFicha.btnEliminarFilasComp) 
         {
            deleteRows(visFicha.tblFacturaDetalleCompras);
            Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);
