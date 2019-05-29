@@ -100,7 +100,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
                   Categoria cat=new Categoria();
 
                   CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
-                  ctrProd.locale = 0;
+                  ctrProd.locale = 1; 
                   ctrProd.iniciar();
               }
           }
@@ -129,7 +129,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
                         Categoria cat=new Categoria();
 
                         CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
-                        ctrProd.locale = 0;
+                        ctrProd.locale = 1;
                         ctrProd.iniciar();
               
                           break;

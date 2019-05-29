@@ -203,6 +203,24 @@ public class CtrlProductos implements ActionListener{
        Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
        visProd.dispose();
      }
+     
+      public void setProductoServicioFacturaCompra()
+     {
+        int filaDetalle = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
+       int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
+       String descripcion = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
+       double precio =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
+
+
+       visFicha.tblFacturaDetalleCompras.setValueAt(idProd, filaDetalle, 0);                            
+       visFicha.tblFacturaDetalleCompras.setValueAt(1, filaDetalle, 1);
+       visFicha.tblFacturaDetalleCompras.setValueAt(descripcion, filaDetalle, 2);
+       visFicha.tblFacturaDetalleCompras.setValueAt(precio, filaDetalle, 3);
+
+       Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);                            
+       Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras, visFicha);
+       visProd.dispose();
+     }
         
      
     public void setListener(){
@@ -253,14 +271,14 @@ public class CtrlProductos implements ActionListener{
                 if(e.getClickCount()==2)
                 {
                                                            
-                    
+                    System.out.println(locale);
                     switch(locale)
                     {
                         case 0 :
                              setProductoServicioFactura();
                             break;
                         case 1:
-                           
+                             setProductoServicioFacturaCompra();
                             break;
                         case 2:
                             

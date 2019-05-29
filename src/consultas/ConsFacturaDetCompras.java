@@ -518,9 +518,9 @@ public class ConsFacturaDetCompras extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "select max(fC.ID_FACCABCOMP) as Id_Faccab " +
+        String sql = "select max(fC.ID_FACCABCOMP) as Id_FaccabComp " +
                     "from FACTURACABECERACOMPRAS fC " +
-                    "order by ID_FACCABCOMP asc";
+                    "order by fC.ID_FACCABCOMP asc";
         
         try 
         {
@@ -529,7 +529,7 @@ public class ConsFacturaDetCompras extends Conexion {
           
             rs = ps.executeQuery();
             if (rs.next()) { //ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per
-                fCab.setId_facCabComp(rs.getInt("ID_FACCABCOMP"));                            
+                fCab.setId_facCabComp(rs.getInt("Id_FaccabComp"));                            
                 return true;
             }
             return false;
