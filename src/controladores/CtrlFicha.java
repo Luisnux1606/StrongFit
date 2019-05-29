@@ -129,6 +129,9 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
         
         this.visFicha.lblPersonaId.setVisible(false);
+        this.visFicha.lblInfoFechaAna.setToolTipText(" aqui se cargara la fecha de analisis automaticamente");
+        this.visFicha.lblInfoFechaMed.setToolTipText(" aqui se cargara la fecha de medidas automaticamente");
+        
         habilitaMedAlimAnalisis();     
         cadBus = "";
        
@@ -622,17 +625,20 @@ public class CtrlFicha implements ActionListener{
            
             modFicha.setId(Validaciones.isNumVoid(visFicha.lblIdFicha.getText()));
             modFicha.setEstado(0);
-                      
-            if (consFicha.eliminar(modFicha)) {
-                JOptionPane.showMessageDialog(null, "Registro Eliminado !");
-                limpiar();
+            int o= JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar el registro?", "Confirmar eliminar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);          
+            if (o ==0) 
+            {              
+                if (consFicha.eliminar(modFicha)) {
+                    JOptionPane.showMessageDialog(null, "Registro Eliminado !");
+                    limpiar();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Error al Eliminar...");
+                    limpiar();
+                }
+                showTable();
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar...");
-                limpiar();
-            }
-            showTable();
         }
       
        if (e.getSource() == visFicha.btnLimpiarFichaG) 

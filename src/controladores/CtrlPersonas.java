@@ -13,6 +13,7 @@ import consultas.ConsFacturaCab;
 import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
+import consultas.ConsTipoPersona;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -43,6 +47,7 @@ import modelos.Ficha;
 import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
+import modelos.TipoPersona;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisFicha;
 import vistas.VisHistorialPersonaServicio;
@@ -93,12 +98,15 @@ public class CtrlPersonas implements ActionListener {
         setFocus();
         setListener();
         setTableModel();
+        showComboTipoPersonas();
         escribirCombos();
+       
     }
     
       private void escribirCombos()
       {
-        AutoCompleteDecorator.decorate(visPersona.cmbxGenero);        
+        AutoCompleteDecorator.decorate(visPersona.cmbxGenero);   
+        AutoCompleteDecorator.decorate(visPersona.cmbTipoPersona);   
            
       }   
     
@@ -131,7 +139,30 @@ public class CtrlPersonas implements ActionListener {
         
         visPersona.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
-    
+    public void showComboTipoPersonas()
+    {
+        ConsTipoPersona cons = new ConsTipoPersona();
+        try {
+           
+            ResultSet listTipoPersonas = cons.buscarTipoPersona();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visPersona.cmbTipoPersona.getModel();           
+            
+            while (listTipoPersonas.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(listTipoPersonas.getString("descripcion_tipoper").toUpperCase());
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            cons.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visPersona.cmbTipoPersona.updateUI();
+    } 
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -151,6 +182,10 @@ public class CtrlPersonas implements ActionListener {
                     modPer.setFecha_nac(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
                     modPer.setMail(visPersona.txtCorreoElect.getText());
                     modPer.setGenero(visPersona.cmbxGenero.getSelectedItem()+"".toUpperCase());
+                    TipoPersona tPer = new TipoPersona();
+                    int idTipoPer = consPer.getIdTipoPerByNom(visPersona.cmbTipoPersona.getSelectedItem()+"");
+                    tPer.setId_tipoPer(idTipoPer);
+                    modPer.setTipoPersona(tPer);
                     modPer.setEstado(1);
 
                     if (consPer.registrar(modPer)) {
@@ -179,6 +214,10 @@ public class CtrlPersonas implements ActionListener {
             modPer.setFecha_nac(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
             modPer.setMail(visPersona.txtCorreoElect.getText());
             modPer.setGenero(visPersona.cmbxGenero.getSelectedItem()+"".toUpperCase());
+            TipoPersona tPer = new TipoPersona();
+            int idTipoPer = consPer.getIdTipoPerByNom(visPersona.cmbTipoPersona.getSelectedItem()+"");
+            tPer.setId_tipoPer(idTipoPer);
+            modPer.setTipoPersona(tPer);
             
             if (consPer.modificar(modPer)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
@@ -220,14 +259,14 @@ public class CtrlPersonas implements ActionListener {
         
                 if (consPer.buscar(modPer)){                   
                     visPersona.txt_id.setText(String.valueOf(modPer.getId()));  
-                    visPersona.txt_cedula.setText(String.valueOf(modPer.getCedula()));
-                    visPersona.txt_nombres.setText(String.valueOf(modPer.getNombre()).toUpperCase());
-                    visPersona.txt_apellidos.setText(String.valueOf(modPer.getApellido()).toUpperCase());
-                    visPersona.txt_edad.setText(String.valueOf(modPer.getEdad()));
-                    visPersona.txt_nro_fono.setText(String.valueOf(modPer.getNro_fono()));                    
+                    visPersona.txt_cedula.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getCedula())));
+                    visPersona.txt_nombres.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getNombre()).toUpperCase()));
+                    visPersona.txt_apellidos.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getApellido()).toUpperCase()));
+                    visPersona.txt_edad.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getEdad())));
+                    visPersona.txt_nro_fono.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getNro_fono())));                    
                     visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(modPer.getFecha_nac()));
 
-                    visPersona.txtCorreoElect.setText(String.valueOf(modPer.getMail()));  
+                    visPersona.txtCorreoElect.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getMail())));  
                     visPersona.cmbxGenero.setSelectedItem(String.valueOf(modPer.getGenero()).toUpperCase());  
                     
                     desabilitaHabilita(visPersona.btnGuardar,false);
@@ -280,8 +319,9 @@ public class CtrlPersonas implements ActionListener {
          visPersona.txt_edad.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 7))));
          visPersona.cmbxGenero.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)).toUpperCase());
          visPersona.txtCorreoElect.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5))));
-         visPersona.txt_nro_fono.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6))));
+         visPersona.txt_nro_fono.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6))));         
          visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 8)))));                        
+         visPersona.cmbTipoPersona.setSelectedItem(tblD.getValueAt(tblD.getSelectedRow(), 9));
      }
     
     
@@ -290,7 +330,7 @@ public class CtrlPersonas implements ActionListener {
         limpiarTabla();                            
            ArrayList<Persona> prodList = consPer.buscarTodos(modPer);
            DefaultTableModel model =  (DefaultTableModel)visPersona.tbl_personas.getModel();
-           Object cols[] = new Object[9];
+           Object cols[] = new Object[11];
 
            for (int i = 0; i < prodList.size(); i++) {
                cols[0] = prodList.get(i).getId();
@@ -302,6 +342,8 @@ public class CtrlPersonas implements ActionListener {
                cols[6] = Validaciones.isNumVoid4(prodList.get(i).getNro_fono());
                cols[7] = Validaciones.isNumVoid(prodList.get(i).getEdad()+"");
                cols[8] = Validaciones.isNumVoid4(prodList.get(i).getFecha_nac());
+               cols[9] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getDescripcion_tipoPer());
+               cols[10] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
 
                model.addRow(cols);                    
            }   
@@ -495,7 +537,7 @@ public class CtrlPersonas implements ActionListener {
                             modPer.setNombre(nombre);
                             modPer.setApellido(apellido);
                             visFicha.lblPersonaId.setText(idPer+"");
-                            visFicha.txtClienteFactura.setText(modPer.getNombre() + " "+modPer.getApellido());
+                            visFicha.txt_clienteFac.setText(modPer.getNombre() + " "+modPer.getApellido());
                             
                             
                             break;

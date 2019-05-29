@@ -260,6 +260,7 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.txtRecomPesas.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5)).toUpperCase());
         visAnalisis.txtRecomCardio.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)).toUpperCase());
         visAnalisis.txtRecomFuncional.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 7)).toUpperCase());
+        visAnalisis.txtInfoFechaAna.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));
         
     }
     
@@ -278,7 +279,7 @@ public class CtrlAnalisis implements ActionListener{
     public void showTable()
     {
         limpiarTabla();                            
-           ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodosByIdPer(modAnalisis,Validaciones.isNumVoid(visAnalisis.txtCodPersona.getText()));
+           ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodos(modAnalisis);
            DefaultTableModel model =  (DefaultTableModel)visAnalisis.tblAnalisis.getModel();
            Object cols[] = new Object[8];
 

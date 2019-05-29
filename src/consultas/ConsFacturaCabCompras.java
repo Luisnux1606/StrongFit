@@ -19,7 +19,7 @@ import modelos.Persona;
  *
  * @author Administrator
  */
-public class ConsBuscarVentas extends Conexion {
+public class ConsFacturaCabCompras extends Conexion {
     
     public boolean registrar(FacturaCab f)
     {
@@ -89,6 +89,80 @@ public class ConsBuscarVentas extends Conexion {
             ps.setInt(10, f.getMembresia().getId());
             ps.setInt(11, f.getIvas().getId_ivas());
             ps.setInt(12, f.getEstado());
+            
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
+    public boolean modificarAjuste(FacturaCab f)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
+        String sql = "update FacturaCabecera SET VALAJUSTE_FACCAB=?"
+                + " WHERE id_facCab=?";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);
+            
+            ps.setDouble(1, f.getValAjuste_facCab());           
+            ps.setInt(2, f.getId_facCab());
+           
+            
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
+    public boolean modificarAnulado(FacturaCab f)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
+        String sql = "update FacturaCabecera SET ESTADO_FACCAB=?"
+                + " WHERE id_facCab=?";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, f.getEstado());           
+            ps.setInt(2, f.getId_facCab());
+           
             
             ps.execute();
             return true;
@@ -399,27 +473,25 @@ public class ConsBuscarVentas extends Conexion {
     
     public ResultSet buscarTodosPorNomTabla(String nom)
     {
-   
+      
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = " select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres,' ' as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+nom+"%' and c.id_cat=2 " +
-                    "union " +
-                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+nom+"%' and c.id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser " +
-                    "UNION " +
-                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,' 'as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=2 " +
-                    "union " +
-                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser";
+        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac, f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
+                        "FROM factura f, persona p \n" +
+                        "where upper(p.nom_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
+                        "UNION\n" +
+                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
+                        "FROM factura f, persona p \n" +
+                        "where upper(p.ced_per) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
+                        "UNION\n" +
+                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
+                        "FROM factura f, persona p \n" +
+                        "where upper(f.fechaInicio_fac) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1\n" +
+                        "UNION\n" +
+                        "SELECT f.id_fac,p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac , f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
+                        "FROM factura f, persona p \n" +
+                        "where upper(f.fechaFin_fac) like upper('%"+nom+"%')  and p.id_per=f.persona_id_per and f.estado_fac=1";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -447,9 +519,9 @@ public class ConsBuscarVentas extends Conexion {
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_faccab, f.fechaFin_faccab, f.VALCANCELO_FACCAB, f.valPendiente_faccab,f.concepto_faccab " +
-                        "FROM FACTURACABECERA f, persona p " +
-                        "where  p.id_per=f.persona_id_per and f.valPendiente_faccab>0 and f.estado_faccab=1" ;
+        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_fac, f.fechaFin_fac,, f.valPago_fac, f.valPendiente_fac,f.concepto_fac \n" +
+                        "FROM factura f, persona p \n" +
+                        "where  p.id_per=f.persona_id_per and f.valPendiente_fac>0 and f.estado_fac=1" ;
                        
                 
         ArrayList datos = new ArrayList();
@@ -489,122 +561,10 @@ public class ConsBuscarVentas extends Conexion {
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = " select distinct fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres ,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab  " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.categoria_id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and h.ESTADO_HISPERSER=1 and fC.ESTADO_FACCAB=1 " +
-                    "order by id_faccab";                       
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-           
-        }
-        return rs;
-    }
-    
-    public ResultSet buscarFacturas()
-    {
-        PreparedStatement ps = null;
-         con = getConexion();
-        ResultSet rs = null; 
-        String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
-                        "from persona p, facturacabecera fC " +
-                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1" +
-                        "order by fC.Id_Faccab desc";                       
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-           
-        }
-        return rs;
-    }
-    
-    public ResultSet buscarFacturasByNom(String nom)
-    {
-        PreparedStatement ps = null;
-         con = getConexion();
-        ResultSet rs = null; 
-        String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
-                        "from persona p, facturacabecera fC " +
-                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1 and upper(p.nom_per) like upper('%"+nom+"%')" +
-                        "order by fC.Id_Faccab desc";                       
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-           
-        }
-        return rs;
-    }
-    
-        public ResultSet buscarFacturasPendientesPago()
-        {
-            PreparedStatement ps = null;
-             con = getConexion();
-            ResultSet rs = null; 
-            String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab\n" +
-                            "from persona p, facturacabecera fC " +
-                            "where p.id_per = fC.Persona_Id_Per " +
-                            "order by fC.Id_Faccab desc";                       
-            try 
-            {
-
-                ps = con.prepareStatement(sql);                            
-                rs = ps.executeQuery();
-
-            } 
-            catch (Exception e) 
-            {
-                e.printStackTrace();
-
-            }
-            finally
-            {
-
-            }
-            return rs;
-        }
-    
-    public ResultSet buscarDetallesByIdFac(int idFac)
-    {
-        PreparedStatement ps = null;
-         con = getConexion();
-        ResultSet rs = null; 
-        String sql = " select fD.Id_Facdet, fD.Descripcion_Facdet, fD.Valunitario_Facdet,fD.Vtotal_Facdet " +
-                        "from facturacabecera fC, facturaDetalle fD " +
-                        "where  fC.Id_Faccab = fD.Factura_Id_Fac and fC.Id_Faccab ="+idFac+" and fC.estado_faccab = 1";
+        String sql = " SELECT f.id_faccab, p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.total_faccab, f.valPendiente_faccab" +
+                    " FROM FacturaCabecera f, persona p " +
+                    " where p.id_per = f.Persona_id_per and f.estado_facCab=1 " +
+                    " order by id_faccab asc ";
                 
         
         try 

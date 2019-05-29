@@ -247,6 +247,7 @@ public class CtrlMedidas implements ActionListener{
          visMedidas.txtEspalda.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),15)));
          visMedidas.txtPorGrasa.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),16)));
          visMedidas.txtPorKilogs.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),17)));
+         visMedidas.txtInfoFechaMed.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(),1)));
          
      }
     
@@ -280,7 +281,7 @@ public class CtrlMedidas implements ActionListener{
     {
         limpiarTabla();                  
         //persona.setId(visMedidas.txt_id_persona_u);
-           ArrayList<Medidas> listMed = consMedidas.buscarTodosByIdPer(modMedidas,Validaciones.isNumVoid(visMedidas.txtCodPersona.getText()));
+           ArrayList<Medidas> listMed = consMedidas.buscarTodos(modMedidas);
            DefaultTableModel model =  (DefaultTableModel)visMedidas.tblDatos.getModel();
            Object cols[] = new Object[19];
 
@@ -394,16 +395,20 @@ public class CtrlMedidas implements ActionListener{
            {
                 modMedidas.setId(Integer.parseInt(visMedidas.txt_id_datos.getText()));
                 modMedidas.setEstado(0);
-                if (consMedidas.eliminar(modMedidas)) {
-                    JOptionPane.showMessageDialog(null, "Registro Eliminado !");
-                    limpiar();
+                int o= JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar el registro?", "Confirmar eliminar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);            
+                if (o ==0) 
+                {           
+                    if (consMedidas.eliminar(modMedidas)) {
+                        JOptionPane.showMessageDialog(null, "Registro Eliminado !");
+                        limpiar();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Error al Eliminar");
+                        limpiar();
+                    }
+                    showTable();
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Error al Eliminar");
-                    limpiar();
-                }
-                showTable();
            }
         }
        

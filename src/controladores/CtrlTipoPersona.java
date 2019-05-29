@@ -39,7 +39,7 @@ import vistas.VisCategoria;
  *
  * @author aplaza
  */
-public class CtrlCategoria implements ActionListener
+public class CtrlTipoPersona implements ActionListener
 {
     Categoria modCat;
     VisCategoria visCat;
@@ -47,7 +47,7 @@ public class CtrlCategoria implements ActionListener
     Object vis;
     String cadBus;
             
-    public CtrlCategoria(Categoria modCategoria, VisCategoria visCategoria, ConsCategoria consCategoria,Object vis)
+    public CtrlTipoPersona(Categoria modCategoria, VisCategoria visCategoria, ConsCategoria consCategoria,Object vis)
     {
         this.modCat = modCategoria;
         this.visCat = visCategoria;

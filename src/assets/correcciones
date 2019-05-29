@@ -6,7 +6,7 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 
 BUSCAR(lupa)
-1. Validar que si un campo de la tabla está vacío no se muestre null. 
+1. Validar que si un campo de la tabla está vacío no se muestre null.:ok
 
 *********GESTION DE MEMBRESIA***************
 GUARDAR= ok
@@ -18,8 +18,8 @@ BUSCAR(nombre)= ok
 
 
 *********GESTION DE GATEGORIA***************
-1. cambiar el nombre de la ventana por: "Strongfit CATEGORIAS"
-2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando informaci�n de la tabla. �?
+1. cambiar el nombre de la ventana por: "Strongfit CATEGORIAS" :ok
+2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando informaci�n de la tabla. �? :ok
 
 GUARDAR=ok
 ELIMINAR= ok
@@ -29,7 +29,7 @@ BUSCAR(nombre)= ok
 
 
 *********GESTION DE PRODUCTOS/SERVICIOS***************
-1. cambiar el nombre de la ventana por: "Strongfit PRODUCTOS/SERVICIOS"
+1. cambiar el nombre de la ventana por: "Strongfit PRODUCTOS/SERVICIOS" :ok
 
 GUARDAR= ok
 ELIMINAR= ok
@@ -42,7 +42,7 @@ BUSCAR(lupa)
 
 
 *********GESTION DE ENTRENAMIENTO***************
-1. cambiar el nombre de la ventana por: "Strongfit ENTRENAMIENTO"
+1. cambiar el nombre de la ventana por: "Strongfit ENTRENAMIENTO" :ok
 
 GUARDAR= ok
 ELIMINAR= ok 
@@ -53,24 +53,24 @@ BUSCAR(nombre)= ok
 
 *********GENERAR VENTAS***************
 GUARDAR
-1. Si pongo guardar y no tengo nada cambiar mensaje, ya que ahora muestra "Debe ingresar un null".
-2. No puedo elegir el entrenamiento, porque cuando hago doble click en la tabla, no pasa nada.
+1. Si pongo guardar y no tengo nada cambiar mensaje, ya que ahora muestra "Debe ingresar un null". :ok
+2. No puedo elegir el entrenamiento, porque cuando hago doble click en la tabla, no pasa nada. :ok
 
 LIMPIAR= ok
 
 
 *********FICHA*************** 
-1. Cambiar el icono de "lupa" por el de "persona"
-2. El botón "cargar fichas" debería además de habilitar las pestañas (ya hace) también mostrar en la tabla todas las fichas de la persona.  
-3. Como voy seleccionando de las otras pestañas que muestre la fecha de analisis y la fecha de medida para que el usuario sepa lo que seleccionó.:r
+1. Cambiar el icono de "lupa" por el de "persona" :ok
+2. El botón "cargar fichas" debería además de habilitar las pestañas (ya hace) también mostrar en la tabla todas las fichas de la persona.:ok(click in load ficha)  
+3. Como voy seleccionando de las otras pestañas que muestre la fecha de analisis y la fecha de medida para que el usuario sepa lo que seleccionó.::ok
 
 GUARDAR
 
 ELIMINAR
-1. Debe preguntar si deseo o no eliminar. :r
+1. Debe preguntar si deseo o no eliminar. :ok
 
 MODIFICAR= ok 
-1. Pero seria mas interesante poder modificar la selecci�n de an�lisis y medidas. :r
+1. Pero seria mas interesante poder modificar la selecci�n de an�lisis y medidas. ::ok(yes it is modificable)
 
 LIMPIAR= ok
 
@@ -80,24 +80,24 @@ BUSCAR(cualquier campo)= ok
 *********GENERAR MEDIDAS***************
 
 GUARDAR
-1. No muestra la información en la tabla, pero si lo guarda en la BD. 
+1. No muestra la información en la tabla, pero si lo guarda en la BD.  :ok
 
 ELIMINAR
-1. Debe presentar si se desea eliminar. 
+1. Debe presentar si se desea eliminar. :ok
 
 MODIFICAR= ok
 LIMPIAR= ok
 BUSCAR(fecha)= ok 
 
 BUSCAR(lupa)
-1. no busca
+1. no busca :ok
 
 
 *********GENERAR ANALISIS***************
 1.Si yo elimino y luego busco(fecha) se duplica la informaci�n de "REcomen.Cardio" a "Recom. pesas".
 
 GUARDAR
-1. No muestra la información en la tabla, pero si lo guarda en la BD. 
+1. No muestra la información en la tabla, pero si lo guarda en la BD. :ok
 
 ELIMINAR= ok
 MODIFICAR= ok
@@ -105,7 +105,7 @@ LIMPIAR= oK
 BUSCAR(lupa)= ok
 
 BUSCAR(fecha)
-1. Al momento de buscar duplica la informaci�n de "REcomen.Cardio" a "Recom. pesas".: ok, no hay error!!
+1. Al momento de buscar duplica la informaci�n de "REcomen.Cardio" a "Recom. pesas".: ok
 
 
 
@@ -120,13 +120,13 @@ BUSCAR(fecha)
 FILTRAR TODO= ok
 
 FILTRAR POR COMBO
-1. No funciona
+1. No funciona :ok
 
 BUSCAR(nombre)
-2.No funciona
+2.No funciona :ok
 
 ------ENTRENAMIENTOS Y SALDOS------
-1. Actualizar la tabla al momento que se anule en ventas. 
+1. Actualizar la tabla al momento que se anule en ventas. :r
 
 FILTRAR POR COMBO
 BUSCAR(nombre)
@@ -136,10 +136,10 @@ Pendiente
 
 *********REPORTES*************** 
 ------PERSONAS------
-1. Cambiar el codigo por el nombre de la persona. 
+1. Cambiar el codigo por el nombre de la persona. :r
 
 
 
 *********GENERALES***************
 1.En las tablas incluir un Scroll (supongo que se podr�a hacer) :ok
-2.Cambiar el nombre de las ventanas.
+2.Cambiar el nombre de las ventanas. 

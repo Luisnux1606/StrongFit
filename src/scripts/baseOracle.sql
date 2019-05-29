@@ -98,6 +98,13 @@ CREATE SEQUENCE persona_id_seq
  CACHE 20
  ORDER
 /
+CREATE SEQUENCE tipoPersona_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+ ORDER
+/
 
 CREATE SEQUENCE membresia_id_seq
  INCREMENT BY 1
@@ -306,11 +313,11 @@ CREATE TABLE Persona(
   genero_per Varchar2(45 ),
   mail_per Varchar2(350 ),
   huella_per Varchar2(350 ),
-  estado_per Number   
+  TipoPersona_id_tipoPer Number,
+  estado_per Number     
 )
 TABLESPACE tbs_usr_strongfit_p
 /
-
 -- Create indexes for table persona
 CREATE INDEX idx_id_per ON Persona(id_per)
 /
@@ -319,9 +326,26 @@ CREATE INDEX idx_id_per ON Persona(id_per)
 ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)
 /
 
+
+CREATE TABLE TipoPersona(
+  id_tipoPer Number NOT NULL,
+  descripcion_tipoPer Varchar2(50),
+  estado_tipoPer Number   
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+
+-- Create indexes for table persona
+CREATE INDEX idx_id_tipoPer ON TipoPersona(id_tipoPer)
+/
+
+-- Add keys for table persona
+ALTER TABLE TipoPersona ADD CONSTRAINT pk_id_tipoPer PRIMARY KEY (id_tipoPer)
+/
+
 CREATE TABLE Categoria(
   id_cat Number NOT NULL,
-  tipo_cat  Varchar2(45 ),
+  tipo_cat  Varchar2(100),
   categoria_id_cat Number,
   estado_cat Number 
 )
@@ -542,7 +566,7 @@ CREATE TABLE FacturaDetalleCompras(
   descripcion_facDetComp Varchar2(50),
   valUnitario_facDetComp Number(10,2),
   vTotal_facDetComp Number(10,2),
-  Producto_id_prod Number, 
+  Producto_id_prodComp Number, 
   Factura_id_facComp Number,
   estado_facDetComp Number 
 )
@@ -555,10 +579,10 @@ CREATE INDEX idx_id_detComp ON FacturaDetalleCompras(id_facDetComp)
 ALTER TABLE FacturaDetalleCompras ADD CONSTRAINT pk_id_detComp PRIMARY KEY (id_facDetComp)
 /
 -- Create relationships section  ------------------------------------------------- 
-ALTER TABLE FacturaDetalleCompras ADD CONSTRAINT fk_id_prodComp FOREIGN KEY (Producto_id_prod) REFERENCES Producto (id_prod)
+ALTER TABLE FacturaDetalleCompras ADD CONSTRAINT fk_id_prodComp FOREIGN KEY (Producto_id_prodComp) REFERENCES Producto (id_prod)
 /
 -- Create relationships section  ------------------------------------------------- 
-ALTER TABLE FacturaDetalleCompras ADD CONSTRAINT fk_id_facComp FOREIGN KEY (Factura_id_fac) REFERENCES FacturaCabeceraCompras (id_facCabComp)
+ALTER TABLE FacturaDetalleCompras ADD CONSTRAINT fk_id_facComp FOREIGN KEY (Factura_id_facComp) REFERENCES FacturaCabeceraCompras (id_facCabComp)
 /
 
 

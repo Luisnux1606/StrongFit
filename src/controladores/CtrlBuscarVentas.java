@@ -316,8 +316,7 @@ public class CtrlBuscarVentas implements ActionListener {
            
             while (listFicha.next()) {
                 try {
-                  
-                    
+                                      
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("nombres");
                     cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
@@ -347,6 +346,48 @@ public class CtrlBuscarVentas implements ActionListener {
         new ButtonTable(visVentas);
         visVentas.tblFacturasCabeceras.updateUI();
     }  
+    
+    public void showTableFacturasCabecerasByNom(String nom)
+    {
+        try {
+            limpiarTabla(visVentas.tblFacturasCabeceras);
+            ResultSet listFicha = consBuscarVentas.buscarFacturasByNom(nom);
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
+            Object cols[] = new Object[11];
+           
+            while (listFicha.next()) {
+                try {
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("nombres");
+                    cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
+                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[4] = listFicha.getString("Concepto_Faccab");
+                    cols[5] = listFicha.getString("Total_Faccab");
+                    cols[6] = listFicha.getString("Valcancelo_Faccab");
+                    cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[8] = listFicha.getDouble("valajuste_faccab");
+                    cols[9] = "Guardar";
+                    cols[10] = "Anular";
+                    
+                
+                    model.addRow(cols);
+                    
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        new ButtonTable(visVentas);
+        visVentas.tblFacturasCabeceras.updateUI();
+    } 
       
     public void showTable()
     {
@@ -545,6 +586,8 @@ public class CtrlBuscarVentas implements ActionListener {
                     if(cadBus.length()>0)
                     cadBus=cadBus.substring(0, cadBus.length()-1);
                 }
+            
+            
             showTableByNom(cadBus);
           }
           
@@ -555,6 +598,48 @@ public class CtrlBuscarVentas implements ActionListener {
           }
         };
         visVentas.txt_buscarPersonaNombres.addKeyListener(keyListenertxtBuscarCedula);
+        
+        //LISTENER TXTBUSCARCAMPO VENTAS REALIZADAS
+        KeyListener keyListenertxtBuscarCampoVentas = new KeyListener() {
+          public void keyPressed(KeyEvent keyEvent) {
+            printIt("Pressed", keyEvent);
+          }
+
+          public void keyReleased(KeyEvent keyEvent) {
+            printIt("Released", keyEvent);
+          }
+
+          public void keyTyped(KeyEvent e) {
+            String m=(e.getKeyChar()+"").toUpperCase();
+            char c =m.charAt(0);
+					
+            limpiarTabla(visVentas.tblFacturasCabeceras);
+            if((c+"").equals("")==false&&(c+"").equals(null)==false)
+                    cadBus+=c;	            
+            else
+            {
+                if((c+"").equals("")==true){
+                    if(cadBus.length()>0)
+                    cadBus=cadBus.substring(0, cadBus.length()-1);
+                }
+            }
+            if(visVentas.txtBuscarCampo.getText().length()==0){
+                cadBus="";
+                showTableFacturasCabeceras();
+            }
+            else                   
+            showTableFacturasCabecerasByNom(cadBus);
+          }
+          
+          private void printIt(String title, KeyEvent keyEvent) {
+            int keyCode = keyEvent.getKeyCode();
+            String keyText = KeyEvent.getKeyText(keyCode);
+         
+          }
+        };
+        visVentas.txtBuscarCampo.addKeyListener(keyListenertxtBuscarCampoVentas);
+        
+        
          /////TBLPERSONAS
         KeyListener keyListenerTblPersonas = new KeyListener() {
           public void keyPressed(KeyEvent e) {

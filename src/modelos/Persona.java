@@ -22,6 +22,7 @@ public class Persona {
     private String fecha_nac;
     private String mail;
     private String genero;
+    private TipoPersona tipoPersona;
     private int estado;
 
     /**
@@ -162,6 +163,20 @@ public class Persona {
      */
     public void setEstado(int estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return the tipoPersona
+     */
+    public TipoPersona getTipoPersona() {
+        return tipoPersona;
+    }
+
+    /**
+     * @param tipoPersona the tipoPersona to set
+     */
+    public void setTipoPersona(TipoPersona tipoPersona) {
+        this.tipoPersona = tipoPersona;
     }
     
     

@@ -205,8 +205,8 @@ public class ConsMedidas extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM medidas where estado_med=1 "
-                + " WHERE fecha_med=?";
+        String sql = "SELECT * FROM medidas  "
+                + " WHERE fecha_med=? and estado_med=1 order by id_med desc";
         /*
         echa_med, peso_med, estatura_med, edad_med,nroHijos_med,pecho_med,abdomenAlto_med,cintura_med,"
                 +                       "  abdomenBajo_med,cadera_med,pierna_med,pantorrilla_med,brazo_med,antebrazo_med,cuello_med,espalda_med,"

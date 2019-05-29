@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import modelos.Analisis;
 import modelos.Conexion;
 import modelos.Persona;
+import modelos.TipoPersona;
 
 /**
  *
@@ -25,7 +26,7 @@ public class ConsPersona extends Conexion
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO persona (id_per,ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per,mail_per,genero_per,estado_per) VALUES(persona_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO persona (id_per,ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per,mail_per,genero_per,TIPOPERSONA_ID_TIPOPER,estado_per) VALUES(persona_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
 
         try 
         {
@@ -38,7 +39,8 @@ public class ConsPersona extends Conexion
             ps.setString(6, p.getFecha_nac());  
             ps.setString(7, p.getMail());     
             ps.setString(8, p.getGenero());  
-            ps.setInt(9, p.getEstado());  
+            ps.setInt(9, p.getTipoPersona().getId_tipoPer());
+            ps.setInt(10, p.getEstado());  
             ps.execute();                                       
             return true;
         } 
@@ -64,7 +66,7 @@ public class ConsPersona extends Conexion
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE persona SET ced_per=?, nom_per=?, ape_per=?, nroFono_per=?,edad_per=?,fechaNac_per=?,mail_per=?,genero_per=?"
+        String sql = "UPDATE persona SET ced_per=?, nom_per=?, ape_per=?, nroFono_per=?,edad_per=?,fechaNac_per=?,mail_per=?,genero_per=?, TIPOPERSONA_ID_TIPOPER=?"
                 + " WHERE id_per=?";
         
         try 
@@ -79,7 +81,8 @@ public class ConsPersona extends Conexion
             ps.setString(6, p.getFecha_nac());
             ps.setString(7, p.getMail());     
             ps.setString(8, p.getGenero()); 
-            ps.setInt(9, p.getId());   
+            ps.setInt(9, p.getTipoPersona().getId_tipoPer()); 
+            ps.setInt(10, p.getId());   
       
             ps.execute();
             return true;
@@ -180,7 +183,53 @@ public class ConsPersona extends Conexion
         }
         
     }
+    public int getIdTipoPerByNom(String cat){
+		String sql;
+		int result=0;
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                
+		sql="select tp.id_tipoper " +
+                    "from tipoPersona tp " +
+                    "where tp.estado_tipoper =1 and upper(tp.DESCRIPCION_TIPOPER) like upper('"+cat+"')";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                        result=rs.getInt(1);
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return result;
+	}
     
+    public String getNomByIdPerByNom(String cat){
+		String sql;
+		String result="";
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                
+		sql="select tp.DESCRIPCION_TIPOPER " +
+                    "from tipoPersona tp " +
+                    "where tp.estado_tipoper =1 and tp.id_tipoper = "+cat+"";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                        result=rs.getString(1);
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return result;
+	}
     
     public ArrayList<Persona> buscarTodos(Persona p)
     {
@@ -207,8 +256,11 @@ public class ConsPersona extends Conexion
                 p.setMail(rs.getString("mail_per"));
                 p.setNro_fono(rs.getString("nroFono_per"));
                 p.setEdad(rs.getInt("edad_per"));                
-                p.setFecha_nac(rs.getString("fechaNac_per")+"");         
-                
+                p.setFecha_nac(rs.getString("fechaNac_per")+"");    
+                    TipoPersona tipoPer = new TipoPersona();
+                    tipoPer.setId_tipoPer(rs.getInt("TIPOPERSONA_ID_TIPOPER"));
+                    tipoPer.setDescripcion_tipoPer(getNomByIdPerByNom(tipoPer.getId_tipoPer()+"")+"");
+                p.setTipoPersona(tipoPer);  
                 personas.add(p);               
             }
              

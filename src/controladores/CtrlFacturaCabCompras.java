@@ -60,7 +60,7 @@ import vistas.VisReportes;
  *
  * @author Administrator
  */
-public class CtrlFacturaCab implements ActionListener{
+public class CtrlFacturaCabCompras implements ActionListener{
 
     FacturaCab modFacCab;
     ArrayList<FacturaCab> lstFicha;
@@ -77,7 +77,7 @@ public class CtrlFacturaCab implements ActionListener{
      ConsFacturaDet consFacDet ;     
      CtrlFacturaDetalle facDetalle; 
     
-    public CtrlFacturaCab(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
+    public CtrlFacturaCabCompras(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
     {
         this.modFacCab = modFicha;
         this.consFicha = consFicha;
