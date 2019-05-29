@@ -20,6 +20,7 @@ import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
 import consultas.ConsProductos;
+import consultas.ConsTipoPersona;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -55,6 +56,7 @@ import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
 import modelos.Producto;
+import modelos.TipoPersona;
 import vistas.VisBuscarVentas;
 import vistas.VisCategoria;
 import vistas.VisDiarioGeneral;
@@ -66,6 +68,7 @@ import vistas.VisPersona;
 import vistas.VisPlanCuentas;
 import vistas.VisProductos;
 import vistas.VisReportes;
+import vistas.VisTipoPersona;
 
 /**
  *
@@ -112,6 +115,8 @@ public class CtrlFicha implements ActionListener{
         
         this.visFicha.mniMembresias.addActionListener(this);
         this.visFicha.mniPersonas.addActionListener(this);
+        this.visFicha.mniTipoPersona.addActionListener(this);
+        
         this.visFicha.mniReportes.addActionListener(this);
         this.visFicha.mniConsultasClientes.addActionListener(this);
         this.visFicha.mniDiarioGeneral.addActionListener(this);
@@ -699,6 +704,17 @@ public class CtrlFicha implements ActionListener{
             Ficha ficha  =  new Ficha();
             CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
             ctrPer.iniciar();
+        }
+         
+        if (e.getSource()==visFicha.mniTipoPersona) //Cuando toca el menú Tipo de Persona
+        {
+            VisTipoPersona visTipPer= new VisTipoPersona();
+            TipoPersona modtipPer=new TipoPersona();
+            ConsTipoPersona constipPer=new ConsTipoPersona();
+            
+            Ficha ficha=new Ficha();
+            CtrlTipoPersonas ctrTipPer= new CtrlTipoPersonas(modtipPer, visTipPer, constipPer, visFicha);
+            ctrTipPer.iniciar();
         }
          
          if (e.getSource() == visFicha.mniConsultasClientes) {
