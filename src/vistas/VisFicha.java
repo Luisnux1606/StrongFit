@@ -225,7 +225,7 @@ public class VisFicha extends javax.swing.JFrame {
         tblFacturaDetalleCompras = new javax.swing.JTable();
         lblDscto1 = new javax.swing.JLabel();
         txtValDsctoComp = new javax.swing.JTextField();
-        btnBuscarDscto1 = new javax.swing.JButton();
+        btnBuscarDsctoCompra = new javax.swing.JButton();
         lblValPagar1 = new javax.swing.JLabel();
         txtValPagarComp = new javax.swing.JTextField();
         lblCambio1 = new javax.swing.JLabel();
@@ -1648,7 +1648,7 @@ public class VisFicha extends javax.swing.JFrame {
             }
         });
 
-        btnBuscarDscto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/membresias.png"))); // NOI18N
+        btnBuscarDsctoCompra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/membresias.png"))); // NOI18N
 
         lblValPagar1.setText("Valor a pagar:");
         lblValPagar1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -1790,7 +1790,7 @@ public class VisFicha extends javax.swing.JFrame {
                                         .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
                                                 .addGap(889, 889, 889)
-                                                .addComponent(btnBuscarDscto1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(btnBuscarDsctoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentasInterno1Layout.createSequentialGroup()
                                                 .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(lblDsctoIdComp, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1864,7 +1864,7 @@ public class VisFicha extends javax.swing.JFrame {
                             .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblDscto1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtValDsctoComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnBuscarDscto1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscarDsctoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtValConDsctoFichaComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2136,7 +2136,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscarClienteFactura;
     public javax.swing.JButton btnBuscarClienteFacturaComp;
     public javax.swing.JButton btnBuscarDscto;
-    public javax.swing.JButton btnBuscarDscto1;
+    public javax.swing.JButton btnBuscarDsctoCompra;
     public javax.swing.JButton btnBuscarMed;
     public javax.swing.JButton btnCalcular;
     public javax.swing.JButton btnCalcular1;

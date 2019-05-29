@@ -394,18 +394,20 @@ public class CtrlPersonas implements ActionListener {
         limpiarTabla();                            
            ArrayList<Persona> prodList = consPer.buscarTodosPorNom(modPer,nom);
            DefaultTableModel model =  (DefaultTableModel)visPersona.tbl_personas.getModel();
-           Object cols[] = new Object[9];
+           Object cols[] = new Object[11];
 
            for (int i = 0; i < prodList.size(); i++) {
                cols[0] = prodList.get(i).getId();
                cols[1] = prodList.get(i).getCedula();
                cols[2] = prodList.get(i).getNombre().toUpperCase();
-               cols[3] = prodList.get(i).getApellido().toUpperCase();
+               cols[3] = Validaciones.isNumVoid4(prodList.get(i).getApellido().toUpperCase());
                cols[4] = prodList.get(i).getGenero().toUpperCase();
                cols[5] = prodList.get(i).getMail();
                cols[6] = prodList.get(i).getNro_fono();
                cols[7] = prodList.get(i).getEdad();
                cols[8] = prodList.get(i).getFecha_nac();
+               cols[9] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getDescripcion_tipoPer());
+               cols[10] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
 
                model.addRow(cols);                    
            }   

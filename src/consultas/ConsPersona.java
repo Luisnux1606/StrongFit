@@ -5,6 +5,7 @@
  */
 package consultas;
 
+import assets.Validaciones;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -342,8 +343,8 @@ public class ConsPersona extends Conexion
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null; //'%"+cad+"%'
-        String sql = "SELECT * FROM Persona "
-                + " where upper(nom_per) like upper('%"+nom+"%') and estado_per=1"
+        String sql = "SELECT * FROM Persona p , TIPOPERSONA tp  "
+                + " where upper(nom_per) like upper('%"+nom+"%') and estado_per=1 and tp.ID_TIPOPER = p.TIPOPERSONA_ID_TIPOPER "
                 + " order by id_per asc ";
         ArrayList<Persona> personas = new ArrayList<>();
         
@@ -357,14 +358,14 @@ public class ConsPersona extends Conexion
             while (rs.next()) {
                 p = new Persona();
                 p.setId(rs.getInt("id_per"));
-                p.setCedula(rs.getString("ced_per"));
-                p.setNombre(rs.getString("nom_per"));
-                p.setApellido(rs.getString("ape_per"));
-                p.setGenero(rs.getString("genero_per"));
-                p.setMail(rs.getString("mail_per"));
-                p.setNro_fono(rs.getString("nroFono_per"));
+                p.setCedula(Validaciones.isNumVoid4(rs.getString("ced_per")));
+                p.setNombre(Validaciones.isNumVoid4(rs.getString("nom_per")));
+                p.setApellido(Validaciones.isNumVoid4(rs.getString("ape_per")));
+                p.setGenero(Validaciones.isNumVoid4(rs.getString("genero_per")));
+                p.setMail(Validaciones.isNumVoid4(rs.getString("mail_per")));
+                p.setNro_fono(Validaciones.isNumVoid4(rs.getString("nroFono_per")));
                 p.setEdad(rs.getInt("edad_per"));                
-                p.setFecha_nac(rs.getString("fechaNac_per")+"");         
+                p.setFecha_nac(Validaciones.isNumVoid4(rs.getString("fechaNac_per")+""));         
                 TipoPersona tipoPer = new TipoPersona();
                     tipoPer.setId_tipoPer(rs.getInt("TIPOPERSONA_ID_TIPOPER"));
                     tipoPer.setDescripcion_tipoPer(getNomByIdPerByNom(tipoPer.getId_tipoPer()+"")+"");

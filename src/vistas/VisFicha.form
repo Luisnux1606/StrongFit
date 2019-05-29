@@ -3073,7 +3073,7 @@
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace min="-2" pref="889" max="-2" attributes="0"/>
-                                                          <Component id="btnBuscarDscto1" min="-2" pref="43" max="-2" attributes="0"/>
+                                                          <Component id="btnBuscarDsctoCompra" min="-2" pref="43" max="-2" attributes="0"/>
                                                       </Group>
                                                       <Group type="102" alignment="1" attributes="0">
                                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -3176,7 +3176,7 @@
                                           <Component id="lblDscto1" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                                           <Component id="txtValDsctoComp" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="btnBuscarDscto1" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
+                                      <Component id="btnBuscarDsctoCompra" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -3436,7 +3436,7 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="btnBuscarDscto1">
+                <Component class="javax.swing.JButton" name="btnBuscarDsctoCompra">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/icons/membresias.png"/>
