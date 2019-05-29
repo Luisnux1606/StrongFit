@@ -153,20 +153,23 @@ public class CtrlProductos implements ActionListener{
             ResultSet listProd = consProd.buscarTodosPorNomTabla(cad);
             
             DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-            Object cols[] = new Object[7];
+            Object cols[] = new Object[11];
             
             while (listProd.next()) {
                 try {
-                   cols[0] = listProd.getInt("id_prod");
-                   cols[1] = listProd.getString("descripcion_prod").toUpperCase();
-                   cols[2] = listProd.getString("precio_prod").toUpperCase();
-                   cols[3] = listProd.getString("FECHAINI_PROD");
-                   cols[4] = listProd.getString("FECHAFIN_PROD");
-                   cols[5] = listProd.getString("tipo_cat");
-                   cols[6] = listProd.getString("id_cat");
+                    cols[0] = listProd.getInt("id_prod");
+                    cols[1] = listProd.getString("descripcion_prod").toUpperCase();
+                    cols[2] = listProd.getString("precio_prod").toUpperCase();
+                    cols[3] = listProd.getString("FECHAINI_PROD");
+                    cols[4] = listProd.getString("FECHAFIN_PROD");
+                    cols[5] = listProd.getString("tipo_cat").toUpperCase();
+                    cols[6] = listProd.getString("EXISTINI").toUpperCase();
+                    cols[7] = listProd.getString("ENTRADAS").toUpperCase();
+                    cols[8] = listProd.getString("SALIDAS").toUpperCase();
+                    cols[9] = listProd.getString("STOCK").toUpperCase();
+                    cols[10] = listProd.getString("id_cat");                                                       
                  
-                    model.addRow(cols);
-                    
+                    model.addRow(cols);                    
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
@@ -368,7 +371,7 @@ public class CtrlProductos implements ActionListener{
         
         int colHide[] = new int[2];
         colHide[0]=0;
-        colHide[1]=6;
+        colHide[1]=10;
         setHideJtableColumn(table,colHide);
         
         //initColumnSizes(table);
@@ -405,7 +408,10 @@ public class CtrlProductos implements ActionListener{
          visProd.dchFechaIni.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3))));
          visProd.dchFechaFin.setDate(Validaciones.setStringToDate(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4))));
          visProd.cbxCategoria.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5)));
-         visProd.lblIdCat.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
+         visProd.txtExistentes.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
+         visProd.txtEntradas.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 7)));
+         visProd.txtSalidas.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 8)));       
+         visProd.lblIdCat.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 10)));
      }
     
      public void setFocus()
@@ -486,7 +492,7 @@ public class CtrlProductos implements ActionListener{
                 ResultSet listProd = consProd.buscarProductos();
 
                 DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-                Object cols[] = new Object[7];
+                Object cols[] = new Object[11];
 
                 while (listProd.next()) {
                     try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
@@ -496,7 +502,11 @@ public class CtrlProductos implements ActionListener{
                        cols[3] = listProd.getString("FECHAINI_PROD");
                        cols[4] = listProd.getString("FECHAFIN_PROD");
                        cols[5] = listProd.getString("tipo_cat").toUpperCase();
-                       cols[6] = listProd.getString("id_cat");
+                       cols[6] = listProd.getString("EXISTINI").toUpperCase();
+                       cols[7] = listProd.getString("ENTRADAS").toUpperCase();
+                       cols[8] = listProd.getString("SALIDAS").toUpperCase();
+                       cols[9] = listProd.getString("STOCK").toUpperCase();
+                       cols[10] = listProd.getString("id_cat");
 
                         model.addRow(cols);
 
@@ -518,7 +528,7 @@ public class CtrlProductos implements ActionListener{
                 ResultSet listProd = consProd.buscarTodos();
 
                 DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-                Object cols[] = new Object[7];
+                Object cols[] = new Object[11];
 
                 while (listProd.next()) {
                     try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
@@ -528,7 +538,11 @@ public class CtrlProductos implements ActionListener{
                        cols[3] = listProd.getString("FECHAINI_PROD");
                        cols[4] = listProd.getString("FECHAFIN_PROD");
                        cols[5] = listProd.getString("tipo_cat").toUpperCase();
-                       cols[6] = listProd.getString("id_cat");
+                       cols[6] = listProd.getString("EXISTINI").toUpperCase();
+                       cols[7] = listProd.getString("ENTRADAS").toUpperCase();
+                       cols[8] = listProd.getString("SALIDAS").toUpperCase();
+                       cols[9] = listProd.getString("STOCK").toUpperCase();
+                       cols[10] = listProd.getString("id_cat");
 
                         model.addRow(cols);
 
@@ -568,29 +582,39 @@ public class CtrlProductos implements ActionListener{
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == visProd.btnGuardar) 
        {       
+           double exis=0;
+           double ent = 0;
+           double sali = 0;
+           exis = Validaciones.isNumVoid10(visProd.txtExistentes.getText());
+           ent = Validaciones.isNumVoid10(visProd.txtEntradas.getText());
+           sali = Validaciones.isNumVoid10(visProd.txtSalidas.getText());
+                      
            ArrayList<JDateChooser> jdc=new ArrayList<>();
-                     
-                       
-                    int tE = consProd.getIdByNom(visProd.cbxCategoria.getSelectedItem()+"");                     
-                    catProd.setId_cat(tE);
-                    prod.setCategoria(catProd);
-                    prod.setDescripcion_prod(visProd.txtDescripcionProd.getText());
-                    prod.setPrecio_prod(Validaciones.isNumVoid10(visProd.txtPrecioProd.getText()));
-                    prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaIni.getDate()));
-                    prod.setFechaFin(Validaciones.setFormatFecha(visProd.dchFechaFin.getDate()));
-                    prod.setEstado_prod(1);
-                  
-                   
-                    if (consProd.registrar(prod)) {
-                        JOptionPane.showMessageDialog(null, "Registro Guardado!");
-                        limpiar();
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Error al Guardar");
-                        limpiar();
-                    }
-                    showDatosComboTable();
+                                            
+            int tE = consProd.getIdByNom(visProd.cbxCategoria.getSelectedItem()+"");                     
+            catProd.setId_cat(tE);
+            prod.setCategoria(catProd);
+            prod.setDescripcion_prod(visProd.txtDescripcionProd.getText());
+            prod.setPrecio_prod(Validaciones.isNumVoid10(visProd.txtPrecioProd.getText()));            
+            prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaIni.getDate()));
+            prod.setFechaFin(Validaciones.setFormatFecha(visProd.dchFechaFin.getDate()));
+            prod.setExistIni(Validaciones.isNumVoid10(visProd.txtExistentes.getText()));
+            prod.setEntradas(Validaciones.isNumVoid10(visProd.txtEntradas.getText()));
+            prod.setSalidas(Validaciones.isNumVoid10(visProd.txtSalidas.getText()));
+            prod.setStock(Calculos.getStock(exis,ent,sali));
+            prod.setEstado_prod(1);
+
+
+            if (consProd.registrar(prod)) {
+                JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                limpiar();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Error al Guardar");
+                limpiar();
+            }
+            showDatosComboTable();
                        
         }
       if (e.getSource() == visProd.btnBuscar) 
@@ -616,6 +640,13 @@ public class CtrlProductos implements ActionListener{
       
       if (e.getSource() == visProd.btnModificar) 
        {            
+           double exis=0;
+           double ent = 0;
+           double sali = 0;
+           exis = Validaciones.isNumVoid10(visProd.txtExistentes.getText());
+           ent = Validaciones.isNumVoid10(visProd.txtEntradas.getText());
+           sali = Validaciones.isNumVoid10(visProd.txtSalidas.getText());
+           
             int tE = consProd.getIdByNom(visProd.cbxCategoria.getSelectedItem()+"");
             catProd.setId_cat(tE);
             prod.setId_prod(Validaciones.isNumVoid(visProd.txt_id.getText()));
@@ -624,6 +655,10 @@ public class CtrlProductos implements ActionListener{
             prod.setPrecio_prod(Validaciones.isNumVoid10(visProd.txtPrecioProd.getText()));  
             prod.setFechaIni(Validaciones.setFormatFecha(visProd.dchFechaIni.getDate()));
             prod.setFechaFin(Validaciones.setFormatFecha(visProd.dchFechaFin.getDate()));
+            prod.setExistIni(Validaciones.isNumVoid10(visProd.txtExistentes.getText()));
+            prod.setEntradas(Validaciones.isNumVoid10(visProd.txtEntradas.getText()));
+            prod.setSalidas(Validaciones.isNumVoid10(visProd.txtSalidas.getText()));
+            prod.setStock(Calculos.getStock(exis,ent,sali));
             prod.setEstado_prod(1);
             
             if (consProd.modificar(prod)) {

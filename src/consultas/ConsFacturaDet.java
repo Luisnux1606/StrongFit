@@ -117,14 +117,14 @@ public class ConsFacturaDet extends Conexion {
         
     }
     
-    public int[] getEntradasSalidas(int idProd){
+    public int[] getExistIniEntradasSalidas(int idProd){
         String sql;
-        int entradasSalidas[] = new int[2];
+        int entradasSalidas[] = new int[3];
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
 
-        sql="select  p.entradas,p.salidas " +
+        sql="select p.EXISTINI, p.entradas,p.salidas " +
             "from producto p " +
             "where p.id_prod = "+idProd+" and p.estado_prod = 1";						
                 try 
@@ -132,8 +132,9 @@ public class ConsFacturaDet extends Conexion {
                     ps = con.prepareStatement(sql);                            
                     rs = ps.executeQuery();
                         while(rs.next()){
-                                entradasSalidas[0]=rs.getInt("entradas");
-                                entradasSalidas[1]=rs.getInt("salidas");
+                            entradasSalidas[0]=rs.getInt(1);
+                            entradasSalidas[1]=rs.getInt(2);
+                            entradasSalidas[2]=rs.getInt(3);
                         }
                        
                 } catch (SQLException e) 
@@ -154,8 +155,8 @@ public class ConsFacturaDet extends Conexion {
     public int calculaStock(int idProd)
     {
         //0: entradas , 1: salidas
-        int entradasSalidas[] = getEntradasSalidas(idProd);
-        int stock = entradasSalidas[0]-entradasSalidas[1];
+        int existIniEntradasSalidas[] = getExistIniEntradasSalidas(idProd);
+        int stock = (existIniEntradasSalidas[0] + existIniEntradasSalidas[1])- existIniEntradasSalidas[2];
         
         return stock;    
     }
@@ -211,7 +212,7 @@ public class ConsFacturaDet extends Conexion {
             for (FacturaDetalle listDets : facDet) 
             {
                 System.out.println(listDets.getCantidad_facDet()+"  "+listDets.getProducto_id_prod().getId_prod());
-                salidasActual = getEntradasSalidas(listDets.getProducto_id_prod().getId_prod())[1];
+                salidasActual = getExistIniEntradasSalidas(listDets.getProducto_id_prod().getId_prod())[2];
                 System.out.println("salidas es "+salidasActual);
                 salidas = salidasActual + listDets.getCantidad_facDet();
                 ps.setInt(1,salidas);                

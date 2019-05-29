@@ -28,7 +28,7 @@ public class ConsProductos extends Conexion
     {
         PreparedStatement ps= null;
         Connection con = getConexion();
-        String sql = "INSERT INTO Producto (id_prod,descripcion_prod, precio_prod,FECHAINI_PROD,FECHAFIN_PROD, Categoria_id_cat, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Producto (id_prod,descripcion_prod, precio_prod,FECHAINI_PROD,FECHAFIN_PROD, Categoria_id_cat,EXISTINI,ENTRADAS,SALIDAS,STOCK, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
         try 
         {
             ps = con.prepareStatement(sql);
@@ -37,7 +37,11 @@ public class ConsProductos extends Conexion
             ps.setString(3, modProducto.getFechaIni());
             ps.setString(4, modProducto.getFechaFin());
             ps.setInt(5, modProducto.getCategoria().getId_cat());
-            ps.setInt(6, modProducto.getEstado_prod());  
+            ps.setDouble(6, modProducto.getExistIni());
+            ps.setDouble(7, modProducto.getEntradas());
+            ps.setDouble(8, modProducto.getSalidas());
+            ps.setDouble(9, modProducto.getStock());
+            ps.setInt(10, modProducto.getEstado_prod());  
 
             ps.execute();                                       
             return true;
@@ -63,9 +67,9 @@ public class ConsProductos extends Conexion
     
     public boolean modificar(Producto modProducto)
     {
-        PreparedStatement ps = null;
+        PreparedStatement ps = null;                    //EXISTINI,ENTRADAS,SALIDAS,STOCK, 
         Connection con = getConexion();// descripcion_prod, precio_prod, Categoria_id_cat, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?)
-        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?,FECHAINI_PROD=?,FECHAFIN_PROD=?, Categoria_id_cat = ?, estado_prod = ?"
+        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?,FECHAINI_PROD=?,FECHAFIN_PROD=?, Categoria_id_cat = ?,EXISTINI=?,ENTRADAS=?,SALIDAS=?,STOCK=?, estado_prod = ?"
                 + " WHERE id_prod=?";
         
         try 
@@ -73,13 +77,18 @@ public class ConsProductos extends Conexion
             
             ps = con.prepareStatement(sql);
             
+            ps = con.prepareStatement(sql);
             ps.setString(1, modProducto.getDescripcion_prod());
             ps.setDouble(2, modProducto.getPrecio_prod());
             ps.setString(3, modProducto.getFechaIni());
             ps.setString(4, modProducto.getFechaFin());
             ps.setInt(5, modProducto.getCategoria().getId_cat());
-            ps.setInt(6, modProducto.getEstado_prod());  
-            ps.setInt(7, modProducto.getId_prod());
+            ps.setDouble(6, modProducto.getExistIni());
+            ps.setDouble(7, modProducto.getEntradas());
+            ps.setDouble(8, modProducto.getSalidas());
+            ps.setDouble(9, modProducto.getStock());
+            ps.setInt(10, modProducto.getEstado_prod());  
+            ps.setInt(11, modProducto.getId_prod());
           
             ps.execute();
             return true;
@@ -148,15 +157,11 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
-                    "from  categoria c,producto p " +
-                    "where c.id_cat = p.categoria_id_cat and upper(p.id_prod) like upper('%"+cad+"%') and p.estado_prod=1 " +
-                    "union " +
-                    "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
+        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
                     "from  categoria c,producto p " +
                     "where c.id_cat = p.categoria_id_cat and upper(p.descripcion_prod) like upper('%"+cad+"%') and p.estado_prod=1  " +
                     "union " +
-                    "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
+                    "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
                     "from  categoria c,producto p " +
                     "where c.id_cat = p.categoria_id_cat and upper(c.tipo_cat) like upper('%"+cad+"%') and p.estado_prod=1  ";
                 
@@ -223,7 +228,7 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
+        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
                     "from categoria c, producto p " +
                     "where c.id_cat = p.categoria_id_cat and p.estado_prod = 1";
                 
@@ -252,7 +257,7 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,c.id_cat " +
+        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
                     "from categoria c, producto p " +
                     "where c.id_cat = p.categoria_id_cat and c.id_cat=2 and p.estado_prod = 1 ";
                 

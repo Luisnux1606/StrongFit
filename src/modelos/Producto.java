@@ -15,6 +15,10 @@ public class Producto {
    private String descripcion_prod;
    private double precio_prod;
    private Categoria categoria;
+   private double entradas;
+   private double salidas;
+   private double existIni;
+   private double stock;
    private String fechaIni;
    private String fechaFin;
    private int estado_prod;
@@ -115,6 +119,62 @@ public class Producto {
      */
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    /**
+     * @return the entradas
+     */
+    public double getEntradas() {
+        return entradas;
+    }
+
+    /**
+     * @param entradas the entradas to set
+     */
+    public void setEntradas(double entradas) {
+        this.entradas = entradas;
+    }
+
+    /**
+     * @return the salidas
+     */
+    public double getSalidas() {
+        return salidas;
+    }
+
+    /**
+     * @param salidas the salidas to set
+     */
+    public void setSalidas(double salidas) {
+        this.salidas = salidas;
+    }
+
+    /**
+     * @return the existIni
+     */
+    public double getExistIni() {
+        return existIni;
+    }
+
+    /**
+     * @param existIni the existIni to set
+     */
+    public void setExistIni(double existIni) {
+        this.existIni = existIni;
+    }
+
+    /**
+     * @return the stock
+     */
+    public double getStock() {
+        return stock;
+    }
+
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(double stock) {
+        this.stock = stock;
     }
    
    

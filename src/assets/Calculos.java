@@ -265,5 +265,13 @@ public class Calculos {
      
      }
      
+     public static double getStock(double exisIni,double entr, double salid)
+     {
+         double stock;
+         stock = getTwoDecimals((exisIni+entr) - salid);
+         
+         return stock;
+     
+     }
      
 }

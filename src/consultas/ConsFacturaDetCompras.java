@@ -82,7 +82,7 @@ public class ConsFacturaDetCompras extends Conexion {
             for (FacturaDetalleCompras listDets : facDet) 
             {
                 System.out.println(listDets.getCantidad_facDetComp()+"  "+listDets.getProducto_id_prodComp().getId_prod());                
-                entradasActual = getEntradasSalidas(listDets.getProducto_id_prodComp().getId_prod())[0];
+                entradasActual = getExisIniEntradasSalidas(listDets.getProducto_id_prodComp().getId_prod())[1];
                 entradas = entradasActual + listDets.getCantidad_facDetComp();
                 ps.setInt(1,entradas);                
                 ps.setInt(2,listDets.getProducto_id_prodComp().getId_prod());
@@ -111,14 +111,14 @@ public class ConsFacturaDetCompras extends Conexion {
         }
         
     }
-    public int[] getEntradasSalidas(int idProd){
+    public int[] getExisIniEntradasSalidas(int idProd){
         String sql;
-        int entradasSalidas[] = new int[2];
+        int entradasSalidas[] = new int[3];
         PreparedStatement ps = null;
         con = getConexion();
         ResultSet rs = null; 
 
-        sql="select  p.entradas,p.salidas " +
+        sql="select p.EXISTINI, p.entradas,p.salidas " +
             "from producto p " +
             "where p.id_prod = "+idProd+" and p.estado_prod = 1";						
                 try 
@@ -126,8 +126,9 @@ public class ConsFacturaDetCompras extends Conexion {
                     ps = con.prepareStatement(sql);                            
                     rs = ps.executeQuery();
                         while(rs.next()){
-                                entradasSalidas[0]=rs.getInt(1);
-                                entradasSalidas[1]=rs.getInt(2);
+                            entradasSalidas[0]=rs.getInt(1);
+                            entradasSalidas[1]=rs.getInt(2);
+                            entradasSalidas[2]=rs.getInt(3);
                         }
                         con.close();
                 } catch (SQLException e) 
@@ -137,8 +138,8 @@ public class ConsFacturaDetCompras extends Conexion {
     }
     public int calculaStock(int idProd)
     {
-        int entradasSalidas[] = getEntradasSalidas(idProd);
-        int stock = entradasSalidas[0]-entradasSalidas[1];
+        int existIniEntradasSalidas[] = getExisIniEntradasSalidas(idProd);
+        int stock =(existIniEntradasSalidas[0] + existIniEntradasSalidas[1])-existIniEntradasSalidas[2];
         
         return stock;    
     }

@@ -51,6 +51,12 @@ public class VisProductos extends javax.swing.JFrame {
         lblFechaIni = new javax.swing.JLabel();
         lblFechaFin = new javax.swing.JLabel();
         dchFechaFin = new com.toedter.calendar.JDateChooser();
+        txtEntradas = new javax.swing.JTextField();
+        txtSalidas = new javax.swing.JTextField();
+        lblSalidas = new javax.swing.JLabel();
+        lblEntradas = new javax.swing.JLabel();
+        lblExistentes = new javax.swing.JLabel();
+        txtExistentes = new javax.swing.JTextField();
         txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lblIdCat = new javax.swing.JLabel();
@@ -78,17 +84,17 @@ public class VisProductos extends javax.swing.JFrame {
 
         tbl_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "DESCRIPCION", "PRECIO", "FECHA INI.", "FECHA FIN.", "CATEGORIA", "IDCAT"
+                "ID", "DESCRIPCION", "PRECIO", "FECHA INI.", "FECHA FIN.", "CATEGORIA", "EXISTENTES INICIALES", "ENTRADAS", "SALIDAS", "STOCK", "IDCAT"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, false, false
+                false, false, false, true, true, false, true, true, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -100,7 +106,7 @@ public class VisProductos extends javax.swing.JFrame {
         tbl_productos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 350, 880, 180);
+        jScrollPane1.setBounds(10, 410, 880, 180);
 
         btnLimpiar.setBackground(new java.awt.Color(102, 102, 102));
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar2.png"))); // NOI18N
@@ -123,7 +129,7 @@ public class VisProductos extends javax.swing.JFrame {
 
         jLabel3.setText("Precio:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(12, 48, 70, 16);
+        jLabel3.setBounds(10, 40, 70, 16);
 
         txtDescripcionProd.setName("cedula"); // NOI18N
         txtDescripcionProd.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +138,7 @@ public class VisProductos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtDescripcionProd);
-        txtDescripcionProd.setBounds(142, 13, 190, 22);
+        txtDescripcionProd.setBounds(140, 10, 190, 25);
 
         txtPrecioProd.setName("nombre"); // NOI18N
         txtPrecioProd.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +147,7 @@ public class VisProductos extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtPrecioProd);
-        txtPrecioProd.setBounds(142, 48, 190, 22);
+        txtPrecioProd.setBounds(140, 40, 190, 25);
 
         btnBuscar.setBackground(new java.awt.Color(255, 255, 204));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 204));
@@ -153,22 +159,40 @@ public class VisProductos extends javax.swing.JFrame {
         jPanel1.add(Categoria);
         Categoria.setBounds(10, 160, 70, 16);
         jPanel1.add(cbxCategoria);
-        cbxCategoria.setBounds(140, 160, 190, 20);
+        cbxCategoria.setBounds(140, 160, 190, 25);
         jPanel1.add(dchFechaIni);
-        dchFechaIni.setBounds(140, 80, 190, 22);
+        dchFechaIni.setBounds(140, 70, 190, 25);
 
         lblFechaIni.setText("Fecha inicio:");
         jPanel1.add(lblFechaIni);
-        lblFechaIni.setBounds(10, 80, 100, 16);
+        lblFechaIni.setBounds(10, 70, 100, 16);
 
         lblFechaFin.setText("Fecha fin:");
         jPanel1.add(lblFechaFin);
-        lblFechaFin.setBounds(10, 120, 80, 16);
+        lblFechaFin.setBounds(10, 100, 80, 16);
         jPanel1.add(dchFechaFin);
-        dchFechaFin.setBounds(140, 120, 190, 22);
+        dchFechaFin.setBounds(140, 100, 190, 25);
+        jPanel1.add(txtEntradas);
+        txtEntradas.setBounds(140, 190, 190, 25);
+        jPanel1.add(txtSalidas);
+        txtSalidas.setBounds(140, 220, 190, 25);
+
+        lblSalidas.setText("Salidas:");
+        jPanel1.add(lblSalidas);
+        lblSalidas.setBounds(10, 220, 70, 16);
+
+        lblEntradas.setText("Entradas:");
+        jPanel1.add(lblEntradas);
+        lblEntradas.setBounds(10, 190, 60, 16);
+
+        lblExistentes.setText("Existentes Iniciales:");
+        jPanel1.add(lblExistentes);
+        lblExistentes.setBounds(10, 130, 120, 16);
+        jPanel1.add(txtExistentes);
+        txtExistentes.setBounds(140, 130, 190, 25);
 
         pnl_personas.add(jPanel1);
-        jPanel1.setBounds(10, 70, 870, 210);
+        jPanel1.setBounds(10, 70, 870, 260);
 
         txtBuscarCualquierCampo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -176,21 +200,21 @@ public class VisProductos extends javax.swing.JFrame {
             }
         });
         pnl_personas.add(txtBuscarCualquierCampo);
-        txtBuscarCualquierCampo.setBounds(10, 320, 150, 22);
+        txtBuscarCualquierCampo.setBounds(10, 380, 150, 22);
 
         jLabel8.setText("Buscar por nombre:");
         pnl_personas.add(jLabel8);
-        jLabel8.setBounds(10, 300, 130, 16);
+        jLabel8.setBounds(10, 360, 130, 16);
         pnl_personas.add(lblIdCat);
         lblIdCat.setBounds(470, 10, 41, 20);
 
         rdbProductos.setText("productos");
         pnl_personas.add(rdbProductos);
-        rdbProductos.setBounds(200, 320, 85, 25);
+        rdbProductos.setBounds(200, 380, 85, 25);
 
         rdbServicios.setText("servicios");
         pnl_personas.add(rdbServicios);
-        rdbServicios.setBounds(330, 320, 77, 25);
+        rdbServicios.setBounds(330, 380, 77, 25);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -282,17 +306,23 @@ public class VisProductos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblDescripcionProducto;
+    private javax.swing.JLabel lblEntradas;
+    public javax.swing.JLabel lblExistentes;
     public javax.swing.JLabel lblFechaFin;
     public javax.swing.JLabel lblFechaIni;
     public javax.swing.JLabel lblIdCat;
     public javax.swing.JLabel lblNomEmp;
+    private javax.swing.JLabel lblSalidas;
     public javax.swing.JPanel pnl_personas;
     public javax.swing.JRadioButton rdbProductos;
     public javax.swing.JRadioButton rdbServicios;
     public javax.swing.JTable tbl_productos;
     public javax.swing.JTextField txtBuscarCualquierCampo;
     public javax.swing.JTextField txtDescripcionProd;
+    public javax.swing.JTextField txtEntradas;
+    public javax.swing.JTextField txtExistentes;
     public javax.swing.JTextField txtPrecioProd;
+    public javax.swing.JTextField txtSalidas;
     public javax.swing.JTextField txt_id;
     // End of variables declaration//GEN-END:variables
 }
