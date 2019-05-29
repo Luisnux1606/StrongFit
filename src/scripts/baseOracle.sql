@@ -770,5 +770,10 @@ values (categoria_id_seq.NEXTVAL,'SERVICIO GIMNASIO',1,1);
 insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
 values (categoria_id_seq.NEXTVAL,'PRODUCTO',2,1);
 
+insert into TipoPersona(id_tipoPer,descripcion_tipoPer,estado_tipoPer)
+values (tipoPersona_id_seq.NEXTVAL,'CLIENTE',1);
+
+insert into TipoPersona(id_tipoPer,descripcion_tipoPer,estado_tipoPer)
+values (tipoPersona_id_seq.NEXTVAL,'NEGOCIO',1);
 
 commit;

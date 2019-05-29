@@ -1,12 +1,17 @@
 ﻿*********GESTION DE PERSONAS***************
-GUARDAR= ok
+1. Quitar el campo de la tabla IDTIPOPER.
+2. Cuando se selecciona en la tabla no aparece en el combo el "tipo de persona"
+
+GUARDAR
+1.Cuando se guarda no se muestra en la tabla el "tipo de persona" aunque está guardada en la base de datos.  
+
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
 BUSCAR(nombre)= ok
 
 BUSCAR(lupa)
-1. Validar que si un campo de la tabla está vacío no se muestre null.:ok
+1. Cuando se busca no se muestra en el combo el "tipo de persona"
 
 *********GESTION DE MEMBRESIA***************
 GUARDAR= ok
