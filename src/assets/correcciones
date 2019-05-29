@@ -1,17 +1,11 @@
 ﻿*********GESTION DE PERSONAS***************
-1. Quitar el campo de la tabla IDTIPOPER.
-2. Cuando se selecciona en la tabla no aparece en el combo el "tipo de persona"
-
-GUARDAR
-1.Cuando se guarda no se muestra en la tabla el "tipo de persona" aunque está guardada en la base de datos.  
-
+GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
 BUSCAR(nombre)= ok
+BUSCAR(lupa)= ok
 
-BUSCAR(lupa)
-1. Cuando se busca no se muestra en el combo el "tipo de persona"
 
 *********GESTION DE MEMBRESIA***************
 GUARDAR= ok
@@ -23,7 +17,6 @@ BUSCAR(nombre)= ok
 
 
 *********GESTION DE GATEGORIA***************
-1. cambiar el nombre de la ventana por: "Strongfit CATEGORIAS" :ok
 2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando informaci�n de la tabla. �? :ok
 
 GUARDAR=ok
@@ -34,8 +27,6 @@ BUSCAR(nombre)= ok
 
 
 *********GESTION DE PRODUCTOS/SERVICIOS***************
-1. cambiar el nombre de la ventana por: "Strongfit PRODUCTOS/SERVICIOS" :ok
-
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -47,8 +38,6 @@ BUSCAR(lupa)
 
 
 *********GESTION DE ENTRENAMIENTO***************
-1. cambiar el nombre de la ventana por: "Strongfit ENTRENAMIENTO" :ok
-
 GUARDAR= ok
 ELIMINAR= ok 
 MODIFICAR= ok
@@ -58,7 +47,6 @@ BUSCAR(nombre)= ok
 
 *********GENERAR VENTAS***************
 GUARDAR
-1. Si pongo guardar y no tengo nada cambiar mensaje, ya que ahora muestra "Debe ingresar un null". :ok
 2. No puedo elegir el entrenamiento, porque cuando hago doble click en la tabla, no pasa nada. :ok
 
 LIMPIAR= ok
