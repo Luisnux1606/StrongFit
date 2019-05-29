@@ -60,7 +60,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         
         setListener();
         limpiarTablaDetalles();
-        setFormatTable(visFicha.tblFacturaDetalleCompras);
+        setFormatTable(visFicha.tblFacturaDetalle);
         
     }
     
@@ -76,7 +76,7 @@ public class CtrlFacturaDetalle implements ActionListener {
     public void setListener()
     {               
         int col = 1;      
-        JTable facDet = visFicha.tblFacturaDetalleCompras;
+        JTable facDet = visFicha.tblFacturaDetalle;
         facDet.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         facDet.setColumnSelectionAllowed(true);
         facDet.setRowSelectionAllowed(true);
@@ -135,15 +135,15 @@ public class CtrlFacturaDetalle implements ActionListener {
                           break;
                     case 4:
                           row = facDet.getSelectedRow()-1;                                                   
-                          addRows(visFicha.tblFacturaDetalleCompras);
+                          addRows(visFicha.tblFacturaDetalle);
                           col = 1;
-                          row = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
-                          visFicha.tblFacturaDetalleCompras.changeSelection(row, col,false,false);                        
+                          row = visFicha.tblFacturaDetalle.getRowCount()-1;
+                          visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);                        
                           break;
                     default:
                         break;
                   }
-                visFicha.tblFacturaDetalleCompras.changeSelection(row, col,false,false);
+                visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);
               }
                 
               
@@ -155,7 +155,7 @@ public class CtrlFacturaDetalle implements ActionListener {
            
           }
         };
-        visFicha.tblFacturaDetalleCompras.addKeyListener(keyListenerTblDetalle);
+        visFicha.tblFacturaDetalle.addKeyListener(keyListenerTblDetalle);
     
     }
     
@@ -179,26 +179,26 @@ public class CtrlFacturaDetalle implements ActionListener {
         }
         if (e.getSource() == visFicha.btnAgregarFilas) 
         {
-           addRows(visFicha.tblFacturaDetalleCompras);
-           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);
-           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras,visFicha);
+           addRows(visFicha.tblFacturaDetalle);
+           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
+           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle,visFicha);
         } 
         if (e.getSource() == visFicha.btnEliminarFilas) 
         {
-           deleteRows(visFicha.tblFacturaDetalleCompras);
-           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);
-           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalleCompras,visFicha);
+           deleteRows(visFicha.tblFacturaDetalle);
+           Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);
+           Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle,visFicha);
         } 
 
     }
     
     public void limpiarTablaDetalles(){
-        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalleCompras.getModel();
-        int a = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
+        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalle.getModel();
+        int a = visFicha.tblFacturaDetalle.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
         }
-         addRows(visFicha.tblFacturaDetalleCompras);
+         addRows(visFicha.tblFacturaDetalle);
     }
     public void addRows(JTable table)
     {        
@@ -257,7 +257,7 @@ public class CtrlFacturaDetalle implements ActionListener {
     
     public ArrayList<FacturaDetalle> setDetalles(VisFicha visFicha,String numFac)
     {
-        JTable table = visFicha.tblFacturaDetalleCompras;
+        JTable table = visFicha.tblFacturaDetalle;
         String num,desc,valU,valT,prodId;
         int facCabId = 0;
                 
