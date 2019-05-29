@@ -228,6 +228,7 @@ public class CtrlProductos implements ActionListener{
                     cadBus=cadBus.substring(0, cadBus.length()-1);
                 }
             showTableByNom(cadBus);
+                        
           }
           
           private void printIt(String title, KeyEvent keyEvent) {

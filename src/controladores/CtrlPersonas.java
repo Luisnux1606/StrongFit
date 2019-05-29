@@ -456,12 +456,20 @@ public class CtrlPersonas implements ActionListener {
             limpiarTabla();
             if((c+"").equals("")==false&&(c+"").equals(null)==false)
                     cadBus+=c;	            
-            else
+            else{
                 if((c+"").equals("")==true){
                     if(cadBus.length()>0)
                     cadBus=cadBus.substring(0, cadBus.length()-1);
                 }
+            }
             showTableByNom(cadBus);
+            
+            if(visPersona.txtBuscarCedula.getText().length()==0){
+                    cadBus="";
+                    showTable();
+                }
+                else
+                    showTableByNom(cadBus);
           }
           
           private void printIt(String title, KeyEvent keyEvent) {

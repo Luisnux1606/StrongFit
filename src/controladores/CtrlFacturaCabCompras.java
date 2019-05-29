@@ -60,10 +60,7 @@ import vistas.VisPersona;
 import vistas.VisProductos;
 import vistas.VisReportes;
 
-/**
- *
- * @author Administrator
- */
+
 public class CtrlFacturaCabCompras implements ActionListener{
 
     FacturaCabCompras modFacCabCompras;
