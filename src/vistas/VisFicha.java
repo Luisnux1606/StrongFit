@@ -230,7 +230,7 @@ public class VisFicha extends javax.swing.JFrame {
         txtValPagarComp = new javax.swing.JTextField();
         lblCambio1 = new javax.swing.JLabel();
         txt_cambio1 = new javax.swing.JTextField();
-        btnCalcular1 = new javax.swing.JButton();
+        btnCalcularCompras = new javax.swing.JButton();
         txt_valEntregado1 = new javax.swing.JTextField();
         lblIva1 = new javax.swing.JLabel();
         txtIVAComp = new javax.swing.JTextField();
@@ -1671,10 +1671,10 @@ public class VisFicha extends javax.swing.JFrame {
             }
         });
 
-        btnCalcular1.setText("calcular");
-        btnCalcular1.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcularCompras.setText("calcular");
+        btnCalcularCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcular1ActionPerformed(evt);
+                btnCalcularComprasActionPerformed(evt);
             }
         });
 
@@ -1764,7 +1764,7 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addGap(13, 13, 13)
                                 .addComponent(txt_cambio1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnCalcular1)
+                                .addComponent(btnCalcularCompras)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_valEntregado1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pnlVentasComponentes1, javax.swing.GroupLayout.PREFERRED_SIZE, 1216, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1856,7 +1856,7 @@ public class VisFicha extends javax.swing.JFrame {
                             .addComponent(txtValPagarComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblCambio1)
-                                .addComponent(btnCalcular1)
+                                .addComponent(btnCalcularCompras)
                                 .addComponent(txt_cambio1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txt_valEntregado1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2085,9 +2085,9 @@ public class VisFicha extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_cambio1ActionPerformed
 
-    private void btnCalcular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcular1ActionPerformed
+    private void btnCalcularComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularComprasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCalcular1ActionPerformed
+    }//GEN-LAST:event_btnCalcularComprasActionPerformed
 
     private void btnEliminarFilasCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFilasCompActionPerformed
         // TODO add your handling code here:
@@ -2139,7 +2139,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscarDsctoCompra;
     public javax.swing.JButton btnBuscarMed;
     public javax.swing.JButton btnCalcular;
-    public javax.swing.JButton btnCalcular1;
+    public javax.swing.JButton btnCalcularCompras;
     public javax.swing.JButton btnCargarFichas;
     public javax.swing.JButton btnElegirPersonaG;
     public javax.swing.JButton btnEliminar;

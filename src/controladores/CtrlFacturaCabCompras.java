@@ -95,12 +95,12 @@ public class CtrlFacturaCabCompras implements ActionListener{
 //        this.visFicha.btnEliminarFacCab.addActionListener(this);
         this.visFicha.btnLimpiarFacCabComp.addActionListener(this);
  //       this.visFicha.btnModificarFacCab.addActionListener(this);
-        this.visFicha.btnBuscarDscto.addActionListener(this);
-        this.visFicha.btnCalcular.addActionListener(this);
-        this.visFicha.btnBuscarClienteFactura.addActionListener(this);
-        this.visFicha.btnAgregarFilas.addActionListener(this);
-        this.visFicha.btnEliminarFilas.addActionListener(this);
-        this.visFicha.btnEntrenamiento.addActionListener(this);
+        this.visFicha.btnBuscarDsctoCompra.addActionListener(this);
+        this.visFicha.btnCalcularCompras.addActionListener(this);
+        this.visFicha.btnBuscarClienteFacturaComp.addActionListener(this);
+        this.visFicha.btnAgregarFilasComp.addActionListener(this);
+        this.visFicha.btnEliminarFilasComp.addActionListener(this);
+       
 
         
          
@@ -736,14 +736,14 @@ public class CtrlFacturaCabCompras implements ActionListener{
           
         }*/
       
-       if (e.getSource() == visFicha.btnLimpiarFacCab) 
+       if (e.getSource() == visFicha.btnLimpiarFacCabComp) 
         {
            limpiar();
            desabilitaHabilita(visFicha.btnGuardarFacCab,true);
           // desabilitaHabilita(visFicha.btnModificarFacCab,false);
         }
 
-        if (e.getSource() == visFicha.btnBuscarDscto) 
+        if (e.getSource() == visFicha.btnBuscarDsctoCompra) 
         {
             VisMembresia visMem = new VisMembresia();
             Membresias memMod  = new Membresias();
@@ -752,7 +752,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
             CtrlMembresias ctrMemb=new CtrlMembresias(memMod,consMem,visMem,ficha,visFicha);
         } 
         
-        if (e.getSource() == visFicha.btnCalcular) 
+        if (e.getSource() == visFicha.btnCalcularCompras) 
         {       
             if (Validaciones.isVoidJTxt(visFicha.txt_cambio)) {
                 double txtValEntregado = Double.parseDouble(visFicha.txt_cambio.getText());
@@ -761,7 +761,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
                 visFicha.txt_valEntregado.setText(Calculos.setTwoDecimals(txtCambio)+"");
                }
         }
-        if (e.getSource() == visFicha.btnBuscarClienteFactura) 
+        if (e.getSource() == visFicha.btnBuscarClienteFacturaComp) 
         {
            
             VisPersona visPer = new VisPersona();
@@ -770,25 +770,11 @@ public class CtrlFacturaCabCompras implements ActionListener{
                 
             Ficha ficha = new Ficha();
             CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
-            ctrPer.locale = 2;
+            ctrPer.locale = 4;
             ctrPer.iniciar();
             
         } 
-        if (e.getSource() == visFicha.btnEntrenamiento) 
-        {
-
-            VisHistorialPersonaServicio visHis = new VisHistorialPersonaServicio();
-            ConsHistorialPersonaServicio consHPS = new ConsHistorialPersonaServicio();
-            HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
-
-            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
-            ctlHis.locale = 0;
-            ctlHis.iniciar();
-            
-           
-
-        } 
-        
+                
         /*
          if (e.getSource() == visFicha.cmbTipoBusqueda) 
         {       

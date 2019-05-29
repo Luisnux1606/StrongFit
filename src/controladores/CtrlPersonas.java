@@ -576,6 +576,16 @@ public class CtrlPersonas implements ActionListener {
                             visHisPerServ.lblIdPersona.setText(idPer+"");
                     //        visEnt.txtPersona.setText(idPer+"");
                            break; 
+                            
+                        case 4:  
+                            visFicha = (VisFicha)vis;
+                            modPer.setId(idPer);
+                            modPer.setNombre(nombre);
+                            modPer.setApellido(apellido);
+                            visFicha.txt_clienteFacComp.setText(nombre+" "+apellido);
+                            visFicha.lblPersonaIdComp.setText(idPer+"");
+                            visFicha.txt_clienteFacComp.setText(modPer.getNombre() + " "+modPer.getApellido());
+                           break; 
                         default:    
                             break;
                     }

@@ -422,7 +422,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     
-                    model.addElement(listCategorias.getString("descripcion_prod"));
+                    model.addElement(listCategorias.getString("descripcion_prod").toUpperCase());
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
