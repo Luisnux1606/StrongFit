@@ -230,7 +230,7 @@ public class ConsAnalisis extends Conexion{
         ResultSet rs = null;
         String sql = "SELECT * " +
                     " FROM analisis a,ficha f,persona p " +
-                    " where p.id_per = f.persona_id_per and a.id_ana=f.analisis_id_ana and  a.estado_ana=1 and p.id_per="+idPer+"";
+                    " where p.id_per = f.persona_id_per and a.id_ana=f.analisis_id_ana and  a.estado_ana=1 and p.id_per="+idPer+" order by a.id_ana desc";
         ArrayList<Analisis> analisis = new ArrayList<>();
         
         

@@ -330,7 +330,7 @@ public class ConsMedidas extends Conexion {
         ResultSet rs = null;
         String sql = "SELECT * "
                 + " FROM medidas m, ficha f, persona p "
-                + " where p.id_per=f.persona_id_per and m.id_med=f.medidas_id_med and m.estado_med=1 and p.id_per="+idPer+"";
+                + " where p.id_per=f.persona_id_per and m.id_med=f.medidas_id_med and m.estado_med=1 and p.id_per="+idPer+" order by m.id_med desc";
         ArrayList<Medidas> medidas = new ArrayList<>();
         
         
