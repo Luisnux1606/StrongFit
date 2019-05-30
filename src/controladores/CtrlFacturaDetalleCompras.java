@@ -52,14 +52,14 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
         
       //  this.visFicha.btnGuardarFacCab.addActionListener(this);
 //        this.visFicha.btnEliminarFacCab.addActionListener(this);
-        this.visFicha.btnLimpiarFacCab.addActionListener(this);
+        this.visFicha.btnLimpiarFacCabComp.addActionListener(this);
 //        this.visFicha.btnModificarFacCab.addActionListener(this);
-        this.visFicha.btnBuscarDscto.addActionListener(this);
-        this.visFicha.btnCalcular.addActionListener(this);
-        this.visFicha.btnBuscarClienteFactura.addActionListener(this);
-        this.visFicha.btnAgregarFilas.addActionListener(this);
-        this.visFicha.btnEliminarFilas.addActionListener(this);
-        this.visFicha.btnEntrenamiento.addActionListener(this);
+        this.visFicha.btnBuscarDsctoCompra.addActionListener(this);
+        this.visFicha.btnCalcularCompras.addActionListener(this);
+        this.visFicha.btnBuscarClienteFacturaComp.addActionListener(this);
+        this.visFicha.btnAgregarFilasComp.addActionListener(this);
+        this.visFicha.btnEliminarFilasComp.addActionListener(this);
+       
         
         setListener();
         limpiarTablaDetalles();

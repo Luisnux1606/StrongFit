@@ -558,6 +558,42 @@ public class CtrlProductos implements ActionListener{
     
     }
     
+    public void getServicios(){
+    try {
+                limpiarTabla();
+                ResultSet listProd = consProd.buscarServicios();
+
+                DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
+                Object cols[] = new Object[11];
+
+                while (listProd.next()) {
+                    try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                       cols[0] = listProd.getInt("id_prod");
+                       cols[1] = listProd.getString("descripcion_prod").toUpperCase();
+                       cols[2] = listProd.getString("precio_prod").toUpperCase();
+                       cols[3] = listProd.getString("FECHAINI_PROD");
+                       cols[4] = listProd.getString("FECHAFIN_PROD");
+                       cols[5] = listProd.getString("tipo_cat").toUpperCase();
+                       cols[6] = listProd.getString("EXISTINI").toUpperCase();
+                       cols[7] = listProd.getString("ENTRADAS").toUpperCase();
+                       cols[8] = listProd.getString("SALIDAS").toUpperCase();
+                       cols[9] = listProd.getString("STOCK").toUpperCase();
+                       cols[10] = listProd.getString("id_cat");
+
+                        model.addRow(cols);
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                consProd.closeConection();
+            } catch (SQLException ex) {
+                Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            visProd.tbl_productos.updateUI();
+    
+    }
+    
     public void showDatosComboTable()
     {
         limpiarComboProdServ();
@@ -701,6 +737,19 @@ public class CtrlProductos implements ActionListener{
            desabilitaHabilita(visProd.btnModificar,false);
            showDatosComboTable();
         }
+       
+        if (e.getSource() == visProd.rdbProductos) 
+        {
+            visProd.rdbServicios.setSelected(false);            
+              getProductos();
+              showComboProductos();        
+        }
+        if (e.getSource() == visProd.rdbServicios) 
+        {
+            visProd.rdbProductos.setSelected(false);
+            getServicios();
+            showComboCategorias();
+        }
 
        
                            
@@ -711,6 +760,10 @@ public class CtrlProductos implements ActionListener{
         visProd.txtPrecioProd.setText("");
         visProd.dchFechaIni.setDate(null);
         visProd.dchFechaFin.setDate(null);
+        visProd.txtEntradas.setText("");
+        visProd.txtExistentes.setText("");
+        visProd.txtSalidas.setText("");
+        
         //visProd.cbxCategoria.setSelectedIndex(0);    
     }
     

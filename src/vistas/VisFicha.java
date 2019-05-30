@@ -218,7 +218,7 @@ public class VisFicha extends javax.swing.JFrame {
         txt_clienteFacComp = new javax.swing.JTextField();
         btnGuardarFacCabCompras = new javax.swing.JButton();
         btnLimpiarFacCabComp = new javax.swing.JButton();
-        txt_id_FacCab1 = new javax.swing.JTextField();
+        txt_id_FacCabComp = new javax.swing.JTextField();
         lblTotDscto1 = new javax.swing.JLabel();
         txtValConDsctoFichaComp = new javax.swing.JTextField();
         jScrollPane13 = new javax.swing.JScrollPane();
@@ -1211,7 +1211,7 @@ public class VisFicha extends javax.swing.JFrame {
                             .addGroup(pnlVentasComponentesLayout.createSequentialGroup()
                                 .addGap(343, 343, 343)
                                 .addComponent(lblNroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(476, Short.MAX_VALUE))
+                .addContainerGap(469, Short.MAX_VALUE))
         );
         pnlVentasComponentesLayout.setVerticalGroup(
             pnlVentasComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1233,7 +1233,7 @@ public class VisFicha extends javax.swing.JFrame {
                             .addComponent(txt_clienteFac, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEntrenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 20, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(pnlEntrenamientoEnFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1455,7 +1455,7 @@ public class VisFicha extends javax.swing.JFrame {
                             .addGroup(pnlVentasInternoLayout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnlVentasInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAgregarFilas)
                                     .addComponent(btnEliminarFilas))))
@@ -1514,7 +1514,7 @@ public class VisFicha extends javax.swing.JFrame {
                     .addComponent(lblTotalConIva))
                 .addGap(12, 12, 12)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlVentasLayout = new javax.swing.GroupLayout(pnlVentas);
@@ -1576,7 +1576,7 @@ public class VisFicha extends javax.swing.JFrame {
                     .addGroup(pnlVentasComponentes1Layout.createSequentialGroup()
                         .addGap(343, 343, 343)
                         .addComponent(lblNroFactura1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(459, Short.MAX_VALUE))
+                .addContainerGap(450, Short.MAX_VALUE))
         );
         pnlVentasComponentes1Layout.setVerticalGroup(
             pnlVentasComponentes1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1776,7 +1776,7 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
                                         .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txt_id_FacCab1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_id_FacCabComp, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnGuardarFacCabCompras, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
@@ -1818,7 +1818,7 @@ public class VisFicha extends javax.swing.JFrame {
                             .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAgregarFilasComp)
                                     .addComponent(btnEliminarFilasComp))))
@@ -1830,7 +1830,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txt_id_FacCab1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_id_FacCabComp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblCompras))
                 .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
@@ -1883,7 +1883,7 @@ public class VisFicha extends javax.swing.JFrame {
                     .addComponent(lblTotalConIva1))
                 .addGap(12, 12, 12)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -2370,7 +2370,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JTextField txt_clienteFac;
     public javax.swing.JTextField txt_clienteFacComp;
     public javax.swing.JTextField txt_id_FacCab;
-    public javax.swing.JTextField txt_id_FacCab1;
+    public javax.swing.JTextField txt_id_FacCabComp;
     public javax.swing.JTextField txt_id_analisis;
     public javax.swing.JTextField txt_id_analisis_u;
     public javax.swing.JTextField txt_id_datos;

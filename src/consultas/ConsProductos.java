@@ -252,6 +252,35 @@ public class ConsProductos extends Conexion
         return rs;
     }
     
+    public ResultSet buscarServicios()
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
+                    "from categoria c, producto p " +
+                    "where c.id_cat = p.categoria_id_cat and c.id_cat=1 and p.estado_prod = 1";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
     public ResultSet buscarProductos()
     {
         PreparedStatement ps = null;
@@ -259,7 +288,7 @@ public class ConsProductos extends Conexion
         ResultSet rs = null; 
         String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
                     "from categoria c, producto p " +
-                    "where c.id_cat = p.categoria_id_cat and c.id_cat=2 and p.estado_prod = 1 ";
+                    "where c.id_cat = p.categoria_id_cat and c.CATEGORIA_ID_CAT=2 and p.estado_prod = 1 ";
                 
         
         try 

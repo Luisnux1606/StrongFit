@@ -134,6 +134,9 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.tabFichaVentas.setSelectedIndex(1);
         
         this.visFicha.lblPersonaId.setVisible(false);
+        this.visFicha.lblDsctoIdComp.setVisible(false);
+        this.visFicha.txt_id_FacCabComp.setVisible(false);
+        this.visFicha.lblIvaIdComp.setVisible(false);
         this.visFicha.lblInfoFechaAna.setToolTipText(" aqui se cargara la fecha de analisis automaticamente");
         this.visFicha.lblInfoFechaMed.setToolTipText(" aqui se cargara la fecha de medidas automaticamente");
         
