@@ -599,15 +599,16 @@ public class CtrlFicha implements ActionListener{
 
                     if (consFicha.registrar(modFicha)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
-                        limpiar();
+                       
                     }
                     else
                     {
                         JOptionPane.showMessageDialog(null, "Error al Guardar");
-                        limpiar();
+                       
                     }
                 //    showTable();
                     setMedidasAnalisisFichas();
+                     limpiar();
                }        
         }
       

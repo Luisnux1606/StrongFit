@@ -268,7 +268,7 @@ public class ConsMedidas extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM medidas where estado_med=1";
+        String sql = "SELECT * FROM medidas where estado_med=1 order by id_med desc";
         ArrayList<Medidas> medidas = new ArrayList<>();
         
         

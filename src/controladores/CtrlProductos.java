@@ -83,8 +83,7 @@ public class CtrlProductos implements ActionListener{
         this.consProd = consProd;        
         this.visProd =  visProd;
         this.visFicha = visFicha;
-        
-                
+                        
         this.visProd.btnGuardar.addActionListener(this);
         this.visProd.btnEliminar.addActionListener(this);
         this.visProd.btnLimpiar.addActionListener(this);
