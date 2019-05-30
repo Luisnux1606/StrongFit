@@ -37,7 +37,7 @@ import vistas.VisCategoria;
 
 /**
  *
- * @author aplaza
+ * @author aplazar
  */
 public class CtrlCategoria implements ActionListener
 {

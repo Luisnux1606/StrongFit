@@ -65,7 +65,7 @@ public class CtrlMembresias implements ActionListener{
         showTable();
         setFocus();
         setListener();    
-        setTableModel();
+       // setTableModel();
         iniciar();
     }
     public void iniciar()

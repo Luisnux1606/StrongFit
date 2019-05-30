@@ -103,7 +103,6 @@ public class CtrlHistorialPersServicio implements ActionListener{
         this.visHisPerServ.lblIdProd.setVisible(false);
         this.visHisPerServ.txt_id.setVisible(false);
         
-
               
         cadBus = "";
         locale = 0; //1:menu , 2:factura
