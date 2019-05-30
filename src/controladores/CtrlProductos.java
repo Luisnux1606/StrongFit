@@ -91,6 +91,7 @@ public class CtrlProductos implements ActionListener{
         this.visProd.btnModificar.addActionListener(this);
         this.visProd.rdbProductos.addActionListener(this);
         this.visProd.rdbServicios.addActionListener(this);
+        this.visProd.rdbTodos.addActionListener(this);
         
         this.visProd.txt_id.setVisible(false);
         this.visProd.lblIdCat.setVisible(false);
