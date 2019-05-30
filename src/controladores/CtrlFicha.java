@@ -309,8 +309,6 @@ public class CtrlFicha implements ActionListener{
         visFicha.setVisible(true);
     
         visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-     
     }
     
     public void setCmbxMembresias()

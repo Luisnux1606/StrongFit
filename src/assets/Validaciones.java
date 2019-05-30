@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import modelos.FacturaDetalle;
 import modelos.Producto;
@@ -144,6 +145,22 @@ public class Validaciones {
          boolean estado = true;
          String msg = "";
          for (JTextField jTextField : txt) 
+         {
+             if (jTextField.getText()==null||jTextField.getText().length()==0)                     
+                msg = msg+" Debe ingresar un "+jTextField.getName()+" ";
+         }
+         if (msg.length()>0) {
+             JOptionPane.showMessageDialog(null, msg);
+             estado = false;
+         }
+         return estado;
+     }
+     
+     public static boolean isVoidTextArea(ArrayList<JTextArea> txt)
+     {
+         boolean estado = true;
+         String msg = "";
+         for (JTextArea jTextField : txt) 
          {
              if (jTextField.getText()==null||jTextField.getText().length()==0)                     
                 msg = msg+" Debe ingresar un "+jTextField.getName()+" ";

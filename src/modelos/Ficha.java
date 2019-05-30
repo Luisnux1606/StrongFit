@@ -18,6 +18,7 @@ public class Ficha {
     private Analisis analisis;
     private Persona persona;
     private Medidas medidas;
+    private PlanAlimenticio planAli;
     private int estado;
 
     /**
@@ -104,7 +105,11 @@ public class Ficha {
         this.estado = estado;
     }
 
-  
-    
-    
+    public PlanAlimenticio getPlanAli() {
+        return planAli;
+    }
+
+    public void setPlanAli(PlanAlimenticio planAli) {
+        this.planAli = planAli;
+    }
 }
