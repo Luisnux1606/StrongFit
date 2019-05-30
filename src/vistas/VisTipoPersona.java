@@ -35,7 +35,7 @@ public class VisTipoPersona extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_categoria = new javax.swing.JTable();
+        tbl_tipoPersona = new javax.swing.JTable();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         txt_id = new javax.swing.JTextField();
@@ -64,7 +64,7 @@ public class VisTipoPersona extends javax.swing.JFrame {
         pnl_categoria.add(btnEliminar);
         btnEliminar.setBounds(110, 20, 50, 40);
 
-        tbl_categoria.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_tipoPersona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -83,9 +83,9 @@ public class VisTipoPersona extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbl_categoria.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tbl_categoria);
-        tbl_categoria.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbl_tipoPersona.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tbl_tipoPersona);
+        tbl_tipoPersona.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_categoria.add(jScrollPane1);
         jScrollPane1.setBounds(10, 220, 880, 220);
@@ -218,7 +218,7 @@ public class VisTipoPersona extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblNomEmp;
     public javax.swing.JPanel pnl_categoria;
-    public javax.swing.JTable tbl_categoria;
+    public javax.swing.JTable tbl_tipoPersona;
     public javax.swing.JTextField txtBuscarNombre;
     public javax.swing.JTextField txt_id;
     public javax.swing.JTextField txt_nombre;

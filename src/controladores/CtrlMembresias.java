@@ -150,7 +150,8 @@ public class CtrlMembresias implements ActionListener{
         };
         visMembresias.txtBuscarNombre.addKeyListener(keyListenertxtBuscarNombre);
 
-        KeyListener keyListenerTblPersonas = new KeyListener() {
+        KeyListener keyListenerTblPersonas = new KeyListener() 
+        {
           public void keyPressed(KeyEvent e) {
            
           }
@@ -172,7 +173,8 @@ public class CtrlMembresias implements ActionListener{
 
         };
         
-        MouseListener mouseListTblMembresia = new MouseListener() {
+        MouseListener mouseListTblMembresia = new MouseListener() 
+        {
             @Override
             public void mouseClicked(MouseEvent e) {
                 
