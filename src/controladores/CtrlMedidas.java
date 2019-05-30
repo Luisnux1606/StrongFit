@@ -279,7 +279,8 @@ public class CtrlMedidas implements ActionListener{
     }
     public void showTable()
     {
-        limpiarTabla();                  
+        limpiarTabla();          
+        int codPer = Validaciones.isNumVoid(visMedidas.txtCodPersona.getText().trim());
         //persona.setId(visMedidas.txt_id_persona_u);
            ArrayList<Medidas> listMed = consMedidas.buscarTodos(modMedidas);
            DefaultTableModel model =  (DefaultTableModel)visMedidas.tblDatos.getModel();

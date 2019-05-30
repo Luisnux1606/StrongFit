@@ -814,8 +814,15 @@ public class CtrlFicha implements ActionListener{
     }
     public void limpiar()
     {
-        visFicha.txtCodPersona.setText(""); 
+        visFicha.txtNomPersonaFicha.setText(""); 
         visFicha.dchFecha.setDate(null);
+        visFicha.txtInfoFechaAna.setText("");
+        visFicha.txtInfoFechaMed.setText("");
+        visFicha.tabp_ficha.setEnabledAt(0, false);
+        visFicha.tabp_ficha.setEnabledAt(1, false);
+        visFicha.tabp_ficha.setEnabledAt(2, false);
+        
+        limpiarTabla(visFicha.tblFichas);
        
     }
     

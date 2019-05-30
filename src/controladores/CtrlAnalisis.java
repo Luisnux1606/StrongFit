@@ -278,7 +278,9 @@ public class CtrlAnalisis implements ActionListener{
     
     public void showTable()
     {
-        limpiarTabla();                            
+        limpiarTabla();                
+        
+         int codPer = Validaciones.isNumVoid(visAnalisis.txtCodPersona.getText().trim());
            ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodos(modAnalisis);
            DefaultTableModel model =  (DefaultTableModel)visAnalisis.tblAnalisis.getModel();
            Object cols[] = new Object[8];

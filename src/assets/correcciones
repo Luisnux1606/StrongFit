@@ -87,7 +87,7 @@ BUSCAR(lupa)
 
 
 *********GENERAR ANALISIS***************
-1.Si yo elimino y luego busco(fecha) se duplica la informaci�n de "REcomen.Cardio" a "Recom. pesas".
+1.Si yo elimino y luego busco(fecha) se duplica la informaci�n de "REcomen.Cardio" a "Recom. pesas".:ok
 
 GUARDAR
 1. No muestra la información en la tabla, pero si lo guarda en la BD. :ok
