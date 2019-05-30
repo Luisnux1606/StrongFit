@@ -12,24 +12,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modelos.Categoria;
 import modelos.Conexion;
-import modelos.Persona;
-
+import modelos.TipoPersona;
 
 
 public class ConsTipoPersona extends Conexion
 {
-    public boolean guardar(Categoria modCat)
+    //GUARDA EN LA BD
+    public boolean guardar(TipoPersona modTipPer)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO categoria (id_cat, tipo_cat,CATEGORIA_ID_CAT, estado_cat) VALUES(categoria_id_seq.NEXTVAL,?,?,?)";
+        String sql = "INSERT INTO TipoPersona (id_tipoper, descripcion_tipoper, estado_tipoper)VALUES(tipoPersona_id_seq.NEXTVAL,?,?)";
 
         try 
         {
             ps = con.prepareStatement(sql);
-            ps.setString(1, modCat.getTipo_cat());
-            ps.setInt(2, modCat.getCategoria_id_cat().getId_cat()); 
-            ps.setInt(3, modCat.getEstado_cat());
+            ps.setString(1, modTipPer.getDescripcion_tipoPer());
+            ps.setInt(2, modTipPer.getEstado_tipoPer()); 
             ps.execute();                                       
             return true;
         } 
@@ -50,33 +49,26 @@ public class ConsTipoPersona extends Conexion
         }  
     }
     
-    public ArrayList<Categoria> buscarTodos(Categoria modCat)
+    //BUSCA TODOS LOS REGISTROS PARA MOSTRARLES EN UNA TABLA A POSTERIOR
+    public ArrayList<TipoPersona> buscarTodos(TipoPersona modTipPer)
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT c.id_cat, c.tipo_cat,c.categoria_id_cat,c.estado_cat " +
-                    "FROM Categoria c " +
-                    "where estado_cat=1 " +
-                    "order by id_cat asc";
-        ArrayList<Categoria> categoria = new ArrayList<>();
-        Categoria c;
+        String sql = "SELECT * FROM TipoPersona where estado_tipoPer=1 order by id_tipoPer asc";
+        ArrayList<TipoPersona> tipoPerList = new ArrayList<>();
 
         try 
         {   
             ps = con.prepareStatement(sql);                            
             rs = ps.executeQuery();
             
-            while (rs.next()) {
-                c  = new Categoria();
-               
-                modCat = new Categoria();
-                modCat.setId_cat(rs.getInt("id_cat"));
-                modCat.setTipo_cat(rs.getString("tipo_cat"));
-                    c.setId_cat(rs.getInt("CATEGORIA_ID_CAT"));                    
-                    c.setTipo_cat(getNomById(c.getId_cat()));
-                modCat.setCategoria_id_cat(c);
-                categoria.add(modCat);               
+            while (rs.next()) 
+            {    
+                modTipPer = new TipoPersona();
+                modTipPer.setId_tipoPer(rs.getInt("id_tipoPer"));
+                modTipPer.setDescripcion_tipoPer(rs.getString("descripcion_tipoPer"));
+                tipoPerList.add(modTipPer);               
             }
         } 
         catch (Exception e) {
@@ -90,8 +82,71 @@ public class ConsTipoPersona extends Conexion
                 e.printStackTrace();
             }
         }
-       return categoria;
+       return tipoPerList;
     }
+    
+    //ELIMINA LOS REGISTROS DE LA BASE DE DATOS. 
+    public boolean eliminar(TipoPersona modTipPer)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "UPDATE TipoPersona SET ESTADO_tipoPer=? WHERE id_tipoPer=?";
+        
+        try 
+        {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, modTipPer.getEstado_tipoPer());
+            ps.setInt(2, modTipPer.getId_tipoPer());
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+            System.err.println(e);
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        } 
+    }
+    
+    public boolean modificar(TipoPersona modTipPer)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion(); 
+        String sql = "UPDATE TipoPersona SET descripcion_tipoPer=? WHERE id_tipPer=?";
+        try 
+        {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, modTipPer.getDescripcion_tipoPer());
+            ps.setInt(2, modTipPer.getId_tipoPer());
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+            System.err.println(e);
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }   
+    }
+    
     public String getNomById(int idCat){
 		String sql;
 		String result="";
@@ -139,68 +194,7 @@ public class ConsTipoPersona extends Conexion
 		
 		return result;
 	}
-    public boolean eliminar(Categoria modCat)
-    {
-        PreparedStatement ps = null;
-        Connection con = getConexion();
-        String sql = "UPDATE categoria SET ESTADO_CAT=? WHERE id_cat=?";
-        
-        try 
-        {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, modCat.getEstado_cat());
-            ps.setInt(2, modCat.getId_cat());
-            ps.execute();
-            return true;
-        } 
-        catch (Exception e) 
-        {
-            System.err.println(e);
-            return false;
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                System.err.println(e);
-            }
-        } 
-    }
     
-    public boolean modificar(Categoria modCat)
-    {
-        PreparedStatement ps = null;
-        Connection con = getConexion(); //id_cat, tipo_cat,CATEGORIA_ID_CAT, estado_cat
-        String sql = "UPDATE categoria SET tipo_cat=?,CATEGORIA_ID_CAT = ? "
-                + " WHERE id_cat=?";
-        try 
-        {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, modCat.getTipo_cat());
-            ps.setInt(2, modCat.getCategoria_id_cat().getId_cat());
-            ps.setInt(3, modCat.getId_cat());
-            ps.execute();
-            return true;
-        } 
-        catch (Exception e) 
-        {
-            System.err.println(e);
-            return false;
-        }
-        finally
-        {
-            try 
-            {
-                con.close();
-            } catch (Exception e) 
-            {
-                System.err.println(e);
-            }
-        }   
-    }
     
     public ArrayList<Categoria> buscarTodosPorNom(Categoria modCat,String nom)
     {
