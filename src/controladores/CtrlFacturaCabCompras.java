@@ -808,13 +808,14 @@ public class CtrlFacturaCabCompras implements ActionListener{
     }
     public void limpiar()
     {
-        visFicha.txt_clienteFac.setText("");
-        visFicha.dtcFechaFacCab.setDate(Calculos.getCurrentDate2()); 
-        visFicha.txtValConDsctoFicha.setText("0.0");
-        visFicha.txtValPendienteFicha.setText("0.0");
-        visFicha.txtValPagar.setText("0.0");
-        visFicha.txtValDscto.setText("0.0");
-        visFicha.txt_valCancelo.setText("0.0");   
+        visFicha.txt_clienteFacComp.setText("");
+        visFicha.dtcFechaFacCabComp.setDate(Calculos.getCurrentDate2()); 
+        visFicha.txtValConDsctoFichaComp.setText("0.0");
+        visFicha.txtValPendienteFichaComp.setText("0.0");
+        visFicha.txtValPagarComp.setText("0.0");
+        visFicha.txtValDsctoComp.setText("0.0");
+        visFicha.txt_valCanceloComp.setText("0.0");   
+        
         visFicha.lblDsctoId.setText("1");
         
         

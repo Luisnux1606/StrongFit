@@ -62,6 +62,7 @@ public class VisProductos extends javax.swing.JFrame {
         lblIdCat = new javax.swing.JLabel();
         rdbProductos = new javax.swing.JRadioButton();
         rdbServicios = new javax.swing.JRadioButton();
+        lblBuscarPor = new javax.swing.JLabel();
         lblNomEmp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -210,11 +211,15 @@ public class VisProductos extends javax.swing.JFrame {
 
         rdbProductos.setText("productos");
         pnl_personas.add(rdbProductos);
-        rdbProductos.setBounds(200, 380, 85, 25);
+        rdbProductos.setBounds(170, 380, 85, 25);
 
         rdbServicios.setText("servicios");
         pnl_personas.add(rdbServicios);
-        rdbServicios.setBounds(330, 380, 77, 25);
+        rdbServicios.setBounds(260, 380, 77, 25);
+
+        lblBuscarPor.setText("Buscar por");
+        pnl_personas.add(lblBuscarPor);
+        lblBuscarPor.setBounds(170, 360, 70, 16);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -305,6 +310,7 @@ public class VisProductos extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JLabel lblBuscarPor;
     public javax.swing.JLabel lblDescripcionProducto;
     private javax.swing.JLabel lblEntradas;
     public javax.swing.JLabel lblExistentes;

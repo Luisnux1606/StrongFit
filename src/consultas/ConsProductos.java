@@ -251,7 +251,34 @@ public class ConsProductos extends Conexion
         }
         return rs;
     }
-    
+    public ResultSet buscarSoloServicios()
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select c.tipo_cat " +
+                    "from categoria c " +
+                    "where c.estado_cat = 1 and c.CATEGORIA_ID_CAT=1";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
     public ResultSet buscarServicios()
     {
         PreparedStatement ps = null;
@@ -367,6 +394,8 @@ public class ConsProductos extends Conexion
         }
         return rs;
     }
+    
+    
     
        
     public ArrayList<Producto> buscarTodos(Producto modProducto, Categoria modCategoria)

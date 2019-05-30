@@ -89,6 +89,8 @@ public class CtrlProductos implements ActionListener{
         this.visProd.btnEliminar.addActionListener(this);
         this.visProd.btnLimpiar.addActionListener(this);
         this.visProd.btnModificar.addActionListener(this);
+        this.visProd.rdbProductos.addActionListener(this);
+        this.visProd.rdbServicios.addActionListener(this);
         
         this.visProd.txt_id.setVisible(false);
         this.visProd.lblIdCat.setVisible(false);
@@ -438,6 +440,7 @@ public class CtrlProductos implements ActionListener{
     }
     public void showComboProductos()
     {
+        visProd.cbxCategoria.removeAllItems();
         try {
            
             ResultSet listCategorias = consProd.buscarCategoriasProductos();
@@ -462,9 +465,35 @@ public class CtrlProductos implements ActionListener{
      
     public void showComboCategorias()
     {
+        visProd.cbxCategoria.removeAllItems();
         try {
            
             ResultSet listCategorias = consProd.buscarCategorias();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visProd.cbxCategoria.getModel();
+           
+            
+            while (listCategorias.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(listCategorias.getString("tipo_cat"));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consProd.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visProd.cbxCategoria.updateUI();
+    }
+    public void showComboServicios()
+    {
+        visProd.cbxCategoria.removeAllItems();
+        try {
+           
+            ResultSet listCategorias = consProd.buscarSoloServicios();
             
             DefaultComboBoxModel model =  (DefaultComboBoxModel)visProd.cbxCategoria.getModel();
            
@@ -748,7 +777,7 @@ public class CtrlProductos implements ActionListener{
         {
             visProd.rdbProductos.setSelected(false);
             getServicios();
-            showComboCategorias();
+            showComboServicios();
         }
 
        
