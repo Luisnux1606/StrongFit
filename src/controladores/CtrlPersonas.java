@@ -437,7 +437,8 @@ public class CtrlPersonas implements ActionListener {
      }
     
     
-    public void setListener(){
+    public void setListener()
+    {
         KeyListener keyListenertxtBuscarCedula = new KeyListener() 
         {
           public void keyPressed(KeyEvent keyEvent) {

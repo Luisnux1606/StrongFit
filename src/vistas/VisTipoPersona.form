@@ -205,7 +205,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txt_nombre">
               <Properties>
-                <Property name="name" type="java.lang.String" value="cedula" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="descripci&#xf3;n tipo de persona" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_nombreActionPerformed"/>

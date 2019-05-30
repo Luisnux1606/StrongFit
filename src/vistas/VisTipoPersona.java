@@ -109,7 +109,7 @@ public class VisTipoPersona extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(10, 10, 110, 20);
 
-        txt_nombre.setName("cedula"); // NOI18N
+        txt_nombre.setName("descripción tipo de persona"); // NOI18N
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombreActionPerformed(evt);

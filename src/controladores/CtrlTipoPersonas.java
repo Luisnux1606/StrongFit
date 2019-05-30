@@ -10,6 +10,8 @@ import assets.Validaciones;
 import consultas.ConsTipoPersona;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -32,9 +34,12 @@ public class CtrlTipoPersonas implements ActionListener
     VisTipoPersona visTipPer;
     ConsTipoPersona consTipPer;
     Object visFicha;
+    String cadBus;
     
     public CtrlTipoPersonas (TipoPersona modtipPer, VisTipoPersona visTipPer, ConsTipoPersona constipPer, Object visFicha)
     {
+        cadBus = "";
+        
         this.modTipPer = modtipPer;
         this.visTipPer = visTipPer;
         this.consTipPer = constipPer;        
@@ -44,6 +49,8 @@ public class CtrlTipoPersonas implements ActionListener
         this.visTipPer.btnEliminar.addActionListener(this);
         this.visTipPer.btnLimpiar.addActionListener(this);
         this.visTipPer.btnModificar.addActionListener(this);
+        
+        setListener();  
     }
     
     public void iniciar()
@@ -122,6 +129,13 @@ public class CtrlTipoPersonas implements ActionListener
             limpiar();
             showTable();
         }
+        
+        if (e.getSource() == visTipPer.btnLimpiar) 
+        {
+           limpiar();
+           desabilitaHabilita(visTipPer.btnGuardar,true);
+           desabilitaHabilita(visTipPer.btnModificar,false);
+        }
     }
     
     public void limpiar()
@@ -155,6 +169,7 @@ public class CtrlTipoPersonas implements ActionListener
     
     public void setListener()
     {
+        //CLICK EN LA TABLA
         MouseListener mouseListTblTipPer= new MouseListener() 
         {
             @Override
@@ -181,7 +196,68 @@ public class CtrlTipoPersonas implements ActionListener
             public void mouseEntered(MouseEvent e) {}
         };
        visTipPer.tbl_tipoPersona.addMouseListener(mouseListTblTipPer);
+       
+       //BUSCAR POR LA CAJA DE TEXTO.
+        KeyListener keyListenertxtBuscarCedula = new KeyListener() 
+        {
+            public void keyPressed(KeyEvent keyEvent) {
+                printIt("Pressed", keyEvent);
+            }
+
+            public void keyReleased(KeyEvent keyEvent) {
+                printIt("Released", keyEvent);
+            }
+
+            public void keyTyped(KeyEvent e) 
+            {
+                String m=(e.getKeyChar()+"").toUpperCase();
+                char c =m.charAt(0);
+					
+                limpiarTabla();
+                if((c+"").equals("")==false&&(c+"").equals(null)==false)
+                    cadBus+=c;	            
+                else{
+                    if((c+"").equals("")==true){
+                        if(cadBus.length()>0)
+                            cadBus=cadBus.substring(0, cadBus.length()-1);
+                        }
+                    }
+                    showTableByNom(cadBus);
+                    
+                    if(visTipPer.txtBuscarNombre.getText().length()==0){
+                        cadBus="";
+                        showTable();
+                    }
+                    else
+                        showTableByNom(cadBus);
+                    }
+          
+          private void printIt(String title, KeyEvent keyEvent) 
+          {
+            int keyCode = keyEvent.getKeyCode();
+            String keyText = KeyEvent.getKeyText(keyCode);
+          }
+        };
+        visTipPer.txtBuscarNombre.addKeyListener(keyListenertxtBuscarCedula);
+        
+       
     }
+    
+    public void showTableByNom(String nom)
+    {
+        limpiarTabla();                            
+        ArrayList<TipoPersona> listTipPer = consTipPer.buscarTodosByNom(modTipPer,nom);
+        DefaultTableModel model =  (DefaultTableModel)visTipPer.tbl_tipoPersona.getModel();
+        Object cols[] = new Object[3];
+
+        for (int i = 0; i < listTipPer.size(); i++) {
+            cols[0] = listTipPer.get(i).getId_tipoPer();
+            cols[1] = Validaciones.isNumVoid4(listTipPer.get(i).getDescripcion_tipoPer().toUpperCase());
+            model.addRow(cols);                    
+        }   
+    }
+    
+    
     
     public void desabilitaHabilita(JButton btn,boolean estado)
     {
