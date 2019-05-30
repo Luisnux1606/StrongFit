@@ -97,7 +97,7 @@ public class CtrlPersonas implements ActionListener {
         showTable();
         setFocus();
         setListener();
-        setTableModel();
+   //     setTableModel();
         showComboTipoPersonas();
         escribirCombos();
         int colHide[] = new int[1];

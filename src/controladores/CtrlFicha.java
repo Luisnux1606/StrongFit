@@ -151,7 +151,7 @@ public class CtrlFicha implements ActionListener{
        // visFicha.txtCodPersona.setText(persona.getId()+"");
         
         limpiarTabla(visFicha.tblFichas);
-        showTable();
+       // showTable();
         
         int colHide[] = new int[1];
         colHide[0]=0;

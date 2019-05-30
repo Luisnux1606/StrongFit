@@ -107,7 +107,7 @@ public class CtrlProductos implements ActionListener{
                 
         setFormatTable(visProd.tbl_productos);
         escribirCombos();
-        setTableModel();
+     //   setTableModel();
     }
     
     private void escribirCombos()

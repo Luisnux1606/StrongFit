@@ -278,7 +278,7 @@ public class ConsAnalisis extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM analisis where estado_ana=1";
+        String sql = "SELECT * FROM analisis where estado_ana=1 order by id_ana desc";
         ArrayList<Analisis> analisis = new ArrayList<>();
         
         

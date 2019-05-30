@@ -1934,7 +1934,7 @@ public class VisFicha extends javax.swing.JFrame {
         jMenu1.add(mniPersonas);
 
         mniTipoPersona.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        mniTipoPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/personas.png"))); // NOI18N
+        mniTipoPersona.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tipoPersona.png"))); // NOI18N
         mniTipoPersona.setText("Tipo Personas");
         mniTipoPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

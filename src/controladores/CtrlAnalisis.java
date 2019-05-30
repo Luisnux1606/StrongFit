@@ -311,7 +311,7 @@ public class CtrlAnalisis implements ActionListener{
                cols[3] = listAnalisis.get(i).getExeso_liquido();
                cols[4] = listAnalisis.get(i).getExeso_total();
                cols[5] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_cardio()).toUpperCase();
-               cols[6] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_cardio()).toUpperCase();
+               cols[6] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_pesas()).toUpperCase();
                cols[7] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_funcional()).toUpperCase();
 
 
