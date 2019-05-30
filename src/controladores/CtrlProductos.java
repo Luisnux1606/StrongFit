@@ -769,15 +769,23 @@ public class CtrlProductos implements ActionListener{
        
         if (e.getSource() == visProd.rdbProductos) 
         {
-            visProd.rdbServicios.setSelected(false);            
-              getProductos();
-              showComboProductos();        
+            visProd.rdbServicios.setSelected(false); 
+            visProd.rdbTodos.setSelected(false);
+            getProductos();
+            showComboProductos();      
         }
         if (e.getSource() == visProd.rdbServicios) 
         {
             visProd.rdbProductos.setSelected(false);
+            visProd.rdbTodos.setSelected(false);
             getServicios();
             showComboServicios();
+        }
+        if (visProd.rdbTodos.isSelected()) {
+            visProd.rdbProductos.setSelected(false);
+            visProd.rdbServicios.setSelected(false);
+            getProductosServicios();
+            showComboCategorias();
         }
 
        
@@ -792,6 +800,25 @@ public class CtrlProductos implements ActionListener{
         visProd.txtEntradas.setText("");
         visProd.txtExistentes.setText("");
         visProd.txtSalidas.setText("");
+        
+        if (visProd.rdbProductos.isSelected()) {
+            visProd.rdbServicios.setSelected(false); 
+            visProd.rdbTodos.setSelected(false);
+             getProductos();
+             showComboProductos();    
+        }
+        if (visProd.rdbServicios.isSelected()) {
+            visProd.rdbProductos.setSelected(false);
+             visProd.rdbTodos.setSelected(false);
+            getServicios();
+            showComboServicios();
+        }
+        if (visProd.rdbTodos.isSelected()) {
+            visProd.rdbProductos.setSelected(false);
+            visProd.rdbServicios.setSelected(false);
+            getProductosServicios();
+            showComboCategorias();
+        }
         
         //visProd.cbxCategoria.setSelectedIndex(0);    
     }

@@ -5,6 +5,7 @@
  */
 package assets;
 
+import java.awt.Font;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -19,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
 import vistas.VisFicha;
 import vistas.VisMembresia;
 
@@ -273,5 +275,14 @@ public class Calculos {
          return stock;
      
      }
+     
+     public static void setHeaderTable(JTable table)
+     {
+         JTableHeader th;
+        th = table.getTableHeader();
+        Font fuente = new Font("Verdana", Font.ITALIC, 25);
+        th.setFont(fuente); 
+     
+     } 
      
 }
