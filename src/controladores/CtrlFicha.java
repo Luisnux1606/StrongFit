@@ -313,7 +313,7 @@ public class CtrlFicha implements ActionListener{
     
      public void limpiar()
     {
-        visFicha.txtNomPersonaFicha.setText(""); 
+        //visFicha.txtNomPersonaFicha.setText(""); 
         visFicha.dchFecha.setDate(null);
         visFicha.txtInfoFechaAna.setText("");
         visFicha.txtInfoFechaMed.setText("");
@@ -321,7 +321,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.tabp_ficha.setEnabledAt(1, false);
         visFicha.tabp_ficha.setEnabledAt(2, false);
         
-        limpiarTabla(visFicha.tblFichas);
+        //limpiarTabla(visFicha.tblFichas);
        
     }
     
@@ -542,8 +542,9 @@ public class CtrlFicha implements ActionListener{
     
     public void showTableByIdPer()
     {
+         limpiarTabla(visFicha.tblFichas);
         try {
-            limpiarTabla(visFicha.tblFichas);
+           
             ResultSet listFicha = consFicha.buscarTodos2ByIdPer(Validaciones.isNumVoid(visFicha.txtCodPersona.getText()));
             System.out.println(visFicha.txtCodPersona.getText());
             DefaultTableModel model =  (DefaultTableModel)visFicha.tblFichas.getModel();
@@ -624,6 +625,9 @@ public class CtrlFicha implements ActionListener{
             consMed.registrar(modMedidas);
             lastId = consMed.getLastId();
         }
+        else
+            lastId = 1;
+        
        return lastId;
     }
     
@@ -648,6 +652,9 @@ public class CtrlFicha implements ActionListener{
             consAnalisis.registrar(modAnalisis);
             lastId = consAnalisis.getLastId();
         }
+        else
+            lastId = 1;
+        
        return lastId;
     }
     
