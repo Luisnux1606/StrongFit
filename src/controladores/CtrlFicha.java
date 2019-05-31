@@ -540,6 +540,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.tblFichas.updateUI();
     }
     
+
     public void showTableByIdPer()
     {
          limpiarTabla(visFicha.tblFichas);
@@ -681,9 +682,70 @@ public class CtrlFicha implements ActionListener{
             else
                 return false;                        
     } 
+  public void limpiarMedida()
+    {
         
-       
+        visFicha.dtcFecha.setDate(null);                
+        visFicha.txtPeso.setText("");
+        visFicha.txtEstatura.setText("");
+        visFicha.txtNroHijos.setText("");
+        visFicha.txtPecho.setText("");
+        visFicha.txtAbdomAlto.setText("");
+        visFicha.txtCintura.setText("");
+        visFicha.txtAbdomBajo.setText("");
+        visFicha.txtCadera.setText("");
+        visFicha.txtPierna.setText("");
+        visFicha.txtPantorrilla.setText("");
+        visFicha.txtBrazo.setText("");
+        visFicha.txtAntebrazo.setText("");
+        visFicha.txtCuello.setText("");
+        visFicha.txtEspalda.setText("");
+        visFicha.txtPorGrasa.setText("");
+        visFicha.txtPorKilogs.setText("");
+  
+        limpiarTablaAgregadoMedidas();
+       // limpiarTabla();
+        
+    }      
+    public void limpiarTablaAgregadoAnalisis(){
+        DefaultTableModel tb = (DefaultTableModel) visFicha.tblAnalisis.getModel();
+        int a = visFicha.tblAnalisis.getRowCount()-1;
+        int id = 0;
+        for (int i = a; i >= 0; i--) {    
+            id = Validaciones.isNumVoid(visFicha.tblAnalisis.getValueAt(i, 0)+"");
+            if (id==0) 
+                tb.removeRow(tb.getRowCount()-1);
+            
+            
+        } 
+    }     
+  
+  
+    public void limpiarTablaAgregadoMedidas(){
+        DefaultTableModel tb = (DefaultTableModel) visFicha.tblDatos.getModel();
+        int a = visFicha.tblDatos.getRowCount()-1;
+        int id = 0;
+        for (int i = a; i >= 0; i--) {    
+            id = Validaciones.isNumVoid(visFicha.tblDatos.getValueAt(i, 0)+"");
+            if (id==0) 
+                tb.removeRow(tb.getRowCount()-1);
+            
+            
+        } 
+    }
     
+    public void limpiarAnalisis()
+    {
+        visFicha.dtcFechaAnalisis.setDate(null);                
+        visFicha.txtExcesoGrasa.setText("");
+        visFicha.txtExcesoLiquido.setText("");
+        visFicha.txtExcesoTotal.setText("");
+        visFicha.txtRecomPesas.setText("");
+        visFicha.txtRecomCardio.setText("");
+        visFicha.txtRecomFuncional.setText("");
+        limpiarTablaAgregadoAnalisis();
+        //limpiarTabla();
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) 
@@ -723,7 +785,20 @@ public class CtrlFicha implements ActionListener{
                     }
                 //    showTable();
                     setMedidasAnalisisFichas();
-                     limpiar();
+                    limpiar();
+                    
+                    
+                    //limpiar medidas
+                    limpiarMedida();
+                    desabilitaHabilita(visFicha.btnGuardar,true);
+                    desabilitaHabilita(visFicha.btnModificar,true);
+                    desabilitaHabilita(visFicha.btnEliminar,true);      
+                    
+                    //limpiar analisis
+                    limpiarAnalisis();
+                    desabilitaHabilita(visFicha.btnGuardarAnalisis,true);
+                    desabilitaHabilita(visFicha.btnModificarAnalisis,true);
+                    desabilitaHabilita(visFicha.btnEliminarAnalisis,true); 
                }        
         }
       
