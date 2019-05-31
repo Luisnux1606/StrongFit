@@ -277,12 +277,58 @@ public class CtrlMedidas implements ActionListener{
             tb.removeRow(tb.getRowCount()-1);
         } 
     }
+    
+     public void limpiarTablaAgregado(){
+        DefaultTableModel tb = (DefaultTableModel) visMedidas.tblDatos.getModel();
+        int a = visMedidas.tblDatos.getRowCount()-1;
+        int id = 0;
+        for (int i = a; i >= 0; i--) {    
+            id = Validaciones.isNumVoid(visMedidas.tblDatos.getValueAt(i, 0)+"");
+            if (id==0) 
+                tb.removeRow(tb.getRowCount()-1);
+            
+            
+        } 
+    }
+    public void passTotable(Medidas modeloMedidas)
+    {
+          
+        DefaultTableModel model =  (DefaultTableModel)visMedidas.tblDatos.getModel();
+        Object cols[] = new Object[19];
+
+        
+            //cols[0] = 0;
+            cols[1] = modeloMedidas.getFecha();
+            cols[2] = modeloMedidas.getPeso();
+            cols[3] = modeloMedidas.getEstatura();
+            cols[4] = modeloMedidas.getNro_hijos();
+            cols[5] = modeloMedidas.getPecho();
+            cols[6] = modeloMedidas.getAbdomen_alto();
+            cols[7] = modeloMedidas.getCintura();
+            cols[8] = modeloMedidas.getAbdomen_bajo();
+            cols[9] = modeloMedidas.getCadera();
+            cols[10] =modeloMedidas.getPiernas();
+            cols[11] =modeloMedidas.getPantorrilla();
+            cols[12] =modeloMedidas.getBrazo();
+            cols[13] =modeloMedidas.getAntebrazo();
+            cols[14] =modeloMedidas.getCuello();
+            cols[15] =modeloMedidas.getEspalda();
+            cols[16] =modeloMedidas.getPorcentaje_grasa();
+            cols[17] =modeloMedidas.getPorcentaje_kgs();        
+
+            model.addRow(cols);                    
+          
+     visMedidas.tblDatos.updateUI();
+     visMedidas.txtInfoFechaMed.setText(modeloMedidas.getFecha());
+    
+    
+    }
     public void showTable()
     {
         limpiarTabla();          
         int codPer = Validaciones.isNumVoid(visMedidas.txtCodPersona.getText().trim());
         //persona.setId(visMedidas.txt_id_persona_u);
-           ArrayList<Medidas> listMed = consMedidas.buscarTodos(modMedidas);
+           ArrayList<Medidas> listMed = consMedidas.buscarTodosByIdPer(modMedidas,codPer);
            DefaultTableModel model =  (DefaultTableModel)visMedidas.tblDatos.getModel();
            Object cols[] = new Object[19];
 
@@ -320,6 +366,8 @@ public class CtrlMedidas implements ActionListener{
            
                if (Validaciones.isDateChooserVoid(jdc)) 
                {
+                  
+                   
                     modMedidas.setFecha(Validaciones.setFormatFecha(visMedidas.dtcFecha.getDate()));                
                     modMedidas.setPeso(Validaciones.isNumVoid3(visMedidas.txtPeso.getText()));
                     modMedidas.setEstatura(Validaciones.isNumVoid3(visMedidas.txtEstatura.getText()));
@@ -338,7 +386,12 @@ public class CtrlMedidas implements ActionListener{
                     modMedidas.setPorcentaje_grasa(Validaciones.isNumVoid3(visMedidas.txtPorGrasa.getText()));
                     modMedidas.setPorcentaje_kgs(Validaciones.isNumVoid3(visMedidas.txtPorKilogs.getText()));
                     modMedidas.setEstado(1);
-
+                    
+                    passTotable(modMedidas);
+                    visMedidas.btnGuardar.setEnabled(false);
+                    visMedidas.btnModificar.setEnabled(false);
+                    visMedidas.btnEliminar.setEnabled(false);
+                    /*
                     if (consMedidas.registrar(modMedidas)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                         visMedidas.txt_id_medidas_u.setText(consMedidas.getLastId()+"");
@@ -351,6 +404,7 @@ public class CtrlMedidas implements ActionListener{
                         limpiar();
                     }
                     showTable();
+                      */ 
                }        
         }
        
@@ -452,10 +506,8 @@ public class CtrlMedidas implements ActionListener{
         {
            limpiar();
            desabilitaHabilita(visMedidas.btnGuardar,true);
-           desabilitaHabilita(visMedidas.btnModificar,false);
-           
-           visMedidas.tabp_ficha.setEnabledAt(1, true);
-           visMedidas.tabp_ficha.setEnabledAt(2, true);
+           desabilitaHabilita(visMedidas.btnModificar,true);
+           desabilitaHabilita(visMedidas.btnEliminar,true);                    
         }
     }
     
@@ -499,9 +551,12 @@ public class CtrlMedidas implements ActionListener{
         visMedidas.txtPorGrasa.setText("");
         visMedidas.txtPorKilogs.setText("");
   
-     
+        limpiarTablaAgregado();
        // limpiarTabla();
+        
     }
+    
+    
     
     
 }

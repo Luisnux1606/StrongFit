@@ -311,6 +311,20 @@ public class CtrlFicha implements ActionListener{
         visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+     public void limpiar()
+    {
+        visFicha.txtNomPersonaFicha.setText(""); 
+        visFicha.dchFecha.setDate(null);
+        visFicha.txtInfoFechaAna.setText("");
+        visFicha.txtInfoFechaMed.setText("");
+        visFicha.tabp_ficha.setEnabledAt(0, false);
+        visFicha.tabp_ficha.setEnabledAt(1, false);
+        visFicha.tabp_ficha.setEnabledAt(2, false);
+        
+        limpiarTabla(visFicha.tblFichas);
+       
+    }
+    
     public void setCmbxMembresias()
     {
         
@@ -580,6 +594,90 @@ public class CtrlFicha implements ActionListener{
 
     }
     
+    public int guardaMedida()
+    {
+        Medidas modMedidas = new Medidas();
+        ConsMedidas consMed = new ConsMedidas();
+        int ultFila = visFicha.tblDatos.getRowCount()-1;
+        int lastId=0;
+        if (existeMedida()) 
+        {
+            modMedidas.setFecha(visFicha.tblDatos.getValueAt(ultFila, 1)+"");                
+            modMedidas.setPeso(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 2)+""));
+            modMedidas.setEstatura(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 3)+""));
+            modMedidas.setNro_hijos(Validaciones.isNumVoid(visFicha.tblDatos.getValueAt(ultFila, 4)+""));
+            modMedidas.setPecho(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 5)+""));
+            modMedidas.setAbdomen_alto(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 6)+""));
+            modMedidas.setCintura(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 7)+""));
+            modMedidas.setAbdomen_bajo(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 8)+""));
+            modMedidas.setCadera(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 9)+""));
+            modMedidas.setPiernas(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 10)+""));
+            modMedidas.setPantorrilla(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 11)+""));
+            modMedidas.setBrazo(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 12)+""));
+            modMedidas.setAntebrazo(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 13)+""));
+            modMedidas.setCuello(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 14)+""));
+            modMedidas.setEspalda(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 15)+""));
+            modMedidas.setPorcentaje_grasa(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 16)+""));
+            modMedidas.setPorcentaje_kgs(Validaciones.isNumVoid3(visFicha.tblDatos.getValueAt(ultFila, 17)+""));
+            modMedidas.setEstado(1);
+            
+            consMed.registrar(modMedidas);
+            lastId = consMed.getLastId();
+        }
+       return lastId;
+    }
+    
+    public int guardaAnalisis()
+    {
+        Analisis modAnalisis = new Analisis();
+        ConsAnalisis consAnalisis = new ConsAnalisis();
+        int ultFila = visFicha.tblAnalisis.getRowCount()-1;
+        int lastId=0;
+        if (existeAnalisis()) 
+        {                        
+            modAnalisis.setFecha(visFicha.tblAnalisis.getValueAt(ultFila, 1)+"");                
+            modAnalisis.setExeso_grasa(Validaciones.isNumVoid2(visFicha.tblAnalisis.getValueAt(ultFila, 2)+""));
+            modAnalisis.setExeso_liquido(Validaciones.isNumVoid2(visFicha.tblAnalisis.getValueAt(ultFila, 3)+""));
+            modAnalisis.setExeso_total(Validaciones.isNumVoid2(visFicha.tblAnalisis.getValueAt(ultFila, 4)+""));
+            modAnalisis.setRecomendacion_pesas(visFicha.tblAnalisis.getValueAt(ultFila, 5)+"".toUpperCase());
+            modAnalisis.setRecomendacion_cardio(visFicha.tblAnalisis.getValueAt(ultFila, 6)+"".toUpperCase());
+            modAnalisis.setRecomendacion_funcional(visFicha.tblAnalisis.getValueAt(ultFila, 7)+"".toUpperCase());
+            modAnalisis.setEstado(1);       
+            
+            
+            consAnalisis.registrar(modAnalisis);
+            lastId = consAnalisis.getLastId();
+        }
+       return lastId;
+    }
+    
+    public boolean existeMedida()
+    {        
+        int id=0;
+        int a = visFicha.tblDatos.getRowCount()-1;
+     
+            id = Validaciones.isNumVoid(visFicha.tblDatos.getValueAt(a, 0)+"");
+            if (id==0) 
+                return true;
+            else
+                return false;                        
+    } 
+        
+    public boolean existeAnalisis()
+    {        
+        int id=0;
+        int a = visFicha.tblAnalisis.getRowCount()-1;
+     
+            id = Validaciones.isNumVoid(visFicha.tblAnalisis.getValueAt(a, 0)+"");
+            if (id==0) 
+                return true;
+            else
+                return false;                        
+    } 
+        
+       
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) 
     {
@@ -589,12 +687,24 @@ public class CtrlFicha implements ActionListener{
            jdc.add(visFicha.dchFecha);
            
                if (Validaciones.isDateChooserVoid(jdc)) 
-               {                   
+               {    
+                   
+                    int lastMed = guardaMedida();
+                    medidas.setId(lastMed);
+                    modFicha.setMedidas(medidas);
+                    
+                    int lastAna = guardaAnalisis();
+                    analisis.setId(lastAna);
+                    modFicha.setAnalisis(analisis);
+                    
+                    persona.setId(Integer.parseInt(visFicha.txtCodPersona.getText()));
+                    modFicha.setPersona(persona);
+                    
                     modFicha.setFecha(Validaciones.setFormatFecha(visFicha.dchFecha.getDate()));                               
                     modFicha.setEstado(1);
                     //valido > si es nullo pongo anon, llenoen mod i guardo
-                    validaAnonimos();
-
+                    //validaAnonimos();
+                   
                     if (consFicha.registrar(modFicha)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                        
@@ -812,19 +922,7 @@ public class CtrlFicha implements ActionListener{
          }
                                
     }
-    public void limpiar()
-    {
-        visFicha.txtNomPersonaFicha.setText(""); 
-        visFicha.dchFecha.setDate(null);
-        visFicha.txtInfoFechaAna.setText("");
-        visFicha.txtInfoFechaMed.setText("");
-        visFicha.tabp_ficha.setEnabledAt(0, false);
-        visFicha.tabp_ficha.setEnabledAt(1, false);
-        visFicha.tabp_ficha.setEnabledAt(2, false);
-        
-        limpiarTabla(visFicha.tblFichas);
-       
-    }
+   
     
    
 

@@ -101,7 +101,7 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.txtRecomPesas.setText("");
         visAnalisis.txtRecomCardio.setText("");
         visAnalisis.txtRecomFuncional.setText("");
- 
+        limpiarTablaAgregado();
         //limpiarTabla();
     }
         
@@ -111,6 +111,19 @@ public class CtrlAnalisis implements ActionListener{
         int a = visAnalisis.tblAnalisis.getRowCount()-1;
         for (int i = a; i >= 0; i--) {           
             tb.removeRow(tb.getRowCount()-1);
+        } 
+    }
+    
+    public void limpiarTablaAgregado(){
+        DefaultTableModel tb = (DefaultTableModel) visAnalisis.tblAnalisis.getModel();
+        int a = visAnalisis.tblAnalisis.getRowCount()-1;
+        int id = 0;
+        for (int i = a; i >= 0; i--) {    
+            id = Validaciones.isNumVoid(visAnalisis.tblAnalisis.getValueAt(i, 0)+"");
+            if (id==0) 
+                tb.removeRow(tb.getRowCount()-1);
+            
+            
         } 
     }
     
@@ -275,13 +288,35 @@ public class CtrlAnalisis implements ActionListener{
         visAnalisis.txtRecomCardio.setNextFocusableComponent(visAnalisis.txtRecomFuncional); 
 
     }
+    public void passTotable(Analisis modeloAnalisis)
+    {
+          
+        DefaultTableModel model =  (DefaultTableModel)visAnalisis.tblAnalisis.getModel();
+        Object cols[] = new Object[19];
+
+        
+            //cols[0] = 0;
+            //cols[0] = modeloAnalisis.getId();
+            cols[1] = modeloAnalisis.getFecha();
+            cols[2] = modeloAnalisis.getExeso_grasa();
+            cols[3] = modeloAnalisis.getExeso_liquido();
+            cols[4] = modeloAnalisis.getExeso_total();
+            cols[5] = Validaciones.isNumVoid4(modeloAnalisis.getRecomendacion_pesas()).toUpperCase();
+            cols[6] = Validaciones.isNumVoid4(modeloAnalisis.getRecomendacion_cardio()).toUpperCase();
+            cols[7] = Validaciones.isNumVoid4(modeloAnalisis.getRecomendacion_funcional()).toUpperCase();
+
+            model.addRow(cols);                    
+          
+     visAnalisis.tblAnalisis.updateUI();
+     visAnalisis.txtInfoFechaAna.setText(modeloAnalisis.getFecha());
     
+    }
     public void showTable()
     {
         limpiarTabla();                
         
          int codPer = Validaciones.isNumVoid(visAnalisis.txtCodPersona.getText().trim());
-           ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodos(modAnalisis);
+           ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodosByIdPer(modAnalisis,codPer);
            DefaultTableModel model =  (DefaultTableModel)visAnalisis.tblAnalisis.getModel();
            Object cols[] = new Object[8];
 
@@ -344,8 +379,12 @@ public class CtrlAnalisis implements ActionListener{
                     modAnalisis.setRecomendacion_pesas(visAnalisis.txtRecomPesas.getText().toUpperCase());
                     modAnalisis.setRecomendacion_cardio(visAnalisis.txtRecomCardio.getText().toUpperCase());
                     modAnalisis.setRecomendacion_funcional(visAnalisis.txtRecomFuncional.getText().toUpperCase());
-                    modAnalisis.setEstado(1);
- 
+                    modAnalisis.setEstado(1);                    
+                    passTotable(modAnalisis);
+                    visAnalisis.btnGuardarAnalisis.setEnabled(false);
+                    visAnalisis.btnModificarAnalisis.setEnabled(false);
+                    visAnalisis.btnEliminarAnalisis.setEnabled(false);
+                    /*
                     if (consAnalisis.registrar(modAnalisis)) {
                         JOptionPane.showMessageDialog(null, "Registro Guardado!");
                         visAnalisis.txt_id_analisis_u.setText(consAnalisis.getLastId()+"");
@@ -357,6 +396,7 @@ public class CtrlAnalisis implements ActionListener{
                         limpiar();
                     }
                     showTable();
+                            */
                }        
         }
        
@@ -434,10 +474,8 @@ public class CtrlAnalisis implements ActionListener{
         {
            limpiar();
            desabilitaHabilita(visAnalisis.btnGuardarAnalisis,true);
-           desabilitaHabilita(visAnalisis.btnModificarAnalisis,false);
-           
-           visAnalisis.tabp_ficha.setEnabledAt(1, true);
-           visAnalisis.tabp_ficha.setEnabledAt(2, true);
+           desabilitaHabilita(visAnalisis.btnModificarAnalisis,true);
+           desabilitaHabilita(visAnalisis.btnEliminarAnalisis,true); 
         }
     }
     
