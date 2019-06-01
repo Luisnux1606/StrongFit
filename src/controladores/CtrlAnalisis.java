@@ -55,6 +55,8 @@ public class CtrlAnalisis implements ActionListener{
         this.visAnalisis.btnLimpiarAnalisis.addActionListener(this);
         this.visAnalisis.btnModificarAnalisis.addActionListener(this);
         this.visAnalisis.btnBuscarAnalisis.addActionListener(this);
+        this.visAnalisis.rdbGetAllAna.addActionListener(this);
+        this.visAnalisis.rdbGetAnaPer.addActionListener(this);
         cadBus = "";
         showTable();
         setFocus();
@@ -333,6 +335,28 @@ public class CtrlAnalisis implements ActionListener{
            }   
         visAnalisis.tblAnalisis.updateUI();
     }
+     public void showTableAll()
+    {
+        limpiarTabla();                
+        
+         int codPer = Validaciones.isNumVoid(visAnalisis.txtCodPersona.getText().trim());
+           ArrayList<Analisis> listAnalisis = consAnalisis.buscarTodos(modAnalisis);
+           DefaultTableModel model =  (DefaultTableModel)visAnalisis.tblAnalisis.getModel();
+           Object cols[] = new Object[8];
+
+           for (int i = 0; i < listAnalisis.size(); i++) {
+               cols[0] = listAnalisis.get(i).getId();
+               cols[1] = listAnalisis.get(i).getFecha();
+               cols[2] = listAnalisis.get(i).getExeso_grasa();
+               cols[3] = listAnalisis.get(i).getExeso_liquido();
+               cols[4] = listAnalisis.get(i).getExeso_total();
+               cols[5] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_pesas()).toUpperCase();
+               cols[6] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_cardio()).toUpperCase();
+               cols[7] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_funcional()).toUpperCase();
+               model.addRow(cols);                    
+           }   
+        visAnalisis.tblAnalisis.updateUI();
+    }
      
      public void showTableByFecha(String fecha)
     {
@@ -470,6 +494,17 @@ public class CtrlAnalisis implements ActionListener{
             }
  
         }
+       if (e.getSource() == visAnalisis.rdbGetAllAna) 
+        {
+            visAnalisis.rdbGetAnaPer.setSelected(false);
+            showTableAll();                                
+        }
+        if (e.getSource() == visAnalisis.rdbGetAnaPer) 
+        {
+            visAnalisis.rdbGetAllAna.setSelected(false);
+            showTable();
+        }
+       
        if (e.getSource() == visAnalisis.btnLimpiarAnalisis) 
         {
            limpiar();

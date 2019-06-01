@@ -228,9 +228,9 @@ public class ConsAnalisis extends Conexion{
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * " +
+        String sql = "SELECT distinct a.id_ana, a.* " +
                     " FROM analisis a,ficha f,persona p " +
-                    " where p.id_per = f.persona_id_per and a.id_ana=f.analisis_id_ana and  a.estado_ana=1 and p.id_per="+idPer+" order by a.id_ana desc";
+                    " where p.id_per = f.persona_id_per and a.id_ana=f.analisis_id_ana and  a.estado_ana=1 and p.estado_per=1 and f.estado_ficha=1 and p.id_per="+idPer+" order by a.id_ana desc";
         ArrayList<Analisis> analisis = new ArrayList<>();
         
         

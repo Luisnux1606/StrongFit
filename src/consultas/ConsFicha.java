@@ -101,6 +101,78 @@ public class ConsFicha extends Conexion {
         
     }
     
+    public boolean modificarFichaMedidas(Ficha f)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "UPDATE ficha SET Medidas_id_med = ?"
+                + " WHERE id_ficha=?";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, f.getMedidas().getId());            
+            ps.setInt(2, f.getId());
+          
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
+    public boolean modificarFichaAnalisis(Ficha f)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "UPDATE ficha SET Analisis_id_ana = ?"
+                + " WHERE id_ficha=?";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, f.getAnalisis().getId());            
+            ps.setInt(2, f.getId());
+          
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
      public boolean eliminar(Ficha f)
     {
         PreparedStatement ps = null;
@@ -528,8 +600,8 @@ order by id_ficha asc ;
         ResultSet rs = null; 
         String sql = "  SELECT f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana " +
                         "FROM ficha f, medidas m,analisis a, persona p " +
-                        "where p.id_per = f.Persona_id_per and f.estado_ficha=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med and p.id_per="+idPer+"" +
-                        "order by id_ficha asc ";
+                        "where p.id_per = f.Persona_id_per and f.estado_ficha=1 and p.estado_per=1 and m.estado_med=1 and a.estado_ana=1 and a.id_ana = f.analisis_id_ana and m.id_med = f.medidas_id_med and p.id_per="+idPer+"" +
+                        "order by id_ficha desc ";
                 
         
         try 

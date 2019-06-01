@@ -63,6 +63,8 @@ public class CtrlMedidas implements ActionListener{
         this.visMedidas.btnLimpiar.addActionListener(this);
         this.visMedidas.btnModificar.addActionListener(this);
         this.visMedidas.btnBuscarMed.addActionListener(this);
+        this.visMedidas.rdbGetAllMed.addActionListener(this);
+        this.visMedidas.rdbGetMedPer.addActionListener(this);
         cadBus = "";
         showTable();
         setFocus();
@@ -356,6 +358,39 @@ public class CtrlMedidas implements ActionListener{
            }   
      visMedidas.tblDatos.updateUI();
     }
+    public void showTableAll()
+    {
+        limpiarTabla();          
+        int codPer = Validaciones.isNumVoid(visMedidas.txtCodPersona.getText().trim());
+        //persona.setId(visMedidas.txt_id_persona_u);
+           ArrayList<Medidas> listMed = consMedidas.buscarTodos(modMedidas);
+           DefaultTableModel model =  (DefaultTableModel)visMedidas.tblDatos.getModel();
+           Object cols[] = new Object[19];
+
+           for (int i = 0; i < listMed.size(); i++) {
+               cols[0] = listMed.get(i).getId();
+               cols[1] = listMed.get(i).getFecha();
+               cols[2] = listMed.get(i).getPeso();
+               cols[3] = listMed.get(i).getEstatura();
+               cols[4] = listMed.get(i).getNro_hijos();
+               cols[5] = listMed.get(i).getPecho();
+               cols[6] = listMed.get(i).getAbdomen_alto();
+               cols[7] = listMed.get(i).getCintura();
+               cols[8] = listMed.get(i).getAbdomen_bajo();
+               cols[9] = listMed.get(i).getCadera();
+               cols[10] = listMed.get(i).getPiernas();
+               cols[11] = listMed.get(i).getPantorrilla();
+               cols[12] = listMed.get(i).getBrazo();
+               cols[13] = listMed.get(i).getAntebrazo();
+               cols[14] = listMed.get(i).getCuello();
+               cols[15] = listMed.get(i).getEspalda();
+               cols[16] = listMed.get(i).getPorcentaje_grasa();
+               cols[17] = listMed.get(i).getPorcentaje_kgs();        
+
+               model.addRow(cols);                    
+           }   
+     visMedidas.tblDatos.updateUI();
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -501,6 +536,18 @@ public class CtrlMedidas implements ActionListener{
                 }
                 showTable();
             }            
+        }
+       
+        if (e.getSource() == visMedidas.rdbGetAllMed) 
+        {
+            visMedidas.rdbGetMedPer.setSelected(false);
+            showTableAll();
+                
+        }
+        if (e.getSource() == visMedidas.rdbGetMedPer) 
+        {
+            visMedidas.rdbGetAllMed.setSelected(false);
+            showTable();
         }
         if (e.getSource() == visMedidas.btnLimpiar) 
         {

@@ -214,6 +214,7 @@ public class CtrlFicha implements ActionListener{
 
                model.addRow(cols);                    
            }   
+           visFicha.tblDatos.updateUI();
     
     }
     
@@ -237,7 +238,7 @@ public class CtrlFicha implements ActionListener{
             cols[7] = Validaciones.isNumVoid4(listAnalisis.get(i).getRecomendacion_funcional()).toUpperCase();
             model.addRow(cols);                    
         }   
-    
+         visFicha.tblAnalisis.updateUI();
     
     }
     
@@ -320,6 +321,8 @@ public class CtrlFicha implements ActionListener{
         visFicha.tabp_ficha.setEnabledAt(0, false);
         visFicha.tabp_ficha.setEnabledAt(1, false);
         visFicha.tabp_ficha.setEnabledAt(2, false);
+        visFicha.txt_id_analisis.setText("1");
+        visFicha.txt_id_datos.setText("1");
         
         //limpiarTabla(visFicha.tblFichas);
        
@@ -445,8 +448,8 @@ public class CtrlFicha implements ActionListener{
                 if(e.getClickCount()==1)
                 {
                     getTableToTxts();
-                     desabilitaHabilita(visFicha.btnGuardarFichaG,false);
-                     desabilitaHabilita(visFicha.btnModificarFichaG,true);
+                    desabilitaHabilita(visFicha.btnGuardarFichaG,false);
+                    desabilitaHabilita(visFicha.btnModificarFichaG,true);
                                           
                 }
             }
@@ -704,6 +707,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.txtPorKilogs.setText("");
   
         limpiarTablaAgregadoMedidas();
+        showTableMedidas();
        // limpiarTabla();
         
     }      
@@ -744,6 +748,7 @@ public class CtrlFicha implements ActionListener{
         visFicha.txtRecomCardio.setText("");
         visFicha.txtRecomFuncional.setText("");
         limpiarTablaAgregadoAnalisis();
+        showTableAnalisis();
         //limpiarTabla();
     }
     
@@ -806,17 +811,47 @@ public class CtrlFicha implements ActionListener{
        {            
             modFicha.setId(Integer.parseInt(visFicha.tblFichas.getValueAt(visFicha.tblFichas.getSelectedRow(), 0)+""));
             modFicha.setFecha(Validaciones.setFormatFecha(visFicha.dchFecha.getDate()));                       
-             validaAnonimos();
-            if (consFicha.modificar(modFicha)) {
-                JOptionPane.showMessageDialog(null, "Registro Modificado!");
-                limpiar();
+            // validaAnonimos();
+            
+            persona.setId(Integer.parseInt(visFicha.txtCodPersona.getText()));
+            modFicha.setPersona(persona);
+            
+            System.out.println("entro ana med"+visFicha.txt_id_analisis.getText()+"  "+visFicha.txt_id_datos.getText());
+            if (Validaciones.isNumVoid(visFicha.txt_id_analisis.getText())!=1 && Validaciones.isNumVoid(visFicha.txt_id_datos.getText())==1){
+               analisis.setId(Integer.parseInt(visFicha.txt_id_analisis.getText()));
+               modFicha.setAnalisis(analisis); 
+               consFicha.modificarFichaAnalisis(modFicha);
+               limpiarAnalisis();
+               System.out.println("entro mod ana");
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Error al Modificar");
-                limpiar();
+            if (Validaciones.isNumVoid(visFicha.txt_id_analisis.getText())==1 && Validaciones.isNumVoid(visFicha.txt_id_datos.getText())!=1){
+               medidas.setId(Integer.parseInt(visFicha.txt_id_datos.getText()));
+               modFicha.setMedidas(medidas); 
+               consFicha.modificarFichaMedidas(modFicha);
+               limpiarMedida();
+               System.out.println("entro mod med");
             }
-            showTable();
+            if (Validaciones.isNumVoid(visFicha.txt_id_analisis.getText())!=1 && Validaciones.isNumVoid(visFicha.txt_id_datos.getText())!=1){
+                
+               medidas.setId(Integer.parseInt(visFicha.txt_id_datos.getText()));
+               modFicha.setMedidas(medidas); 
+               
+               analisis.setId(Integer.parseInt(visFicha.txt_id_analisis.getText()));
+               modFicha.setAnalisis(analisis); 
+             
+                System.out.println("entro mod med y and");
+                if (consFicha.modificar(modFicha)) {
+                    JOptionPane.showMessageDialog(null, "Registro Modificado!");
+                   
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Error al Modificar");
+                   
+                }
+            }
+             limpiar();
+            showTableByIdPer();
         }
       
       if (e.getSource() == visFicha.btnEliminarFichaG) 
@@ -836,7 +871,7 @@ public class CtrlFicha implements ActionListener{
                     JOptionPane.showMessageDialog(null, "Error al Eliminar...");
                     limpiar();
                 }
-                showTable();
+                showTableByIdPer();
             }
         }
       
