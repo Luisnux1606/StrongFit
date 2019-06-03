@@ -51,6 +51,7 @@ import modelos.TipoPersona;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisFicha;
 import vistas.VisHistorialPersonaServicio;
+import vistas.VisIngresoEgreso;
 import vistas.VisMembresia;
 import vistas.VisPersona;
 import vistas.VisProductos;
@@ -70,6 +71,7 @@ public class CtrlPersonas implements ActionListener {
     VisPersona visPersona;
     VisMembresia visMemb;
     VisFicha visFicha;   
+    VisIngresoEgreso visIngEgr;
     VisHistorialPersonaServicio visHisPerServ;
 //    VisEntrenamiento visEnt;
     Object vis;
@@ -549,7 +551,7 @@ public class CtrlPersonas implements ActionListener {
                     String apellido = Validaciones.isNumVoid4(visPersona.tbl_personas.getValueAt(visPersona.tbl_personas.getSelectedRow(), 3)+"");
                     
                     switch(locale){
-                        case 1:
+                        case 1: //ficha
                             visFicha = (VisFicha)vis;
                             modPer.setId(idPer);
                             modPer.setNombre(nombre);
@@ -558,17 +560,15 @@ public class CtrlPersonas implements ActionListener {
                             visFicha.txtNomPersonaFicha.setText(modPer.getNombre() + " "+modPer.getApellido());
                             //CtrlFicha.setMedidasAnalisis();
                             break;
-                        case 2:
-                            visFicha = (VisFicha)vis;
+                        case 2: //facturaVenta
+                            visFicha = (VisFicha)vis; 
                             modPer.setId(idPer);
                             modPer.setNombre(nombre);
                             modPer.setApellido(apellido);
                             visFicha.lblPersonaId.setText(idPer+"");
-                            visFicha.txt_clienteFac.setText(modPer.getNombre() + " "+modPer.getApellido());
-                            
-                            
+                            visFicha.txt_clienteFac.setText(modPer.getNombre() + " "+modPer.getApellido());                                                        
                             break;
-                        case 3:  
+                        case 3:  //servicio
                             visHisPerServ = (VisHistorialPersonaServicio)vis;
                             modPer.setId(idPer);
                             modPer.setNombre(nombre);
@@ -578,7 +578,7 @@ public class CtrlPersonas implements ActionListener {
                     //        visEnt.txtPersona.setText(idPer+"");
                            break; 
                             
-                        case 4:  
+                        case 4:  //facCompra
                             visFicha = (VisFicha)vis;
                             modPer.setId(idPer);
                             modPer.setNombre(nombre);
@@ -587,6 +587,14 @@ public class CtrlPersonas implements ActionListener {
                             visFicha.lblPersonaIdComp.setText(idPer+"");
                             visFicha.txt_clienteFacComp.setText(modPer.getNombre() + " "+modPer.getApellido());
                            break; 
+                            
+                        case 5: //IngresosEcresos
+                            visIngEgr = (VisIngresoEgreso)vis; 
+                            modPer.setId(idPer);
+                            modPer.setNombre(nombre);
+                            modPer.setApellido(apellido);
+                            visIngEgr.tblIngresosEgresos.setValueAt(modPer.getNombre() + " "+modPer.getApellido(),visIngEgr.tblIngresosEgresos.getSelectedRow(),2);
+                            visIngEgr.tblIngresosEgresos.setValueAt(modPer.getId(),visIngEgr.tblIngresosEgresos.getSelectedRow(),3);
                         default:    
                             break;
                     }

@@ -270,6 +270,8 @@ public class VisFicha extends javax.swing.JFrame {
         mniProductos = new javax.swing.JMenuItem();
         mniCategoria = new javax.swing.JMenuItem();
         mniEntrenamientos = new javax.swing.JMenuItem();
+        mnuHerramientas = new javax.swing.JMenu();
+        mniDescripcionTransaccional = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mniConsultasClientes = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -1151,7 +1153,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGroup(pnlFichaComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblInfoFechaAna)
                     .addComponent(txtInfoFechaAna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel5.setText("Buscar por cualquier campo");
@@ -2062,6 +2064,16 @@ public class VisFicha extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        mnuHerramientas.setText("Herramientas");
+        mnuHerramientas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+
+        mniDescripcionTransaccional.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mniDescripcionTransaccional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ingresosEgresos.png"))); // NOI18N
+        mniDescripcionTransaccional.setText("Crear ingreso o egreso");
+        mnuHerramientas.add(mniDescripcionTransaccional);
+
+        jMenuBar1.add(mnuHerramientas);
+
         jMenu2.setText("Consultas");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -2379,6 +2391,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JMenuItem mniCategoria;
     public javax.swing.JMenuItem mniColores;
     public javax.swing.JMenuItem mniConsultasClientes;
+    public javax.swing.JMenuItem mniDescripcionTransaccional;
     public javax.swing.JMenuItem mniDiarioGeneral;
     public javax.swing.JMenuItem mniEntrenamientos;
     public javax.swing.JMenuItem mniMembresias;
@@ -2387,6 +2400,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JMenuItem mniProductos;
     public javax.swing.JMenuItem mniReportes;
     public javax.swing.JMenuItem mniTipoPersona;
+    public javax.swing.JMenu mnuHerramientas;
     public javax.swing.JPanel pnlAnalisis;
     public javax.swing.JPanel pnlAnalisisComponentes;
     private javax.swing.JPanel pnlEntrenamientoEnFactura;

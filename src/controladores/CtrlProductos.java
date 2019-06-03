@@ -9,6 +9,7 @@ import assets.Calculos;
 import assets.Configuracion;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDateChooserCellEditor;
 import consultas.ConsAnalisis;
 
 import consultas.ConsFacturaCab;
@@ -28,6 +29,7 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -39,6 +41,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import modelos.Analisis;
 import modelos.Categoria;
@@ -53,6 +56,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisBuscarVentas;
 
 import vistas.VisFicha;
+import vistas.VisIngresoEgreso;
 import vistas.VisMembresia;
 import vistas.VisPersona;
 import vistas.VisProductos;
@@ -71,12 +75,13 @@ public class CtrlProductos implements ActionListener{
    
     VisFicha visFicha;
     Categoria catProd;
-  
-
+    VisIngresoEgreso visIngEgr;
+    Object vis;
+    
     String cadBus;
     int locale;
     
-    public CtrlProductos(Producto prod, ConsProductos consProd,VisProductos visProd,VisFicha visFicha)
+    public CtrlProductos(Producto prod, ConsProductos consProd,VisProductos visProd,VisFicha visFicha,Object vis)
     {
        
         this.prod = prod;
@@ -94,6 +99,7 @@ public class CtrlProductos implements ActionListener{
         
         this.visProd.txt_id.setVisible(false);
         this.visProd.lblIdCat.setVisible(false);
+        this.vis = vis;
         
         catProd = new Categoria();
               
@@ -189,7 +195,49 @@ public class CtrlProductos implements ActionListener{
          btn.setEnabled(estado);
      }
      
-     
+     public void setProductoServicioIngresoEgreso()
+     {
+         JTable table = ((VisIngresoEgreso)vis).tblIngresosEgresos;
+       int filaDetalle = table.getSelectedRow();
+       int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
+       String descripcionProd = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
+       double precioProd =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
+       
+       String fechaIni = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 3)+"";
+       String fechaFin = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 4)+"";
+       
+     //  table.setValueAt(idProd, filaDetalle, 6);                            
+     //  visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
+       table.setValueAt(descripcionProd, filaDetalle, 5);
+       table.setValueAt(idProd, filaDetalle, 6);
+       
+       JDateChooserCellEditor jd = new JDateChooserCellEditor();
+       
+       DefaultTableModel tb = (DefaultTableModel) table.getModel();   
+       
+       Date m = null;
+       
+       jd = (JDateChooserCellEditor)table.getColumnModel().getColumn(7).getCellEditor();
+       JDateChooser jDate = (JDateChooser)jd.getTableCellEditorComponent(table, jd, true, idProd, idProd);
+       jDate.setDate(Validaciones.setStringToDate(fechaIni));
+       System.out.println(jDate.getDate().toString());
+       //jd.setDate(Validaciones.setStringToDate(fechaIni));
+       //table.getColumnModel().getColumn(7).setCellEditor(new JDateChooserCellEditor());
+      //table.setValueAt(jd, filaDetalle, 7);
+       
+       /*
+       public Object getCellEditorValue() 
+        {
+          return new String(((JTextField)date.getDateEditor().getUiComponent()).getText());
+        }
+       
+       */
+       //visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
+
+     //  Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
+      // Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+       visProd.dispose();
+     }
      
      public void setProductoServicioFactura()
      {
@@ -286,7 +334,7 @@ public class CtrlProductos implements ActionListener{
                              setProductoServicioFacturaCompra();
                             break;
                         case 2:
-                            
+                            setProductoServicioIngresoEgreso();
                             break;
                         case 3:
                             
@@ -372,9 +420,9 @@ public class CtrlProductos implements ActionListener{
        // table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
         
         int colHide[] = new int[2];
-        colHide[0]=0;
+      //  colHide[0]=0;
         colHide[1]=10;
-        setHideJtableColumn(table,colHide);
+       // setHideJtableColumn(table,colHide);
         
         //initColumnSizes(table);
         
@@ -402,8 +450,9 @@ public class CtrlProductos implements ActionListener{
     }
      public void getTableToTxts()
      {
-         limpiar();
+        // limpiar();
          JTable tblD = visProd.tbl_productos;
+         System.out.println(tblD.getSelectedRow());
          visProd.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
          visProd.txtDescripcionProd.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));
          visProd.txtPrecioProd.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2)));
@@ -631,11 +680,15 @@ public class CtrlProductos implements ActionListener{
             case 0: //muestra productos solamente
                 getProductos();
                 showComboProductos();
-                    break;
+                break;
             case 1: //muestra todos
                 getProductosServicios();
                 showComboCategorias();
-                    break;
+                break;
+            case 2:
+                getProductosServicios();
+                showComboCategorias();
+                break;
             default :
                 break;
                         
@@ -781,11 +834,13 @@ public class CtrlProductos implements ActionListener{
             getServicios();
             showComboServicios();
         }
-        if (visProd.rdbTodos.isSelected()) {
+        if (e.getSource() ==visProd.rdbTodos) {
             visProd.rdbProductos.setSelected(false);
             visProd.rdbServicios.setSelected(false);
             getProductosServicios();
             showComboCategorias();
+            
+            
         }
 
        

@@ -99,7 +99,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
                   Producto prod=new Producto();
                   Categoria cat=new Categoria();
 
-                  CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
+                  CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha,visFicha);
                   ctrProd.locale = 1; 
                   ctrProd.iniciar();
               }
@@ -128,7 +128,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
                         Producto prod=new Producto();
                         Categoria cat=new Categoria();
 
-                        CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);
+                        CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha,visFicha);
                         ctrProd.locale = 1;
                         ctrProd.iniciar();
               

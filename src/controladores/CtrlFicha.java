@@ -16,6 +16,7 @@ import consultas.ConsCategoria;
 import consultas.ConsFacturaCab;
 import consultas.ConsFicha;
 import consultas.ConsHistorialPersonaServicio;
+import consultas.ConsIngresosEgresos;
 import consultas.ConsMedidas;
 import consultas.ConsMembresias;
 import consultas.ConsPersona;
@@ -63,6 +64,7 @@ import vistas.VisDiarioGeneral;
 
 import vistas.VisFicha;
 import vistas.VisHistorialPersonaServicio;
+import vistas.VisIngresoEgreso;
 import vistas.VisMembresia;
 import vistas.VisPersona;
 import vistas.VisPlanCuentas;
@@ -128,6 +130,9 @@ public class CtrlFicha implements ActionListener{
         
         this.visFicha.mniColores.addActionListener(this);
         this.visFicha.mniEntrenamientos.addActionListener(this);
+        
+        this.visFicha.mniDescripcionTransaccional.addActionListener(this);
+        
         this.visFicha.txtCodPersona.setVisible(false);
         
         this.visFicha.tabp_ficha.setSelectedIndex(3);
@@ -957,6 +962,15 @@ public class CtrlFicha implements ActionListener{
             ctrBuscarVentas.iniciar();
         }
          
+         if (e.getSource() == visFicha.mniDescripcionTransaccional) {
+            
+            VisIngresoEgreso visIngEgr = new VisIngresoEgreso();            
+            ConsIngresosEgresos consFacCab = new ConsIngresosEgresos();
+                       
+            CtrlIngresosEgresos ctrIngEgr=new CtrlIngresosEgresos(consFacCab, visIngEgr,visFicha);
+            ctrIngEgr.iniciar();
+        }
+         
         if (e.getSource() == visFicha.mniProductos) //Cuando toca el menú productos
         {   
             VisProductos visProd = new VisProductos();
@@ -964,7 +978,7 @@ public class CtrlFicha implements ActionListener{
             Producto prod=new Producto();
             Categoria cat=new Categoria();
             
-            CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha);  
+            CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha,visFicha);  
             ctrProd.locale = 1;
             ctrProd.iniciar();
             
