@@ -311,8 +311,8 @@ public class CtrlIngresosEgresos implements ActionListener {
          cols[17]="Eliminar";
          
        //  setFormatTable(table);
-        
-        tb.addRow(cols);
+        tb.insertRow(0, cols);
+        //tb.addRow(cols);
         
         new ButtonTableIngresosEgresos(visIngEgr);
         visIngEgr.tblIngresosEgresos.updateUI();

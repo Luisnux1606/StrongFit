@@ -218,6 +218,7 @@ public class VisFicha extends javax.swing.JFrame {
         lblCobroPendiente = new javax.swing.JLabel();
         txtValPendienteFicha = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane15 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         pnlVentasInterno1 = new javax.swing.JPanel();
         pnlVentasComponentes1 = new javax.swing.JPanel();
@@ -1867,14 +1868,14 @@ public class VisFicha extends javax.swing.JFrame {
                                         .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txt_id_FacCabComp, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnGuardarFacCabCompras, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnLimpiarFacCabComp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnLimpiarFacCabComp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(496, 496, 496)
                                                 .addComponent(lblNroFacCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
-                                                .addGap(544, 544, 544)
+                                                .addGap(483, 483, 483)
                                                 .addComponent(lblCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(pnlVentasInterno1Layout.createSequentialGroup()
                                         .addGroup(pnlVentasInterno1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1992,7 +1993,9 @@ public class VisFicha extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabFichaVentas.addTab("Generar Compras", jPanel1);
+        jScrollPane15.setViewportView(jPanel1);
+
+        tabFichaVentas.addTab("tab4", jScrollPane15);
 
         menuArchivo.setText("Archivo");
         menuArchivo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -2340,6 +2343,7 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
