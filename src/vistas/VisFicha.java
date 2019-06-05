@@ -1234,12 +1234,14 @@ public class VisFicha extends javax.swing.JFrame {
             .addGroup(pnlFichaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(tabp_ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         scpFicha.setViewportView(pnlFicha);
 
         tabFichaVentas.addTab("Control Corporal", scpFicha);
+
+        scpVentas.setAutoscrolls(true);
 
         pnlVentas.setPreferredSize(new java.awt.Dimension(1433, 685));
 
@@ -1627,6 +1629,8 @@ public class VisFicha extends javax.swing.JFrame {
         scpVentas.setViewportView(pnlVentas);
 
         tabFichaVentas.addTab("Generar Ventas", scpVentas);
+
+        jScrollPane15.setAutoscrolls(true);
 
         pnlVentasInterno1.setBackground(new java.awt.Color(204, 204, 204));
         pnlVentasInterno1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -2125,7 +2129,7 @@ public class VisFicha extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(626, 626, 626)
                 .addComponent(lblNomEmpresa)
-                .addGap(448, 472, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(tabFichaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -2135,8 +2139,9 @@ public class VisFicha extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(lblNomEmpresa)
-                .addGap(7, 7, 7)
-                .addComponent(tabFichaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 828, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabFichaVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
