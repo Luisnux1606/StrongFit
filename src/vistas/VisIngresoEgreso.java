@@ -68,11 +68,11 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "CODPER", "CODPRODSERV", "GUARDAR", "ELIMINAR"
+                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "CODPER", "CODPRODSERV", "CODHISTPERSERV", "GUARDAR", "ELIMINAR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true
+                false, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

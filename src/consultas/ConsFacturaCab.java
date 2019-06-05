@@ -69,7 +69,7 @@ public class ConsFacturaCab extends Conexion {
     {
         PreparedStatement ps = null;
         Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
-        String sql = "update FacturaCabecera SET fecha_facCab=?, num_facCab=?, subTotal_facCab=?,valPagar_facCab=?,subTotal_facCab=?,total_facCab=?,valPendiente_facCab=?,valCancelo_facCab=?,Persona_id_per=?,Membresia_id_memb=?,Ivas_id_ivas=?,estado_facCab=?"
+        String sql = "update FacturaCabecera SET fecha_facCab=?, num_facCab=?, subTotal_facCab=?,valPagar_facCab=?,total_facCab=?,valPendiente_facCab=?,valCancelo_facCab=?,Persona_id_per=?,Membresia_id_memb=?,Ivas_id_ivas=?,estado_facCab=?,VALAJUSTE_FACCAB=?"
                 + " WHERE id_facCab=?";
         
         try 
@@ -81,14 +81,15 @@ public class ConsFacturaCab extends Conexion {
             ps.setString(2, f.getNum_facCab());
             ps.setDouble(3, f.getSubTotal_facCab());
             ps.setDouble(4, f.getValPagar_facCab());
-            ps.setDouble(5, f.getSubTotal_facCab());
-            ps.setDouble(6, f.getTotal_facCab());
-            ps.setDouble(7, f.getValPendiente_facCab());
-            ps.setDouble(8, f.getValCancelo_facCab());
-            ps.setInt(9, f.getPersona().getId());
-            ps.setInt(10, f.getMembresia().getId());
-            ps.setInt(11, f.getIvas().getId_ivas());
-            ps.setInt(12, f.getEstado());
+            ps.setDouble(5, f.getTotal_facCab());
+            ps.setDouble(6, f.getValPendiente_facCab());
+            ps.setDouble(7, f.getValCancelo_facCab());
+            ps.setInt(8, f.getPersona().getId());
+            ps.setInt(9, f.getMembresia().getId());
+            ps.setInt(10, f.getIvas().getId_ivas());
+            ps.setInt(11, f.getEstado());
+            ps.setDouble(12, f.getValAjuste_facCab());
+            ps.setInt(13, f.getId_facCab());
             
             ps.execute();
             return true;

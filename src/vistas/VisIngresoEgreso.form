@@ -126,7 +126,7 @@
                 <Component class="javax.swing.JTable" name="tblIngresosEgresos">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="18" rowCount="0">
+                      <Table columnCount="19" rowCount="0">
                         <Column editable="false" title="IDFAC" type="java.lang.Object"/>
                         <Column editable="true" title="FECHA FACTURA" type="java.lang.Object"/>
                         <Column editable="true" title="NOMBRES APELLIDOS" type="java.lang.Object"/>
@@ -143,6 +143,7 @@
                         <Column editable="true" title="SALDO CONTABLE" type="java.lang.Object"/>
                         <Column editable="true" title="CODPER" type="java.lang.Object"/>
                         <Column editable="true" title="CODPRODSERV" type="java.lang.Object"/>
+                        <Column editable="true" title="CODHISTPERSERV" type="java.lang.Object"/>
                         <Column editable="true" title="GUARDAR" type="java.lang.Object"/>
                         <Column editable="true" title="ELIMINAR" type="java.lang.Object"/>
                       </Table>

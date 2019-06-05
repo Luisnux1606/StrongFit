@@ -529,17 +529,15 @@ public class CtrlIngresosEgresos implements ActionListener {
             ResultSet listFicha = consIngEgr.buscarIngresosEgresos();
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[18];
+            Object cols[] = new Object[19];
            
             while (listFicha.next()) {
-                try { //select fC.Id_Faccab,fC.Fecha_Faccab,concat(concat(p.nom_per,' '),p.ape_per),fC.Num_Faccab,
-                        //fD.Descripcion_Facdet,' 'as FechaInicio,''as FechaFin,fC.Total_Faccab,'' as egreso,fC.Valcancelo_Faccab,
-                    //fC.Valpendiente_Faccab,fC.Valajuste_Faccab
+                try { 
                                       
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("Fecha_Faccab");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
                     cols[4] = listFicha.getString("Descripcion_Facdet");
                     cols[5] = listFicha.getString("FechaInicio");
                     cols[6] = listFicha.getString("FechaFin");
@@ -550,12 +548,13 @@ public class CtrlIngresosEgresos implements ActionListener {
                     cols[11] = listFicha.getDouble("Valajuste_Faccab");
                     cols[12] = listFicha.getDouble("estadoEnt");
                     cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getDouble("id_per");
-                    cols[15] = listFicha.getDouble("id_prod");
+                    cols[14] = listFicha.getInt("id_per");
+                    cols[15] = listFicha.getInt("id_prod");
+                    cols[16] = listFicha.getInt("codHist");
                     
-                    cols[16] = "Guardar";
-                    cols[17] = "Anular";
-                                    
+                    cols[17] = "Guardar";
+                    cols[18] = "Anular";
+                    cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);              
                     model.addRow(cols);
                     
                                         
@@ -657,7 +656,7 @@ public class CtrlIngresosEgresos implements ActionListener {
             ResultSet listFicha = consIngEgr.buscarIngresosEgresos();
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[18];
+            Object cols[] = new Object[19];
             double diffAjusteCanc;
             while (listFicha.next()) {
                 try {
@@ -666,7 +665,7 @@ public class CtrlIngresosEgresos implements ActionListener {
                     cols[0] = listFicha.getInt("Id_Faccab");
                     cols[1] = listFicha.getString("Fecha_Faccab");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
                     cols[4] = listFicha.getString("Descripcion_Facdet");
                     cols[5] = listFicha.getString("FechaInicio");
                     cols[6] = listFicha.getString("FechaFin");
@@ -677,12 +676,13 @@ public class CtrlIngresosEgresos implements ActionListener {
                     cols[11] = listFicha.getDouble("Valajuste_Faccab");
                     cols[12] = listFicha.getDouble("estadoEnt");
                     cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getDouble("id_per");
-                    cols[15] = listFicha.getDouble("id_prod");
+                    cols[14] = listFicha.getInt("id_per");
+                    cols[15] = listFicha.getInt("id_prod");
+                    cols[16] = listFicha.getInt("codHist");
                     
-                    cols[16] = "Guardar";
-                    cols[17] = "Anular";
-                    
+                    cols[17] = "Guardar";
+                    cols[18] = "Anular";
+                    cols[13] = Calculos.getDiferencia((double)cols[9], (double)cols[11]);       
                     diffAjusteCanc = (double)cols[10] - (double)cols[11];
                     
                     if (Math.abs(diffAjusteCanc)>0) {
