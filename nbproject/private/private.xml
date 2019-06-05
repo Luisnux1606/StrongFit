@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/consultas/ConsFicha.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/consultas/ConsProductos.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlAnalisis.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/consultas/ConsMedidas.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlFicha.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlIngresosEgresos.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/consultas/ConsIngresosEgresos.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlHistorialPersServicio.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/vistas/VisIngresoEgreso.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/consultas/ConsAnalisis.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/vistas/VisFicha.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlProductos.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlMedidas.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlBuscarVentas.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/assets/ButtonTableIngresosEgresos.java</file>
         </group>
     </open-files>
 </project-private>

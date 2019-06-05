@@ -5,6 +5,7 @@
  */
 package consultas;
 
+import assets.Validaciones;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -208,6 +209,59 @@ public class ConsProductos extends Conexion
                         {e.printStackTrace();}			
 		
 		return result;
+	}
+    
+    public String getTipoProdServ(String prodId){
+        String sql;
+        String result="";
+        PreparedStatement ps = null;
+        con = getConexion();
+        ResultSet rs = null; 
+        boolean estado = false;
+
+        sql="select  c.tipo_cat " +
+            "from producto p , categoria c " +
+            "where c.id_cat = p.categoria_id_cat and p.id_prod = "+prodId+" and p.estado_prod = 1";						
+            try 
+            {
+                ps = con.prepareStatement(sql);                            
+                rs = ps.executeQuery();
+                    while(rs.next()){
+                        result=rs.getString(1);                                        
+                    }
+
+            } catch (SQLException e) 
+            {e.printStackTrace();}					                
+        return result;
+	}
+    public boolean existeProducto(String prod){
+		String sql;
+		String result="";
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                boolean estado = false;
+                
+		sql="select p.descripcion_prod " +
+                    "from producto p " +
+                    "where upper(p.descripcion_prod) like upper('"+prod+"') and p.estado_prod = 1";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                    result=rs.getString(1);
+                                    if (!Validaciones.isCadnull(result)) {
+                                        estado =  true;
+                                        break;
+                                    }
+                                        
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return estado;
 	}
     
     

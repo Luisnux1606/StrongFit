@@ -18,6 +18,7 @@ public class HistorialPersonaServicio {
     private int id_HisPerSer;
     private String fechaIni_HisPerSer;
     private String fechaFin_HisPerSer;
+    private String estadoDias_HisPerSer;
     private Persona Persona_id_HisPerSer;
     private Producto Producto_id_HisPerSer;
     private int estado_HisPerSer;
@@ -104,6 +105,20 @@ public class HistorialPersonaServicio {
      */
     public void setEstado_HisPerSer(int estado_HisPerSer) {
         this.estado_HisPerSer = estado_HisPerSer;
+    }
+
+    /**
+     * @return the estadoDias_HisPerSer
+     */
+    public String getEstadoDias_HisPerSer() {
+        return estadoDias_HisPerSer;
+    }
+
+    /**
+     * @param estadoDias_HisPerSer the estadoDias_HisPerSer to set
+     */
+    public void setEstadoDias_HisPerSer(String estadoDias_HisPerSer) {
+        this.estadoDias_HisPerSer = estadoDias_HisPerSer;
     }
     
     

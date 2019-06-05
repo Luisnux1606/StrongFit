@@ -594,7 +594,7 @@ public class CtrlPersonas implements ActionListener {
                             modPer.setNombre(nombre);
                             modPer.setApellido(apellido);
                             visIngEgr.tblIngresosEgresos.setValueAt(modPer.getNombre() + " "+modPer.getApellido(),visIngEgr.tblIngresosEgresos.getSelectedRow(),2);
-                            visIngEgr.tblIngresosEgresos.setValueAt(modPer.getId(),visIngEgr.tblIngresosEgresos.getSelectedRow(),3);
+                            visIngEgr.tblIngresosEgresos.setValueAt(modPer.getId(),visIngEgr.tblIngresosEgresos.getSelectedRow(),14);
                         default:    
                             break;
                     }

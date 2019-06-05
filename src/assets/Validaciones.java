@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -60,7 +61,7 @@ public class Validaciones {
       public static double isNumVoid10(String txt)
      {
          double val = 0;
-         if (txt.length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.trim().length()==0 ||txt.equals("null")||txt.equals("0.0")) {
+         if (txt.length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.trim().length()==0 ||txt.equals("null")||txt.equals("0.0") ) {
              val = 0;
          }
          else
@@ -110,8 +111,10 @@ public class Validaciones {
      public static boolean isNumVoid1(String txt)
      {
          boolean estado = false;
-         if (txt.trim().length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.length()==0 ||txt.equals("null")) 
+         if (txt.trim().length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.length()==0 ||txt.equals("null")) {
              estado = true;
+             
+         }
          else
              estado = false;
          
@@ -252,6 +255,15 @@ public class Validaciones {
           }
       }
     
+      public static boolean isDate(String cad)
+      {
+            String regex = "^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2}$"; 
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(cad);
+            
+        return matcher.matches();
+      }
+      
       public static boolean isDateChooserVoid(ArrayList<JDateChooser> dtc)
      {
          boolean estado = true;
@@ -273,6 +285,16 @@ public class Validaciones {
         String emailRegexp = "[^@]+@[^@]+\\.[a-zA-Z]{2,}";
         boolean resultado;
         resultado= Pattern.matches(emailRegexp, txtMail)?true:false;
+       
+        
+        return resultado;
+      }
+      
+      public static boolean validaNums(String cad)
+      {
+        String regex = "[0-9]";;
+        boolean resultado;
+        resultado= Pattern.matches(regex, cad)?true:false;
        
         
         return resultado;
@@ -300,5 +322,9 @@ public class Validaciones {
           return 0;
       }
       
-     
+      public static String getMsgOption(){
+        Object[] possibleValues = { "Ingreso", "Egreso"};
+        Object selectedValue = JOptionPane.showInputDialog(null,"Eliga una opcion", "INGRESO/EGRESO",JOptionPane.INFORMATION_MESSAGE, null,possibleValues, possibleValues[0]);
+        return selectedValue.toString();
+      }
 }

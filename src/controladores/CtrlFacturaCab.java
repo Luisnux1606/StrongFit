@@ -87,7 +87,7 @@ public class CtrlFacturaCab implements ActionListener{
         this.memb = new Membresias();
         this.iva = new Iva();
               
-         consFacDet= new ConsFacturaDet();  
+        consFacDet= new ConsFacturaDet();  
         facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
         
         this.visFicha.btnGuardarFacCab.addActionListener(this);
@@ -633,7 +633,7 @@ public class CtrlFacturaCab implements ActionListener{
     */
     public void setFacturaCabecera(VisFicha visFich)
     {
-         String numFac = visFicha.lblNroFactura.getText();
+        String numFac = visFicha.lblNroFactura.getText();
         
         modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
         modFacCab.setNum_facCab(numFac);

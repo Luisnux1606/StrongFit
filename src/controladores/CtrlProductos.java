@@ -197,8 +197,9 @@ public class CtrlProductos implements ActionListener{
      
      public void setProductoServicioIngresoEgreso()
      {
-         JTable table = ((VisIngresoEgreso)vis).tblIngresosEgresos;
+       JTable table = ((VisIngresoEgreso)vis).tblIngresosEgresos;
        int filaDetalle = table.getSelectedRow();
+       
        int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
        String descripcionProd = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
        double precioProd =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
@@ -208,9 +209,21 @@ public class CtrlProductos implements ActionListener{
        
      //  table.setValueAt(idProd, filaDetalle, 6);                            
      //  visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
-       table.setValueAt(descripcionProd, filaDetalle, 5);
-       table.setValueAt(idProd, filaDetalle, 6);
+       table.setValueAt(descripcionProd, filaDetalle, 4);
+       table.setValueAt(idProd, filaDetalle, 15);
+       String ingEgr = Validaciones.getMsgOption().toUpperCase()+"";
+         if (ingEgr.equals("INGRESO")) {
+             table.setValueAt(precioProd, filaDetalle, 7);
+             table.setValueAt("0.0", filaDetalle, 8);
+         }
+         if (ingEgr.equals("EGRESO")) {
+              table.setValueAt(precioProd, filaDetalle, 8);
+              table.setValueAt("0.0", filaDetalle, 7);
+         }
+         table.changeSelection(filaDetalle, 9,false,false);
+        
        
+       /*
        JDateChooserCellEditor jd = new JDateChooserCellEditor();
        
        DefaultTableModel tb = (DefaultTableModel) table.getModel();   
@@ -218,9 +231,10 @@ public class CtrlProductos implements ActionListener{
        Date m = null;
        
        jd = (JDateChooserCellEditor)table.getColumnModel().getColumn(7).getCellEditor();
-       JDateChooser jDate = (JDateChooser)jd.getTableCellEditorComponent(table, jd, true, idProd, idProd);
+       JDateChooser jDate = (JDateChooser)jd.getTableCellEditorComponent(table, jd, true, 1, 7);
        jDate.setDate(Validaciones.setStringToDate(fechaIni));
-       System.out.println(jDate.getDate().toString());
+       
+       System.out.println(jDate.getDate().toString());*/
        //jd.setDate(Validaciones.setStringToDate(fechaIni));
        //table.getColumnModel().getColumn(7).setCellEditor(new JDateChooserCellEditor());
       //table.setValueAt(jd, filaDetalle, 7);

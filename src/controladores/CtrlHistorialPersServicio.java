@@ -501,33 +501,31 @@ public class CtrlHistorialPersServicio implements ActionListener{
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == visHisPerServ.btnGuardar) 
        {       
-           ArrayList<JDateChooser> jdc=new ArrayList<>();
-                     
-                       
-                    int tE = consHisPerServ.getIdByNom((visHisPerServ.cbxServicio.getSelectedItem()+"").toUpperCase());     
-                  
-                    prod.setId_prod(tE);
-                    hisPerServ.setProducto_id_HisPerSer(prod);
-                    
-                    hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaIni.getDate()));
-                    hisPerServ.setFechaFin_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
-                    
-                    per.setId(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
-                    hisPerServ.setPersona_id_HisPerSer(per);
-                    hisPerServ.setEstado_HisPerSer(1);
-                    prod.setEstado_prod(1);
-                  
-                   
-                    if (consHisPerServ.registrar(hisPerServ)) {
-                        JOptionPane.showMessageDialog(null, "Registro Guardado!");
-                        limpiar();
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Error al Guardar");
-                        limpiar();
-                    }
-                    showDataTableByLocal();
+           ArrayList<JDateChooser> jdc=new ArrayList<>();                                            
+            int tE = consHisPerServ.getIdByNom((visHisPerServ.cbxServicio.getSelectedItem()+"").toUpperCase());     
+
+            prod.setId_prod(tE);
+            hisPerServ.setProducto_id_HisPerSer(prod);
+
+            hisPerServ.setFechaIni_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaIni.getDate()));
+            hisPerServ.setFechaFin_HisPerSer(Validaciones.setFormatFecha(visHisPerServ.dchFechaFin.getDate()));
+
+            per.setId(Validaciones.isNumVoid(visHisPerServ.lblIdPersona.getText()));
+            hisPerServ.setPersona_id_HisPerSer(per);
+            hisPerServ.setEstado_HisPerSer(1);
+            prod.setEstado_prod(1);
+
+
+            if (consHisPerServ.registrar(hisPerServ)) {
+                JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                limpiar();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Error al Guardar");
+                limpiar();
+            }
+            showDataTableByLocal();
                        
         }
       

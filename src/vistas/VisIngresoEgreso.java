@@ -33,7 +33,7 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         pnlIngresosEgresos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblIngresosEgresos = new javax.swing.JTable();
-        btnMostrarFacturas = new javax.swing.JButton();
+        btnMostrarIngrEgr = new javax.swing.JButton();
         cmbElegirBusquedaFac = new javax.swing.JComboBox();
         txtBuscarCampo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -42,12 +42,9 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_buscarPersonaNombres = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_BuscarVentas = new javax.swing.JTable();
         cmbTipoBusqueda = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblDetalles = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblIngresosEgresosCons = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         lblBuscarFichas = new javax.swing.JLabel();
         txtBuscarFichas = new javax.swing.JTextField();
@@ -71,11 +68,11 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "CODPER", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "CODPRODSERV", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "GUARDAR", "ELIMINAR"
+                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "CODPER", "CODPRODSERV", "GUARDAR", "ELIMINAR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true
+                false, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -86,7 +83,7 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         tblIngresosEgresos.setRowHeight(24);
         jScrollPane3.setViewportView(tblIngresosEgresos);
 
-        btnMostrarFacturas.setText("Mostrar todos");
+        btnMostrarIngrEgr.setText("Mostrar todos");
 
         cmbElegirBusquedaFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todos", "pendientes" }));
 
@@ -104,7 +101,7 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(pnlIngresosEgresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
-                        .addComponent(btnMostrarFacturas)
+                        .addComponent(btnMostrarIngrEgr)
                         .addGap(12, 12, 12)
                         .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -122,7 +119,7 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
             .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(pnlIngresosEgresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMostrarFacturas)
+                    .addComponent(btnMostrarIngrEgr)
                     .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -144,50 +141,27 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
 
         jLabel2.setText("Buscar por cualquier campo");
 
-        tbl_BuscarVentas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "CEDULA", "NOMBRES APELLIDOS", "FECHA INI", "FECHA FIN", "CONCEPTO", "FECHA FAC", "TOTAL", "VAL CANCELADO", "VAL PENDIENTE"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tbl_BuscarVentas);
-
         cmbTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Eliga un tipo de consulta", "cursando", "proximos a vencer", "vencidos" }));
 
-        jLabel3.setText("Detalles");
-
-        tblDetalles.setModel(new javax.swing.table.DefaultTableModel(
+        tblIngresosEgresosCons.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "IDDET", "DESCRIPCION", "VAL.UNITARIO", "VAL. TOTAL"
+                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "CODPRODSERV", "CODPER", "GUARDAR", "ELIMINAR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tblDetalles);
+        tblIngresosEgresosCons.setMaximumSize(new java.awt.Dimension(2147483640, 0));
+        tblIngresosEgresosCons.setRowHeight(24);
+        jScrollPane5.setViewportView(tblIngresosEgresosCons);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,16 +169,14 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txt_buscarPersonaNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(cmbTipoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 1260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(422, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,13 +186,9 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_buscarPersonaNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbTipoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(325, Short.MAX_VALUE))
         );
 
         tpnIngresosEgresos.addTab("Entrenamientos y saldos", jPanel1);
@@ -321,25 +289,22 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregarTrans;
     public javax.swing.JButton btnEliminarTrans;
-    public javax.swing.JButton btnMostrarFacturas;
+    public javax.swing.JButton btnMostrarIngrEgr;
     public javax.swing.JComboBox cmbElegirBusquedaFac;
     public javax.swing.JComboBox cmbTipoBusqueda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     public javax.swing.JLabel lblBuscarFichas;
     private javax.swing.JPanel pnlIngresosEgresos;
-    public javax.swing.JTable tblDetalles;
     public javax.swing.JTable tblIngresosEgresos;
-    public javax.swing.JTable tbl_BuscarVentas;
+    public javax.swing.JTable tblIngresosEgresosCons;
     public javax.swing.JTabbedPane tpnIngresosEgresos;
     public javax.swing.JTextField txtBuscarCampo;
     public javax.swing.JTextField txtBuscarFichas;

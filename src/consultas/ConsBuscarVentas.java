@@ -405,21 +405,21 @@ public class ConsBuscarVentas extends Conexion {
         ResultSet rs = null; 
         String sql = " select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres,' ' as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+nom+"%' and c.id_cat=2 " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+nom+"%' and c.id_cat=2 and ROWNUM <= 30 " +
                     "union " +
                     "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
                     "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+nom+"%' and c.id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser " +
+                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and ROWNUM <= 30 " +
                     "UNION " +
                     "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,' 'as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=2 " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=2 and ROWNUM <= 30 " +
                     "union " +
                     "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
                     "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser";
+                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and ROWNUM <= 30 ";
                 
         ArrayList datos = new ArrayList();
         try 
@@ -492,7 +492,7 @@ public class ConsBuscarVentas extends Conexion {
         String sql = " select distinct fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres ,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab  " +
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
                     "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.categoria_id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and h.ESTADO_HISPERSER=1 and fC.ESTADO_FACCAB=1 " +
+                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and h.ESTADO_HISPERSER=1 and fC.ESTADO_FACCAB=1 and ROWNUM <= 30 " +
                     "order by id_faccab";                       
         try 
         {

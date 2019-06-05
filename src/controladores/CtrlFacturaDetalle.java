@@ -305,8 +305,7 @@ public class CtrlFacturaDetalle implements ActionListener {
 
             }
         }                               
-            return facDet;
-       
+            return facDet;       
     }
   
     

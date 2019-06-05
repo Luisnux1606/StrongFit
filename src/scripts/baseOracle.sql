@@ -390,6 +390,7 @@ CREATE TABLE HistPersServ(
   id_HisPerSer Number NOT NULL,  
   fechaIni_HisPerSer Varchar2(100),
   fechaFin_HisPerSer Varchar2(100),
+  estadoDias_HisPerSer Varchar2(100),
   Persona_id_HisPerSer Number,
   Producto_id_HisPerSer Number,
   estado_HisPerSer Number 
