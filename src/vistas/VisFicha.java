@@ -1995,7 +1995,7 @@ public class VisFicha extends javax.swing.JFrame {
 
         jScrollPane15.setViewportView(jPanel1);
 
-        tabFichaVentas.addTab("tab4", jScrollPane15);
+        tabFichaVentas.addTab("Generar Compras", jScrollPane15);
 
         menuArchivo.setText("Archivo");
         menuArchivo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

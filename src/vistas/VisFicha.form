@@ -3263,8 +3263,8 @@
         <Container class="javax.swing.JScrollPane" name="jScrollPane15">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="tab4">
-                <Property name="tabTitle" type="java.lang.String" value="tab4"/>
+              <JTabbedPaneConstraints tabName="Generar Compras">
+                <Property name="tabTitle" type="java.lang.String" value="Generar Compras"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
