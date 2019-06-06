@@ -94,8 +94,12 @@ public class CtrlIngresosEgresos implements ActionListener {
         setListener();
         iniciar();             
         
-        int colHide[] = new int[1];
+        int colHide[] = new int[5];
         colHide[0]=0; 
+        colHide[1]=3; 
+        colHide[2]=14; 
+        colHide[3]=15;
+        colHide[4]=16;
         
         
        // colHide[1]=6;

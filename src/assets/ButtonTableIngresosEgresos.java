@@ -235,6 +235,57 @@ public class ButtonTableIngresosEgresos extends JFrame
                      setDatos();                        
                 }
         }
+        
+    public void showTableIngresosEgresos()
+    {
+        ConsIngresosEgresos consIngEgr = new ConsIngresosEgresos();
+        try {
+            limpiarTabla(visIngEgr.tblIngresosEgresos);
+            ResultSet listFicha = consIngEgr.buscarIngresosEgresos();
+            
+            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
+            Object cols[] = new Object[19];
+           
+            while (listFicha.next()) {
+                try { 
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("Fecha_Faccab");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
+                    cols[4] = listFicha.getString("Descripcion_Facdet");
+                    cols[5] = listFicha.getString("FechaInicio");
+                    cols[6] = listFicha.getString("FechaFin");
+                    cols[7] = listFicha.getString("Total_Faccab");
+                    cols[8] = listFicha.getDouble("egreso");
+                    cols[9] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[10] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[11] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[12] = listFicha.getDouble("estadoEnt");
+                    cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[14] = listFicha.getInt("id_per");
+                    cols[15] = listFicha.getInt("id_prod");
+                    cols[16] = listFicha.getInt("codHist");
+                    
+                    cols[17] = "Guardar";
+                    cols[18] = "Anular";
+                    cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);              
+                    model.addRow(cols);
+                    
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consIngEgr.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        new ButtonTableIngresosEgresos(visIngEgr);
+        visIngEgr.tblIngresosEgresos.updateUI();
+    }  
         public void actionPerformed(ActionEvent e)
         {
             fireEditingStopped();
@@ -250,6 +301,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 {                                            
                   setDatosGuardar();
                 }   
+                showTableIngresosEgresos();
                 
             }
             if (command.equals( "Anular")) {
