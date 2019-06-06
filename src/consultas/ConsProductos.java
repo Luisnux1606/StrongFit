@@ -219,7 +219,7 @@ public class ConsProductos extends Conexion
         ResultSet rs = null; 
         boolean estado = false;
 
-        sql="select  c.tipo_cat " +
+        sql="select  c.CATEGORIA_ID_CAT " +
             "from producto p , categoria c " +
             "where c.id_cat = p.categoria_id_cat and p.id_prod = "+prodId+" and p.estado_prod = 1";						
             try 

@@ -218,7 +218,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                    prodId ="1"; // 1 for default product 999
             
 
-                if (consProd.getTipoProdServ(prodId).equals("SERVICIO GIMNASIO"))
+                if (consProd.getTipoProdServ(prodId).equals("1"))
                 {                    
                     String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
                     String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";   
@@ -230,7 +230,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                     else
                         Validaciones.getMensaje("Revise si hay fechas inicio y fin y si eligio la persona");
                 }
-                if (consProd.getTipoProdServ(prodId).equals("PRODUCTO")){
+                if (consProd.getTipoProdServ(prodId).equals("2")){
                     System.out.println("entro a producto");
                      setDatos();                        
                 }
