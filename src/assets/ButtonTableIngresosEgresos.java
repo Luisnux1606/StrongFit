@@ -717,6 +717,10 @@ public class ButtonTableIngresosEgresos extends JFrame
                 facDet.add(detalles.get(detalles.size()-1));
 
             }
+             else
+                {
+                    JOptionPane.showMessageDialog(null, "Revisar valores de fila seleccionada");
+                }
         }                               
             return facDet;
        

@@ -214,12 +214,12 @@ public class CtrlIngresosEgresos implements ActionListener {
              int m=e.getKeyChar();
              System.out.println ("------------------------------------- "+m + " "+visIngEgr.tblIngresosEgresos.getSelectedColumn());
              
+             
              int col =facDet.getSelectedColumn();
-             int  row =facDet.getRowCount()-1;
+             int  row =0;
              
               if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB ) 
-              {
-                              
+              {                              
                   switch(col)
                   {
                       case 2:
