@@ -155,6 +155,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                         if(consFacDet.modificar(facDets))
                         {                      
                             JOptionPane.showMessageDialog(null, "Registro Modificado!");
+                            showTableIngresosEgresos();
                             if(consFacDet.actualizarSalidas(facDets)){
                                 consFacDet.actualizarStock(facDets);
                                 System.out.println("actualizado salidas");
@@ -301,7 +302,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 {                                            
                   setDatosGuardar();
                 }   
-                showTableIngresosEgresos();
+                
                 
             }
             if (command.equals( "Anular")) {
@@ -435,6 +436,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                         if(consFacDet.registrar(facDets))
                         {                      
                             JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                            showTableIngresosEgresos();
                             if(consFacDet.actualizarSalidas(facDets)){
                                 consFacDet.actualizarStock(facDets);
                                 System.out.println("actualizado salidas");
@@ -503,6 +505,7 @@ public class ButtonTableIngresosEgresos extends JFrame
 
                 if (consFacCab.modificarAnulado(modFacCab)) {
                     JOptionPane.showMessageDialog(null, "Registro Anulado!");
+                    showTableIngresosEgresos();
                 }
                 else
                 {
@@ -527,8 +530,23 @@ public class ButtonTableIngresosEgresos extends JFrame
                     JOptionPane.showMessageDialog(null, "Error al Anular");               
                 }
             }
+            
+            int idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
+            if (idFacCab==0) {
+                deleteRows(visIngEgr.tblIngresosEgresos);
+            }
         }
-        
+        public void deleteRows(JTable table)
+         {
+             DefaultTableModel tb = (DefaultTableModel) table.getModel(); 
+             int n =0 ;
+             n = table.getSelectedRow();
+             if (n>=0) 
+                 tb.removeRow(n);
+             else
+                 Validaciones.getMensaje("Debe seleccionar una fila para eliminar");
+
+         }     
         
          public void limpiarTabla(JTable table)
          {

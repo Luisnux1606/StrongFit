@@ -218,11 +218,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         if (n>=0) 
             tb.removeRow(n);
         else
-            Validaciones.getMensaje("Debe seleccionar una fila para eliminar");
- 
-        
-        
-        
+            Validaciones.getMensaje("Debe seleccionar una fila para eliminar");   
     }
     
     public void setFormatTable(JTable table)

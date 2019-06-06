@@ -186,7 +186,7 @@ public class CtrlIngresosEgresos implements ActionListener {
             
               if (e.getKeyCode()==KeyEvent.VK_F1 )
               {
-                
+                /*
                   VisPersona visPer = new VisPersona();
                   ConsPersona consPer = new ConsPersona();
                   Persona per=new Persona();
@@ -194,11 +194,12 @@ public class CtrlIngresosEgresos implements ActionListener {
                   CtrlPersonas ctrPer=new CtrlPersonas(per,consPer, visPer, visIngEgr);
                   ctrPer.locale = 5;
                   ctrPer.iniciar();
+                  */
               }
               
               if (e.getKeyCode()==KeyEvent.VK_F2 )
               {
-                
+                /*
                 VisProductos visProd = new VisProductos();
                 ConsProductos consProd = new ConsProductos();
                 Producto prod=new Producto();
@@ -207,6 +208,7 @@ public class CtrlIngresosEgresos implements ActionListener {
                 CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha,visFicha);
                 ctrProd.locale = 2;
                 ctrProd.iniciar();
+                        */
               }
           }
 
@@ -221,6 +223,7 @@ public class CtrlIngresosEgresos implements ActionListener {
              
              int col =facDet.getSelectedColumn();
              int  row =0;
+             if(m == KeyEvent.VK_ENTER) col = col+1;
              
               if (m == KeyEvent.VK_ENTER || m == KeyEvent.VK_TAB ) 
               {                              
@@ -298,6 +301,107 @@ public class CtrlIngresosEgresos implements ActionListener {
         };
         visIngEgr.tblIngresosEgresos.addKeyListener(keyListenerTblDetalle);
     
+        //mouse listener tableingegr
+        
+        MouseListener mouseListTblIngEgr;
+        mouseListTblIngEgr = new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int col =facDet.getSelectedColumn();
+                int  row =facDet.getSelectedRow();
+                double valCanc = 0;
+                double valIng = 0;
+               switch(col)
+                  {
+                      case 2:
+                        VisPersona visPer = new VisPersona();
+                        ConsPersona consPer = new ConsPersona();
+                        Persona per=new Persona();
+
+                        CtrlPersonas ctrPer=new CtrlPersonas(per,consPer, visPer, visIngEgr);
+                        ctrPer.locale = 5;
+                        ctrPer.iniciar();
+              
+                          break;
+                    case 3:                            
+                          break;    
+                    case 4: 
+                        
+                        VisProductos visProd = new VisProductos();
+                        ConsProductos consProd = new ConsProductos();
+                        Producto prod=new Producto();
+                        
+                        CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha,visIngEgr);
+                        ctrProd.locale = 2;
+                        ctrProd.iniciar();
+                        break;
+                   case 5:                            
+                          break;
+                    case 6:                            
+                         break;
+                    case 7:                            
+                        break;
+                    case 8:                            
+                        break;
+                    case 9:  
+                             valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 9)+"");
+                             valIng=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 7)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 10);
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 13);
+                            
+                        break;
+                     case 10:         
+                             valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 9)+"");
+                             valIng=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 7)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 10);
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 13);
+                        break;
+                    case 11:                            
+                        break;
+                    case 12:    
+                            double valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
+                            double valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 13);
+                        break;
+                        
+                    case 13:       
+                           
+                        break;
+                    case 14:                            
+                            
+                        break;
+                    case 15:                            
+                            
+                        break;
+                    default:
+                        break;
+                  }
+                System.out.println(visIngEgr.tblIngresosEgresos.getSelectedColumn()+"");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+               
+            }
+        
+        };
+        visIngEgr.tblIngresosEgresos.addMouseListener(mouseListTblIngEgr);
     }
     
     public void addRows(JTable table)
@@ -312,7 +416,7 @@ public class CtrlIngresosEgresos implements ActionListener {
             cols[i] = new String();
         }
          cols[17]="Guardar";
-         cols[18]="Eliminar";
+         cols[18]="Anular";
          
        //  setFormatTable(table);
         tb.insertRow(0, cols);
@@ -367,7 +471,7 @@ public class CtrlIngresosEgresos implements ActionListener {
         visIngEgr.setLocation(300, 100);
         visIngEgr.setVisible(true);
        
-       // showTable();
+        showTableIngresosEgresos();
                 
     }
     
