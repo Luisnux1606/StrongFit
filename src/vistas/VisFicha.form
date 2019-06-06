@@ -320,7 +320,7 @@
               <Component id="lblNomEmpresa" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="448" max="32767" attributes="0"/>
           </Group>
-          <Component id="tabFichaVentas" alignment="1" pref="1242" max="32767" attributes="0"/>
+          <Component id="tabFichaVentas" alignment="0" pref="1253" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -328,8 +328,8 @@
           <Group type="102" attributes="0">
               <Component id="lblNomEmpresa" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="tabFichaVentas" min="-2" pref="838" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Component id="tabFichaVentas" min="-2" pref="760" max="-2" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
