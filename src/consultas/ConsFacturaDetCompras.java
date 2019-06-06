@@ -182,30 +182,29 @@ public class ConsFacturaDetCompras extends Conexion {
         
     }
     
-    public boolean modificar(FacturaCab f)
+    public boolean modificar(ArrayList<FacturaDetalleCompras> facDetComp)
     {
-        PreparedStatement ps = null;
-        Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
-        String sql = "update FacturaCabecera SET fecha_facCab=?, num_facCab=?, subTotal_facCab=?,valPagar_facCab=?,subTotal_facCab=?,total_facCab=?,valPendiente_facCab=?,valCancelo_facCab=?,Persona_id_per=?,Membresia_id_memb=?,Ivas_id_ivas=?,estado_facCab=?"
-                + " WHERE id_facCab=?";
+        PreparedStatement ps = null; // FACTURADETALLECOMPRAS (ID_FACDETCOMP
+        Connection con = getConexion(); //ID_FACDETCOMP,CANTIDAD_FACDETCOMP, DESCRIPCION_FACDETCOMP,VALUNITARIO_FACDETCOMP,VTOTAL_FACDETCOMP,PRODUCTO_ID_PRODCOMP,FACTURA_ID_FACCOMP,ESTADO_FACDETCOMP
+        String sql = "update FACTURADETALLECOMPRAS SET CANTIDAD_FACDETCOMP=?, CANTIDAD_FACDETCOMP=?, DESCRIPCION_FACDETCOMP=?,VALUNITARIO_FACDETCOMP=?,VTOTAL_FACDETCOMP=?,PRODUCTO_ID_PRODCOMP=?,FACTURA_ID_FACCOMP=?,ESTADO_FACDETCOMP=?"
+                + " WHERE ID_FACDETCOMP=?";
         
         try 
         {
             
             ps = con.prepareStatement(sql);
-            
-            ps.setString(1, f.getFecha_facCab());           
-            ps.setString(2, f.getNum_facCab());
-            ps.setDouble(3, f.getSubTotal_facCab());
-            ps.setDouble(4, f.getValPagar_facCab());
-            ps.setDouble(5, f.getSubTotal_facCab());
-            ps.setDouble(6, f.getTotal_facCab());
-            ps.setDouble(7, f.getValPendiente_facCab());
-            ps.setDouble(8, f.getValCancelo_facCab());
-            ps.setInt(9, f.getPersona().getId());
-            ps.setInt(10, f.getMembresia().getId());
-            ps.setInt(11, f.getIvas().getId_ivas());
-            ps.setInt(12, f.getEstado());
+            for (FacturaDetalleCompras listDets : facDetComp) 
+            {
+                ps.setInt(1,listDets.getCantidad_facDetComp());
+                ps.setString(2,listDets.getDescripcion_facDetComp());
+                ps.setDouble(3,listDets.getValUnitario_facDetComp());
+                ps.setDouble(4,listDets.getvTotal_facDetComp());
+                ps.setInt(5,listDets.getProducto_id_prodComp().getId_prod());
+                ps.setInt(6,listDets.getFactura_id_facComp().getId_facCabComp());               
+                ps.setInt(7, listDets.getEstado_facDetComp()); 
+                ps.setInt(8, listDets.getId_facDetComp());  
+                ps.execute();
+            }
             
             ps.execute();
             return true;

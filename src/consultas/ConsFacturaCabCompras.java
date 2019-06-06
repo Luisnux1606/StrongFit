@@ -148,7 +148,7 @@ public class ConsFacturaCabCompras extends Conexion {
         
     }
     
-    public boolean modificarAnulado(FacturaCab f)
+    public boolean modificarAnulado(FacturaCabCompras f)
     {
         PreparedStatement ps = null;
         Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
@@ -160,8 +160,8 @@ public class ConsFacturaCabCompras extends Conexion {
             
             ps = con.prepareStatement(sql);
             
-            ps.setInt(1, f.getEstado());           
-            ps.setInt(2, f.getId_facCab());
+            ps.setInt(1, f.getEstadoComp());           
+            ps.setInt(2, f.getId_facCabComp());
            
             
             ps.execute();
