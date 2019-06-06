@@ -239,7 +239,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
           public void keyTyped(KeyEvent e) {
             int m=e.getKeyChar();
               if (m == KeyEvent.VK_ENTER) {
-                  Calculos.setPendiente(visFicha);                                    
+                  Calculos.setPendienteComp(visFicha);                                    
               }  
           }
           
@@ -249,7 +249,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
            
           }
         };
-        visFicha.txt_valCancelo.addKeyListener(keyListenertxtValCacncelo);
+        visFicha.txt_valCanceloComp.addKeyListener(keyListenertxtValCacncelo);
         
         //**********listener txtValPendienteFicha ************
         

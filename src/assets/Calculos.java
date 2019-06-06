@@ -227,6 +227,14 @@ public class Calculos {
         double totMasIva = ((valConDscto*iva)/100) +valConDscto;        
         return getTwoDecimals(totMasIva);
     }
+    
+    public static double setTotalConIvaComp(VisFicha visFicha)
+    {
+        double iva = Validaciones.isNumVoid10(visFicha.txtIVAComp.getText());
+        double valConDscto = Validaciones.isNumVoid10(visFicha.txtValConDsctoFichaComp.getText());
+        double totMasIva = ((valConDscto*iva)/100) +valConDscto;        
+        return getTwoDecimals(totMasIva);
+    }
     public static double setTotalConIvaCompras(VisFicha visFicha)
     {
         double iva = Validaciones.isNumVoid10(visFicha.txtIVAComp.getText());
@@ -238,6 +246,13 @@ public class Calculos {
     public static double getValCancelo(VisFicha visFicha)
     {
         double valCancelo = Validaciones.isNumVoid10(visFicha.txt_valCancelo.getText());
+        return getTwoDecimals(valCancelo);
+    
+    }
+    
+    public static double getValCanceloComp(VisFicha visFicha)
+    {
+        double valCancelo = Validaciones.isNumVoid10(visFicha.txt_valCanceloComp.getText());
         return getTwoDecimals(valCancelo);
     
     }
@@ -264,6 +279,11 @@ public class Calculos {
      public static void setPendiente(VisFicha visFicha)
      {
          visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");
+     
+     }
+     public static void setPendienteComp(VisFicha visFicha)
+     {
+         visFicha.txtValPendienteFichaComp.setText(getDiferencia(setTotalConIvaCompras(visFicha),getValCanceloComp(visFicha) )+"");
      
      }
      

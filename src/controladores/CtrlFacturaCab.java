@@ -683,7 +683,7 @@ public class CtrlFacturaCab implements ActionListener{
                     {
                         ArrayList<FacturaDetalle> facDets = facDetalle.setDetalles(visFicha, "");
                         if(consFacDet.registrar(facDets))
-                        {                      
+                        {                      //txt_valCanceloComp
                             JOptionPane.showMessageDialog(null, "Registro Guardado!");
                             if(consFacDet.actualizarSalidas(facDets)){
                                 consFacDet.actualizarStock(facDets);
