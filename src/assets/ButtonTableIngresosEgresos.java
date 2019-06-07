@@ -493,37 +493,40 @@ public class ButtonTableIngresosEgresos extends JFrame
  
         public void setAnulado()
         {
+            int idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
             if (getIngresoEgreso().equals("ingreso")) 
             {
                 FacturaCab modFacCab=new FacturaCab();
 
                 double ajuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
-                int idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
+                // idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
                 modFacCab.setEstado(3); //anulado 
                 modFacCab.setId_facCab(idFacCab);       
                // consFacCab.modificarAjuste(modFacCab);
 
                 if (consFacCab.modificarAnulado(modFacCab)) {
                     JOptionPane.showMessageDialog(null, "Registro Anulado!");
-                    showTableIngresosEgresos();
+                   // showTableIngresosEgresos();
                 }
                 else
                 {
                     JOptionPane.showMessageDialog(null, "Error al Anular");               
                 }
             }
+            else
             if (getIngresoEgreso().equals("egreso")) 
             {
                 FacturaCabCompras modFacCab=new FacturaCabCompras();
 
                 double ajuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
-                int idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
+                // idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
                 modFacCab.setEstadoComp(3); //anulado 
                 modFacCab.setId_facCabComp(idFacCab);       
                // consFacCab.modificarAjuste(modFacCab);
 
                 if (consFacCabComp.modificarAnulado(modFacCab)) {
                     JOptionPane.showMessageDialog(null, "Registro Anulado!");
+                   // showTableIngresosEgresos();
                 }
                 else
                 {
@@ -531,10 +534,12 @@ public class ButtonTableIngresosEgresos extends JFrame
                 }
             }
             
-            int idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
+            
             if (idFacCab==0) {
                 deleteRows(visIngEgr.tblIngresosEgresos);
             }
+            
+             showTableIngresosEgresos();
         }
         public void deleteRows(JTable table)
          {
