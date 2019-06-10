@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e484188a-c062-4a2f-910a-b3b9657e92ec">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="282"/>
+	<property name="ireport.y" value="259"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\TroyaGym\\src\\reportes\\"]]></defaultValueExpression>
 	</parameter>
@@ -209,7 +209,7 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 			</line>
 			<image>
 				<reportElement x="16" y="26" width="293" height="302" uuid="ed2c4f84-dc25-4fb3-a9fc-950ec8a1487f"/>
-				<imageExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\TroyaGym\\src\\icons\\humanbodymen2.jpeg"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\StrongFit\\src\\icons\\humanbodymen2.jpeg"]]></imageExpression>
 			</image>
 			<textField>
 				<reportElement x="243" y="69" width="29" height="13" uuid="df0f53d0-4e8d-4f0f-8e31-3370d591f042"/>
