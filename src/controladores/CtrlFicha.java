@@ -1022,6 +1022,8 @@ public class CtrlFicha implements ActionListener{
             ctrPlan.iniciar();
         }
         
+        
+        
         if (e.getSource()==visFicha.mniColores) //Cuando toca el menú diario general
         {
             JColorChooser ventanaDeColores=new JColorChooser();
@@ -1039,12 +1041,7 @@ public class CtrlFicha implements ActionListener{
             visFicha.pnlMedidasComponentes2.setBackground(color);
             visFicha.pnlAnalisisComponentes.setBackground(color);
             visFicha.pnlFichaComponentes.setBackground(color);
-            
-           // visPer.pnl_personas.setBackground(color);
-            //visMemb.pnl_personas.setBackground(color);
-            
-                    
-            
+               
         }
          
          if (e.getSource() == visFicha.menuSalir) 

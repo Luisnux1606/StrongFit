@@ -321,6 +321,10 @@ TABLESPACE tbs_usr_strongfit_p
 -- Create indexes for table persona
 CREATE INDEX idx_id_per ON Persona(id_per)
 /
+CREATE INDEX idx_nom_per ON Persona(nom_per)
+/
+CREATE INDEX idx_ape_per ON Persona(ape_per)
+/
 
 -- Add keys for table persona
 ALTER TABLE Persona ADD CONSTRAINT pk_id_per PRIMARY KEY (id_per)

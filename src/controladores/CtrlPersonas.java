@@ -351,6 +351,7 @@ public class CtrlPersonas implements ActionListener {
            Object cols[] = new Object[11];
 
            for (int i = 0; i < prodList.size(); i++) {
+             //  model.insertRow(i,new (prodList.get(i).getNombre().toUpperCase()+"", prodList.get(i).getApellido()+"",prodList.get(i).getId()));
                cols[0] = prodList.get(i).getId();
                cols[1] = Validaciones.isNumVoid4(prodList.get(i).getCedula());
                cols[2] = prodList.get(i).getNombre().toUpperCase();
@@ -362,7 +363,7 @@ public class CtrlPersonas implements ActionListener {
                cols[8] = Validaciones.isNumVoid4(prodList.get(i).getFecha_nac());
                cols[9] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getDescripcion_tipoPer());
                cols[10] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
-
+            
                model.addRow(cols);                    
            }   
         //   model.remove;
@@ -566,7 +567,7 @@ public class CtrlPersonas implements ActionListener {
                             modPer.setNombre(nombre);
                             modPer.setApellido(apellido);
                             visFicha.lblPersonaId.setText(idPer+"");
-                            visFicha.cmb_clienteFac.setSelectedItem(modPer.getNombre() + " "+modPer.getApellido());                                                        
+                            visFicha.cmb_clienteFac.setSelectedItem(new Persona(modPer.getApellido(),modPer.getNombre(),modPer.getId()));                                                        
                             break;
                         case 3:  //servicio
                             visHisPerServ = (VisHistorialPersonaServicio)vis;

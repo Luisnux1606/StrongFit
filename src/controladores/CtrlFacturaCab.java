@@ -8,6 +8,7 @@ package controladores;
 
 import assets.Calculos;
 import assets.Configuracion;
+import assets.ItemRenderer;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -32,6 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -105,6 +107,7 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnAgregarFilas.addActionListener(this);
         this.visFicha.btnEliminarFilas.addActionListener(this);
         this.visFicha.btnEntrenamiento.addActionListener(this);
+        
 
         
          
@@ -138,13 +141,13 @@ public class CtrlFacturaCab implements ActionListener{
 //        visFicha.btnModificarFacCab.setToolTipText("Modificar el registro");
 //        visFicha.btnEliminarFacCab.setToolTipText("Eliminar el registro");
         visFicha.btnLimpiarFacCab.setToolTipText("Limpiar el registro");
-        showComboCategorias();
+        showComboPersonas();
         AutoCompleteDecorator.decorate(visFicha.cmb_clienteFac);  
         //visFicha.tabp_ficha.setSelectedIndex(2);
         limpiar();       
     }
     
-    public void showComboCategorias()
+    public void showComboPersonas()
     {
         visFicha.cmb_clienteFac.removeAllItems();
         try {
@@ -157,7 +160,7 @@ public class CtrlFacturaCab implements ActionListener{
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     
-                    model.addElement(listCategorias.getString("nom_per")+" "+listCategorias.getString("ape_per"));
+                    model.addElement(new Persona(listCategorias.getString("nom_per"),listCategorias.getString("ape_per"),listCategorias.getInt("id_per")));
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,6 +170,9 @@ public class CtrlFacturaCab implements ActionListener{
         } catch (SQLException ex) {
             Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
+      //  visFicha.cmb_clienteFac.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
+        visFicha.cmb_clienteFac.setRenderer(new ItemRenderer());
+        this.visFicha.cmb_clienteFac.addActionListener(this);
         visFicha.cmb_clienteFac.updateUI();
     }
     
@@ -701,8 +707,8 @@ public class CtrlFacturaCab implements ActionListener{
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dtcFechaFacCab);
           
-                System.out.println(visFicha.cmb_clienteFac.getName());
-               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isNumVoid1(visFicha.cmb_clienteFac.getSelectedItem()+"") && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
+                System.out.println(((Persona)visFicha.cmb_clienteFac.getSelectedItem()).getApellido());
+               if (Validaciones.isDateChooserVoid(jdc) && !Validaciones.isNumVoid1(visFicha.cmb_clienteFac.getSelectedItem()+"") && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
                {                                        
                     setFacturaCabecera(visFicha);   
                                        
@@ -729,47 +735,10 @@ public class CtrlFacturaCab implements ActionListener{
                         limpiar();
                     }
                    
-               }        
+               } 
+               else
+                 Validaciones.getMensaje("Seleccione la persona");
         }
-      
-/*      if (e.getSource() == visFicha.btnModificarFacCab) 
-       {            
-                modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
-                modFacCab.setNum_facCab("sera numero");
-                modFacCab.setSubTotal_facCab(Validaciones.isNumVoid3(visFicha.txtValConDsctoFicha.getText()));
-                modFacCab.setTotal_facCab(Validaciones.isNumVoid3(visFicha.txtTotalConIva.getText()));
-                modFacCab.setValPendiente_facCab(Validaciones.isNumVoid3(visFicha.txtValPendienteFicha.getText()));       
-                modFacCab.setEstado(1);          
-
-            if (consFicha.modificar(modFacCab)) {
-                JOptionPane.showMessageDialog(null, "Registro Modificado!");
-                limpiar();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Error al Modificar");
-                limpiar();
-            }
-        }
-      
-      if (e.getSource() == visFicha.btnEliminarFacCab) 
-       {
-           
-            modFacCab.setId_facCab(Integer.parseInt(visFicha.txt_id_FacCab.getText()));
-            modFacCab.setEstado(2);
-                      
-            if (consFicha.eliminar(modFacCab)) {
-                JOptionPane.showMessageDialog(null, "Registro Eliminado !");
-                limpiar();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar...");
-                limpiar();
-            }
-          
-        }*/
-      
        if (e.getSource() == visFicha.btnLimpiarFacCab) 
         {
            limpiar();
@@ -815,35 +784,19 @@ public class CtrlFacturaCab implements ActionListener{
             ConsHistorialPersonaServicio consHPS = new ConsHistorialPersonaServicio();
             HistorialPersonaServicio hisPS = new HistorialPersonaServicio();
             
-            System.out.println(persona.getNombre());
-            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,persona);                        
+            Persona item = (Persona)(visFicha.cmb_clienteFac.getSelectedItem());
+            CtrlHistorialPersServicio ctlHis = new CtrlHistorialPersServicio(visHis, hisPS, consHPS, visFicha,item);                        
             ctlHis.locale = 0;
-            ctlHis.iniciar();
-            
-           
+            ctlHis.iniciar();                       
 
         } 
-        
-        /*
-         if (e.getSource() == visFicha.cmbTipoBusqueda) 
-        {       
-           String tipo = visFicha.cmbTipoBusqueda.getSelectedItem()+"";
-            if (tipo.equals("todos")) {
-             showTable();
-            }
-            if (tipo.equals("cursando")) {
-                showTableCursando();
-            }
-            if (tipo.equals("pendientes")) {
-                showTablePendientes();
-            }
-            if (tipo.equals("proximos a vencer")) {
-                showTableProximosVencer();
-            }
-            if (tipo.equals("vencidos")) {
-                showTableVencidos();
-            }
-        }*/
+        if (e.getSource()==visFicha.cmb_clienteFac)
+        {
+         
+            Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
+            visFicha.lblPersonaId.setText(item.getId()+"");
+            System.out.println(item.getId() + " : " + item.getApellido());
+        }                
       
     }
     public void limpiar()

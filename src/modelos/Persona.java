@@ -28,6 +28,27 @@ public class Persona {
     /**
      * @return the cedula
      */
+    
+    public Persona(String nombre, String apellido, int id)
+    {
+        this.id = id;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.nro_fono = nro_fono;
+        this.edad = edad;
+        this.fecha_nac = fecha_nac;
+        this.mail = mail;
+        this.genero = genero;
+        this.tipoPersona = tipoPersona;
+    
+    }
+
+    public Persona()
+    {
+    
+    }
+    
     public String getCedula() {
         return cedula;
     }
@@ -179,6 +200,8 @@ public class Persona {
         this.tipoPersona = tipoPersona;
     }
     
-    
+    public String toString() {
+        return this.apellido;
+    }
     
 }
