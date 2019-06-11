@@ -5,6 +5,7 @@
  */
 package controladores;
 
+
 import assets.Calculos;
 import assets.Configuracion;
 import assets.Validaciones;
@@ -29,6 +30,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -48,6 +50,7 @@ import modelos.Medidas;
 import modelos.Membresias;
 import modelos.Persona;
 import modelos.Producto;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 import vistas.VisFicha;
 import vistas.VisHistorialPersonaServicio;
@@ -74,8 +77,9 @@ public class CtrlFacturaCab implements ActionListener{
     Persona persona;
     String cadBus;
     
-     ConsFacturaDet consFacDet ;     
-     CtrlFacturaDetalle facDetalle; 
+    ConsPersona consPer;
+    ConsFacturaDet consFacDet ;     
+    CtrlFacturaDetalle facDetalle; 
     
     public CtrlFacturaCab(FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona)
     {
@@ -87,6 +91,7 @@ public class CtrlFacturaCab implements ActionListener{
         this.memb = new Membresias();
         this.iva = new Iva();
               
+        consPer = new ConsPersona();
         consFacDet= new ConsFacturaDet();  
         facDetalle = new CtrlFacturaDetalle(consFacDet, visFicha);
         
@@ -125,8 +130,7 @@ public class CtrlFacturaCab implements ActionListener{
     
     public void iniciar()
     {
-        visFicha.setTitle( Configuracion.nomEmp + "FACTURA CABECERA");
-        
+        visFicha.setTitle( Configuracion.nomEmp + "FACTURA CABECERA");        
         visFicha.dtcFechaFacCab.setDate(Calculos.getCurrentDate2());     
         visFicha.txt_id_FacCab.setVisible(false);
        
@@ -134,13 +138,36 @@ public class CtrlFacturaCab implements ActionListener{
 //        visFicha.btnModificarFacCab.setToolTipText("Modificar el registro");
 //        visFicha.btnEliminarFacCab.setToolTipText("Eliminar el registro");
         visFicha.btnLimpiarFacCab.setToolTipText("Limpiar el registro");
+        showComboCategorias();
+        AutoCompleteDecorator.decorate(visFicha.cmb_clienteFac);  
         //visFicha.tabp_ficha.setSelectedIndex(2);
         limpiar();       
     }
     
-    public void setCmbxMembresias()
+    public void showComboCategorias()
     {
-        
+        visFicha.cmb_clienteFac.removeAllItems();
+        try {
+           
+            ResultSet listCategorias = consPer.buscarPersonasClientes();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visFicha.cmb_clienteFac.getModel();
+           
+            
+            while (listCategorias.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(listCategorias.getString("nom_per")+" "+listCategorias.getString("ape_per"));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consPer.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visFicha.cmb_clienteFac.updateUI();
     }
     
     public void setTableModel()
@@ -414,7 +441,7 @@ public class CtrlFacturaCab implements ActionListener{
      public void setFocus()
     {
         visFicha.dtcFechaFacCab.requestFocus();
-        visFicha.dtcFechaFacCab.setNextFocusableComponent(visFicha.txt_clienteFac);
+        visFicha.dtcFechaFacCab.setNextFocusableComponent(visFicha.cmb_clienteFac);
        
     }
      
@@ -674,8 +701,8 @@ public class CtrlFacturaCab implements ActionListener{
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dtcFechaFacCab);
           
-                System.out.println(visFicha.txt_clienteFac.getName());
-               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFac) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
+                System.out.println(visFicha.cmb_clienteFac.getName());
+               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isNumVoid1(visFicha.cmb_clienteFac.getSelectedItem()+"") && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
                {                                        
                     setFacturaCabecera(visFicha);   
                                        
@@ -821,7 +848,7 @@ public class CtrlFacturaCab implements ActionListener{
     }
     public void limpiar()
     {
-        visFicha.txt_clienteFac.setText("");
+        visFicha.cmb_clienteFac.setSelectedIndex(0);
         visFicha.dtcFechaFacCab.setDate(Calculos.getCurrentDate2()); 
         visFicha.txtValConDsctoFicha.setText("0.0");
         visFicha.txtValPendienteFicha.setText("0.0");

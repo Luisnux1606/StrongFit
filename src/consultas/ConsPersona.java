@@ -235,6 +235,35 @@ public class ConsPersona extends Conexion
 		return result;
 	}
     
+    
+    public ResultSet buscarPersonasClientes()
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select * " +
+                    "from Persona p " +
+                    "where p.estado_per = 1";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
     public ArrayList<Persona> buscarTodos(Persona p)
     {
         PreparedStatement ps = null;
@@ -391,7 +420,17 @@ public class ConsPersona extends Conexion
         }
        return personas ;
     }
-    
+    public void closeConection()
+    {
+        
+          try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                e.printStackTrace();
+            }
+    }
      public String getCedByCed(String ced){
 		String sql;
 		String result="";

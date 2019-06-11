@@ -415,7 +415,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
      public void setFocus()
     {
         visFicha.dtcFechaFacCab.requestFocus();
-        visFicha.dtcFechaFacCab.setNextFocusableComponent(visFicha.txt_clienteFac);
+        visFicha.dtcFechaFacCab.setNextFocusableComponent(visFicha.cmb_clienteFac);
        
     }
      
@@ -675,7 +675,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
            ArrayList<JDateChooser> jdc=new ArrayList<>();
            jdc.add(visFicha.dtcFechaFacCabComp);
           
-                System.out.println(visFicha.txt_clienteFac.getName());
+                System.out.println(visFicha.cmb_clienteFac.getName());
                if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFacComp) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalleCompras)) 
                {                                        
                     setFacturaCabecera(visFicha);   

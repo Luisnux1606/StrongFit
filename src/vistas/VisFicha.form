@@ -2624,26 +2624,37 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
-                                          <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="61" pref="61" max="-2" attributes="0"/>
-                                          <Component id="dtcFechaFacCab" min="-2" pref="195" max="-2" attributes="0"/>
-                                          <EmptySpace min="343" pref="343" max="-2" attributes="0"/>
-                                          <Component id="lblNroFactura" min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
-                                          <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="61" pref="61" max="-2" attributes="0"/>
-                                          <Component id="txt_clienteFac" min="-2" pref="195" max="-2" attributes="0"/>
-                                          <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                                          <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
-                                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                          <Component id="lblPersonaId" min="-2" pref="52" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
                                           <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
                                           <Component id="btnEntrenamiento" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                                                  <Component id="lblFechaFacCab" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
+                                                  <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="dtcFechaFacCab" max="32767" attributes="0"/>
+                                              <Component id="cmb_clienteFac" pref="235" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <EmptySpace min="303" pref="303" max="-2" attributes="0"/>
+                                                  <Component id="lblNroFactura" min="-2" pref="60" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                                  <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
+                                                  <Component id="lblPersonaId" min="-2" pref="52" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="418" max="-2" attributes="0"/>
@@ -2662,14 +2673,16 @@
                                   <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txt_clienteFac" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="btnBuscarClienteFactura" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
                                           <Component id="lblPersonaId" min="-2" pref="26" max="-2" attributes="0"/>
                                       </Group>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="cmb_clienteFac" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnBuscarClienteFactura" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="btnEntrenamiento" min="-2" pref="46" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                               </Group>
@@ -2729,9 +2742,13 @@
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                           </AuxValues>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="txt_clienteFac">
+                        <Component class="javax.swing.JComboBox" name="cmb_clienteFac">
                           <Properties>
-                            <Property name="name" type="java.lang.String" value="ClienteFactura" noResource="true"/>
+                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                              <StringArray count="1">
+                                <StringItem index="0" value="Seleccione persona"/>
+                              </StringArray>
+                            </Property>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
