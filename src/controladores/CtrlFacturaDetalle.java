@@ -9,8 +9,9 @@ import assets.AutoSuggestor;
 import assets.Calculos;
 import static assets.Calculos.calcularTotalDetalle;
 import static assets.Calculos.getTwoDecimals;
-import assets.CeldaRenderer;
-
+import assets.ItemRendererClienteFac;
+import assets.ItemRendererProducto;
+import assets.Java2sAutoComboBox;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsFacturaDet;
@@ -18,10 +19,19 @@ import consultas.ConsProductos;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -34,6 +44,7 @@ import javax.swing.table.TableColumn;
 import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
+import modelos.Persona;
 import modelos.Producto;
 import static oracle.net.aso.C10.c;
 
@@ -76,61 +87,98 @@ public class CtrlFacturaDetalle implements ActionListener {
         crearTablaCombo();        
     }
    
+    public ArrayList<Producto> getProductosServicios()
+    {
+        ConsProductos consProd=new ConsProductos();
+        ArrayList<Producto> listSomeString = new ArrayList<Producto>();
+        try 
+        {
+            //jc.removeAllItems();
+            ResultSet listProd = consProd.buscarTodos();
+               
+           // DefaultComboBoxModel model =  (DefaultComboBoxModel)jc.getModel();
+            Object cols[] = new Object[11];
+
+             while (listProd.next()) {
+            try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                Categoria c = new Categoria();
+                c.setId_cat(listProd.getInt("id_cat"));
+                listSomeString.add(new Producto(listProd.getString("descripcion_prod").toUpperCase(),listProd.getDouble("precio_prod"),listProd.getInt("id_prod"),c));
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+               
+        consProd.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSomeString;
+    }
+    
+    public Producto getIndexByItemCombo(JComboBox comboBox,String cad)
+    {
+        DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
+        
+        Producto p=new Producto();
+        for (int i = 0; i < model.getSize(); i++) {
+            if((((Producto)model.getElementAt(i)).getDescripcion_prod()).equals(cad))
+            {
+                p= (Producto)model.getElementAt(i);
+            }
+        }
+        return p;
+    }
+    
     private void crearTablaCombo() {
-        //Combo y valores
-        JComboBox comboBox = new JComboBox();
-        comboBox.addItem("Argentina");
-        comboBox.addItem("Bolivia");
-        comboBox.addItem("Brasil");
-        comboBox.addItem("Braulio");
-        comboBox.addItem("Brocoli");
-        comboBox.addItem("Canada");
-        comboBox.addItem("España");
-        comboBox.addItem("Estadio");
-        comboBox.addItem("Espoli");
-        comboBox.addItem("Estupendo");
-        comboBox.addItem("Guatemala");
-        comboBox.addItem("Mexico");
-        //se agrega model al JTable
-        
-        
-        
-        /*
-         AutoCompleteDecorator.decorate(comboBox);
-         DefaultCellEditor cellEditor = new DefaultCellEditor(comboBox);
-        visFicha.tblFacturaDetalle.setRowHeight(22);//altura de filas
-        //se indica que columna tendra el JComboBox
-        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(cellEditor);       
-       */
-        //visFicha.tblFacturaDetalle.setDefaultRenderer(Object.class, new CeldaRenderer(2));
-        /*
-        JTextField f = new JTextField(10);
-        AutoSuggestor autoSuggestor = new AutoSuggestor(f, visFicha, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
-            public boolean wordTyped(String typedWord) {
 
-                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-                ArrayList<String> words = new ArrayList<>();
-                words.add("hello");
-                words.add("heritage");
-                words.add("happiness");
-                words.add("goodbye");
-                words.add("cruel");
-                words.add("car");
-                words.add("war");
-                words.add("will");
-                words.add("world");
-                words.add("wall");
+        JTable tabDet = visFicha.tblFacturaDetalle;      
+        ArrayList<Producto>  listSomeString = getProductosServicios();
+        Java2sAutoComboBox comboBox1 = new Java2sAutoComboBox(listSomeString);
+        comboBox1.setDataList(listSomeString);
+        comboBox1.setMaximumRowCount(5);
+        comboBox1.setRenderer(new ItemRendererProducto());
+       
+        ActionListener comboAct = new ActionListener() {
 
-
-                setDictionary(words);
-                //addToDictionary("bye");//adds a single word
-
-                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox1.getModel();
+                if (comboBox1.getSelectedIndex()!=-1) {
+                    System.out.println("dataenter "+((Producto)model.getElementAt(comboBox1.getSelectedIndex())).getId_prod());
+                }              
             }
         };
-       visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(f));       
-        */
         
+         comboBox1.addActionListener(comboAct);
+         comboBox1.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+               JComboBox comboBox = (JComboBox) event.getSource();
+                  Object item = event.getItem();
+                   DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
+                   if (event.getStateChange() == ItemEvent.SELECTED) {
+                       System.out.println(item.toString() + " selected." +getIndexByItemCombo(comboBox,item.toString()).getId_prod());
+                       int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
+                       double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
+                       tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
+                       tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                       try {
+                             System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
+                       } catch (Exception e) {
+                           System.out.println("seleccinado null: ");
+                       }
+                   }
+
+                   if (event.getStateChange() == ItemEvent.DESELECTED) {
+                    System.out.println(item.toString() + " deselected.");
+                   }
+
+            }
+        });
+        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));      
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setToolTipText("Click para ver producto");  
     }
 
      private void initColumnSizes(JTable table) {

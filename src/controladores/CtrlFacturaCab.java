@@ -8,7 +8,7 @@ package controladores;
 
 import assets.Calculos;
 import assets.Configuracion;
-import assets.ItemRenderer;
+import assets.ItemRendererClienteFac;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -171,7 +171,7 @@ public class CtrlFacturaCab implements ActionListener{
             Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
       //  visFicha.cmb_clienteFac.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
-        visFicha.cmb_clienteFac.setRenderer(new ItemRenderer());
+        visFicha.cmb_clienteFac.setRenderer(new ItemRendererClienteFac());
         this.visFicha.cmb_clienteFac.addActionListener(this);
         visFicha.cmb_clienteFac.updateUI();
     }

@@ -9,25 +9,26 @@ import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import modelos.Persona;
+import modelos.Producto;
 
 /**
  *
  * @author Administrator
  */
-public class ItemRenderer extends BasicComboBoxRenderer {
+public class ItemRendererProducto extends BasicComboBoxRenderer {
   public Component getListCellRendererComponent(JList list, Object value,
       int index, boolean isSelected, boolean cellHasFocus) {
     super.getListCellRendererComponent(list, value, index, isSelected,
         cellHasFocus);
 
     if (value != null) {
-      Persona item = (Persona) value;
-      setText(item.getApellido().toUpperCase()+" "+item.getNombre().toUpperCase());
+      Producto item = (Producto) value;
+      setText(item.getDescripcion_prod().toUpperCase());
     }
 
     if (index == -1) {
-      Persona item = (Persona) value;
-      setText("" + item.getId());
+      Producto item = (Producto) value;
+      setText("" + item.getId_prod());
     }
 
     return this;

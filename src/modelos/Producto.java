@@ -23,6 +23,18 @@ public class Producto {
    private String fechaFin;
    private int estado_prod;
 
+   
+   public Producto(String descripcion, double precio, int id, Categoria idCat)
+   {
+       this.descripcion_prod = descripcion;
+       this.precio_prod = precio;
+       this.id_prod = id;
+       this.categoria = idCat;
+   }
+   public Producto()
+   {
+   
+   }
     /**
      * @return the id_prod
      */
@@ -176,6 +188,9 @@ public class Producto {
     public void setStock(double stock) {
         this.stock = stock;
     }
-   
+    
+   public String toString() {
+        return this.getDescripcion_prod();
+    }
    
 }
