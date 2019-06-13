@@ -1,4 +1,27 @@
-﻿*********GESTION DE PERSONAS***************
+*********PESTAÑA INGRESOS/EGRESOS***************﻿
+1. Incluir en el combo las opciones de: "anulados", "eliminados"
+2. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón. 
+
+TABLA
+    1. Validar que el valor pendiente nunca sea mayor al valor a pagar. 
+    2. Si elijo un entrenamiento no se salte a valor. cancelado.
+    3. Validar que el valor ajuste nunca sea mayor a lo pendiente 
+    4. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.
+    5. Validar que cuando se guarde en la tabla no se muestren los eliminados o anulados. (ahora está mostrando los eliminados)
+    6. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona. 
+    7. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes)
+
+BUSCAR(campo)
+    1. No busca 
+
+MOSTRAR TODOS
+    1. Debe mostrar únicamente los activos, no los eliminados ni anulados. 
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+*********GESTION DE PERSONAS***************
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
