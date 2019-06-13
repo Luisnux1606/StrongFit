@@ -5,20 +5,27 @@
  */
 package controladores;
 
+import assets.AutoSuggestor;
 import assets.Calculos;
 import static assets.Calculos.calcularTotalDetalle;
 import static assets.Calculos.getTwoDecimals;
+import assets.CeldaRenderer;
+
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsFacturaDet;
 import consultas.ConsProductos;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -28,6 +35,7 @@ import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.Producto;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisFicha;
 import vistas.VisProductos;
 
@@ -62,8 +70,66 @@ public class CtrlFacturaDetalle implements ActionListener {
         limpiarTablaDetalles();
         setFormatTable(visFicha.tblFacturaDetalle);
         
+        crearTablaCombo();        
     }
-    
+   
+    private void crearTablaCombo() {
+        //Combo y valores
+        JComboBox comboBox = new JComboBox();
+        comboBox.addItem("Argentina");
+        comboBox.addItem("Bolivia");
+        comboBox.addItem("Brasil");
+        comboBox.addItem("Braulio");
+        comboBox.addItem("Brocoli");
+        comboBox.addItem("Canada");
+        comboBox.addItem("España");
+        comboBox.addItem("Estadio");
+        comboBox.addItem("Espoli");
+        comboBox.addItem("Estupendo");
+        comboBox.addItem("Guatemala");
+        comboBox.addItem("Mexico");
+        //se agrega model al JTable
+        
+        
+        
+        /*
+         AutoCompleteDecorator.decorate(comboBox);
+         DefaultCellEditor cellEditor = new DefaultCellEditor(comboBox);
+        visFicha.tblFacturaDetalle.setRowHeight(22);//altura de filas
+        //se indica que columna tendra el JComboBox
+        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(cellEditor);       
+       */
+        //visFicha.tblFacturaDetalle.setDefaultRenderer(Object.class, new CeldaRenderer(2));
+        /*
+        JTextField f = new JTextField(10);
+        AutoSuggestor autoSuggestor = new AutoSuggestor(f, visFicha, null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.75f) {
+            public boolean wordTyped(String typedWord) {
+
+                //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+                ArrayList<String> words = new ArrayList<>();
+                words.add("hello");
+                words.add("heritage");
+                words.add("happiness");
+                words.add("goodbye");
+                words.add("cruel");
+                words.add("car");
+                words.add("war");
+                words.add("will");
+                words.add("world");
+                words.add("wall");
+
+
+                setDictionary(words);
+                //addToDictionary("bye");//adds a single word
+
+                return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+            }
+        };
+       visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(f));       
+        */
+        
+    }
+
      private void initColumnSizes(JTable table) {
 		TableColumn column = null;
         for (int i = 0; i < 3; i++) {

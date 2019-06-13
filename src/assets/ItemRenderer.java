@@ -22,7 +22,7 @@ public class ItemRenderer extends BasicComboBoxRenderer {
 
     if (value != null) {
       Persona item = (Persona) value;
-      setText(item.getApellido().toUpperCase());
+      setText(item.getApellido().toUpperCase()+" "+item.getNombre().toUpperCase());
     }
 
     if (index == -1) {

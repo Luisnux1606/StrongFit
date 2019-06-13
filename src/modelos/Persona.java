@@ -201,7 +201,7 @@ public class Persona {
     }
     
     public String toString() {
-        return this.apellido;
+        return this.getApellido()+" " +this.getNombre();
     }
     
 }

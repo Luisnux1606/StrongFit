@@ -1285,14 +1285,14 @@ public class VisFicha extends javax.swing.JFrame {
                                 .addComponent(lblCliente)))
                         .addGap(61, 61, 61)
                         .addGroup(pnlVentasComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dtcFechaFacCab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmb_clienteFac, 0, 235, Short.MAX_VALUE))
+                            .addComponent(cmb_clienteFac, 0, 289, Short.MAX_VALUE)
+                            .addComponent(dtcFechaFacCab, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(pnlVentasComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlVentasComponentesLayout.createSequentialGroup()
-                                .addGap(303, 303, 303)
+                                .addGap(249, 249, 249)
                                 .addComponent(lblNroFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlVentasComponentesLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
+                                .addGap(5, 5, 5)
                                 .addComponent(btnBuscarClienteFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblPersonaId, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -1334,13 +1334,13 @@ public class VisFicha extends javax.swing.JFrame {
         lblTotDscto.setText("Total con Dscto:");
         lblTotDscto.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblTotDscto.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        pnlVentasInterno.add(lblTotDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(944, 412, 138, 25));
+        pnlVentasInterno.add(lblTotDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 480, 138, 25));
 
         txtValConDsctoFicha.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtValConDsctoFicha.setText("0.0");
         txtValConDsctoFicha.setEnabled(false);
         txtValConDsctoFicha.setName("txtValConDsctoFicha"); // NOI18N
-        pnlVentasInterno.add(txtValConDsctoFicha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1087, 415, 85, -1));
+        pnlVentasInterno.add(txtValConDsctoFicha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 480, 85, -1));
 
         tblFacturaDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1354,7 +1354,7 @@ public class VisFicha extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false
+                false, true, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1369,7 +1369,7 @@ public class VisFicha extends javax.swing.JFrame {
         lblDscto.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         lblDscto.setPreferredSize(new java.awt.Dimension(5, 14));
         lblDscto.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        pnlVentasInterno.add(lblDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(944, 383, 138, 22));
+        pnlVentasInterno.add(lblDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 450, 138, 22));
 
         txtValDscto.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtValDscto.setText("0.0");
@@ -1379,10 +1379,10 @@ public class VisFicha extends javax.swing.JFrame {
                 txtValDsctoActionPerformed(evt);
             }
         });
-        pnlVentasInterno.add(txtValDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1087, 383, 85, -1));
+        pnlVentasInterno.add(txtValDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 450, 85, -1));
 
         btnBuscarDscto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/membresias.png"))); // NOI18N
-        pnlVentasInterno.add(btnBuscarDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(901, 376, 43, 29));
+        pnlVentasInterno.add(btnBuscarDscto, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 450, 43, 29));
 
         lblValPagar.setText("Valor a pagar:");
         lblValPagar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -1419,21 +1419,21 @@ public class VisFicha extends javax.swing.JFrame {
         pnlVentasInterno.add(txt_valEntregado, new org.netbeans.lib.awtextra.AbsoluteConstraints(863, 345, 43, 23));
 
         lblIva.setText("I.V.A");
-        pnlVentasInterno.add(lblIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(944, 444, -1, -1));
+        pnlVentasInterno.add(lblIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 510, -1, -1));
 
         txtIVA.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtIVA.setText("0.0");
         txtIVA.setEnabled(false);
-        pnlVentasInterno.add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1087, 444, 85, -1));
+        pnlVentasInterno.add(txtIVA, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 510, 85, -1));
 
         lblTotalConIva.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         lblTotalConIva.setText("Total + IVA");
-        pnlVentasInterno.add(lblTotalConIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(944, 482, -1, -1));
+        pnlVentasInterno.add(lblTotalConIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 550, -1, -1));
 
         txtTotalConIva.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtTotalConIva.setText("0.0");
         txtTotalConIva.setEnabled(false);
-        pnlVentasInterno.add(txtTotalConIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1087, 479, 85, -1));
+        pnlVentasInterno.add(txtTotalConIva, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 540, 85, -1));
 
         btnEliminarFilas.setText("eliminar");
         btnEliminarFilas.addActionListener(new java.awt.event.ActionListener() {
@@ -1447,10 +1447,10 @@ public class VisFicha extends javax.swing.JFrame {
         pnlVentasInterno.add(btnAgregarFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1179, 248, -1, -1));
 
         lblIvaId.setText("1");
-        pnlVentasInterno.add(lblIvaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(884, 444, 29, 22));
+        pnlVentasInterno.add(lblIvaId, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 510, 29, 22));
 
         lblDsctoId.setText("1");
-        pnlVentasInterno.add(lblDsctoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(884, 416, 46, 21));
+        pnlVentasInterno.add(lblDsctoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, 46, 21));
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 0)));
 
@@ -1476,10 +1476,10 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCobroPendiente)
                     .addComponent(lblValCancelo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_valCancelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValPendienteFicha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_valCancelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValPendienteFicha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1494,7 +1494,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
-        pnlVentasInterno.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(944, 513, 314, -1));
+        pnlVentasInterno.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 380, 230, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("VENTAS");

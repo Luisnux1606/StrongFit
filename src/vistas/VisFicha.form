@@ -2640,16 +2640,16 @@
                                           </Group>
                                           <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="cmb_clienteFac" pref="289" max="32767" attributes="0"/>
                                               <Component id="dtcFechaFacCab" max="32767" attributes="0"/>
-                                              <Component id="cmb_clienteFac" pref="235" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="303" pref="303" max="-2" attributes="0"/>
+                                                  <EmptySpace min="249" pref="249" max="-2" attributes="0"/>
                                                   <Component id="lblNroFactura" min="-2" pref="60" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                                   <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="lblPersonaId" min="-2" pref="52" max="-2" attributes="0"/>
@@ -2810,7 +2810,7 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="944" y="412" width="138" height="25"/>
+                          <AbsoluteConstraints x="940" y="480" width="138" height="25"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2828,7 +2828,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="1087" y="415" width="85" height="-1"/>
+                          <AbsoluteConstraints x="1090" y="480" width="85" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2850,7 +2850,7 @@
                               <Table columnCount="5" rowCount="4">
                                 <Column editable="false" title="IdProducto" type="java.lang.Object"/>
                                 <Column editable="true" title="Cantidad" type="java.lang.Object"/>
-                                <Column editable="false" title="Descripcion" type="java.lang.Object"/>
+                                <Column editable="true" title="Descripcion" type="java.lang.Object"/>
                                 <Column editable="false" title="V.Unitario" type="java.lang.Object"/>
                                 <Column editable="false" title="V.Total" type="java.lang.Object"/>
                               </Table>
@@ -2873,7 +2873,7 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="944" y="383" width="138" height="22"/>
+                          <AbsoluteConstraints x="940" y="450" width="138" height="22"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2893,7 +2893,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="1087" y="383" width="85" height="-1"/>
+                          <AbsoluteConstraints x="1090" y="450" width="85" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -2908,7 +2908,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="901" y="376" width="43" height="29"/>
+                          <AbsoluteConstraints x="890" y="450" width="43" height="29"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3004,7 +3004,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="944" y="444" width="-1" height="-1"/>
+                          <AbsoluteConstraints x="940" y="510" width="-1" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3021,7 +3021,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="1087" y="444" width="85" height="-1"/>
+                          <AbsoluteConstraints x="1090" y="510" width="85" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3037,7 +3037,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="944" y="482" width="-1" height="-1"/>
+                          <AbsoluteConstraints x="940" y="550" width="-1" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3054,7 +3054,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="1087" y="479" width="85" height="-1"/>
+                          <AbsoluteConstraints x="1090" y="540" width="85" height="-1"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3096,7 +3096,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="884" y="444" width="29" height="22"/>
+                          <AbsoluteConstraints x="880" y="510" width="29" height="22"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3109,7 +3109,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="884" y="416" width="46" height="21"/>
+                          <AbsoluteConstraints x="880" y="480" width="46" height="21"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3125,7 +3125,7 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="944" y="513" width="314" height="-1"/>
+                          <AbsoluteConstraints x="940" y="380" width="230" height="-1"/>
                         </Constraint>
                       </Constraints>
 
@@ -3137,10 +3137,10 @@
                                       <Component id="lblCobroPendiente" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lblValCancelo" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="39" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txt_valCancelo" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                                      <Component id="txtValPendienteFicha" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
+                                      <Component id="txt_valCancelo" alignment="1" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <Component id="txtValPendienteFicha" alignment="1" min="-2" pref="82" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>

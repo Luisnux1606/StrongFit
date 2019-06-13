@@ -75,8 +75,7 @@ public class CtrlCategoria implements ActionListener
     
     private void escribirCombos(){
         AutoCompleteDecorator.decorate(visCat.cmbCatSuperior);
-        
-        
+                
     }
 
     

@@ -57,6 +57,8 @@ public class VisProductos extends javax.swing.JFrame {
         lblEntradas = new javax.swing.JLabel();
         lblExistentes = new javax.swing.JLabel();
         txtExistentes = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox();
+        lblCalculoFechaServicio = new javax.swing.JLabel();
         txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lblIdCat = new javax.swing.JLabel();
@@ -108,7 +110,7 @@ public class VisProductos extends javax.swing.JFrame {
         tbl_productos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 410, 880, 180);
+        jScrollPane1.setBounds(10, 430, 880, 160);
 
         btnLimpiar.setBackground(new java.awt.Color(102, 102, 102));
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar2.png"))); // NOI18N
@@ -193,8 +195,16 @@ public class VisProductos extends javax.swing.JFrame {
         jPanel1.add(txtExistentes);
         txtExistentes.setBounds(140, 130, 190, 25);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diario", "Semanal", "Mensual", "Anual" }));
+        jPanel1.add(jComboBox1);
+        jComboBox1.setBounds(140, 252, 190, 30);
+
+        lblCalculoFechaServicio.setText("Calculo de fecha:");
+        jPanel1.add(lblCalculoFechaServicio);
+        lblCalculoFechaServicio.setBounds(10, 260, 110, 16);
+
         pnl_personas.add(jPanel1);
-        jPanel1.setBounds(10, 70, 870, 260);
+        jPanel1.setBounds(10, 70, 870, 290);
 
         txtBuscarCualquierCampo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -202,29 +212,29 @@ public class VisProductos extends javax.swing.JFrame {
             }
         });
         pnl_personas.add(txtBuscarCualquierCampo);
-        txtBuscarCualquierCampo.setBounds(10, 380, 150, 22);
+        txtBuscarCualquierCampo.setBounds(10, 400, 150, 22);
 
         jLabel8.setText("Buscar por nombre:");
         pnl_personas.add(jLabel8);
-        jLabel8.setBounds(10, 360, 130, 16);
+        jLabel8.setBounds(10, 380, 130, 16);
         pnl_personas.add(lblIdCat);
         lblIdCat.setBounds(470, 10, 41, 20);
 
         rdbProductos.setText("productos");
         pnl_personas.add(rdbProductos);
-        rdbProductos.setBounds(170, 380, 85, 25);
+        rdbProductos.setBounds(170, 400, 85, 25);
 
         rdbServicios.setText("servicios");
         pnl_personas.add(rdbServicios);
-        rdbServicios.setBounds(260, 380, 77, 25);
+        rdbServicios.setBounds(260, 400, 77, 25);
 
         lblBuscarPor.setText("Buscar por");
         pnl_personas.add(lblBuscarPor);
-        lblBuscarPor.setBounds(170, 360, 70, 16);
+        lblBuscarPor.setBounds(170, 380, 70, 16);
 
         rdbTodos.setText("todos");
         pnl_personas.add(rdbTodos);
-        rdbTodos.setBounds(350, 380, 70, 25);
+        rdbTodos.setBounds(350, 400, 70, 25);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -310,12 +320,14 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JComboBox<String> cbxCategoria;
     public com.toedter.calendar.JDateChooser dchFechaFin;
     public com.toedter.calendar.JDateChooser dchFechaIni;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblBuscarPor;
+    private javax.swing.JLabel lblCalculoFechaServicio;
     public javax.swing.JLabel lblDescripcionProducto;
     private javax.swing.JLabel lblEntradas;
     public javax.swing.JLabel lblExistentes;
