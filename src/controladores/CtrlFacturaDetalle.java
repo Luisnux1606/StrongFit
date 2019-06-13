@@ -35,7 +35,10 @@ import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.Producto;
+import static oracle.net.aso.C10.c;
+
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import org.jdesktop.swingx.autocomplete.ComboBoxCellEditor;
 import vistas.VisFicha;
 import vistas.VisProductos;
 
