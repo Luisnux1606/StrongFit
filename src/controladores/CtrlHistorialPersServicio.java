@@ -7,6 +7,8 @@ package controladores;
 
 import assets.Calculos;
 import assets.Configuracion;
+import assets.ItemRendererClienteFac;
+import assets.ItemRendererProducto;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
@@ -42,6 +44,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import modelos.Analisis;
+import modelos.CalculoFechaServicio;
 import modelos.Categoria;
 
 import modelos.FacturaCab;
@@ -96,7 +99,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
         this.visHisPerServ.btnEliminar.addActionListener(this);
         this.visHisPerServ.btnLimpiar.addActionListener(this);
         this.visHisPerServ.btnModificar.addActionListener(this);     
-        this.visHisPerServ.cbxServicio.addActionListener(this);
+       
         this.visHisPerServ.btnBuscarPerona.addActionListener(this);
         
         this.visHisPerServ.lblIdPersona.setVisible(false);
@@ -146,20 +149,21 @@ public class CtrlHistorialPersServicio implements ActionListener{
     {
         switch(locale)
         {
-            case 0:      
-                
+            case 0:                      
                 showComboServicioTrain();
+                this.visHisPerServ.cbxServicio.addActionListener(this);
                 showTableByIdPer();
                 break;
             case 1: //to show all services
                 showComboServicioTrain();
+                this.visHisPerServ.cbxServicio.addActionListener(this);
                 showTableAll();
                 break;
             default:
                 break;
         
         }
-    
+      
     }
     
     public void showTableByNom(String cad)
@@ -419,17 +423,25 @@ public class CtrlHistorialPersServicio implements ActionListener{
             
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    Categoria cat = new Categoria();
+                    CalculoFechaServicio calcF = new CalculoFechaServicio();
+                    cat.setId_cat(listCategorias.getInt("CATEGORIA_ID_CAT"));
+                    calcF.setId_calServ(listCategorias.getInt("CALFECHSERV_ID_CAL"));
                     
-                    model.addElement(listCategorias.getString("descripcion_prod").toUpperCase());
+                    model.addElement(new Producto(listCategorias.getInt("ID_PROD"),listCategorias.getString("descripcion_prod").toUpperCase(),
+                                                  listCategorias.getString("FECHAINI_PROD"),listCategorias.getString("FECHAFIN_PROD"),
+                                                  listCategorias.getDouble("PRECIO_PROD"),cat,calcF ));
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
-            consHisPerServ.closeConection();
+            }                      
+           consHisPerServ.closeConection();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlHistorialPersServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
+        visHisPerServ.cbxServicio.setRenderer(new ItemRendererProducto());
         visHisPerServ.cbxServicio.updateUI();
     }
     
@@ -502,8 +514,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
       if (e.getSource() == visHisPerServ.btnGuardar) 
        {       
            ArrayList<JDateChooser> jdc=new ArrayList<>();                                            
-            int tE = consHisPerServ.getIdByNom((visHisPerServ.cbxServicio.getSelectedItem()+"").toUpperCase());     
-
+            int tE = ((Producto)visHisPerServ.cbxServicio.getSelectedItem()).getId_prod();     
             prod.setId_prod(tE);
             hisPerServ.setProducto_id_HisPerSer(prod);
 
@@ -531,7 +542,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
       
       if (e.getSource() == visHisPerServ.btnModificar) 
        {            
-            int tE = consHisPerServ.getIdByNom(visHisPerServ.cbxServicio.getSelectedItem()+"");                                         
+             int tE = ((Producto)visHisPerServ.cbxServicio.getSelectedItem()).getId_prod();                               
             prod.setId_prod(tE);
             hisPerServ.setProducto_id_HisPerSer(prod);
 
@@ -578,16 +589,35 @@ public class CtrlHistorialPersServicio implements ActionListener{
         }
        if (e.getSource() == visHisPerServ.cbxServicio) 
        {    
-           String prod = (visHisPerServ.cbxServicio.getSelectedItem()+"").toUpperCase();          
-           double precio = consHisPerServ.getPrecioByCat(prod);
-           visHisPerServ.lblPrecio.setText(precio+"");
-           
-           if(prod.equals("ENTRENAMIENTO DIARIO"))
+           Producto prod = (Producto)visHisPerServ.cbxServicio.getSelectedItem();          //compare betwen ids for day month year of ccalfechserv
+           if(prod!=null)
            {
-               visHisPerServ.dchFechaIni.setDate(Calculos.getCurrentDate2());
-               visHisPerServ.dchFechaFin.setDate(Calculos.getCurrentDate2());
+                visHisPerServ.lblPrecio.setText(prod.getPrecio_prod()+"");
+                //double precio = Validaciones.isNumVoid2(prod.getPrecio_prod()+"");
+                //visHisPerServ.lblPrecio.setText(precio+"");
+                System.out.println("prod val "+prod.getPrecio_prod());
+                switch(prod.getCalcFechServ().getId_calServ())           
+                {
+                    case 1://diario
+                        visHisPerServ.dchFechaIni.setDate(Calculos.getCurrentDate2());
+                        visHisPerServ.dchFechaFin.setDate(Calculos.getCurrentDate2());
+                        break;
+                    case 2://semanal
+                        visHisPerServ.dchFechaIni.setDate(Calculos.getCurrentDate2());
+                        visHisPerServ.dchFechaFin.setDate(Calculos.getNextWeekDate());
+                        break;
+                    case 3://mensual
+                        visHisPerServ.dchFechaIni.setDate(Calculos.getCurrentDate2());
+                        visHisPerServ.dchFechaFin.setDate(Calculos.getNexMonthDate());
+                        break;
+                    case 4://anual
+                        visHisPerServ.dchFechaIni.setDate(Calculos.getCurrentDate2());
+                        visHisPerServ.dchFechaFin.setDate(Calculos.getNexYearDate());
+                        break;
+                    default:
+                        break;
+                }
            }
-
       
        }
        if (e.getSource() == visHisPerServ.btnBuscarPerona) 
@@ -619,7 +649,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
         visHisPerServ.dchFechaFin.setDate(null);
         visHisPerServ.dchFechaIni.setDate(null);
         visHisPerServ.txtPersona.setText("");
-        visHisPerServ.cbxServicio.setSelectedIndex(0);
+//        visHisPerServ.cbxServicio.setSelectedIndex(0);
        
        
     }

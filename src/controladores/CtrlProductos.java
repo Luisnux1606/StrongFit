@@ -7,6 +7,7 @@ package controladores;
 
 import assets.Calculos;
 import assets.Configuracion;
+import assets.ItemRendererCalcFechaServ;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDateChooserCellEditor;
@@ -44,6 +45,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import modelos.Analisis;
+import modelos.CalculoFechaServicio;
 import modelos.Categoria;
 
 import modelos.FacturaCab;
@@ -96,6 +98,7 @@ public class CtrlProductos implements ActionListener{
         this.visProd.rdbProductos.addActionListener(this);
         this.visProd.rdbServicios.addActionListener(this);
         this.visProd.rdbTodos.addActionListener(this);
+        this.visProd.cmbCalcFechaServ.addActionListener(this);
         
         this.visProd.txt_id.setVisible(false);
         this.visProd.lblIdCat.setVisible(false);
@@ -118,7 +121,8 @@ public class CtrlProductos implements ActionListener{
     
     private void escribirCombos()
       {
-        AutoCompleteDecorator.decorate(visProd.cbxCategoria);           
+        AutoCompleteDecorator.decorate(visProd.cbxCategoria); 
+        AutoCompleteDecorator.decorate(visProd.cmbCalcFechaServ); 
       }  
     
     
@@ -132,6 +136,7 @@ public class CtrlProductos implements ActionListener{
         visProd.btnLimpiar.setToolTipText("Limpiar el registro");
         
         showDatosComboTable();
+        showComboCalcFechaServ();
         limpiar();
         
         visProd.setLocation(300,10); 
@@ -477,8 +482,29 @@ public class CtrlProductos implements ActionListener{
          visProd.txtEntradas.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 7)));
          visProd.txtSalidas.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 8)));       
          visProd.lblIdCat.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 10)));
+         int idCalcFecha = Validaciones.isNumVoid(tblD.getValueAt(tblD.getSelectedRow(), 11)+""); //0 nada
+         visProd.cmbCalcFechaServ.setSelectedItem(getCalcFechaServicio(idCalcFecha));
      }
     
+     public CalculoFechaServicio getCalcFechaServicio(int idC)
+     {
+         //(Persona) visFicha.cmb_clienteFac.getSelectedItem();
+         DefaultComboBoxModel model =  (DefaultComboBoxModel) visProd.cmbCalcFechaServ.getModel();
+         CalculoFechaServicio calc = new CalculoFechaServicio();
+         for (int i = 0; i < model.getSize(); i++) {
+              calc = (CalculoFechaServicio)model.getElementAt(i);
+             if (calc.getId_calServ()==idC) {
+                 System.out.println(" " +calc.getId_calServ() + " "+calc.getDescripcion_calServ());
+                calc = (CalculoFechaServicio)model.getElementAt(i);
+                break;
+             }
+           else
+                 calc = null;
+         }
+         return calc;
+     }
+     
+     
      public void setFocus()
     {
         visProd.txtBuscarCualquierCampo.requestFocus();
@@ -524,6 +550,32 @@ public class CtrlProductos implements ActionListener{
             Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
         visProd.cbxCategoria.updateUI();
+    } 
+    
+    public void showComboCalcFechaServ()
+    {
+        visProd.cmbCalcFechaServ.removeAllItems();
+        try {
+           
+            ResultSet listCategorias = consProd.buscarCalcFechaServ();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visProd.cmbCalcFechaServ.getModel();           
+            
+            while (listCategorias.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(new CalculoFechaServicio(listCategorias.getInt("ID_CALSERV"),listCategorias.getString("DESCRIPCION_CALSERV"),listCategorias.getInt("ESTADO_CALSERV")));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consProd.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        visProd.cmbCalcFechaServ.setRenderer(new ItemRendererCalcFechaServ());                  
+        visProd.cmbCalcFechaServ.updateUI();
     } 
      
     public void showComboCategorias()
@@ -584,7 +636,7 @@ public class CtrlProductos implements ActionListener{
                 ResultSet listProd = consProd.buscarProductos();
 
                 DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-                Object cols[] = new Object[11];
+                Object cols[] = new Object[12];
 
                 while (listProd.next()) {
                     try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
@@ -599,6 +651,7 @@ public class CtrlProductos implements ActionListener{
                        cols[8] = listProd.getString("SALIDAS").toUpperCase();
                        cols[9] = listProd.getString("STOCK").toUpperCase();
                        cols[10] = listProd.getString("id_cat");
+                       cols[11] = listProd.getString("id_calserv");
 
                         model.addRow(cols);
 
@@ -620,7 +673,7 @@ public class CtrlProductos implements ActionListener{
                 ResultSet listProd = consProd.buscarTodos();
 
                 DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-                Object cols[] = new Object[11];
+                Object cols[] = new Object[12];
 
                 while (listProd.next()) {
                     try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
@@ -635,7 +688,7 @@ public class CtrlProductos implements ActionListener{
                        cols[8] = listProd.getString("SALIDAS").toUpperCase();
                        cols[9] = listProd.getString("STOCK").toUpperCase();
                        cols[10] = listProd.getString("id_cat");
-
+                       cols[11] = listProd.getString("id_calserv");
                         model.addRow(cols);
 
                     } catch (SQLException ex) {
@@ -656,12 +709,12 @@ public class CtrlProductos implements ActionListener{
                 ResultSet listProd = consProd.buscarServicios();
 
                 DefaultTableModel model =  (DefaultTableModel)visProd.tbl_productos.getModel();
-                Object cols[] = new Object[11];
+                Object cols[] = new Object[12];
 
                 while (listProd.next()) {
                     try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                        cols[0] = listProd.getInt("id_prod");
-                       cols[1] = listProd.getString("descripcion_prod").toUpperCase();
+                       cols[1] = Validaciones.isNumVoid4(listProd.getString("descripcion_prod")).toUpperCase();
                        cols[2] = listProd.getString("precio_prod").toUpperCase();
                        cols[3] = listProd.getString("FECHAINI_PROD");
                        cols[4] = listProd.getString("FECHAFIN_PROD");
@@ -671,7 +724,7 @@ public class CtrlProductos implements ActionListener{
                        cols[8] = listProd.getString("SALIDAS").toUpperCase();
                        cols[9] = listProd.getString("STOCK").toUpperCase();
                        cols[10] = listProd.getString("id_cat");
-
+                       cols[11] = listProd.getString("id_calserv");
                         model.addRow(cols);
 
                     } catch (SQLException ex) {
@@ -734,8 +787,9 @@ public class CtrlProductos implements ActionListener{
             prod.setEntradas(Validaciones.isNumVoid10(visProd.txtEntradas.getText()));
             prod.setSalidas(Validaciones.isNumVoid10(visProd.txtSalidas.getText()));
             prod.setStock(Calculos.getStock(exis,ent,sali));
+            prod.setCalcFechServ(((CalculoFechaServicio) visProd.cmbCalcFechaServ.getSelectedItem()));
             prod.setEstado_prod(1);
-
+            
 
             if (consProd.registrar(prod)) {
                 JOptionPane.showMessageDialog(null, "Registro Guardado!");
@@ -791,6 +845,8 @@ public class CtrlProductos implements ActionListener{
             prod.setEntradas(Validaciones.isNumVoid10(visProd.txtEntradas.getText()));
             prod.setSalidas(Validaciones.isNumVoid10(visProd.txtSalidas.getText()));
             prod.setStock(Calculos.getStock(exis,ent,sali));
+            System.out.println(((CalculoFechaServicio) visProd.cmbCalcFechaServ.getSelectedItem()));
+            prod.setCalcFechServ(((CalculoFechaServicio) visProd.cmbCalcFechaServ.getSelectedItem()));
             prod.setEstado_prod(1);
             
             if (consProd.modificar(prod)) {
@@ -840,6 +896,12 @@ public class CtrlProductos implements ActionListener{
             visProd.rdbTodos.setSelected(false);
             getProductos();
             showComboProductos();      
+        }
+        
+        if (e.getSource() == visProd.cmbCalcFechaServ) 
+        {
+            CalculoFechaServicio item = (CalculoFechaServicio) visProd.cmbCalcFechaServ.getSelectedItem();           
+            System.out.println(item.getId_calServ() + " : " + item.getDescripcion_calServ());
         }
         if (e.getSource() == visProd.rdbServicios) 
         {

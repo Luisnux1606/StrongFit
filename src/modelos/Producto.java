@@ -21,15 +21,19 @@ public class Producto {
    private double stock;
    private String fechaIni;
    private String fechaFin;
+   private CalculoFechaServicio calcFechServ;
    private int estado_prod;
 
    
-   public Producto(String descripcion, double precio, int id, Categoria idCat)
+   public Producto(int idProd,String descripcion, String fechaIni, String fechaFin, double precio,Categoria idCat,CalculoFechaServicio calcFechServ)
    {
+       this.id_prod = idProd;
        this.descripcion_prod = descripcion;
-       this.precio_prod = precio;
-       this.id_prod = id;
+       this.fechaIni = fechaIni;
+       this.fechaFin = fechaFin;
+       this.precio_prod = precio;       
        this.categoria = idCat;
+       this.calcFechServ = calcFechServ;
    }
    public Producto()
    {
@@ -191,6 +195,20 @@ public class Producto {
     
    public String toString() {
         return this.getDescripcion_prod();
+    }
+
+    /**
+     * @return the calcFechServ
+     */
+    public CalculoFechaServicio getCalcFechServ() {
+        return calcFechServ;
+    }
+
+    /**
+     * @param calcFechServ the calcFechServ to set
+     */
+    public void setCalcFechServ(CalculoFechaServicio calcFechServ) {
+        this.calcFechServ = calcFechServ;
     }
    
 }

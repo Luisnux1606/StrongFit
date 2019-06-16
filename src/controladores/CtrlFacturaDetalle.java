@@ -41,6 +41,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import modelos.CalculoFechaServicio;
 import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
@@ -102,8 +103,12 @@ public class CtrlFacturaDetalle implements ActionListener {
              while (listProd.next()) {
             try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                 Categoria c = new Categoria();
+                CalculoFechaServicio calcF = new CalculoFechaServicio();
+                calcF.setId_calServ(listProd.getInt("id_calserv"));
                 c.setId_cat(listProd.getInt("id_cat"));
-                listSomeString.add(new Producto(listProd.getString("descripcion_prod").toUpperCase(),listProd.getDouble("precio_prod"),listProd.getInt("id_prod"),c));
+                listSomeString.add(new Producto(listProd.getInt("ID_PROD"),listProd.getString("descripcion_prod").toUpperCase(),
+                                                  listProd.getString("FECHAINI_PROD"),listProd.getString("FECHAFIN_PROD"),
+                                                  listProd.getDouble("PRECIO_PROD"),c,calcF ));
 
             } catch (SQLException ex) {
                 Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);

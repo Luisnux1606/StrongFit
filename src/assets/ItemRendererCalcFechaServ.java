@@ -8,27 +8,27 @@ package assets;
 import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import modelos.CalculoFechaServicio;
 import modelos.Persona;
-import modelos.Producto;
 
 /**
  *
  * @author Administrator
  */
-public class ItemRendererProducto extends BasicComboBoxRenderer {
+public class ItemRendererCalcFechaServ extends BasicComboBoxRenderer {
   public Component getListCellRendererComponent(JList list, Object value,
       int index, boolean isSelected, boolean cellHasFocus) {
     super.getListCellRendererComponent(list, value, index, isSelected,
         cellHasFocus);
 
     if (value != null) {
-      Producto item = (Producto) value; //item.getId_prod(),item.getDescripcion_prod().toUpperCase(),item.getFechaIni(),item.getFechaFin(),item.getPrecio_prod(),item.getCategoria(),item.getCalcFechServ()
-      setText(item.getDescripcion_prod().toUpperCase());
+        CalculoFechaServicio item = (CalculoFechaServicio) value;
+        setText(item.getDescripcion_calServ().toUpperCase());
     }
 
     if (index == -1) {
-      Producto item = (Producto) value;
-      setText(""+item.getId_prod());
+      CalculoFechaServicio item = (CalculoFechaServicio) value;
+      setText(item.getId_calServ()+"" );//item.getId_calServ());
     }
 
     return this;

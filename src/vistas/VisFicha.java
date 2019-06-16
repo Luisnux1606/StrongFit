@@ -1494,7 +1494,7 @@ public class VisFicha extends javax.swing.JFrame {
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
-        pnlVentasInterno.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 380, 230, -1));
+        pnlVentasInterno.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 380, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("VENTAS");

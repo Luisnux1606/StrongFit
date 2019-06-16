@@ -122,7 +122,7 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
 
         cbxServicio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         jPanel1.add(cbxServicio);
-        cbxServicio.setBounds(140, 40, 190, 20);
+        cbxServicio.setBounds(140, 40, 190, 30);
         jPanel1.add(dchFechaIni);
         dchFechaIni.setBounds(140, 80, 190, 22);
 
@@ -148,7 +148,7 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
 
         lblPrecio.setText("$");
         jPanel1.add(lblPrecio);
-        lblPrecio.setBounds(420, 40, 90, 20);
+        lblPrecio.setBounds(410, 40, 90, 20);
 
         lblPrecioIndic.setText("Precio:");
         jPanel1.add(lblPrecioIndic);

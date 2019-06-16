@@ -57,7 +57,7 @@ public class VisProductos extends javax.swing.JFrame {
         lblEntradas = new javax.swing.JLabel();
         lblExistentes = new javax.swing.JLabel();
         txtExistentes = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
+        cmbCalcFechaServ = new javax.swing.JComboBox();
         lblCalculoFechaServicio = new javax.swing.JLabel();
         txtBuscarCualquierCampo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -88,17 +88,17 @@ public class VisProductos extends javax.swing.JFrame {
 
         tbl_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "DESCRIPCION", "PRECIO", "FECHA INI.", "FECHA FIN.", "CATEGORIA", "EXISTENTES INICIALES", "ENTRADAS", "SALIDAS", "STOCK", "IDCAT"
+                "ID", "DESCRIPCION", "PRECIO", "FECHA INI.", "FECHA FIN.", "CATEGORIA", "EXISTENTES INICIALES", "ENTRADAS", "SALIDAS", "STOCK", "IDCAT", "IDCALFECHASERV"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true, false, true, true, true, true, false
+                false, false, false, true, true, false, true, true, true, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -195,9 +195,8 @@ public class VisProductos extends javax.swing.JFrame {
         jPanel1.add(txtExistentes);
         txtExistentes.setBounds(140, 130, 190, 25);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Diario", "Semanal", "Mensual", "Anual" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(140, 252, 190, 30);
+        jPanel1.add(cmbCalcFechaServ);
+        cmbCalcFechaServ.setBounds(140, 252, 190, 30);
 
         lblCalculoFechaServicio.setText("Calculo de fecha:");
         jPanel1.add(lblCalculoFechaServicio);
@@ -318,9 +317,9 @@ public class VisProductos extends javax.swing.JFrame {
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnModificar;
     public javax.swing.JComboBox<String> cbxCategoria;
+    public javax.swing.JComboBox cmbCalcFechaServ;
     public com.toedter.calendar.JDateChooser dchFechaFin;
     public com.toedter.calendar.JDateChooser dchFechaIni;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JMenuBar jMenuBar1;

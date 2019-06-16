@@ -146,6 +146,14 @@ CREATE SEQUENCE detalleComp_id_seq
  ORDER
 /
 
+CREATE SEQUENCE calculoFechaServicio_id_seq
+ INCREMENT BY 1
+ NOMAXVALUE
+ NOMINVALUE
+ CACHE 20
+ ORDER
+/
+
 CREATE SEQUENCE producto_id_seq
  INCREMENT BY 1
  NOMAXVALUE
@@ -364,6 +372,19 @@ ALTER TABLE Categoria ADD CONSTRAINT pk_id_cat PRIMARY KEY (id_cat)
 ALTER TABLE Categoria ADD CONSTRAINT fk_id_cat_cat FOREIGN KEY (categoria_id_cat) REFERENCES Categoria(id_cat)
 /
 
+CREATE TABLE CalculoFechaServicio(
+  id_calServ Number NOT NULL,
+  descripcion_calServ  Varchar2(350),
+  estado_calServ Number
+)
+TABLESPACE tbs_usr_strongfit_p
+/
+-- Create indexes for table CalculoFechaServicio
+CREATE INDEX idx_calServ ON CalculoFechaServicio(id_calServ)
+/
+-- Add keys for table producto
+ALTER TABLE CalculoFechaServicio ADD CONSTRAINT pk_id_calServ PRIMARY KEY (id_calServ)
+/
 
 CREATE TABLE Producto(
   id_prod Number NOT NULL,
@@ -376,6 +397,7 @@ CREATE TABLE Producto(
   salidas Number(10,2),
   stock Number(10,2),  
   Categoria_id_cat Number,
+  CalFechServ_id_cal Number,
   estado_prod Number 
 )
 TABLESPACE tbs_usr_strongfit_p
@@ -388,6 +410,9 @@ ALTER TABLE Producto ADD CONSTRAINT pk_id_prod PRIMARY KEY (id_prod)
 /
 -- Create relationships section  ------------------------------------------------- 
 ALTER TABLE Producto ADD CONSTRAINT fk_id_cat FOREIGN KEY (Categoria_id_cat) REFERENCES Categoria (id_cat)
+/
+
+ALTER TABLE Producto ADD CONSTRAINT fk_id_cal FOREIGN KEY (CalFechServ_id_cal) REFERENCES CalculoFechaServicio (id_calServ)
 /
 
 CREATE TABLE HistPersServ(
@@ -781,5 +806,17 @@ values (tipoPersona_id_seq.NEXTVAL,'CLIENTE',1);
 
 insert into TipoPersona(id_tipoPer,descripcion_tipoPer,estado_tipoPer)
 values (tipoPersona_id_seq.NEXTVAL,'NEGOCIO',1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'DIARIO',1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'SEMANAL',1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'MENSUAL',1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'ANUAL',1);
 
 commit;

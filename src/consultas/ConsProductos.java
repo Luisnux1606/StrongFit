@@ -29,7 +29,7 @@ public class ConsProductos extends Conexion
     {
         PreparedStatement ps= null;
         Connection con = getConexion();
-        String sql = "INSERT INTO Producto (id_prod,descripcion_prod, precio_prod,FECHAINI_PROD,FECHAFIN_PROD, Categoria_id_cat,EXISTINI,ENTRADAS,SALIDAS,STOCK, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Producto (id_prod,descripcion_prod, precio_prod,FECHAINI_PROD,FECHAFIN_PROD, Categoria_id_cat,EXISTINI,ENTRADAS,SALIDAS,STOCK,CALFECHSERV_ID_CAL, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
         try 
         {
             ps = con.prepareStatement(sql);
@@ -42,7 +42,8 @@ public class ConsProductos extends Conexion
             ps.setDouble(7, modProducto.getEntradas());
             ps.setDouble(8, modProducto.getSalidas());
             ps.setDouble(9, modProducto.getStock());
-            ps.setInt(10, modProducto.getEstado_prod());  
+            ps.setInt(10, modProducto.getCalcFechServ().getId_calServ());
+            ps.setInt(11, modProducto.getEstado_prod());  
 
             ps.execute();                                       
             return true;
@@ -70,7 +71,7 @@ public class ConsProductos extends Conexion
     {
         PreparedStatement ps = null;                    //EXISTINI,ENTRADAS,SALIDAS,STOCK, 
         Connection con = getConexion();// descripcion_prod, precio_prod, Categoria_id_cat, estado_prod) VALUES(producto_id_seq.NEXTVAL,?,?,?,?)
-        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?,FECHAINI_PROD=?,FECHAFIN_PROD=?, Categoria_id_cat = ?,EXISTINI=?,ENTRADAS=?,SALIDAS=?,STOCK=?, estado_prod = ?"
+        String sql = "UPDATE Producto SET descripcion_prod = ?,precio_prod = ?,FECHAINI_PROD=?,FECHAFIN_PROD=?, Categoria_id_cat = ?,EXISTINI=?,ENTRADAS=?,SALIDAS=?,STOCK=?, CALFECHSERV_ID_CAL =?,estado_prod = ?"
                 + " WHERE id_prod=?";
         
         try 
@@ -88,8 +89,9 @@ public class ConsProductos extends Conexion
             ps.setDouble(7, modProducto.getEntradas());
             ps.setDouble(8, modProducto.getSalidas());
             ps.setDouble(9, modProducto.getStock());
-            ps.setInt(10, modProducto.getEstado_prod());  
-            ps.setInt(11, modProducto.getId_prod());
+            ps.setInt(10, modProducto.getCalcFechServ().getId_calServ());  
+            ps.setInt(11, modProducto.getEstado_prod());  
+            ps.setInt(12, modProducto.getId_prod());
           
             ps.execute();
             return true;
@@ -282,9 +284,9 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
-                    "from categoria c, producto p " +
-                    "where c.id_cat = p.categoria_id_cat and p.estado_prod = 1";
+        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat,cf.id_calserv " +
+                    "from categoria c, producto p, calculofechaservicio cf " +
+                    "where c.id_cat = p.categoria_id_cat  and cf.id_calserv = p.calfechserv_id_cal and p.estado_prod = 1 ";
                 
         
         try 
@@ -338,9 +340,9 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
-                    "from categoria c, producto p " +
-                    "where c.id_cat = p.categoria_id_cat and c.CATEGORIA_ID_CAT=1 and p.estado_prod = 1";
+        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat,cf.id_calserv " +
+                    "from categoria c, producto p, calculofechaservicio cf " +
+                    "where c.id_cat = p.categoria_id_cat and c.CATEGORIA_ID_CAT=1 and cf.id_calserv = p.calfechserv_id_cal and p.estado_prod = 1";
                 
         
         try 
@@ -367,9 +369,9 @@ public class ConsProductos extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat " +
-                    "from categoria c, producto p " +
-                    "where c.id_cat = p.categoria_id_cat and c.CATEGORIA_ID_CAT=2 and p.estado_prod = 1 ";
+        String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat,cf.id_calserv " +
+                    "from categoria c, producto p, calculofechaservicio cf " +
+                    "where c.id_cat = p.categoria_id_cat and c.CATEGORIA_ID_CAT=2 and cf.id_calserv = p.calfechserv_id_cal and p.estado_prod = 1";
                 
         
         try 
@@ -399,6 +401,35 @@ public class ConsProductos extends Conexion
         String sql = "select c.tipo_cat " +
                     "from categoria c " +
                     "where c.categoria_id_cat=2 and c.estado_cat = 1";
+                
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarCalcFechaServ()
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = "select * " +
+                     "from calculofechaservicio c " +
+                     "where c.estado_calserv = 1 ";
                 
         
         try 

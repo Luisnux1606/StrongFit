@@ -247,8 +247,8 @@ public class ConsHistorialPersonaServicio extends Conexion
          con = getConexion();
         ResultSet rs = null; 
         String sql = "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per\n" +
-                    "from  persona p, histpersserv h, producto pr\n" +
-                    "where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and h.ESTADO_HISPERSER=1";
+                    "from  persona p, histpersserv h, producto pr " +
+                    "where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and h.ESTADO_HISPERSER=1 order by h.ID_HISPERSER desc";
                 
         
         try 
@@ -277,7 +277,7 @@ public class ConsHistorialPersonaServicio extends Conexion
         ResultSet rs = null; 
         String sql = "select h.id_hisperser,concat(concat(p.nom_per,' '),p.ape_per) as nombres,pr.descripcion_prod,h.fechaini_hisperser,h.fechafin_hisperser,pr.id_prod,p.id_per " +
                 "     from  persona p, histpersserv h, producto pr " +
-                "     where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and p.id_per="+idPer+"  and h.ESTADO_HISPERSER=1";
+                "     where p.id_per = h.persona_id_hisperser and pr.id_prod = h.producto_id_hisperser and p.id_per="+idPer+"  and h.ESTADO_HISPERSER=1 order by h.ID_HISPERSER desc ";
                 
         
         try 
@@ -333,7 +333,7 @@ public class ConsHistorialPersonaServicio extends Conexion
         PreparedStatement ps = null;
          con = getConexion();
         ResultSet rs = null; 
-        String sql = "select p.descripcion_prod " +
+        String sql = "select p.ID_PROD,p.DESCRIPCION_PROD, p.PRECIO_PROD,p.FECHAINI_PROD,p.FECHAFIN_PROD,p.CATEGORIA_ID_CAT,p.CALFECHSERV_ID_CAL " +
                     "  from categoria c, producto p " +
                     "  where c.id_cat =p.categoria_id_cat and c.categoria_id_cat=1 and c.estado_cat = 1 and p.estado_prod=1";
                 
