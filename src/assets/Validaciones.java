@@ -96,6 +96,8 @@ public class Validaciones {
          return val;
      }
      
+     
+     
      public static double isNumVoid3(String txt)
      {
          double val = 0;
@@ -234,6 +236,37 @@ public class Validaciones {
          }
          return estado;
      }
+      
+      public static boolean isHigher(double a, double b)
+      {
+          if (a>=b) 
+              return true;              
+          else
+              return false;          
+      }
+      public static boolean isValCancHigherIngreso(double a, double b)
+      {
+          if(isHigher(a, b)){     
+              getMensaje("EL valor a cancelar no puede sr mayor a " + b);
+              return true;              
+          }
+          else{
+              
+              return false;
+          }
+      }
+      
+       public static boolean isValAjusteHigherPendiente(double a, double b)
+      {
+          if(isHigher(a, b)){     
+              getMensaje("EL valor de ajuste no puede sr mayor a " + b);
+              return true;              
+          }
+          else{
+              
+              return false;
+          }
+      }
       
       public static Date setStringToDate(String txt)
       {

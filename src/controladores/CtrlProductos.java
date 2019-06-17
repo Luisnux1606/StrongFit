@@ -206,6 +206,7 @@ public class CtrlProductos implements ActionListener{
        int filaDetalle = table.getSelectedRow();
        
        int idProd = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 0)+"");
+       int idCat = Integer.parseInt(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 10)+"");
        String descripcionProd = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 1)+"";
        double precioProd =  Validaciones.isNumVoid10(visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 2)+"");
        
@@ -225,7 +226,11 @@ public class CtrlProductos implements ActionListener{
               table.setValueAt(precioProd, filaDetalle, 8);
               table.setValueAt("0.0", filaDetalle, 7);
          }
-         table.changeSelection(filaDetalle, 9,false,false);
+         System.out.println(">>> "+idCat);
+         if (idCat==1) 
+             table.changeSelection(filaDetalle, 5,false,false);        
+         else             
+            table.changeSelection(filaDetalle, 9,false,false);
         
        
        /*

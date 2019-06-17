@@ -273,8 +273,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
                 }
                 if(e.getClickCount()==2)
                 {
-                                                           
-                    
+                                                                               
                     switch(locale)
                     {
                         case 0 :
@@ -363,14 +362,31 @@ public class CtrlHistorialPersServicio implements ActionListener{
      {
          JTable tblD = visHisPerServ.tbl_historialPerServ;
          visHisPerServ.txt_id.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 0)));
-         visHisPerServ.txtPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));
-         visHisPerServ.cbxServicio.setSelectedItem(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 2)));
+         visHisPerServ.txtPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 1)));         
+         int idHistPerServ = Validaciones.isNumVoid(tblD.getValueAt(tblD.getSelectedRow(), 5)+""); //0 nada
+         visHisPerServ.cbxServicio.setSelectedItem(getCalcFechaHistPerServ(idHistPerServ));         
          visHisPerServ.dchFechaIni.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 3)))));
          visHisPerServ.dchFechaFin.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 4)))));
          visHisPerServ.lblIdProd.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 5)));
          visHisPerServ.lblIdPersona.setText(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6)));
      }
-    
+     public Producto getCalcFechaHistPerServ(int idC)
+     {
+         //(Persona) visFicha.cmb_clienteFac.getSelectedItem();
+         DefaultComboBoxModel model =  (DefaultComboBoxModel) visHisPerServ.cbxServicio.getModel();
+         Producto calc = new Producto();
+         for (int i = 0; i < model.getSize(); i++) {
+              calc = (Producto)model.getElementAt(i);
+             if (calc.getId_prod() ==idC) {
+               
+                calc = (Producto)model.getElementAt(i);
+                break;
+             }
+           else
+                 calc = null;
+         }
+         return calc;
+     }
      public void setFocus()
     {
         visHisPerServ.cbxServicio.requestFocus();

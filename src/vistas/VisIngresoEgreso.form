@@ -66,13 +66,12 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel4" min="-2" pref="129" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="btnMostrarIngrEgr" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                              <Component id="txtBuscarCampo" min="-2" pref="219" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="cmbElegirBusquedaFac" min="-2" pref="175" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel4" min="-2" pref="129" max="-2" attributes="0"/>
-                          <Component id="txtBuscarCampo" min="-2" pref="219" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane3" min="-2" pref="1260" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -89,18 +88,13 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnMostrarIngrEgr" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                              <Component id="cmbElegirBusquedaFac" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                      <Component id="txtBuscarCampo" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtBuscarCampo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbElegirBusquedaFac" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane3" min="-2" pref="332" max="-2" attributes="0"/>
@@ -159,20 +153,13 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnMostrarIngrEgr">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Mostrar todos"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JComboBox" name="cmbElegirBusquedaFac">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
+                  <StringArray count="3">
                     <StringItem index="0" value="todos"/>
                     <StringItem index="1" value="pendientes"/>
+                    <StringItem index="2" value="eliminados"/>
                   </StringArray>
                 </Property>
               </Properties>

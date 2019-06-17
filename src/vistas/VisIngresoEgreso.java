@@ -33,7 +33,6 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         pnlIngresosEgresos = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblIngresosEgresos = new javax.swing.JTable();
-        btnMostrarIngrEgr = new javax.swing.JButton();
         cmbElegirBusquedaFac = new javax.swing.JComboBox();
         txtBuscarCampo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -83,9 +82,7 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         tblIngresosEgresos.setRowHeight(24);
         jScrollPane3.setViewportView(tblIngresosEgresos);
 
-        btnMostrarIngrEgr.setText("Mostrar todos");
-
-        cmbElegirBusquedaFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todos", "pendientes" }));
+        cmbElegirBusquedaFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todos", "pendientes", "eliminados" }));
 
         jLabel4.setText("Buscar por campos");
 
@@ -100,12 +97,11 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
             .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(pnlIngresosEgresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
-                        .addComponent(btnMostrarIngrEgr)
-                        .addGap(12, 12, 12)
-                        .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
+                        .addComponent(txtBuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1260, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -117,16 +113,12 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         pnlIngresosEgresosLayout.setVerticalGroup(
             pnlIngresosEgresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(pnlIngresosEgresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMostrarIngrEgr)
-                    .addGroup(pnlIngresosEgresosLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19)
+                .addGap(79, 79, 79)
                 .addComponent(jLabel4)
                 .addGap(7, 7, 7)
-                .addComponent(txtBuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlIngresosEgresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBuscarCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbElegirBusquedaFac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlIngresosEgresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,7 +281,6 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAgregarTrans;
     public javax.swing.JButton btnEliminarTrans;
-    public javax.swing.JButton btnMostrarIngrEgr;
     public javax.swing.JComboBox cmbElegirBusquedaFac;
     public javax.swing.JComboBox cmbTipoBusqueda;
     private javax.swing.JLabel jLabel1;

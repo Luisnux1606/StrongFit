@@ -320,6 +320,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrecio">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="$"/>
               </Properties>
               <AuxValues>
@@ -327,12 +330,15 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="410" y="40" width="90" height="20"/>
+                  <AbsoluteConstraints x="430" y="40" width="90" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrecioIndic">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="1"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Precio:"/>
               </Properties>
               <AuxValues>
@@ -340,7 +346,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="360" y="40" width="-1" height="-1"/>
+                  <AbsoluteConstraints x="360" y="40" width="60" height="30"/>
                 </Constraint>
               </Constraints>
             </Component>

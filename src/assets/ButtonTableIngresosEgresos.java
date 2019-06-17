@@ -142,8 +142,14 @@ public class ButtonTableIngresosEgresos extends JFrame
                
                String cliente =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 2)+"";
                String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"";
-               
-               if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)) 
+               double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"");
+               double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"");
+                
+               double valAjuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"");
+               double valPendiente = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"");
+                
+               if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)
+                   && !Validaciones.isValCancHigherIngreso(valCanc,valIngre) && !Validaciones.isValAjusteHigherPendiente(valAjuste, valPendiente)) 
                {
                     String tanggal = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
                     fechaAct = tanggal;
@@ -181,8 +187,9 @@ public class ButtonTableIngresosEgresos extends JFrame
                
                String cliente =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 2)+"";
                String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"";
-               
-               if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)) 
+                double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"");
+                    double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"");
+               if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)&& !Validaciones.isValCancHigherIngreso(valCanc,valIngre)) 
                {
                     String tanggal = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
                     fechaAct = tanggal;
@@ -224,8 +231,13 @@ public class ButtonTableIngresosEgresos extends JFrame
                     String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
                     String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";   
                     String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
-
-                    if (!Validaciones.isCadnull(fIni)&&!Validaciones.isCadnull(fFin) && !Validaciones.isCadnull(codPer)) {                
+                    double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"");
+                    double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"");
+                    double valAjuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"");
+                    double valPendiente = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"");
+                    if (!Validaciones.isCadnull(fIni)&&!Validaciones.isCadnull(fFin) && !Validaciones.isCadnull(codPer) 
+                        && !Validaciones.isValCancHigherIngreso(valCanc,valIngre) && !Validaciones.isValAjusteHigherPendiente(valAjuste, valPendiente)) {   
+                       
                         setDatos();                                           
                     }
                     else

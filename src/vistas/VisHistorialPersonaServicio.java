@@ -146,13 +146,15 @@ public class VisHistorialPersonaServicio extends javax.swing.JFrame {
         jPanel1.add(btnBuscarPerona);
         btnBuscarPerona.setBounds(340, 151, 50, 40);
 
+        lblPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblPrecio.setText("$");
         jPanel1.add(lblPrecio);
-        lblPrecio.setBounds(410, 40, 90, 20);
+        lblPrecio.setBounds(430, 40, 90, 30);
 
+        lblPrecioIndic.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPrecioIndic.setText("Precio:");
         jPanel1.add(lblPrecioIndic);
-        lblPrecioIndic.setBounds(360, 40, 40, 16);
+        lblPrecioIndic.setBounds(360, 40, 60, 30);
 
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 210);
