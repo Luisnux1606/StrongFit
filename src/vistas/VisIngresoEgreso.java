@@ -62,16 +62,17 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 360, 0, 0);
         getContentPane().add(jLabel1, gridBagConstraints);
 
+        tblIngresosEgresos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tblIngresosEgresos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "CODPER", "CODPRODSERV", "CODHISTPERSERV", "GUARDAR", "ELIMINAR"
+                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "SALDO CONT.TOTAL", "CODPER", "CODPRODSERV", "CODHISTPERSERV", "GUARDAR", "ELIMINAR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true
+                false, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

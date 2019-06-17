@@ -239,7 +239,7 @@ public class Validaciones {
       
       public static boolean isHigher(double a, double b)
       {
-          if (a>=b) 
+          if (a>b) 
               return true;              
           else
               return false;          

@@ -65,8 +65,8 @@ public class ButtonTableIngresosEgresos extends JFrame
       
        
 
-        ButtonColumn buttonColumn = new ButtonColumn(visIngEgr.tblIngresosEgresos, 17);
-        ButtonColumn buttonColumn1 = new ButtonColumn(visIngEgr.tblIngresosEgresos, 18);
+        ButtonColumn buttonColumn = new ButtonColumn(visIngEgr.tblIngresosEgresos, 18);
+        ButtonColumn buttonColumn1 = new ButtonColumn(visIngEgr.tblIngresosEgresos, 19);
     }
 
     
@@ -219,7 +219,7 @@ public class ButtonTableIngresosEgresos extends JFrame
         
         public void setDatosGuardar()
         {
-                String prodId = table.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";            
+                String prodId = table.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 17)+"";            
                 ConsProductos consProd = new ConsProductos();
                 String desc = table.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+""; 
                 if (!consProd.existeProducto(desc))
@@ -230,7 +230,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 {                    
                     String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
                     String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";   
-                    String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
+                    String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
                     double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"");
                     double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"");
                     double valAjuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"");
@@ -257,8 +257,7 @@ public class ButtonTableIngresosEgresos extends JFrame
             ResultSet listFicha = consIngEgr.buscarIngresosEgresos();
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[19];
-           
+            Object cols[] = new Object[20];
             while (listFicha.next()) {
                 try { 
                                       
@@ -276,12 +275,13 @@ public class ButtonTableIngresosEgresos extends JFrame
                     cols[11] = listFicha.getDouble("Valajuste_Faccab");
                     cols[12] = listFicha.getDouble("estadoEnt");
                     cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getInt("id_per");
-                    cols[15] = listFicha.getInt("id_prod");
-                    cols[16] = listFicha.getInt("codHist");
+                    cols[14] = listFicha.getDouble("saldoP");
+                    cols[15] = listFicha.getInt("id_per");
+                    cols[16] = listFicha.getInt("id_prod");
+                    cols[17] = listFicha.getInt("codHist");
                     
-                    cols[17] = "Guardar";
-                    cols[18] = "Anular";
+                    cols[18] = "Guardar";
+                    cols[19] = "Anular";
                     cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);              
                     model.addRow(cols);
                     
@@ -356,7 +356,8 @@ public class ButtonTableIngresosEgresos extends JFrame
             modFacCab.setFecha_facCab(fechaAct);                
             modFacCab.setNum_facCab(numFac);
             
-            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
+            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
+            System.out.println(codPer);
             persona.setId(Validaciones.isNumVoid(codPer));
             modFacCab.setPersona(persona);
             
@@ -395,7 +396,7 @@ public class ButtonTableIngresosEgresos extends JFrame
             modFacCabComp.setFecha_facCabComp(fechaAct);                
             modFacCab.setNum_facCab(numFac);
             
-            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
+            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
             persona.setId(Validaciones.isNumVoid(codPer));
             modFacCabComp.setPersonaComp(persona);
             
@@ -650,7 +651,7 @@ public class ButtonTableIngresosEgresos extends JFrame
         for (int i = selectedRow; i <= selectedRow; i++) 
         {
             
-            prodId =table.getValueAt(i, 15)+""; //si existe or not
+            prodId =table.getValueAt(i, 16)+""; //si existe or not
             num = "1";//table.getValueAt(i, 1)+"";
             desc = table.getValueAt(i, 4)+"";     
             valU = table.getValueAt(i, 8)+"";
@@ -676,7 +677,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);
@@ -744,7 +745,7 @@ public class ButtonTableIngresosEgresos extends JFrame
         for (int i = selectedRow; i <= selectedRow; i++) 
         {
             
-            prodId =table.getValueAt(i, 15)+""; //si existe or not
+            prodId =table.getValueAt(i, 16)+""; //si existe or not
             num = "1";//table.getValueAt(i, 1)+"";
             desc = table.getValueAt(i, 4)+"";     
             valU = table.getValueAt(i, 7)+"";
@@ -770,7 +771,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);
@@ -842,7 +843,7 @@ public class ButtonTableIngresosEgresos extends JFrame
         for (int i = selectedRow; i <= selectedRow; i++) 
         {
             
-            prodId =table.getValueAt(i, 15)+""; //si existe or not
+            prodId =table.getValueAt(i, 16)+""; //si existe or not
             num = "1";//table.getValueAt(i, 1)+"";
             desc = table.getValueAt(i, 4)+"";     
             valU = table.getValueAt(i, 7)+"";
@@ -868,7 +869,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);
@@ -937,7 +938,7 @@ public class ButtonTableIngresosEgresos extends JFrame
         for (int i = selectedRow; i <= selectedRow; i++) 
         {
             
-            prodId =table.getValueAt(i, 15)+""; //si existe or not
+            prodId =table.getValueAt(i, 16)+""; //si existe or not
             num = "1";//table.getValueAt(i, 1)+"";
             desc = table.getValueAt(i, 4)+"";     
             valU = table.getValueAt(i, 7)+"";
@@ -963,7 +964,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 14)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);

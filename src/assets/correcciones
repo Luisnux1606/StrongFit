@@ -6,10 +6,10 @@ TABLA
     1. Validar que el valor pendiente nunca sea mayor al valor a pagar. :ok (hay que usar tab)
     2. Si elijo un entrenamiento no se salte a valor. cancelado. :ok
     3. Validar que el valor ajuste nunca sea mayor a lo pendiente : ok
-    4. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.: r
+    4. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.: r(no se queria con cantidad )
     5. Validar que cuando se guarde en la tabla no se muestren los eliminados o anulados. (ahora está mostrando los eliminados) :ok;
-    6. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona. :r
-    7. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):r
+    6. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona. :ok
+    7. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):ok
 
 BUSCAR(campo)
     1. No busca :r
