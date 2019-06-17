@@ -22,7 +22,15 @@ public class ItemRendererClienteFac extends BasicComboBoxRenderer {
 
     if (value != null) {
       Persona item = (Persona) value;
-      setText(item.getApellido().toUpperCase()+" "+item.getNombre().toUpperCase());
+        if (item!=null) {
+            if (item.getApellido()==null) {
+                item.setApellido("");
+            }
+             if (item.getNombre()==null) {
+                item.setNombre("");
+            }
+            setText(item.getApellido().toUpperCase()+" "+item.getNombre().toUpperCase());
+        }
     }
 
     if (index == -1) {

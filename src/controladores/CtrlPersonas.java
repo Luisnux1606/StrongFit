@@ -7,6 +7,7 @@ package controladores;
 
 import assets.Calculos;
 import assets.Configuracion;
+import assets.ItemRendererClienteFac;
 import assets.Validaciones;
 import consultas.ConsAnalisis;
 import consultas.ConsFacturaCab;
@@ -181,6 +182,37 @@ public class CtrlPersonas implements ActionListener {
         visPersona.cmbTipoPersona.updateUI();
     } 
     
+    public void showComboPersonas()
+    {       
+        visFicha = (VisFicha)vis;
+                  
+      
+        try {
+           visFicha.cmb_clienteFac.removeAllItems();
+            ResultSet listCategorias = consPer.buscarPersonasClientes();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visFicha.cmb_clienteFac.getModel();
+            
+            
+            while (listCategorias.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(new Persona(listCategorias.getString("nom_per"),listCategorias.getString("ape_per"),listCategorias.getInt("id_per")));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consPer.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      //  visFicha.cmb_clienteFac.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
+        visFicha.cmb_clienteFac.setRenderer(new ItemRendererClienteFac());
+       // this.visFicha.cmb_clienteFac.addActionListener(this);
+        visFicha.cmb_clienteFac.updateUI();          
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
          
@@ -215,6 +247,8 @@ public class CtrlPersonas implements ActionListener {
                         limpiar();
                     }
                     showTable();
+                    showComboPersonas();
+                 //   visFicha.cmb_clienteFac.updateUI();
                }
          
         }
@@ -565,8 +599,7 @@ public class CtrlPersonas implements ActionListener {
                             visFicha = (VisFicha)vis; 
                             modPer.setId(idPer);
                             modPer.setNombre(nombre);
-                            modPer.setApellido(apellido);
-                            visFicha.lblPersonaId.setText(idPer+"");
+                            modPer.setApellido(apellido);                           
                             visFicha.cmb_clienteFac.setSelectedItem(new Persona(modPer.getApellido(),modPer.getNombre(),modPer.getId()));                                                        
                             break;
                         case 3:  //servicio

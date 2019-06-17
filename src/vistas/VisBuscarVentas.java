@@ -77,6 +77,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblFacturasCabeceras.setRowHeight(24);
         jScrollPane3.setViewportView(tblFacturasCabeceras);
 
         btnMostrarFacturas.setText("Mostrar todos");

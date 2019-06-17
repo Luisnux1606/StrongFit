@@ -160,7 +160,7 @@ public class CtrlFacturaCab implements ActionListener{
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     
-                    model.addElement(new Persona(listCategorias.getString("nom_per"),listCategorias.getString("ape_per"),listCategorias.getInt("id_per")));
+                    model.addElement(new Persona(listCategorias.getString("ape_per"),listCategorias.getString("nom_per"),listCategorias.getInt("id_per")));
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
@@ -670,8 +670,9 @@ public class CtrlFacturaCab implements ActionListener{
         
         modFacCab.setFecha_facCab(Validaciones.setFormatFecha(visFicha.dtcFecha.getDate()));                
         modFacCab.setNum_facCab(numFac);
-
-        persona.setId(Validaciones.isNumVoid(visFicha.lblPersonaId.getText()));
+        
+        Persona p = ((Persona)visFicha.cmb_clienteFac.getSelectedItem());
+        persona.setId(Validaciones.isNumVoid(p.getId()+""));
         modFacCab.setPersona(persona);
 
         modFacCab.setValPagar_facCab(Validaciones.isNumVoid3(visFicha.txtValPagar.getText()));
@@ -792,10 +793,11 @@ public class CtrlFacturaCab implements ActionListener{
         } 
         if (e.getSource()==visFicha.cmb_clienteFac)
         {
-         
-            Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
-            visFicha.lblPersonaId.setText(item.getId()+"");
-            System.out.println(item.getId() + " : " + item.getApellido());
+            if (visFicha!=null) {                
+                Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
+              //  visFicha.lblPersonaId.setText(item.getId()+"");
+              //  System.out.println(item.getId() + " : " + item.getApellido());
+            }
         }                
       
     }
