@@ -225,7 +225,7 @@ public class VisCapturaHuella extends javax.swing.JFrame {
        guardarHuella();
        Reclutador.clear();
        lblImagenHuella.setIcon(null);
-       r
+       
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 

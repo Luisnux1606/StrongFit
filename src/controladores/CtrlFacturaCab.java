@@ -108,15 +108,10 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnEliminarFilas.addActionListener(this);
         this.visFicha.btnEntrenamiento.addActionListener(this);
         
-
-        
-         
-              
         cadBus = "";
        
         setFocus();
         setListener();    
-        setTableModel();
         iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
@@ -176,77 +171,7 @@ public class CtrlFacturaCab implements ActionListener{
         visFicha.cmb_clienteFac.updateUI();
     }
     
-    public void setTableModel()
-    {   /*         
-       Color rojo = new Color(254,000,000);  
-       Color amarillo = new Color(255,255,000);
-       visFicha.tblFicha.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
-        {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-            {
-                final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                c.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-              
-                
-                if(Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")<=5 &&Calculos.getDiffDaysToFinish(table.getValueAt(row, 4)+"")>=0)
-                {
-                     c.setBackground(amarillo); //proximos a terminarse
-                }
-                else
-                    if (Calculos.dateGreaterThanCurrent(table.getValueAt(row, 4)+"")==true) {
-                     c.setBackground(rojo);
-                    }
-                if(Double.parseDouble(table.getValueAt(row, 7)+"")!=0 )
-                {
-                 c.setBackground(rojo); //proximos a terminarse o pendientes de pago
-                }
-               
-                
-                
-                return c;
-            }
-            
-            
-            });
-            */
-     
-    }
-    /*
-    public void showTableByNom(String nom)
-    {
-        try {
-            limpiarTabla();
-            
-            ResultSet listFicha = consFicha.buscarTodosPorNomTabla(nom);
-            
-            DefaultTableModel model =  (DefaultTableModel)visFicha.tblFicha.getModel();
-            Object cols[] = new Object[8];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("id_ficha");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaIni_ficha");
-                    cols[4] = listFicha.getString("fechaFin_ficha");
-                    cols[5] = Validaciones.isNumVoid4(listFicha.getString("concepto_ficha")).toUpperCase();
-                    cols[6] = listFicha.getDouble("valPago_ficha");
-                    cols[7] = listFicha.getDouble("valPendiente_ficha");
-                    model.addRow(cols);
-                    
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consFicha.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-    */
+   
      public void desabilitaHabilita(JButton btn,boolean estado)
      {
          btn.setEnabled(estado);

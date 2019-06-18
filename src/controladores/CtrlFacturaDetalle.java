@@ -70,10 +70,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         this.consFacDet = consFacDet;
         this.visFicha = visFicha;
         
-      //  this.visFicha.btnGuardarFacCab.addActionListener(this);
-//        this.visFicha.btnEliminarFacCab.addActionListener(this);
         this.visFicha.btnLimpiarFacCab.addActionListener(this);
-//        this.visFicha.btnModificarFacCab.addActionListener(this);
         this.visFicha.btnBuscarDscto.addActionListener(this);
         this.visFicha.btnCalcular.addActionListener(this);
         this.visFicha.btnBuscarClienteFactura.addActionListener(this);
@@ -83,8 +80,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         
         setListener();
         limpiarTablaDetalles();
-        setFormatTable(visFicha.tblFacturaDetalle);
-        
+        setFormatTable(visFicha.tblFacturaDetalle);        
         crearTablaCombo();        
     }
    
@@ -164,14 +160,16 @@ public class CtrlFacturaDetalle implements ActionListener {
                    DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
                    if (event.getStateChange() == ItemEvent.SELECTED) {
                        System.out.println(item.toString() + " selected." +getIndexByItemCombo(comboBox,item.toString()).getId_prod());
-                       int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
-                       double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
-                       tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
-                       tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
-                       try {
-                             System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
-                       } catch (Exception e) {
-                           System.out.println("seleccinado null: ");
+                       //if (comboBox.getSelectedIndex()!=-1) {                                                  
+                            int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
+                            double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
+                            tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
+                            tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                            try {
+                                  System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
+                            } catch (Exception e) {
+                                System.out.println("seleccinado null: ");
+                        //    }
                        }
                    }
 

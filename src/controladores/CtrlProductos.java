@@ -8,6 +8,8 @@ package controladores;
 import assets.Calculos;
 import assets.Configuracion;
 import assets.ItemRendererCalcFechaServ;
+import assets.ItemRendererProducto;
+import assets.Java2sAutoComboBox;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JDateChooserCellEditor;
@@ -23,6 +25,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent; 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -33,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -768,6 +773,121 @@ public class CtrlProductos implements ActionListener{
         
     }
     
+    public Producto getIndexByItemCombo(JComboBox comboBox,String cad)
+    {
+        DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
+        
+        Producto p=new Producto();
+        for (int i = 0; i < model.getSize(); i++) {
+            if((((Producto)model.getElementAt(i)).getDescripcion_prod()).equals(cad))
+            {
+                p= (Producto)model.getElementAt(i);
+            }
+        }
+        return p;
+    }
+    public ArrayList<Producto> getProductosServicios2()
+    {
+        ConsProductos consProd=new ConsProductos();
+        ArrayList<Producto> listSomeString = new ArrayList<Producto>();
+        try 
+        {
+            //jc.removeAllItems();
+            ResultSet listProd = consProd.buscarTodos();
+               
+           // DefaultComboBoxModel model =  (DefaultComboBoxModel)jc.getModel();
+            Object cols[] = new Object[11];
+
+             while (listProd.next()) {
+            try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                Categoria c = new Categoria();
+                CalculoFechaServicio calcF = new CalculoFechaServicio();
+                calcF.setId_calServ(listProd.getInt("id_calserv"));
+                c.setId_cat(listProd.getInt("id_cat"));
+                listSomeString.add(new Producto(listProd.getInt("ID_PROD"),listProd.getString("descripcion_prod").toUpperCase(),
+                                                  listProd.getString("FECHAINI_PROD"),listProd.getString("FECHAFIN_PROD"),
+                                                  listProd.getDouble("PRECIO_PROD"),c,calcF ));
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+               
+        consProd.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSomeString;
+    }
+    public void addRows(JTable table)
+    {        
+         Object cols[] = new Object[6];
+         DefaultTableModel tb = (DefaultTableModel) table.getModel();         
+         for (int i = 0; i <= 5; i++) {
+            cols[i] = new String();
+        }
+         setFormatTable(table);
+       tb.addRow(cols);
+    }
+    public void limpiarTablaDetalles(){
+        DefaultTableModel tb = (DefaultTableModel) visFicha.tblFacturaDetalle.getModel();
+        int a = visFicha.tblFacturaDetalle.getRowCount()-1;
+        for (int i = a; i >= 0; i--) {           
+            tb.removeRow(tb.getRowCount()-1);
+        }
+         addRows(visFicha.tblFacturaDetalle);
+    }
+    private void crearTablaCombo() {
+
+        limpiarTablaDetalles();
+        JTable tabDet = visFicha.tblFacturaDetalle;      
+        ArrayList<Producto>  listSomeString = getProductosServicios2();
+        Java2sAutoComboBox comboBox1 = new Java2sAutoComboBox(listSomeString);
+        comboBox1.setDataList(listSomeString);
+        comboBox1.setMaximumRowCount(5);
+        comboBox1.setRenderer(new ItemRendererProducto());
+       
+        ActionListener comboAct = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox1.getModel();
+                if (comboBox1.getSelectedIndex()!=-1) {
+                    System.out.println("dataenter "+((Producto)model.getElementAt(comboBox1.getSelectedIndex())).getId_prod());
+                }              
+            }
+        };
+        
+         comboBox1.addActionListener(comboAct);
+         comboBox1.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+               JComboBox comboBox = (JComboBox) event.getSource();
+                  Object item = event.getItem();
+                   DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
+                   if (event.getStateChange() == ItemEvent.SELECTED) {
+                       System.out.println(item.toString() + " selected." +getIndexByItemCombo(comboBox,item.toString()).getId_prod());
+                       int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
+                       double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
+                       tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
+                       tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                       try {
+                             System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
+                       } catch (Exception e) {
+                           System.out.println("seleccinado null: ");
+                       }
+                   }
+
+                   if (event.getStateChange() == ItemEvent.DESELECTED) {
+                    System.out.println(item.toString() + " deselected.");
+                   }
+
+            }
+        });
+        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));      
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setToolTipText("Click para ver producto");  
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == visProd.btnGuardar) 
@@ -806,6 +926,7 @@ public class CtrlProductos implements ActionListener{
                 limpiar();
             }
             showDatosComboTable();
+            crearTablaCombo();
                        
         }
       if (e.getSource() == visProd.btnBuscar) 

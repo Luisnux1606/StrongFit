@@ -258,6 +258,18 @@ public class VisFicha extends javax.swing.JFrame {
         txtValPendienteFichaComp = new javax.swing.JTextField();
         lblCompras = new javax.swing.JLabel();
         lblNroFacCompras = new javax.swing.JLabel();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        jPanel2 = new javax.swing.JPanel();
+        jftFechaActual = new javax.swing.JFormattedTextField();
+        jftHoraActual = new javax.swing.JFormattedTextField();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        tblDatosHuella = new javax.swing.JTable();
+        jLabel38 = new javax.swing.JLabel();
+        lblImagenHuella = new javax.swing.JLabel();
+        scpNotificaciones = new javax.swing.JScrollPane();
+        txtNotificaciones = new javax.swing.JTextArea();
+        btnAbrir = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         mniReportes = new javax.swing.JMenuItem();
@@ -1233,7 +1245,7 @@ public class VisFicha extends javax.swing.JFrame {
             pnlFichaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFichaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabp_ficha, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE)
+                .addComponent(tabp_ficha, javax.swing.GroupLayout.PREFERRED_SIZE, 763, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1795,6 +1807,99 @@ public class VisFicha extends javax.swing.JFrame {
 
         tabFichaVentas.addTab("Generar Compras", jScrollPane15);
 
+        jftFechaActual.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        jftHoraActual.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        tblDatosHuella.setBackground(new java.awt.Color(64, 64, 64));
+        tblDatosHuella.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        tblDatosHuella.setForeground(new java.awt.Color(0, 204, 51));
+        tblDatosHuella.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Fecha", "HORA", "NOMBRE", "APELLIDO"
+            }
+        ));
+        tblDatosHuella.setRowHeight(50);
+        jScrollPane18.setViewportView(tblDatosHuella);
+
+        jLabel38.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel38.setText("SYSTEMA DE CONTROL DE ENTRADA DE PERSONA");
+
+        lblImagenHuella.setBackground(new java.awt.Color(204, 255, 204));
+        lblImagenHuella.setForeground(new java.awt.Color(204, 255, 204));
+        lblImagenHuella.setBorder(javax.swing.BorderFactory.createTitledBorder("Huella"));
+
+        txtNotificaciones.setColumns(20);
+        txtNotificaciones.setFont(new java.awt.Font("Monospaced", 1, 14)); // NOI18N
+        txtNotificaciones.setRows(5);
+        scpNotificaciones.setViewportView(txtNotificaciones);
+
+        btnAbrir.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnAbrir.setText("ABRIR");
+
+        btnCerrar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCerrar.setText("CERRAR");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(333, 333, 333)
+                        .addComponent(jLabel38))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(scpNotificaciones, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jftFechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jftHoraActual, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblImagenHuella, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(785, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnAbrir, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel38)
+                        .addGap(69, 69, 69)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jftFechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jftHoraActual, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(33, 33, 33)
+                                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblImagenHuella, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(55, 55, 55)
+                        .addComponent(scpNotificaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
+
+        jScrollPane16.setViewportView(jPanel2);
+
+        tabFichaVentas.addTab("ControlEntradaSalida", jScrollPane16);
+
         menuArchivo.setText("Archivo");
         menuArchivo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
@@ -2048,6 +2153,7 @@ public class VisFicha extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnAbrir;
     public javax.swing.JButton btnAgregarFilas;
     public javax.swing.JButton btnAgregarFilasComp;
     public javax.swing.JButton btnBuscarAnalisis;
@@ -2059,6 +2165,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnCalcular;
     public javax.swing.JButton btnCalcularCompras;
     public javax.swing.JButton btnCargarFichas;
+    public javax.swing.JButton btnCerrar;
     public javax.swing.JButton btnElegirPersonaG;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnEliminarAnalisis;
@@ -2121,6 +2228,7 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2137,6 +2245,7 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -2146,6 +2255,8 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2154,6 +2265,8 @@ public class VisFicha extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    public javax.swing.JFormattedTextField jftFechaActual;
+    public javax.swing.JFormattedTextField jftHoraActual;
     private javax.swing.JLabel lblCambio;
     private javax.swing.JLabel lblCambio1;
     public javax.swing.JLabel lblCliente;
@@ -2170,6 +2283,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JLabel lblFechaFacCab;
     public javax.swing.JLabel lblFechaFacCab1;
     public javax.swing.JLabel lblIdFicha;
+    public javax.swing.JLabel lblImagenHuella;
     public javax.swing.JLabel lblInfoFechaAna;
     public javax.swing.JLabel lblInfoFechaMed;
     public javax.swing.JLabel lblIva;
@@ -2225,6 +2339,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JRadioButton rdbGetAnaPer;
     public javax.swing.JRadioButton rdbGetMedPer;
     public javax.swing.JScrollPane scpFicha;
+    public javax.swing.JScrollPane scpNotificaciones;
     public javax.swing.JScrollPane scpVentas;
     private javax.swing.JScrollPane scrpTablaFichas;
     public javax.swing.JTabbedPane tabFichaVentas;
@@ -2232,6 +2347,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JTable tblAnalisis;
     public javax.swing.JTable tblAnalisis1;
     public javax.swing.JTable tblDatos;
+    public javax.swing.JTable tblDatosHuella;
     public javax.swing.JTable tblFacturaDetalle;
     public javax.swing.JTable tblFacturaDetalleCompras;
     public javax.swing.JTable tblFichas;
@@ -2261,6 +2377,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JTextArea txtMColacion;
     public javax.swing.JTextArea txtMerienda;
     public javax.swing.JTextField txtNomPersonaFicha;
+    public javax.swing.JTextArea txtNotificaciones;
     public javax.swing.JTextField txtNroHijos;
     public javax.swing.JTextField txtPantorrilla;
     public javax.swing.JTextField txtPecho;
