@@ -50,6 +50,7 @@ import modelos.Membresias;
 import modelos.Persona;
 import modelos.TipoPersona;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import vistas.VisCapturaHuella;
 import vistas.VisFicha;
 import vistas.VisHistorialPersonaServicio;
 import vistas.VisIngresoEgreso;
@@ -92,6 +93,7 @@ public class CtrlPersonas implements ActionListener {
         this.visPersona.btnLimpiar.addActionListener(this);
         this.visPersona.btnModificar.addActionListener(this);
         this.visPersona.btnBuscar.addActionListener(this);
+        this.visPersona.btnCargarHuella.addActionListener(this);
        
         locale = 0; // 1: ficha , 2: factura, 3: entrenamiento
         
@@ -339,6 +341,14 @@ public class CtrlPersonas implements ActionListener {
              desabilitaHabilita(visPersona.btnGuardar,true);
            desabilitaHabilita(visPersona.btnModificar,false);
          }
+         if(e.getSource() == visPersona.btnCargarHuella)
+         {
+             if (!Validaciones.isCedulaPersonaVoid(visPersona.txt_cedula)) {
+                 VisCapturaHuella form = new VisCapturaHuella(visPersona.txt_cedula.getText().trim());
+                 form.setVisible(true);
+             }
+             
+         }
        
     }
     
@@ -351,6 +361,7 @@ public class CtrlPersonas implements ActionListener {
         visPersona.dtc_fechaNac.setDate(null);
         visPersona.txtCorreoElect.setText("");
         visPersona.txt_nro_fono.setText("");
+        visPersona.btnCargarHuella.setEnabled(false);
        // limpiarTabla();
     }
     
@@ -374,6 +385,7 @@ public class CtrlPersonas implements ActionListener {
          visPersona.txt_nro_fono.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6))));         
          visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 8)))));                        
          visPersona.cmbTipoPersona.setSelectedItem(tblD.getValueAt(tblD.getSelectedRow(), 9));
+         visPersona.btnCargarHuella.setEnabled(true);
      }
     
     

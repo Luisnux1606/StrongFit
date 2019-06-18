@@ -39,4 +39,9 @@ public class Conexion {
         }
         return con;
     }
+    
+     public void desconectar(){
+        con = null;
+    //System.out.println("Desconexion a base de datos listo...");
+    }
 }

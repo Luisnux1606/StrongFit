@@ -59,6 +59,8 @@ public class VisPersona extends javax.swing.JFrame {
         cmbxGenero = new javax.swing.JComboBox<String>();
         lblTipoPersona = new javax.swing.JLabel();
         cmbTipoPersona = new javax.swing.JComboBox();
+        btnCargarHuella = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         txtBuscarCedula = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lblNomEmp = new javax.swing.JLabel();
@@ -212,6 +214,15 @@ public class VisPersona extends javax.swing.JFrame {
         jPanel1.add(cmbTipoPersona);
         cmbTipoPersona.setBounds(640, 140, 190, 30);
 
+        btnCargarHuella.setText("CARGAR HUELLA DIGITAL");
+        btnCargarHuella.setEnabled(false);
+        jPanel1.add(btnCargarHuella);
+        btnCargarHuella.setBounds(640, 190, 190, 25);
+
+        jLabel1.setText("HUELLA DIGITAL:");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(460, 190, 110, 16);
+
         pnl_personas.add(jPanel1);
         jPanel1.setBounds(10, 70, 870, 220);
 
@@ -303,6 +314,7 @@ public class VisPersona extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnCargarHuella;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnLimpiar;
@@ -310,6 +322,7 @@ public class VisPersona extends javax.swing.JFrame {
     public javax.swing.JComboBox cmbTipoPersona;
     public javax.swing.JComboBox<String> cmbxGenero;
     public com.toedter.calendar.JDateChooser dtc_fechaNac;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

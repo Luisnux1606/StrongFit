@@ -96,6 +96,19 @@ public class Validaciones {
          return val;
      }
      
+      public static boolean isCedulaPersonaVoid(JTextField txt)
+     {
+         boolean  val = false;
+         if (txt==null || txt.toString().equalsIgnoreCase("null") || txt.getText().length()==0) {
+             val = true;
+             getMensaje("Necesita ingresar una cedula");
+         }
+         else
+             val = false;
+
+         return val;
+     }
+     
      
      
      public static double isNumVoid3(String txt)
