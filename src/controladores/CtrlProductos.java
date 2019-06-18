@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -845,47 +846,15 @@ public class CtrlProductos implements ActionListener{
         Java2sAutoComboBox comboBox1 = new Java2sAutoComboBox(listSomeString);
         comboBox1.setDataList(listSomeString);
         comboBox1.setMaximumRowCount(5);
-        comboBox1.setRenderer(new ItemRendererProducto());
+        //comboBox1.setRenderer(new ItemRendererProducto());
        
-        ActionListener comboAct = new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox1.getModel();
-                if (comboBox1.getSelectedIndex()!=-1) {
-                    System.out.println("dataenter "+((Producto)model.getElementAt(comboBox1.getSelectedIndex())).getId_prod());
-                }              
-            }
-        };
         
-         comboBox1.addActionListener(comboAct);
-         comboBox1.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent event) {
-               JComboBox comboBox = (JComboBox) event.getSource();
-                  Object item = event.getItem();
-                   DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
-                   if (event.getStateChange() == ItemEvent.SELECTED) {
-                       System.out.println(item.toString() + " selected." +getIndexByItemCombo(comboBox,item.toString()).getId_prod());
-                       int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
-                       double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
-                       tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
-                       tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
-                       try {
-                             System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
-                       } catch (Exception e) {
-                           System.out.println("seleccinado null: ");
-                       }
-                   }
-
-                   if (event.getStateChange() == ItemEvent.DESELECTED) {
-                    System.out.println(item.toString() + " deselected.");
-                   }
-
-            }
-        });
-        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));      
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setToolTipText("Click para ver producto");  
+        
+        CellEditor c= visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).getCellEditor();//.setCellEditor(new DefaultCellEditor(comboBox1));      
+        c = new DefaultCellEditor(comboBox1);
+        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(c);
+        visFicha.tblFacturaDetalle.updateUI();
+        
     }
     
     @Override
