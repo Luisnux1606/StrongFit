@@ -1,15 +1,14 @@
-*********PESTAÑA INGRESOS/EGRESOS***************﻿
-1. Incluir en el combo las opciones de: "anulados", "eliminados" :ok
-2. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón.  :ok
+*********PESTAÑA INGRESOS/EGRESOS***************﻿ REVISADO
+1. Incluir en el combo la opción de: "anulados".
+2. Cuando se agrega un registro muestra los botones "Anular" y "En blanco". y "en blanco" no hace nada. no puedo revisar porque no guarda
 
 TABLA
-    1. Validar que el valor pendiente nunca sea mayor al valor a pagar. :ok (hay que usar tab)
-    2. Si elijo un entrenamiento no se salte a valor. cancelado. :ok
-    3. Validar que el valor ajuste nunca sea mayor a lo pendiente : ok
-    4. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.: r(no se queria con cantidad )
-    5. Validar que cuando se guarde en la tabla no se muestren los eliminados o anulados. (ahora está mostrando los eliminados) :ok;
-    6. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona. :ok
-    7. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):ok
+    1. Si elijo un entrenamiento no se salte a valor. cancelado. :ok
+    2. Validar que el valor ajuste nunca sea mayor a lo pendiente : ok
+    3. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.: r(no se queria con cantidad )
+    4. Validar que cuando se guarde en la tabla no se muestren los eliminados o anulados. (ahora está mostrando los eliminados) :ok;
+    5. El campo saldo.cont.total no se calcula siguiendo con tab.
+    6. El campo saldo.cont.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes)
 
 BUSCAR(campo)
     1. No busca :r
@@ -18,10 +17,9 @@ MOSTRAR TODOS
     1. Debe mostrar únicamente los activos, no los eliminados ni anulados. :ok
 
 
-
 -------------------------------------------------------------------------------------------------------------------
 
-*********GESTION DE PERSONAS***************
+*********GESTION DE PERSONAS*************** REVISADO
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -29,7 +27,7 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 BUSCAR(lupa)= ok
 
-*********GESTION DE MEMBRESIA***************
+*********GESTION DE MEMBRESIA*************** REVISADO
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -37,39 +35,110 @@ LIMPIAR= ok
 BUSCAR(lupa)= ok
 BUSCAR(nombre)= ok
 
-*********GESTION DE GATEGORIA***************
+*********GESTION DE GATEGORIA*************** REVISADO
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
 LIMPIAR= ok
 BUSCAR(nombre)= ok
 
-*********GESTION DE PRODUCTOS/SERVICIOS***************
+*********GESTION DE PRODUCTOS/SERVICIOS***************  REVISADO
 1. Borrar en la tabla los campos "idcat", "idcalfechaserv"
+2. El campo "categoria" cambiarlo a la primera columna antes que el campo "ID"
 
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
-LIMPIAR= ok 
-BUSCAR(nombre)=ok
+
+LIMPIAR
+1. Ordenar la tabla en base al ID.
+
+BUSCAR(nombre)
+1. Debe buscar dependiendo si está habilitado "servicios", "productos" o "todos"
 
 BUSCAR(lupa)
 1. no busca [sigue pendiente] : r(it's going to be by code)
 
 
-*********GESTION DE ENTRENAMIENTO***************
-GUARDAR= ok
+*********GESTION DE ENTRENAMIENTO***************  REVISADO
+1. En persona debe estar vacío cuando se carga la ventana. 
+
+GUARDAR
+1. cuando se guarde Borrar "tipo de entrenamiento", "fecha inicio", "fecha fin" y "precio".
+
 ELIMINAR= ok 
 MODIFICAR= ok
 LIMPIAR=ok
-BUSCAR(nombre)= ok
+
+BUSCAR(nombre)
+1. Cuando se borre lo que tiene la caja de texto mostrar los NO ELIMINADOS. 
 
 
-*********GENERAR VENTAS***************
+*********GENERAR VENTAS***************  REVISADO
+1. Quitar el botón de personas, ya que existe el combo.
+2. Cuando uso tab en la tabla de detalle se muestran sólo los productos, pero no los servicios. 
+3. Cuando elijo en la tabla con las flechas actualizar "valor a pagar", "valor que cancelo"
+
 GUARDAR
-2. No puedo elegir el entrenamiento, porque cuando hago doble click en la tabla, no pasa nada. :ok
+1. Si corresponde en detalle a un servicio no se debe restar en "PRODUCTOS/SERVICIOS" con el "existentes".
 
 LIMPIAR= ok
+AGREGAR= ok
+ElIMINAR= ok
+
+MEMBRESIA
+1.Cuando elijo una membresia se pone en cero "valor a pagar", "valor que cancelo", y "cobro pendiente".
+
+
+*********GENERAR COMPRAS***************
+1. Incluir el combo en la tabla detalle, al igual como hizo en VENTAS
+2. Quitar label que muestra un código. 
+3. Actualizar el "valor a pagar" si se actualiza "valor unitario".
+4. Actualizar el "cobro pendiente" en base al "valor que cancela".
+5. Entre "GENERAR COMPRAS" y "GENERAR VENTAS" se cambia el orden del cuadro amarillo que contiene "valor que cancelo" y "cobro pendiente"
+
+GUARDAR= ok
+LIMPIAR= ok
+
+AGREGAR= ok
+ELIMINAR= ok
+
+MEMBRESIA
+1. No realiza nada.
+
+
+*********CONSULTAS*************** 
+------VENTAS REALIZADAS------  REVISADO
+1. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón. 
+2. Incluir en el combo las opciones de: "anulados", "eliminados".
+3. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona.
+4. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes)
+
+FILTRAR TODO= ok
+FILTRAR POR COMBO= ok
+
+BUSCAR(nombre)
+1. Busque considerando si está en el combo "todos", "pendientes", "anulados", "eliminados"
+
+ANULAR
+1. Si anula factura regrese la cantidad de productos a stock.
+
+------ENTRENAMIENTOS Y SALDOS------
+1. En la tabla se muestren solo las facturas activas que tengan entrenamiento.
+
+FILTRAR POR COMBO
+
+BUSCAR(nombre)
+1. No busca y borra la tabla. 
+
+------FICHA DE ANALISIS------
+Pendiente
+
+
+
+
+
+
 
 
 *********FICHA*************** 
@@ -122,35 +191,9 @@ BUSCAR(fecha)
 
 
 
-*********PLAN ALIMENTICIO*************** 
-1. Existen cajas de texto para poner informaci�n, pero no presenta las opciones CRUD
-
-
-
-
-*********CONSULTAS*************** 
-------VENTAS REALIZADAS------
-FILTRAR TODO= ok
-
-FILTRAR POR COMBO
-1. No funciona :ok
-
-BUSCAR(nombre)
-2.No funciona :ok
-
-------ENTRENAMIENTOS Y SALDOS------
-1. Actualizar la tabla al momento que se anule en ventas. :r
-
-FILTRAR POR COMBO
-BUSCAR(nombre)
-
-------FICHA DE ANALISIS------
-Pendiente
-
 *********REPORTES*************** 
 ------PERSONAS------
 1. Cambiar el codigo por el nombre de la persona. :r
-
 
 
 *********GENERALES***************
