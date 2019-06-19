@@ -163,8 +163,11 @@ public class CtrlFacturaDetalle implements ActionListener {
                        //if (comboBox.getSelectedIndex()!=-1) {                                                  
                             int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
                             double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
-                            tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
-                            tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                            try
+                            {
+                                tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
+                                tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                            }catch(Exception e){System.out.println("index en -1");}
                             try {
                                   System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
                             } catch (Exception e) {
