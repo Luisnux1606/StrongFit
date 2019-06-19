@@ -58,7 +58,7 @@ import vistas.VisMembresia;
 import vistas.VisPersona;
 import vistas.VisProductos;
 import vistas.VisReportes;
-import visual.facturacion.MyTableModel;
+
 
 /**
  *
@@ -78,7 +78,7 @@ public class CtrlPersonas implements ActionListener {
 //    VisEntrenamiento visEnt;
     Object vis;
     String cadBus;
-    MyTableModel dT;
+
     
     int locale;
     public CtrlPersonas(Persona modPersona, ConsPersona consPersona,VisPersona visPersona,Object vis)
