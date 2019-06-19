@@ -36,7 +36,7 @@ where p.id_per = f.Persona_id_per and TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') BE
 				<textElement>
 					<font size="24"/>
 				</textElement>
-				<text><![CDATA[TROYA GYM]]></text>
+				<text><![CDATA[STRONGFIT]]></text>
 			</staticText>
 		</band>
 	</title>
