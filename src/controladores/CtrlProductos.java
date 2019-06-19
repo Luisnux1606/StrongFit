@@ -37,7 +37,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -849,10 +848,9 @@ public class CtrlProductos implements ActionListener{
         //comboBox1.setRenderer(new ItemRendererProducto());
        
         
+       
+        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));      
         
-        CellEditor c= visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).getCellEditor();//.setCellEditor(new DefaultCellEditor(comboBox1));      
-        c = new DefaultCellEditor(comboBox1);
-        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(c);
         visFicha.tblFacturaDetalle.updateUI();
         
     }
