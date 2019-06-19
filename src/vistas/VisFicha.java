@@ -1373,6 +1373,7 @@ public class VisFicha extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblFacturaDetalle.setRowHeight(22);
         jScrollPane6.setViewportView(tblFacturaDetalle);
 
         pnlVentasInterno.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 1160, 110));

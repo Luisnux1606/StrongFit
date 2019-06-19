@@ -844,13 +844,51 @@ public class CtrlProductos implements ActionListener{
         ArrayList<Producto>  listSomeString = getProductosServicios2();
         Java2sAutoComboBox comboBox1 = new Java2sAutoComboBox(listSomeString);
         comboBox1.setDataList(listSomeString);
-        comboBox1.setMaximumRowCount(5);
+        comboBox1.setMaximumRowCount(5);       
         //comboBox1.setRenderer(new ItemRendererProducto());
+        comboBox1.setRenderer(new ItemRendererProducto());
        
+        ActionListener comboAct = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox1.getModel();
+                if (comboBox1.getSelectedIndex()!=-1) {
+                    System.out.println("dataenter "+((Producto)model.getElementAt(comboBox1.getSelectedIndex())).getId_prod());
+                }              
+            }
+        };
         
-       
-        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));      
-        
+         comboBox1.addActionListener(comboAct);
+         comboBox1.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+               JComboBox comboBox = (JComboBox) event.getSource();
+                  Object item = event.getItem();
+                   DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
+                   if (event.getStateChange() == ItemEvent.SELECTED) {
+                       System.out.println(item.toString() + " selected." +getIndexByItemCombo(comboBox,item.toString()).getId_prod());
+                       //if (comboBox.getSelectedIndex()!=-1) {                                                  
+                            int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
+                            double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
+                            tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
+                            tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                            try {
+                                  System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
+                            } catch (Exception e) {
+                                System.out.println("seleccinado null: ");
+                        //    }
+                       }
+                   }
+
+                   if (event.getStateChange() == ItemEvent.DESELECTED) {
+                    System.out.println(item.toString() + " deselected.");
+                   }
+
+            }
+        });
+       visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(null);
+       visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));            
+      
         visFicha.tblFacturaDetalle.updateUI();
         
     }
