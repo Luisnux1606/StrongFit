@@ -29,7 +29,6 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 BUSCAR(lupa)= ok
 
-
 *********GESTION DE MEMBRESIA***************
 GUARDAR= ok
 ELIMINAR= ok
@@ -38,18 +37,16 @@ LIMPIAR= ok
 BUSCAR(lupa)= ok
 BUSCAR(nombre)= ok
 
-
 *********GESTION DE GATEGORIA***************
-2. en el buscar(nombre)dependiendo de cuantas veces pulse "delete" se va borrando informaci�n de la tabla. �? :ok
-
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
 LIMPIAR= ok
 BUSCAR(nombre)= ok
 
-
 *********GESTION DE PRODUCTOS/SERVICIOS***************
+1. Borrar en la tabla los campos "idcat", "idcalfechaserv"
+
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -57,7 +54,7 @@ LIMPIAR= ok
 BUSCAR(nombre)=ok
 
 BUSCAR(lupa)
-1. no busca : r(it's going to be by code)
+1. no busca [sigue pendiente] : r(it's going to be by code)
 
 
 *********GESTION DE ENTRENAMIENTO***************
