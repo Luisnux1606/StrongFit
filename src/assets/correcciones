@@ -1,6 +1,6 @@
 *********PESTAÑA INGRESOS/EGRESOS***************﻿ REVISADO
-1. Incluir en el combo la opción de: "anulados".
-2. Cuando se agrega un registro muestra los botones "Anular" y "En blanco". y "en blanco" no hace nada. no puedo revisar porque no guarda
+1. Incluir en el combo la opción de: "anulados".:ok(anulado es eliminado)
+2. Cuando se agrega un registro muestra los botones "Anular" y "En blanco". y "en blanco" no hace nada. no puedo revisar porque no guarda :ok(guarda)
 
 TABLA
     1. Si elijo un entrenamiento no se salte a valor. cancelado. :ok
@@ -91,11 +91,11 @@ MEMBRESIA
 
 
 *********GENERAR COMPRAS***************
-1. Incluir el combo en la tabla detalle, al igual como hizo en VENTAS
-2. Quitar label que muestra un código. 
-3. Actualizar el "valor a pagar" si se actualiza "valor unitario".
-4. Actualizar el "cobro pendiente" en base al "valor que cancela".
-5. Entre "GENERAR COMPRAS" y "GENERAR VENTAS" se cambia el orden del cuadro amarillo que contiene "valor que cancelo" y "cobro pendiente"
+1. Incluir el combo en la tabla detalle, al igual como hizo en VENTAS :r
+2. Quitar label que muestra un código. :r
+3. Actualizar el "valor a pagar" si se actualiza "valor unitario". :r
+4. Actualizar el "cobro pendiente" en base al "valor que cancela". :r
+5. Entre "GENERAR COMPRAS" y "GENERAR VENTAS" se cambia el orden del cuadro amarillo que contiene "valor que cancelo" y "cobro pendiente":r
 
 GUARDAR= ok
 LIMPIAR= ok
@@ -109,30 +109,30 @@ MEMBRESIA
 
 *********CONSULTAS*************** 
 ------VENTAS REALIZADAS------  REVISADO
-1. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón. 
-2. Incluir en el combo las opciones de: "anulados", "eliminados".
-3. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona.
-4. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes)
+1. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón. :ok 
+2. Incluir en el combo las opciones de: "anulados", "eliminados".:r
+3. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona.:r
+4. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):r
 
 FILTRAR TODO= ok
 FILTRAR POR COMBO= ok
 
 BUSCAR(nombre)
-1. Busque considerando si está en el combo "todos", "pendientes", "anulados", "eliminados"
+1. Busque considerando si está en el combo "todos", "pendientes", "anulados", "eliminados" :r
 
 ANULAR
-1. Si anula factura regrese la cantidad de productos a stock.
+1. Si anula factura regrese la cantidad de productos a stock.:r
 
 ------ENTRENAMIENTOS Y SALDOS------
-1. En la tabla se muestren solo las facturas activas que tengan entrenamiento.
+1. En la tabla se muestren solo las facturas activas que tengan entrenamiento.:ok(asi seria porque es solo entrenamientos)
 
 FILTRAR POR COMBO
 
 BUSCAR(nombre)
-1. No busca y borra la tabla. 
+1. No busca y borra la tabla. :r
 
 ------FICHA DE ANALISIS------
-Pendiente
+Pendiente :r
 
 
 
@@ -152,7 +152,7 @@ ELIMINAR
 1. Debe preguntar si deseo o no eliminar. :ok
 
 MODIFICAR= ok 
-1. Pero seria mas interesante poder modificar la selecci�n de an�lisis y medidas. ::ok(yes it is modificable)
+1. Pero seria mas interesante poder modificar la selecci�n de an�lisis y medidas. ::ok
 
 LIMPIAR= ok
 
@@ -193,7 +193,7 @@ BUSCAR(fecha)
 
 *********REPORTES*************** 
 ------PERSONAS------
-1. Cambiar el codigo por el nombre de la persona. :r
+1. Cambiar el codigo por el nombre de la persona. ::ok
 
 
 *********GENERALES***************

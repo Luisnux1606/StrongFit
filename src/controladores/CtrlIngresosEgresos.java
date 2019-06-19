@@ -402,7 +402,7 @@ public class CtrlIngresosEgresos implements ActionListener {
     
     public void addRows(JTable table)
     {        
-         Object cols[] = new Object[19];
+         Object cols[] = new Object[20];
          table.getColumnModel().getColumn(1).setCellEditor(new JDateChooserCellEditor());
          table.getColumnModel().getColumn(5).setCellEditor(new JDateChooserCellEditor());
          table.getColumnModel().getColumn(6).setCellEditor(new JDateChooserCellEditor());
@@ -411,8 +411,8 @@ public class CtrlIngresosEgresos implements ActionListener {
          for (int i = 0; i <= 15; i++) {
             cols[i] = new String();
         }
-         cols[17]="Guardar";
-         cols[18]="Anular";
+         cols[18]="Guardar";
+         cols[19]="Anular";
          
        //  setFormatTable(table);
         tb.insertRow(0, cols);

@@ -69,7 +69,6 @@ public class CtrlBuscarVentas implements ActionListener {
         this.visFicha = visFicha;
         
         this.visVentas.cmbTipoBusqueda.addActionListener(this);
-        this.visVentas.btnMostrarFacturas.addActionListener(this);
         this.visVentas.cmbElegirBusquedaFac.addActionListener(this);
         
         f = new FacturaCab();
@@ -132,11 +131,7 @@ public class CtrlBuscarVentas implements ActionListener {
            
        }
        
-      if (e.getSource() == visVentas.btnMostrarFacturas) 
-       { 
-           showTableFacturasCabeceras();           
-           
-       }
+    
     }
     
     public void iniciar()

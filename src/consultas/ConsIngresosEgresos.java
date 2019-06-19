@@ -522,7 +522,8 @@ public class ConsIngresosEgresos extends Conexion {
                         + " fD.Descripcion_Facdet,' 'as FechaInicio,''as FechaFin,fC.Total_Faccab,'' as egreso,fC.Valcancelo_Faccab,"
                         + " fC.Valpendiente_Faccab,fC.Valajuste_Faccab,'' as estadoEnt, " 
                             + " (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " 
-                            + " from facturacabecera fC2 " 
+                            + " from facturacabecera fC2 "
+                            + " where p.id_per = fC2.persona_id_per" 
                             +  " ) as saldoP , p.id_per,pro.id_prod,1 as codHist " +
                     " from persona p, facturacabecera fC,FacturaDetalle fD,producto pro,categoria ca  " +
                     " where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and "
@@ -533,7 +534,7 @@ public class ConsIngresosEgresos extends Conexion {
                              + " fC1.Valcancelo_Faccab,fC1.Valpendiente_Faccab,fC1.Valajuste_Faccab,h.estadoDias_HisPerSer,"
                              + " (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " 
                              + " from facturacabecera fC2 " 
-                             + " )as saldoP, p.id_per,pro.id_prod,h.ID_HISPERSER " 
+                             + "  where p.id_per = fC2.persona_id_per)as saldoP, p.id_per,pro.id_prod,h.ID_HISPERSER " 
                     + " from persona p, facturacabecera fC1,FacturaDetalle fD,producto pro,histpersserv h,categoria ca " +
                     " where p.id_per = fC1.Persona_Id_Per  and fC1.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=1 " +
                     " and pro.id_prod=h.producto_id_hisperser and p.id_per=h.persona_id_hisperser and ROWNUM <= 30 and fC1.ESTADO_FACCAB=1 " +
