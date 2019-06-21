@@ -137,8 +137,8 @@ public class CtrlBuscarVentas implements ActionListener {
     public void iniciar()
     {
         visVentas.setTitle(Configuracion.nomEmp +" BUSQUEDA DE VENTAS");
-        visVentas.setSize(1200, 800);
-        visVentas.setLocation(400, 200);
+        visVentas.setSize(900, 600);
+        visVentas.setLocation(100, 100);
         visVentas.setVisible(true);
        
         showTable();

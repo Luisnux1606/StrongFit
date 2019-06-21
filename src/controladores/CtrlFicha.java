@@ -310,8 +310,8 @@ public class CtrlFicha implements ActionListener{
         limpiar();
         
 
-        visFicha.setLocation(300,10); 
-        visFicha.setSize(1500,968);                
+        visFicha.setLocation(200,10); 
+        visFicha.setSize(900,668);                
         visFicha.setVisible(true);
     
         visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

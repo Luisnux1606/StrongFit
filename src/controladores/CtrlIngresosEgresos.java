@@ -463,8 +463,8 @@ public class CtrlIngresosEgresos implements ActionListener {
     public void iniciar()
     {
         visIngEgr.setTitle(Configuracion.nomEmp +" INGRESOS EGRESOS TRANSACCIONALES");
-        visIngEgr.setSize(1400, 800);
-        visIngEgr.setLocation(300, 100);
+        visIngEgr.setSize(900, 600);
+        visIngEgr.setLocation(100, 100);
         visIngEgr.setVisible(true);
        
         showTableIngresosEgresos();
