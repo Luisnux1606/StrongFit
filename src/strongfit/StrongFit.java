@@ -76,7 +76,7 @@ public class StrongFit {
         CtrlAnalisis ctrlAna = new CtrlAnalisis(ana, consAna, visFicha);
         CtrlFacturaCab ctrlFacturaCab = new CtrlFacturaCab(facCab, consFacCab, visFicha, visMemb, per);
         CtrlFacturaCabCompras ctrlFacCabComp = new CtrlFacturaCabCompras(facCabComp, consFacCabComp, visFicha, visMemb, per);
-       // CtrlRegistroEntrada ctrlRegEnt = new CtrlRegistroEntrada(visFicha);
+        CtrlRegistroEntrada ctrlRegEnt = new CtrlRegistroEntrada(visFicha);
         
         CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha );
         ctrlFicha.iniciar();
