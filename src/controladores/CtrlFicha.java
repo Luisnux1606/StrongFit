@@ -311,7 +311,7 @@ public class CtrlFicha implements ActionListener{
         
 
         visFicha.setLocation(200,10); 
-        visFicha.setSize(900,668);                
+        visFicha.setSize(900,768);                
         visFicha.setVisible(true);
     
         visFicha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -915,6 +915,11 @@ public class CtrlFicha implements ActionListener{
             CtrlReportes ctrlRepo = new CtrlReportes(visRepo);
             
             
+         }
+         if (e.getSource() == visFicha.txtValDscto) 
+         {
+             System.out.println("hhh");
+             Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
          }
          //////
          if (e.getSource() == visFicha.mniMembresias) 

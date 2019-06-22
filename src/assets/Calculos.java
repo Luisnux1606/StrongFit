@@ -319,13 +319,16 @@ public class Calculos {
     }
      public static void setTotalesCabecera(JTable facDet,VisFicha visFicha)
     {
-        visFicha.txtValPagar.setText(calcularValorPagar(facDet,visFicha)+"");
+        double valPagar = calcularValorPagar(facDet,visFicha);
+        visFicha.txtValPagar.setText(valPagar+"");
         visFicha.txtValConDsctoFicha.setText(setDescuentoFromDetEnt(visFicha)+"");
         visFicha.txtTotalConIva.setText(setTotalConIva(visFicha)+"");
         
-        visFicha.txt_valCancelo.setText(setTotalConIva(visFicha)+"");
-        visFicha.txtValPendienteFicha.setText(getDiferencia(setTotalConIva(visFicha),getValCancelo(visFicha) )+"");               
+        visFicha.txt_valCancelo.setText(calcularValorPagar(facDet,visFicha)+"");
+        visFicha.txtValPendienteFicha.setText(getDiferencia(valPagar,getValCancelo(visFicha) )+"");               
     }
+     
+     
      
      public static void setTotalesCabeceraCompras(JTable facDet,VisFicha visFicha)
     {

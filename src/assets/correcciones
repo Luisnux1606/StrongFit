@@ -43,8 +43,8 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 
 *********GESTION DE PRODUCTOS/SERVICIOS***************  REVISADO
-1. Borrar en la tabla los campos "idcat", "idcalfechaserv"
-2. El campo "categoria" cambiarlo a la primera columna antes que el campo "ID"
+1. Borrar en la tabla los campos "idcat", "idcalfechaserv" :ok
+2. El campo "categoria" cambiarlo a la primera columna antes que el campo "ID" :ok
 
 GUARDAR= ok
 ELIMINAR= ok
@@ -87,15 +87,15 @@ AGREGAR= ok
 ElIMINAR= ok
 
 MEMBRESIA
-1.Cuando elijo una membresia se pone en cero "valor a pagar", "valor que cancelo", y "cobro pendiente".
+1.Cuando elijo una membresia se pone en cero "valor a pagar", "valor que cancelo", y "cobro pendiente". :ok
 
 
 *********GENERAR COMPRAS***************
 1. Incluir el combo en la tabla detalle, al igual como hizo en VENTAS :r
-2. Quitar label que muestra un código. :r
-3. Actualizar el "valor a pagar" si se actualiza "valor unitario". :r
-4. Actualizar el "cobro pendiente" en base al "valor que cancela". :r
-5. Entre "GENERAR COMPRAS" y "GENERAR VENTAS" se cambia el orden del cuadro amarillo que contiene "valor que cancelo" y "cobro pendiente":r
+2. Quitar label que muestra un código. :ok
+3. Actualizar el "valor a pagar" si se actualiza "valor unitario". :ok(si esta)
+4. Actualizar el "cobro pendiente" en base al "valor que cancela". :ok(dando un enter)
+5. Entre "GENERAR COMPRAS" y "GENERAR VENTAS" se cambia el orden del cuadro amarillo que contiene "valor que cancelo" y "cobro pendiente"::ok
 
 GUARDAR= ok
 LIMPIAR= ok
@@ -104,13 +104,13 @@ AGREGAR= ok
 ELIMINAR= ok
 
 MEMBRESIA
-1. No realiza nada.
+1. No realiza nada. :ok
 
 
 *********CONSULTAS*************** 
 ------VENTAS REALIZADAS------  REVISADO
 1. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón. :ok 
-2. Incluir en el combo las opciones de: "anulados", "eliminados".:r
+2. Incluir en el combo las opciones de: "anulados", "eliminados".:(solo au=nulados no existe eliminados)
 3. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona.:r
 4. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):r
 

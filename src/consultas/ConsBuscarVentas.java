@@ -541,6 +541,34 @@ public class ConsBuscarVentas extends Conexion {
         return rs;
     }
     
+    public ResultSet buscarFacturasEliminadas()
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
+                        "from persona p, facturacabecera fC " +
+                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 3" +
+                        "order by fC.Id_Faccab desc";                       
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
     public ResultSet buscarFacturasByNom(String nom)
     {
         PreparedStatement ps = null;
