@@ -160,7 +160,7 @@ public class CtrlProductos implements ActionListener{
         limpiar();
         
         visProd.setLocation(300,10); 
-        visProd.setSize(1000,600);                
+        visProd.setSize(1000,700);                
         visProd.setVisible(true);
     }
     
