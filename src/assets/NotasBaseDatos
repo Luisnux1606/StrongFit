@@ -7,4 +7,17 @@ Campo estado
 2 = configuracion  //para manejo de programa
 3 = anulado
 
+Tabla Entrenamientos
+    Entrenamientos se guarda en la tabla de entrenamientos como fechaIni y fechaFin
 
+
+
+FacturaVentas
+    se guarda en facturaCabeceras, y facturaDetalles
+    si elige entrenamiento , tambien se genera un entrenamiento en tabla entrenamientos
+
+FacturaCompras
+    se guarda en facturaVentas y facVentasDetalles
+
+Stock
+    se actualiza en productos cuando se elige un producto de la facturaCompras o facturaVentas
