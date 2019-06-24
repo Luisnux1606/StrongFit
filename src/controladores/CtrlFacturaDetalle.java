@@ -208,9 +208,8 @@ public class CtrlFacturaDetalle implements ActionListener {
           public void keyPressed(KeyEvent e) {
 
               Calculos.calcularTotalDetalles(facDet);             
-              Calculos.calcularValorPagar(facDet,visFicha);
-              
-              
+              Calculos.setTotalesCabecera(facDet,visFicha);
+                            
               if (e.getKeyCode()==KeyEvent.VK_F1 )
               {
                 

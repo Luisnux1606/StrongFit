@@ -3547,7 +3547,7 @@
                               <Table columnCount="5" rowCount="4">
                                 <Column editable="false" title="IdProducto" type="java.lang.Object"/>
                                 <Column editable="true" title="Cantidad" type="java.lang.Object"/>
-                                <Column editable="false" title="Descripcion" type="java.lang.Object"/>
+                                <Column editable="true" title="Descripcion" type="java.lang.Object"/>
                                 <Column editable="true" title="V.Unitario" type="java.lang.Object"/>
                                 <Column editable="false" title="V.Total" type="java.lang.Object"/>
                               </Table>

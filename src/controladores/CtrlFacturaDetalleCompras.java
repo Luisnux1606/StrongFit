@@ -8,6 +8,8 @@ package controladores;
 import assets.Calculos;
 import static assets.Calculos.calcularTotalDetalle;
 import static assets.Calculos.getTwoDecimals;
+import assets.ItemRendererProducto;
+import assets.Java2sAutoComboBox;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsFacturaDet;
@@ -15,9 +17,18 @@ import consultas.ConsFacturaDetCompras;
 import consultas.ConsProductos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -25,6 +36,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import modelos.CalculoFechaServicio;
 import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.FacturaCabCompras;
@@ -50,10 +62,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
         this.consFacDetCompras = consFacDet;
         this.visFicha = visFicha;
         
-      //  this.visFicha.btnGuardarFacCab.addActionListener(this);
-//        this.visFicha.btnEliminarFacCab.addActionListener(this);
         this.visFicha.btnLimpiarFacCabComp.addActionListener(this);
-//        this.visFicha.btnModificarFacCab.addActionListener(this);
         this.visFicha.btnBuscarDsctoCompra.addActionListener(this);
         this.visFicha.btnCalcularCompras.addActionListener(this);
         this.visFicha.btnBuscarClienteFacturaComp.addActionListener(this);
@@ -64,9 +73,108 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
         setListener();
         limpiarTablaDetalles();
         setFormatTable(visFicha.tblFacturaDetalleCompras);
-        
+        crearTablaCombo();       
     }
     
+    
+    public ArrayList<Producto> getProductosServicios()
+    {
+        ConsProductos consProd=new ConsProductos();
+        ArrayList<Producto> listSomeString = new ArrayList<Producto>();
+        try 
+        {
+            ResultSet listProd = consProd.buscarTodos();
+            Object cols[] = new Object[11];
+
+             while (listProd.next()) {
+            try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                Categoria c = new Categoria();
+                CalculoFechaServicio calcF = new CalculoFechaServicio();
+                calcF.setId_calServ(listProd.getInt("id_calserv"));
+                c.setId_cat(listProd.getInt("id_cat"));
+                listSomeString.add(new Producto(listProd.getInt("ID_PROD"),listProd.getString("descripcion_prod").toUpperCase(),
+                                                  listProd.getString("FECHAINI_PROD"),listProd.getString("FECHAFIN_PROD"),
+                                                  listProd.getDouble("PRECIO_PROD"),c,calcF ));
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+               
+        consProd.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listSomeString;
+    }
+    
+    public Producto getIndexByItemCombo(JComboBox comboBox,String cad)
+    {
+        DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
+        
+        Producto p=new Producto();
+        for (int i = 0; i < model.getSize(); i++) {
+            if((((Producto)model.getElementAt(i)).getDescripcion_prod()).equals(cad))
+            {
+                p= (Producto)model.getElementAt(i);
+            }
+        }
+        return p;
+    }
+     private void crearTablaCombo() {
+
+        JTable tabDet = visFicha.tblFacturaDetalleCompras;      
+        ArrayList<Producto>  listSomeString = getProductosServicios();
+        Java2sAutoComboBox comboBox1 = new Java2sAutoComboBox(listSomeString);
+        comboBox1.setDataList(listSomeString);
+        comboBox1.setMaximumRowCount(5);
+        comboBox1.setRenderer(new ItemRendererProducto());
+       
+        ActionListener comboAct = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox1.getModel();
+                if (comboBox1.getSelectedIndex()!=-1) {
+                    System.out.println("dataenter "+((Producto)model.getElementAt(comboBox1.getSelectedIndex())).getId_prod());
+                }              
+            }
+        };
+        
+         comboBox1.addActionListener(comboAct);
+         comboBox1.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent event) {
+               JComboBox comboBox = (JComboBox) event.getSource();
+                  Object item = event.getItem();
+                   DefaultComboBoxModel model =  (DefaultComboBoxModel)comboBox.getModel();
+                   if (event.getStateChange() == ItemEvent.SELECTED) {
+                       System.out.println(item.toString() + " selected." +getIndexByItemCombo(comboBox,item.toString()).getId_prod());
+                       //if (comboBox.getSelectedIndex()!=-1) {                                                  
+                            int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
+                            double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
+                            try
+                            {
+                                tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
+                                tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                            }catch(Exception e){System.out.println("index en -1");}
+                            try {
+                                  System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
+                            } catch (Exception e) {
+                                System.out.println("seleccinado null: ");
+                        //    }
+                       }
+                   }
+
+                   if (event.getStateChange() == ItemEvent.DESELECTED) {
+                    System.out.println(item.toString() + " deselected.");
+                   }
+
+            }
+        });
+        visFicha.tblFacturaDetalleCompras.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));      
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setToolTipText("Click para ver producto");  
+    }
      private void initColumnSizes(JTable table) {
 		TableColumn column = null;
         for (int i = 0; i < 3; i++) {
@@ -88,7 +196,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
           public void keyPressed(KeyEvent e) {
 
               Calculos.calcularTotalDetalles(facDet);             
-              Calculos.calcularValorPagar(facDet,visFicha);
+              Calculos.setTotalesCabeceraCompras(facDet,visFicha);
               
               
               if (e.getKeyCode()==KeyEvent.VK_F1 )

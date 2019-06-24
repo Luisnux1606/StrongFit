@@ -8,10 +8,10 @@ TABLA
     3. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.: r(no se queria con cantidad )
     4. Validar que cuando se guarde en la tabla no se muestren los eliminados o anulados. (ahora está mostrando los eliminados) :ok;
     5. El campo saldo.cont.total no se calcula siguiendo con tab.
-    6. El campo saldo.cont.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes)
+    6. El campo saldo.cont.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes): ok
 
 BUSCAR(campo)
-    1. No busca ::r
+    1. No busca ::ok
 
 MOSTRAR TODOS
     1. Debe mostrar únicamente los activos, no los eliminados ni anulados. :ok
@@ -54,7 +54,7 @@ LIMPIAR
 1. Ordenar la tabla en base al ID. :ok
 
 BUSCAR(nombre)
-1. Debe buscar dependiendo si está habilitado "servicios", "productos" o "todos" :r
+1. Debe buscar dependiendo si está habilitado "servicios", "productos" o "todos" :ok(no importa, servicios son pocos)
 
 BUSCAR(lupa)
 1. no busca [sigue pendiente] : r(it's going to be by code)
@@ -71,7 +71,7 @@ MODIFICAR= ok
 LIMPIAR=ok
 
 BUSCAR(nombre)
-1. Cuando se borre lo que tiene la caja de texto mostrar los NO ELIMINADOS. 
+1. Cuando se borre lo que tiene la caja de texto mostrar los NO ELIMINADOS. :ok
 
 
 *********GENERAR VENTAS***************  REVISADO
@@ -91,7 +91,7 @@ MEMBRESIA
 
 
 *********GENERAR COMPRAS***************
-1. Incluir el combo en la tabla detalle, al igual como hizo en VENTAS :r
+1. Incluir el combo en la tabla detalle, al igual como hizo en VENTAS :ok
 2. Quitar label que muestra un código. :ok
 3. Actualizar el "valor a pagar" si se actualiza "valor unitario". :ok(si esta)
 4. Actualizar el "cobro pendiente" en base al "valor que cancela". :ok(dando un enter)
@@ -110,7 +110,7 @@ MEMBRESIA
 *********CONSULTAS*************** 
 ------VENTAS REALIZADAS------  REVISADO
 1. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón. :ok 
-2. Incluir en el combo las opciones de: "anulados", "eliminados".:(solo au=nulados no existe eliminados)
+2. Incluir en el combo las opciones de: "anulados", "eliminados".:ok(solo au=nulados no existe eliminados)
 3. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona.:r
 4. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):r
 
@@ -129,7 +129,7 @@ ANULAR
 FILTRAR POR COMBO
 
 BUSCAR(nombre)
-1. No busca y borra la tabla. :r
+1. No busca y borra la tabla. :ok
 
 ------FICHA DE ANALISIS------
 Pendiente :r
