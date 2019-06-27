@@ -19,15 +19,42 @@ MOSTRAR TODOS
 
 -------------------------------------------------------------------------------------------------------------------
 
-*********GESTION DE PERSONAS*************** REVISADO
+*********GESTION DE PERSONAS*************** REVISAR 
+1.Permitir que cuando ya esté la fecha registrada poderla editar sin que salte al género.
+2.Debería mostrar en la tabla el tipo de persona aunque ya se lo haya eliminado.
+
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
 LIMPIAR= ok
-BUSCAR(nombre)= ok
+
+BUSCAR(nombre)
+1.Debe buscar por todo el texto que ingrese, está buscando desde la segunda letra
+P.ej (elu= busca lu) =MAL   debería buscar elu =BIEN 
+2.Validar que cuando no tenga nada en la caja de texto no busque, o sino se genera el siguiente error. 
+java.sql.SQLException: Listener refused the connection with the following error:
+ORA-12519, TNS:no appropriate service handler found
+The Connection descriptor used by the client was:
+localhost:1521:xe
+
 BUSCAR(lupa)= ok
 
+*********GESTION DE PERSONAS*************** REVISAR
+
+AGREGAR= ok
+ELIMINAR= ok
+MODIFICAR= ok
+LIMPIAR= ok
+
+BUSCAR (nombre)
+1.Debe buscar por todo el texto que ingrese, está buscando desde la segunda letra.
+2.Buscar que en el texto puede estar en cualquier parte esa letra. 
+P.ej (descuentos busca cu y no sale)= esta funcionalidad si tiene la GESTION DE PERSONAS 
+
+
 *********GESTION DE MEMBRESIA*************** REVISADO
+1. la tabla se ordene por el ID. 
+
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
@@ -40,7 +67,11 @@ GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
 LIMPIAR= ok
+
 BUSCAR(nombre)= ok
+1.Buscar que en el texto puede estar en cualquier parte esa letra. 
+P.ej (descuentos busca cu y no sale)= esta funcionalidad si tiene la GESTION DE PERSONAS 
+
 
 *********GESTION DE PRODUCTOS/SERVICIOS***************  REVISADO
 1. Borrar en la tabla los campos "idcat", "idcalfechaserv" :ok
