@@ -92,9 +92,9 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
                 CalculoFechaServicio calcF = new CalculoFechaServicio();
                 calcF.setId_calServ(listProd.getInt("id_calserv"));
                 c.setId_cat(listProd.getInt("id_cat"));
-                listSomeString.add(new Producto(listProd.getInt("ID_PROD"),listProd.getString("descripcion_prod").toUpperCase(),
-                                                  listProd.getString("FECHAINI_PROD"),listProd.getString("FECHAFIN_PROD"),
-                                                  listProd.getDouble("PRECIO_PROD"),c,calcF ));
+                listSomeString.add(new Producto(listProd.getInt("ID_PROD"),Validaciones.isNumVoid4(listProd.getString("descripcion_prod")).toUpperCase(),
+                                                  Validaciones.isNumVoid4(listProd.getString("FECHAINI_PROD")),Validaciones.isNumVoid4(listProd.getString("FECHAFIN_PROD")),
+                                                  Validaciones.isNumVoid10(listProd.getDouble("PRECIO_PROD")+""),c,calcF  ));
 
             } catch (SQLException ex) {
                 Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);

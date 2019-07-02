@@ -54,7 +54,7 @@ import vistas.VisIngresoEgreso;
 import vistas.VisPersona;
 import vistas.VisProductos;
 import vistas.VisReportes;
-import visual.facturacion.MyTableModel;
+
 
 /**
  *
@@ -100,10 +100,9 @@ public class CtrlIngresosEgresos implements ActionListener {
         colHide[3]=16;
         colHide[4]=17;
         
-        
-       // colHide[1]=6;
+
         setHideJtableColumn(visIngEgr.tblIngresosEgresos,colHide);        
-        //setHideJtableColumn(visIngEgr.tbl_BuscarVentas,colHide);
+       setHideJtableColumn(visIngEgr.tblIngresosEgresosCons,colHide); 
     }
     
     public void setHideJtableColumn(JTable table, int col[])
