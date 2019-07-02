@@ -100,7 +100,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(tblFacturaDetalles);
 
-        cmbElegirBusquedaFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todos", "pendientes" }));
+        cmbElegirBusquedaFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "todos", "pendientes", "anulados" }));
 
         jLabel4.setText("Buscar por campos");
 

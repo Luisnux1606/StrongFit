@@ -10,21 +10,23 @@
 		<defaultValueExpression><![CDATA[$F{FECHAFIN}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') as FechaIni, TO_DATE(f.fechaFin_ficha, 'DD/MM/YYYY') as FechaFin, upper(concat(CONCAT(p.nom_per,' '),p.ape_per)) as nombres, upper(f.concepto_ficha), f.valPago_ficha,f.valPendiente_ficha
-from ficha f,persona p
-where p.id_per = f.Persona_id_per and TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') BETWEEN TO_DATE($P{p_fechaIni},'DD/MM/YYYY') AND TO_DATE($P{p_fechaFin},'DD/MM/YYYY') and p.estado_per=1 and f.estado_ficha=1]]>
+		<![CDATA[select TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') as FechaIni, TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') as FechaFin, upper(concat(CONCAT(p.nom_per,' '),p.ape_per)) as nombres, f.CONCEPTO_FACCAB, f.valPagar_faccab,f.valPendiente_faccab
+from facturaCabecera f,persona p
+where p.id_per = f.Persona_id_per and TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') BETWEEN TO_DATE($P{p_fechaIni},'DD/MM/YYYY') AND TO_DATE($P{p_fechaFin},'DD/MM/YYYY') and p.estado_per=1 and f.estado_faccab=1]]>
 	</queryString>
 	<field name="FECHAINI" class="java.sql.Timestamp"/>
 	<field name="FECHAFIN" class="java.sql.Timestamp"/>
 	<field name="NOMBRES" class="java.lang.String"/>
-	<field name="UPPER(F.CONCEPTO_FICHA)" class="java.lang.String"/>
-	<field name="VALPAGO_FICHA" class="java.math.BigDecimal"/>
-	<field name="VALPENDIENTE_FICHA" class="java.math.BigDecimal"/>
-	<variable name="valPago" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{VALPAGO_FICHA}]]></variableExpression>
+	<field name="valPagar_faccab" class="java.math.BigDecimal"/>
+	<field name="valPendiente_faccab" class="java.math.BigDecimal"/>
+	<field name="concepto_faccab" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="valPagar_faccab" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valPagar_faccab}]]></variableExpression>
 	</variable>
-	<variable name="valPendiente" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{VALPENDIENTE_FICHA}]]></variableExpression>
+	<variable name="valPendiente_faccab" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valPendiente_faccab}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -137,17 +139,17 @@ where p.id_per = f.Persona_id_per and TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') BE
 				<reportElement x="133" y="0" width="135" height="20" uuid="4517a842-2e62-4900-95ea-ac62241f8367"/>
 				<textFieldExpression><![CDATA[$F{NOMBRES}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="279" y="0" width="170" height="20" uuid="43b4b61d-f387-4da3-a82f-ab917667e548"/>
-				<textFieldExpression><![CDATA[$F{UPPER(F.CONCEPTO_FICHA)}]]></textFieldExpression>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="508" y="0" width="47" height="20" uuid="ccd4e4b4-a3a1-4c71-9e2d-b0e0eed81467"/>
+				<textFieldExpression><![CDATA[$F{valPendiente_faccab}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="449" y="0" width="46" height="20" uuid="79e5369f-009e-4563-a093-a5e2828bb7f8"/>
-				<textFieldExpression><![CDATA[$F{VALPAGO_FICHA}]]></textFieldExpression>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="250" y="2" width="112" height="20" uuid="14788d7a-18ca-4cdc-b0fa-65a90c87b83b"/>
+				<textFieldExpression><![CDATA[$F{concepto_faccab}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="508" y="0" width="35" height="20" uuid="4195d7d7-27bd-463e-ae00-6855e243d725"/>
-				<textFieldExpression><![CDATA[$F{VALPENDIENTE_FICHA}]]></textFieldExpression>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="436" y="2" width="60" height="20" uuid="56fac182-2896-4d94-9d78-f7fb1c04f5a1"/>
+				<textFieldExpression><![CDATA[$F{valPagar_faccab}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -160,7 +162,7 @@ where p.id_per = f.Persona_id_per and TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') BE
 		</band>
 	</lastPageFooter>
 	<summary>
-		<band height="53" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<staticText>
 				<reportElement x="349" y="33" width="78" height="20" uuid="2acafcec-1ff2-46ab-a3d9-78f562f8fb95"/>
 				<textElement>
@@ -168,13 +170,13 @@ where p.id_per = f.Persona_id_per and TO_DATE(f.fechaIni_ficha, 'DD/MM/YYYY') BE
 				</textElement>
 				<text><![CDATA[TOTALES:]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="449" y="33" width="34" height="20" uuid="56b1d333-1d0f-4d1a-ba1a-3460083baffb"/>
-				<textFieldExpression><![CDATA[$V{valPago}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valPagar_faccab}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="496" y="33" width="35" height="20" uuid="564344df-e466-41c9-91f4-d85307c22e08"/>
-				<textFieldExpression><![CDATA[$V{valPendiente}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{valPendiente_faccab}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

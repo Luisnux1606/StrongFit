@@ -122,6 +122,13 @@ public class CtrlProductos implements ActionListener{
         setFormatTable(visProd.tbl_productos);
         escribirCombos();
      //   setTableModel();
+        
+        int colHide[] = new int[3];
+        colHide[0]=0;
+        colHide[1]=10;
+        colHide[2]=11;
+       
+        setHideJtableColumn(visProd.tbl_productos,colHide);
     }
     
     private void escribirCombos()
@@ -130,7 +137,15 @@ public class CtrlProductos implements ActionListener{
         AutoCompleteDecorator.decorate(visProd.cmbCalcFechaServ); 
       }  
     
+    public void setHideJtableColumn(JTable table, int col[])
+    {
+        for (int i = 0; i < col.length; i++) {
+            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
+            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
+            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
+        }       
     
+    }
     public void iniciar()
     {
         visProd.setTitle(Configuracion.nomEmp +" PRODUCTOS/SERVICIOS");    
@@ -145,7 +160,7 @@ public class CtrlProductos implements ActionListener{
         limpiar();
         
         visProd.setLocation(300,10); 
-        visProd.setSize(1000,600);                
+        visProd.setSize(1000,700);                
         visProd.setVisible(true);
     }
     
@@ -467,16 +482,7 @@ public class CtrlProductos implements ActionListener{
             }
         }
     }
-    public void setHideJtableColumn(JTable table, int col[])
-    {
-        for (int i = 0; i < col.length; i++) {
-            table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
-            table.getColumnModel().getColumn(col[i]).setMinWidth(0);
-            table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
-        }
-       
-    
-    }
+  
      public void getTableToTxts()
      {
         // limpiar();

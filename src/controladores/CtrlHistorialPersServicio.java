@@ -137,7 +137,9 @@ public class CtrlHistorialPersServicio implements ActionListener{
         visHisPerServ.btnLimpiar.setToolTipText("Limpiar el registro");
         //visEnt.tabp_ficha.setSelectedIndex(2);
         limpiar();    
-        visHisPerServ.txtPersona.setText(per.getNombre()+" "+Validaciones.isNumVoid4(per.getApellido()) );
+        if (per.getNombre()!=null && per.getApellido() !=null)                   
+            visHisPerServ.txtPersona.setText(per.getNombre()+" "+Validaciones.isNumVoid4(per.getApellido()) );
+        
         visHisPerServ.lblIdPersona.setText(per.getId()+"");
         showDataTableByLocal();                
         visHisPerServ.setLocation(300,10); 
@@ -665,6 +667,7 @@ public class CtrlHistorialPersServicio implements ActionListener{
         visHisPerServ.dchFechaFin.setDate(null);
         visHisPerServ.dchFechaIni.setDate(null);
         visHisPerServ.txtPersona.setText("");
+        
 //        visHisPerServ.cbxServicio.setSelectedIndex(0);
        
        

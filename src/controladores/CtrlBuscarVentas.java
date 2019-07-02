@@ -128,6 +128,9 @@ public class CtrlBuscarVentas implements ActionListener {
            if (tipo.equals("todos")) {
                showTableFacturasCabeceras();
             }
+           if (tipo.equals("eliminados")) {
+               showTableFacturasCabecerasEliminados();
+            }
            
        }
        
@@ -341,6 +344,48 @@ public class CtrlBuscarVentas implements ActionListener {
         new ButtonTable(visVentas);
         visVentas.tblFacturasCabeceras.updateUI();
     }  
+    
+    public void showTableFacturasCabecerasEliminados()
+    {
+        try {
+            limpiarTabla(visVentas.tblFacturasCabeceras);
+            ResultSet listFicha = consBuscarVentas.buscarFacturasEliminadas();
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
+            Object cols[] = new Object[11];
+           
+            while (listFicha.next()) {
+                try {
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("nombres");
+                    cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
+                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[4] = listFicha.getString("Concepto_Faccab");
+                    cols[5] = listFicha.getString("Total_Faccab");
+                    cols[6] = listFicha.getString("Valcancelo_Faccab");
+                    cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[8] = listFicha.getDouble("valajuste_faccab");
+                    cols[9] = "Guardar";
+                    cols[10] = "Anular";
+                    
+                
+                    model.addRow(cols);
+                    
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        new ButtonTable(visVentas);
+        visVentas.tblFacturasCabeceras.updateUI();
+    } 
     
     public void showTableFacturasCabecerasByNom(String nom)
     {

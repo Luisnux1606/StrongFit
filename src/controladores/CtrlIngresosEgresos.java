@@ -54,7 +54,7 @@ import vistas.VisIngresoEgreso;
 import vistas.VisPersona;
 import vistas.VisProductos;
 import vistas.VisReportes;
-import visual.facturacion.MyTableModel;
+
 
 /**
  *
@@ -100,10 +100,9 @@ public class CtrlIngresosEgresos implements ActionListener {
         colHide[3]=16;
         colHide[4]=17;
         
-        
-       // colHide[1]=6;
+
         setHideJtableColumn(visIngEgr.tblIngresosEgresos,colHide);        
-        //setHideJtableColumn(visIngEgr.tbl_BuscarVentas,colHide);
+       setHideJtableColumn(visIngEgr.tblIngresosEgresosCons,colHide); 
     }
     
     public void setHideJtableColumn(JTable table, int col[])
@@ -182,29 +181,12 @@ public class CtrlIngresosEgresos implements ActionListener {
             
               if (e.getKeyCode()==KeyEvent.VK_F1 )
               {
-                /*
-                  VisPersona visPer = new VisPersona();
-                  ConsPersona consPer = new ConsPersona();
-                  Persona per=new Persona();
-                  
-                  CtrlPersonas ctrPer=new CtrlPersonas(per,consPer, visPer, visIngEgr);
-                  ctrPer.locale = 5;
-                  ctrPer.iniciar();
-                  */
+               
               }
               
               if (e.getKeyCode()==KeyEvent.VK_F2 )
               {
-                /*
-                VisProductos visProd = new VisProductos();
-                ConsProductos consProd = new ConsProductos();
-                Producto prod=new Producto();
-                Categoria cat=new Categoria();
-
-                CtrlProductos ctrProd=new CtrlProductos(prod,consProd, visProd, visFicha,visFicha);
-                ctrProd.locale = 2;
-                ctrProd.iniciar();
-                        */
+               
               }
           }
 
@@ -398,6 +380,47 @@ public class CtrlIngresosEgresos implements ActionListener {
         
         };
         visIngEgr.tblIngresosEgresos.addMouseListener(mouseListTblIngEgr);
+        
+        
+        
+        ///**********************TXTBUSCARPORCAMPOS*************************
+        
+        KeyListener keyListenerTxtBuscarCampos = new KeyListener() {
+          public void keyPressed(KeyEvent e) {
+
+            
+              if (e.getKeyCode()==KeyEvent.VK_F1 )
+              {
+               
+              }
+              
+              if (e.getKeyCode()==KeyEvent.VK_F2 )
+              {
+               
+              }
+          }
+
+          public void keyReleased(KeyEvent keyEvent) {
+           
+          }
+
+          public void keyTyped(KeyEvent e) {
+             int m=e.getKeyChar();
+             System.out.println ("------------------------------------- "+m + " "+visIngEgr.tblIngresosEgresos.getSelectedColumn());
+             
+             
+             int col =facDet.getSelectedColumn();
+             int  row =0;
+             if(m == KeyEvent.VK_ENTER) 
+             {
+                 String cadCamp = Validaciones.isNumVoid4(visIngEgr.txtBuscarCampo.getText());
+                 showTableIngresosEgresosCampos(cadCamp);
+                 System.out.println("aqui estoy...");
+             }
+          }         
+                                                              
+        };
+        visIngEgr.txtBuscarCampo.addKeyListener(keyListenerTxtBuscarCampos);
     }
     
     public void addRows(JTable table)
@@ -676,7 +699,59 @@ public class CtrlIngresosEgresos implements ActionListener {
              
         new ButtonTableIngresosEgresos(visIngEgr);
         visIngEgr.tblIngresosEgresos.updateUI();
-    }  
+    }
+    public void showTableIngresosEgresosCampos(String cadCampo)
+    {
+        try {
+            limpiarTabla(visIngEgr.tblIngresosEgresos);
+            ResultSet listFicha = consIngEgr.buscarIngresosEgresosCampos(cadCampo);
+            
+            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
+            Object cols[] = new Object[20];
+           
+            while (listFicha.next()) {
+                try { 
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("Fecha_Faccab");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
+                    cols[4] = listFicha.getString("Descripcion_Facdet");
+                    cols[5] = listFicha.getString("FechaInicio");
+                    cols[6] = listFicha.getString("FechaFin");
+                    cols[7] = listFicha.getString("Total_Faccab");
+                    cols[8] = listFicha.getDouble("egreso");
+                    cols[9] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[10] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[11] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[12] = listFicha.getDouble("estadoEnt");
+                    cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[14] = listFicha.getDouble("saldoP");
+                    cols[15] = listFicha.getInt("id_per");
+                    cols[16] = listFicha.getInt("id_prod");
+                    cols[17] = listFicha.getInt("codHist");
+                    
+                    cols[18] = "Guardar";
+                    cols[19] = "Anular";
+                    cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);  
+                    
+                    model.addRow(cols);
+                    
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consIngEgr.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        new ButtonTableIngresosEgresos(visIngEgr);
+        visIngEgr.tblIngresosEgresos.updateUI();
+    }
+    
     
     public void showTableIngresosEgresosAnulados()
     {
