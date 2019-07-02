@@ -3,10 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
-
-
-        <group/>
-
         <group>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/vistas/VisFicha.java</file>
         </group>
@@ -20,13 +16,14 @@
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/consultas/ConsBuscarVentas.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlProductos.java</file>
         </group>
-
         <group/>
         <group/>
-
         <group>
             <file>file:/C:/Users/aplaza/Documents/NetBeansProjects/StrongFit/src/assets/correcciones</file>
         </group>
-
+        <group>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlFacturaDetalle.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlFacturaDetalleCompras.java</file>
+        </group>
     </open-files>
 </project-private>
