@@ -28,7 +28,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tbpVentasRealizadas = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblFacturasCabeceras = new javax.swing.JTable();
@@ -136,7 +136,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
                 .addGap(68, 68, 68))
         );
 
-        jTabbedPane1.addTab("Ventas realizadas", jPanel3);
+        tbpVentasRealizadas.addTab("Ventas realizadas", jPanel3);
 
         jLabel2.setText("Buscar por cualquier campo");
 
@@ -219,7 +219,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
                 .addContainerGap(114, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Entrenamientos y saldos", jPanel1);
+        tbpVentasRealizadas.addTab("Entrenamientos y saldos", jPanel1);
 
         lblBuscarFichas.setText("Buscar por campo");
 
@@ -260,7 +260,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
                 .addContainerGap(202, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Fichas de analisis corporal", jPanel2);
+        tbpVentasRealizadas.addTab("Fichas de analisis corporal", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,7 +270,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tbpVentasRealizadas, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(194, 194, 194)
                         .addComponent(jLabel1)))
@@ -282,7 +282,7 @@ public class VisBuscarVentas extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tbpVentasRealizadas, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(147, Short.MAX_VALUE))
         );
 
@@ -340,13 +340,13 @@ public class VisBuscarVentas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     public javax.swing.JLabel lblBuscarFichas;
     public javax.swing.JTable tblDetalles;
     public javax.swing.JTable tblFacturaDetalles;
     public javax.swing.JTable tblFacturasCabeceras;
     public javax.swing.JTable tbl_BuscarVentas;
+    public javax.swing.JTabbedPane tbpVentasRealizadas;
     public javax.swing.JTextField txtBuscarCampo;
     public javax.swing.JTextField txtBuscarFichas;
     public javax.swing.JTextField txt_buscarPersonaNombres;

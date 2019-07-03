@@ -159,7 +159,17 @@ public class CtrlBuscarVentas implements ActionListener {
                 visVentas.setLocation(100, 100);
                 visVentas.setVisible(true);       
                 System.out.println(p.getCedula());
-                showTableFacPendientesByCed(p.getCedula());
+                showTableFacPendientesByCed(p.getCedula());                
+                break;
+                
+             case 2:
+                visVentas.setTitle(Configuracion.nomEmp +" BUSQUEDA DE VENTAS DE "+p.getNombre() + " "+p.getApellido());
+                visVentas.tbpVentasRealizadas.setSelectedIndex(2);
+                visVentas.setSize(900, 600);
+                visVentas.setLocation(100, 100);
+                visVentas.setVisible(true);       
+                System.out.println(p.getCedula());
+                showTableByCed(p.getCedula());
                 
                 break;
                
@@ -286,6 +296,42 @@ public class CtrlBuscarVentas implements ActionListener {
             limpiarTabla(visVentas.tbl_BuscarVentas);
             
             ResultSet listFicha = consBuscarVentas.buscarTodosPorNomTabla(nom);
+            
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
+            Object cols[] = new Object[10];
+            
+            while (listFicha.next()) {
+                try {
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("ced_per");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = listFicha.getString("fechaini_hisperser");
+                    cols[4] = listFicha.getString("fechafin_hisperser");
+                    cols[5] = listFicha.getString("Concepto_Faccab");
+                    cols[6] = listFicha.getString("Fecha_Faccab");
+                    cols[7] = listFicha.getDouble("Total_Faccab");
+                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
+                    model.addRow(cols);
+                    
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public void showTableByCed(String ced)
+    {
+        try {
+            limpiarTabla(visVentas.tbl_BuscarVentas);
+            
+            ResultSet listFicha = consBuscarVentas.buscarTodosPorNomTablaCed(ced);
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];

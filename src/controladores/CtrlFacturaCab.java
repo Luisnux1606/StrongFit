@@ -455,13 +455,20 @@ public class CtrlFacturaCab implements ActionListener{
         } 
         if (e.getSource() == visFicha.btnDeudas) 
         {
-            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();
-            
-            ConsBuscarVentas consFacCab = new ConsBuscarVentas();
-           
-            
+            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();            
+            ConsBuscarVentas consFacCab = new ConsBuscarVentas();                       
             CtrlBuscarVentas ctrlBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
             ctrlBuscarVentas.locale = 1; 
+            ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
+            ctrlBuscarVentas.iniciar();
+        }
+        
+        if (e.getSource() == visFicha.btnEntrenSaldos) 
+        {
+            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();            
+            ConsBuscarVentas consFacCab = new ConsBuscarVentas();                       
+            CtrlBuscarVentas ctrlBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
+            ctrlBuscarVentas.locale = 2; 
             ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
             ctrlBuscarVentas.iniciar();
         }
