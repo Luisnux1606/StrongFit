@@ -164,7 +164,7 @@ public class CtrlBuscarVentas implements ActionListener {
                 
              case 2:
                 visVentas.setTitle(Configuracion.nomEmp +" BUSQUEDA DE VENTAS DE "+p.getNombre() + " "+p.getApellido());
-                visVentas.tbpVentasRealizadas.setSelectedIndex(2);
+                visVentas.tbpVentasRealizadas.setSelectedIndex(1);
                 visVentas.setSize(900, 600);
                 visVentas.setLocation(100, 100);
                 visVentas.setVisible(true);       
