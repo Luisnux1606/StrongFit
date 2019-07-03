@@ -114,7 +114,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.btnModificarFichaG.addActionListener(this);     
         this.visFicha.btnElegirPersonaG.addActionListener(this);
         this.visFicha.btnCargarFichas.addActionListener(this);
-        
+               
         this.visFicha.mniMembresias.addActionListener(this);
         this.visFicha.mniPersonas.addActionListener(this);
         this.visFicha.mniTipoPersona.addActionListener(this);
@@ -132,6 +132,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniEntrenamientos.addActionListener(this);
         
         this.visFicha.mniDescripcionTransaccional.addActionListener(this);
+        
         
         this.visFicha.txtCodPersona.setVisible(false);
         
@@ -899,13 +900,15 @@ public class CtrlFicha implements ActionListener{
             ctrPer.iniciar();
             ctrPer.locale = 1;
         }                 
-         if (e.getSource() == visFicha.btnCargarFichas) 
+        if (e.getSource() == visFicha.btnCargarFichas) 
         {           
             setMedidasAnalisisFichas();
             if (!Validaciones.isNumVoid1(visFicha.txtCodPersona.getText())) {
                 deshabilitaMedAlimAnalisis();
             }
         }
+       
+         
                 
          if (e.getSource() == visFicha.mniReportes) 
          {

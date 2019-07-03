@@ -29,7 +29,7 @@ public class Persona {
      * @return the cedula
      */
     
-    public Persona(String nombre, String apellido, int id)
+    public Persona(String nombre, String apellido, int id,String cedula)
     {
         this.id = id;
         this.cedula = cedula;

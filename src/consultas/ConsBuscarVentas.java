@@ -472,6 +472,37 @@ public class ConsBuscarVentas extends Conexion {
        return rs;
     }
     
+    public ResultSet buscarPendientesByCed(String ced)
+    {
+        
+        PreparedStatement ps = null;
+        con = getConexion();
+        ResultSet rs = null; 
+        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_faccab, f.fechaFin_faccab, f.VALCANCELO_FACCAB, f.valPendiente_faccab,f.concepto_faccab " +
+                        "FROM FACTURACABECERA f, persona p " +
+                        "where  p.id_per=f.persona_id_per and f.valPendiente_faccab>0 and f.estado_faccab=1 and p.ced_per like'"+ced+"'" ;
+                       
+                
+        ArrayList datos = new ArrayList();
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+            
+        }
+       return rs;
+    }
+    
     public void closeConection()
     {
         
@@ -521,6 +552,34 @@ public class ConsBuscarVentas extends Conexion {
         String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
                         "from persona p, facturacabecera fC " +
                         "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1" +
+                        "order by fC.Id_Faccab desc";                       
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarFacturasByCed(String ced)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
+                        "from persona p, facturacabecera fC " +
+                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1 and p.ced_per like '"+ced+"'" +
                         "order by fC.Id_Faccab desc";                       
         try 
         {
@@ -596,6 +655,8 @@ public class ConsBuscarVentas extends Conexion {
         }
         return rs;
     }
+    
+     
     
         public ResultSet buscarFacturasPendientesPago()
         {

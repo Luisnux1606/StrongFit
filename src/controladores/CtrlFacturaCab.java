@@ -12,6 +12,7 @@ import assets.ItemRendererClienteFac;
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
 import consultas.ConsAnalisis;
+import consultas.ConsBuscarVentas;
 import consultas.ConsFacturaCab;
 import consultas.ConsFacturaDet;
 import consultas.ConsHistorialPersonaServicio;
@@ -53,6 +54,7 @@ import modelos.Membresias;
 import modelos.Persona;
 import modelos.Producto;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import vistas.VisBuscarVentas;
 
 import vistas.VisFicha;
 import vistas.VisHistorialPersonaServicio;
@@ -105,6 +107,8 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnAgregarFilas.addActionListener(this);
         this.visFicha.btnEliminarFilas.addActionListener(this);
         this.visFicha.btnEntrenamiento.addActionListener(this);
+        this.visFicha.btnDeudas.addActionListener(this);
+        this.visFicha.btnEntrenSaldos.addActionListener(this);
         
         cadBus = "";
        
@@ -150,7 +154,7 @@ public class CtrlFacturaCab implements ActionListener{
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     
-                    model.addElement(new Persona(listCategorias.getString("ape_per"),listCategorias.getString("nom_per"),listCategorias.getInt("id_per")));
+                    model.addElement(new Persona(listCategorias.getString("ape_per"),listCategorias.getString("nom_per"),listCategorias.getInt("id_per"),listCategorias.getString("ced_per")));
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
@@ -422,6 +426,7 @@ public class CtrlFacturaCab implements ActionListener{
                 visFicha.txt_valEntregado.setText(Calculos.setTwoDecimals(txtCambio)+"");
                }
         }
+        
         if (e.getSource() == visFicha.btnBuscarClienteFactura) 
         {
            
@@ -448,6 +453,19 @@ public class CtrlFacturaCab implements ActionListener{
             ctlHis.iniciar();                       
 
         } 
+        if (e.getSource() == visFicha.btnDeudas) 
+        {
+            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();
+            
+            ConsBuscarVentas consFacCab = new ConsBuscarVentas();
+           
+            
+            CtrlBuscarVentas ctrlBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
+            ctrlBuscarVentas.locale = 1; 
+            ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
+            ctrlBuscarVentas.iniciar();
+        }
+        
         if (e.getSource()==visFicha.cmb_clienteFac)
         {
             if (visFicha!=null) {                

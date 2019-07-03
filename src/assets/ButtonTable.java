@@ -30,14 +30,18 @@ public class ButtonTable extends JFrame
     
     ConsFacturaCab consFacCab;
     VisBuscarVentas visVentas;
+    public int locale;
+    public String cedula;
     
-    public ButtonTable(VisBuscarVentas visVentas)
+    public ButtonTable(VisBuscarVentas visVentas,int locale)
     {
         consFacCab = new ConsFacturaCab();
         this.visVentas = visVentas;
         
-
+        this.locale = locale;
         ButtonColumn buttonColumn = new ButtonColumn(visVentas.tblFacturasCabeceras, 9);
+        buttonColumn.locale = this.locale;
+        buttonColumn.cedula = this.cedula;
         ButtonColumn buttonColumn1 = new ButtonColumn(visVentas.tblFacturasCabeceras, 10);
     }
 
@@ -50,7 +54,8 @@ public class ButtonTable extends JFrame
         JButton renderButton;
         JButton editButton;
         String text;
-
+        public int locale;
+        public String cedula;
         public ButtonColumn(JTable table, int column)
         {
             super();
@@ -131,7 +136,12 @@ public class ButtonTable extends JFrame
             if (consFacCab.modificarAjuste(modFacCab)) {
                 JOptionPane.showMessageDialog(null, "Registro Modificado!");
                 
-                 showTableFacturasCabeceras();
+               //  showTableFacturasCabeceras();
+                if (locale ==1) {
+                    showTableFacturasCabecerasByCed(cedula);
+                }
+                else
+                    showTableFacturasCabeceras();
                 
             }
             else
@@ -173,9 +183,54 @@ public class ButtonTable extends JFrame
                 tb.removeRow(tb.getRowCount()-1);
             } 
          }
+         
+        public void showTableFacturasCabecerasByCed(String ced)
+        {
+            ConsBuscarVentas consBuscarVentas = new ConsBuscarVentas();
+        
+        try {
+            limpiarTabla(visVentas.tblFacturasCabeceras);
+            
+            ResultSet listFicha = consBuscarVentas.buscarFacturasByCed(ced);
+            DefaultTableModel model =  (DefaultTableModel)visVentas.tblFacturasCabeceras.getModel();
+            Object cols[] = new Object[11];
+           
+            while (listFicha.next()) {
+                try {
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("nombres");
+                    cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
+                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[4] = listFicha.getString("Concepto_Faccab");
+                    cols[5] = listFicha.getString("Total_Faccab");
+                    cols[6] = listFicha.getString("Valcancelo_Faccab");
+                    cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[8] = listFicha.getDouble("valajuste_faccab");
+                    cols[9] = "Guardar";
+                    cols[10] = "Anular";
+                    
+                
+                    model.addRow(cols);
+                    
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        new ButtonTable(visVentas,locale);
+        visVentas.tblFacturasCabeceras.updateUI();
+    } 
+         
         public void showTableFacturasCabeceras()
         {
-        ConsBuscarVentas consBuscarVentas = new ConsBuscarVentas();
+         ConsBuscarVentas consBuscarVentas = new ConsBuscarVentas();
          DefaultTableModel model=null; 
         try {
             limpiarTabla(visVentas.tblFacturasCabeceras);
@@ -214,7 +269,7 @@ public class ButtonTable extends JFrame
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
              
-        new ButtonTable(visVentas);
+        new ButtonTable(visVentas,locale);
         visVentas.tblFacturasCabeceras.setModel(model);
        // visVentas.tbl_BuscarVentas.updateUI();
         

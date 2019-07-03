@@ -2,15 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-
-
         <group/>
-
-
-
-        <group/>
-
-
         <group>
             <file>file:/C:/Users/lender/Documents/NetBeansProjects/StrongFit/src/assets/Configuracion.java</file>
             <file>file:/C:/Users/lender/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlReportes.java</file>
@@ -26,7 +18,6 @@
             <file>file:/C:/Users/lender/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlReportes.java</file>
             <file>file:/C:/Users/lender/Documents/NetBeansProjects/StrongFit/src/reportes/RepoFacturaCab.jrxml</file>
         </group>
-
         <group>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/assets/correcciones</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlHistorialPersServicio.java</file>
@@ -42,14 +33,13 @@
         <group>
             <file>file:/C:/Users/aplaza/Documents/NetBeansProjects/StrongFit/src/assets/correcciones</file>
         </group>
-
         <group>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlFacturaDetalle.java</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlFacturaDetalleCompras.java</file>
         </group>
-
-
-
-
+        <group>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlFacturaDetalle.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/StrongFit/src/controladores/CtrlFacturaDetalleCompras.java</file>
+        </group>
     </open-files>
 </project-private>

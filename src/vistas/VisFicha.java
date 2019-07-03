@@ -185,6 +185,8 @@ public class VisFicha extends javax.swing.JFrame {
         lblNroFactura = new javax.swing.JLabel();
         btnEntrenamiento = new javax.swing.JButton();
         cmb_clienteFac = new javax.swing.JComboBox();
+        btnDeudas = new javax.swing.JButton();
+        btnEntrenSaldos = new javax.swing.JButton();
         btnGuardarFacCab = new javax.swing.JButton();
         btnLimpiarFacCab = new javax.swing.JButton();
         txt_id_FacCab = new javax.swing.JTextField();
@@ -1259,6 +1261,10 @@ public class VisFicha extends javax.swing.JFrame {
 
         cmb_clienteFac.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione persona" }));
 
+        btnDeudas.setText("Deudas");
+
+        btnEntrenSaldos.setText("Entren/Saldos");
+
         javax.swing.GroupLayout pnlVentasComponentesLayout = new javax.swing.GroupLayout(pnlVentasComponentes);
         pnlVentasComponentes.setLayout(pnlVentasComponentesLayout);
         pnlVentasComponentesLayout.setHorizontalGroup(
@@ -1287,6 +1293,10 @@ public class VisFicha extends javax.swing.JFrame {
                             .addGroup(pnlVentasComponentesLayout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addComponent(btnBuscarClienteFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDeudas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEntrenSaldos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblPersonaId, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(418, 418, 418))
@@ -1307,7 +1317,9 @@ public class VisFicha extends javax.swing.JFrame {
                         .addComponent(lblPersonaId, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlVentasComponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(cmb_clienteFac, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnBuscarClienteFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscarClienteFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDeudas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEntrenSaldos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addComponent(btnEntrenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
@@ -2150,6 +2162,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnCalcularCompras;
     public javax.swing.JButton btnCargarFichas;
     public javax.swing.JButton btnCerrar;
+    public javax.swing.JButton btnDeudas;
     public javax.swing.JButton btnElegirPersonaG;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnEliminarAnalisis;
@@ -2157,6 +2170,7 @@ public class VisFicha extends javax.swing.JFrame {
     public javax.swing.JButton btnEliminarFilas;
     public javax.swing.JButton btnEliminarFilasComp;
     public javax.swing.JButton btnEliminarPlanAli;
+    public javax.swing.JButton btnEntrenSaldos;
     public javax.swing.JButton btnEntrenamiento;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnGuardarAnalisis;

@@ -2682,6 +2682,10 @@
                                               <Group type="102" alignment="1" attributes="0">
                                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                                   <Component id="btnBuscarClienteFactura" min="-2" pref="42" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="btnDeudas" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="btnEntrenSaldos" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="lblPersonaId" min="-2" pref="52" max="-2" attributes="0"/>
                                               </Group>
@@ -2712,6 +2716,8 @@
                                           <Component id="cmb_clienteFac" alignment="0" max="32767" attributes="0"/>
                                           <Component id="btnBuscarClienteFactura" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="btnDeudas" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="btnEntrenSaldos" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="btnEntrenamiento" min="-2" pref="46" max="-2" attributes="0"/>
@@ -2780,6 +2786,22 @@
                                 <StringItem index="0" value="Seleccione persona"/>
                               </StringArray>
                             </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnDeudas">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Deudas"/>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnEntrenSaldos">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Entren/Saldos"/>
                           </Properties>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
