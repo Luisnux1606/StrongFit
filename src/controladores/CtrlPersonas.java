@@ -199,7 +199,7 @@ public class CtrlPersonas implements ActionListener {
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     
-                    model.addElement(new Persona(listCategorias.getString("nom_per"),listCategorias.getString("ape_per"),listCategorias.getInt("id_per")));
+                    model.addElement(new Persona(listCategorias.getString("nom_per"),listCategorias.getString("ape_per"),listCategorias.getInt("id_per"),listCategorias.getString("ced_per")));
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
@@ -612,7 +612,7 @@ public class CtrlPersonas implements ActionListener {
                             modPer.setId(idPer);
                             modPer.setNombre(nombre);
                             modPer.setApellido(apellido);                           
-                            visFicha.cmb_clienteFac.setSelectedItem(new Persona(modPer.getApellido(),modPer.getNombre(),modPer.getId()));                                                        
+                            visFicha.cmb_clienteFac.setSelectedItem(new Persona(modPer.getApellido(),modPer.getNombre(),modPer.getId(),modPer.getCedula()));                                                        
                             break;
                         case 3:  //servicio
                             visHisPerServ = (VisHistorialPersonaServicio)vis;
