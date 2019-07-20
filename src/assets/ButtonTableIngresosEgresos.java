@@ -65,8 +65,8 @@ public class ButtonTableIngresosEgresos extends JFrame
       
        
 
-        ButtonColumn buttonColumn = new ButtonColumn(visIngEgr.tblIngresosEgresos, 18);
-        ButtonColumn buttonColumn1 = new ButtonColumn(visIngEgr.tblIngresosEgresos, 19);
+        ButtonColumn buttonColumn = new ButtonColumn(visIngEgr.tblIngresosEgresos, 19);
+        ButtonColumn buttonColumn1 = new ButtonColumn(visIngEgr.tblIngresosEgresos, 20);
     }
 
     
@@ -141,12 +141,12 @@ public class ButtonTableIngresosEgresos extends JFrame
                String fechaAct = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
                
                String cliente =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 2)+"";
-               String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"";
-               double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"");
-               double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"");
+               String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
+               double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"");
+               double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
                 
-               double valAjuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"");
-               double valPendiente = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"");
+               double valAjuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 12)+"");
+               double valPendiente = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"");
                 
                if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)
                    && !Validaciones.isValCancHigherIngreso(valCanc,valIngre) && !Validaciones.isValAjusteHigherPendiente(valAjuste, valPendiente)) 
@@ -186,9 +186,9 @@ public class ButtonTableIngresosEgresos extends JFrame
                String fechaAct = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
                
                String cliente =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 2)+"";
-               String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"";
-                double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"");
-                    double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"");
+               String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
+                double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"");
+                double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
                if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)&& !Validaciones.isValCancHigherIngreso(valCanc,valIngre)) 
                {
                     String tanggal = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
@@ -221,22 +221,25 @@ public class ButtonTableIngresosEgresos extends JFrame
         {
                 String prodId = table.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 17)+"";            
                 ConsProductos consProd = new ConsProductos();
-                String desc = table.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+""; 
+                String desc = table.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+""; 
+                int cant = Validaciones.isNumVoid(table.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"");
                 if (!consProd.existeProducto(desc))
                    prodId ="1"; // 1 for default product 999
             
 
-                if (consProd.getTipoProdServ(prodId).equals("1"))
+                if (consProd.getTipoProdServ(prodId).equals("1")) //servicio ejmp entrenamiento
                 {                    
-                    String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
-                    String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";   
-                    String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
-                    double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"");
-                    double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"");
-                    double valAjuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"");
-                    double valPendiente = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"");
+                    String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                    String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"";   
+                    String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"";
+                    double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"");
+                    double valIngre = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
+                    double valAjuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 12)+"");
+                    double valPendiente = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"");
+                    int cantidad = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"");
                     if (!Validaciones.isCadnull(fIni)&&!Validaciones.isCadnull(fFin) && !Validaciones.isCadnull(codPer) 
-                        && !Validaciones.isValCancHigherIngreso(valCanc,valIngre) && !Validaciones.isValAjusteHigherPendiente(valAjuste, valPendiente)) {   
+                        && !Validaciones.isValCancHigherIngreso(valCanc,valIngre) && !Validaciones.isValAjusteHigherPendiente(valAjuste, valPendiente)
+                            && !Validaciones.isNumVoid1(cantidad+"")) {   
                        
                         setDatos();                                           
                     }
@@ -254,10 +257,11 @@ public class ButtonTableIngresosEgresos extends JFrame
         ConsIngresosEgresos consIngEgr = new ConsIngresosEgresos();
         try {
             limpiarTabla(visIngEgr.tblIngresosEgresos);
-            ResultSet listFicha = consIngEgr.buscarIngresosEgresos();
+            String nombres = Validaciones.isNumVoid4(visIngEgr.txtBuscarCampo.getText());
+            ResultSet listFicha = consIngEgr.buscarIngresosEgresos(nombres);
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[20];
+            Object cols[] = new Object[21];
             while (listFicha.next()) {
                 try { 
                                       
@@ -265,24 +269,25 @@ public class ButtonTableIngresosEgresos extends JFrame
                     cols[1] = listFicha.getString("Fecha_Faccab");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
                     cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
-                    cols[4] = listFicha.getString("Descripcion_Facdet");
-                    cols[5] = listFicha.getString("FechaInicio");
-                    cols[6] = listFicha.getString("FechaFin");
-                    cols[7] = listFicha.getString("Total_Faccab");
-                    cols[8] = listFicha.getDouble("egreso");
-                    cols[9] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[10] = listFicha.getDouble("Valpendiente_Faccab");
-                    cols[11] = listFicha.getDouble("Valajuste_Faccab");
-                    cols[12] = listFicha.getDouble("estadoEnt");
-                    cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getDouble("saldoP");
-                    cols[15] = listFicha.getInt("id_per");
-                    cols[16] = listFicha.getInt("id_prod");
-                    cols[17] = listFicha.getInt("codHist");
+                    cols[4] = listFicha.getString("cant");
+                    cols[5] = listFicha.getString("Descripcion_Facdet");
+                    cols[6] = listFicha.getString("FechaInicio");
+                    cols[7] = listFicha.getString("FechaFin");
+                    cols[8] = listFicha.getString("Total_Faccab");
+                    cols[9] = listFicha.getDouble("egreso");
+                    cols[10] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[11] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[12] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[13] = listFicha.getDouble("estadoEnt");
+                    cols[14] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[15] = listFicha.getDouble("saldoP");
+                    cols[16] = listFicha.getInt("id_per");
+                    cols[17] = listFicha.getInt("id_prod");
+                    cols[18] = listFicha.getInt("codHist");
                     
-                    cols[18] = "Guardar";
-                    cols[19] = "Anular";
-                    cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);              
+                    cols[19] = "Guardar";
+                    cols[20] = "Anular";
+                    cols[14] = Calculos.getDiferencia((double)cols[11], (double)cols[12]);                
                     model.addRow(cols);
                     
                                         
@@ -296,9 +301,10 @@ public class ButtonTableIngresosEgresos extends JFrame
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
              
-        new ButtonTableIngresosEgresos(visIngEgr);
+      //  new ButtonTableIngresosEgresos(visIngEgr);
         visIngEgr.tblIngresosEgresos.updateUI();
-    }  
+    } 
+        
         public void actionPerformed(ActionEvent e)
         {
             fireEditingStopped();
@@ -311,7 +317,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                     setDatosModificar();
                 }
                 if(Validaciones.isNumVoid(codFac)==0)
-                {                                            
+                {                                    
                   setDatosGuardar();
                 }   
                 
@@ -326,22 +332,25 @@ public class ButtonTableIngresosEgresos extends JFrame
         
         public String getIngresoEgreso()
         {
-           String ing= visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"";
-           String egr= visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"";
-           System.out.println("ing "+ing + "egr "+egr);
-           String tipo = "";
-           if (ing.trim().length()>0){
-               if (Validaciones.isNumVoid10(ing)!=0) {
-                   tipo = "ingreso";
-               }
-           }                
-                         
-            if (egr.trim().length()>0){
-               if (Validaciones.isNumVoid10(egr)!=0) {
-                 tipo = "egreso";
-               }
-            }     
-                     
+            String tipo = "";
+            
+                           
+                String ing= visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"";
+                String egr= visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"";
+                System.out.println("ing "+ing + "egr "+egr);
+                
+                if (ing.trim().length()>0){
+                    if (Validaciones.isNumVoid10(ing)!=0) {
+                        tipo = "ingreso";
+                    }
+                }                
+
+                 if (egr.trim().length()>0){
+                    if (Validaciones.isNumVoid10(egr)!=0) {
+                      tipo = "egreso";
+                    }
+                 }     
+                    
         return tipo;
         }
         
@@ -356,12 +365,12 @@ public class ButtonTableIngresosEgresos extends JFrame
             modFacCab.setFecha_facCab(fechaAct);                
             modFacCab.setNum_facCab(numFac);
             
-            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
+            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"";
             System.out.println(codPer);
             persona.setId(Validaciones.isNumVoid(codPer));
             modFacCab.setPersona(persona);
             
-            String valPagar = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"".trim();
+            String valPagar = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"".trim();
             modFacCab.setValPagar_facCab(Validaciones.isNumVoid10(valPagar));
 
             memb.setId(1);
@@ -372,14 +381,14 @@ public class ButtonTableIngresosEgresos extends JFrame
             iva.setId_ivas(1);
             modFacCab.setIvas(iva); //1 = 0
 
-            String valCancelo = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"".trim();
+            String valCancelo = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"".trim();
             modFacCab.setTotal_facCab(Validaciones.isNumVoid3(valPagar));
             modFacCab.setValCancelo_facCab(Validaciones.isNumVoid3(valCancelo));
             
-            String valPend = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"".trim();
+            String valPend = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"".trim();
             modFacCab.setValPendiente_facCab(Validaciones.isNumVoid3(valPend));       
             
-            String valAjuste = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"".trim();
+            String valAjuste = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 12)+"".trim();
             modFacCab.setValAjuste_facCab(Validaciones.isNumVoid10(valAjuste));
             
             modFacCab.setEstado(1);
@@ -396,11 +405,11 @@ public class ButtonTableIngresosEgresos extends JFrame
             modFacCabComp.setFecha_facCabComp(fechaAct);                
             modFacCab.setNum_facCab(numFac);
             
-            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
+            String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"";
             persona.setId(Validaciones.isNumVoid(codPer));
             modFacCabComp.setPersonaComp(persona);
             
-            String valPagar = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"".trim();
+            String valPagar = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"".trim();
             modFacCabComp.setValPagar_facCabComp(Validaciones.isNumVoid10(valPagar));
 
             memb.setId(1);
@@ -411,14 +420,14 @@ public class ButtonTableIngresosEgresos extends JFrame
             iva.setId_ivas(1);
             modFacCabComp.setIvasComp(iva); //1 = 0
 
-            String valCancelo = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 9)+"".trim();
+            String valCancelo = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"".trim();
             modFacCabComp.setTotal_facCabComp(Validaciones.isNumVoid3(valPagar));
             modFacCabComp.setValCancelo_facCabComp(Validaciones.isNumVoid3(valCancelo));
             
-            String valPend = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 10)+"".trim();
+            String valPend = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"".trim();
             modFacCabComp.setValPendiente_facCabComp(Validaciones.isNumVoid3(valPend));       
             
-            String valAjuste = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 11)+"".trim();
+            String valAjuste = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 12)+"".trim();
             modFacCabComp.setValAjuste_facCabComp(Validaciones.isNumVoid10(valAjuste));
             
             modFacCabComp.setEstadoComp(1);
@@ -436,7 +445,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                String fechaAct = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
                
                String cliente =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 2)+"";
-               String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"";
+               String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
                
                if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)) 
                {
@@ -465,53 +474,57 @@ public class ButtonTableIngresosEgresos extends JFrame
                } 
                 
             }
-            System.out.println("ing egre = "+getIngresoEgreso());
-            if (getIngresoEgreso().equals("egreso")) {
-                System.out.println("entro a egreso");
-               ConsFacturaCabCompras consFichaComp = new ConsFacturaCabCompras();
-               ConsFacturaDetCompras consFacDetComp = new ConsFacturaDetCompras();
+            if (visIngEgr.tblIngresosEgresos.getSelectedRow()!=-1) {                            
                
-               String fechaAct = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
-               System.out.println(fechaAct);
-               String cliente =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 2)+"";
-               String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 4)+"";
-               
-               if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)) 
-               {
-                    Date tanggal = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1);
-                    fechaAct = Validaciones.setFormatFecha(tanggal);
-                    setFacturaCabeceraCompra(fechaAct);
-                    if (consFichaComp.registrar(modFacCabComp)) 
-                    {
-                        ArrayList<FacturaDetalleCompras> facDetsComps =setDetallesCompras(visIngEgr);
-                        if(consFacDetComp.registrar(facDetsComps))
-                        {                      
-                            JOptionPane.showMessageDialog(null, "Registro Guardado!");
-                            if(consFacDetComp.actualizarEntradas(facDetsComps)){
-                                consFacDetComp.actualizarStock(facDetsComps);
-                                System.out.println("actualizado entradas");
+                if (getIngresoEgreso().equals("egreso")) {
+                    System.out.println("entro a egreso");
+                   ConsFacturaCabCompras consFichaComp = new ConsFacturaCabCompras();
+                   ConsFacturaDetCompras consFacDetComp = new ConsFacturaDetCompras();
+
+                   String fechaAct = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1)+"";
+                   System.out.println(fechaAct);
+                   String cliente =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 2)+"";
+                   String detalle =  visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
+
+                   if (!Validaciones.isNumVoid1(fechaAct) &&  !Validaciones.isNumVoid1(cliente) && !Validaciones.isNumVoid1(detalle)) 
+                   {
+                        Date tanggal = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 1);
+                        fechaAct = Validaciones.setFormatFecha(tanggal);
+                        setFacturaCabeceraCompra(fechaAct);
+                        if (consFichaComp.registrar(modFacCabComp)) 
+                        {
+                            ArrayList<FacturaDetalleCompras> facDetsComps =setDetallesCompras(visIngEgr);
+                            if(consFacDetComp.registrar(facDetsComps))
+                            {           
+                                showTableIngresosEgresos();
+                                JOptionPane.showMessageDialog(null, "Registro Guardado!");
+                                if(consFacDetComp.actualizarEntradas(facDetsComps)){
+                                    consFacDetComp.actualizarStock(facDetsComps);
+                                    System.out.println("actualizado entradas");
+                                }
+                                else
+                                    System.out.println("NO actualizado entradas");      
                             }
-                            else
-                                System.out.println("NO actualizado entradas");      
                         }
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Error al Guardar");  
-                    }
-               } 
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Error al Guardar");  
+                        }
+                   } 
+                }
             }
            
         }
  
         public void setAnulado()
         {
+            consFacCabComp = new ConsFacturaCabCompras();
             int idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
             if (getIngresoEgreso().equals("ingreso")) 
             {
                 FacturaCab modFacCab=new FacturaCab();
 
-                double ajuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
+                //double ajuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
                 // idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
                 modFacCab.setEstado(3); //anulado 
                 modFacCab.setId_facCab(idFacCab);       
@@ -530,9 +543,9 @@ public class ButtonTableIngresosEgresos extends JFrame
             if (getIngresoEgreso().equals("egreso")) 
             {
                 FacturaCabCompras modFacCab=new FacturaCabCompras();
-
-                double ajuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
-                // idFacCab = Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
+                System.out.println("ingreso a anylar .....");
+              //  double ajuste = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 8)+"");
+                // idFacCab = Validaciones.isNumVoid(virsIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 0)+"");
                 modFacCab.setEstadoComp(3); //anulado 
                 modFacCab.setId_facCabComp(idFacCab);       
                // consFacCab.modificarAjuste(modFacCab);
@@ -626,7 +639,7 @@ public class ButtonTableIngresosEgresos extends JFrame
     {        
         JTable table = visIngEgr.tblIngresosEgresos;
         int selectedRow = table.getSelectedRow();
-        String num,desc,valU,valT,prodId;
+        String num,desc,valU,valT,prodId,cant;
         int facCabId = 0;
         ConsFacturaDetCompras consFacDetComp = new ConsFacturaDetCompras();
         ConsProductos consProd = new ConsProductos();
@@ -651,17 +664,18 @@ public class ButtonTableIngresosEgresos extends JFrame
         for (int i = selectedRow; i <= selectedRow; i++) 
         {
             
-            prodId =table.getValueAt(i, 16)+""; //si existe or not
-            num = "1";//table.getValueAt(i, 1)+"";
-            desc = table.getValueAt(i, 4)+"";     
-            valU = table.getValueAt(i, 8)+"";
-            valT = table.getValueAt(i, 8)+"";
+            prodId =table.getValueAt(i, 17)+""; //si existe or not
+            num =  table.getValueAt(i, 4)+"";
+            desc = table.getValueAt(i, 5)+"";     
+            valU = table.getValueAt(i, 9)+"";
+            cant = table.getValueAt(i, 4)+"";
+            valT = (Validaciones.isNumVoid10(valU+"")*Validaciones.isNumVoid10(cant+""))+"";
             
             if (!consProd.existeProducto(desc))
                 prodId ="1";
             
          
-            if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
+            if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 && Validaciones.isNumVoid(cant)!=0 ) {
                 
                 detalle = new FacturaDetalleCompras();
                 prod = new Producto();
@@ -677,19 +691,19 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);
                 hisPerServ.setEstado_HisPerSer(1);
                 prod.setEstado_prod(1);
 
-                String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
-                String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"";
                 
                 if (!Validaciones.isNumVoid1(fIni)&&!Validaciones.isNumVoid1(fFin)) {
-                    Date fechaIniD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5);
-                    Date fechaFinD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6);
+                    Date fechaIniD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6);
+                    Date fechaFinD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7);
                     String fechaIni = Validaciones.setFormatFecha(fechaIniD);
                     String fechaFin = Validaciones.setFormatFecha(fechaFinD);
                     hisPerServ.setFechaIni_HisPerSer(fechaIni);
@@ -720,7 +734,7 @@ public class ButtonTableIngresosEgresos extends JFrame
     {        
         JTable table = visIngEgr.tblIngresosEgresos;
         int selectedRow = table.getSelectedRow();
-        String num,desc,valU,valT,prodId;
+        String num,desc,valU,valT,prodId,cant;
         int facCabId = 0;
         ConsFacturaDet consFacDet = new ConsFacturaDet();
         ConsProductos consProd = new ConsProductos();
@@ -745,22 +759,24 @@ public class ButtonTableIngresosEgresos extends JFrame
         for (int i = selectedRow; i <= selectedRow; i++) 
         {
             
-            prodId =table.getValueAt(i, 16)+""; //si existe or not
+            prodId =table.getValueAt(i, 17)+""; //si existe or not
             num = "1";//table.getValueAt(i, 1)+"";
-            desc = table.getValueAt(i, 4)+"";     
-            valU = table.getValueAt(i, 7)+"";
-            valT = table.getValueAt(i, 7)+"";
+            desc = table.getValueAt(i, 5)+"";     
+            valU = table.getValueAt(i, 8)+"";
+            cant = table.getValueAt(i, 4)+"";
+            valT = (Validaciones.isNumVoid10(valU+"")*Validaciones.isNumVoid10(cant+""))+"";
+            
             
             if (!consProd.existeProducto(desc))
                 prodId ="1";
             
          
-            if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
+            if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 && Validaciones.isNumVoid(cant)!=0 ) {
                 
                 detalle = new FacturaDetalle();
                 prod = new Producto();
                
-                detalle.setCantidad_facDet(Validaciones.isNumVoid(num));
+                detalle.setCantidad_facDet(Validaciones.isNumVoid(cant));
                 detalle.setDescripcion_facDet(desc);
                 detalle.setValUnitario_facDet(Validaciones.isNumVoid10(valU));
                 detalle.setvTotal_facDet(Validaciones.isNumVoid10(valT));
@@ -771,23 +787,30 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);
                 hisPerServ.setEstado_HisPerSer(1);
                 prod.setEstado_prod(1);
 
-                String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
-                String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"";
                 
                 if (!Validaciones.isNumVoid1(fIni)&&!Validaciones.isNumVoid1(fFin)) {
-                    Date fechaIniD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5);
-                    Date fechaFinD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6);
+                    Date fechaIniD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6);
+                    Date fechaFinD = (Date) visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7);
+                    ConsFacturaCab consFacCab = new ConsFacturaCab();
+                    FacturaCab fCUltima = new FacturaCab();
+                    consFacCab.getLastInvoice(fCUltima);
+                    int idFac = fCUltima.getId_facCab();
+                    
                     String fechaIni = Validaciones.setFormatFecha(fechaIniD);
                     String fechaFin = Validaciones.setFormatFecha(fechaFinD);
                     hisPerServ.setFechaIni_HisPerSer(fechaIni);
                     hisPerServ.setFechaFin_HisPerSer(fechaFin);
+                    hisPerServ.setFactura_id_fac(facCabId);
+                 
                     if (consHisPerServ.registrar(hisPerServ)) {
                         JOptionPane.showMessageDialog(null, "Entrenamiento Guardado!");
 
@@ -818,7 +841,7 @@ public class ButtonTableIngresosEgresos extends JFrame
     {        
         JTable table = visIngEgr.tblIngresosEgresos;
         int selectedRow = table.getSelectedRow();
-        String num,desc,valU,valT,prodId;
+        String num,desc,valU,valT,prodId,cant;
         int facCabId = 0;
         ConsFacturaDet consFacDet = new ConsFacturaDet();
         ConsProductos consProd = new ConsProductos();
@@ -843,11 +866,12 @@ public class ButtonTableIngresosEgresos extends JFrame
         for (int i = selectedRow; i <= selectedRow; i++) 
         {
             
-            prodId =table.getValueAt(i, 16)+""; //si existe or not
-            num = "1";//table.getValueAt(i, 1)+"";
-            desc = table.getValueAt(i, 4)+"";     
-            valU = table.getValueAt(i, 7)+"";
-            valT = table.getValueAt(i, 7)+"";
+            prodId =table.getValueAt(i, 17)+""; //si existe or not
+            num =  table.getValueAt(i, 4)+"";
+            desc = table.getValueAt(i, 5)+"";     
+            valU = table.getValueAt(i, 8)+"";
+            cant = table.getValueAt(i, 4)+"";
+            valT = (Validaciones.isNumVoid2(cant+"")*Validaciones.isNumVoid2(valU+""))+"";
             
             if (!consProd.existeProducto(desc))
                 prodId ="1";
@@ -869,22 +893,22 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);
                 hisPerServ.setEstado_HisPerSer(1);
                 prod.setEstado_prod(1);
 
-                String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
-                String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                String fIni = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                String fFin = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"";
                 
                 if (!Validaciones.isNumVoid1(fIni)&&!Validaciones.isNumVoid1(fFin)) {
-                    String fechaIniD = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 5)+"";
-                    String fechaFinD = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                    String fechaIniD = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 6)+"";
+                    String fechaFinD = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 7)+"";
                     String fechaIni = (fechaIniD);
                     String fechaFin = (fechaFinD);
-                    int idHisPerServ =Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"");
+                    int idHisPerServ =Validaciones.isNumVoid(visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 18)+"");
                     hisPerServ.setFechaIni_HisPerSer(fechaIni);
                     hisPerServ.setFechaFin_HisPerSer(fechaFin);
                     hisPerServ.setId_HisPerSer(idHisPerServ);
@@ -913,7 +937,7 @@ public class ButtonTableIngresosEgresos extends JFrame
     {        
         JTable table = visIngEgr.tblIngresosEgresos;
         int selectedRow = table.getSelectedRow();
-        String num,desc,valU,valT,prodId;
+        String num,desc,valU,valT,prodId,cant;
         int facCabId = 0;
         ConsFacturaDetCompras consFacDetComp = new ConsFacturaDetCompras();
         ConsProductos consProd = new ConsProductos();
@@ -939,16 +963,17 @@ public class ButtonTableIngresosEgresos extends JFrame
         {
             
             prodId =table.getValueAt(i, 16)+""; //si existe or not
-            num = "1";//table.getValueAt(i, 1)+"";
-            desc = table.getValueAt(i, 4)+"";     
-            valU = table.getValueAt(i, 7)+"";
-            valT = table.getValueAt(i, 7)+"";
+            num =  table.getValueAt(i, 4)+"";
+            desc = table.getValueAt(i, 5)+"";     
+            valU = table.getValueAt(i, 8)+"";
+            cant = table.getValueAt(i, 4)+"";
+            valT = (Validaciones.isNumVoid2(cant+"")*Validaciones.isNumVoid2(valU+""))+"";
             
             if (!consProd.existeProducto(desc))
                 prodId ="1";
             
          
-            if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
+            if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 && Validaciones.isNumVoid(cant)!=0 ) {
                 
                 detalle = new FacturaDetalleCompras();
                 prod = new Producto();
@@ -964,7 +989,7 @@ public class ButtonTableIngresosEgresos extends JFrame
                 
                 hisPerServ.setProducto_id_HisPerSer(prod);
                 
-                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 15)+"";
+                String codPer = visIngEgr.tblIngresosEgresos.getValueAt(visIngEgr.tblIngresosEgresos.getSelectedRow(), 16)+"";
                 persona.setId(Validaciones.isNumVoid(codPer));
 
                 hisPerServ.setPersona_id_HisPerSer(persona);

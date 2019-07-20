@@ -5,6 +5,8 @@
  */
 package controladores;
 
+import assets.Calculos;
+import assets.PrtoSerial;
 import com.digitalpersona.onetouch.DPFPDataPurpose;
 import com.digitalpersona.onetouch.DPFPFeatureSet;
 import com.digitalpersona.onetouch.DPFPGlobal;
@@ -24,6 +26,7 @@ import com.digitalpersona.onetouch.processing.DPFPFeatureExtraction;
 import com.digitalpersona.onetouch.processing.DPFPImageQualityException;
 import com.digitalpersona.onetouch.verification.DPFPVerification;
 import com.digitalpersona.onetouch.verification.DPFPVerificationResult;
+import consultas.ConsBuscarVentas;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -42,6 +45,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 import modelos.Conexion;
 import vistas.VisFicha;
 
@@ -49,14 +53,16 @@ import vistas.VisFicha;
  *
  * @author Administrator
  */
-public class CtrlRegistroEntrada {
+public class CtrlRegistroEntrada implements ActionListener {
     
     VisFicha visFicha;
     Conexion con=new Conexion();
+    PrtoSerial prtoSer = new PrtoSerial();
+    javax.swing.Timer tPort; 
     
     //Varible que permite iniciar el dispositivo de lector de huella conectado
     // con sus distintos metodos.
-    private DPFPCapture Lector = DPFPGlobal.getCaptureFactory().createCapture();
+    public DPFPCapture Lector = DPFPGlobal.getCaptureFactory().createCapture();
 
     //Varible que permite establecer las capturas de la huellas, para determina sus caracteristicas
     // y poder estimar la creacion de un template de la huella para luego poder guardarla
@@ -74,6 +80,10 @@ public class CtrlRegistroEntrada {
     public CtrlRegistroEntrada(VisFicha visFicha)
     {
         this.visFicha = visFicha;
+        this.visFicha.btnAbrir.addActionListener(this);
+        this.visFicha.btnCerrar.addActionListener(this);
+        
+        tPort =   new javax.swing.Timer(0,null);
         
         javax.swing.Timer t = new javax.swing.Timer(1000, new ActionListener() {
             
@@ -85,9 +95,10 @@ public class CtrlRegistroEntrada {
             visFicha.jftFechaActual.setText(fechaa);
             dt = new SimpleDateFormat("hh:mm:ss");
             String hora=dt.format(fecha);
-            visFicha.jftHoraActual.setText(hora);
-          }
+            visFicha.jftHoraActual.setText(hora);                                                         
+         }
        });
+        verifyTrain("302");
         t.start();
         Iniciar();
         start();
@@ -151,28 +162,30 @@ public class CtrlRegistroEntrada {
   public DPFPFeatureSet featuresverificacion;
   public  void ProcesarCaptura(DPFPSample sample)
   {
- // Procesar la muestra de la huella y crear un conjunto de características con el propósito de inscripción.
- featuresinscripcion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_ENROLLMENT);
+    // Procesar la muestra de la huella y crear un conjunto de características con el propósito de inscripción.
+    featuresinscripcion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_ENROLLMENT);
 
- // Procesar la muestra de la huella y crear un conjunto de características con el propósito de verificacion.
- featuresverificacion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_VERIFICATION);
+    // Procesar la muestra de la huella y crear un conjunto de características con el propósito de verificacion.
+    featuresverificacion = extraerCaracteristicas(sample, DPFPDataPurpose.DATA_PURPOSE_VERIFICATION);
 
- // Comprobar la calidad de la muestra de la huella y lo añade a su reclutador si es bueno
- if (featuresinscripcion != null)
-     try{
-     System.out.println("Las Caracteristicas de la Huella han sido creada");
-     Reclutador.addFeatures(featuresinscripcion);// Agregar las caracteristicas de la huella a la plantilla a crear
-     // Dibuja la huella dactilar capturada.
-     Image image=CrearImagenHuella(sample);
-     DibujarHuella(image);
-    identificarHuella();
-    Reclutador.clear();
-    stop();
-    start();
-     }catch (DPFPImageQualityException ex) {
-     System.err.println("Error");
-     }
-    }
+    // Comprobar la calidad de la muestra de la huella y lo añade a su reclutador si es bueno
+    if (featuresinscripcion != null)
+        try
+        {
+            System.out.println("Las Caracteristicas de la Huella han sido creada");
+            Reclutador.addFeatures(featuresinscripcion);// Agregar las caracteristicas de la huella a la plantilla a crear
+            // Dibuja la huella dactilar capturada.
+            Image image=CrearImagenHuella(sample);
+            DibujarHuella(image);
+            identificarHuella();
+            Reclutador.clear();
+            stop();
+            start();
+        }catch (DPFPImageQualityException ex) 
+        {
+            System.err.println("Error");
+        }
+       }
   public  DPFPFeatureSet extraerCaracteristicas(DPFPSample sample, DPFPDataPurpose purpose)
   {
         DPFPFeatureExtraction extractor = DPFPGlobal.getFeatureExtractionFactory().createFeatureExtraction();
@@ -219,51 +232,73 @@ public class CtrlRegistroEntrada {
     }
     
     
- /**
-  * Identifica a una persona registrada por medio de su huella digital
-  */
   public void identificarHuella(){
      try {
-       //Establece los valores para la sentencia SQL
        Connection c=con.getConexion();
-       //Obtiene todas las huellas de la bd
-       PreparedStatement identificarStmt = c.prepareStatement("SELECT nom_per,huella_per,id_per FROM persona ");
+       PreparedStatement identificarStmt = c.prepareStatement("SELECT nom_per,ape_per,huella_per,id_per FROM persona ");
        ResultSet rs = identificarStmt.executeQuery();
-       //Si se encuentra el nombre en la base de datos
+
        while(rs.next()){
-       //Lee la plantilla de la base de datos
             byte temp[] = rs.getBytes("huella_per");
             if (temp!=null) {                          
                 Blob templateBuffer = rs.getBlob("huella_per");
                 String nombre=rs.getString("nom_per");
+                String apellido = rs.getString("ape_per");
                 System.out.println(nombre);
-                String clave=rs.getString("id_per");
-                //Crea una nueva plantilla a partir de la guardada en la base de datos
+                String idPer=rs.getString("id_per");
+
                 DPFPTemplate referenceTemplate = DPFPGlobal.getTemplateFactory().createTemplate(templateBuffer.getBytes(1,temp.length));
-                //Envia la plantilla creada al objeto contendor de Template del componente de huella digital
                 setTemplate(referenceTemplate);
-                // Compara las caracteriticas de la huella recientemente capturda con la
-                // alguna plantilla guardada en la base de datos que coincide con ese tipo
                 DPFPVerificationResult result = Verificador.verify(featuresverificacion, getTemplate());
-                //compara las plantilas (actual vs bd)
-                //Si encuentra correspondencia dibuja el mapa
-                //e indica el nombre de la persona que coincidió.
-                if (result.isVerified()){       
+
+                if (result.isVerified()){       //
                     Date fecha = new Date(); //aqui tu fecha;
                     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
                     String fechaa=dt.format(fecha);
-                    visFicha.tblDatosHuella.setValueAt( fechaa ,0 ,0);
                     dt = new SimpleDateFormat("hh:mm:ss");
                     String hora=dt.format(fecha);
-                    visFicha.tblDatosHuella.setValueAt( hora ,0 ,1);
-                    visFicha.tblDatosHuella.setValueAt( nombre ,0 ,2);
-                   // consultaES(clave);       
-                    abrir();
+                    String fechaIniFin [] = verifyTrain(idPer); 
+                    visFicha.tblDatosHuella.setValueAt( fechaa + "\n" + hora ,0 ,0);                                       
+                    visFicha.tblDatosHuella.setValueAt( nombre ,0 ,1);
+                    visFicha.tblDatosHuella.setValueAt(apellido, 0, 2);
+                    visFicha.tblDatosHuella.setValueAt(fechaIniFin[0]+" al "+fechaIniFin[1], 0, 3);
+                    if (Calculos.dateGreaterThanCurrent(fechaIniFin[1]))
+                    { 
+                        visFicha.tblDatosHuella.setValueAt("ACTIVO", 0, 4);
+                        if (tPort.isRunning()) {
+                            tPort.stop();
+                            tmp=0;
+                            openDoor();
+                            visFicha.lblPuertaEstado.setText("ABIERTA");
+                            countSeconds();
+                        }
+                        else
+                        {
+                            openDoor();
+                            visFicha.lblPuertaEstado.setText("ABIERTA");
+                            countSeconds();
+                        }
+                    }
+                    else
+                    {
+                        visFicha.tblDatosHuella.setValueAt("NO ACTIVO", 0, 4);
+                        if (tPort.isRunning()) {
+                            tPort.stop();
+                            tmp=0;
+                            closeDoor();
+                            visFicha.lblPuertaEstado.setText("CERRADA");
+                        }
+                        else
+                        {
+                         closeDoor();
+                         visFicha.lblPuertaEstado.setText("CERRADA");
+                        }
+                    }
+                   // abrir();
                 return;
                 }
             }
        }
-       //Si no encuentra alguna huella correspondiente al nombre lo indica con un mensaje
        visFicha.txtNotificaciones.setText("No existe un registro que coincida con la huella actual\n"
                + "Repita la operacion, revise que su huella no este maltratada");
        visFicha.tblDatosHuella.setValueAt( "---" ,0 ,0);
@@ -273,13 +308,53 @@ public class CtrlRegistroEntrada {
       
        setTemplate(null);
        } catch (SQLException e) {
-           e.printStackTrace();
-       //Si ocurre un error lo indica en la consola
-       //System.err.println("Error al identificar huella dactilar."+e.getMessage());
+           e.printStackTrace();      
        }finally{
        con.desconectar();
        }
    }
+  
+  public void openDoor()
+  {
+      PrtoSerial.sendData(1);
+      visFicha.lblPuertaEstado.setText("ABIERTA");
+      
+      
+      
+  }
+  public void closeDoor()
+  {
+    PrtoSerial.sendData(0);
+    visFicha.lblPuertaEstado.setText("CERRADA");
+  }
+  
+  
+  int tmp ;
+  public void countSeconds()
+  {
+       
+      tPort = new javax.swing.Timer(1000, new ActionListener() 
+      {
+        
+        public void actionPerformed(ActionEvent e) 
+        {
+            tmp = tmp + 1 ;
+           
+            System.out.println("counting " +tmp);
+            
+            if (tmp == 5) {
+                System.out.println("count 5 ");
+                tPort.stop();
+                tmp = 0;
+          
+            closeDoor();          
+            }    
+           
+        }
+        
+       });   
+        tPort.start();
+  }
   
   public void abrir()
   {
@@ -301,9 +376,9 @@ public class CtrlRegistroEntrada {
             long delay  = 1000L;
             long period = 1000L;
             timer.scheduleAtFixedRate(repeatedTask, delay, period);
-            Thread.sleep(5000L);
+            Thread.sleep(2000L);
             timer.cancel();
-             visFicha.btnAbrir.setForeground(Color.black);
+            visFicha.btnAbrir.setForeground(Color.black);
             visFicha.btnAbrir.setBackground(Color.LIGHT_GRAY);
         } catch (InterruptedException ex) {
             Logger.getLogger(CtrlRegistroEntrada.class.getName()).log(Level.SEVERE, null, ex);
@@ -312,91 +387,71 @@ public class CtrlRegistroEntrada {
   
   public void cerrar()
   {
-  
+      Lector.stopCapture();
   }
   
-  public void consultaES(String clave){
-     Connection ch=con.getConexion();
-     int hactual,hbase,mactual,mbase;   
-     String hora1=null;
-     Date dias = new Date(); //consultamos en que dia nos encontramos;
-     SimpleDateFormat dtdia=new SimpleDateFormat("EEEE");
-     String fechaaa=dtdia.format(dias);
-     String diain="e"+fechaaa;//modificamoes esta parte
-     String diaout="s"+fechaaa;
-     //------------------------------------------------------------
-     try {
-                PreparedStatement consultah = ch.prepareStatement("SELECT *FROM horario where clave_trabajador=?");
-                consultah.setString(1,clave);
-                ResultSet res = consultah.executeQuery();
-                while (res.next()) {
-                //si se encuentran datos lo insertamos en la tabla
-                    String edia=res.getString(diain);//extraemos la hora de entrada
-                    String sdia=res.getString(diaout);
-
-                    Date hora=new Date();//creamos la hora actual
-                    SimpleDateFormat dt = new SimpleDateFormat("HH:mm");
-                    String horatabla=edia;
+  public String[] verifyTrain(String idPer)
+  {
+     String fechaIniFinUltEnt[]=new String[2];
+  
+     try {           
+            ConsBuscarVentas consBuscarVentas = new ConsBuscarVentas();
+            ResultSet listFicha = consBuscarVentas.buscarUltimoEntrenPersona(idPer);
+                       
+            while (listFicha.next()) {
                 try {
-                    Date htabla = dt.parse(horatabla);
-                } catch (ParseException ex) {
-                    Logger.getLogger(CtrlRegistroEntrada.class.getName()).log(Level.SEVERE, null, ex);
+                   
+                    fechaIniFinUltEnt[0] = listFicha.getString("fechaini_hisperser");
+                    fechaIniFinUltEnt[1] = listFicha.getString("fechafin_hisperser");
+                                                           
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    Date htabla;
-                try {
-                    htabla = dt.parse(horatabla);
-                    hora1=dt.format(htabla);
-                    //System.err.println(hora1);//conversion a tipo date de la horas de entrada en el horario
-                } catch (ParseException ex) {
-                    Logger.getLogger(CtrlRegistroEntrada.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                    String hora2=dt.format(hora);//hora actual de entrada
-                    
-                    //convertir las horas a entero para compararlas
-
-                    hactual=Integer.parseInt(hora2.substring(0, 2));
-                    hbase=Integer.parseInt(hora1.substring(0, 2));
-
-                    mactual=Integer.parseInt(hora2.substring(3, 5));
-                    mbase=Integer.parseInt(hora1.substring(3, 5));
-
-                    //System.err.println(hactual+" "+hbase+" minutos "+mactual+" "+mbase);
-                    int horaminutos_entrada=(hbase*60)+mbase,horaminutos_actual=(hactual*60)+mactual;//convertimos todo a minutos para que sea facil la comparacion
-                    //System.err.println("minutos actual "+horaminutos_actual);
-                    //System.err.println("minutos entrada "+horaminutos_entrada);
-                    Date fecha=new Date();
-                    SimpleDateFormat fech = new SimpleDateFormat("dd/MM/yyyy");//creamos la fecha actual que se guardara en la base de datos
-                    String fechaa=fech.format(fecha);
-
-                    if(horaminutos_entrada<horaminutos_actual){//si tiempo de entrada es menor que tiempo actual
-                    visFicha.tblDatosHuella.setValueAt( "Entrada",0 ,3);//retardo
-                    visFicha.tblDatosHuella.setValueAt( "Retardo" ,0 ,4);
-                    visFicha.txtNotificaciones.setText("Asistencia registrada\n"
-                            + "Procure llegar mas temprano");
-                    PreparedStatement insertar = ch.prepareStatement("insert into historial(clave_trabajador,fecha,estado) values('"+clave+"','"+fechaa+"','Retardo');");
-                    insertar.executeQuery();
-                     
-                    
-
-                                   }
-                    else{
-                    visFicha.tblDatosHuella.setValueAt( "Entrada",0 ,3);
-                    visFicha.tblDatosHuella.setValueAt( "Normal" ,0 ,4);
-                    visFicha.txtNotificaciones.setText("Asistencia registrada\n");
-                    PreparedStatement insertar = ch.prepareStatement("insert into historial(clave_trabajador,fecha,estado) values('"+clave+"','"+fechaa+"','Normal');");
-                    insertar.executeQuery();
-                                        }
-                     }
-            } catch (SQLException ex) {
-                PreparedStatement actualiza_asistencia;
-            try {
-                actualiza_asistencia = ch.prepareStatement("UPDATE personal SET asistencia=true WHERE clave='" + clave + "';");
-                actualiza_asistencia.executeQuery();
-            } catch (SQLException ex1) {
-                //Logger.getLogger(RegEntradaSalida.class.getName()).log(Level.SEVERE, null, ex1);
-            }             
             }
-     //----------------------------------------------------------------
-  con.desconectar();
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }            
+    con.desconectar();
+    
+     return fechaIniFinUltEnt;
+  }
+
+    
+    @Override    
+    public void actionPerformed(ActionEvent e) 
+    {
+        
+        if (e.getSource() == visFicha.btnAbrir) 
+        {
+            System.out.println("abrir");
+            if (tPort.isRunning()) {
+                tPort.stop();
+                tmp=0;
+                PrtoSerial.sendData(1);
+                visFicha.lblPuertaEstado.setText("ABIERTA");
+            }
+            else{
+                PrtoSerial.sendData(1);
+                visFicha.lblPuertaEstado.setText("ABIERTA");
+            }
+
+            
+        }
+
+        if (e.getSource() == visFicha.btnCerrar) 
+        {
+            System.out.println("cerrar");
+             if (tPort.isRunning()) {
+                tPort.stop();
+                tmp=0;
+                PrtoSerial.sendData(0);
+                visFicha.lblPuertaEstado.setText("CERRADA");
+             }
+             else{
+                 PrtoSerial.sendData(0);
+                 visFicha.lblPuertaEstado.setText("CERRADA");
+             }
+        }
     }
 }

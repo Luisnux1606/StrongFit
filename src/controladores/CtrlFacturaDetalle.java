@@ -166,7 +166,7 @@ public class CtrlFacturaDetalle implements ActionListener {
                             try
                             {
                                 tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
-                                tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                                tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 4);                     
                             }catch(Exception e){System.out.println("index en -1");}
                             try {
                                   System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
@@ -182,23 +182,23 @@ public class CtrlFacturaDetalle implements ActionListener {
 
             }
         });
-        visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));      
+        visFicha.tblFacturaDetalle.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox1));      
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setToolTipText("Click para ver producto");  
     }
 
      private void initColumnSizes(JTable table) {
 		TableColumn column = null;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
         	column = table.getColumnModel().getColumn(i);
-            if(i==2){
+            if(i==3){
             	column.setPreferredWidth(400);
             }
         }
     }
     public void setListener()
     {               
-        int col = 1;      
+        int col = 2;      
         JTable facDet = visFicha.tblFacturaDetalle;
         facDet.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         facDet.setColumnSelectionAllowed(true);
@@ -241,7 +241,7 @@ public class CtrlFacturaDetalle implements ActionListener {
                               
                   switch(col)
                   {
-                      case 2:
+                      case 3:
                         VisProductos visProd = new VisProductos();
                         ConsProductos consProd = new ConsProductos();
                         Producto prod=new Producto();
@@ -252,13 +252,13 @@ public class CtrlFacturaDetalle implements ActionListener {
                         ctrProd.iniciar();
               
                           break;
-                    case 3: 
+                    case 4: 
                            
                           break;
-                    case 4:
+                    case 5:
                           row = facDet.getSelectedRow()-1;                                                   
                           addRows(visFicha.tblFacturaDetalle);
-                          col = 1;
+                          col = 2;
                           row = visFicha.tblFacturaDetalle.getRowCount()-1;
                           visFicha.tblFacturaDetalle.changeSelection(row, col,false,false);                        
                           break;
@@ -347,11 +347,12 @@ public class CtrlFacturaDetalle implements ActionListener {
     {
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-        table.getColumnModel().getColumn(4).setCellRenderer(tcr);
-        table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
+        table.getColumnModel().getColumn(5).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(4).setCellRenderer(tcr);                        
         
-        int colHide[] = new int[1];
+        int colHide[] = new int[2];
         colHide[0]=0;
+        colHide[1]=1;
        
         setHideJtableColumn(table,colHide);
         
@@ -376,7 +377,7 @@ public class CtrlFacturaDetalle implements ActionListener {
     public ArrayList<FacturaDetalle> setDetalles(VisFicha visFicha,String numFac)
     {
         JTable table = visFicha.tblFacturaDetalle;
-        String num,desc,valU,valT,prodId;
+        String num,desc,valU,valT,prodId,histServId;
         int facCabId = 0;
                 
         Producto prod = new Producto();
@@ -396,16 +397,18 @@ public class CtrlFacturaDetalle implements ActionListener {
         for (int i = 0; i <= table.getRowCount()-1; i++) 
         {
             prodId =table.getValueAt(i, 0)+"";
-            num = table.getValueAt(i, 1)+"";
-            desc = table.getValueAt(i, 2)+"";     
-            valU = table.getValueAt(i, 3)+"";
-            valT = table.getValueAt(i, 4)+"";
+            histServId =table.getValueAt(i, 1)+"";
+            num = table.getValueAt(i, 2)+"";
+            desc = table.getValueAt(i, 3)+"";     
+            valU = table.getValueAt(i, 4)+"";
+            valT = table.getValueAt(i, 5)+"";
          
             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 ) {
                 
                 detalle = new FacturaDetalle();
                 prod = new Producto();
                
+                detalle.setHistorial_id_hist(Validaciones.isNumVoid(histServId));
                 detalle.setCantidad_facDet(Validaciones.isNumVoid(num));
                 detalle.setDescripcion_facDet(desc);
                 detalle.setValUnitario_facDet(Validaciones.isNumVoid10(valU));

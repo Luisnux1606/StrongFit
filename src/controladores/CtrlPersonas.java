@@ -31,7 +31,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -75,7 +74,6 @@ public class CtrlPersonas implements ActionListener {
     VisFicha visFicha;   
     VisIngresoEgreso visIngEgr;
     VisHistorialPersonaServicio visHisPerServ;
-//    VisEntrenamiento visEnt;
     Object vis;
     String cadBus;
 
@@ -87,6 +85,7 @@ public class CtrlPersonas implements ActionListener {
         this.consPer = consPersona;
         this.visPersona = visPersona;        
         this.vis = vis;
+    
         
         this.visPersona.btnGuardar.addActionListener(this);
         this.visPersona.btnEliminar.addActionListener(this);
@@ -105,13 +104,14 @@ public class CtrlPersonas implements ActionListener {
    //     setTableModel();
         showComboTipoPersonas();
         escribirCombos();
-        int colHide[] = new int[1];
-        colHide[0]=10;
+        int colHide[] = new int[2];
+        colHide[1] = 0;
+        colHide[0]=11;
        
         setHideJtableColumn(visPersona.tbl_personas,colHide);
        
     }
-    
+      
       private void escribirCombos()
       {
         AutoCompleteDecorator.decorate(visPersona.cmbxGenero);   
@@ -199,7 +199,7 @@ public class CtrlPersonas implements ActionListener {
             while (listCategorias.next()) {
                 try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
                     
-                    model.addElement(new Persona(listCategorias.getString("nom_per"),listCategorias.getString("ape_per"),listCategorias.getInt("id_per"),listCategorias.getString("ced_per")));
+                    model.addElement(new Persona(listCategorias.getString("ape_per"),listCategorias.getString("nom_per"),listCategorias.getInt("id_per"),listCategorias.getString("ced_per")));
                                         
                 } catch (SQLException ex) {
                     Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
@@ -233,6 +233,7 @@ public class CtrlPersonas implements ActionListener {
                     modPer.setFecha_nac(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
                     modPer.setMail(visPersona.txtCorreoElect.getText());
                     modPer.setGenero(visPersona.cmbxGenero.getSelectedItem()+"".toUpperCase());
+                    modPer.setEstadoSalud(visPersona.txtEstadoSalud.getText()+"".toUpperCase());
                     TipoPersona tPer = new TipoPersona();
                     int idTipoPer = consPer.getIdTipoPerByNom(visPersona.cmbTipoPersona.getSelectedItem()+"");
                     tPer.setId_tipoPer(idTipoPer);
@@ -267,6 +268,7 @@ public class CtrlPersonas implements ActionListener {
             modPer.setFecha_nac(Validaciones.setFormatFecha(visPersona.dtc_fechaNac.getDate()));
             modPer.setMail(visPersona.txtCorreoElect.getText());
             modPer.setGenero(visPersona.cmbxGenero.getSelectedItem()+"".toUpperCase());
+            modPer.setEstadoSalud(visPersona.txtEstadoSalud.getText()+"".toUpperCase());
             TipoPersona tPer = new TipoPersona();
             int idTipoPer = consPer.getIdTipoPerByNom(visPersona.cmbTipoPersona.getSelectedItem()+"");
             tPer.setId_tipoPer(idTipoPer);
@@ -290,16 +292,20 @@ public class CtrlPersonas implements ActionListener {
             int o= JOptionPane.showConfirmDialog(null, "Realmente desea Eliminar el registro?", "Confirmar eliminar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);            
             if (o ==0) 
             {           
-                if (consPer.eliminar(modPer)) {
-                    JOptionPane.showMessageDialog(null, "Registro Eliminado !");
-                    limpiar();
+                if(modPer.getNombre().equals("anonimo"))
+                      JOptionPane.showMessageDialog(null, "No se puede eliminar este registro !");
+                else{
+                    if (consPer.eliminar(modPer)) {
+                        JOptionPane.showMessageDialog(null, "Registro Eliminado !");
+                        limpiar();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Error al Eliminar");
+                        limpiar();
+                    }
+                    showTable();
                 }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Error al Eliminar");
-                    limpiar();
-                }
-                showTable();
             }
             
         }
@@ -322,7 +328,7 @@ public class CtrlPersonas implements ActionListener {
                     visPersona.txtCorreoElect.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getMail())));  
                     visPersona.cmbxGenero.setSelectedItem(String.valueOf(modPer.getGenero()).toUpperCase());  
                     visPersona.cmbTipoPersona.setSelectedItem(modPer.getTipoPersona().getDescripcion_tipoPer());
-                    
+                    visPersona.txtEstadoSalud.setText(Validaciones.isNumVoid4(String.valueOf(modPer.getEstadoSalud())));
                     desabilitaHabilita(visPersona.btnGuardar,false);
                     desabilitaHabilita(visPersona.btnModificar,true);
                 }
@@ -338,13 +344,14 @@ public class CtrlPersonas implements ActionListener {
          if (e.getSource() == visPersona.btnLimpiar) 
          {
             limpiar();
-             desabilitaHabilita(visPersona.btnGuardar,true);
+           desabilitaHabilita(visPersona.btnGuardar,true);
            desabilitaHabilita(visPersona.btnModificar,false);
          }
          if(e.getSource() == visPersona.btnCargarHuella)
          {
              if (!Validaciones.isCedulaPersonaVoid(visPersona.txt_cedula)) {
-                 VisCapturaHuella form = new VisCapturaHuella(visPersona.txt_cedula.getText().trim());
+                 
+                 VisCapturaHuella form = new VisCapturaHuella(visPersona.txt_cedula.getText().trim());                
                  form.setVisible(true);
              }
              
@@ -362,6 +369,7 @@ public class CtrlPersonas implements ActionListener {
         visPersona.txtCorreoElect.setText("");
         visPersona.txt_nro_fono.setText("");
         visPersona.btnCargarHuella.setEnabled(false);
+        visPersona.txtEstadoSalud.setText("");
        // limpiarTabla();
     }
     
@@ -385,6 +393,7 @@ public class CtrlPersonas implements ActionListener {
          visPersona.txt_nro_fono.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 6))));         
          visPersona.dtc_fechaNac.setDate(Validaciones.setStringToDate(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 8)))));                        
          visPersona.cmbTipoPersona.setSelectedItem(tblD.getValueAt(tblD.getSelectedRow(), 9));
+         visPersona.txtEstadoSalud.setText(Validaciones.isNumVoid4(String.valueOf(tblD.getValueAt(tblD.getSelectedRow(), 10))));
          visPersona.btnCargarHuella.setEnabled(true);
      }
     
@@ -394,13 +403,13 @@ public class CtrlPersonas implements ActionListener {
         limpiarTabla();                            
            ArrayList<Persona> prodList = consPer.buscarTodos(modPer);
            DefaultTableModel model =  (DefaultTableModel)visPersona.tbl_personas.getModel();
-           Object cols[] = new Object[11];
+           Object cols[] = new Object[12];
 
            for (int i = 0; i < prodList.size(); i++) {
              //  model.insertRow(i,new (prodList.get(i).getNombre().toUpperCase()+"", prodList.get(i).getApellido()+"",prodList.get(i).getId()));
                cols[0] = prodList.get(i).getId();
                cols[1] = Validaciones.isNumVoid4(prodList.get(i).getCedula());
-               cols[2] = prodList.get(i).getNombre().toUpperCase();
+               cols[2] = Validaciones.isNumVoid4(prodList.get(i).getNombre().toUpperCase()+" ");
                cols[3] = prodList.get(i).getApellido();
                cols[4] = prodList.get(i).getGenero().toUpperCase();
                cols[5] = Validaciones.isNumVoid4(prodList.get(i).getMail());
@@ -408,7 +417,8 @@ public class CtrlPersonas implements ActionListener {
                cols[7] = Validaciones.isNumVoid(prodList.get(i).getEdad()+"");
                cols[8] = Validaciones.isNumVoid4(prodList.get(i).getFecha_nac());
                cols[9] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getDescripcion_tipoPer());
-               cols[10] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
+               cols[10] = Validaciones.isNumVoid4(prodList.get(i).getEstadoSalud()).toUpperCase();
+               cols[11] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
             
                model.addRow(cols);                    
            }   
@@ -424,14 +434,17 @@ public class CtrlPersonas implements ActionListener {
 
            for (int i = 0; i < prodList.size(); i++) {
                cols[0] = prodList.get(i).getId();
-               cols[1] = prodList.get(i).getCedula();
-               cols[2] = prodList.get(i).getNombre().toUpperCase();
-               cols[3] = prodList.get(i).getApellido().toUpperCase();
+               cols[1] = Validaciones.isNumVoid4(prodList.get(i).getCedula());
+               cols[2] = Validaciones.isNumVoid4(prodList.get(i).getNombre().toUpperCase()+" ");
+               cols[3] = prodList.get(i).getApellido();
                cols[4] = prodList.get(i).getGenero().toUpperCase();
-               cols[5] = prodList.get(i).getMail();
-               cols[6] = prodList.get(i).getNro_fono();
-               cols[7] = prodList.get(i).getEdad();
-               cols[8] = prodList.get(i).getFecha_nac();
+               cols[5] = Validaciones.isNumVoid4(prodList.get(i).getMail());
+               cols[6] = Validaciones.isNumVoid4(prodList.get(i).getNro_fono());
+               cols[7] = Validaciones.isNumVoid(prodList.get(i).getEdad()+"");
+               cols[8] = Validaciones.isNumVoid4(prodList.get(i).getFecha_nac());
+               cols[9] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getDescripcion_tipoPer());
+               cols[10] = Validaciones.isNumVoid4(prodList.get(i).getEstadoSalud()).toUpperCase();
+               cols[11] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
 
                model.addRow(cols);                    
            }   
@@ -440,10 +453,10 @@ public class CtrlPersonas implements ActionListener {
     
     public void showTableByNom(String nom)
     {
-        limpiarTabla();                            
+           limpiarTabla();                            
            ArrayList<Persona> prodList = consPer.buscarTodosPorNom(modPer,nom);
            DefaultTableModel model =  (DefaultTableModel)visPersona.tbl_personas.getModel();
-           Object cols[] = new Object[11];
+           Object cols[] = new Object[12];
 
            for (int i = 0; i < prodList.size(); i++) {
                cols[0] = prodList.get(i).getId();
@@ -456,7 +469,8 @@ public class CtrlPersonas implements ActionListener {
                cols[7] = prodList.get(i).getEdad();
                cols[8] = prodList.get(i).getFecha_nac();
                cols[9] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getDescripcion_tipoPer());
-               cols[10] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
+               cols[10] = Validaciones.isNumVoid4(prodList.get(i).getEstadoSalud());
+               cols[11] = Validaciones.isNumVoid4(prodList.get(i).getTipoPersona().getId_tipoPer()+"");
 
                model.addRow(cols);                    
            }   
@@ -499,7 +513,7 @@ public class CtrlPersonas implements ActionListener {
           }
 
           public void keyTyped(KeyEvent e) {
-              System.out.println ("-------------------------------------");
+            /*
             String m=(e.getKeyChar()+"").toUpperCase();
             char c =m.charAt(0);
 					
@@ -520,6 +534,12 @@ public class CtrlPersonas implements ActionListener {
                 }
                 else
                     showTableByNom(cadBus);
+                    */
+               int m = e.getKeyChar();
+               if (m == KeyEvent.VK_ENTER) {
+                   String cadCamp = Validaciones.isNumVoid4(visPersona.txtBuscarCedula.getText());
+                   showTableByNom(cadCamp);
+              }
           }
           
           private void printIt(String title, KeyEvent keyEvent) {
@@ -640,7 +660,7 @@ public class CtrlPersonas implements ActionListener {
                             modPer.setNombre(nombre);
                             modPer.setApellido(apellido);
                             visIngEgr.tblIngresosEgresos.setValueAt(modPer.getNombre() + " "+modPer.getApellido(),visIngEgr.tblIngresosEgresos.getSelectedRow(),2);
-                            visIngEgr.tblIngresosEgresos.setValueAt(modPer.getId(),visIngEgr.tblIngresosEgresos.getSelectedRow(),15);
+                            visIngEgr.tblIngresosEgresos.setValueAt(modPer.getId(),visIngEgr.tblIngresosEgresos.getSelectedRow(),16);
                         default:    
                             break;
                     }

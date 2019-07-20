@@ -13,14 +13,7 @@ import java.sql.DriverManager;
  * @author Administrator
  */
 public class Conexion {
-    /*
-    ("jdbc:oracle:thin:@localhost:1521:xe","usr_transmendez", "transmendez2010");
-
     
-    1*/
-    String base = "troyagym";
-    String usr = "root";
-    String pass = "luisnux1606";
     //String url = "jdbc:mysql://localhost:3306/"+base;
     String url ="jdbc:oracle:thin:@localhost:1521:xe";
     public Connection con =  null;

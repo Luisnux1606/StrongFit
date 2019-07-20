@@ -173,8 +173,7 @@ public class CtrlBuscarPersonas {
 
         };
         
-        MouseListener mouseListTblPersonas;
-        mouseListTblPersonas = new MouseListener() {
+        MouseListener mouseListTblPersonas = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(e.getClickCount()==2)

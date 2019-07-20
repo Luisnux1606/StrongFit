@@ -286,9 +286,8 @@ public class ConsProductos extends Conexion
         ResultSet rs = null; 
         String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat,cf.id_calserv " +
                     "from categoria c, producto p, calculofechaservicio cf " +
-                    "where c.id_cat = p.categoria_id_cat  and cf.id_calserv = p.calfechserv_id_cal and p.estado_prod = 1 ";
-                
-        
+                    "where c.id_cat = p.categoria_id_cat  and cf.id_calserv = p.calfechserv_id_cal and p.estado_prod = 1 and p.CATEGORIA_ID_CAT = 2 ";
+                        
         try 
         {
             

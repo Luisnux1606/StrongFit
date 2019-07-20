@@ -676,7 +676,7 @@ public class CtrlFacturaCabCompras implements ActionListener{
            jdc.add(visFicha.dtcFechaFacCabComp);
           
                 System.out.println(visFicha.cmb_clienteFac.getName());
-               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFacComp) && Validaciones.isDetalleNull(visFicha.tblFacturaDetalleCompras)) 
+               if (Validaciones.isDateChooserVoid(jdc) &&  Validaciones.isVoidJTxt(visFicha.txt_clienteFacComp) && Validaciones.isDetalleNullComp(visFicha.tblFacturaDetalleCompras)) 
                {                                        
                     setFacturaCabecera(visFicha);   
                                        

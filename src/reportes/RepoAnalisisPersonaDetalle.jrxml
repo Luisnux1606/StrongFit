@@ -7,7 +7,7 @@
 		<defaultValueExpression><![CDATA[$P{p_id_per}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select p.id_per,p.ced_per, p.nom_per,p.ape_per,m.estatura_med,p.edad_per,a.recomendacionPesas_ana,a.recomendacionCardio_ana,a.recomendacionFuncional_ana,a.exesoGrasa_ana,a.exesoLiquido_ana,a.exesoTotal_ana,m.peso_med,m.fecha_med,m.abdomenAlto_med
+		<![CDATA[select p.id_per,p.ced_per, p.nom_per,p.ape_per,m.estatura_med,p.edad_per,a.recomendacionPesas_ana,a.recomendacionCardio_ana,a.recomendacionFuncional_ana,a.excesoGrasa_ana,a.excesoLiquido_ana,a.excesoTotal_ana,m.peso_med,m.fecha_med,m.abdomenAlto_med
 from persona p, ficha f,medidas m,analisis a
 where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and a.id_ana=f.Analisis_id_ana and p.id_per=$P{p_id_per} and p.estado_per=1]]>
 	</queryString>
@@ -20,9 +20,9 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and a.id_ana=f.A
 	<field name="RECOMENDACIONPESAS_ANA" class="java.lang.String"/>
 	<field name="RECOMENDACIONCARDIO_ANA" class="java.lang.String"/>
 	<field name="RECOMENDACIONFUNCIONAL_ANA" class="java.lang.String"/>
-	<field name="EXESOGRASA_ANA" class="java.math.BigDecimal"/>
-	<field name="EXESOLIQUIDO_ANA" class="java.math.BigDecimal"/>
-	<field name="EXESOTOTAL_ANA" class="java.math.BigDecimal"/>
+	<field name="EXCESOGRASA_ANA" class="java.math.BigDecimal"/>
+	<field name="EXCESOLIQUIDO_ANA" class="java.math.BigDecimal"/>
+	<field name="EXCESOTOTAL_ANA" class="java.lang.Number"/>
 	<field name="PESO_MED" class="java.math.BigDecimal"/>
 	<field name="FECHA_MED" class="java.lang.String"/>
 	<field name="ABDOMENALTO_MED" class="java.math.BigDecimal"/>
@@ -33,7 +33,7 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and a.id_ana=f.A
 		<band splitType="Stretch"/>
 	</background>
 	<columnFooter>
-		<band height="332" splitType="Stretch">
+		<band height="287" splitType="Stretch">
 			<staticText>
 				<reportElement x="7" y="2" width="49" height="20" uuid="6bbebc88-ec52-4d07-b2db-15f36bbec184"/>
 				<text><![CDATA[Peso:]]></text>
@@ -51,19 +51,98 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and a.id_ana=f.A
 				<text><![CDATA[Exceso Total:]]></text>
 			</staticText>
 			<lineChart>
-				<chart isShowLegend="false">
-					<reportElement x="107" y="2" width="164" height="76" uuid="876ae8f0-4398-4a69-8f71-0405dc167f08"/>
+				<chart evaluationTime="Report" theme="default">
+					<reportElement x="117" y="200" width="200" height="73" uuid="37bd432c-5646-41c0-8916-cd2509c2b7da"/>
 					<chartTitle/>
 					<chartSubtitle/>
-					<chartLegend>
-						<font size="8"/>
-					</chartLegend>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></rangeAxisMinValueExpression>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart evaluationTime="Report" theme="default">
+					<reportElement x="117" y="127" width="200" height="73" uuid="e00c7844-16e5-41de-8e96-8a7cc497d0ed"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{EXCESOLIQUIDO_ANA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{EXCESOLIQUIDO_ANA}]]></valueExpression>
+						<labelExpression><![CDATA["liquido"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></rangeAxisMinValueExpression>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart evaluationTime="Report" theme="default">
+					<reportElement x="117" y="63" width="200" height="64" uuid="50bb1b6b-83d5-498c-8aa4-da87301ea1d8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{EXCESOGRASA_ANA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{EXCESOGRASA_ANA}]]></valueExpression>
+						<labelExpression><![CDATA["grasa"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></rangeAxisMinValueExpression>
+				</linePlot>
+			</lineChart>
+			<lineChart>
+				<chart evaluationTime="Report" theme="default">
+					<reportElement x="117" y="0" width="200" height="63" uuid="9c760061-d325-40de-b84c-b37c89d3d9e0"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
 				</chart>
 				<categoryDataset>
 					<categorySeries>
 						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
 						<categoryExpression><![CDATA[$F{PESO_MED}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{PESO_MED}]]></valueExpression>
+						<labelExpression><![CDATA["peso"]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
 				<linePlot>
@@ -71,87 +150,11 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and a.id_ana=f.A
 					<categoryAxisFormat>
 						<axisFormat/>
 					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></valueAxisLabelExpression>
 					<valueAxisFormat>
 						<axisFormat/>
 					</valueAxisFormat>
-				</linePlot>
-			</lineChart>
-			<lineChart>
-				<chart isShowLegend="false">
-					<reportElement x="107" y="78" width="164" height="82" uuid="f9824911-0c85-4ea1-a071-74d918ff46cd"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend>
-						<font size="8"/>
-					</chartLegend>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{EXESOGRASA_ANA}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{EXESOGRASA_ANA}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<linePlot>
-					<plot/>
-					<categoryAxisFormat>
-						<axisFormat/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat/>
-					</valueAxisFormat>
-				</linePlot>
-			</lineChart>
-			<lineChart>
-				<chart isShowLegend="false">
-					<reportElement x="107" y="160" width="164" height="87" uuid="3715c1da-2f38-47d1-9a6d-76fbe8343586"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend>
-						<font size="8"/>
-					</chartLegend>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{EXESOLIQUIDO_ANA}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{EXESOLIQUIDO_ANA}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<linePlot>
-					<plot/>
-					<categoryAxisFormat>
-						<axisFormat/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat/>
-					</valueAxisFormat>
-				</linePlot>
-			</lineChart>
-			<lineChart>
-				<chart isShowLegend="false">
-					<reportElement x="107" y="247" width="164" height="82" uuid="068aaf65-ebb5-486e-a8c5-c4865460672c"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend>
-						<font size="8"/>
-					</chartLegend>
-				</chart>
-				<categoryDataset>
-					<categorySeries>
-						<seriesExpression><![CDATA[$F{ID_PER}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{EXESOTOTAL_ANA}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{EXESOTOTAL_ANA}]]></valueExpression>
-					</categorySeries>
-				</categoryDataset>
-				<linePlot>
-					<plot/>
-					<categoryAxisFormat>
-						<axisFormat/>
-					</categoryAxisFormat>
-					<valueAxisFormat>
-						<axisFormat/>
-					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></rangeAxisMinValueExpression>
 				</linePlot>
 			</lineChart>
 		</band>

@@ -1,19 +1,30 @@
 *********PESTAÑA INGRESOS/EGRESOS***************﻿ REVISADO
-1. Incluir en el combo la opción de: "anulados".:ok(anulado es eliminado)
-2. Cuando se agrega un registro muestra los botones "Anular" y "En blanco". y "en blanco" no hace nada. no puedo revisar porque no guarda :ok(guarda)
-
 TABLA
     1. Si elijo un entrenamiento no se salte a valor. cancelado. :ok
-    2. Validar que el valor ajuste nunca sea mayor a lo pendiente : ok
-    3. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.: r(no se queria con cantidad )
-    4. Validar que cuando se guarde en la tabla no se muestren los eliminados o anulados. (ahora está mostrando los eliminados) :ok;
-    5. El campo saldo.cont.total no se calcula siguiendo con tab.
-    6. El campo saldo.cont.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes): ok
+    2. Cuando muestre el mensaje que el valor ajuste no sea mayor a lo pendiente que borre el dato registrado en valor ajuste.
+    3. Cuando se cambia la fecha se duplica la información. 
+    4. El valor ajuste lo quitaría porque el valor que cancela es con todo y lo pendiente.
+        (es importante definir esto porque depeniendo de ello puedo probar.)
+
+        MI PROPUESTA:
+            -- VAL.CANCELA= valor que paga la persona que puede ser mayor al ingreso. 
+            -- VAL.PENDIENTE= (saldo+ingreso)-val.cancela.
+            -- VAL.AJUSTE= eliminar
+            -- SALDO.CONTABLE= eliminar
+            -- SALDO CONT.TOTAL= eliminar
+
+    5. Se podría incluir cantidad para indicar cuanto va a comprar de cierta cosa, e incluso para decir de cuantos entrenamientos está pagando.: r(no se queria con cantidad )
+        si no se quería con cantidad no va a funcionar lo del stock, pero está ok si es lo que pide.  
+
+    6. El campo saldo.cont.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes) pero por registro:
+        En este caso deberíamos acordar si se anula un pendiente se recalcula el saldo.cont.total, y lo mismo con el eliminar.  [IMPORTANTE]
 
 BUSCAR(campo)
-    1. No busca ::ok
+    1. No busca [SIGUE PENDIENTE] :ok
 
-MOSTRAR TODOS
+MOSTRAR COMBO
+    1. El mostrar por los "eliminados" no realiza nada. 
+    2. El mostrar por 
     1. Debe mostrar únicamente los activos, no los eliminados ni anulados. :ok
 
 
@@ -39,7 +50,7 @@ localhost:1521:xe
 
 BUSCAR(lupa)= ok
 
-*********GESTION DE PERSONAS*************** REVISAR
+*********GESTION DE TIPO PERSONAS*************** REVISAR
 
 AGREGAR= ok
 ELIMINAR= ok
@@ -52,17 +63,20 @@ BUSCAR (nombre)
 P.ej (descuentos busca cu y no sale)= esta funcionalidad si tiene la GESTION DE PERSONAS 
 
 
-*********GESTION DE MEMBRESIA*************** REVISADO
+*********GESTION DE MEMBRESIA*************** REVISAR
 1. la tabla se ordene por el ID. 
 
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
+1. Validar que debe haber buscado información para modificarla.  
+(esto me falta revisar en los demás) 
+
 LIMPIAR= ok
 BUSCAR(lupa)= ok
 BUSCAR(nombre)= ok
 
-*********GESTION DE GATEGORIA*************** REVISADO
+*********GESTION DE GATEGORIA*************** REVISAR
 GUARDAR=ok
 ELIMINAR= ok
 MODIFICAR=ok
@@ -71,44 +85,42 @@ LIMPIAR= ok
 BUSCAR(nombre)= ok
 1.Buscar que en el texto puede estar en cualquier parte esa letra. 
 P.ej (descuentos busca cu y no sale)= esta funcionalidad si tiene la GESTION DE PERSONAS 
+2.Validar que no importa las veces que suprima debe mostrarse los datos en la tabla. 
 
-
-*********GESTION DE PRODUCTOS/SERVICIOS***************  REVISADO
-1. Borrar en la tabla los campos "idcat", "idcalfechaserv" :ok
-2. El campo "categoria" cambiarlo a la primera columna antes que el campo "ID" :ok
-
+*********GESTION DE PRODUCTOS/SERVICIOS***************  REVISAR
 GUARDAR= ok
 ELIMINAR= ok
 MODIFICAR= ok
-
-LIMPIAR
-1. Ordenar la tabla en base al ID. :ok
+LIMPIAR= ok
 
 BUSCAR(nombre)
-1. Debe buscar dependiendo si está habilitado "servicios", "productos" o "todos" :ok(no importa, servicios son pocos)
+1. Debe buscar dependiendo si está habilitado "servicios", "productos" o "todos" [sigue pendiente]
 
 BUSCAR(lupa)
 1. no busca [sigue pendiente] : r(it's going to be by code)
 
 
-*********GESTION DE ENTRENAMIENTO***************  REVISADO
-1. En persona debe estar vacío cuando se carga la ventana.  :ok
-
+*********GESTION DE ENTRENAMIENTO***************  REVISAR
+1. Cuando se abra la ventana el campo PERSONA deberia estar vacio 
 GUARDAR
-1. cuando se guarde Borrar "tipo de entrenamiento", "fecha inicio", "fecha fin" y "precio". :r
+1.Cuando se guarde Borrar de las cajas de texto "tipo de entrenamiento", "fecha inicio", "fecha fin" y "precio" [sigue pendiente]
 
 ELIMINAR= ok 
 MODIFICAR= ok
-LIMPIAR=ok
+
+LIMPIAR
+1. También borrar el label que contiene el precio. 
 
 BUSCAR(nombre)
-1. Cuando se borre lo que tiene la caja de texto mostrar los NO ELIMINADOS. :ok
+1. Cuando se borre lo que tiene la caja de texto mostrar los NO ELIMINADOS. [SIGUE PENDIENTE] :ok
+2. Ordenar bajo el mismo criterio que cuando guarda, supongo que por el código. 
 
 
-*********GENERAR VENTAS***************  REVISADO
-1. Quitar el botón de personas, ya que existe el combo.:ok (no porque puede ser util para ingresos rapidos)
+*********GENERAR VENTAS***************  REVISAR
+1. Cambiar el orden de "valor que cancelo" y "cobro pendiente" después de IVA, ya que corresponde a lo que se va a pagar al final.
 2. Cuando uso tab en la tabla de detalle se muestran sólo los productos, pero no los servicios. :ok (entre se debe elegir por boton y guardarlo ates de generar la factura) 
 3. Cuando elijo en la tabla con las flechas actualizar "valor a pagar", "valor que cancelo" :ok (se usa enter)
+4. "Generar Compras" tiene TOTAL+IVA,y "Generar Ventas" no. Incluir TOTAL+IVA.
 
 GUARDAR
 1. Si corresponde en detalle a un servicio no se debe restar en "PRODUCTOS/SERVICIOS" con el "existentes". :ok (no importa el stock en este caso)
@@ -120,13 +132,12 @@ ElIMINAR= ok
 MEMBRESIA
 1.Cuando elijo una membresia se pone en cero "valor a pagar", "valor que cancelo", y "cobro pendiente". :ok
 
-
-*********GENERAR COMPRAS***************
-1. Incluir el combo en la tabla detalle, al igual como hizo en VENTAS :ok
-2. Quitar label que muestra un código. :ok
-3. Actualizar el "valor a pagar" si se actualiza "valor unitario". :ok(si esta)
-4. Actualizar el "cobro pendiente" en base al "valor que cancela". :ok(dando un enter)
-5. Entre "GENERAR COMPRAS" y "GENERAR VENTAS" se cambia el orden del cuadro amarillo que contiene "valor que cancelo" y "cobro pendiente"::ok
+*********GENERAR COMPRAS***************   REVISAR
+1. Cambiar el orden de "valor que cancelo" y "cobro pendiente" después de IVA, ya que corresponde a lo que se va a pagar al final.
+2. Borrar el label que se presenta cuando se selecciona el proveedor. 
+3. En el detalle el combo o ventana de productos deber mostrar únicamente productos, no servicios. 
+4. Actualizar el "valor total" si se actualiza "valor unitario". [PENDIENTE](si esta)
+5. Al elegir el producto mediante el combo actualizar el v.total. 
 
 GUARDAR= ok
 LIMPIAR= ok
@@ -135,27 +146,27 @@ AGREGAR= ok
 ELIMINAR= ok
 
 MEMBRESIA
-1. No realiza nada. :ok
+1. No realiza nada. : [Sigue pendiente] ok
 
 
-*********CONSULTAS*************** 
-------VENTAS REALIZADAS------  REVISADO
-1. No encuentro diferencia entre el botón "mostrar todos" y en el combo la opción "todos". Quitar el botón. :ok 
-2. Incluir en el combo las opciones de: "anulados", "eliminados".:ok(solo au=nulados no existe eliminados)
-3. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona.:r
-4. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):r
+*********CONSULTAS***************  
+------VENTAS REALIZADAS------  REVISAR
+1. Cuando se despliegue la ventana mostrar todas las ventas realizadas. 
+2. Incluir saldo.total que se refiere a la sumatoria total del saldo de la persona.:r
+3. En el campo saldo.total debe mostrar el saldo total de la persona (la sumatoria de los valores pendientes - sumatoria de los ajustes):r
 
-FILTRAR TODO= ok
-FILTRAR POR COMBO= ok
+FILTRAR POR COMBO
+1. Borrar el detalle, es decir la segunda tabla. 
+2. No filtra por anulados.  
 
 BUSCAR(nombre)
-1. Busque considerando si está en el combo "todos", "pendientes", "anulados", "eliminados" :r
+1. Busque considerando si está en el combo "todos", "pendientes", "anulados":r
 
-ANULAR
-1. Si anula factura regrese la cantidad de productos a stock.:r
+ANULAR= ok
+GUARDAR= ok
 
-------ENTRENAMIENTOS Y SALDOS------
-1. En la tabla se muestren solo las facturas activas que tengan entrenamiento.:ok(asi seria porque es solo entrenamientos)
+------ENTRENAMIENTOS Y SALDOS------ REVISAR
+1. En la tabla se muestren las facturas activas aunque el entrenamiento se haya eliminado. 
 
 FILTRAR POR COMBO
 
@@ -230,3 +241,20 @@ BUSCAR(fecha)
 *********GENERALES***************
 1.En las tablas incluir un Scroll (supongo que se podr�a hacer) :ok
 2.Cambiar el nombre de las ventanas. 
+
+
+
+//cambios factura cabecera, factura detalle, consultas ventas realizadas, ctrlingresoEgreso
+
+update github
+
+new changes to de database: fileds added
+    num_registro_facCabCompr : facturaCompras
+    num_registro_facCab: Factura ventas
+    num_registro_hisPerSer: HistPerServ
+    FACTURA_ID_FAC: HISTPERSERV
+    estadoSalud_per:Persona
+
+update facturacabeceracompras f set f.num_registro_faccabcompr = 0 where length(f.num_faccabcomp)=0;
+update facturacabecera f set f.num_registro_faccab = 0;
+update histpersserv h set h.num_registro_hisperser = 0;

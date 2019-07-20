@@ -45,6 +45,8 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -85,15 +87,15 @@ public class CtrlFicha implements ActionListener{
     VisReportes visReportes;
     VisMembresia visMemb;
     VisPersona visPer;
-    
+    CtrlRegistroEntrada ctrlRegEnt;
     Persona persona;
     Analisis analisis;
     Medidas medidas;    
     String cadBus;
-    
+
     String nomEmpresa;
     
-    public CtrlFicha(Ficha modFicha,ConsFicha consFicha,VisFicha visFicha)
+    public CtrlFicha(Ficha modFicha,ConsFicha consFicha,VisFicha visFicha,CtrlRegistroEntrada ctrlRegEnt)
     {
         nomEmpresa = Configuracion.nomEmp;
         
@@ -102,6 +104,7 @@ public class CtrlFicha implements ActionListener{
         this.visFicha = visFicha;
         this.persona = new Persona();
         this.visMemb =  visMemb;
+        this.ctrlRegEnt = ctrlRegEnt;
        
         
        // persona = new Persona();
@@ -114,7 +117,8 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.btnModificarFichaG.addActionListener(this);     
         this.visFicha.btnElegirPersonaG.addActionListener(this);
         this.visFicha.btnCargarFichas.addActionListener(this);
-               
+      
+        
         this.visFicha.mniMembresias.addActionListener(this);
         this.visFicha.mniPersonas.addActionListener(this);
         this.visFicha.mniTipoPersona.addActionListener(this);
@@ -132,7 +136,6 @@ public class CtrlFicha implements ActionListener{
         this.visFicha.mniEntrenamientos.addActionListener(this);
         
         this.visFicha.mniDescripcionTransaccional.addActionListener(this);
-        
         
         this.visFicha.txtCodPersona.setVisible(false);
         
@@ -164,6 +167,8 @@ public class CtrlFicha implements ActionListener{
        
         setHideJtableColumn(visFicha.tblFichas,colHide);
     }
+    
+   
     
     public void habilitaMedAlimAnalisis()
     {
@@ -484,6 +489,24 @@ public class CtrlFicha implements ActionListener{
         };
        
         visFicha.tblFichas.addMouseListener(mouseListTblFicha);
+        
+       //*******************TABED PANE******************
+        visFicha.tabFichaVentas.addChangeListener(new ChangeListener() {
+       
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int index = visFicha.tabFichaVentas.getSelectedIndex();
+                if (index == 3) {
+                    if (!ctrlRegEnt.Lector.isStarted()) {
+                         ctrlRegEnt.start();
+                    }
+                   
+                }
+            }
+        });
+        
+        
+        
       
     }
      public void getTableToTxts()
@@ -900,15 +923,13 @@ public class CtrlFicha implements ActionListener{
             ctrPer.iniciar();
             ctrPer.locale = 1;
         }                 
-        if (e.getSource() == visFicha.btnCargarFichas) 
+         if (e.getSource() == visFicha.btnCargarFichas) 
         {           
             setMedidasAnalisisFichas();
             if (!Validaciones.isNumVoid1(visFicha.txtCodPersona.getText())) {
                 deshabilitaMedAlimAnalisis();
             }
         }
-       
-         
                 
          if (e.getSource() == visFicha.mniReportes) 
          {
@@ -945,6 +966,7 @@ public class CtrlFicha implements ActionListener{
            
             Ficha ficha  =  new Ficha();
             CtrlPersonas ctrPer=new CtrlPersonas(persona, consPer, visPer,visFicha);
+            ctrlRegEnt.cerrar();
             ctrPer.iniciar();
         }
          
@@ -1043,7 +1065,7 @@ public class CtrlFicha implements ActionListener{
             visFicha.pnlPlanAlim.setBackground(color);
             visFicha.pnlFichaCrear.setBackground(color);
             visFicha.pnlVentas.setBackground(color);
-            visFicha.pnlVentasInterno.setBackground(color);
+            
             visFicha.pnlVentasComponentes.setBackground(color);             
             visFicha.pnlMedidasComponentes.setBackground(color);
             visFicha.pnlMedidasComponentes2.setBackground(color);
@@ -1052,6 +1074,7 @@ public class CtrlFicha implements ActionListener{
                
         }
          
+        
          if (e.getSource() == visFicha.menuSalir) 
          {
             visFicha.dispose();

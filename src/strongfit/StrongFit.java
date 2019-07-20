@@ -71,14 +71,15 @@ public class StrongFit {
         VisMembresia visMemb = new VisMembresia();
         
 
-        CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer, visFicha);
+        
         CtrlMedidas ctrlMed = new CtrlMedidas(med, consMed, visFicha);        
         CtrlAnalisis ctrlAna = new CtrlAnalisis(ana, consAna, visFicha);
         CtrlFacturaCab ctrlFacturaCab = new CtrlFacturaCab(facCab, consFacCab, visFicha, visMemb, per);
         CtrlFacturaCabCompras ctrlFacCabComp = new CtrlFacturaCabCompras(facCabComp, consFacCabComp, visFicha, visMemb, per);
-        //CtrlRegistroEntrada ctrlRegEnt = new CtrlRegistroEntrada(visFicha);
-        
-        CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha );
+        CtrlRegistroEntrada ctrlRegEnt = new CtrlRegistroEntrada(visFicha);
+        CtrlPersonas ctrlPersonas = new CtrlPersonas(per, consPer, visPer, visFicha);
+                
+        CtrlFicha ctrlFicha = new CtrlFicha(ficha, consFicha, visFicha,ctrlRegEnt );
         ctrlFicha.iniciar();
 
     }

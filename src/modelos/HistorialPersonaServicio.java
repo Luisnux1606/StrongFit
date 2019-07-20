@@ -22,6 +22,7 @@ public class HistorialPersonaServicio {
     private Persona Persona_id_HisPerSer;
     private Producto Producto_id_HisPerSer;
     private int estado_HisPerSer;
+    private int Factura_id_fac;
 
     /**
      * @return the id_HisPerSer
@@ -119,6 +120,20 @@ public class HistorialPersonaServicio {
      */
     public void setEstadoDias_HisPerSer(String estadoDias_HisPerSer) {
         this.estadoDias_HisPerSer = estadoDias_HisPerSer;
+    }
+
+    /**
+     * @return the Factura_id_fac
+     */
+    public int getFactura_id_fac() {
+        return Factura_id_fac;
+    }
+
+    /**
+     * @param Factura_id_fac the Factura_id_fac to set
+     */
+    public void setFactura_id_fac(int Factura_id_fac) {
+        this.Factura_id_fac = Factura_id_fac;
     }
     
     

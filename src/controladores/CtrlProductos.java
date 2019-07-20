@@ -233,24 +233,23 @@ public class CtrlProductos implements ActionListener{
        String fechaIni = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 3)+"";
        String fechaFin = visProd.tbl_productos.getValueAt(visProd.tbl_productos.getSelectedRow(), 4)+"";
        
-     //  table.setValueAt(idProd, filaDetalle, 6);                            
-     //  visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
-       table.setValueAt(descripcionProd, filaDetalle, 4);
-       table.setValueAt(idProd, filaDetalle, 15);
+       table.setValueAt(descripcionProd, filaDetalle, 5);
+       table.setValueAt(idProd, filaDetalle, 17);
+       int cant = Validaciones.isNumVoid(table.getValueAt(table.getSelectedRow(), 4)+"");
        String ingEgr = Validaciones.getMsgOption().toUpperCase()+"";
          if (ingEgr.equals("INGRESO")) {
-             table.setValueAt(precioProd, filaDetalle, 7);
-             table.setValueAt("0.0", filaDetalle, 8);
+             table.setValueAt(precioProd*cant, filaDetalle, 8);
+             table.setValueAt("0.0", filaDetalle, 9);
          }
          if (ingEgr.equals("EGRESO")) {
-              table.setValueAt(precioProd, filaDetalle, 8);
-              table.setValueAt("0.0", filaDetalle, 7);
+              table.setValueAt(precioProd*cant, filaDetalle, 9);
+              table.setValueAt("0.0", filaDetalle, 8);
          }
          System.out.println(">>> "+idCat);
          if (idCat==1) 
-             table.changeSelection(filaDetalle, 5,false,false);        
+             table.changeSelection(filaDetalle, 6,false,false);        
          else             
-            table.changeSelection(filaDetalle, 9,false,false);
+            table.changeSelection(filaDetalle, 10,false,false);
         
        
        /*
@@ -293,8 +292,8 @@ public class CtrlProductos implements ActionListener{
 
        visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);                            
      //  visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 1);
-       visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 2);
-       visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 3);
+       visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 3);
+       visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 4);
 
        Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
        Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
@@ -314,7 +313,7 @@ public class CtrlProductos implements ActionListener{
        visFicha.tblFacturaDetalleCompras.setValueAt(descripcion, filaDetalle, 2);
        visFicha.tblFacturaDetalleCompras.setValueAt(precio, filaDetalle, 3);
 
-       Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalleCompras);                            
+       Calculos.calcularTotalDetallesComp(visFicha.tblFacturaDetalleCompras);                            
        Calculos.setTotalesCabeceraCompras(visFicha.tblFacturaDetalleCompras, visFicha);
        visProd.dispose();
      }
@@ -367,8 +366,6 @@ public class CtrlProductos implements ActionListener{
                 }
                 if(e.getClickCount()==2)
                 {
-                                                           
-                    System.out.println(locale);
                     switch(locale)
                     {
                         case 0 :

@@ -212,6 +212,35 @@ public class Validaciones {
           boolean estado=false;
           for (int i = 0; i <= table.getRowCount()-1; i++) 
            {
+               num = table.getValueAt(i, 2)+"";
+               desc = table.getValueAt(i, 3)+"";     
+               valU = table.getValueAt(i, 4)+"";
+               valT = table.getValueAt(i, 5)+"";
+
+               if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0 && Validaciones.isNumVoid10(valT)!=0 )
+               {
+                    estado = true;
+                    break;
+               }
+               else 
+               {
+                   estado  = false;
+                   
+               }
+               if (estado == false)
+                   getMensaje("La factura debe tener almenos un detalle.");
+               
+           }      
+      return estado;
+      }
+      
+      public static boolean isDetalleNullComp(JTable table)
+      {
+          String num,desc,valU,valT,prodId; 
+          
+          boolean estado=false;
+          for (int i = 0; i <= table.getRowCount()-1; i++) 
+           {
                num = table.getValueAt(i, 1)+"";
                desc = table.getValueAt(i, 2)+"";     
                valU = table.getValueAt(i, 3)+"";

@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package consultas;
-
+import assets.Calculos;
+import assets.Validaciones;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +29,13 @@ public class ConsHistorialPersonaServicio extends Conexion
     {
         PreparedStatement ps= null;
         Connection con = getConexion();
-        String sql = "INSERT INTO HISTPERSSERV (ID_HISPERSER,FECHAINI_HISPERSER, FECHAFIN_HISPERSER, PERSONA_ID_HISPERSER, PRODUCTO_ID_HISPERSER,ESTADO_HISPERSER) VALUES(HistPersServ_id_seq.NEXTVAL,?,?,?,?,?)";
+        
+        int nroRegFacVen = new ConsFacturaCab().getNroRegistroFacVen();
+        int nroRegFacCom = new ConsFacturaCabCompras().getNroRegistroFacComp();
+        int nroRegHistPerServ = new ConsHistorialPersonaServicio().getNroRegistroHisPerSev();        
+        int nroRegGreatter = Validaciones.isNumVoid(Calculos.getGretterNumber(nroRegFacVen,nroRegFacCom,nroRegHistPerServ)+"") + 1;
+        
+        String sql = "INSERT INTO HISTPERSSERV (ID_HISPERSER,FECHAINI_HISPERSER, FECHAFIN_HISPERSER, PERSONA_ID_HISPERSER, PRODUCTO_ID_HISPERSER,ESTADO_HISPERSER,FACTURA_ID_FAC,num_registro_hisPerSer) VALUES(HistPersServ_id_seq.NEXTVAL,?,?,?,?,?,?,?)";
         try 
         {
             ps = con.prepareStatement(sql);
@@ -37,6 +44,8 @@ public class ConsHistorialPersonaServicio extends Conexion
             ps.setInt(3, hisPerServ.getPersona_id_HisPerSer().getId());
             ps.setInt(4, hisPerServ.getProducto_id_HisPerSer().getId_prod());  
             ps.setInt(5, hisPerServ.getEstado_HisPerSer()); 
+            ps.setInt(6, hisPerServ.getFactura_id_fac());
+            ps.setInt(7, nroRegGreatter);
 
             ps.execute();                                       
             return true;
@@ -403,6 +412,43 @@ public class ConsHistorialPersonaServicio extends Conexion
        return prod;
     }
 
-    
+    public int getNroRegistroHisPerSev()
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        int nroReg = 0;
+        String sql = "select max(h.num_registro_hisperser) as num_registro_hisperser " +
+                     " from histpersserv h " +
+                     " order by num_registro_hisperser desc";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                     
+          
+            rs = ps.executeQuery();
+            if (rs.next()) { //ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per
+                nroReg = rs.getInt("num_registro_hisperser");                                           
+            }
+           
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        return nroReg;
+    }
    
 }

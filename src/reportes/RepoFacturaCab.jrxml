@@ -12,7 +12,8 @@
 	<queryString>
 		<![CDATA[select TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') as FechaIni, TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') as FechaFin, upper(concat(CONCAT(p.nom_per,' '),p.ape_per)) as nombres, f.CONCEPTO_FACCAB, f.valPagar_faccab,f.valPendiente_faccab
 from facturaCabecera f,persona p
-where p.id_per = f.Persona_id_per and TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') BETWEEN TO_DATE($P{p_fechaIni},'DD/MM/YYYY') AND TO_DATE($P{p_fechaFin},'DD/MM/YYYY') and p.estado_per=1 and f.estado_faccab=1]]>
+where p.id_per = f.Persona_id_per and TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') BETWEEN TO_DATE($P{p_fechaIni},'DD/MM/YYYY') AND TO_DATE($P{p_fechaFin},'DD/MM/YYYY') and p.estado_per=1 and f.estado_faccab=1
+order by f.id_faccab asc]]>
 	</queryString>
 	<field name="FECHAINI" class="java.sql.Timestamp"/>
 	<field name="FECHAFIN" class="java.sql.Timestamp"/>
@@ -38,7 +39,7 @@ where p.id_per = f.Persona_id_per and TO_DATE(f.fecha_faccab, 'DD/MM/YYYY') BETW
 				<textElement>
 					<font size="24"/>
 				</textElement>
-				<text><![CDATA[STRONGFIT]]></text>
+				<text><![CDATA[TROYAGYM]]></text>
 			</staticText>
 		</band>
 	</title>

@@ -16,6 +16,7 @@ import modelos.Conexion;
 import modelos.FacturaCab;
 import modelos.FacturaDetalle;
 import modelos.FacturaDetalleCompras;
+import modelos.HistorialPersonaServicio;
 
 /**
  *
@@ -43,6 +44,12 @@ public class ConsFacturaDet extends Conexion {
                 ps.setDouble(4,listDets.getvTotal_facDet());
                 ps.setInt(5,listDets.getProducto_id_prod().getId_prod());
                 ps.setInt(6,listDets.getFactura_id_fac().getId_facCab());
+                
+                int idHist = listDets.getHistorial_id_hist();
+                int idFact = listDets.getFactura_id_fac().getId_facCab();
+                if (idHist!=0) {
+                    modificarHistorialServicio(idHist,idFact);
+                }
                 System.out.println("cabFac "+listDets.getFactura_id_fac().getId_facCab());
                 ps.setInt(7, listDets.getEstado_facDet());
                
@@ -56,6 +63,42 @@ public class ConsFacturaDet extends Conexion {
         catch (Exception e) 
         {
             e.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        
+    }
+    
+    public boolean modificarHistorialServicio(int idHist,int idFact)
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();//HistorialPeronaServicio (ID_HISPERSER,FECHAINI_HISPERSER, FECHAFIN_HISPERSER, PERSONA_ID_HISPERSER, PRODUCTO_ID_HISPERSER,ESTADO_HISPERSER) VALUES(HistPersServ_id_seq.NEXTVAL,?,?,?,?,?)";
+        String sql = "UPDATE HISTPERSSERV SET FACTURA_ID_FAC = ?"
+                + " WHERE ID_HISPERSER=?";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);
+            
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idFact);
+            ps.setInt(2, idHist);
+            ps.execute();
+            return true;
+        } 
+        catch (Exception e) 
+        {
+           e.printStackTrace();
             return false;
         }
         finally

@@ -27,7 +27,7 @@ public class ConsPersona extends Conexion
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO persona (id_per,ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per,mail_per,genero_per,TIPOPERSONA_ID_TIPOPER,estado_per) VALUES(persona_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO persona (id_per,ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per,mail_per,genero_per,TIPOPERSONA_ID_TIPOPER,estado_per,estadosalud_per) VALUES(persona_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
 
         try 
         {
@@ -42,6 +42,7 @@ public class ConsPersona extends Conexion
             ps.setString(8, p.getGenero());  
             ps.setInt(9, p.getTipoPersona().getId_tipoPer());
             ps.setInt(10, p.getEstado());  
+            ps.setString(11, p.getEstadoSalud());
             ps.execute();                                       
             return true;
         } 
@@ -67,7 +68,8 @@ public class ConsPersona extends Conexion
     {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "UPDATE persona SET ced_per=?, nom_per=?, ape_per=?, nroFono_per=?,edad_per=?,fechaNac_per=?,mail_per=?,genero_per=?, TIPOPERSONA_ID_TIPOPER=?"
+        String sql = "UPDATE persona SET ced_per=?, nom_per=?, ape_per=?, nroFono_per=?,"
+                + " edad_per=?,fechaNac_per=?,mail_per=?,genero_per=?, TIPOPERSONA_ID_TIPOPER=?, ESTADOSALUD_PER =? "
                 + " WHERE id_per=?";
         
         try 
@@ -83,14 +85,16 @@ public class ConsPersona extends Conexion
             ps.setString(7, p.getMail());     
             ps.setString(8, p.getGenero()); 
             ps.setInt(9, p.getTipoPersona().getId_tipoPer()); 
-            ps.setInt(10, p.getId());   
-      
+            System.out.println(p.getEstadoSalud());
+            ps.setString(10, p.getEstadoSalud().trim());
+            ps.setInt(11, p.getId()); 
+
             ps.execute();
             return true;
         } 
         catch (Exception e) 
         {
-            System.err.println(e);
+            e.printStackTrace();
             return false;
         }
         finally
@@ -215,7 +219,7 @@ public class ConsPersona extends Conexion
 		String sql;
 		String result="";
                 PreparedStatement ps = null;
-                con = getConexion();
+               // con = getConexion();
                 ResultSet rs = null; 
                 
 		sql="select tp.DESCRIPCION_TIPOPER " +
@@ -243,7 +247,7 @@ public class ConsPersona extends Conexion
         ResultSet rs = null; 
         String sql = "select * " +
                     "from Persona p " +
-                    "where p.estado_per = 1";
+                    "where p.estado_per = 1 order by ape_per";
                 
         
         try 
@@ -269,7 +273,7 @@ public class ConsPersona extends Conexion
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null;
-        String sql = "SELECT * FROM Persona where estado_per=1 order by id_per asc";
+        String sql = "SELECT * FROM Persona where estado_per=1 order by ape_per asc";
         ArrayList<Persona> personas = new ArrayList<>();
         
         
@@ -282,18 +286,19 @@ public class ConsPersona extends Conexion
             while (rs.next()) {
                 p = new Persona();
                 p.setId(rs.getInt("id_per"));
-                p.setCedula(rs.getString("ced_per"));
-                p.setNombre(rs.getString("nom_per"));
-                p.setApellido(rs.getString("ape_per"));
+                p.setCedula(Validaciones.isNumVoid4(rs.getString("ced_per")));
+                p.setNombre(Validaciones.isNumVoid4(rs.getString("nom_per")));
+                p.setApellido(Validaciones.isNumVoid4(rs.getString("ape_per")));
                 p.setGenero(rs.getString("genero_per"));
-                p.setMail(rs.getString("mail_per"));
-                p.setNro_fono(rs.getString("nroFono_per"));
+                p.setMail(Validaciones.isNumVoid4(rs.getString("mail_per")));
+                p.setNro_fono(Validaciones.isNumVoid4(rs.getString("nroFono_per")));
                 p.setEdad(rs.getInt("edad_per"));                
                 p.setFecha_nac(rs.getString("fechaNac_per")+"");    
                     TipoPersona tipoPer = new TipoPersona();
                     tipoPer.setId_tipoPer(rs.getInt("TIPOPERSONA_ID_TIPOPER"));
                     tipoPer.setDescripcion_tipoPer(getNomByIdPerByNom(tipoPer.getId_tipoPer()+"")+"");
                 p.setTipoPersona(tipoPer);  
+                p.setEstadoSalud(Validaciones.isNumVoid4(rs.getString("ESTADOSALUD_PER")));
                 personas.add(p);               
             }
              
@@ -344,7 +349,7 @@ public class ConsPersona extends Conexion
                 p.setNro_fono(rs.getString("nroFono_per"));
                 p.setEdad(rs.getInt("edad_per"));                
                 p.setFecha_nac(rs.getString("fechaNac_per")+"");         
-                
+                p.setEstadoSalud(rs.getString("ESTADOSALUD_PER"));
                 personas.add(p);               
             }
              
@@ -372,9 +377,9 @@ public class ConsPersona extends Conexion
         PreparedStatement ps = null;
         Connection con = getConexion();
         ResultSet rs = null; //'%"+cad+"%'
-        String sql = "SELECT * FROM Persona p , TIPOPERSONA tp  "
-                + " where upper(nom_per) like upper('%"+nom+"%') and estado_per=1 and tp.ID_TIPOPER = p.TIPOPERSONA_ID_TIPOPER "
-                + " order by id_per asc ";
+        String sql = "SELECT * FROM Persona p , TIPOPERSONA tp  " +
+                    "  where upper(concat(concat(concat(concat(nom_per,' '),ape_per), ' '),p.ced_per)) like upper('%"+nom+"%') and estado_per=1 and tp.ID_TIPOPER = p.TIPOPERSONA_ID_TIPOPER " +
+                    "  order by ape_per asc ";
         ArrayList<Persona> personas = new ArrayList<>();
         
         
@@ -399,6 +404,7 @@ public class ConsPersona extends Conexion
                     tipoPer.setId_tipoPer(rs.getInt("TIPOPERSONA_ID_TIPOPER"));
                     tipoPer.setDescripcion_tipoPer(getNomByIdPerByNom(tipoPer.getId_tipoPer()+"")+"");
                 p.setTipoPersona(tipoPer);  
+                p.setEstadoSalud(Validaciones.isNumVoid4(rs.getString("ESTADOSALUD_PER")));
                 personas.add(p);               
             }
              

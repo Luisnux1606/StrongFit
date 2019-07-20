@@ -61,6 +61,9 @@ public class VisPersona extends javax.swing.JFrame {
         cmbTipoPersona = new javax.swing.JComboBox();
         btnCargarHuella = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtEstadoSalud = new javax.swing.JTextArea();
         txtBuscarCedula = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         lblNomEmp = new javax.swing.JLabel();
@@ -85,17 +88,17 @@ public class VisPersona extends javax.swing.JFrame {
 
         tbl_personas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "CEDULA", "NOMBRE", "APELLIDOS", "GENERO", "CORREO ELEC.", "TELEFONO", "EDAD", "FECHA_NACIMIENTO", "TIPOPERSONA", "IDTIPOPER"
+                "ID", "CEDULA", "NOMBRE", "APELLIDOS", "GENERO", "CORREO ELEC.", "TELEFONO", "EDAD", "FECHA_NACIMIENTO", "TIPOPERSONA", "ESTADOSALUD", "IDTIPOPER"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, true, true, true
+                false, false, false, false, false, false, false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -107,7 +110,7 @@ public class VisPersona extends javax.swing.JFrame {
         tbl_personas.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         pnl_personas.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 350, 880, 180);
+        jScrollPane1.setBounds(10, 400, 880, 180);
 
         btnLimpiar.setBackground(new java.awt.Color(102, 102, 102));
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/limpiar2.png"))); // NOI18N
@@ -171,11 +174,11 @@ public class VisPersona extends javax.swing.JFrame {
 
         jLabel6.setText("EDAD:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(460, 110, 36, 16);
+        jLabel6.setBounds(460, 70, 36, 16);
 
         jLabel5.setText("NRO_FONO:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(460, 70, 80, 16);
+        jLabel5.setBounds(460, 30, 80, 16);
 
         jLabel7.setText("FECHA DE NACIMIENTO:");
         jPanel1.add(jLabel7);
@@ -183,11 +186,11 @@ public class VisPersona extends javax.swing.JFrame {
 
         txt_edad.setName("edad"); // NOI18N
         jPanel1.add(txt_edad);
-        txt_edad.setBounds(640, 100, 190, 30);
+        txt_edad.setBounds(600, 60, 290, 30);
 
         txt_nro_fono.setName("fono"); // NOI18N
         jPanel1.add(txt_nro_fono);
-        txt_nro_fono.setBounds(640, 60, 190, 30);
+        txt_nro_fono.setBounds(600, 20, 290, 30);
 
         dtc_fechaNac.setName("fechaNac"); // NOI18N
         jPanel1.add(dtc_fechaNac);
@@ -195,36 +198,47 @@ public class VisPersona extends javax.swing.JFrame {
 
         jLabel9.setText("CORREO ELECTR.:");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(460, 30, 120, 16);
+        jLabel9.setBounds(10, 240, 120, 16);
         jPanel1.add(txtCorreoElect);
-        txtCorreoElect.setBounds(640, 20, 190, 30);
+        txtCorreoElect.setBounds(180, 230, 190, 30);
 
         jLabel10.setText("GENERO:");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(10, 180, 70, 16);
+        jLabel10.setBounds(10, 190, 70, 16);
 
         cmbxGenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MASCULINO", "FEMENINO" }));
         jPanel1.add(cmbxGenero);
         cmbxGenero.setBounds(180, 180, 190, 30);
 
-        lblTipoPersona.setText("TIPO DE PERSONA");
+        lblTipoPersona.setText("TIPO DE PERSONA:");
         jPanel1.add(lblTipoPersona);
-        lblTipoPersona.setBounds(460, 150, 120, 16);
+        lblTipoPersona.setBounds(460, 110, 120, 16);
 
         jPanel1.add(cmbTipoPersona);
-        cmbTipoPersona.setBounds(640, 140, 190, 30);
+        cmbTipoPersona.setBounds(600, 100, 290, 30);
 
         btnCargarHuella.setText("CARGAR HUELLA DIGITAL");
         btnCargarHuella.setEnabled(false);
         jPanel1.add(btnCargarHuella);
-        btnCargarHuella.setBounds(640, 190, 190, 25);
+        btnCargarHuella.setBounds(600, 240, 290, 25);
 
         jLabel1.setText("HUELLA DIGITAL:");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(460, 190, 110, 16);
+        jLabel1.setBounds(460, 240, 110, 16);
+
+        jLabel11.setText("ESTADO DE SALUD:");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(460, 150, 120, 16);
+
+        txtEstadoSalud.setColumns(20);
+        txtEstadoSalud.setRows(5);
+        jScrollPane2.setViewportView(txtEstadoSalud);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(600, 140, 290, 90);
 
         pnl_personas.add(jPanel1);
-        jPanel1.setBounds(10, 70, 870, 220);
+        jPanel1.setBounds(10, 70, 890, 270);
 
         txtBuscarCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -232,11 +246,11 @@ public class VisPersona extends javax.swing.JFrame {
             }
         });
         pnl_personas.add(txtBuscarCedula);
-        txtBuscarCedula.setBounds(10, 310, 150, 30);
+        txtBuscarCedula.setBounds(10, 360, 150, 30);
 
         jLabel8.setText("Buscar por nombres:");
         pnl_personas.add(jLabel8);
-        jLabel8.setBounds(10, 290, 150, 16);
+        jLabel8.setBounds(10, 340, 150, 16);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -324,6 +338,7 @@ public class VisPersona extends javax.swing.JFrame {
     public com.toedter.calendar.JDateChooser dtc_fechaNac;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -335,12 +350,14 @@ public class VisPersona extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public javax.swing.JLabel lblNomEmp;
     public javax.swing.JLabel lblTipoPersona;
     public javax.swing.JPanel pnl_personas;
     public javax.swing.JTable tbl_personas;
     public javax.swing.JTextField txtBuscarCedula;
     public javax.swing.JTextField txtCorreoElect;
+    public javax.swing.JTextArea txtEstadoSalud;
     public javax.swing.JTextField txt_apellidos;
     public javax.swing.JTextField txt_cedula;
     public javax.swing.JTextField txt_edad;

@@ -10,6 +10,8 @@ import assets.Calculos;
 import assets.ButtonTable;
 import assets.ButtonTableIngresosEgresos;
 import assets.Configuracion;
+import assets.ItemRendererClienteFac;
+import assets.ItemRendererClienteIngEgr;
 
 import assets.Validaciones;
 import com.toedter.calendar.JDateChooser;
@@ -21,8 +23,14 @@ import consultas.ConsIngresosEgresos;
 import consultas.ConsMedidas;
 import consultas.ConsPersona;
 import consultas.ConsProductos;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -30,23 +38,29 @@ import java.awt.event.MouseListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.text.JTextComponent;
 import modelos.Analisis;
 import modelos.Categoria;
 import modelos.FacturaCab;
 import modelos.Medidas;
 import modelos.Persona;
 import modelos.Producto;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import vistas.VisBuscarPersonas;
 import vistas.VisBuscarVentas;
 import vistas.VisFicha;
@@ -85,9 +99,10 @@ public class CtrlIngresosEgresos implements ActionListener {
         this.visIngEgr.cmbElegirBusquedaFac.addActionListener(this);
         this.visIngEgr.btnAgregarTrans.addActionListener(this);
         this.visIngEgr.btnEliminarTrans.addActionListener(this);
-        
-        f = new FacturaCab();
-        
+        this.visIngEgr.cmbPersonasIngEgr.addActionListener(this);
+        this.visIngEgr.btnBuscarPersonaIngEgr.addActionListener(this);
+
+        f = new FacturaCab();        
         cadBus = "";
 //        
         setListener();
@@ -96,13 +111,14 @@ public class CtrlIngresosEgresos implements ActionListener {
         int colHide[] = new int[5];
         colHide[0]=0; 
         colHide[1]=3; 
-        colHide[2]=15; 
-        colHide[3]=16;
-        colHide[4]=17;
+        colHide[2]=16; 
+        colHide[3]=17;
+        colHide[4]=18;
         
 
-        setHideJtableColumn(visIngEgr.tblIngresosEgresos,colHide);        
-       setHideJtableColumn(visIngEgr.tblIngresosEgresosCons,colHide); 
+       setHideJtableColumn(visIngEgr.tblIngresosEgresos,colHide);        
+       //setHideJtableColumn(visIngEgr.tblIngresosEgresosCons,colHide); 
+       
     }
     
     public void setHideJtableColumn(JTable table, int col[])
@@ -111,12 +127,12 @@ public class CtrlIngresosEgresos implements ActionListener {
             table.getColumnModel().getColumn(col[i]).setMaxWidth(0);
             table.getColumnModel().getColumn(col[i]).setMinWidth(0);
             table.getColumnModel().getColumn(col[i]).setPreferredWidth(0);
-        }       
-    
-    }
+        }           
+    }       
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        
       if (e.getSource() == visIngEgr.cmbTipoBusqueda) 
        {       
            String tipo = visIngEgr.cmbTipoBusqueda.getSelectedItem()+"";
@@ -164,7 +180,21 @@ public class CtrlIngresosEgresos implements ActionListener {
         {
            deleteRows(visIngEgr.tblIngresosEgresos);
            
-        }            
+        }  
+                    
+        
+        if (e.getSource()==visIngEgr.btnBuscarPersonaIngEgr)
+        {            
+             Persona item = (Persona) visIngEgr.cmbPersonasIngEgr.getSelectedItem();
+             if (item!=null) {
+                  System.out.println(item.getId() + " : " + item.getApellido()+" "+item.getCedula());
+                  showTableByIdPer(item.getCedula());
+                  
+            }
+            
+           
+            
+        }   
     }
     
     public void setListener()
@@ -219,7 +249,7 @@ public class CtrlIngresosEgresos implements ActionListener {
                           break;
                     case 3:                            
                           break;    
-                    case 4: 
+                    case 5: 
                         
                         VisProductos visProd = new VisProductos();
                         ConsProductos consProd = new ConsProductos();
@@ -229,38 +259,50 @@ public class CtrlIngresosEgresos implements ActionListener {
                         ctrProd.locale = 2;
                         ctrProd.iniciar();
                         break;
-                   case 5:                            
+                   case 6:                            
                           break;
-                    case 6:                            
-                         break;
                     case 7:                            
-                        break;
+                         break;
                     case 8:                            
                         break;
-                    case 9:  
-                            
+                    case 9:                            
                         break;
-                     case 10:         
-                            double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 9)+"");
-                            double valIng=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 7)+"");
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 10);
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 13);
+                    case 10:  
+                            double valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 12)+"");
+                            double valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 14);
                         break;
-                    case 11:                            
+                     case 11:         
+                            double valIng = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 8)+"");
+                            double valEgr = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 9)+"");
+                          
+                            if (valIng>0 && valIng>valEgr) {                                                      
+                                double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");                                
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 11);                                
+                            }
+                            if (valEgr>0 && valEgr>valIng) {    
+                                double valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");                                
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valEgr,valCanc), row, 11);                              
+                            }
                         break;
-                    case 12:    
-                            double valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
-                            double valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 13);
+                    case 12:      
+                        valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 12)+"");
+                             valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 14);
+                        break;
+                    case 13:    
+                            valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 12)+"");
+                             valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 14);
                         break;
                         
-                    case 13:       
+                    case 14:       
                            
                         break;
-                    case 14:                            
+                    case 15:                            
                             
                         break;
-                    case 15:                            
+                    case 16:                            
                             
                         break;
                     default:
@@ -279,6 +321,17 @@ public class CtrlIngresosEgresos implements ActionListener {
         };
         visIngEgr.tblIngresosEgresos.addKeyListener(keyListenerTblDetalle);
     
+        
+        //cmblistener personas
+
+       
+        
+        
+        ///////combo
+        
+       
+        
+        
         //mouse listener tableingegr
         
         MouseListener mouseListTblIngEgr;
@@ -289,6 +342,7 @@ public class CtrlIngresosEgresos implements ActionListener {
                 int col =facDet.getSelectedColumn();
                 int  row =facDet.getSelectedRow();
                 double valCanc = 0;
+                double valEgr = 0;
                 double valIng = 0;
                switch(col)
                   {
@@ -304,7 +358,7 @@ public class CtrlIngresosEgresos implements ActionListener {
                           break;
                     case 3:                            
                           break;    
-                    case 4: 
+                    case 5: 
                         
                         VisProductos visProd = new VisProductos();
                         ConsProductos consProd = new ConsProductos();
@@ -314,42 +368,63 @@ public class CtrlIngresosEgresos implements ActionListener {
                         ctrProd.locale = 2;
                         ctrProd.iniciar();
                         break;
-                   case 5:                            
+                   case 6:                            
                           break;
-                    case 6:                            
-                         break;
                     case 7:                            
-                        break;
+                         break;
                     case 8:                            
                         break;
-                    case 9:  
-                             valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 9)+"");
-                             valIng=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 7)+"");
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 10);
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 13);
+                    case 9:                            
+                        break;
+                    case 10:                                                          
+                             valIng = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 8)+"");
+                             valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row,10)+"");
+                          
+                            if (valIng>0 && valIng>valEgr) {                                                      
+                                 valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");                                
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 11);
+                              
+                            }
+                            if (valEgr>0 && valEgr>valIng) {    
+                                 valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");                                
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valEgr,valCanc), row, 11);
+                               
+                            }
                             
                         break;
-                     case 10:         
-                             valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 9)+"");
-                             valIng=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 7)+"");
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 10);
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 13);
+                     case 11:         
+                             valIng = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 8)+"");
+                             valEgr = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 9)+"");
+                          
+                            if (valIng>0 && valIng>valEgr) {                                                      
+                                 valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");                                
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 11);
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valIng,valCanc), row, 14);
+                            }
+                            if (valEgr>0 && valEgr>valIng) {    
+                                 valCanc = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");                                
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valEgr,valCanc), row, 11);
+                                visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valEgr,valCanc), row, 14);
+                            }
                         break;
-                    case 11:                            
+                    case 12:        
+                            double valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 12)+"");
+                            double valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 14);
                         break;
-                    case 12:    
-                            double valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
-                            double valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 10)+"");
-                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 13);
+                    case 13:    
+                             valAju = Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 12)+"");
+                             valPen=Validaciones.isNumVoid10(visIngEgr.tblIngresosEgresos.getValueAt(row, 11)+"");
+                            visIngEgr.tblIngresosEgresos.setValueAt(Calculos.getDiferencia(valPen,valAju ), row, 14);
                         break;
                         
-                    case 13:       
+                    case 14:       
                            
                         break;
-                    case 14:                            
+                    case 15:                            
                             
                         break;
-                    case 15:                            
+                    case 16:                            
                             
                         break;
                     default:
@@ -405,10 +480,7 @@ public class CtrlIngresosEgresos implements ActionListener {
           }
 
           public void keyTyped(KeyEvent e) {
-             int m=e.getKeyChar();
-             System.out.println ("------------------------------------- "+m + " "+visIngEgr.tblIngresosEgresos.getSelectedColumn());
-             
-             
+             int m=e.getKeyChar();                                
              int col =facDet.getSelectedColumn();
              int  row =0;
              if(m == KeyEvent.VK_ENTER) 
@@ -425,17 +497,18 @@ public class CtrlIngresosEgresos implements ActionListener {
     
     public void addRows(JTable table)
     {        
-         Object cols[] = new Object[20];
+         Object cols[] = new Object[21];
          table.getColumnModel().getColumn(1).setCellEditor(new JDateChooserCellEditor());
-         table.getColumnModel().getColumn(5).setCellEditor(new JDateChooserCellEditor());
          table.getColumnModel().getColumn(6).setCellEditor(new JDateChooserCellEditor());
+         table.getColumnModel().getColumn(7).setCellEditor(new JDateChooserCellEditor());
          
          DefaultTableModel tb = (DefaultTableModel) table.getModel();         
-         for (int i = 0; i <= 15; i++) {
+         for (int i = 0; i <= 16; i++) {
             cols[i] = new String();
         }
-         cols[18]="Guardar";
-         cols[19]="Anular";
+         cols[1] = Calculos.getCurrentDate2();
+         cols[19]="Guardar";
+         cols[20]="Anular";
          
        //  setFormatTable(table);
         tb.insertRow(0, cols);
@@ -450,28 +523,26 @@ public class CtrlIngresosEgresos implements ActionListener {
     {
         DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
         tcr.setHorizontalAlignment(SwingConstants.RIGHT);
-        table.getColumnModel().getColumn(4).setCellRenderer(tcr);
+        table.getColumnModel().getColumn(5).setCellRenderer(tcr);
         table.getColumnModel().getColumn(3).setCellRenderer(tcr);                        
         
         int colHide[] = new int[1];
-        colHide[0]=0;
-       
+        colHide[0]=0;       
         setHideJtableColumn(table,colHide);
         
-        initColumnSizes(table);
-        
-        table.setCellSelectionEnabled(false);
-        
+        //initColumnSizes(table);        
+        table.setCellSelectionEnabled(false);        
     } 
     
     private void initColumnSizes(JTable table) {
-		TableColumn column = null;
-        for (int i = 0; i < 3; i++) {
-        	column = table.getColumnModel().getColumn(i);
-            if(i==2){
-            	column.setPreferredWidth(400);
-            }
-        }
+        
+        table.getColumnModel().getColumn(1).setPreferredWidth(100);
+        table.getColumnModel().getColumn(2).setPreferredWidth(250);
+        table.getColumnModel().getColumn(5).setPreferredWidth(200);
+        table.getColumnModel().getColumn(6).setPreferredWidth(100);
+        table.getColumnModel().getColumn(7).setPreferredWidth(100);
+      
+    
     }
     public void deleteRows(JTable table)
     {
@@ -485,12 +556,18 @@ public class CtrlIngresosEgresos implements ActionListener {
     }
     public void iniciar()
     {
-        visIngEgr.setTitle(Configuracion.nomEmp +" INGRESOS EGRESOS TRANSACCIONALES");
-        visIngEgr.setSize(900, 600);
-        visIngEgr.setLocation(100, 100);
-        visIngEgr.setVisible(true);
-       
-        showTableIngresosEgresos();
+        visIngEgr.setTitle(Configuracion.nomEmp +" INGRESOS EGRESOS TRANSACCIONALES");        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int width = screenSize.width;
+
+        visIngEgr.setSize(width, 600);
+        visIngEgr.setLocationRelativeTo(null);
+        visIngEgr.setVisible(true);        
+        showTableIngresosEgresos();    
+        initColumnSizes(visIngEgr.tblIngresosEgresos);
+        
+        showComboPersonas();
+        AutoCompleteDecorator.decorate(visIngEgr.cmbPersonasIngEgr); 
                 
     }
     
@@ -639,6 +716,63 @@ public class CtrlIngresosEgresos implements ActionListener {
         }
 
     }
+    
+    public void showTableByIdPer(String id)
+    {
+        try {
+            limpiarTabla(visIngEgr.tblIngresosEgresos);
+            String nombres = Validaciones.isNumVoid4(visIngEgr.txtBuscarCampo.getText());
+            ResultSet listFicha = consIngEgr.buscarIngresosEgresosId(id);
+            
+            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
+            Object cols[] = new Object[21];
+         
+           
+            while (listFicha.next()) {
+                try { 
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("Fecha_Faccab");
+                    cols[2] = listFicha.getString("nombres").toUpperCase();
+                    cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
+                    cols[4] = listFicha.getString("cant");
+                    cols[5] = listFicha.getString("Descripcion_Facdet");
+                    cols[6] = listFicha.getString("FechaInicio");
+                    cols[7] = listFicha.getString("FechaFin");
+                    cols[8] = listFicha.getString("Total_Faccab");
+                    cols[9] = listFicha.getDouble("egreso");
+                    cols[10] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[11] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[12] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[13] = listFicha.getDouble("estadoEnt");
+                    cols[14] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[15] = listFicha.getDouble("saldoP");
+                    cols[16] = listFicha.getInt("id_per");
+                    cols[17] = listFicha.getInt("id_prod");
+                    cols[18] = listFicha.getInt("codHist");
+                    
+                    cols[19] = "Guardar";
+                    cols[20] = "Anular";
+                    cols[14] = Calculos.getDiferencia((double)cols[11], (double)cols[12]);  
+                    
+
+                    model.addRow(cols);
+                    
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consIngEgr.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+             
+        new ButtonTableIngresosEgresos(visIngEgr);
+        visIngEgr.tblIngresosEgresos.updateUI();
+
+    }
      
       public void limpiarTabla(JTable table){
         DefaultTableModel tb = (DefaultTableModel) table.getModel();
@@ -653,10 +787,12 @@ public class CtrlIngresosEgresos implements ActionListener {
     {
         try {
             limpiarTabla(visIngEgr.tblIngresosEgresos);
-            ResultSet listFicha = consIngEgr.buscarIngresosEgresos();
+            String nombres = Validaciones.isNumVoid4(visIngEgr.txtBuscarCampo.getText());
+            ResultSet listFicha = consIngEgr.buscarIngresosEgresos(nombres);
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[20];
+            Object cols[] = new Object[21];
+         
            
             while (listFicha.next()) {
                 try { 
@@ -665,25 +801,27 @@ public class CtrlIngresosEgresos implements ActionListener {
                     cols[1] = listFicha.getString("Fecha_Faccab");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
                     cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
-                    cols[4] = listFicha.getString("Descripcion_Facdet");
-                    cols[5] = listFicha.getString("FechaInicio");
-                    cols[6] = listFicha.getString("FechaFin");
-                    cols[7] = listFicha.getString("Total_Faccab");
-                    cols[8] = listFicha.getDouble("egreso");
-                    cols[9] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[10] = listFicha.getDouble("Valpendiente_Faccab");
-                    cols[11] = listFicha.getDouble("Valajuste_Faccab");
-                    cols[12] = listFicha.getDouble("estadoEnt");
-                    cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getDouble("saldoP");
-                    cols[15] = listFicha.getInt("id_per");
-                    cols[16] = listFicha.getInt("id_prod");
-                    cols[17] = listFicha.getInt("codHist");
+                    cols[4] = listFicha.getString("cant");
+                    cols[5] = listFicha.getString("Descripcion_Facdet");
+                    cols[6] = listFicha.getString("FechaInicio");
+                    cols[7] = listFicha.getString("FechaFin");
+                    cols[8] = listFicha.getString("Total_Faccab");
+                    cols[9] = listFicha.getDouble("egreso");
+                    cols[10] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[11] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[12] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[13] = listFicha.getDouble("estadoEnt");
+                    cols[14] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[15] = listFicha.getDouble("saldoP");
+                    cols[16] = listFicha.getInt("id_per");
+                    cols[17] = listFicha.getInt("id_prod");
+                    cols[18] = listFicha.getInt("codHist");
                     
-                    cols[18] = "Guardar";
-                    cols[19] = "Anular";
-                    cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);  
+                    cols[19] = "Guardar";
+                    cols[20] = "Anular";
+                    cols[14] = Calculos.getDiferencia((double)cols[11], (double)cols[12]);  
                     
+
                     model.addRow(cols);
                     
                                         
@@ -700,6 +838,37 @@ public class CtrlIngresosEgresos implements ActionListener {
         new ButtonTableIngresosEgresos(visIngEgr);
         visIngEgr.tblIngresosEgresos.updateUI();
     }
+    
+    public void showComboPersonas()
+    {
+       
+        ConsPersona consPer = new ConsPersona();
+        visIngEgr.cmbPersonasIngEgr.removeAllItems();
+        try {
+           
+            ResultSet listCategorias = consPer.buscarPersonasClientes();
+            
+            DefaultComboBoxModel model =  (DefaultComboBoxModel)visIngEgr.cmbPersonasIngEgr.getModel();
+           
+            
+            while (listCategorias.next()) {
+                try { // f.id_ficha, f.fecha_ficha,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombresApellidos,p.id_per,m.fecha_med,m.id_med,a.fecha_ana,a.id_ana\n
+                    
+                    model.addElement(new Persona(listCategorias.getString("ape_per"),listCategorias.getString("nom_per"),listCategorias.getInt("id_per"),listCategorias.getString("ced_per")));
+                                        
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            consPer.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      //  visFicha.cmb_clienteFac.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
+        visIngEgr.cmbPersonasIngEgr.setRenderer(new ItemRendererClienteIngEgr());
+        this.visIngEgr.cmbPersonasIngEgr.addActionListener(this);        
+        visIngEgr.cmbPersonasIngEgr.updateUI();
+    }
     public void showTableIngresosEgresosCampos(String cadCampo)
     {
         try {
@@ -707,7 +876,7 @@ public class CtrlIngresosEgresos implements ActionListener {
             ResultSet listFicha = consIngEgr.buscarIngresosEgresosCampos(cadCampo);
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[20];
+            Object cols[] = new Object[21];
            
             while (listFicha.next()) {
                 try { 
@@ -716,24 +885,25 @@ public class CtrlIngresosEgresos implements ActionListener {
                     cols[1] = listFicha.getString("Fecha_Faccab");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
                     cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
-                    cols[4] = listFicha.getString("Descripcion_Facdet");
-                    cols[5] = listFicha.getString("FechaInicio");
-                    cols[6] = listFicha.getString("FechaFin");
-                    cols[7] = listFicha.getString("Total_Faccab");
-                    cols[8] = listFicha.getDouble("egreso");
-                    cols[9] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[10] = listFicha.getDouble("Valpendiente_Faccab");
-                    cols[11] = listFicha.getDouble("Valajuste_Faccab");
-                    cols[12] = listFicha.getDouble("estadoEnt");
-                    cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getDouble("saldoP");
-                    cols[15] = listFicha.getInt("id_per");
-                    cols[16] = listFicha.getInt("id_prod");
-                    cols[17] = listFicha.getInt("codHist");
+                    cols[4] = listFicha.getString("cant");
+                    cols[5] = listFicha.getString("Descripcion_Facdet");
+                    cols[6] = listFicha.getString("FechaInicio");
+                    cols[7] = listFicha.getString("FechaFin");
+                    cols[8] = listFicha.getString("Total_Faccab");
+                    cols[9] = listFicha.getDouble("egreso");
+                    cols[10] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[11] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[12] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[13] = listFicha.getDouble("estadoEnt");
+                    cols[14] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[15] = listFicha.getDouble("saldoP");
+                    cols[16] = listFicha.getInt("id_per");
+                    cols[17] = listFicha.getInt("id_prod");
+                    cols[18] = listFicha.getInt("codHist");
                     
-                    cols[18] = "Guardar";
-                    cols[19] = "Anular";
-                    cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);  
+                    cols[19] = "Guardar";
+                    cols[20] = "Anular";
+                    cols[14] = Calculos.getDiferencia((double)cols[11], (double)cols[12]);    
                     
                     model.addRow(cols);
                     
@@ -760,7 +930,7 @@ public class CtrlIngresosEgresos implements ActionListener {
             ResultSet listFicha = consIngEgr.buscarIngresosEgresosEliminados();
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[19];
+            Object cols[] = new Object[21];
            
             while (listFicha.next()) {
                 try { 
@@ -769,25 +939,26 @@ public class CtrlIngresosEgresos implements ActionListener {
                     cols[1] = listFicha.getString("Fecha_Faccab");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
                     cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
-                    cols[4] = listFicha.getString("Descripcion_Facdet");
-                    cols[5] = listFicha.getString("FechaInicio");
-                    cols[6] = listFicha.getString("FechaFin");
-                    cols[7] = listFicha.getString("Total_Faccab");
-                    cols[8] = listFicha.getDouble("egreso");
-                    cols[9] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[10] = listFicha.getDouble("Valpendiente_Faccab");
-                    cols[11] = listFicha.getDouble("Valajuste_Faccab");
-                    cols[12] = listFicha.getDouble("estadoEnt");
-                    cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getDouble("saldoP");
-                    cols[15] = listFicha.getInt("id_per");
-                    cols[16] = listFicha.getInt("id_prod");
-                    cols[17] = listFicha.getInt("codHist");
+                    cols[4] = listFicha.getString("cant");
+                    cols[5] = listFicha.getString("Descripcion_Facdet");
+                    cols[6] = listFicha.getString("FechaInicio");
+                    cols[7] = listFicha.getString("FechaFin");
+                    cols[8] = listFicha.getString("Total_Faccab");
+                    cols[9] = listFicha.getDouble("egreso");
+                    cols[10] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[11] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[12] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[13] = listFicha.getDouble("estadoEnt");
+                    cols[14] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[15] = listFicha.getDouble("saldoP");
+                    cols[16] = listFicha.getInt("id_per");
+                    cols[17] = listFicha.getInt("id_prod");
+                    cols[18] = listFicha.getInt("codHist");
                     
-                    cols[18] = "Guardar";
-                    cols[19] = "Anular";
-                    cols[13] = Calculos.getDiferencia((double)cols[10], (double)cols[11]);
-                   
+                    cols[19] = "Guardar";
+                    cols[20] = "Anular";
+                    cols[14] = Calculos.getDiferencia((double)cols[11], (double)cols[12]);  
+                    
                     model.addRow(cols);
                     
                                         
@@ -886,10 +1057,11 @@ public class CtrlIngresosEgresos implements ActionListener {
     {
          try {
             limpiarTabla(visIngEgr.tblIngresosEgresos);
-            ResultSet listFicha = consIngEgr.buscarIngresosEgresos();
+            String nombres = Validaciones.isNumVoid4(visIngEgr.txtBuscarCampo.getText());
+            ResultSet listFicha = consIngEgr.buscarIngresosEgresos(nombres);
             
             DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresos.getModel();
-            Object cols[] = new Object[20];
+            Object cols[] = new Object[21];
             double diffAjusteCanc;
             while (listFicha.next()) {
                 try {
@@ -899,28 +1071,29 @@ public class CtrlIngresosEgresos implements ActionListener {
                     cols[1] = listFicha.getString("Fecha_Faccab");
                     cols[2] = listFicha.getString("nombres").toUpperCase();
                     cols[3] = Validaciones.isNumVoid4(listFicha.getString("Num_Faccab"));
-                    cols[4] = listFicha.getString("Descripcion_Facdet");
-                    cols[5] = listFicha.getString("FechaInicio");
-                    cols[6] = listFicha.getString("FechaFin");
-                    cols[7] = listFicha.getString("Total_Faccab");
-                    cols[8] = listFicha.getDouble("egreso");
-                    cols[9] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[10] = listFicha.getDouble("Valpendiente_Faccab");
-                    cols[11] = listFicha.getDouble("Valajuste_Faccab");
-                    cols[12] = listFicha.getDouble("estadoEnt");
-                    cols[13] = listFicha.getDouble("VALPENDIENTE_FACCAB");
-                    cols[14] = listFicha.getDouble("saldoP");
-                    cols[15] = listFicha.getInt("id_per");
-                    cols[16] = listFicha.getInt("id_prod");
-                    cols[17] = listFicha.getInt("codHist");
+                    cols[4] = listFicha.getString("cant");
+                    cols[5] = listFicha.getString("Descripcion_Facdet");
+                    cols[6] = listFicha.getString("FechaInicio");
+                    cols[7] = listFicha.getString("FechaFin");
+                    cols[8] = listFicha.getString("Total_Faccab");
+                    cols[9] = listFicha.getDouble("egreso");
+                    cols[10] = listFicha.getDouble("Valcancelo_Faccab");
+                    cols[11] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[12] = listFicha.getDouble("Valajuste_Faccab");
+                    cols[13] = listFicha.getDouble("estadoEnt");
+                    cols[14] = listFicha.getDouble("VALPENDIENTE_FACCAB");
+                    cols[15] = listFicha.getDouble("saldoP");
+                    cols[16] = listFicha.getInt("id_per");
+                    cols[17] = listFicha.getInt("id_prod");
+                    cols[18] = listFicha.getInt("codHist");
                     
-                    cols[18] = "Guardar";
-                    cols[19] = "Anular";
-                    cols[13] = Calculos.getDiferencia((double)cols[9], (double)cols[11]);   
+                    cols[19] = "Guardar";
+                    cols[20] = "Anular";
+                    cols[14] = Calculos.getDiferencia((double)cols[11], (double)cols[12]);   
                    
-                    diffAjusteCanc = (double)cols[10] - (double)cols[11];
+                    diffAjusteCanc =Calculos.getDiferencia( (double)Validaciones.isNumVoid2(cols[8]+""), (double)Validaciones.isNumVoid2(cols[10]+""));
                     
-                    if (Math.abs(diffAjusteCanc)>0) {
+                    if (Math.abs(diffAjusteCanc)>0 && (double)Validaciones.isNumVoid2(cols[8]+"")>0) {
                          model.addRow(cols);
                     }
                    
@@ -1002,10 +1175,5 @@ public class CtrlIngresosEgresos implements ActionListener {
             Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
         }
         visIngEgr.tblIngresosEgresosCons.updateUI();
-    }
-    
-   
-      
-       
-
+    }  
 }

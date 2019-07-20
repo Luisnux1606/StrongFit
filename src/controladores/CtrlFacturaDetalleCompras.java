@@ -195,7 +195,7 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
         KeyListener keyListenerTblDetalle = new KeyListener() {
           public void keyPressed(KeyEvent e) {
 
-              Calculos.calcularTotalDetalles(facDet);             
+              Calculos.calcularTotalDetallesComp(facDet);             
               Calculos.setTotalesCabeceraCompras(facDet,visFicha);
               
               
@@ -219,8 +219,8 @@ public class CtrlFacturaDetalleCompras implements ActionListener {
 
           public void keyTyped(KeyEvent e) {
              int m=e.getKeyChar();
-             Calculos.calcularTotalDetalles(facDet);
-             Calculos.setTotalesCabecera(facDet,visFicha);
+             Calculos.calcularTotalDetallesComp(facDet);
+             Calculos.setTotalesCabeceraComp(facDet,visFicha);
              
              int col =facDet.getSelectedColumn();
              int  row =facDet.getRowCount()-1;

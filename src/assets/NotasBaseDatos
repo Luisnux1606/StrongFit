@@ -21,3 +21,30 @@ FacturaCompras
 
 Stock
     se actualiza en productos cuando se elige un producto de la facturaCompras o facturaVentas
+
+
+
+
+
+codigo para buscar por nombres
+
+String m=(e.getKeyChar()+"").toUpperCase();
+            char c =m.charAt(0);
+					
+            limpiarTabla(visVentas.tblFacturasCabeceras);
+            if((c+"").equals("")==false&&(c+"").equals(null)==false)
+                    cadBus+=c;	            
+            else
+            {
+                if((c+"").equals("")==true){
+                    if(cadBus.length()>0)
+                    cadBus=cadBus.substring(0, cadBus.length()-1);
+                }
+            }
+            if(visVentas.txtBuscarCampo.getText().length()==0){
+                cadBus="";
+                showTableFacturasCabeceras();
+            }
+            else                   
+            showTableFacturasCabecerasByNom(cadBus);
+

@@ -322,7 +322,8 @@ CREATE TABLE Persona(
   mail_per Varchar2(350 ),
   huella_per blob,
   TipoPersona_id_tipoPer Number,
-  estado_per Number     
+  estado_per Number,
+  estadoSalud_per Number     
 )
 TABLESPACE tbs_usr_strongfit_p
 /
@@ -419,10 +420,12 @@ CREATE TABLE HistPersServ(
   id_HisPerSer Number NOT NULL,  
   fechaIni_HisPerSer Varchar2(100),
   fechaFin_HisPerSer Varchar2(100),
-  estadoDias_HisPerSer Varchar2(100),
+  estadoDias_HisPerSer Varchar2(100),  
   Persona_id_HisPerSer Number,
   Producto_id_HisPerSer Number,
-  estado_HisPerSer Number 
+  estado_HisPerSer Number, 
+  Factura_id_fac Number,
+  num_registro_hisPerSer Number
 )
 TABLESPACE tbs_usr_strongfit_p
 /
@@ -515,7 +518,8 @@ CREATE TABLE FacturaCabecera(
   Persona_id_per Number,
   Membresia_id_memb Number,        --2. descuento
   Ivas_id_ivas Number,            --4. iva
-  estado_facCab Number 
+  estado_facCab Number,
+  num_registro_facCab Number 
 )
 TABLESPACE tbs_usr_strongfit_p
 /
@@ -574,7 +578,8 @@ CREATE TABLE FacturaCabeceraCompras(
   Persona_id_per Number,
   Membresia_id_memb Number,        --2. descuento
   Ivas_id_ivas Number,            --4. iva
-  estado_facCabCompr Number 
+  estado_facCabCompr Number, 
+  num_registro_facCabCompr Number
 )
 TABLESPACE tbs_usr_strongfit_p
 /

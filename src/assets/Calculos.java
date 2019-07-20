@@ -226,6 +226,22 @@ public class Calculos {
          String num;
          double totDet;
          for (int i = 0; i <= table.getRowCount()-1; i++) {
+             num = table.getValueAt(i, 2)+"";
+             valU = table.getValueAt(i, 4)+"";
+                          
+             if (Validaciones.isNumVoid10(num)!=0 && Validaciones.isNumVoid10(valU)!=0) {
+                 totDet = calcularTotalDetalle(Validaciones.isNumVoid10(num),Validaciones.isNumVoid10(valU));
+                 table.setValueAt(getTwoDecimals(totDet), i,5);
+             }
+         }
+     } 
+     
+     public static void calcularTotalDetallesComp(JTable table)
+     {
+         String valU;
+         String num;
+         double totDet;
+         for (int i = 0; i <= table.getRowCount()-1; i++) {
              num = table.getValueAt(i, 1)+"";
              valU = table.getValueAt(i, 3)+"";
                           
@@ -242,6 +258,24 @@ public class Calculos {
      
      }
      public static double calcularValorPagar(JTable table,VisFicha visFicha)
+     {
+         String valTotDet;      
+         double totDetalles = 0;
+         
+         for (int i = 0; i <= table.getRowCount()-1; i++) {
+             valTotDet = table.getValueAt(i, 5)+"";
+             
+             if (Validaciones.isNumVoid10(valTotDet)!=0 ) {
+                 totDetalles = totDetalles + Validaciones.isNumVoid10(valTotDet);
+               
+             }
+         }
+         return getTwoDecimals(totDetalles);
+     } 
+     
+     
+     
+     public static double calcularValorPagarComp(JTable table,VisFicha visFicha)
      {
          String valTotDet;      
          double totDetalles = 0;
@@ -328,11 +362,22 @@ public class Calculos {
         visFicha.txtValPendienteFicha.setText(getDiferencia(valPagar,getValCancelo(visFicha) )+"");               
     }
      
+      public static void setTotalesCabeceraComp(JTable facDet,VisFicha visFicha)
+    {
+        double valPagar = calcularValorPagarComp(facDet,visFicha);
+        visFicha.txtValPagar.setText(valPagar+"");
+        visFicha.txtValConDsctoFicha.setText(setDescuentoFromDetEnt(visFicha)+"");
+        visFicha.txtTotalConIva.setText(setTotalConIva(visFicha)+"");
+        
+        visFicha.txt_valCancelo.setText(calcularValorPagarComp(facDet,visFicha)+"");
+        visFicha.txtValPendienteFicha.setText(getDiferencia(valPagar,getValCancelo(visFicha) )+"");               
+    }
+     
      
      
      public static void setTotalesCabeceraCompras(JTable facDet,VisFicha visFicha)
     {
-        visFicha.txtValPagarComp.setText(calcularValorPagar(facDet,visFicha)+"");
+        visFicha.txtValPagarComp.setText(calcularValorPagarComp(facDet,visFicha)+"");
         visFicha.txtValConDsctoFichaComp.setText(setDescuentoFromDetEntComp(visFicha)+"");
         visFicha.txtTotalConIvaComp.setText(setTotalConIvaCompras(visFicha)+"");
         
@@ -369,4 +414,18 @@ public class Calculos {
      
      } 
      
+     public static int getGretterNumber(int... numbers)
+     {
+        int max = 0;
+        for(int i = 0; i < numbers.length; i++)
+        {
+            if(max < numbers[i])
+            {
+                max = numbers[i];
+            }
+
+        }
+         return max;
+     
+     }
 }

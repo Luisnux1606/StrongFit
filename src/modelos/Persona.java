@@ -22,6 +22,7 @@ public class Persona {
     private String fecha_nac;
     private String mail;
     private String genero;
+    private String estadoSalud;
     private TipoPersona tipoPersona;
     private int estado;
 
@@ -29,7 +30,7 @@ public class Persona {
      * @return the cedula
      */
     
-    public Persona(String nombre, String apellido, int id,String cedula)
+    public Persona(String apellido, String nombre, int id,String cedula)
     {
         this.id = id;
         this.cedula = cedula;
@@ -202,6 +203,20 @@ public class Persona {
     
     public String toString() {
         return this.getApellido()+" " +this.getNombre();
+    }
+
+    /**
+     * @return the estadoSalud
+     */
+    public String getEstadoSalud() {
+        return estadoSalud;
+    }
+
+    /**
+     * @param estadoSalud the estadoSalud to set
+     */
+    public void setEstadoSalud(String estadoSalud) {
+        this.estadoSalud = estadoSalud;
     }
     
 }

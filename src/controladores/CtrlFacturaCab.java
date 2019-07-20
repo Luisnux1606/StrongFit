@@ -164,7 +164,6 @@ public class CtrlFacturaCab implements ActionListener{
         } catch (SQLException ex) {
             Logger.getLogger(CtrlProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
-      //  visFicha.cmb_clienteFac.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
         visFicha.cmb_clienteFac.setRenderer(new ItemRendererClienteFac());
         this.visFicha.cmb_clienteFac.addActionListener(this);
         visFicha.cmb_clienteFac.updateUI();
@@ -426,7 +425,6 @@ public class CtrlFacturaCab implements ActionListener{
                 visFicha.txt_valEntregado.setText(Calculos.setTwoDecimals(txtCambio)+"");
                }
         }
-        
         if (e.getSource() == visFicha.btnBuscarClienteFactura) 
         {
            
@@ -453,26 +451,6 @@ public class CtrlFacturaCab implements ActionListener{
             ctlHis.iniciar();                       
 
         } 
-        if (e.getSource() == visFicha.btnDeudas) 
-        {
-            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();            
-            ConsBuscarVentas consFacCab = new ConsBuscarVentas();                       
-            CtrlBuscarVentas ctrlBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
-            ctrlBuscarVentas.locale = 1; 
-            ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
-            ctrlBuscarVentas.iniciar();
-        }
-        
-        if (e.getSource() == visFicha.btnEntrenSaldos) 
-        {
-            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();            
-            ConsBuscarVentas consFacCab = new ConsBuscarVentas();                       
-            CtrlBuscarVentas ctrlBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
-            ctrlBuscarVentas.locale = 2; 
-            ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
-            ctrlBuscarVentas.iniciar();
-        }
-        
         if (e.getSource()==visFicha.cmb_clienteFac)
         {
             if (visFicha!=null) {                
@@ -480,12 +458,30 @@ public class CtrlFacturaCab implements ActionListener{
               //  visFicha.lblPersonaId.setText(item.getId()+"");
               //  System.out.println(item.getId() + " : " + item.getApellido());
             }
-        }                
+        } 
+        if (e.getSource()==visFicha.btnDeudas)
+        {
+            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();            
+            ConsBuscarVentas consFacCab = new ConsBuscarVentas();                       
+            CtrlBuscarVentas ctrlBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
+            ctrlBuscarVentas.locale = 1; 
+            ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
+            ctrlBuscarVentas.iniciar();
+        } 
+        if (e.getSource()==visFicha.btnEntrenSaldos)
+        {
+            VisBuscarVentas visBuscarVentas = new VisBuscarVentas();            
+            ConsBuscarVentas consFacCab = new ConsBuscarVentas();                       
+            CtrlBuscarVentas ctrlBuscarVentas=new CtrlBuscarVentas(consFacCab, visBuscarVentas,visFicha);
+            ctrlBuscarVentas.locale = 2; 
+            ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
+            ctrlBuscarVentas.iniciar();
+        } 
       
     }
     public void limpiar()
     {
-        visFicha.cmb_clienteFac.setSelectedIndex(0);
+//        visFicha.cmb_clienteFac.setSelectedIndex(0);
         visFicha.dtcFechaFacCab.setDate(Calculos.getCurrentDate2()); 
         visFicha.txtValConDsctoFicha.setText("0.0");
         visFicha.txtValPendienteFicha.setText("0.0");

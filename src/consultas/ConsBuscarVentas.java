@@ -414,55 +414,11 @@ public class ConsBuscarVentas extends Conexion {
                     "UNION " +
                     "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,' 'as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=2 and ROWNUM <= 30 " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(concat(concat(p.nom_per,' '),p.ape_per)) like upper('%"+nom+"%') and c.id_cat=2 and ROWNUM <= 30 " +
                     "union " +
                     "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+nom+"%') and c.id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and ROWNUM <= 30 ";
-                
-        ArrayList datos = new ArrayList();
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-            
-        }
-       return rs;
-    }
-    
-    public ResultSet buscarTodosPorNomTablaCed(String ced)
-    {
-   
-        PreparedStatement ps = null;
-        con = getConexion();
-        ResultSet rs = null; 
-        String sql = " select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres,' ' as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+ced+"%' and c.id_cat=2 and ROWNUM <= 30 " +
-                    "union " +
-                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and p.ced_per like'%"+ced+"%' and c.id_cat=1 " +
-                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and ROWNUM <= 30 " +
-                    "UNION " +
-                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,' 'as fechaini_hisperser,' ' as fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+ced+"%') and c.id_cat=2 and ROWNUM <= 30 " +
-                    "union " +
-                    "select fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per)as nombres,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab " +
-                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
-                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(p.nom_per) like upper('%"+ced+"%') and c.id_cat=1 " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and upper(concat(concat(p.nom_per,' '),p.ape_per)) like upper('%"+nom+"%') and c.id_cat=1 " +
                     "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and ROWNUM <= 30 ";
                 
         ArrayList datos = new ArrayList();
@@ -516,37 +472,6 @@ public class ConsBuscarVentas extends Conexion {
        return rs;
     }
     
-    public ResultSet buscarPendientesByCed(String ced)
-    {
-        
-        PreparedStatement ps = null;
-        con = getConexion();
-        ResultSet rs = null; 
-        String sql = " SELECT f.id_fac,   p.ced_per,CONCAT(CONCAT(p.nom_per,' '),p.ape_per) as nombres, f.fechaInicio_faccab, f.fechaFin_faccab, f.VALCANCELO_FACCAB, f.valPendiente_faccab,f.concepto_faccab " +
-                        "FROM FACTURACABECERA f, persona p " +
-                        "where  p.id_per=f.persona_id_per and f.valPendiente_faccab>0 and f.estado_faccab=1 and p.ced_per like'"+ced+"'" ;
-                       
-                
-        ArrayList datos = new ArrayList();
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-            
-        }
-       return rs;
-    }
-    
     public void closeConection()
     {
         
@@ -568,7 +493,69 @@ public class ConsBuscarVentas extends Conexion {
                     "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
                     "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.categoria_id_cat=1 " +
                     "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and h.ESTADO_HISPERSER=1 and fC.ESTADO_FACCAB=1 and ROWNUM <= 30 " +
-                    "order by id_faccab";                       
+                    "order by id_faccab desc";                       
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+     public ResultSet buscarTodos2ByCed(String ced)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = " select distinct fC.Id_Faccab,p.ced_per,concat(concat(p.nom_per,' '),p.ape_per) as nombres ,h.fechaini_hisperser,h.fechafin_hisperser,fC.Concepto_Faccab,fC.Fecha_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab  " +
+                    "from persona p, facturacabecera fC,FacturaDetalle fD,producto pr, categoria c,histpersserv h " +
+                    "where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and c.id_cat=pr.categoria_id_cat and pr.id_prod=fD.Producto_Id_Prod and c.categoria_id_cat=1 " +
+                    "and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and h.ESTADO_HISPERSER=1 and fC.ESTADO_FACCAB=1 and p.ced_per like '"+ced+"'and ROWNUM <= 30 " +
+                    "order by id_faccab desc";                       
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarUltimoEntrenPersona(String idPer)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = " select h.id_hisperser,h.fechaini_hisperser,h.fechafin_hisperser " +
+                    " from persona p, producto pr, categoria c,histpersserv h " +
+                    " where c.id_cat=pr.categoria_id_cat  and c.categoria_id_cat=1 " +
+                    " and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and h.ESTADO_HISPERSER=1  and p.id_per = '"+idPer+"' " +
+                    " and h.id_hisperser  = (select max(h.id_hisperser) " +
+                                            " from persona p, producto pr, categoria c,histpersserv h " +
+                                            " where c.id_cat=pr.categoria_id_cat  and c.categoria_id_cat=1 " +
+                                            " and p.id_per=h.persona_id_hisperser and pr.id_prod=h.producto_id_hisperser and h.ESTADO_HISPERSER=1  and p.id_per =  '"+idPer+"') " +
+                    " order by 1 desc";                       
         try 
         {
             
@@ -596,34 +583,6 @@ public class ConsBuscarVentas extends Conexion {
         String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
                         "from persona p, facturacabecera fC " +
                         "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1" +
-                        "order by fC.Id_Faccab desc";                       
-        try 
-        {
-            
-            ps = con.prepareStatement(sql);                            
-            rs = ps.executeQuery();
-             
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-           
-        }
-        finally
-        {
-           
-        }
-        return rs;
-    }
-    
-    public ResultSet buscarFacturasByCed(String ced)
-    {
-        PreparedStatement ps = null;
-         con = getConexion();
-        ResultSet rs = null; 
-        String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
-                        "from persona p, facturacabecera fC " +
-                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1 and p.ced_per like '"+ced+"'" +
                         "order by fC.Id_Faccab desc";                       
         try 
         {
@@ -679,7 +638,7 @@ public class ConsBuscarVentas extends Conexion {
         ResultSet rs = null; 
         String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
                         "from persona p, facturacabecera fC " +
-                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1 and upper(p.nom_per) like upper('%"+nom+"%')" +
+                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1 and upper(concat(concat(p.nom_per,' '),p.ape_per)) like upper('%"+nom+"%')" +
                         "order by fC.Id_Faccab desc";                       
         try 
         {
@@ -700,7 +659,33 @@ public class ConsBuscarVentas extends Conexion {
         return rs;
     }
     
-     
+    public ResultSet buscarFacturasById(String id)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql = " select  fC.Id_Faccab, concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC.Fecha_Faccab, fC.Num_Faccab,fC.Concepto_Faccab,fC.Total_Faccab,fC.Valcancelo_Faccab,fC.Valpendiente_Faccab,fC.VALAJUSTE_FACCAB " +
+                        "from persona p, facturacabecera fC " +
+                        "where p.id_per = fC.Persona_Id_Per and fC.ESTADO_FACCAB = 1 and p.ced_per like '"+id+"'" +
+                        "order by fC.Id_Faccab desc";                       
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
     
         public ResultSet buscarFacturasPendientesPago()
         {

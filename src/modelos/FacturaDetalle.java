@@ -22,6 +22,7 @@ public class FacturaDetalle {
   private Producto Producto_id_prod;
   private FacturaCab Factura_id_fac;
   private int estado_facDet;
+  private int Historial_id_hist;
   
   
   //FacturaCab modFicha,ConsFacturaCab consFicha,VisFicha visFicha,VisMembresia visMemb,Persona persona
@@ -140,6 +141,20 @@ public class FacturaDetalle {
      */
     public void setEstado_facDet(int estado_facDet) {
         this.estado_facDet = estado_facDet;
+    }
+
+    /**
+     * @return the Historial_id_hist
+     */
+    public int getHistorial_id_hist() {
+        return Historial_id_hist;
+    }
+
+    /**
+     * @param Historial_id_hist the Historial_id_hist to set
+     */
+    public void setHistorial_id_hist(int Historial_id_hist) {
+        this.Historial_id_hist = Historial_id_hist;
     }
   
   

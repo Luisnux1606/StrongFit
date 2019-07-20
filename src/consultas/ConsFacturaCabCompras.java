@@ -5,6 +5,8 @@
  */
 package consultas;
 
+import assets.Calculos;
+import assets.Validaciones;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,8 +28,15 @@ public class ConsFacturaCabCompras extends Conexion {
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FACTURACABECERACOMPRAS (ID_FACCABCOMP,FECHA_FACCABCOMP, NUM_FACCABCOMP,VALPAGAR_FACCABCOMPR,SUBTOTAL_FACCABCOMPR,TOTAL_FACCABCOMPR,VALPENDIENTE_FACCABCOMPR,VALCANCELO_FACCABCOMPR, PERSONA_ID_PER, MEMBRESIA_ID_MEMB, IVAS_ID_IVAS,ESTADO_FACCABCOMPR) "
-                + " VALUES(facturaComp_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
+        
+        int nroRegFacVen = new ConsFacturaCab().getNroRegistroFacVen();
+        int nroRegFacCom = new ConsFacturaCabCompras().getNroRegistroFacComp();
+        int nroRegHistPerServ = new ConsHistorialPersonaServicio().getNroRegistroHisPerSev();        
+        int nroRegGreatter = Validaciones.isNumVoid(Calculos.getGretterNumber(nroRegFacVen,nroRegFacCom,nroRegHistPerServ)+"") + 1;
+        
+        
+        String sql = "INSERT INTO FACTURACABECERACOMPRAS (ID_FACCABCOMP,FECHA_FACCABCOMP, NUM_FACCABCOMP,VALPAGAR_FACCABCOMPR,SUBTOTAL_FACCABCOMPR,TOTAL_FACCABCOMPR,VALPENDIENTE_FACCABCOMPR,VALCANCELO_FACCABCOMPR, PERSONA_ID_PER, MEMBRESIA_ID_MEMB, IVAS_ID_IVAS,ESTADO_FACCABCOMPR,num_registro_facCabCompr) "
+                + " VALUES(facturaComp_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try 
         {            
@@ -44,6 +53,7 @@ public class ConsFacturaCabCompras extends Conexion {
             ps.setInt(9, f.getMembresiaComp().getId());
             ps.setInt(10, f.getIvasComp().getId_ivas());
             ps.setInt(11, f.getEstadoComp());
+            ps.setInt(12, nroRegGreatter);
                         
             ps.execute();                                       
             return true;
@@ -153,7 +163,7 @@ public class ConsFacturaCabCompras extends Conexion {
         PreparedStatement ps = null;
         Connection con = getConexion(); //id_facCab,fecha_facCab, num_facCab, subTotal_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab
         String sql = "update FACTURACABECERACOMPRAS SET ESTADO_FACCABCOMPR=?"
-                + " WHERE id_facCab=?";
+                + " WHERE ID_FACCABCOMP=?";
         
         try 
         {
@@ -623,5 +633,44 @@ public class ConsFacturaCabCompras extends Conexion {
             }
         }
         
+    }
+    
+    public int getNroRegistroFacComp()
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        int nroReg = 0;
+        String sql = "select max(fC.Num_Registro_Faccabcompr) as Num_Registro_Faccabcompr" +
+                     " from facturaCabeceracompras fC " +
+                     " order by Num_Registro_Faccabcompr desc";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                     
+          
+            rs = ps.executeQuery();
+            if (rs.next()) { //ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per
+                nroReg = rs.getInt("Num_Registro_Faccabcompr");                                           
+            }
+           
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        return nroReg;
     }
 }

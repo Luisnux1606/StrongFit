@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e484188a-c062-4a2f-910a-b3b9657e92ec">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="220"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\TroyaGym\\src\\reportes\\"]]></defaultValueExpression>
 	</parameter>
@@ -10,10 +10,10 @@
 		<defaultValueExpression><![CDATA[$F{ID_PER}]]></defaultValueExpression>
 	</parameter>
 	<parameter name="p_fechaIni_ficha" class="java.lang.String">
-		<defaultValueExpression><![CDATA[$F{FECHAINI_FICHA}]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[$F{FECHA_FICHA}]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[select p.id_per,p.ced_per,f.fechaIni_ficha, p.nom_per,p.ape_per,m.estatura_med,p.edad_per,a.recomendacionPesas_ana,a.recomendacionCardio_ana,a.recomendacionFuncional_ana,a.exesoGrasa_ana,a.exesoLiquido_ana,a.exesoTotal_ana,m.peso_med,m.fecha_med,m.abdomenAlto_med
+		<![CDATA[select p.id_per,p.ced_per,f.fecha_ficha, p.nom_per,p.ape_per,m.estatura_med,p.edad_per,a.recomendacionPesas_ana,a.recomendacionCardio_ana,a.recomendacionFuncional_ana,a.excesoGrasa_ana,a.excesoLiquido_ana,a.excesoTotal_ana,m.peso_med,m.fecha_med,m.abdomenAlto_med
 ,m.pecho_med,m.cintura_med,m.abdomenBajo_med,m.cadera_med,m.pierna_med,m.pantorrilla_med,m.brazo_med,m.antebrazo_med,m.cuello_med
 ,m.espalda_med
 from persona p, ficha f,medidas m,analisis a
@@ -21,7 +21,7 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 	</queryString>
 	<field name="ID_PER" class="java.math.BigDecimal"/>
 	<field name="CED_PER" class="java.lang.String"/>
-	<field name="FECHAINI_FICHA" class="java.lang.String"/>
+	<field name="FECHA_FICHA" class="java.lang.String"/>
 	<field name="NOM_PER" class="java.lang.String"/>
 	<field name="APE_PER" class="java.lang.String"/>
 	<field name="ESTATURA_MED" class="java.math.BigDecimal"/>
@@ -29,9 +29,9 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 	<field name="RECOMENDACIONPESAS_ANA" class="java.lang.String"/>
 	<field name="RECOMENDACIONCARDIO_ANA" class="java.lang.String"/>
 	<field name="RECOMENDACIONFUNCIONAL_ANA" class="java.lang.String"/>
-	<field name="EXESOGRASA_ANA" class="java.math.BigDecimal"/>
-	<field name="EXESOLIQUIDO_ANA" class="java.math.BigDecimal"/>
-	<field name="EXESOTOTAL_ANA" class="java.math.BigDecimal"/>
+	<field name="EXCESOGRASA_ANA" class="java.math.BigDecimal"/>
+	<field name="EXCESOLIQUIDO_ANA" class="java.math.BigDecimal"/>
+	<field name="EXCESOTOTAL_ANA" class="java.math.BigDecimal"/>
 	<field name="PESO_MED" class="java.math.BigDecimal"/>
 	<field name="FECHA_MED" class="java.lang.String"/>
 	<field name="ABDOMENALTO_MED" class="java.math.BigDecimal"/>
@@ -55,14 +55,14 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 				<textElement>
 					<font size="28"/>
 				</textElement>
-				<text><![CDATA[STRONGFIT]]></text>
+				<text><![CDATA[TROYAGYM]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="432" y="0" width="100" height="20" forecolor="#666666" uuid="dc58f3fb-7f8e-461f-b6d6-27e8ac456594"/>
 				<textElement>
 					<font size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Lender Castillo]]></text>
+				<text><![CDATA[Juan Carlos]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="432" y="20" width="57" height="13" uuid="2157f144-7422-427a-b57b-5715d2817055"/>
@@ -140,6 +140,10 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 	</pageHeader>
 	<columnHeader>
 		<band height="339" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement stretchType="RelativeToTallestObject" x="9" y="36" width="299" height="264" uuid="8c506ace-f79c-4ad4-8289-6d7a06bc8978"/>
+				<imageExpression><![CDATA["C:\\troyagym\\configuracion\\reportes\\images\\humanbodymen2.jpeg"]]></imageExpression>
+			</image>
 			<staticText>
 				<reportElement x="53" y="0" width="212" height="24" uuid="f9846370-e50f-41c4-b369-c74a149d9f11"/>
 				<textElement>
@@ -188,15 +192,15 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 			</staticText>
 			<textField>
 				<reportElement x="324" y="37" width="42" height="14" forecolor="#999999" uuid="a3b31aa6-82fa-451c-a818-cfbb4100c050"/>
-				<textFieldExpression><![CDATA[$F{EXESOGRASA_ANA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{EXCESOGRASA_ANA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="416" y="37" width="42" height="14" forecolor="#999999" uuid="7736799b-c281-4333-9ae8-ce29106946eb"/>
-				<textFieldExpression><![CDATA[$F{EXESOLIQUIDO_ANA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{EXCESOLIQUIDO_ANA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="502" y="37" width="39" height="13" forecolor="#999999" uuid="588a0764-bf09-4351-b9e0-f61f53ee439f"/>
-				<textFieldExpression><![CDATA[$F{EXESOTOTAL_ANA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{EXCESOTOTAL_ANA}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="314" y="24" width="1" height="222" uuid="2f3aafb2-efad-4db3-b0e5-d61effefbafc"/>
@@ -207,10 +211,6 @@ where p.id_per = f.Persona_id_per and m.id_med=f.Medidas_id_med and p.id_per=$P{
 			<line>
 				<reportElement x="489" y="19" width="1" height="31" forecolor="#999999" uuid="05000b83-1801-4202-96b9-df8f0b08669a"/>
 			</line>
-			<image>
-				<reportElement x="16" y="26" width="293" height="302" uuid="ed2c4f84-dc25-4fb3-a9fc-950ec8a1487f"/>
-				<imageExpression><![CDATA["C:\\Users\\Administrator\\Documents\\NetBeansProjects\\StrongFit\\src\\icons\\humanbodymen2.jpeg"]]></imageExpression>
-			</image>
 			<textField>
 				<reportElement x="243" y="69" width="29" height="13" uuid="df0f53d0-4e8d-4f0f-8e31-3370d591f042"/>
 				<textFieldExpression><![CDATA[$F{CUELLO_MED}]]></textFieldExpression>

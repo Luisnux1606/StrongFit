@@ -5,6 +5,8 @@
  */
 package consultas;
 
+import assets.Calculos;
+import assets.Validaciones;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,8 +27,14 @@ public class ConsFacturaCab extends Conexion {
     {
         PreparedStatement ps,ps2 = null;
         Connection con = getConexion();
-        String sql = "INSERT INTO FacturaCabecera (id_facCab,fecha_facCab, num_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab) "
-                + " VALUES(factura_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
+        
+        int nroRegFacVen = new ConsFacturaCab().getNroRegistroFacVen();
+        int nroRegFacCom = new ConsFacturaCabCompras().getNroRegistroFacComp();
+        int nroRegHistPerServ = new ConsHistorialPersonaServicio().getNroRegistroHisPerSev();        
+        int nroRegGreatter = Validaciones.isNumVoid(Calculos.getGretterNumber(nroRegFacVen,nroRegFacCom,nroRegHistPerServ)+"") + 1 ;
+        
+        String sql = "INSERT INTO FacturaCabecera (id_facCab,fecha_facCab, num_facCab,valPagar_facCab,subTotal_facCab,total_facCab,valPendiente_facCab,valCancelo_facCab, Persona_id_per, Membresia_id_memb, Ivas_id_ivas,estado_facCab,num_registro_facCab) "
+                + " VALUES(factura_id_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try 
         {            
@@ -43,6 +51,7 @@ public class ConsFacturaCab extends Conexion {
             ps.setInt(9, f.getMembresia().getId());
             ps.setInt(10, f.getIvas().getId_ivas());
             ps.setInt(11, f.getEstado());
+            ps.setInt(12, nroRegGreatter);
                         
             ps.execute();                                       
             return true;
@@ -624,5 +633,44 @@ public class ConsFacturaCab extends Conexion {
             }
         }
         
+    }
+    
+    public int getNroRegistroFacVen()
+    {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        int nroReg = 0;
+        String sql = "select max(fC.NUM_REGISTRO_FACCAB) as NUM_REGISTRO_FACCAB " +
+                    "from facturaCabecera fC " +
+                    "order by NUM_REGISTRO_FACCAB desc";
+        
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                     
+          
+            rs = ps.executeQuery();
+            if (rs.next()) { //ced_per, nom_per, ape_per, nroFono_per,edad_per,fechaNac_per
+                nroReg = rs.getInt("NUM_REGISTRO_FACCAB");                                           
+            }
+           
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+            
+        }
+        finally
+        {
+            try 
+            {
+                con.close();
+            } catch (Exception e) 
+            {
+                System.err.println(e);
+            }
+        }
+        return nroReg;
     }
 }

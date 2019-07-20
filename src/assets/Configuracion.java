@@ -29,7 +29,7 @@ public class Configuracion {
     }
     public static String rutaRepos()
     {
-        String ruta = "C:/strongfit/configuracion/reportes/"; 
+        String ruta = "C:/troyagym/configuracion/reportes/"; 
         
         return ruta;
     }
