@@ -46,6 +46,12 @@ public class VisReportes extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         dtcFechaFinReportesRegistros = new com.toedter.calendar.JDateChooser();
         btnGenerarRepoRegistros = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        dtcFechaFinReportesRegistros1 = new com.toedter.calendar.JDateChooser();
+        dtcFechaInicioReportesIngEgr = new com.toedter.calendar.JDateChooser();
+        btnGenerarIngEgr = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -90,7 +96,7 @@ public class VisReportes extends javax.swing.JFrame {
                     .addComponent(dtcFechaReporte, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(btnReportePersonasBuscarPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 772, Short.MAX_VALUE))
+                .addGap(0, 777, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +120,7 @@ public class VisReportes extends javax.swing.JFrame {
                                 .addComponent(btnReportePersonasBuscarPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
 
-        jTabbedPane1.addTab("PERSONAS", jPanel1);
+        jTabbedPane1.addTab("CTRL CORPORAL PERSONAS", jPanel1);
 
         jLabel3.setText("Fecha Inicio:");
 
@@ -145,7 +151,7 @@ public class VisReportes extends javax.swing.JFrame {
                         .addComponent(dtcFechaFinReportesRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(btnGenerarRepoRegistros)
-                .addContainerGap(689, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,10 +169,62 @@ public class VisReportes extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(btnGenerarRepoRegistros)))
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("REGISTROS", jPanel2);
+        jTabbedPane1.addTab("REGISTROS VENTAS", jPanel2);
+
+        jLabel1.setText("Fecha inicio:");
+
+        jLabel6.setText("Fecha fin:");
+
+        dtcFechaFinReportesRegistros1.setDateFormatString("dd/MM/yyyy");
+        dtcFechaFinReportesRegistros1.setName("fechaInicioReporteRegistros"); // NOI18N
+
+        dtcFechaInicioReportesIngEgr.setDateFormatString("dd/MM/yyyy");
+        dtcFechaInicioReportesIngEgr.setName("fechaInicioReporteRegistros"); // NOI18N
+
+        btnGenerarIngEgr.setText("Generar");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dtcFechaInicioReportesIngEgr, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dtcFechaFinReportesRegistros1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(btnGenerarIngEgr)
+                .addContainerGap(689, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(dtcFechaInicioReportesIngEgr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dtcFechaFinReportesRegistros1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(btnGenerarIngEgr)))
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("REGISTROS INGRESOS/EGRESOS", jPanel3);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -217,18 +275,24 @@ public class VisReportes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnGenerarIngEgr;
     public javax.swing.JButton btnGenerarRepoPersonas;
     public javax.swing.JButton btnGenerarRepoRegistros;
     public javax.swing.JButton btnReportePersonasBuscarPersonas;
     public com.toedter.calendar.JDateChooser dtcFechaFinReportesRegistros;
+    public com.toedter.calendar.JDateChooser dtcFechaFinReportesRegistros1;
+    public com.toedter.calendar.JDateChooser dtcFechaInicioReportesIngEgr;
     public com.toedter.calendar.JDateChooser dtcFechaInicioReportesRegistros;
     public com.toedter.calendar.JDateChooser dtcFechaReporte;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     public javax.swing.JTabbedPane jTabbedPane1;
     public javax.swing.JLabel lblReportes;
     public javax.swing.JTextField txtCedulaReportePersonas;

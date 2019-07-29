@@ -39,7 +39,7 @@ public class Configuracion {
         
         BufferedReader br = null;  
         try {
-            File file = new File("C:/strongfit/configuracion/empresa/nomEmp.txt");
+            File file = new File("C:/troyagym/configuracion/empresa/nomEmp.txt");
             br = new BufferedReader(new FileReader(file));
             nomEmp = br.readLine();
             

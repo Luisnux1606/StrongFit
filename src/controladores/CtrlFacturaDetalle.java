@@ -91,8 +91,7 @@ public class CtrlFacturaDetalle implements ActionListener {
         try 
         {
             //jc.removeAllItems();
-            ResultSet listProd = consProd.buscarTodos();
-               
+            ResultSet listProd = consProd.buscarTodos();               
            // DefaultComboBoxModel model =  (DefaultComboBoxModel)jc.getModel();
             Object cols[] = new Object[11];
 

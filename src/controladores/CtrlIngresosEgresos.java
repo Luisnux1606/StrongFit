@@ -95,7 +95,7 @@ public class CtrlIngresosEgresos implements ActionListener {
         this.visIngEgr = visIngEgr;       
         this.visFicha = visFicha;
         
-        this.visIngEgr.cmbTipoBusqueda.addActionListener(this);    
+     
         this.visIngEgr.cmbElegirBusquedaFac.addActionListener(this);
         this.visIngEgr.btnAgregarTrans.addActionListener(this);
         this.visIngEgr.btnEliminarTrans.addActionListener(this);
@@ -133,27 +133,7 @@ public class CtrlIngresosEgresos implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         
-      if (e.getSource() == visIngEgr.cmbTipoBusqueda) 
-       {       
-           String tipo = visIngEgr.cmbTipoBusqueda.getSelectedItem()+"";
-            if (tipo.equals("todos")) {
-             showTable();
-            }
-            if (tipo.equals("cursando")) {
-                showTableCursando();
-            }
-            if (tipo.equals("pendientes")) {
-                showTablePendientes();
-            }
-            if (tipo.equals("proximos a vencer")) {
-                showTableProximosVencer();
-            }
-            if (tipo.equals("vencidos")) {
-                showTableVencidos();
-            }
-           
-               
-        }
+      
       
        if (e.getSource() == visIngEgr.cmbElegirBusquedaFac) 
        {
@@ -321,17 +301,7 @@ public class CtrlIngresosEgresos implements ActionListener {
         };
         visIngEgr.tblIngresosEgresos.addKeyListener(keyListenerTblDetalle);
     
-        
-        //cmblistener personas
 
-       
-        
-        
-        ///////combo
-        
-       
-        
-        
         //mouse listener tableingegr
         
         MouseListener mouseListTblIngEgr;
@@ -536,11 +506,14 @@ public class CtrlIngresosEgresos implements ActionListener {
     
     private void initColumnSizes(JTable table) {
         
-        table.getColumnModel().getColumn(1).setPreferredWidth(100);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
         table.getColumnModel().getColumn(2).setPreferredWidth(250);
+        table.getColumnModel().getColumn(4).setPreferredWidth(40);
         table.getColumnModel().getColumn(5).setPreferredWidth(200);
         table.getColumnModel().getColumn(6).setPreferredWidth(100);
         table.getColumnModel().getColumn(7).setPreferredWidth(100);
+        table.getColumnModel().getColumn(8).setPreferredWidth(50);
+        table.getColumnModel().getColumn(9).setPreferredWidth(50);
       
     
     }
@@ -571,151 +544,7 @@ public class CtrlIngresosEgresos implements ActionListener {
                 
     }
     
-    public void showTablePendientes()
-    {
-        try {
-            limpiarTabla(visIngEgr.tblIngresosEgresosCons);
-            ResultSet listFicha = consIngEgr.buscarPendientes();
-            
-            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresosCons.getModel();
-            Object cols[] = new Object[10];
-            double diff;
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("Id_Faccab");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaini_hisperser");
-                    cols[4] = listFicha.getString("fechafin_hisperser");
-                    cols[5] = listFicha.getString("Concepto_Faccab");
-                    cols[6] = listFicha.getString("Fecha_Faccab");
-                    cols[7] = listFicha.getDouble("Total_Faccab");
-                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
-                    diff = (double)cols[8]-(double)cols[9];
-                    if (Math.abs(diff)>0) {
-                         model.addRow(cols);
-                    }
-                   
-                                        
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consIngEgr.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visIngEgr.tblIngresosEgresosCons.updateUI();
-    }
-    
-    public void showTableProximosVencer()
-    {
-        try {
-            limpiarTabla(visIngEgr.tblIngresosEgresosCons);
-            ResultSet listFicha = consIngEgr.buscarTodos2();
-            
-            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresosCons.getModel();
-            Object cols[] = new Object[10];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("Id_Faccab");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaini_hisperser");
-                    cols[4] = listFicha.getString("fechafin_hisperser");
-                    cols[5] = listFicha.getString("Concepto_Faccab");
-                    cols[6] = listFicha.getString("Fecha_Faccab");
-                    cols[7] = listFicha.getDouble("Total_Faccab");
-                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
-                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
-                        double days = Calculos.getDiffDaysToFinish(cols[4].toString());
-                        if (days<=5) {
-                            model.addRow(cols);
-                        }
-                    }                       
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consIngEgr.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visIngEgr.tblIngresosEgresosCons.updateUI();
-    }
-    
-    public void showTableCursando()
-    {
-        try {
-             limpiarTabla(visIngEgr.tblIngresosEgresosCons);
-            ResultSet listFicha = consIngEgr.buscarTodos2();
-            
-            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresosCons.getModel();
-            Object cols[] = new Object[10];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("Id_Faccab");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaini_hisperser");
-                    cols[4] = listFicha.getString("fechafin_hisperser");
-                    cols[5] = listFicha.getString("Concepto_Faccab");
-                    cols[6] = listFicha.getString("Fecha_Faccab");
-                    cols[7] = listFicha.getDouble("Total_Faccab");
-                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
-                    if (Calculos.dateGreaterThanCurrent(cols[4].toString())) {
-                        model.addRow(cols);                     
-                    }                       
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consIngEgr.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visIngEgr.tblIngresosEgresosCons.updateUI();
-    }
-    public void showTableByNom(String nom)
-    {
-        try {
-            limpiarTabla(visIngEgr.tblIngresosEgresosCons);
-            
-            ResultSet listFicha = consIngEgr.buscarTodosPorNomTabla(nom);
-            
-            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresosCons.getModel();
-            Object cols[] = new Object[10];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("Id_Faccab");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaini_hisperser");
-                    cols[4] = listFicha.getString("fechafin_hisperser");
-                    cols[5] = listFicha.getString("Concepto_Faccab");
-                    cols[6] = listFicha.getString("Fecha_Faccab");
-                    cols[7] = listFicha.getDouble("Total_Faccab");
-                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
-                    model.addRow(cols);
-                    
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consIngEgr.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+  
     
     public void showTableByIdPer(String id)
     {
@@ -1018,40 +847,7 @@ public class CtrlIngresosEgresos implements ActionListener {
         visIngEgr.tblIngresosEgresos.updateUI();
     } 
       
-    public void showTable()
-    {
-        try {
-            limpiarTabla(visIngEgr.tblIngresosEgresosCons);
-            ResultSet listFicha = consIngEgr.buscarTodos2();
-            
-            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresosCons.getModel();
-            Object cols[] = new Object[10];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("Id_Faccab");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaini_hisperser");
-                    cols[4] = listFicha.getString("fechafin_hisperser");
-                    cols[5] = listFicha.getString("Concepto_Faccab");
-                    cols[6] = listFicha.getString("Fecha_Faccab");
-                    cols[7] = listFicha.getDouble("Total_Faccab");
-                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
-                  
-                    model.addRow(cols);
-                                        
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consIngEgr.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visIngEgr.tblIngresosEgresosCons.updateUI();
-    }
+   
     
     public void showTableIngrEgrePendientes()
     {
@@ -1112,68 +908,5 @@ public class CtrlIngresosEgresos implements ActionListener {
         new ButtonTableIngresosEgresos(visIngEgr);
         visIngEgr.tblIngresosEgresos.updateUI();
     }
-     
-     public void showTableVencidos()
-    {
-        try {
-            limpiarTabla(visIngEgr.tblIngresosEgresosCons);
-            ResultSet listFicha = consIngEgr.buscarTodos2();
-            
-            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresosCons.getModel();
-            Object cols[] = new Object[10];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("Id_Faccab");
-                    cols[1] = listFicha.getString("ced_per");
-                    cols[2] = listFicha.getString("nombres").toUpperCase();
-                    cols[3] = listFicha.getString("fechaini_hisperser");
-                    cols[4] = listFicha.getString("fechafin_hisperser");
-                    cols[5] = listFicha.getString("Concepto_Faccab");
-                    cols[6] = listFicha.getString("Fecha_Faccab");
-                    cols[7] = listFicha.getDouble("Total_Faccab");
-                    cols[8] = listFicha.getDouble("Valcancelo_Faccab");
-                    cols[9] = listFicha.getDouble("Valpendiente_Faccab");
-                    if (!Calculos.dateGreaterThanCurrent(cols[4].toString()))
-                        model.addRow(cols);
-                     
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consIngEgr.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visIngEgr.tblIngresosEgresosCons.updateUI();
-    }
-     
-    public void showTableDetalles(int idFac)
-    {
-        try {
-            limpiarTabla(visIngEgr.tblIngresosEgresosCons);
-            ResultSet listFicha = consIngEgr.buscarDetallesByIdFac(idFac);
-            
-            DefaultTableModel model =  (DefaultTableModel)visIngEgr.tblIngresosEgresosCons.getModel();
-            Object cols[] = new Object[4];
-            
-            while (listFicha.next()) {
-                try {
-                    cols[0] = listFicha.getInt("Id_Facdet");
-                    cols[1] = listFicha.getString("Descripcion_Facdet");
-                    cols[2] = listFicha.getDouble("Valunitario_Facdet");
-                    cols[3] = listFicha.getDouble("Vtotal_Facdet");
-                    
-                    model.addRow(cols);
-                                        
-                } catch (SQLException ex) {
-                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            consIngEgr.closeConection();
-        } catch (SQLException ex) {
-            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        visIngEgr.tblIngresosEgresosCons.updateUI();
-    }  
+
 }

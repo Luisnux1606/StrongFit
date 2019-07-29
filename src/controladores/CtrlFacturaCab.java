@@ -6,6 +6,8 @@
 package controladores;
 
 
+import assets.ButtonTable;
+import assets.ButtonTableIngresosEgresos;
 import assets.Calculos;
 import assets.Configuracion;
 import assets.ItemRendererClienteFac;
@@ -109,6 +111,9 @@ public class CtrlFacturaCab implements ActionListener{
         this.visFicha.btnEntrenamiento.addActionListener(this);
         this.visFicha.btnDeudas.addActionListener(this);
         this.visFicha.btnEntrenSaldos.addActionListener(this);
+        this.visFicha.btnPagarAjustar.addActionListener(this);
+        this.visFicha.btnPagarAjustarGimnasio.addActionListener(this);
+        this.visFicha.btnPagarAjustarRopa.addActionListener(this);
         
         cadBus = "";
        
@@ -117,6 +122,17 @@ public class CtrlFacturaCab implements ActionListener{
         iniciar();
         
         visFicha.txt_id_persona_u.setText(persona.getId()+"");
+        
+        /// desabilitado para TroyaGYM
+        
+         this.visFicha.lblGimnasio.setVisible(false);
+         this.visFicha.lblDeudaAjustarGimnasio.setVisible(false);
+         this.visFicha.btnPagarAjustarGimnasio.setVisible(false);
+         this.visFicha.lblDeudaRopa.setVisible(false);
+         this.visFicha.lblDeudaAjustarRopa.setVisible(false);
+         this.visFicha.btnPagarAjustarRopa.setVisible(false);
+
+
 
     }
     
@@ -360,6 +376,191 @@ public class CtrlFacturaCab implements ActionListener{
         facDetalle.setDetalles(visFicha, cadBus);
     }
     
+    public void ajustarPagarDeudas(String idPersona,double valAjustePago)
+    {
+        
+        ConsBuscarVentas consBuscarVentas = new ConsBuscarVentas();
+        ArrayList<String> idsFacturasAjustar = new ArrayList<String>();
+        try {
+            
+            ResultSet listFicha = consBuscarVentas.buscarFacturasById(idPersona);                        
+            Object cols[] = new Object[11];
+            
+            while (listFicha.next()) {
+                try {
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("nombres");
+                    cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
+                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[4] = listFicha.getString("Concepto_Faccab");
+                    cols[5] = listFicha.getString("Total_Faccab");
+                    cols[6] = listFicha.getString("Valcancelo_Faccab");
+                    cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[8] = listFicha.getDouble("valajuste_faccab");
+                    cols[9] = "Guardar";
+                    cols[10] = "Anular";
+                    
+                    double valCancelo = new Double(cols[6]+"").doubleValue();
+                    double valPend = new Double(cols[7]+"").doubleValue();
+                    double valAjus = new Double(cols[8]+"").doubleValue();
+                    double totPagar = new Double(cols[5]+"").doubleValue();
+                    
+                    if (Math.abs(totPagar - (valAjus+valCancelo))>0) {                       
+                        idsFacturasAjustar.add(cols[0]+";"+cols[5]+";"+cols[7]+";"+cols[8]);
+                    }
+                   
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+        /*
+                recorro facturas
+             se comprueba que valAjuste>0
+             se ve el valajuste si es menor que val pend
+             si el (valorPendiente-valAjuste) < valAjustePagar >> valAjustePagar = ValAjustePagar - (valorPend-valAjuste)
+                valorAjusteFac = valorPendiente;
+              si el (valorPendiente-valAjuste)>   valAjustePagar  >>valAjusteFac = valAjustefAC + valAjustePagar
+                valAjustePagr = valAjustePagar - valAjusteFac
+
+             si es igual pasa al siguiente factura
+
+            */
+        double valAjustePagar = valAjustePago;
+        for (int i = 0; i < idsFacturasAjustar.size(); i++) {
+            String[] arrDat = idsFacturasAjustar.get(i).split(";"); //id; total;valPend;valAjust
+            int idFac = new Integer(arrDat[0]).intValue();
+            double totFac = new Double(arrDat[1]).doubleValue();
+            double valPend = new Double(arrDat[2]).doubleValue();
+            double valAjuste = new Double(arrDat[3]).doubleValue(); //valAjuste de la factura
+             FacturaCab facCab = new FacturaCab();
+            if (valAjustePagar>0)   //paraetro para pagar/ajustar
+            {
+                 if ((valPend-valAjuste) <= valAjustePagar) {
+                    valAjustePagar = valAjustePagar - (valPend-valAjuste);
+                    valAjuste = valPend;
+                    System.out.println("factura "+idFac + " nuevo ValAjuste "+valAjuste);
+                    //falta hacer update en esa factura con  valAjuste                                               
+                }
+                if((valPend-valAjuste)> valAjustePagar)
+                {
+                    valAjuste = valAjuste + valAjustePagar;
+                    valAjustePagar = valAjustePagar - valAjuste;
+                    //falta hace update en esa factura del valAjuste con valAjuste                     
+                    System.out.println("factura "+idFac + " nuevo ValAjuste "+valAjuste);
+                }
+                
+                facCab.setValAjuste_facCab(valAjuste);
+                facCab.setId_facCab(idFac);
+                consFicha.modificarAjuste(facCab);
+                
+            }
+        }
+        getValDeuda();
+    }
+    
+    public void ajustarPagarDeudasGimnasio(String idPersona,double valAjustePago)
+    {
+        
+        ConsBuscarVentas consBuscarVentas = new ConsBuscarVentas();
+        ArrayList<String> idsFacturasAjustar = new ArrayList<String>();
+        try {
+            
+            ResultSet listFicha = consBuscarVentas.buscarFacturasById(idPersona);                        
+            Object cols[] = new Object[11];
+            
+            while (listFicha.next()) {
+                try {
+                                      
+                    cols[0] = listFicha.getInt("Id_Faccab");
+                    cols[1] = listFicha.getString("nombres");
+                    cols[2] = listFicha.getString("Fecha_Faccab").toUpperCase();
+                    cols[3] = listFicha.getString("Num_Faccab");
+                    cols[4] = listFicha.getString("Concepto_Faccab");
+                    cols[5] = listFicha.getString("Total_Faccab");
+                    cols[6] = listFicha.getString("Valcancelo_Faccab");
+                    cols[7] = listFicha.getDouble("Valpendiente_Faccab");
+                    cols[8] = listFicha.getDouble("valajuste_faccab");
+                    cols[9] = "Guardar";
+                    cols[10] = "Anular";
+                    
+                    double valCancelo = new Double(cols[6]+"").doubleValue();
+                    double valPend = new Double(cols[7]+"").doubleValue();
+                    double valAjus = new Double(cols[8]+"").doubleValue();
+                    double totPagar = new Double(cols[5]+"").doubleValue();
+                    
+                    if (Math.abs(totPagar - (valAjus+valCancelo))>0) {                       
+                        idsFacturasAjustar.add(cols[0]+";"+cols[5]+";"+cols[7]+";"+cols[8]);
+                    }
+                   
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consBuscarVentas.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }      
+        /*
+                recorro facturas
+             se comprueba que valAjuste>0
+             se ve el valajuste si es menor que val pend
+             si el (valorPendiente-valAjuste) < valAjustePagar >> valAjustePagar = ValAjustePagar - (valorPend-valAjuste)
+                valorAjusteFac = valorPendiente;
+              si el (valorPendiente-valAjuste)>   valAjustePagar  >>valAjusteFac = valAjustefAC + valAjustePagar
+                valAjustePagr = valAjustePagar - valAjusteFac
+
+             si es igual pasa al siguiente factura
+
+            */
+        double valAjustePagar = valAjustePago;
+        for (int i = 0; i < idsFacturasAjustar.size(); i++) {
+            String[] arrDat = idsFacturasAjustar.get(i).split(";"); //id; total;valPend;valAjust
+            int idFac = new Integer(arrDat[0]).intValue();
+            double totFac = new Double(arrDat[1]).doubleValue();
+            double valPend = new Double(arrDat[2]).doubleValue();
+            double valAjuste = new Double(arrDat[3]).doubleValue(); //valAjuste de la factura
+             FacturaCab facCab = new FacturaCab();
+            if (valAjustePagar>0)   //paraetro para pagar/ajustar
+            {
+                 if ((valPend-valAjuste) <= valAjustePagar) {
+                    valAjustePagar = valAjustePagar - (valPend-valAjuste);
+                    valAjuste = valPend;
+                    System.out.println("factura "+idFac + " nuevo ValAjuste "+valAjuste);
+                    //falta hacer update en esa factura con  valAjuste                                               
+                }
+                if((valPend-valAjuste)> valAjustePagar)
+                {
+                    valAjuste = valAjuste + valAjustePagar;
+                    valAjustePagar = valAjustePagar - valAjuste;
+                    //falta hace update en esa factura del valAjuste con valAjuste                     
+                    System.out.println("factura "+idFac + " nuevo ValAjuste "+valAjuste);
+                }
+                
+                facCab.setValAjuste_facCab(valAjuste);
+                facCab.setId_facCab(idFac);
+                consFicha.modificarAjuste(facCab);
+                
+            }
+        }
+        getValDeuda();
+    }
+    
+    
+    public void getValDeuda()
+    {
+    
+        Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
+       String nombre = item.getApellido()+" "+item.getNombre();
+       String deuda = showTotalDeudaPersona(nombre);                
+       visFicha.lblDedudaTotalValor.setText(Validaciones.isNumVoid10(deuda)+"");
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -369,13 +570,28 @@ public class CtrlFacturaCab implements ActionListener{
            jdc.add(visFicha.dtcFechaFacCab);
           
                 System.out.println(((Persona)visFicha.cmb_clienteFac.getSelectedItem()).getApellido());
+                String ced = ((Persona)visFicha.cmb_clienteFac.getSelectedItem()).getCedula();
+               
                if (Validaciones.isDateChooserVoid(jdc) && !Validaciones.isNumVoid1(visFicha.cmb_clienteFac.getSelectedItem()+"") && Validaciones.isDetalleNull(visFicha.tblFacturaDetalle)) 
-               {                                        
-                    setFacturaCabecera(visFicha);   
-                                       
+               {                                                
+                    setFacturaCabecera(visFicha);                       
+                    
                     if (consFicha.registrar(modFacCab)) 
                     {
                         ArrayList<FacturaDetalle> facDets = facDetalle.setDetalles(visFicha, "");
+                        
+                        for (FacturaDetalle facDet : facDets) {
+                            if (facDet.getDescripcion_facDet().equals("AJUSTAR DEUDA")) {
+                                ajustarPagarDeudas(ced, facDet.getValUnitario_facDet());
+                            }
+                            if (facDet.getDescripcion_facDet().equals("AJUSTAR DEUDA GIMNASIO")) {
+                                ajustarPagarDeudas(ced, facDet.getValUnitario_facDet());
+                            }
+                            if (facDet.getDescripcion_facDet().equals("AJUSTAR DEUDA ROPA")) {
+                                ajustarPagarDeudas(ced, facDet.getValUnitario_facDet());
+                            }
+                        }
+                        
                         if(consFacDet.registrar(facDets))
                         {                      //txt_valCanceloComp
                             JOptionPane.showMessageDialog(null, "Registro Guardado!");
@@ -455,8 +671,44 @@ public class CtrlFacturaCab implements ActionListener{
         {
             if (visFicha!=null) {                
                 Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
-              //  visFicha.lblPersonaId.setText(item.getId()+"");
-              //  System.out.println(item.getId() + " : " + item.getApellido());
+                String nombre = item.getApellido()+" "+item.getNombre();
+                String deudaTot = showTotalDeudaPersona(nombre);                
+                String deudaTotGim = showTotalDeudaPersonaGimnasio(nombre);
+                String deudaTotRop = showTotalDeudaPersonaRopa(nombre);
+                visFicha.lblDedudaTotalValor.setText(Validaciones.isNumVoid10(deudaTot)+"");  
+                visFicha.lblDeudaAjustarGimnasio.setText(Validaciones.isNumVoid10(deudaTotGim)+"");
+                visFicha.lblDeudaAjustarRopa.setText(Validaciones.isNumVoid10(deudaTotRop)+"");
+                System.out.println(item.getId() + " ::::: " + item.getApellido());
+            }
+        } 
+        
+        if (e.getSource()==visFicha.btnPagarAjustar)
+        {
+            String totDeuda = visFicha.lblDedudaTotalValor.getText()+"".trim();
+            double totDeudaD = Calculos.getTwoDecimals(new Double(totDeuda).doubleValue());
+            if (totDeudaD>0) 
+            {
+                setFilaAjustarPagar();
+                Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
+                String ced = item.getCedula();                
+            }
+        } 
+        if (e.getSource()==visFicha.btnPagarAjustarGimnasio)
+        {
+            String totDeuda = visFicha.lblDeudaAjustarGimnasio.getText()+"".trim();
+            double totDeudaD = Calculos.getTwoDecimals(new Double(totDeuda).doubleValue());
+            if (totDeudaD>0) 
+            {
+                setFilaAjustarPagarGimnasio();                     
+            }
+        } 
+        if (e.getSource()==visFicha.btnPagarAjustarRopa)
+        {
+            String totDeuda = visFicha.lblDeudaAjustarRopa.getText()+"".trim();
+            double totDeudaD = Calculos.getTwoDecimals(new Double(totDeuda).doubleValue());
+            if (totDeudaD>0) 
+            {
+                setFilaAjustarPagarRopa();                           
             }
         } 
         if (e.getSource()==visFicha.btnDeudas)
@@ -468,6 +720,7 @@ public class CtrlFacturaCab implements ActionListener{
             ctrlBuscarVentas.p = (Persona)visFicha.cmb_clienteFac.getSelectedItem();
             ctrlBuscarVentas.iniciar();
         } 
+        
         if (e.getSource()==visFicha.btnEntrenSaldos)
         {
             VisBuscarVentas visBuscarVentas = new VisBuscarVentas();            
@@ -479,6 +732,146 @@ public class CtrlFacturaCab implements ActionListener{
         } 
       
     }
+    
+    public void setFilaAjustarPagar()
+    {
+        ConsProductos consProd = new ConsProductos();
+        Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
+        
+        int filaDetalle = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
+        int idProd = consProd.getIdProdByNom("AJUSTAR DEUDA");
+        int idPer = item.getId();
+        
+        String descripcion = "AJUSTAR DEUDA";
+        double precio =  Validaciones.isNumVoid10(visFicha.lblDedudaTotalValor.getText());
+
+
+        visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);
+        visFicha.tblFacturaDetalle.setValueAt(0, filaDetalle, 1);
+        visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 2); 
+        visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 3);
+        visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 4);
+
+        Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
+        Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+    
+    }
+    public void setFilaAjustarPagarGimnasio()
+    {
+        ConsProductos consProd = new ConsProductos();
+        Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
+        
+        int filaDetalle = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
+        int idProd = consProd.getIdProdByNom("AJUSTAR DEUDA GIMNASIO");
+        int idPer = item.getId();
+        
+        String descripcion = "AJUSTAR DEUDA GIMNASIO";
+        double precio =  Validaciones.isNumVoid10(visFicha.lblDeudaAjustarGimnasio.getText());
+
+
+        visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);
+        visFicha.tblFacturaDetalle.setValueAt(0, filaDetalle, 1);
+        visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 2); 
+        visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 3);
+        visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 4);
+
+        Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
+        Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+    
+    }
+    public void setFilaAjustarPagarRopa()
+    {
+        ConsProductos consProd = new ConsProductos();
+        Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
+        
+        int filaDetalle = visFicha.tblFacturaDetalleCompras.getRowCount()-1;
+        int idProd = consProd.getIdProdByNom("AJUSTAR DEUDA ROPA");
+        int idPer = item.getId();
+        
+        String descripcion = "AJUSTAR DEUDA ROPA";
+        double precio =  Validaciones.isNumVoid10(visFicha.lblDeudaAjustarRopa.getText());
+
+
+        visFicha.tblFacturaDetalle.setValueAt(idProd, filaDetalle, 0);
+        visFicha.tblFacturaDetalle.setValueAt(0, filaDetalle, 1);
+        visFicha.tblFacturaDetalle.setValueAt(1, filaDetalle, 2); 
+        visFicha.tblFacturaDetalle.setValueAt(descripcion, filaDetalle, 3);
+        visFicha.tblFacturaDetalle.setValueAt(precio, filaDetalle, 4);
+
+        Calculos.calcularTotalDetalles(visFicha.tblFacturaDetalle);                            
+        Calculos.setTotalesCabecera(visFicha.tblFacturaDetalle, visFicha);
+    
+    }
+    
+    public String showTotalDeudaPersona(String cadCampo)
+    {
+        Object cols[] = new Object[21];
+        try {
+            visFicha.lblDedudaTotalValor.setText("$");
+            ResultSet listFicha = consPer.buscarIngresosEgresosCampos(cadCampo);
+            while (listFicha.next()) {
+                try { 
+                    
+                    cols[15] = listFicha.getDouble("saldoP");
+                                                           
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consPer.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cols[15]+"";
+    }
+    
+    public String showTotalDeudaPersonaGimnasio(String cadCampo)
+    {
+        Object cols[] = new Object[21];
+        try {
+            visFicha.lblDedudaTotalValor.setText("$");
+            ResultSet listFicha = consPer.buscarIngresosEgresosCamposGimnasio(cadCampo);
+            while (listFicha.next()) {
+                try { 
+                    
+                    cols[15] = listFicha.getDouble("saldoP");
+                                                           
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consPer.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cols[15]+"";
+    }
+     
+    public String showTotalDeudaPersonaRopa(String cadCampo)
+    {
+        Object cols[] = new Object[21];
+        try {
+            visFicha.lblDedudaTotalValor.setText("$");
+            ResultSet listFicha = consPer.buscarIngresosEgresosCamposRopa(cadCampo);
+            while (listFicha.next()) {
+                try { 
+                    
+                    cols[15] = listFicha.getDouble("saldoP");
+                                                           
+                } catch (SQLException ex) {
+                    Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            consPer.closeConection();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlFacturaCab.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cols[15]+"";
+    }
+    
     public void limpiar()
     {
 //        visFicha.cmb_clienteFac.setSelectedIndex(0);

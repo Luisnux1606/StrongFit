@@ -48,3 +48,4 @@ String m=(e.getKeyChar()+"").toUpperCase();
             else                   
             showTableFacturasCabecerasByNom(cadBus);
 
+Se agrega un nuevo item (AJUSTAR DEUDA,AJUSTAR DEUDA ROPA(cat producto ropa),AJUSTAR DEUDA GIMNASIO) para ajustar deudas hasta que avance el valor parametro de ajustar deuda desde factura ventas

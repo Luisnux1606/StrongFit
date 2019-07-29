@@ -156,7 +156,7 @@ public class CtrlPersonas implements ActionListener {
         visPersona.btnModificar.setToolTipText("Modificar el registro");
         visPersona.btnEliminar.setToolTipText("Eliminar el registro");
         visPersona.btnLimpiar.setToolTipText("Limpiar el registro");
-        
+        visPersona.txtBuscarCedula.requestFocus();
         visPersona.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     public void showComboTipoPersonas()

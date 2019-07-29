@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="df544c0d-0606-4f9e-a4e0-10b910dcede9">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="175"/>
+	<parameter name="p_fechaIni" class="java.lang.String"/>
+	<parameter name="p_fechaFin" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select  fC.Fecha_Faccab,concat(concat(p.nom_per,' '),p.ape_per) as nombres,  
+                         fD.CANTIDAD_FACDET as cant,fD.Descripcion_Facdet,' 'as FechaInicioEntrenamiento,''as FechaFinEntrenamiento,fC.Total_Faccab as Ingreso, 0 as Egreso,fC.Valcancelo_Faccab, 
+                         fC.Valpendiente_Faccab,fC.Valajuste_Faccab                           
+                         from persona p, facturacabecera fC,FacturaDetalle fD,producto pro,categoria ca   
+                         where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and  
+                         ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and TO_DATE(fC.Fecha_Faccab, 'DD/MM/YYYY') between TO_DATE($P{p_fechaIni},'DD/MM/YYYY') and TO_DATE($P{p_fechaFin},'DD/MM/YYYY')  
+                    union                  
+                    select  fC1.Fecha_Faccab,concat(concat(p.nom_per,' '),p.ape_per)as nombres,
+                               fD.CANTIDAD_FACDET as cant,fD.Descripcion_Facdet,h.fechaini_hisperser as FechaInicioEntrenamiento,h.fechafin_hisperser as FechaFinEntrenamiento,fC1.Total_Faccab as Ingreso,0 as Egreso,  
+                              fC1.Valcancelo_Faccab,fC1.Valpendiente_Faccab,fC1.Valajuste_Faccab                                
+                     from persona p, facturacabecera fC1,FacturaDetalle fD,producto pro,histpersserv h,categoria ca  
+                    where p.id_per = fC1.Persona_Id_Per  and fC1.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=1  
+                    and pro.id_prod=h.producto_id_hisperser and p.id_per=h.persona_id_hisperser and fC1.ESTADO_FACCAB=1 and pro.ESTADO_PROD=1 and h.ESTADO_HISPERSER=1  and TO_DATE(fC1.Fecha_Faccab, 'DD/MM/YYYY') between TO_DATE($P{p_fechaIni},'DD/MM/YYYY') and TO_DATE($P{p_fechaFin},'DD/MM/YYYY') 
+                  and h.Factura_id_fac = fc1.id_faccab
+                 union 
+                  select  fC.Fecha_Faccabcomp,concat(concat(p.nom_per,' '),p.ape_per) as nombres,
+                 fD.CANTIDAD_FACDETCOMP as cant,fD.Descripcion_Facdetcomp,' 'as FechaInicioEntrenamiento,''as FechaFinEntrenamiento,0 as Ingreso,fC.Total_Faccabcompr as Egreso,fC.Valcancelo_Faccabcompr,  
+                         fC.Valpendiente_Faccabcompr,fC.Valajuste_Faccabcompr                              
+                    from persona p, facturacabeceracompras fC,FacturaDetalleCompras fD,producto pro,categoria ca    
+                    where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccabcomp = fD.Factura_Id_Faccomp and pro.id_prod=fD.Producto_Id_Prodcomp and   
+                           ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1 and TO_DATE(fC.Fecha_Faccabcomp, 'DD/MM/YYYY') between TO_DATE($P{p_fechaIni},'DD/MM/YYYY') and TO_DATE($P{p_fechaFin},'DD/MM/YYYY')
+                    order by 1 desc]]>
+	</queryString>
+	<field name="FECHA_FACCAB" class="java.lang.String"/>
+	<field name="NOMBRES" class="java.lang.String"/>
+	<field name="CANT" class="java.math.BigDecimal"/>
+	<field name="DESCRIPCION_FACDET" class="java.lang.String"/>
+	<field name="FECHAINICIOENTRENAMIENTO" class="java.lang.String"/>
+	<field name="FECHAFINENTRENAMIENTO" class="java.lang.String"/>
+	<field name="INGRESO" class="java.math.BigDecimal"/>
+	<field name="EGRESO" class="java.math.BigDecimal"/>
+	<field name="VALCANCELO_FACCAB" class="java.math.BigDecimal"/>
+	<field name="VALPENDIENTE_FACCAB" class="java.math.BigDecimal"/>
+	<field name="VALAJUSTE_FACCAB" class="java.math.BigDecimal"/>
+	<variable name="tot_ingreso" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{INGRESO}]]></variableExpression>
+	</variable>
+	<variable name="tot_egreso" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{EGRESO}]]></variableExpression>
+	</variable>
+	<variable name="tot_cancelo" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VALCANCELO_FACCAB}]]></variableExpression>
+	</variable>
+	<variable name="tot_pendiente" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VALPENDIENTE_FACCAB}]]></variableExpression>
+	</variable>
+	<variable name="tot_ajuste" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{VALAJUSTE_FACCAB}]]></variableExpression>
+	</variable>
+	<variable name="tot_deudas" class="java.lang.Double"/>
+	<variable name="patrimonio" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="66" y="0" width="441" height="34" uuid="9c5452bd-bac8-43f5-be62-55a863a26e9e"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE INGRESOS Y GASTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="229" y="34" width="72" height="16" uuid="a694ba6e-1c03-44a9-b841-a640d2e28b15"/>
+				<text><![CDATA[TROYA GYM]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="66" height="20" uuid="49b57415-1006-4516-b69c-d30c64ab709e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha actual:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="71" y="0" width="100" height="20" uuid="a3979a6d-9874-434f-a30f-c63c2c8d891e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="25" width="66" height="15" uuid="69fa8c0e-328b-4fbf-a95f-b1ffffaf3c51"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte del:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="25" width="70" height="20" uuid="d99bc101-0b4b-47ea-a4b4-13bee6f75e53"/>
+				<textFieldExpression><![CDATA[$P{p_fechaIni}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="27" width="15" height="15" uuid="f2397750-064a-4b85-8c29-e67b10b45dd3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[al]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="161" y="25" width="100" height="20" uuid="f31a214e-81e7-49fb-a153-779166794666"/>
+				<textFieldExpression><![CDATA[$P{p_fechaFin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="37" height="20" uuid="d1a9fa48-0b9a-423a-837b-f6c1da1b873d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="47" y="0" width="120" height="20" uuid="988a6623-be66-4f02-b58d-94472ed6730a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="0" width="34" height="20" uuid="b8676444-edf3-43bc-8b12-7df14a2ab7ee"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="201" y="0" width="100" height="20" uuid="39396ecb-3aae-438d-8860-002bc142a87a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION_FACDET]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="0" width="47" height="20" uuid="974edc6b-8138-4596-81f4-3479904c2fe8"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INGRESO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="0" width="48" height="20" uuid="7d3cf12d-6ed9-4665-8e74-4ed6bae93ce2"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EGRESO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="0" width="59" height="20" uuid="f057ae06-464c-4722-acfc-387fc9e0d468"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VAL.CANCELO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="53" height="20" uuid="c7205584-0762-47ec-aaa4-576174c51091"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VAL.PEND.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="0" width="59" height="20" uuid="878a31ac-9c1a-4ddb-a35d-839aa47e135b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VAL.AJUSTE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="37" height="20" uuid="8d4d6728-3c3d-4a68-9975-47ea0f0cecbb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA_FACCAB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="47" y="0" width="120" height="20" uuid="ef400505-bbe8-45f4-8ca0-c1d2109a2006"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRES}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="167" y="0" width="34" height="20" uuid="9b995298-7be3-41ee-abc8-6e90e5e4b08d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="201" y="0" width="100" height="20" uuid="7af168a8-0b7e-415e-a5cc-178a16fb0392"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCION_FACDET}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="301" y="0" width="47" height="20" uuid="b3f579b0-eb09-4cb0-9d69-d0809ee9e983"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INGRESO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="348" y="0" width="48" height="20" uuid="979472fa-eba8-49e0-b121-960cb0909acd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EGRESO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="396" y="0" width="59" height="20" uuid="39378580-ea13-45e8-92a4-918b7573a3a8"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VALCANCELO_FACCAB}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="455" y="0" width="42" height="20" uuid="a7a9cef3-dd97-4718-874a-1646b706a4d1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VALPENDIENTE_FACCAB}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="508" y="0" width="47" height="20" uuid="d366f8ef-a83e-43c6-8767-2f93445b6dbb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{VALAJUSTE_FACCAB}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="134" splitType="Stretch">
+			<rectangle>
+				<reportElement x="223" y="59" width="320" height="60" uuid="cbbdbdc4-0f95-4d3e-a92b-e32120c2162e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="223" y="59" width="78" height="20" uuid="9dfb8bbe-1a27-4041-9dc9-6752945e3776"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTALES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="79" width="78" height="20" uuid="e8d1803b-85c0-41ef-ab8a-74f024853ce7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOT. DEUDAS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="99" width="78" height="20" uuid="e1b7e963-167f-4375-8193-e5a912c621a4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PATRIMONIO:]]></text>
+			</staticText>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="460" y="79" width="48" height="20" uuid="92da42df-c7bb-40d1-875e-a00e0a19c16e"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_ajuste} - $V{tot_pendiente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="301" y="99" width="100" height="20" uuid="64725e52-dbee-4105-ab99-bac8fdc725cd"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_ingreso} - $V{tot_egreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="301" y="59" width="47" height="20" uuid="024008b3-eef8-43cb-85e2-731a017a543f"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_ingreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="348" y="59" width="48" height="20" uuid="884e0b49-34b8-458e-91ce-a7c220a493a2"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_egreso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="396" y="59" width="59" height="20" uuid="e023aaec-b230-4090-8d50-9fd3a86aef83"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_cancelo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="455" y="59" width="42" height="20" uuid="6761d07d-15e2-44ab-a1c3-5de750165213"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_pendiente}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="508" y="59" width="35" height="20" uuid="2841ecce-45e5-4fbe-804d-b97770abe4f4"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{tot_ajuste}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

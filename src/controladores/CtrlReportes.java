@@ -58,6 +58,7 @@ public class CtrlReportes extends Conexion implements ActionListener{
         visRepo.btnGenerarRepoPersonas.addActionListener(this);
         visRepo.btnGenerarRepoRegistros.addActionListener(this);
         visRepo.btnReportePersonasBuscarPersonas.addActionListener(this);
+        visRepo.btnGenerarIngEgr.addActionListener(this);
         iniciar();
     }
     
@@ -125,6 +126,32 @@ public class CtrlReportes extends Conexion implements ActionListener{
             e.printStackTrace();
         }
      }
+     
+     public void getIngEgr(Date fI,Date fF)
+     {                        
+         String fIni=Validaciones.setFormatFecha(fI);
+         String fFin=Validaciones.setFormatFecha(fF);
+         
+         parametros.put("p_fechaIni", fIni); 
+         parametros.put("p_fechaFin", fFin);
+
+        try
+        {
+             try
+                {
+                    reporteMaestro = (JasperReport) JRLoader.loadObjectFromFile(rutaJasper+"RepoIngresoEgreso.jasper");
+                }
+                catch (JRException e) {e.printStackTrace();}
+                
+                 jP = JasperFillManager.fillReport(reporteMaestro,parametros,conexion);
+
+            JasperViewer.viewReport( jP, false);
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+     }
     
      public boolean validaRepoFichaPerona(JTextField ced, JDateChooser fechaIni)
      {
@@ -175,9 +202,17 @@ public class CtrlReportes extends Conexion implements ActionListener{
         if (e.getSource() == visRepo.btnReportePersonasBuscarPersonas) 
         {                   
             
-            CtrlBuscarPersonas ctrBP=new CtrlBuscarPersonas (visRepo);
-         
+            CtrlBuscarPersonas ctrBP=new CtrlBuscarPersonas (visRepo);         
                        
+        }
+        
+        if (e.getSource() == visRepo.btnGenerarIngEgr) 
+        {  
+            Date  fechaIniFicha= visRepo.dtcFechaInicioReportesIngEgr.getDate();
+            Date fechaFinFicha  = visRepo.dtcFechaFinReportesRegistros1.getDate();
+            if (validaRepoFicha(visRepo.dtcFechaInicioReportesIngEgr, visRepo.dtcFechaFinReportesRegistros1))
+               getIngEgr(fechaIniFicha,fechaFinFicha); 
+                                          
         }
         
         

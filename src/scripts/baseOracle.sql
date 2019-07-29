@@ -18,31 +18,31 @@ connect system/manager@xe
 
 prompt ************************BORRADO DE LOS USUARIOS****************...
 ALTER SYSTEM SET PROCESSES=150 SCOPE=SPFILE;
-drop user usr_strongfit cascade;  
+drop user usr_troyagym cascade;  
 
 prompt ************************BORRADO DE LOS PERFILES Y TABLESPACES****************...
-drop profile prf_usr_strongfit cascade;  
-drop tablespace tbs_usr_strongfit_p including contents and datafiles; 
-drop tablespace tbs_usr_strongfit_t including contents and datafiles; 
-drop tablespace tbs_usr_strongfit_inx including contents and datafiles;
+drop profile prf_usr_troyagym cascade;  
+drop tablespace tbs_usr_troyagym_p including contents and datafiles; 
+drop tablespace tbs_usr_troyagym_t including contents and datafiles; 
+drop tablespace tbs_usr_troyagym_inx including contents and datafiles;
 
 
 prompt ************************CREACION DE LOS TABLESPACES****************...
-create tablespace tbs_usr_strongfit_p   
-datafile 'C:/strongfit/tablespaces/tbs_usr_strongfit_p.dbf'   
+create tablespace tbs_usr_troyagym_p   
+datafile 'C:/troyagym/tablespaces/tbs_usr_troyagym_p.dbf'   
 size 32m   
 autoextend on   
 next 32m maxsize 9048m ;   
 
-create temporary tablespace tbs_usr_strongfit_t  
-tempfile 'C:/strongfit/tablespaces/tbs_usr_strongfit_t.dbf'   
+create temporary tablespace tbs_usr_troyagym_t  
+tempfile 'C:/troyagym/tablespaces/tbs_usr_troyagym_t.dbf'   
 size 32m 
 autoextend on    
 next 32m maxsize 9048m ;
 
 prompt ************************CREACION DE LOS PERFILES****************...
-create tablespace tbs_usr_strongfit_inx   datafile 'C:/strongfit/tablespaces/tbs_usr_strongfit_inx.dbf'   size 32m   autoextend on   next 32m maxsize 4048m ;
-CREATE PROFILE prf_usr_strongfit LIMIT 
+create tablespace tbs_usr_troyagym_inx   datafile 'C:/troyagym/tablespaces/tbs_usr_troyagym_inx.dbf'   size 32m   autoextend on   next 32m maxsize 4048m ;
+CREATE PROFILE prf_usr_troyagym LIMIT 
    SESSIONS_PER_USER          UNLIMITED 
    CPU_PER_SESSION            UNLIMITED 
    CPU_PER_CALL               3000 
@@ -54,15 +54,15 @@ CREATE PROFILE prf_usr_strongfit LIMIT
 
 
 prompt ************************CREACION DE LOS USUARIOS****************...
-CREATE USER usr_strongfit IDENTIFIED BY strongfit
-default tablespace tbs_usr_strongfit_p  
-temporary tablespace tbs_usr_strongfit_t  
-profile prf_usr_strongfit;
+CREATE USER usr_troyagym IDENTIFIED BY troyagym
+default tablespace tbs_usr_troyagym_p  
+temporary tablespace tbs_usr_troyagym_t  
+profile prf_usr_troyagym;
 
-GRANT CONNECT, RESOURCE TO usr_strongfit;
-GRANT DBA TO usr_strongfit;
+GRANT CONNECT, RESOURCE TO usr_troyagym;
+GRANT DBA TO usr_troyagym;
 
-connect usr_strongfit/strongfit
+connect usr_troyagym/troyagym
 
 
 
@@ -270,7 +270,7 @@ CREATE TABLE Analisis(
   recomendacionFuncional_ana Varchar2(500 ),
   estado_ana Number  
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table analisis
 CREATE INDEX idx_id_ana ON analisis(id_ana)
@@ -301,7 +301,7 @@ CREATE TABLE Medidas(
   porcentajeKlgs_med Number(10,2),
   estado_med Number 
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table medidas
 CREATE INDEX idx_id_med ON Medidas (id_med)
@@ -325,7 +325,7 @@ CREATE TABLE Persona(
   estado_per Number,
   estadoSalud_per Number     
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table persona
 CREATE INDEX idx_id_per ON Persona(id_per)
@@ -345,7 +345,7 @@ CREATE TABLE TipoPersona(
   descripcion_tipoPer Varchar2(50),
   estado_tipoPer Number   
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 
 -- Create indexes for table persona
@@ -362,7 +362,7 @@ CREATE TABLE Categoria(
   categoria_id_cat Number,
   estado_cat Number 
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table categoria
 CREATE INDEX idx_id_cat ON Categoria(id_cat)
@@ -378,7 +378,7 @@ CREATE TABLE CalculoFechaServicio(
   descripcion_calServ  Varchar2(350),
   estado_calServ Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table CalculoFechaServicio
 CREATE INDEX idx_calServ ON CalculoFechaServicio(id_calServ)
@@ -401,7 +401,7 @@ CREATE TABLE Producto(
   CalFechServ_id_cal Number,
   estado_prod Number 
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table producto
 CREATE INDEX idx_id_prod ON Producto(id_prod)
@@ -427,7 +427,7 @@ CREATE TABLE HistPersServ(
   Factura_id_fac Number,
   num_registro_hisPerSer Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table producto
 CREATE INDEX id_HisPerSer ON HistPersServ(id_HisPerSer)
@@ -451,7 +451,7 @@ CREATE TABLE Ficha(
   Medidas_id_med Number,
   estado_ficha Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 
 -- Create indexes for table ficha
@@ -481,7 +481,7 @@ CREATE TABLE Membresia(
   dscto_memb Number(10,2),
   estado_memb Number   
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table membresia
 CREATE INDEX idx_id_memb ON Membresia(id_memb)
@@ -495,7 +495,7 @@ CREATE TABLE IVAS(
   val_ivas Number(10,2),
   estado_ivas Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 CREATE INDEX idx_id_ivas ON IVAS(id_ivas)
 /
@@ -521,7 +521,7 @@ CREATE TABLE FacturaCabecera(
   estado_facCab Number,
   num_registro_facCab Number 
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Add keys for table factura
 -- Create indexes for table factura
@@ -548,7 +548,7 @@ CREATE TABLE FacturaDetalle(
   Factura_id_fac Number,
   estado_facDet Number 
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table detalle
 CREATE INDEX idx_id_det ON FacturaDetalle(id_facDet)
@@ -581,7 +581,7 @@ CREATE TABLE FacturaCabeceraCompras(
   estado_facCabCompr Number, 
   num_registro_facCabCompr Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Add keys for table factura
 -- Create indexes for table factura
@@ -606,7 +606,7 @@ CREATE TABLE FacturaDetalleCompras(
   Factura_id_facComp Number,
   estado_facDetComp Number 
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 -- Create indexes for table detalle
 CREATE INDEX idx_id_detComp ON FacturaDetalleCompras(id_facDetComp)
@@ -629,7 +629,7 @@ CREATE TABLE CONTA_TIPO_ASIENTOS(
   ID_TIPOASIENTO Number,
   DESCRIPCION_TIPOASIENTO Varchar2(100 )
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_TIPO_ASIENTOS ADD CONSTRAINT ID_TIPOASIENTO_PK PRIMARY KEY (ID_TIPOASIENTO)
 /
@@ -642,7 +642,7 @@ CREATE TABLE CONTA_ASIENTOS(
   ESTADO_ASIENTO number default 1,
   ID_TIPOASIENTO Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_ASIENTOS ADD CONSTRAINT ASIENTO_PK PRIMARY KEY (ID_ASIENTO)
 /
@@ -653,7 +653,7 @@ CREATE TABLE CONTA_TIPODOCS(
   ID_TIPODOC Number CONSTRAINT SYS_C004394 NOT NULL,
   DESCRIPCION_TIPODOC Varchar2(100 )
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_TIPODOCS ADD CONSTRAINT TIPODOC_PK PRIMARY KEY (ID_TIPODOC)
 /
@@ -664,7 +664,7 @@ CREATE TABLE CONTA_DOC_REFERENCIAS(
   DESCRIPCION_DOCREFERENCIA Varchar2(100 ),
   ID_TIPODOC_FK Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_DOC_REFERENCIAS ADD CONSTRAINT DOCREFERENCIA_PK PRIMARY KEY (ID_DOCREFERENCIA)
 /
@@ -675,7 +675,7 @@ CREATE TABLE CONTA_TIPOCUENTAS(
   ID_TIPOCUENTA Number CONSTRAINT SYS_C004388 NOT NULL,
   DESCRIPCION_TIPOCUENTA Varchar2(100 )
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_TIPOCUENTAS ADD CONSTRAINT ID_TIPOCUENTA_PK PRIMARY KEY (ID_TIPOCUENTA)
 /
@@ -685,7 +685,7 @@ CREATE TABLE CONTA_NIVELES(
   VALOR_NIVEL Number,
   DESCRIPCION_NIVEL Varchar2(100)
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_NIVELES ADD CONSTRAINT ID_NIVEL_PK PRIMARY KEY (ID_NIVEL)
 /
@@ -695,7 +695,7 @@ CREATE TABLE CONTA_CTA_MOVIMIENTOS(
   CODIGO_CTAMOV Varchar2(100 ),
   DESCRIPCION_CTAMOV Varchar2(100 )
   )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_CTA_MOVIMIENTOS ADD CONSTRAINT CTA_MOVIMIENTOS_PK PRIMARY KEY (ID_CTAMOV)
 /
@@ -710,7 +710,7 @@ CREATE TABLE CONTA_CUENTAS(
   EST_ENLACE_CUENTA Number,
   ID_CTAMOV_FK Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_CUENTAS ADD CONSTRAINT CUENTA_PK PRIMARY KEY (ID_CUENTA)
 /
@@ -737,7 +737,7 @@ CREATE TABLE CONTA_ASIENTO_CUENTAS(
   NOTAS_ASIENTOCUENTA Varchar2(100 ),
   ordena_dh_asientocuenta Varchar2(100 )
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_ASIENTO_CUENTAS ADD CONSTRAINT ASIENTO_CUENTA_PK PRIMARY KEY (ID_ASIENTOCUENTA)
 /
@@ -762,7 +762,7 @@ CREATE TABLE CONTA_MAYOR_DETALLES(
   ASIENTOCIERRE_MAYDETALLE Varchar2(50 ),
   ID_CUENTA_FK Number
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_MAYOR_DETALLES ADD CONSTRAINT MAYOR_DETALLE_PK PRIMARY KEY (ID_MAYDETALLE)
 /
@@ -774,7 +774,7 @@ CREATE TABLE CONTA_RETENCIONES(
   VALOR_RETENCION Number(10,2),
   DESCRIPCION_RETENCION Varchar2(100)
 )
-TABLESPACE tbs_usr_strongfit_p
+TABLESPACE tbs_usr_troyagym_p
 /
 ALTER TABLE CONTA_RETENCIONES ADD CONSTRAINT ID_RETENCION_PK PRIMARY KEY (ID_RETENCION)
 /

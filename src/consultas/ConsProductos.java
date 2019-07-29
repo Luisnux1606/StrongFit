@@ -213,6 +213,30 @@ public class ConsProductos extends Conexion
 		return result;
 	}
     
+    public int getIdProdByNom(String prod){
+		String sql;
+		int result=0;
+                PreparedStatement ps = null;
+                con = getConexion();
+                ResultSet rs = null; 
+                
+		sql="select c.id_prod " +
+                    "from producto c " +
+                    "where upper(c.descripcion_prod) like upper('"+prod+"') and c.estado_prod = 1";						
+                        try 
+                        {
+                            ps = con.prepareStatement(sql);                            
+                            rs = ps.executeQuery();
+                                while(rs.next()){
+                                        result=rs.getInt(1);
+                                }
+
+                        } catch (SQLException e) 
+                        {e.printStackTrace();}			
+		
+		return result;
+	}
+    
     public String getTipoProdServ(String prodId){
         String sql;
         String result="";
@@ -285,8 +309,8 @@ public class ConsProductos extends Conexion
          con = getConexion();
         ResultSet rs = null; 
         String sql = "select p.id_prod,p.descripcion_prod,p.precio_prod,p.FECHAINI_PROD,p.FECHAFIN_PROD,c.tipo_cat,p.EXISTINI,p.ENTRADAS,p.SALIDAS,p.STOCK,c.id_cat,cf.id_calserv " +
-                    "from categoria c, producto p, calculofechaservicio cf " +
-                    "where c.id_cat = p.categoria_id_cat  and cf.id_calserv = p.calfechserv_id_cal and p.estado_prod = 1 and p.CATEGORIA_ID_CAT = 2 ";
+                    " from categoria c, producto p, calculofechaservicio cf " +
+                    " where c.id_cat = p.categoria_id_cat  and cf.id_calserv = p.calfechserv_id_cal and p.estado_prod = 1 and c.CATEGORIA_ID_CAT = 2 ";
                         
         try 
         {
@@ -399,7 +423,7 @@ public class ConsProductos extends Conexion
         ResultSet rs = null; 
         String sql = "select c.tipo_cat " +
                     "from categoria c " +
-                    "where c.categoria_id_cat=2 and c.estado_cat = 1";
+                    "where c.estado_cat = 1";
                 
         
         try 

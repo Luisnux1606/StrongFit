@@ -103,20 +103,22 @@ public class CtrlBuscarVentas implements ActionListener {
       if (e.getSource() == visVentas.cmbTipoBusqueda) 
        {       
            String tipo = visVentas.cmbTipoBusqueda.getSelectedItem()+"";
+           String nomb = visVentas.txt_buscarPersonaNombres.getText()+"".trim();
             if (tipo.equals("todos")) {
-             showTable();
+             showTable(nomb);
             }
             if (tipo.equals("cursando")) {
-                showTableCursando();
+                
+                showTableCursando(nomb);
             }
             if (tipo.equals("pendientes")) {
                 showTablePendientes();
             }
             if (tipo.equals("proximos a vencer")) {
-                showTableProximosVencer();
+                showTableProximosVencer(nomb);
             }
             if (tipo.equals("vencidos")) {
-                showTableVencidos();
+                showTableVencidos(nomb);
             }
            
                
@@ -147,11 +149,12 @@ public class CtrlBuscarVentas implements ActionListener {
         visVentas.setSize(1200, 600);
         visVentas.setLocation(100, 100);
         visVentas.setVisible(true);
-       
+        String nom = visVentas.txt_buscarPersonaNombres.getText().trim();
+        
         switch(locale)
         {
             case 0:
-                showTable();
+                showTable(nom);
             break;
                 
             case 1:
@@ -207,11 +210,11 @@ public class CtrlBuscarVentas implements ActionListener {
         visVentas.tbl_BuscarVentas.updateUI();
     }
     
-    public void showTableProximosVencer()
+    public void showTableProximosVencer(String nom)
     {
         try {
             limpiarTabla(visVentas.tbl_BuscarVentas);
-            ResultSet listFicha = consBuscarVentas.buscarTodos2();
+            ResultSet listFicha = consBuscarVentas.buscarTodos2(nom);
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];
@@ -247,11 +250,11 @@ public class CtrlBuscarVentas implements ActionListener {
         visVentas.tbl_BuscarVentas.updateUI();
     }
     
-    public void showTableCursando()
+    public void showTableCursando(String nom)
     {
         try {
              limpiarTabla(visVentas.tbl_BuscarVentas);
-            ResultSet listFicha = consBuscarVentas.buscarTodos2();
+            ResultSet listFicha = consBuscarVentas.buscarTodos2(nom);
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];
@@ -518,12 +521,15 @@ public class CtrlBuscarVentas implements ActionListener {
                     cols[9] = "Guardar";
                     cols[10] = "Anular";
                     
-                    double tot = new Double(cols[5]+"".trim()).doubleValue();
-                    double valCan = new Double(cols[6]+"".trim()).doubleValue();
-                    if (Math.abs(tot-valCan)>0) {
-                         model.addRow(cols);
+                    double valCancelo = new Double(cols[6]+"").doubleValue();
+                    double valPend = new Double(cols[7]+"").doubleValue();
+                    double valAjus = new Double(cols[8]+"").doubleValue();
+                    double totPagar = new Double(cols[5]+"").doubleValue();
+                    
+                    if (Math.abs(totPagar - (valAjus+valCancelo))>0) {
+                        model.addRow(cols);
                     }
-                   
+                    
                     
                                         
                 } catch (SQLException ex) {
@@ -540,11 +546,11 @@ public class CtrlBuscarVentas implements ActionListener {
         visVentas.tblFacturasCabeceras.updateUI();
     } 
       
-    public void showTable()
+    public void showTable(String nom)
     {
         try {
             limpiarTabla(visVentas.tbl_BuscarVentas);
-            ResultSet listFicha = consBuscarVentas.buscarTodos2();
+            ResultSet listFicha = consBuscarVentas.buscarTodos2(nom);
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];
@@ -622,11 +628,11 @@ public class CtrlBuscarVentas implements ActionListener {
         visVentas.tblFacturasCabeceras.updateUI();
     }
      
-     public void showTableVencidos()
+     public void showTableVencidos(String nom)
     {
         try {
             limpiarTabla(visVentas.tbl_BuscarVentas);
-            ResultSet listFicha = consBuscarVentas.buscarTodos2();
+            ResultSet listFicha = consBuscarVentas.buscarTodos2(nom);
             
             DefaultTableModel model =  (DefaultTableModel)visVentas.tbl_BuscarVentas.getModel();
             Object cols[] = new Object[10];

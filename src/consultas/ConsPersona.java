@@ -462,4 +462,163 @@ public class ConsPersona extends Conexion
 	}
      
      
+    public ResultSet buscarIngresosEgresosCampos(String cadCamp)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql =    " select  fC.Id_Faccab,fC.Fecha_Faccab,concat(concat(p.nom_per,' '),p.ape_per) as nombres,fC.Num_Faccab, " +
+                        " fD.CANTIDAD_FACDET as cant,fD.Descripcion_Facdet,' 'as FechaInicio,''as FechaFin,fC.Total_Faccab, 0 as egreso,fC.Valcancelo_Faccab," +
+                        " fC.Valpendiente_Faccab,fC.Valajuste_Faccab,'' as estadoEnt, " +
+                        " (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " +
+                        " from facturacabecera fC2 " +
+                        " where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1 " +
+                        " ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCAB " +
+                        " from persona p, facturacabecera fC,FacturaDetalle fD,producto pro,categoria ca  " +
+                        " where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and " +
+                        " ca.id_cat=pro.CATEGORIA_ID_CAT  and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30  " +
+"                    union                 " +
+"                    select fC1.Id_Faccab, fC1.Fecha_Faccab,concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC1.Num_Faccab, " +
+                               "fD.CANTIDAD_FACDET as cant,fD.Descripcion_Facdet,h.fechaini_hisperser,h.fechafin_hisperser,fC1.Total_Faccab,0 as egreso, " +
+"                              fC1.Valcancelo_Faccab,fC1.Valpendiente_Faccab,fC1.Valajuste_Faccab,h.estadoDias_HisPerSer, " +
+"                              (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " +
+"                              from facturacabecera fC2 " +
+"                               where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1)as saldoP, p.id_per,pro.id_prod,h.ID_HISPERSER ,h.NUM_REGISTRO_HISPERSER  " +
+"                     from persona p, facturacabecera fC1,FacturaDetalle fD,producto pro,histpersserv h,categoria ca " +
+"                    where p.id_per = fC1.Persona_Id_Per  and fC1.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=1 " +
+"                    and pro.id_prod=h.producto_id_hisperser and p.id_per=h.persona_id_hisperser and fC1.ESTADO_FACCAB=1 and pro.ESTADO_PROD=1 and h.ESTADO_HISPERSER=1   "
+                + " and h.Factura_id_fac = fc1.id_faccab and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30 " +
+                " union "
+                + " select  fC.Id_Faccabcomp,fC.Fecha_Faccabcomp,concat(concat(p.nom_per,' '),p.ape_per) as nombres,fC.Num_Faccabcomp,  " +
+                " fD.CANTIDAD_FACDETCOMP as cant,fD.Descripcion_Facdetcomp,' 'as FechaInicio,''as FechaFin,0 as ingreso,fC.Total_Faccabcompr,fC.Valcancelo_Faccabcompr, " +
+"                         fC.Valpendiente_Faccabcompr,fC.Valajuste_Faccabcompr,'' as estadoEnt, " +
+"                             (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0)  " +
+"                             from facturacabecera fC2  " +
+"                             where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1  " +
+"                              ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCABCOMPR  " +
+"                    from persona p, facturacabeceracompras fC,FacturaDetalleCompras fD,producto pro,categoria ca   " +
+"                    where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccabcomp = fD.Factura_Id_Faccomp and pro.id_prod=fD.Producto_Id_Prodcomp and  " +
+"                           ca.id_cat=pro.CATEGORIA_ID_CAT  and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30 "+
+"                    order by 19 desc ";  
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarIngresosEgresosCamposGimnasio(String cadCamp)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql =    " select  " +
+                        " (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " +
+                        " from facturacabecera fC2,facturaDetalle fD0,producto pro,categoria ca" +
+                        " where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1 and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.tipo_cat like 'PRODUCTO' and fC2.Id_Faccab = fD0.Factura_Id_Fac and pro.id_prod=fD0.Producto_Id_Prod" +
+                        " ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCAB " +
+                        " from persona p, facturacabecera fC,FacturaDetalle fD,producto pro,categoria ca  " +
+                        " where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and " +
+                        " ca.id_cat=pro.CATEGORIA_ID_CAT and ca.tipo_cat like 'PRODUCTO' and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30  " +
+"                    union                 " +
+"                    select "
+                + "(select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " +
+"                              from facturacabecera fC2,facturaDetalle fD0,producto pro,categoria ca " +
+"                               where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1 and fC2.Id_Faccab = fD0.Factura_Id_Fac and pro.id_prod=fD0.Producto_Id_Prod)as saldoP, p.id_per,pro.id_prod,h.ID_HISPERSER ,h.NUM_REGISTRO_HISPERSER  " +
+"                     from persona p, facturacabecera fC1,FacturaDetalle fD,producto pro,histpersserv h,categoria ca " +
+"                    where p.id_per = fC1.Persona_Id_Per  and fC1.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=1 " +
+"                    and pro.id_prod=h.producto_id_hisperser and p.id_per=h.persona_id_hisperser and fC1.ESTADO_FACCAB=1 and pro.ESTADO_PROD=1 and h.ESTADO_HISPERSER=1   "
+                + " and h.Factura_id_fac = fc1.id_faccab and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30 " +
+                " union "
+                + " select  "
+                + " (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0)  " +
+"                             from facturacabecera fC2,facturaDetalle fD0 ,producto pro,categoria ca " +
+"                             where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1 and ca.id_cat=pro.CATEGORIA_ID_CAT and  ca.tipo_cat like 'PRODUCTO' and fC2.Id_Faccab = fD0.Factura_Id_Fac and pro.id_prod=fD0.Producto_Id_Prod " +
+"                              ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCABCOMPR  " +
+"                    from persona p, facturacabeceracompras fC,FacturaDetalleCompras fD,producto pro,categoria ca   " +
+"                    where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccabcomp = fD.Factura_Id_Faccomp and pro.id_prod=fD.Producto_Id_Prodcomp and  " +
+"                           ca.id_cat=pro.CATEGORIA_ID_CAT  and ca.tipo_cat like 'PRODUCTO' and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30 "+
+"                    order by 1 desc ";  
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+    
+    public ResultSet buscarIngresosEgresosCamposRopa(String cadCamp)
+    {
+        PreparedStatement ps = null;
+         con = getConexion();
+        ResultSet rs = null; 
+        String sql =    " select  " +
+                        " (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " +
+                        " from facturacabecera fC2,facturaDetalle fD0,producto pro,categoria ca" +
+                        " where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1 and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.tipo_cat like 'PRODUCTO ROPA' and fC2.Id_Faccab = fD0.Factura_Id_Fac and pro.id_prod=fD0.Producto_Id_Prod" +
+                        " ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCAB " +
+                        " from persona p, facturacabecera fC,FacturaDetalle fD,producto pro,categoria ca  " +
+                        " where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and " +
+                        " ca.id_cat=pro.CATEGORIA_ID_CAT and ca.tipo_cat like 'PRODUCTO ROPA' and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30  " +
+"                    union                 " +
+"                    select "
+                + "(select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0) " +
+"                              from facturacabecera fC2,facturaDetalle fD0,producto pro,categoria ca " +
+"                               where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1 and fC2.Id_Faccab = fD0.Factura_Id_Fac and pro.id_prod=fD0.Producto_Id_Prod)as saldoP, p.id_per,pro.id_prod,h.ID_HISPERSER ,h.NUM_REGISTRO_HISPERSER  " +
+"                     from persona p, facturacabecera fC1,FacturaDetalle fD,producto pro,histpersserv h,categoria ca " +
+"                    where p.id_per = fC1.Persona_Id_Per  and fC1.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=1 " +
+"                    and pro.id_prod=h.producto_id_hisperser and p.id_per=h.persona_id_hisperser and fC1.ESTADO_FACCAB=1 and pro.ESTADO_PROD=1 and h.ESTADO_HISPERSER=1   "
+                + " and h.Factura_id_fac = fc1.id_faccab and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30 " +
+                " union "
+                + " select  "
+                + " (select sum(fc2.valpendiente_faccab - fc2.valajuste_faccab + 0.0)  " +
+"                             from facturacabecera fC2,facturaDetalle fD0 ,producto pro,categoria ca " +
+"                             where p.id_per = fC2.persona_id_per and fC2.ESTADO_FACCAB=1 and ca.id_cat=pro.CATEGORIA_ID_CAT and  ca.tipo_cat like 'PRODUCTO ROPA' and fC2.Id_Faccab = fD0.Factura_Id_Fac and pro.id_prod=fD0.Producto_Id_Prod " +
+"                              ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCABCOMPR  " +
+"                    from persona p, facturacabeceracompras fC,FacturaDetalleCompras fD,producto pro,categoria ca   " +
+"                    where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccabcomp = fD.Factura_Id_Faccomp and pro.id_prod=fD.Producto_Id_Prodcomp and  " +
+"                           ca.id_cat=pro.CATEGORIA_ID_CAT  and ca.tipo_cat like 'PRODUCTO ROPA' and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') and ROWNUM <= 30 "+
+"                    order by 1 desc ";  
+        try 
+        {
+            
+            ps = con.prepareStatement(sql);                            
+            rs = ps.executeQuery();
+             
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+           
+        }
+        finally
+        {
+           
+        }
+        return rs;
+    }
+     
 }

@@ -40,24 +40,13 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         btnEliminarTrans = new javax.swing.JButton();
         cmbPersonasIngEgr = new javax.swing.JComboBox();
         btnBuscarPersonaIngEgr = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txt_buscarPersonaNombres = new javax.swing.JTextField();
-        cmbTipoBusqueda = new javax.swing.JComboBox();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tblIngresosEgresosCons = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        lblBuscarFichas = new javax.swing.JLabel();
-        txtBuscarFichas = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(630, 174));
         setPreferredSize(new java.awt.Dimension(1400, 793));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
-        layout.columnWidths = new int[] {0, 0, 0, 0, 0, 0, 0};
-        layout.rowHeights = new int[] {0, 2, 0};
+        layout.columnWidths = new int[] {0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0};
+        layout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         getContentPane().setLayout(layout);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -65,15 +54,14 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.weightx = 0.1;
-        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipady = 2;
         getContentPane().add(jLabel1, gridBagConstraints);
 
         pnlIngresosEgresos.setPreferredSize(new java.awt.Dimension(300, 484));
         java.awt.GridBagLayout pnlIngresosEgresosLayout = new java.awt.GridBagLayout();
         pnlIngresosEgresosLayout.columnWidths = new int[] {0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0, 3, 0};
-        pnlIngresosEgresosLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        pnlIngresosEgresosLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         pnlIngresosEgresos.setLayout(pnlIngresosEgresosLayout);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -125,8 +113,8 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 78;
-        gridBagConstraints.gridheight = 13;
+        gridBagConstraints.gridwidth = 100;
+        gridBagConstraints.gridheight = 60;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weighty = 1.0;
@@ -144,7 +132,7 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
 
         btnAgregarTrans.setText("Agregar");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 78;
+        gridBagConstraints.gridx = 100;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
@@ -152,7 +140,7 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
 
         btnEliminarTrans.setText("Eliminar");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 78;
+        gridBagConstraints.gridx = 100;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -180,125 +168,16 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
 
         tpnIngresosEgresos.addTab("Ingresos/Egresos", pnlIngresosEgresos);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jLabel2.setText("Buscar por cualquier campo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 16;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 12, 0, 0);
-        jPanel1.add(jLabel2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 184;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 12, 0, 0);
-        jPanel1.add(txt_buscarPersonaNombres, gridBagConstraints);
-
-        cmbTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Eliga un tipo de consulta", "cursando", "proximos a vencer", "vencidos" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(7, 27, 0, 0);
-        jPanel1.add(cmbTipoBusqueda, gridBagConstraints);
-
-        tblIngresosEgresosCons.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "IDFAC", "FECHA FACTURA", "NOMBRES APELLIDOS", "NUM FACTURA", "DESCRIPCION TRANSACCIONAL", "FECHA INI.", "FECHA FIN.", "INGRESO", "EGRESO", "VAL. CANCELO", "VAL. PENDIENTE", "VAL. AJUSTE", "ESTADO.ENTR", "SALDO CONTABLE", "CODPRODSERV", "CODPER", "GUARDAR", "ELIMINAR"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblIngresosEgresosCons.setMaximumSize(new java.awt.Dimension(2147483640, 0));
-        tblIngresosEgresosCons.setRowHeight(24);
-        jScrollPane5.setViewportView(tblIngresosEgresosCons);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 43;
+        gridBagConstraints.gridheight = 60;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 1233;
-        gridBagConstraints.ipady = 285;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(31, 12, 322, 179);
-        jPanel1.add(jScrollPane5, gridBagConstraints);
-
-        tpnIngresosEgresos.addTab("Entrenamientos y saldos", jPanel1);
-
-        jPanel2.setLayout(new java.awt.GridBagLayout());
-
-        lblBuscarFichas.setText("Buscar por campo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 58;
-        gridBagConstraints.ipady = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(29, 34, 0, 0);
-        jPanel2.add(lblBuscarFichas, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 175;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 34, 0, 0);
-        jPanel2.add(txtBuscarFichas, gridBagConstraints);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable1);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 973;
-        gridBagConstraints.ipady = 183;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(13, 34, 406, 417);
-        jPanel2.add(jScrollPane4, gridBagConstraints);
-
-        tpnIngresosEgresos.addTab("Fichas de analisis corporal", jPanel2);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(7, 12, 0, 10);
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 0, 2);
         getContentPane().add(tpnIngresosEgresos, gridBagConstraints);
         tpnIngresosEgresos.getAccessibleContext().setAccessibleName("Ingresos/Egresos");
 
@@ -349,23 +228,12 @@ public class VisIngresoEgreso extends javax.swing.JFrame {
     public javax.swing.JButton btnEliminarTrans;
     public javax.swing.JComboBox cmbElegirBusquedaFac;
     public javax.swing.JComboBox cmbPersonasIngEgr;
-    public javax.swing.JComboBox cmbTipoBusqueda;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
-    public javax.swing.JLabel lblBuscarFichas;
     private javax.swing.JPanel pnlIngresosEgresos;
     public javax.swing.JTable tblIngresosEgresos;
-    public javax.swing.JTable tblIngresosEgresosCons;
     public javax.swing.JTabbedPane tpnIngresosEgresos;
     public javax.swing.JTextField txtBuscarCampo;
-    public javax.swing.JTextField txtBuscarFichas;
-    public javax.swing.JTextField txt_buscarPersonaNombres;
     // End of variables declaration//GEN-END:variables
 }

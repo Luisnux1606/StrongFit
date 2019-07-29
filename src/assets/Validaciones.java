@@ -126,7 +126,7 @@ public class Validaciones {
      public static boolean isNumVoid1(String txt)
      {
          boolean estado = false;
-         if (txt.trim().length()==0 || txt.trim().equals("0")||txt=="0" ||txt==null || txt.length()==0 ||txt.equals("null")) {
+         if (txt.trim().length()==0 ||txt.trim().equals("0.0")|| txt.trim().equals("0")||txt=="0" ||txt==null || txt.length()==0 ||txt.equals("null")) {
              estado = true;
              
          }

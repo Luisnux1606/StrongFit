@@ -8,7 +8,7 @@ first create the next varibles into plsql
 to set the output 
  * SET SERVEROUTPUT ON;
 to call procedure
- * excen nameProcedure
+ * excec nameProcedure
 
 
 create or replace procedure exportBlob is

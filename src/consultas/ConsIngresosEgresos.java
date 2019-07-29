@@ -571,7 +571,7 @@ public class ConsIngresosEgresos extends Conexion {
                         " ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCAB " +
                         " from persona p, facturacabecera fC,FacturaDetalle fD,producto pro,categoria ca  " +
                         " where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and " +
-                        " ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+nombres+"%') " +
+                        " ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+nombres+"%')   " +
 "                    union                 " +
 "                    select fC1.Id_Faccab, fC1.Fecha_Faccab,concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC1.Num_Faccab, " +
                                "fD.CANTIDAD_FACDET as cant,fD.Descripcion_Facdet,h.fechaini_hisperser,h.fechafin_hisperser,fC1.Total_Faccab,0 as egreso, " +
@@ -582,7 +582,7 @@ public class ConsIngresosEgresos extends Conexion {
 "                     from persona p, facturacabecera fC1,FacturaDetalle fD,producto pro,histpersserv h,categoria ca " +
 "                    where p.id_per = fC1.Persona_Id_Per  and fC1.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=1 " +
 "                    and pro.id_prod=h.producto_id_hisperser and p.id_per=h.persona_id_hisperser and fC1.ESTADO_FACCAB=1 and pro.ESTADO_PROD=1 and h.ESTADO_HISPERSER=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+nombres+"%')  "
-                + " and h.Factura_id_fac = fc1.id_faccab " +
+                + " and h.Factura_id_fac = fc1.id_faccab  " +
                 " union "
                 + " select  fC.Id_Faccabcomp,fC.Fecha_Faccabcomp,concat(concat(p.nom_per,' '),p.ape_per) as nombres,fC.Num_Faccabcomp,  " +
                 " fD.CANTIDAD_FACDETCOMP as cant,fD.Descripcion_Facdetcomp,' 'as FechaInicio,''as FechaFin,0 as ingreso,fC.Total_Faccabcompr,fC.Valcancelo_Faccabcompr, " +
@@ -593,8 +593,9 @@ public class ConsIngresosEgresos extends Conexion {
 "                              ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCABCOMPR  " +
 "                    from persona p, facturacabeceracompras fC,FacturaDetalleCompras fD,producto pro,categoria ca   " +
 "                    where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccabcomp = fD.Factura_Id_Faccomp and pro.id_prod=fD.Producto_Id_Prodcomp and  " +
-"                           ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1  and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+nombres+"%')"+
-"                    order by 19 desc ";                       
+"                           ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1  and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+nombres+"%') "+
+"                    order by 19 desc "
+                + " ";                       
         try 
         {
             
@@ -628,7 +629,7 @@ public class ConsIngresosEgresos extends Conexion {
                         " ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCAB " +
                         " from persona p, facturacabecera fC,FacturaDetalle fD,producto pro,categoria ca  " +
                         " where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and " +
-                        " ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') " +
+                        " ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.ESTADO_FACCAB=1 and  pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%')  " +
 "                    union                 " +
 "                    select fC1.Id_Faccab, fC1.Fecha_Faccab,concat(concat(p.nom_per,' '),p.ape_per)as nombres,fC1.Num_Faccab, " +
                                "fD.CANTIDAD_FACDET as cant,fD.Descripcion_Facdet,h.fechaini_hisperser,h.fechafin_hisperser,fC1.Total_Faccab,0 as egreso, " +
@@ -639,7 +640,7 @@ public class ConsIngresosEgresos extends Conexion {
 "                     from persona p, facturacabecera fC1,FacturaDetalle fD,producto pro,histpersserv h,categoria ca " +
 "                    where p.id_per = fC1.Persona_Id_Per  and fC1.Id_Faccab = fD.Factura_Id_Fac and pro.id_prod=fD.Producto_Id_Prod and ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=1 " +
 "                    and pro.id_prod=h.producto_id_hisperser and p.id_per=h.persona_id_hisperser and fC1.ESTADO_FACCAB=1 and pro.ESTADO_PROD=1 and h.ESTADO_HISPERSER=1   "
-                + " and h.Factura_id_fac = fc1.id_faccab and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%')" +
+                + " and h.Factura_id_fac = fc1.id_faccab and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%')  " +
                 " union "
                 + " select  fC.Id_Faccabcomp,fC.Fecha_Faccabcomp,concat(concat(p.nom_per,' '),p.ape_per) as nombres,fC.Num_Faccabcomp,  " +
                 " fD.CANTIDAD_FACDETCOMP as cant,fD.Descripcion_Facdetcomp,' 'as FechaInicio,''as FechaFin,0 as ingreso,fC.Total_Faccabcompr,fC.Valcancelo_Faccabcompr, " +
@@ -650,7 +651,7 @@ public class ConsIngresosEgresos extends Conexion {
 "                              ) as saldoP , p.id_per,pro.id_prod,1 as codHist ,fC.NUM_REGISTRO_FACCABCOMPR  " +
 "                    from persona p, facturacabeceracompras fC,FacturaDetalleCompras fD,producto pro,categoria ca   " +
 "                    where p.id_per = fC.Persona_Id_Per  and fC.Id_Faccabcomp = fD.Factura_Id_Faccomp and pro.id_prod=fD.Producto_Id_Prodcomp and  " +
-"                           ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%') "+
+"                           ca.id_cat=pro.CATEGORIA_ID_CAT and ca.CATEGORIA_ID_CAT=2 and fC.Estado_Faccabcompr=1  and pro.ESTADO_PROD=1 and upper(concat(concat(p.ape_per,' '),p.nom_per)) like upper('%"+cadCamp+"%')  "+
 "                    order by 19 desc ";  
         try 
         {

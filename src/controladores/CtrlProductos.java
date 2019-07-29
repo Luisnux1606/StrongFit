@@ -659,10 +659,10 @@ public class CtrlProductos implements ActionListener{
                        cols[3] = listProd.getString("FECHAINI_PROD");
                        cols[4] = listProd.getString("FECHAFIN_PROD");
                        cols[5] = listProd.getString("tipo_cat").toUpperCase();
-                       cols[6] = listProd.getString("EXISTINI").toUpperCase();
-                       cols[7] = listProd.getString("ENTRADAS").toUpperCase();
-                       cols[8] = listProd.getString("SALIDAS").toUpperCase();
-                       cols[9] = listProd.getString("STOCK").toUpperCase();
+                       cols[6] = Validaciones.isNumVoid10(listProd.getString("EXISTINI")+"");
+                       cols[7] = Validaciones.isNumVoid10(listProd.getString("ENTRADAS")+"");
+                       cols[8] = Validaciones.isNumVoid10(listProd.getString("SALIDAS")+"");
+                       cols[9] = Validaciones.isNumVoid(listProd.getString("STOCK")+"");
                        cols[10] = listProd.getString("id_cat");
                        cols[11] = listProd.getString("id_calserv");
 
@@ -696,10 +696,10 @@ public class CtrlProductos implements ActionListener{
                        cols[3] = listProd.getString("FECHAINI_PROD");
                        cols[4] = listProd.getString("FECHAFIN_PROD");
                        cols[5] = listProd.getString("tipo_cat").toUpperCase();
-                       cols[6] = listProd.getString("EXISTINI").toUpperCase();
-                       cols[7] = listProd.getString("ENTRADAS").toUpperCase();
-                       cols[8] = listProd.getString("SALIDAS").toUpperCase();
-                       cols[9] = listProd.getString("STOCK").toUpperCase();
+                       cols[6] = Validaciones.isNumVoid10(listProd.getString("EXISTINI")+"");
+                       cols[7] = Validaciones.isNumVoid10(listProd.getString("ENTRADAS")+"");
+                       cols[8] = Validaciones.isNumVoid10(listProd.getString("SALIDAS")+"");
+                       cols[9] = Validaciones.isNumVoid10(listProd.getString("STOCK")+"");
                        cols[10] = listProd.getString("id_cat");
                        cols[11] = listProd.getString("id_calserv");
                         model.addRow(cols);
