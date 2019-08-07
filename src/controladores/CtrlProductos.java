@@ -874,7 +874,7 @@ public class CtrlProductos implements ActionListener{
                             int idProd = getIndexByItemCombo(comboBox,item.toString()).getId_prod();
                             double precioPro = getIndexByItemCombo(comboBox,item.toString()).getPrecio_prod();
                             tabDet.setValueAt(idProd,tabDet.getSelectedRow(), 0);
-                            tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 3);                     
+                            tabDet.setValueAt(precioPro,tabDet.getSelectedRow(), 4);                     
                             try {
                                   System.out.println("dataenterclik "+((Producto)model.getElementAt(comboBox.getSelectedIndex())).getId_prod());
                             } catch (Exception e) {
@@ -889,8 +889,8 @@ public class CtrlProductos implements ActionListener{
 
             }
         });
-       visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(null);
-       visFicha.tblFacturaDetalle.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(comboBox1));            
+       visFicha.tblFacturaDetalle.getColumnModel().getColumn(3).setCellEditor(null);
+       visFicha.tblFacturaDetalle.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboBox1));            
       
         visFicha.tblFacturaDetalle.updateUI();
         

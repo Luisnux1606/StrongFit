@@ -669,16 +669,19 @@ public class CtrlFacturaCab implements ActionListener{
         } 
         if (e.getSource()==visFicha.cmb_clienteFac)
         {
-            if (visFicha!=null) {                
+            if (visFicha!=null) {        
+                
                 Persona item = (Persona) visFicha.cmb_clienteFac.getSelectedItem();
-                String nombre = item.getApellido()+" "+item.getNombre();
-                String deudaTot = showTotalDeudaPersona(nombre);                
-                String deudaTotGim = showTotalDeudaPersonaGimnasio(nombre);
-                String deudaTotRop = showTotalDeudaPersonaRopa(nombre);
-                visFicha.lblDedudaTotalValor.setText(Validaciones.isNumVoid10(deudaTot)+"");  
-                visFicha.lblDeudaAjustarGimnasio.setText(Validaciones.isNumVoid10(deudaTotGim)+"");
-                visFicha.lblDeudaAjustarRopa.setText(Validaciones.isNumVoid10(deudaTotRop)+"");
-                System.out.println(item.getId() + " ::::: " + item.getApellido());
+                if (item!=null) {
+                    String nombre = item.getApellido()+" "+item.getNombre();
+                    String deudaTot = showTotalDeudaPersona(nombre);                
+                    String deudaTotGim = showTotalDeudaPersonaGimnasio(nombre);
+                    String deudaTotRop = showTotalDeudaPersonaRopa(nombre);
+                    visFicha.lblDedudaTotalValor.setText(Validaciones.isNumVoid10(deudaTot)+"");  
+                    visFicha.lblDeudaAjustarGimnasio.setText(Validaciones.isNumVoid10(deudaTotGim)+"");
+                    visFicha.lblDeudaAjustarRopa.setText(Validaciones.isNumVoid10(deudaTotRop)+"");
+                    System.out.println(item.getId() + " ::::: " + item.getApellido());
+                }
             }
         } 
         
