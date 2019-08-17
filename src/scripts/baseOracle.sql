@@ -785,6 +785,67 @@ ALTER TABLE CONTA_RETENCIONES ADD CONSTRAINT ID_RETENCION_PK PRIMARY KEY (ID_RET
 insert into Persona(id_per,ced_per,nom_per, ape_per, nroFono_per,edad_per, fechaNac_per, genero_per, mail_per,ESTADO_PER )
 values (persona_id_seq.NEXTVAL,'999999999','anonimo', 'anonimo', 'anonimo', '99999999', 9, '999999999', '  ',1);
 
+insert into TipoPersona(id_tipoPer,descripcion_tipoPer,estado_tipoPer)
+values (tipoPersona_id_seq.NEXTVAL,'CLIENTE',1);
+
+insert into TipoPersona(id_tipoPer,descripcion_tipoPer,estado_tipoPer)
+values (tipoPersona_id_seq.NEXTVAL,'NEGOCIO',1);
+
+insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
+values (categoria_id_seq.NEXTVAL,'SERVICIO GIMNASIO',1,1);
+
+insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
+values (categoria_id_seq.NEXTVAL,'PRODUCTO',2,1);
+
+insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
+values (categoria_id_seq.NEXTVAL,'PRODUCTO ROPA',3,1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'DIARIO',1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'SEMANAL',1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'MENSUAL',1);
+
+insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
+values (calculoFechaServicio_id_seq.NEXTVAL,'ANUAL',1);
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'AJUSTAR DEUDA',0,null,null,0,0,0,0,2,1,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'AJUSTAR DEUDA GIMNASIO',0,null,null,0,0,0,0,2,1,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'AJUSTAR DEUDA ROPA',0,null,null,0,0,0,0,2,1,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'DIARIO',2.50,null,null,0,0,0,0,1,1,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'SEMANAL',10,null,null,0,0,0,0,1,2,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'MENSUAL',35,null,null,0,0,0,0,1,3,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'CLASE',2.50,null,null,0,0,0,0,1,1,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'ESTUDIANTE',25,null,null,0,0,0,0,1,3,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'PROMO X5',25,null,null,0,0,0,0,1,3,1)
+
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'PROMO X3',30,null,null,0,0,0,0,1,3,1)
+
+-- 2 MESES
+insert into Producto (id_prod, descripcion_prod, precio_prod, fechaIni_prod, fechaFin_prod, existIni, entradas, salidas, stock, Categoria_id_cat, CalFechServ_id_cal, estado_prod)
+values (producto_id_seq.NEXTVAL,'VACACIONAL',40,null,null,0,0,0,0,1,3,1)
+
 insert into Analisis(id_ana,fecha_ana,excesoGrasa_ana,excesoLiquido_ana,excesoTotal_ana,recomendacionPesas_ana,recomendacionCardio_ana,recomendacionFuncional_ana,ESTADO_ANA)
 values (analisis_id_seq.NEXTVAL, '999999999', 9, 9, 9, '9', '9', '999999999',1);
 
@@ -799,29 +860,5 @@ values (membresia_id_seq.NEXTVAL,'diario',2,1);
 
 insert into IVAS(id_ivas,val_ivas,estado_ivas)
 values (iva_id_seq.NEXTVAL,0,1);
-
-insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
-values (categoria_id_seq.NEXTVAL,'SERVICIO GIMNASIO',1,1);
-
-insert into Categoria(id_cat,tipo_cat,categoria_id_cat,estado_cat)
-values (categoria_id_seq.NEXTVAL,'PRODUCTO',2,1);
-
-insert into TipoPersona(id_tipoPer,descripcion_tipoPer,estado_tipoPer)
-values (tipoPersona_id_seq.NEXTVAL,'CLIENTE',1);
-
-insert into TipoPersona(id_tipoPer,descripcion_tipoPer,estado_tipoPer)
-values (tipoPersona_id_seq.NEXTVAL,'NEGOCIO',1);
-
-insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
-values (calculoFechaServicio_id_seq.NEXTVAL,'DIARIO',1);
-
-insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
-values (calculoFechaServicio_id_seq.NEXTVAL,'SEMANAL',1);
-
-insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
-values (calculoFechaServicio_id_seq.NEXTVAL,'MENSUAL',1);
-
-insert into CalculoFechaServicio(id_calServ,descripcion_calServ,estado_calServ)
-values (calculoFechaServicio_id_seq.NEXTVAL,'ANUAL',1);
 
 commit;

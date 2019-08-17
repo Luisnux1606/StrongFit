@@ -24,7 +24,7 @@ public class Conexion {
         {            
             //Class.forName("com.mysql.jdbc.Driver");
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection(url,"usr_troyagym", "troyagym");
+            con = DriverManager.getConnection(url,"usr_strongfit", "strongfit");
             
         } catch (Exception e) 
         {
